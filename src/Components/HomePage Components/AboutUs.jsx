@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Flex, Image } from "@chakra-ui/react";
-import { glowBg, webAboutus } from "../../assests";
+import {  webAboutus } from "../../assests";
 import { CustomButton } from "../../utils/Buttons";
 import { CustomText } from "../../utils/Texts";
 import CompanyStats from "./CompanyStats";
@@ -9,38 +9,31 @@ const Aboutus = () => {
   return (
     <>
       <Box
-       
+        overflow={"hidden"}
         position={"relative"}
         py={{ base: "2rem", md: "4rem" }}
       >
-        {/* <Box
-          className="firstglow"
-          bgImage={`url(${glowBg})`}
-          bgSize="cover"
-          width={{ base: "50px", md: "200px", lg: "500px" }}
-          height={{ base: "50px", md: "200px", lg: "500px" }}
-          position="absolute"
-         top={{ base: "0", md: "1rem", lg: "-10rem" }}
-        left="30%"
-          // transform="translateX(-50%)"
-          zIndex="0"
-          borderRadius="full"
-        />
-
         <Box
-          className="secondglow"
-          bgImage={`url(${glowBg})`}
-          bgSize="cover"
-          width={{ base: "50px", md: "200px", lg: "300px" }}
-          height={{ base: "50px", md: "200px", lg: "300px" }}
           position="absolute"
+          top="-8rem"
+          left="40%"
+          transform="translateX(-50%)"
+          width="800px"
+          height={{base:"400px" , md:"350px", lg:"320px"}}
+          borderRadius="0% 0% 0% 50%"
+          bg="radial-gradient(50% 50% at 50% 50%, rgba(38, 145, 223, 0.4) 6.24%, rgba(38, 145, 223, 0) 100%)"
+        ></Box>
+        <Box
+          position="absolute"
+          display={{base:"none", sm:"none", md:"block", lg:"block"}}
           top="50%"
-          left={{ base: "1rem", md: "2rem", lg: "3rem" }}
-          // transform="translateY(-50%)"
-          // zIndex="-1"
-          borderRadius="full"
-        /> */}
-
+          left={{ base: "-6rem", md: "-8rem", lg: "-12rem" }}
+          transform="translateY(-50%)"
+          width={{ base: "300px", sm: "400px", md: "500px", lg: "700px" }}
+          height={{ base: "240px", sm: "340px", md: "480px", lg: "580px" }}
+          borderRadius="0% 0% 0% 50%"
+          bg="radial-gradient(50% 50% at 50% 50%, rgba(38, 145, 223, 0.4) 6.24%, rgba(38, 145, 223, 0) 100%)"
+        ></Box>
         <Flex
           w={{ base: "90%", md: "80%" }}
           m="auto"
@@ -49,10 +42,13 @@ const Aboutus = () => {
           flexDirection={{ base: "column", md: "row" }}
         >
           <Image
+            zIndex={1000}
+            bg={"transparent"}
             _hover={{ transform: "scale(1.2)" }}
-            w={{ base: "200px", md: "250px", lg: "322px" }}
-            h={{ base: "200px", md: "250px", lg: "301px" }}
+            w={{ base: "200px", md: "250px", lg: "300px" }}
+            h={{ base: "200px", md: "250px", lg: "280px" }}
             src={webAboutus}
+            transition="transform 0.5s ease"
             alt="Aboutus"
           />
           <Flex

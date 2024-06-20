@@ -2,10 +2,11 @@ import React from "react";
 import CountUp from "react-countup";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import VisibilitySensor from 'react-visibility-sensor';
-const CompanyStats = ({startCount}) => {
+import { CustomText } from "../../utils/Texts";
+const CompanyStats = () => {
   return (
     <Flex
-      flexDirection={{ base: "column", md: "row" }}
+      flexDirection={{ base: "row", md: "row" }}
       justifyContent="space-around"
       alignItems="center"
       py={{ base: "1rem", md: "2rem" }}
@@ -19,7 +20,8 @@ const CompanyStats = ({startCount}) => {
             </Text>
           )}
         </VisibilitySensor>
-        <Text fontSize={{ base: "lg", md: "xl" }}>Clients</Text>
+        <CustomText variant="subheading1" children={"Clients"} />
+
       </Box>
       <Box bg={"rgba(255, 255, 255, 0.05)"} textAlign="center" mx="1rem">
       <VisibilitySensor partialVisibility>
@@ -29,7 +31,8 @@ const CompanyStats = ({startCount}) => {
             </Text>
           )}
         </VisibilitySensor>
-        <Text fontSize={{ base: "lg", md: "xl" }}>Team Members</Text>
+        <CustomText variant="subheading1" children={"Team Members"} />
+
       </Box>
       <Box bg={"rgba(255, 255, 255, 0.05)"} textAlign="center" mx="1rem">
       <VisibilitySensor partialVisibility>
@@ -39,7 +42,7 @@ const CompanyStats = ({startCount}) => {
             </Text>
           )}
         </VisibilitySensor>
-        <Text fontSize={{ base: "lg", md: "xl" }}>Projects</Text>
+        <CustomText variant="subheading1" children={"Projects"} />
       </Box>
     </Flex>
   );
