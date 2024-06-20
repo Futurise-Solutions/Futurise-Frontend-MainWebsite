@@ -2,7 +2,7 @@ import React from 'react'
 
 const HeroSection = () => {
   return (
-    <div>HeroSection</div>
+    <div style={{marginBottom:"50rem"}}>HeroSection</div>
   )
 }
 
