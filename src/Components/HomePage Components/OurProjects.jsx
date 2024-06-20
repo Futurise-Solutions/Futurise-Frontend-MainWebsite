@@ -5,49 +5,47 @@ import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { CustomText } from "../../utils/Texts";
 import { noteIcon } from "../../assests";
+import { CustomButton } from "../../utils/Buttons";
 
-const reviews = [
+const projects = [
   {
     avatar:
-      "https://i.pinimg.com/564x/b3/e5/db/b3e5db5a3bf1399f74500a6209462794.jpg",
-    name: "Marcus Veltri",
+      "https://i.pinimg.com/564x/a5/7c/e5/a57ce5c64863317503915174fa700cfa.jpg",
+    name: "Fitness Fuel",
     description:
-      "The Futurise solution team exceeded our expectations with their exceptional service and innovative solutions. They were highly efficient and delivered outstanding results ahead of schedule.",
-    rating: 5,
+      "Fitness Fuel is a comprehensive health and wellness app that helps users track their workouts, monitor nutrition, and stay motivated with personalized fitness plans.",
   },
   {
-    avatar: "https://bit.ly/sage-adebayo",
-    name: "Jane Smith",
+    avatar: "https://i.pinimg.com/564x/25/75/f9/2575f95220c4fdb4a15e55c1cac2e3e7.jpg",
+    name: "Souled Store",
     description:
-      "Working with The Futurise solution was a fantastic experience. They were always available to answer our questions and provided valuable insights throughout the project. We couldn't be happier with the end result.",
-    rating: 4,
+      "Souled Store is an e-commerce platform offering a wide range of pop culture merchandise. The platform provides a seamless shopping experience with secure payment options.",
   },
   {
     avatar:
-      "https://i.pinimg.com/564x/03/eb/d6/03ebd625cc0b9d636256ecc44c0ea324.jpg",
-    name: "Dev Mishra",
+      "https://i.pinimg.com/564x/c3/89/6d/c3896df1cf6271c1b27f614e0e630bd4.jpg",
+    name: "Blockchain Exchange",
     description:
-      "The team at The Futurise solution is truly remarkable. Their dedication, expertise, and attention to detail ensured that our project was a great success. We highly recommend their services.",
-    rating: 4,
+      "Blockchain Exchange is a secure and user-friendly platform for trading cryptocurrencies. It offers advanced trading tools and real-time market data to help users make informed decisions.",
   },
 ];
 
 const OurProjects = () => {
   return (
-    <Box position={"relative"} width={{ base: "95%", md: "90%" }} m={"auto"} textAlign={"center"}>
+    <Box position={"relative"} width={{ base: "95%", md: "90%" }} m={"auto"} textAlign={"center"} py={{ base: 4, md: 8 }}>
       <CustomText
         variant="heading"
-        children={"Get To Know Our Clients"}
+        children={"Our Projects"}
         styles={{ zIndex: 1000 }}
       />
       <Box
         position="absolute"
-        top="-4rem"
+        bottom={{ base: "-2rem", md: "-4rem" }}
         left="50%"
         transform="translateX(-50%)"
         width={{ base: "100%", md: "800px" }}
         height={{ base: "320px", md: "350px", lg: "400px" }}
-        borderRadius="50%"
+        // borderRadius="50%"
         bg="radial-gradient(50% 50% at 50% 50%, rgba(38, 145, 223, 0.4) 6.24%, rgba(38, 145, 223, 0) 100%)"
       ></Box>
       <Swiper
@@ -61,10 +59,11 @@ const OurProjects = () => {
           disableOnInteraction: false,
         }}
       >
-        {reviews.map((review, index) => (
+        {projects.map((project, index) => (
           <SwiperSlide key={index}>
             <Flex
-              direction="column"
+              direction={{ base: "column-reverse", md: "row" }}
+              justifyContent={"space-around"}
               alignItems="center"
               textAlign="center"
               bg="rgba(255, 255, 255, 0.19)"
@@ -74,42 +73,34 @@ const OurProjects = () => {
               shadow="md"
               m={4}
             >
+              <Flex
+                gap={"1rem"}
+                w={{ base: "100%", md: "40%" }}
+                align={{ base: "center", md: "flex-start" }}
+                flexDir={"column"}
+              >
+                <CustomText
+                  styles={{ color: "#07ABE8" }}
+                  variant="callout"
+                  children={project?.name}
+                />
+                <CustomText
+                  variant="subheading"
+                  styles={{ textAlign: "start" }}
+                >
+                  {project.description}
+                </CustomText>
+                <CustomButton text="Know More" variant="primary" />
+              </Flex>
               <Image
-                w={"40px"}
-                h={"40px"}
-                top={"20%"}
-                left={"20%"}
-                position={"absolute"}
-                alt="note"
-                src={noteIcon}
-              />
-              <Image
-                borderRadius="full"
-                width={"60px"}
-                height={"60px"}
-                src={review.avatar}
-                alt={review.name}
+                borderRadius="10px"
+                width={{ base: "70%", sm:"50%", md: "400px" }}
+                height={{ base: "auto", md: "275px" }}
+                src={project.avatar}
+                alt={project.name}
                 mb={4}
                 zIndex={100000}
               />
-              <Flex bg={"transparent"} mb={2}>
-                {Array.from({ length: review.rating }, (_, i) => (
-                  <Text key={i} bg={"transparent"}>
-                    ⭐
-                  </Text>
-                ))}
-              </Flex>
-              <CustomText
-                styles={{ background: "transparent" }}
-                variant="callout"
-                children={review?.name}
-              />
-              <CustomText
-                variant="subheading"
-                styles={{ background: "transparent" }}
-              >
-                {review.description}
-              </CustomText>
             </Flex>
           </SwiperSlide>
         ))}
@@ -118,5 +109,4 @@ const OurProjects = () => {
   );
 };
 
-
-export default OurProjects
+export default OurProjects;

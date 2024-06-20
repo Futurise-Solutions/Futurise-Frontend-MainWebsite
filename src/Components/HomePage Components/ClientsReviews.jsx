@@ -47,7 +47,7 @@ const ClientsReviews = () => {
         transform="translateX(-50%)"
         width={{ base: "100%", md: "800px" }}
         height={{ base: "320px", md: "350px", lg: "400px" }}
-        borderRadius="50%"
+        // borderRadius="50%"
         bg="radial-gradient(50% 50% at 50% 50%, rgba(38, 145, 223, 0.4) 6.24%, rgba(38, 145, 223, 0) 100%)"
       ></Box>
       <Swiper
@@ -77,7 +77,7 @@ const ClientsReviews = () => {
               <Image
                 w={"40px"}
                 h={"40px"}
-                top={"20%"}
+                top={"15%"}
                 left={"20%"}
                 position={"absolute"}
                 alt="note"
