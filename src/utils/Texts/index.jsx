@@ -16,15 +16,25 @@ const textVariants = {
     fontWeight: "400",
     lineHeight: { base: "24px", md: "28px", lg: "32px" },
   },
+  subheading2: {
+    fontSize: { base: "16px", md: "18px", lg: "20px" },
+    fontWeight: "500",
+    lineHeight: { base: "20px", md: "22px", lg: "25px" },
+  },
   callout: {
     fontSize: { base: "15px", md: "20px", lg: "22px" },
     fontWeight: "600",
     lineHeight: { base: "20px", md: "22px", lg: "26px" },
   },
-  callout: {
+  callout1: {
     fontSize: { base: "20px", md: "24px", lg: "28px" },
     fontWeight: "700",
     lineHeight: { base: "21px", md: "27px", lg: "32px" },
+  },
+  callout2: {
+    fontSize: { base: "11px", md: "15px", lg: "18px" },
+    fontWeight: "300",
+    lineHeight: { base: "19px", md: "24px", lg: "28px" },
   }
 };
 
