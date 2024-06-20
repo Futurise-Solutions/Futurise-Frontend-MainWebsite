@@ -12,7 +12,7 @@ const CompanyStats = () => {
       py={{ base: "1rem", md: "2rem" }}
       bg={"rgba(255, 255, 255, 0.05)"}
     >
-      <Box bg={"rgba(255, 255, 255, 0.05)"} textAlign="center" mx="1rem">
+      <Box  textAlign="center" mx="1rem">
       <VisibilitySensor partialVisibility>
           {({ isVisible }) => (
             <Text  color={"rgba(7, 171, 232, 1)"} fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }} fontWeight="bold">
@@ -23,7 +23,7 @@ const CompanyStats = () => {
         <CustomText variant="subheading1" children={"Clients"} />
 
       </Box>
-      <Box bg={"rgba(255, 255, 255, 0.05)"} textAlign="center" mx="1rem">
+      <Box  textAlign="center" mx="1rem">
       <VisibilitySensor partialVisibility>
           {({ isVisible }) => (
             <Text  color={"rgba(7, 171, 232, 1)"} fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }} fontWeight="bold">
@@ -34,7 +34,7 @@ const CompanyStats = () => {
         <CustomText variant="subheading1" children={"Team Members"} />
 
       </Box>
-      <Box bg={"rgba(255, 255, 255, 0.05)"} textAlign="center" mx="1rem">
+      <Box  textAlign="center" mx="1rem">
       <VisibilitySensor partialVisibility>
           {({ isVisible }) => (
             <Text  color={"rgba(7, 171, 232, 1)"} fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }} fontWeight="bold">
