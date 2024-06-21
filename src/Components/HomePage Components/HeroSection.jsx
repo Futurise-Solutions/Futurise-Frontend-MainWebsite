@@ -9,7 +9,7 @@ const HeroSection = () => {
     <Box backgroundImage={`url(${HeroSectionBg})`} h={{ base: "20rem", md: "30rem", lg: "50rem" }} bgRepeat={"no-repeat"} backgroundSize={"cover"} opacity={1}>
 
       <Flex w={"90%"} m={"auto"} gap={"10%"} >
-        {/* FLEX BOX 1 **************** */}
+        {/* FLEX BOX 1 **************** *********/}
         <Box w={"45%"} h={"500px"} border={"1px solid red"} >
           <CustomText variant='subheading6' styles={{fontFamily:"Oxanium"}}>Mobile App & Web Development Company</CustomText>
 
