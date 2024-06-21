@@ -97,7 +97,7 @@ const WhyChooseUs = () => {
               />
               <CustomText
               
-                variant="subheading2"
+                variant="callout3"
                 children={el.title}
                 fontWeight="bold"
                 textAlign="center"
