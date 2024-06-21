@@ -6,7 +6,7 @@ import { CustomButton } from '../../utils/Buttons'
 
 const HeroSection = () => {
   return (
-    <Box backgroundImage={`url(${HeroSectionBg})`} h={{ base: "20rem", md: "30rem", lg: "50rem" }} bgRepeat={"no-repeat"} backgroundSize={"cover"} opacity={1}>
+    <Box backgroundImage={`url(${HeroSectionBg})`} h={{ base: "20rem", md: "30rem", lg: "50rem" }} bgRepeat={"no-repeat"} backgroundSize={"cover"} opacity={1} pt={"10rem"}>
 
       <Flex w={"90%"} m={"auto"} gap={"10%"} >
         {/* FLEX BOX 1 **************** *********/}
