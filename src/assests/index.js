@@ -6,6 +6,10 @@ export {default as clienticon } from "./HomeAssest/client.svg"
 export {default as expertiseicon } from "./HomeAssest/expertise.svg"
 export {default as quailtyicon } from "./HomeAssest/quality.svg"
 export {default as posticon } from "./HomeAssest/post.svg"
+export {default as logo } from "./logo.svg"
+export {default as contactus } from "./contactus.svg"
+
+
 
 
 

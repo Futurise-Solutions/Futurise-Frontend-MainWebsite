@@ -21,7 +21,7 @@ const cards = [
 
 const WhyChooseUs = () => {
   return (
-    <Box m={"auto"} textAlign="center" mb="5rem">
+    <Box w={"90%"} m={"auto"} textAlign="center" mb="5rem">
       <CustomText
         variant="heading"
         children="Why Choose Us"
@@ -64,8 +64,8 @@ const WhyChooseUs = () => {
             spaceBetween: 20,
           },
           1024: {
-            slidesPerView: 5,
-            spaceBetween: 30,
+            slidesPerView: 4,
+            spaceBetween: 40,
           },
         }}
       >
