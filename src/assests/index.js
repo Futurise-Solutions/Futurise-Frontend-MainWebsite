@@ -15,6 +15,7 @@ export {default as InstagramIcon} from "./HomeAssest/InstagramIcon.svg";
 export {default as HeroSectionBg} from "./HomeAssest/HeroSectionBg.jpeg";
 export {default as HeroImg1} from "./HomeAssest/HeroImg1.svg";
 export {default as HeroImg2} from "./HomeAssest/HeroImg2.svg";
+export {default as HeroImg3} from "./HomeAssest/HeroImg3.svg";
 export {default as noteIcon} from "./HomeAssest/reviewNote.svg"
 export {default as timeicon } from "./HomeAssest/timily.svg"
 export {default as clienticon } from "./HomeAssest/client.svg"
