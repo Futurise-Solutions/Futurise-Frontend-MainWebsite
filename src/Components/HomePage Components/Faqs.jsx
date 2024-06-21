@@ -76,7 +76,7 @@ const Faqs = () => {
                 onClick={() => toggleFaq(index)}
               >
                 <CustomText
-                  variant="subheading2"
+                  variant="callout3"
                   children={faq.question}
                   styles={{ textAlign: "start", color: "white", zIndex: 1000 }}
                 />
