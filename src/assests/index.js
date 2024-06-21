@@ -1,2 +1,22 @@
-export {default as webAboutus} from "./HomeAssest/aboutus.svg"
-export {default as glowBg} from "./HomeAssest/glowbg.svg"
+export {default as webAboutus} from "./HomeAssest/aboutus.svg";
+export {default as glowBg} from "./HomeAssest/glowbg.svg";
+export {default as AppDevelopment} from "./HomeAssest/AppDevelopment.svg";
+export {default as DigitalMarketing} from "./HomeAssest/DigitalMarketing.svg";
+export {default as WebDevelopment} from "./HomeAssest/WebDevelopment.svg";
+export {default as BlockchainDevelopment} from "./HomeAssest/BlockchainDevelopment.svg";
+export {default as UIUXDevelopment} from "./HomeAssest/UIUXDevelopment.svg";
+export {default as SmartContract} from "./HomeAssest/SmartContract.svg";
+export {default as LinkedInIcon} from "./HomeAssest/LinkedInIcon.svg";
+export {default as MailIcon} from "./HomeAssest/MailIcon.svg";
+export {default as FacebookIcon} from "./HomeAssest/FacebookIcon.svg";
+export {default as TwitterIcon} from "./HomeAssest/TwitterIcon.svg";
+export {default as InstagramIcon} from "./HomeAssest/InstagramIcon.svg";
+export {default as HeroSectionBg} from "./HomeAssest/HeroSectionBg.jpeg";
+export {default as HeroImg1} from "./HomeAssest/HeroImg1.svg";
+export {default as HeroImg2} from "./HomeAssest/HeroImg2.svg";
+export {default as HeroImg3} from "./HomeAssest/HeroImg3.svg";
+
+
+
+
+

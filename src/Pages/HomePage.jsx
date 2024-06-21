@@ -1,9 +1,10 @@
 import React from 'react'
-import { Aboutus, ClientsReviews, HeroSection, OurProjects, OurServices, Partners, WhyChooseUs } from '../Components'
+import { Aboutus, ClientsReviews,  HeroSection,  OurProjects, OurServices, Partners, WhyChooseUs } from '../Components'
+import { Box } from '@chakra-ui/react'
 
 const HomePage = () => {
   return (
-    <div>
+    <Box>
       <HeroSection/>
       <Aboutus/>
       <OurServices/>
@@ -11,7 +12,7 @@ const HomePage = () => {
       <WhyChooseUs/>
       <ClientsReviews/>
       <Partners/>
-    </div>
+    </Box>
   )
 }
 
