@@ -38,10 +38,10 @@ const textVariants = {
   }
 };
 
-export const CustomText = ({ variant = "heading", children, styles }) => {
+export const CustomText = ({ variant = "heading", children, styles , args}) => {
   const variantStyles = textVariants[variant];
   return (
-    <Text {...variantStyles} style={styles}>
+    <Text {...variantStyles} style={styles} {...args}>
       {children}
     </Text>
   );
