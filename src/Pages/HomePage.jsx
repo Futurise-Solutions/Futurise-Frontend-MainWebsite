@@ -1,5 +1,6 @@
 import React from 'react'
 import { Aboutus, ClientsReviews, HeroSection, OurProjects, OurServices, Partners, WhyChooseUs } from '../Components'
+import Faqs from '../Components/HomePage Components/Faqs'
 
 const HomePage = () => {
   return (
@@ -11,6 +12,7 @@ const HomePage = () => {
       <WhyChooseUs/>
       <ClientsReviews/>
       <Partners/>
+      <Faqs/>
     </div>
   )
 }
