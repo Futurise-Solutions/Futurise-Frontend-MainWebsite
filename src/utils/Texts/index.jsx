@@ -37,7 +37,7 @@ const textVariants = {
     lineHeight: { base: "16px", md: "20px", lg: "25px" },
   },
   subheading6: {
-    fontSize: { base: "2rem", md: "2.5rem", lg: "3.25rem" },
+    fontSize: { base: "30px", md: "48px", lg: "52px" },
     fontWeight: "700",
     lineHeight: { base: "40px", md: "50px", lg: "65px" },
   },
@@ -69,7 +69,6 @@ const textVariants = {
   },
 
 };
-
 export const CustomText = ({ variant = "heading", children, styles, args }) => {
   const variantStyles = textVariants[variant];
   return (
