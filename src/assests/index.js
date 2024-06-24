@@ -24,6 +24,14 @@ export {default as quailtyicon } from "./HomeAssest/quality.svg"
 export {default as posticon } from "./HomeAssest/post.svg"
 export {default as logo } from "./logo.svg"
 export {default as contactus } from "./contactus.svg"
+export {default as heromobile } from "./HomeAssest/mobilehero.svg"
+export {default as webService } from "./HomeAssest/webservice.svg"
+export {default as mobileService } from "./HomeAssest/mobileservice.svg"
+export {default as threedlogo } from "./HomeAssest/3dlogo.png"
+
+
+
+
 
 
 

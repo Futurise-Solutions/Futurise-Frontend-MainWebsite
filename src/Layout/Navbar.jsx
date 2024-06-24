@@ -1,10 +1,11 @@
 import React from 'react';
-import { Box, Flex, Link, Button, useDisclosure, IconButton, Image, Collapse } from '@chakra-ui/react';
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-import { contactus, logo } from '../assests'; 
+import { Box, Flex, Link, Button, useDisclosure, IconButton, Image, Collapse, Text, Icon } from '@chakra-ui/react';
+import { HamburgerIcon, CloseIcon, ArrowForwardIcon } from '@chakra-ui/icons';
+import { contactus, logo } from '../assests';
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Box w={"100%"} zIndex={1000} px={4} position={"fixed"} bg="#00000080" color="white">
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
@@ -47,27 +48,7 @@ const Navbar = () => {
 
         {/* Right Side - Contact Us Button */}
         <Flex alignItems={'center'}>
-          <Button
-            borderRadius={"full"}
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize={'sm'}
-            fontWeight={600}
-            color={'#FFFFFF'}
-            bg={"transparent"}
-            border={"1px solid #FFFFFF"}
-            w={"190px"}
-            h={"40px"}
-            rightIcon={
-              <Box display={"flex"} justifyContent={"center"} alignItems={"center"} bg={"white"} w={"40px"} h={"40px"} borderRadius={"full"}>
-                <Image src={contactus} alt="contact us icon" boxSize={4} />
-              </Box>
-            }
-            _hover={{
-              bg: 'whiteAlpha.200',
-            }}
-          >
-            Contact Us
-          </Button>
+          <LearnMoreButton display={{ base: "none", md: "inline-block" }} />
           {/* Hamburger Menu for Mobile */}
           <IconButton
             size={'md'}
@@ -82,7 +63,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <Collapse in={isOpen} animateOpacity>
         <Box pb={4} display={{ md: 'none' }}>
-          <Flex flexDirection={'column'}>
+          <Flex flexDirection={'column'} alignItems={'start'} gap={2}>
             {['Home', 'About', 'Services', 'Portfolio', 'Blog'].map((link, index) => (
               <Link
                 key={index}
@@ -95,25 +76,7 @@ const Navbar = () => {
                 {link}
               </Link>
             ))}
-            <Button
-              w="full"
-              mt={2}
-              fontSize={'sm'}
-              fontWeight={600}
-              color={'#FFFFFF'}
-              bg={"transparent"}
-              border={"1px solid #FFFFFF"}
-              rightIcon={
-                <Box display={"flex"} justifyContent={"center"} alignItems={"center"} bg={"white"} w={"40px"} h={"40px"} borderRadius={"full"}>
-                  <Image src={contactus} alt="contact us icon" boxSize={4} />
-                </Box>
-              }
-              _hover={{
-                bg: 'whiteAlpha.200',
-              }}
-            >
-              Contact Us
-            </Button>
+            <LearnMoreButton text={"white"} bg={"#07ABE8"} />
           </Flex>
         </Box>
       </Collapse>
@@ -122,3 +85,74 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+const LearnMoreButton = ({ display, text, bg }) => {
+  return (
+    <Button
+      position="relative"
+      display={display}
+      cursor="pointer"
+      justifyContent="center"
+      alignItems="center"
+      outline="none"
+      border="1px solid #07ABE8"
+      verticalAlign="middle"
+      textDecoration="none"
+      background={bg || "transparent"}
+      padding="0"
+      borderRadius="full"
+      fontSize="inherit"
+      fontFamily="inherit"
+      width="190px"
+      height="40px"
+      color="white"
+      className="contact"
+      _hover={{
+        ".circle": { width: "100%" },
+        ".circle .icon": { transform: "translate(3.2rem, 0)" },
+        ".button-text": { color: "#FFFFFF" }
+      }}
+    >
+      <Flex
+        transition="all 0.45s cubic-bezier(0.65, 0, 0.076, 1)"
+        position="absolute"
+        left="0"
+        width="40px"
+        height="40px"
+        top={0}
+        background=""
+        borderRadius="1.625rem"
+        alignItems="center"
+        justifyContent="center"
+        textAlign={"center"}
+        bg={"linear-gradient(90deg, #015371 0%, #8ADEFE 100%)"}
+        className="circle"
+        _hover={{ bg: "linear-gradient(90deg, #015371 0%, #8ADEFE 100%)" }}
+      >
+        <Icon
+          as={ArrowForwardIcon}
+          transition="all 0.45s cubic-bezier(0.65, 0, 0.076, 1)"
+          color="#fff"
+          boxSize={4}
+          className="icon"
+          mt={-1}
+        />
+      </Flex>
+      <Text
+        transition="all 0.45s cubic-bezier(0.65, 0, 0.076, 1)"
+        position="relative"
+        left="5px"
+        color={text || "#07ABE8"}
+        fontWeight="500"
+        lineHeight="1.6"
+        textAlign="center"
+        textTransform="uppercase"
+        className="button-text"
+        fontSize="18px"
+        _hover={{ left: "-8px" }}
+      >
+        Contact Us
+      </Text>
+    </Button>
+  );
+};
