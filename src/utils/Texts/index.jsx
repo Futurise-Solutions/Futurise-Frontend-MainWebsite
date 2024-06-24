@@ -67,9 +67,14 @@ const textVariants = {
     fontWeight: "500",
     lineHeight: { base: "20px", md: "22px", lg: "25px" },
   },
+  callout4: {
+    fontSize: { base: "28px", md: "35px", lg: "40px" },
+    fontWeight: "500",
+    lineHeight: { base: "35px", md: "42px", lg: "48px" },
+  },
 
 };
-export const CustomText = ({ variant = "heading", children, styles, args }) => {
+export const CustomText = ({ variant = "heading", children, styles, ...args }) => {
   const variantStyles = textVariants[variant];
   return (
     <Text {...variantStyles} style={styles} {...args}>

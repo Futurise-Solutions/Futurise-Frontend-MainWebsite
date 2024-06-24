@@ -28,6 +28,9 @@ export {default as heromobile } from "./HomeAssest/mobilehero.svg"
 export {default as webService } from "./HomeAssest/webservice.svg"
 export {default as mobileService } from "./HomeAssest/mobileservice.svg"
 export {default as threedlogo } from "./HomeAssest/3dlogo.png"
+export {default as appdevelop} from "./ServicePage/appdevelop.svg"
+export {default as mobiledevelop} from "./ServicePage/appdevelopment.svg"
+
 
 
 

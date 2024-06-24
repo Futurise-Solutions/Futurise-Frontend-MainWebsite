@@ -29,7 +29,7 @@ const variants = {
   },
 };
 
-export const CustomButton = ({ variant = "primary", text, onClick }) => {
+export const CustomButton = ({ variant = "primary", text, onClick , ...props}) => {
   const variantStyles = variants[variant];
 
   return (
@@ -40,6 +40,7 @@ export const CustomButton = ({ variant = "primary", text, onClick }) => {
       borderRadius="full"
       mt="1rem"
       onClick={onClick}
+      {...props}
     >
       {text}
     </Button>
