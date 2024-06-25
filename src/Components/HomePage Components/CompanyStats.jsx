@@ -7,7 +7,7 @@ const CompanyStats = () => {
   return (
     <Flex
       flexDirection={{ base: "row", md: "row" }}
-      justifyContent="space-around"
+      justifyContent="space-around"    
       alignItems="center"
       py={{ base: "1rem", md: "2rem" }}
       bg={"rgba(255, 255, 255, 0.05)"}
@@ -16,7 +16,7 @@ const CompanyStats = () => {
       <VisibilitySensor partialVisibility>
           {({ isVisible }) => (
             <Text  color={"rgba(7, 171, 232, 1)"} fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }} fontWeight="bold">
-              {isVisible ? <CountUp style={{ color: "#07ABE8" }} end={50} duration={2} /> : '50'}+
+              {isVisible ? <CountUp style={{ color: "#07ABE8" }} end={50} duration={4} /> : '50'}+
             </Text>
           )}
         </VisibilitySensor>

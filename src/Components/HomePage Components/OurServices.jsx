@@ -58,8 +58,10 @@ const OurServices = () => {
               opacity={0}
               visibility="hidden"
               transition="all 0.3s ease-in-out"
+              flexDir={"column"}
             >
-              <InfoIcon w={10} h={10} color="white" />
+              <Image  color="white" src={el.icon} alt='icon'/>
+              <CustomText variant='subheading2' styles={{marginTop:"1rem"}}>Know More</CustomText>
             </Flex>
 
             {/* Image */}

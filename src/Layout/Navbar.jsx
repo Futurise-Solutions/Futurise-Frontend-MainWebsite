@@ -7,8 +7,8 @@ const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Box w={"100%"} zIndex={1000} px={4} position={"fixed"} bg="#00000080" color="white">
-      <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+    <Box w={"100%"} zIndex={1000} px={4} position={"fixed"} bg="#00000080" color="white" boxShadow="0px 2px 10px #07ABE8">
+      <Flex h={16} alignItems={'center'} justifyContent={'space-between'} w={"99%"} m={"auto"}>
         {/* Left Side - Logo */}
         <Image w={"171px"} h={"50px"} src={logo} alt="logo" />
 
@@ -40,6 +40,9 @@ const Navbar = () => {
                 transformOrigin: 'bottom right',
                 transition: 'transform 0.40s ease-out',
               }}
+              fontFamily={"Roboto"}
+              fontWeight={500}
+              fontSize={["1rem","1rem","1.25rem"]}
             >
               {link}
             </Link>

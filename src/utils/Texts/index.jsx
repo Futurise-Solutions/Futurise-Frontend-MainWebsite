@@ -72,6 +72,11 @@ const textVariants = {
     fontWeight: "500",
     lineHeight: { base: "35px", md: "42px", lg: "48px" },
   },
+  callout5: {
+    fontSize: { base: "28px", md: "37px", lg: "48px" },
+    fontWeight: "600",
+    lineHeight: { base: "35px", md: "42px", lg: "48px" },
+  },
 
 };
 export const CustomText = ({ variant = "heading", children, styles, ...args }) => {
