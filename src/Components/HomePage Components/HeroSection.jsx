@@ -81,6 +81,7 @@ const HeroSection = () => {
             zIndex="3"
             className='img1'
             loading={"lazy"}
+            // border={"1px solid red"}
           />
           <Image
            loading={"lazy"}
@@ -104,8 +105,8 @@ const HeroSection = () => {
             src={HeroImg3}
             alt="Image 3"
             position="absolute"
-            top={{ base: "50%", lg: "30%" }}
-            left={{ base: "50%", lg: "25%" }}
+            top={{ base: "50%", lg: "22%" }}
+            left={{ base: "50%", lg: "40%" }}
             transform="translateX(-50%)"
             zIndex="1"
             className='img3'

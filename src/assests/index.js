@@ -31,7 +31,12 @@ export {default as threedlogo } from "./HomeAssest/3dlogo.png"
 export {default as appdevelop} from "./ServicePage/appdevelop.svg"
 export {default as mobiledevelop} from "./ServicePage/appdevelopment.svg"
 
-
+export {default as webDevHover} from "./HomeAssest/webDevHover.svg";
+export {default as AppDevHover} from "./HomeAssest/AppDevHover.svg";
+export {default as DigitalMarketingHover} from "./HomeAssest/DigitalMarketingHover.svg";
+export {default as SmartContractHover} from "./HomeAssest/SmartContractHover.svg";
+export {default as UIUXHover} from "./HomeAssest/UIUXHover.svg";
+export {default as BlockchainHover} from "./HomeAssest/BlockChainHover.svg";
 
 
 

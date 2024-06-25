@@ -50,3 +50,16 @@
   transition: transform 0.3s ease;
 }
 
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #1d1c1c;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #07ABE8 ;
+  border-radius: 3px;
+}
