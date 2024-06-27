@@ -1,5 +1,5 @@
 import { Box, Flex, Image, Text, Button } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { appdevelop } from "../assests";
 import ProcessSection from "../Components/ServiceComponents/ProcessSection";
@@ -61,12 +61,14 @@ const services = {
 
 const ServicePage = () => {
   const { serviceName } = useParams();
-  const service = services["app-development"];
+  const service = services[serviceName];
 
   if (!service) {
     return <Text>Service not found</Text>;
   }
-
+useEffect(() => {
+ window.scroll(0,0)
+},[])
   return (
     <Box>
       <Box pt={{ base: "3rem", md: "5rem" }} w="90%" m="auto">
@@ -120,7 +122,7 @@ const ServicePage = () => {
         </CustomText>
         <CustomButton text={"Connect With Us"} px={20}></CustomButton>
       </Box>
-  <ServiceStack service={"web-development"} />
+  <ServiceStack service={serviceName} />
       <ProcessSection />
     </Box>
   );

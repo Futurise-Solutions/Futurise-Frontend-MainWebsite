@@ -6,6 +6,8 @@ import "./index.css"
 
 
 const App = () => {
+  sessionStorage.setItem("userActive", "user is active")
+  
   return (
     <Box id='app'>
       <Navbar />

@@ -2,15 +2,17 @@ import React from 'react';
 import { Box, Flex, Link, Button, useDisclosure, IconButton, Image, Collapse, Text, Icon } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 import { contactus, logo } from '../assests';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const navigate = useNavigate()
 
   return (
-    <Box w={"100%"} zIndex={1000} px={4} position={"fixed"} bg="#00000080" color="white" boxShadow="0px 2px 10px #07ABE8">
+    <Box w={"100%"} zIndex={1000} px={4} position={"fixed"} bg="#00000090" color="white" boxShadow="0px 2px 10px #07ABE8">
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'} w={"99%"} m={"auto"}>
         {/* Left Side - Logo */}
-        <Image w={"171px"} h={"50px"} src={logo} alt="logo" />
+        <Image onClick={() => navigate("/")} w={"171px"} h={"50px"} src={logo} alt="logo" />
 
         {/* Middle - Navbar Links */}
         <Flex display={{ base: 'none', md: 'flex' }} alignItems={'center'} gap={4}>
@@ -51,7 +53,7 @@ const Navbar = () => {
 
         {/* Right Side - Contact Us Button */}
         <Flex alignItems={'center'}>
-          <LearnMoreButton display={{ base: "none", md: "inline-block" }} />
+          <LearnMoreButton  display={{ base: "none", md: "inline-block" }} />
           {/* Hamburger Menu for Mobile */}
           <IconButton
             size={'md'}
@@ -90,8 +92,13 @@ const Navbar = () => {
 export default Navbar;
 
 const LearnMoreButton = ({ display, text, bg }) => {
+  const navigate = useNavigate()
+  const handleRoute = (route)=> {
+     navigate(route)
+  }
   return (
     <Button
+    onClick={()=> handleRoute("/contact")}
       position="relative"
       display={display}
       cursor="pointer"

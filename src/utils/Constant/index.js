@@ -6,38 +6,46 @@ export const OurServiceData = [
     image: AppDevelopment,
     serviceName: "App Development",
     serviceDesc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore quibusdam molestiae explicabo.",
-    icon:AppDevHover
+    icon:AppDevHover,
+    route:"app-development"
   },
   {
     image: DigitalMarketing,
     serviceName: "Digital Marketing",
     serviceDesc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore quibusdam molestiae explicabo.",
-    icon:DigitalMarketingHover
+    icon:DigitalMarketingHover,
+    route:"digital-marketing"
   },
   {
     image: WebDevelopment,
     serviceName: "Web Development",
     serviceDesc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore quibusdam molestiae explicabo.",
-    icon:webDevHover
+    icon:webDevHover,
+    route:"web-development"
+   
 
   },
   {
     image: BlockchainDevelopment,
     serviceName: "Blockchain Development",
     serviceDesc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore quibusdam molestiae explicabo.",
-    icon:BlockchainHover
+    icon:BlockchainHover,
+    route:"blockchain-development"
   },
   {
     image: UIUXDevelopment,
     serviceName: "Ui-Ux Development",
     serviceDesc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore quibusdam molestiae explicabo.",
-    icon:UIUXHover
+    icon:UIUXHover,
+     route:"ui-ux-design"
   },
   {
     image: SmartContract,
     serviceName: "Smart Contract",
     serviceDesc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore quibusdam molestiae explicabo.",
-    icon:SmartContractHover
+    icon:SmartContractHover,
+   
+    route:"smart-contract"
   },
 ];
   
