@@ -3,6 +3,7 @@ import { Box, Grid, GridItem, Image, Flex } from '@chakra-ui/react';
 import { CustomText } from '../../utils/Texts';
 import { InfoIcon } from '@chakra-ui/icons'; // Example icon, you can replace it with any icon you prefer
 import { OurServiceData } from '../../utils/Constant';
+import { Link } from 'react-router-dom';
 
 
 const OurServices = () => {
@@ -45,6 +46,7 @@ const OurServices = () => {
             }}
           >
             {/* Overlay */}
+            <Link to={`/service/${el.route}`}>
             <Flex
               className="overlay"
               position="absolute"
@@ -63,6 +65,7 @@ const OurServices = () => {
               <Image  color="white" src={el.icon} alt='icon'/>
               <CustomText variant='subheading2' styles={{marginTop:"1rem"}}>Know More</CustomText>
             </Flex>
+            </Link>
 
             {/* Image */}
             <Image src={el.image} py={"0.5rem"} px={"0.5rem"} w={"100%"} />

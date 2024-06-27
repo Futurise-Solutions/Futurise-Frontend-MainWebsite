@@ -2,6 +2,7 @@ import { Box, Button, Image, Input, keyframes } from '@chakra-ui/react'
 import React from 'react'
 import { CustomText } from '../utils/Texts'
 import { FacebookIcon, InstagramIcon, LinkedInIcon, MailIcon, TwitterIcon } from '../assests'
+import { useNavigate } from 'react-router-dom';
 
 const circulate = keyframes`
   0% {
@@ -21,7 +22,7 @@ const hoverEffect = {
     animation: `${circulate} 1.5s infinite`,
 }
 const Footer = () => {
- 
+ const navigate = useNavigate()
   return (
     <Box bg={"rgba(0, 14, 27, 0.6);"} >
 
@@ -39,9 +40,9 @@ const Footer = () => {
 
         {/* BOX 2** */}
         <Box>
-          <CustomText variant='subheading4'>Customer Support</CustomText>
+          <CustomText  variant='subheading4'>Customer Support</CustomText>
 
-          <CustomText variant='subheading5' styles={{ marginTop: "1.5rem" }}>Contact Us</CustomText>
+          <CustomText cursor={"pointer"} onClick={()=> navigate("/contact")}  variant='subheading5' styles={{ marginTop: "1.5rem" }}>Contact Us</CustomText>
           <CustomText variant='subheading5' styles={{ marginTop: "0.5rem" }}>Project FAQ</CustomText>
           <CustomText variant='subheading5' styles={{ marginTop: "0.5rem" }}>FAQs</CustomText>
 

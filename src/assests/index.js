@@ -37,6 +37,8 @@ export {default as DigitalMarketingHover} from "./HomeAssest/DigitalMarketingHov
 export {default as SmartContractHover} from "./HomeAssest/SmartContractHover.svg";
 export {default as UIUXHover} from "./HomeAssest/UIUXHover.svg";
 export {default as BlockchainHover} from "./HomeAssest/BlockChainHover.svg";
+export {default as contactUsBanner} from "./ServicePage/banner.jpeg";
+
 
 
 

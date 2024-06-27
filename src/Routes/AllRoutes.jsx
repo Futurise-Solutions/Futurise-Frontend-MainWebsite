@@ -1,17 +1,17 @@
-import React from 'react'
-import { Route, Routes } from 'react-router-dom'
-import { Contactus, HomePage } from '../Pages'
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import { Contactus, HomePage, ServiceSingalPage } from "../Pages";
 
 const AllRoutes = () => {
   return (
     <div>
-        <Routes>
-            <Route path='/' element={<HomePage/>}/>
-            <Route path='/contact' element={<Contactus/>}/>
-
-        </Routes>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/contact" element={<Contactus />} />
+        <Route path="/service/:serviceName" element={<ServiceSingalPage />} />
+      </Routes>
     </div>
-  )
-}
+  );
+};
 
-export default AllRoutes
+export default AllRoutes;
