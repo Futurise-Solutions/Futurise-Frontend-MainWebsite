@@ -6,6 +6,11 @@ const textVariants = {
     fontWeight: "500",
     lineHeight: { base: "40px", md: "60px", lg: "100px" },
   },
+  heading1: {
+    fontSize: { base: "28px", md: "38px", lg: "46px" },
+    fontWeight: "500",
+    lineHeight: { base: "30px", md: "40px", lg: "60px" },
+  },
   subheading: {
     fontSize: { base: "16px", md: "18px", lg: "20px" },
     fontWeight: "400",

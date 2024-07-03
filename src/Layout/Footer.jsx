@@ -30,7 +30,6 @@ const Footer = () => {
         {/* BOX 1** */}
         <Box>
           <CustomText variant='subheading4'>Learn</CustomText>
-
           <CustomText variant='subheading5' styles={{ marginTop: "1.5rem"}}>Home</CustomText>
           <CustomText variant='subheading5' styles={{ marginTop: "0.5rem" }}>About Us</CustomText>
           <CustomText variant='subheading5' styles={{ marginTop: "0.5rem" }}>Our Services</CustomText>
@@ -41,7 +40,6 @@ const Footer = () => {
         {/* BOX 2** */}
         <Box>
           <CustomText  variant='subheading4'>Customer Support</CustomText>
-
           <CustomText cursor={"pointer"} onClick={()=> navigate("/contact")}  variant='subheading5' styles={{ marginTop: "1.5rem" }}>Contact Us</CustomText>
           <CustomText variant='subheading5' styles={{ marginTop: "0.5rem" }}>Project FAQ</CustomText>
           <CustomText variant='subheading5' styles={{ marginTop: "0.5rem" }}>FAQs</CustomText>
@@ -54,7 +52,6 @@ const Footer = () => {
         {/* BOX 3** */}
         <Box>
           <CustomText variant='subheading4'>Bussiness</CustomText>
-
           <CustomText variant='subheading5' styles={{ marginTop: "1.5rem" }}>Collaboration</CustomText>
           <CustomText variant='subheading5' styles={{ marginTop: "0.5rem" }}>Sourcing</CustomText>
           <CustomText variant='subheading5' styles={{ marginTop: "0.5rem" }}>Careers</CustomText>
@@ -62,25 +59,22 @@ const Footer = () => {
 
         </Box>
 
-
-        {/* BOX 3** */}
+        {/* BOX 4** */}
         <Box>
           <CustomText variant='subheading4'>Subscribe Our NewsLetter</CustomText>
-
-
           <Input
             h={"4rem"}
             type={'email'}
             placeholder='Enter Email Address'
             border={"1px solid rgba(132, 132, 132, 1)"}
             borderRadius={"1rem"}
-            variant={"unstyled"}
+            // variant={"unstyled"}
             _placeholder={{
               color: "rgba(177, 177, 177, 1)",
               fontFamily: "Roboto",
               fontWeight: 400,
               size: "1rem",
-              pl: "1rem"
+              // pl: "1rem"
             }}
             my={"1.5rem"}
           />
@@ -89,14 +83,12 @@ const Footer = () => {
           <CustomText variant='subheading4' styles={{ marginBottom: "1rem" }}>Follow Us</CustomText>
           {/* ****Box For Showing Social Media Icons ***** */}
           <Box display={"flex"} gap={"1rem"}>
-            <a href=""><Image src={LinkedInIcon} alt='LinkedInIcon' _hover={hoverEffect} w={"35px"} h={"37px"}/> </a>
+            <a href=""><Image src={LinkedInIcon} alt='LinkedInIcon' _hover={hoverEffect} /> </a>
             <a href=""> <Image src={MailIcon} alt='MailIcon' _hover={hoverEffect} /> </a>
             <a href=""> <Image src={FacebookIcon} alt='FacebookIcon' _hover={hoverEffect}/> </a>
             <a href=""> <Image src={InstagramIcon} alt='InstagramIcon' _hover={hoverEffect}/> </a>
-            <a href=""> <Image src={TwitterIcon} alt='TwitterIcon' _hover={hoverEffect} w={"35px"} h={"37px"}/> </a>
-
+            <a href=""> <Image src={TwitterIcon} alt='TwitterIcon' _hover={hoverEffect}/> </a>
           </Box>
-
 
         </Box>
 
@@ -108,3 +100,5 @@ const Footer = () => {
 }
 
 export default Footer
+
+

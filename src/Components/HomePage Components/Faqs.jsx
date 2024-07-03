@@ -2,34 +2,9 @@ import { Box, Flex, IconButton, Collapse } from "@chakra-ui/react";
 import { useState } from "react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { CustomText } from "../../utils/Texts";
+import { faqs } from "../../utils/Constant";
 
-const faqs = [
-  {
-    question: "What services do you offer?",
-    answer:
-      "We offer a wide range of digital transformation and software solutions, including web development, mobile app development, and cloud services.",
-  },
-  {
-    question: "How can I contact customer support?",
-    answer:
-      "You can contact our customer support team via email at support@futurisetechnologies.com or call us at (123) 456-7890.",
-  },
-  {
-    question: "What are your business hours?",
-    answer:
-      "Our business hours are Monday to Friday, 9 AM to 6 PM. We are closed on weekends and public holidays.",
-  },
-  {
-    question: "Do you offer customized solutions?",
-    answer:
-      "Yes, we provide customized solutions tailored to meet your specific business needs and requirements.",
-  },
-  {
-    question: "What is your pricing model?",
-    answer:
-      "Our pricing model varies depending on the project scope and requirements. Please contact us for a detailed quote.",
-  },
-];
+
 
 const Faqs = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
@@ -86,7 +61,10 @@ const Faqs = () => {
                   aria-label="Toggle FAQ"
                   w={"24px"}
                   h={"24px"}
-                  color="white"
+                  color="#fff"
+                  _hover={{
+                    color:"#fff"
+                  }}
                   zIndex={1000}
                 />
               </Flex>

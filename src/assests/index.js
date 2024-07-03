@@ -36,8 +36,18 @@ export {default as AppDevHover} from "./HomeAssest/AppDevHover.svg";
 export {default as DigitalMarketingHover} from "./HomeAssest/DigitalMarketingHover.svg";
 export {default as SmartContractHover} from "./HomeAssest/SmartContractHover.svg";
 export {default as UIUXHover} from "./HomeAssest/UIUXHover.svg";
+export {default as clientIconHover} from "./HomeAssest/clientIconHover.svg";
+export {default as expertiseiconHover} from "./HomeAssest/expertiseiconHover.svg";
+export {default as postIconHover} from "./HomeAssest/postIconHover.svg";
+export {default as qualityIconHover} from "./HomeAssest/qualityIconHover.svg";
+export {default as timeIconHover} from "./HomeAssest/timeIconHover.svg";
+
+
+
 export {default as BlockchainHover} from "./HomeAssest/BlockChainHover.svg";
 export {default as contactUsBanner} from "./ServicePage/banner.jpeg";
+export {default as AboutUsHeroBg} from "./AboutUsHeroBg.jpg"
+export {default as OurPortfolioBg} from "./OurPortfolioBg.jpg"
 
 
 

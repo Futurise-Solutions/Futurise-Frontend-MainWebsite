@@ -6,29 +6,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { CustomText } from "../../utils/Texts";
 import { noteIcon } from "../../assests";
 import { CustomButton } from "../../utils/Buttons";
+import { projects } from "../../utils/Constant";
 
-const projects = [
-  {
-    avatar:
-      "https://i.pinimg.com/564x/a5/7c/e5/a57ce5c64863317503915174fa700cfa.jpg",
-    name: "Fitness Fuel",
-    description:
-      "Fitness Fuel is a comprehensive health and wellness app that helps users track their workouts, monitor nutrition, and stay motivated with personalized fitness plans.",
-  },
-  {
-    avatar: "https://i.pinimg.com/564x/25/75/f9/2575f95220c4fdb4a15e55c1cac2e3e7.jpg",
-    name: "Souled Store",
-    description:
-      "Souled Store is an e-commerce platform offering a wide range of pop culture merchandise. The platform provides a seamless shopping experience with secure payment options.",
-  },
-  {
-    avatar:
-      "https://i.pinimg.com/564x/c3/89/6d/c3896df1cf6271c1b27f614e0e630bd4.jpg",
-    name: "Blockchain Exchange",
-    description:
-      "Blockchain Exchange is a secure and user-friendly platform for trading cryptocurrencies. It offers advanced trading tools and real-time market data to help users make informed decisions.",
-  },
-];
+
 
 const OurProjects = () => {
   return (
