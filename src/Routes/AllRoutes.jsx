@@ -4,7 +4,7 @@ import { AboutUs, Contactus, HomePage, Portfolio, ServiceSingalPage } from "../P
 
 const AllRoutes = () => {
   return (
-    <div>
+    <div> 
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/contact" element={<Contactus />} />
