@@ -5,32 +5,9 @@ import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { CustomText } from "../../utils/Texts";
 import { noteIcon } from "../../assests";
+import { reviews } from "../../utils/Constant";
 
-const reviews = [
-  {
-    avatar:
-      "https://i.pinimg.com/564x/b3/e5/db/b3e5db5a3bf1399f74500a6209462794.jpg",
-    name: "Marcus Veltri",
-    description:
-      "The Futurise solution team exceeded our expectations with their exceptional service and innovative solutions. They were highly efficient and delivered outstanding results ahead of schedule.",
-    rating: 5,
-  },
-  {
-    avatar: "https://bit.ly/sage-adebayo",
-    name: "Jane Smith",
-    description:
-      "Working with The Futurise solution was a fantastic experience. They were always available to answer our questions and provided valuable insights throughout the project. We couldn't be happier with the end result.",
-    rating: 4,
-  },
-  {
-    avatar:
-      "https://i.pinimg.com/564x/03/eb/d6/03ebd625cc0b9d636256ecc44c0ea324.jpg",
-    name: "Dev Mishra",
-    description:
-      "The team at The Futurise solution is truly remarkable. Their dedication, expertise, and attention to detail ensured that our project was a great success. We highly recommend their services.",
-    rating: 4,
-  },
-];
+
 
 const ClientsReviews = () => {
   return (

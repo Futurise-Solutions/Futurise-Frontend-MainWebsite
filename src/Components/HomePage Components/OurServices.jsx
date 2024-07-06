@@ -9,12 +9,17 @@ import { Link } from 'react-router-dom';
 const OurServices = () => {
   return (
     <Box
-      py={"5rem"}
+    py={"5rem"}
       w={"90%"}
       m={"auto"}
       position={"relative"}
-      overflow={"hidden"}
-    >
+      overflow={"hidden"}>
+
+      <CustomText
+        variant="heading"
+        children="Our Services"
+        styles={{ zIndex: 1000,textAlign:"center"}}
+      />
       {/* BOX FOR GLOW EFFECT */}
       <Box
         position="absolute"
@@ -44,27 +49,28 @@ const OurServices = () => {
                 visibility: 'visible',
               }
             }}
+            // border={"1px solid red"}
           >
             {/* Overlay */}
             <Link to={`/service/${el.route}`}>
-            <Flex
-              className="overlay"
-              position="absolute"
-              top={0}
-              left={0}
-              width="100%"
-              height="100%"
-              bg="rgba(0, 0, 0, 0.7)"
-              alignItems="center"
-              justifyContent="center"
-              opacity={0}
-              visibility="hidden"
-              transition="all 0.3s ease-in-out"
-              flexDir={"column"}
-            >
-              <Image  color="white" src={el.icon} alt='icon'/>
-              <CustomText variant='subheading2' styles={{marginTop:"1rem"}}>Know More</CustomText>
-            </Flex>
+              <Flex
+                className="overlay"
+                position="absolute"
+                top={0}
+                left={0}
+                width="100%"
+                height="100%"
+                bg="rgba(0, 0, 0, 0.7)"
+                alignItems="center"
+                justifyContent="center"
+                opacity={0}
+                visibility="hidden"
+                transition="all 0.3s ease-in-out"
+                flexDir={"column"}
+              >
+                <Image color="white" src={el.icon} alt='icon' />
+                <CustomText variant='subheading2' styles={{ marginTop: "1rem" }}>Know More</CustomText>
+              </Flex>
             </Link>
 
             {/* Image */}

@@ -9,7 +9,7 @@ const Navbar = () => {
   const navigate = useNavigate()
 
   return (
-    <Box w={"100%"} zIndex={1000} px={4} position={"fixed"} bg="#00000090" color="white" boxShadow="0px 2px 10px #07ABE8">
+    <Box w={"100%"} zIndex={10000} px={4} position={"fixed"} bg="#00000090" color="white" boxShadow="0px 2px 10px #07ABE8">
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'} w={"99%"} m={"auto"}>
         {/* Left Side - Logo */}
         <Image onClick={() => navigate("/")} w={"171px"} h={"50px"} src={logo} alt="logo" />
