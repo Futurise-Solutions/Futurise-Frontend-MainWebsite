@@ -77,7 +77,9 @@ const MissionVision = () => {
           mb={{ base: "2rem", md: "4rem" }}
           bg="rgba(255, 255, 255, 0.19)"
           border={"1px solid #FFFFFF6E"}
-          borderRadius={{ base: "15px", sm: "15px", md: "0px", lg: "0px" }}
+        boxShadow={"#068bbb -5px 5px"}
+
+          borderRadius={{ base: "15px", sm: "15px", md: "15px", lg: "15px" }}
           borderLeftRadius={{
             base: "0px",
             sm: "0px",
@@ -134,7 +136,8 @@ const MissionVision = () => {
         mb={{ base: "2rem", md: "4rem" }}
         bg="rgba(255, 255, 255, 0.19)"
         border={"1px solid #FFFFFF6E"}
-        borderRadius={{ base: "15px", sm: "15px", md: "0px", lg: "0px" }}
+        boxShadow={"#068bbb -5px 5px"}
+        borderRadius={{ base: "15px", sm: "15px", md: "15px", lg: "15px" }}
         borderRightRadius={{
           base: "0px",
           sm: "0px",
