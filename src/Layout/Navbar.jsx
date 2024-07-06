@@ -1,8 +1,8 @@
 import React from 'react';
-import { Box, Flex, Link, Button, useDisclosure, IconButton, Image, Collapse, Text, Icon } from '@chakra-ui/react';
+import { Box, Flex, Button, useDisclosure, IconButton, Image, Collapse, Text, Icon } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 import { contactus, logo } from '../assests';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -22,7 +22,8 @@ const Navbar = () => {
               px={2}
               py={1}
               rounded={'md'}
-              href="#"
+              to={link.toLowerCase()}
+              
               position="relative"
               _hover={{
                 _after: {
