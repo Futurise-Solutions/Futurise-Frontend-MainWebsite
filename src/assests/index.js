@@ -41,6 +41,14 @@ export {default as expertiseiconHover} from "./HomeAssest/expertiseiconHover.svg
 export {default as postIconHover} from "./HomeAssest/postIconHover.svg";
 export {default as qualityIconHover} from "./HomeAssest/qualityIconHover.svg";
 export {default as timeIconHover} from "./HomeAssest/timeIconHover.svg";
+export {default as WebDevNavbarIcon} from "./HomeAssest/WebDevNavbarIcon.svg";
+export {default as AppDevNavbarIcon} from "./HomeAssest/AppDevNavbarIcon.svg";
+export {default as BlockchainDevNavbarIcon} from "./HomeAssest/BlockchainDevNavbarIcon.svg";
+export {default as DigiMarketingNavbarIcon} from "./HomeAssest/DigiMarketingNavbarIcon.svg";
+export {default as SmartContractNavbarIcon} from "./HomeAssest/SmartContractNavbarIcon.svg";
+export {default as UIUXNavbarIcon} from "./HomeAssest/UIUXNavbarIcon.svg";
+
+
 
 
 

@@ -27,22 +27,7 @@ import {
 } from "@chakra-ui/icons";
 import { contactus, logo } from "../assests";
 import { Link, useNavigate } from "react-router-dom";
-
-const options = [
-  { option: "Home", path: "/" },
-  { option: "About", path: "/about" },
-  { option: "Services", path: "/" },
-  { option: "Portfolio", path: "/portfolio" },
-  { option: "Blog", path: "/" },
-];
-
-const servicesOptions = [
-  { option: "App Development", path: "/service/app-development" },
-  { option: "Digital Marketing", path: "/service/digital-marketing" },
-  { option: "Web Development", path: "/service/web-development" },
-  { option: "Blockchain Development", path: "/service/blockchain-development" },
-  { option: "Ui-Ux Development", path: "/service/ui-ux-design" },
-];
+import { navbarOptions, NavbarservicesOptions } from "../utils/Constant";
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -65,7 +50,7 @@ const Navbar = () => {
         w={"99%"}
         m={"auto"}
       >
-        {/* Left Side - Logo */}
+        {/* Left Side - Logo ********************************************/}
         <Image
           onClick={() => navigate("/")}
           w={"171px"}
@@ -74,13 +59,13 @@ const Navbar = () => {
           alt="logo"
         />
 
-        {/* Middle - Navbar Links */}
+        {/* Middle - Navbar Links **********************************/}
         <Flex
           display={{ base: "none", md: "flex" }}
           alignItems={"center"}
           gap={4}
         >
-          {options.map((link, index) => (
+          {navbarOptions.map((link, index) => (
             <React.Fragment key={index}>
               {link.option === "Services" ? (
                 <Popover trigger="hover">
@@ -91,10 +76,11 @@ const Navbar = () => {
                     _hover={{ bg: "transparent" }}
                     bg="transparent"
                     position={"relative"}
-                    color={"white"}
+                    color={"#fff"}
                     _active={{
                       bg: "transparent",
                     }}
+
                   >
                     <Text
                       px={2}
@@ -132,13 +118,12 @@ const Navbar = () => {
                   <PopoverContent
                     bg={"#000"}
                     boxShadow="0px 2px 10px #07ABE8"
-                    border={"none"}
                     mt={2}
                     w={"fit-content"}
                     pr={"3rem"}
                     ml={"3rem"}
                   >
-                    {servicesOptions.map((service, serviceIndex) => (
+                    {NavbarservicesOptions.map((service, serviceIndex) => (
                       <PopoverBody
                         cursor={"pointer"}
                         bg={"#00000090"}
@@ -146,19 +131,23 @@ const Navbar = () => {
                         onClick={() => navigate(service.path)}
                         _hover={{ bg: "transparent" }}
                       >
-                        {service.option}
+                        <Box display="flex" alignItems={"center"}>
+                          <Image src={service.icon} alt="service options" h={"2rem"} w={"2rem"} />
+                          <Text ml="0.5rem">{service.option}</Text>
+                        </Box>
                       </PopoverBody>
                     ))}
                   </PopoverContent>
                 </Popover>
               ) : link.option === "Blog" ? (
                 <Tooltip
-                  pos={"absolute"}
-                  zIndex={100000}
+                  // pos={"absolute"}
+                  // zIndex={100000}
                   color={"white"}
                   bg={"#07ABE8"}
                   label="Coming Soon"
-                  aria-label="Coming Soon"
+                  hasArrow
+                  placement="top"
                 >
                   <Text
                     px={2}
@@ -249,7 +238,7 @@ const Navbar = () => {
       <Collapse in={isOpen} animateOpacity>
         <Box pb={4} display={{ md: "none" }}>
           <Flex flexDirection={"column"} alignItems={"start"} gap={2}>
-            {options.map((link, index) => (
+            {navbarOptions.map((link, index) => (
               <React.Fragment key={index}>
                 {link.option === "Services" ? (
                   <Popover trigger="hover">
@@ -306,7 +295,7 @@ const Navbar = () => {
                       pr={"3rem"}
                       ml={"3rem"}
                     >
-                      {servicesOptions.map((service, serviceIndex) => (
+                      {NavbarservicesOptions.map((service, serviceIndex) => (
                         <PopoverBody
                           cursor={"pointer"}
                           bg={"#00000090"}

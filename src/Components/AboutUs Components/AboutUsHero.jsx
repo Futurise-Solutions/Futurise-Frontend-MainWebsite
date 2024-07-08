@@ -20,8 +20,7 @@ const AboutUsHero = () => {
       position={"relative"}
       p={{ base: "1rem", lg: "5rem" }}
     >
-      <Box
-        position="absolute"
+      <Box position="absolute"
         top={0}
         left={0}
         h="100%"
