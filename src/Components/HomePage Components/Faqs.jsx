@@ -14,7 +14,7 @@ const Faqs = () => {
   };
 
   return (
-    <Box textAlign={"center"} py={8} px={4}>
+    <Box textAlign={"center"} mb={"5rem"}>
       <CustomText
         variant="heading"
         children={"Frequently Asked Questions"}

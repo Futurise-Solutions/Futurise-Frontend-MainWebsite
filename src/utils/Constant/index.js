@@ -1,4 +1,4 @@
-import { AppDevHover, AppDevelopment, BlockchainDevelopment, BlockchainHover, DigitalMarketing, DigitalMarketingHover, SmartContract, SmartContractHover, UIUXDevelopment, UIUXHover, WebDevelopment, clientIconHover,  clienticon,  expertiseicon,  expertiseiconHover,  postIconHover, posticon, quailtyicon,qualityIconHover,timeIconHover,timeicon,webDevHover } from "../../assests";
+import { AppDevHover, AppDevelopment, BlockchainDevelopment, BlockchainHover, ClientLogo, DigitalMarketing, DigitalMarketingHover, SmartContract, SmartContractHover, UIUXDevelopment, UIUXHover, WebDevelopment, clientIconHover,  clienticon,  expertiseicon,  expertiseiconHover,  postIconHover, posticon, quailtyicon,qualityIconHover,timeIconHover,timeicon,webDevHover } from "../../assests";
 
 // ****************OUR SERVICES DATA ****************
 export const OurServiceData = [
@@ -197,3 +197,34 @@ export const reviews = [
     rating: 4,
   },
 ];
+
+// ************************Our PARTNERS****************************
+export const partners=[
+  {
+    img:ClientLogo
+  },
+  {
+    img:ClientLogo
+  },
+  {
+    img:ClientLogo
+  },
+  {
+    img:ClientLogo
+  },
+  {
+    img:ClientLogo
+  },
+  {
+    img:ClientLogo
+  },
+  {
+    img:ClientLogo
+  },
+  {
+    img:ClientLogo
+  },
+  {
+    img:ClientLogo
+  }
+]

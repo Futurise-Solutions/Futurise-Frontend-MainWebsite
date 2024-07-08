@@ -48,6 +48,7 @@ export {default as BlockchainHover} from "./HomeAssest/BlockChainHover.svg";
 export {default as contactUsBanner} from "./ServicePage/banner.jpeg";
 export {default as AboutUsHeroBg} from "./AboutUsHeroBg.jpg"
 export {default as OurPortfolioBg} from "./OurPortfolioBg.jpg"
+export {default as ClientLogo} from "./HomeAssest/ClientLogo.png"
 
 
 
