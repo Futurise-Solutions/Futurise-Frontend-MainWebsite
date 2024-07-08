@@ -41,7 +41,7 @@ const AboutUsHero = () => {
           variant="subheading6"
           styles={{ fontFamily: "Oxanium" }}
         >
-          About Futurise Solution
+          About Futurise Solutions
         </CustomText>
         <CustomText
           variant="callout6"
