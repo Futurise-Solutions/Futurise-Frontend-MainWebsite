@@ -1,66 +1,245 @@
-import React from 'react';
-import { Box, Flex, Button, useDisclosure, IconButton, Image, Collapse, Text, Icon } from '@chakra-ui/react';
-import { HamburgerIcon, CloseIcon, ArrowForwardIcon } from '@chakra-ui/icons';
-import { contactus, logo } from '../assests';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import {
+  Box,
+  Flex,
+  Button,
+  useDisclosure,
+  IconButton,
+  Image,
+  Collapse,
+  Text,
+  Tooltip,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Popover,
+  PopoverTrigger,
+  PopoverBody,
+  PopoverContent,
+  Icon,
+} from "@chakra-ui/react";
+import {
+  HamburgerIcon,
+  CloseIcon,
+  ChevronDownIcon,
+  ArrowForwardIcon,
+} from "@chakra-ui/icons";
+import { contactus, logo } from "../assests";
+import { Link, useNavigate } from "react-router-dom";
+
+const options = [
+  { option: "Home", path: "/" },
+  { option: "About", path: "/about" },
+  { option: "Services", path: "/" },
+  { option: "Portfolio", path: "/portfolio" },
+  { option: "Blog", path: "/" },
+];
+
+const servicesOptions = [
+  { option: "App Development", path: "/service/app-development" },
+  { option: "Digital Marketing", path: "/service/digital-marketing" },
+  { option: "Web Development", path: "/service/web-development" },
+  { option: "Blockchain Development", path: "/service/blockchain-development" },
+  { option: "Ui-Ux Development", path: "/service/ui-ux-design" },
+];
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
-    <Box w={"100%"} zIndex={10000} px={4} position={"fixed"} bg="#00000090" color="white" boxShadow="0px 2px 10px #07ABE8">
-      <Flex h={16} alignItems={'center'} justifyContent={'space-between'} w={"99%"} m={"auto"}>
+    <Box
+      w={"100%"}
+      zIndex={10000}
+      px={4}
+      position={"fixed"}
+      bg="black"
+      color="white"
+      boxShadow="0px 2px 10px #07ABE8"
+    >
+      <Flex
+        h={16}
+        alignItems={"center"}
+        justifyContent={"space-between"}
+        w={"99%"}
+        m={"auto"}
+      >
         {/* Left Side - Logo */}
-        <Image onClick={() => navigate("/")} w={"171px"} h={"50px"} src={logo} alt="logo" />
+        <Image
+          onClick={() => navigate("/")}
+          w={"171px"}
+          h={"50px"}
+          src={logo}
+          alt="logo"
+        />
 
         {/* Middle - Navbar Links */}
-        <Flex display={{ base: 'none', md: 'flex' }} alignItems={'center'} gap={4}>
-          {['Home', 'About', 'Services', 'Portfolio', 'Blog'].map((link, index) => (
-            <Link
-              key={index}
-              px={2}
-              py={1}
-              rounded={'md'}
-              to={link.toLowerCase()}
-              
-              position="relative"
-              _hover={{
-                _after: {
-                  transform: 'scaleX(1)',
-                  transformOrigin: 'bottom left',
-                }
-              }}
-              _after={{
-                content: '""',
-                position: 'absolute',
-                width: '100%',
-                transform: 'scaleX(0)',
-                height: '2px',
-                bottom: '0',
-                left: '0',
-                backgroundColor: '#07ABE8',
-                transformOrigin: 'bottom right',
-                transition: 'transform 0.40s ease-out',
-              }}
-              fontFamily={"Roboto"}
-              fontWeight={500}
-              fontSize={["1rem","1rem","1.25rem"]}
-            >
-              {link}
-            </Link>
+        <Flex
+          display={{ base: "none", md: "flex" }}
+          alignItems={"center"}
+          gap={4}
+        >
+          {options.map((link, index) => (
+            <React.Fragment key={index}>
+              {link.option === "Services" ? (
+                <Popover trigger="hover">
+                  <PopoverTrigger
+                    border={"none"}
+                    as={Button}
+                    rightIcon={<ChevronDownIcon />}
+                    _hover={{ bg: "transparent" }}
+                    bg="transparent"
+                    position={"relative"}
+                    color={"white"}
+                    _active={{
+                      bg: "transparent",
+                    }}
+                  >
+                    <Text
+                      px={2}
+                      py={1}
+                      rounded={"md"}
+                      color="white"
+                      position="relative"
+                      _hover={{
+                        _after: {
+                          transform: "scaleX(1)",
+                          transformOrigin: "bottom left",
+                        },
+                      }}
+                      _after={{
+                        content: '""',
+                        position: "absolute",
+                        width: "100%",
+                        transform: "scaleX(0)",
+                        height: "2px",
+                        bottom: "0",
+                        left: "0",
+                        backgroundColor: "#07ABE8",
+                        transformOrigin: "bottom right",
+                        transition: "transform 0.40s ease-out",
+                      }}
+                      cursor={"pointer"}
+                      fontFamily={"Roboto"}
+                      fontWeight={500}
+                      fontSize={["1rem", "1rem", "1.25rem"]}
+                    >
+                      {"Services"}
+                    </Text>
+                  </PopoverTrigger>
+
+                  <PopoverContent
+                    bg={"#000"}
+                    boxShadow="0px 2px 10px #07ABE8"
+                    border={"none"}
+                    mt={2}
+                    w={"fit-content"}
+                    pr={"3rem"}
+                    ml={"3rem"}
+                  >
+                    {servicesOptions.map((service, serviceIndex) => (
+                      <PopoverBody
+                        cursor={"pointer"}
+                        bg={"#00000090"}
+                        key={serviceIndex}
+                        onClick={() => navigate(service.path)}
+                        _hover={{ bg: "transparent" }}
+                      >
+                        {service.option}
+                      </PopoverBody>
+                    ))}
+                  </PopoverContent>
+                </Popover>
+              ) : link.option === "Blog" ? (
+                <Tooltip
+                  pos={"absolute"}
+                  zIndex={100000}
+                  color={"white"}
+                  bg={"#07ABE8"}
+                  label="Coming Soon"
+                  aria-label="Coming Soon"
+                >
+                  <Text
+                    px={2}
+                    py={1}
+                    rounded={"md"}
+                    color="white"
+                    position="relative"
+                    _hover={{
+                      _after: {
+                        transform: "scaleX(1)",
+                        transformOrigin: "bottom left",
+                      },
+                    }}
+                    _after={{
+                      content: '""',
+                      position: "absolute",
+                      width: "100%",
+                      transform: "scaleX(0)",
+                      height: "2px",
+                      bottom: "0",
+                      left: "0",
+                      backgroundColor: "#07ABE8",
+                      transformOrigin: "bottom right",
+                      transition: "transform 0.40s ease-out",
+                    }}
+                    cursor={"pointer"}
+                    fontFamily={"Roboto"}
+                    fontWeight={500}
+                    fontSize={["1rem", "1rem", "1.25rem"]}
+                  >
+                    {link.option}
+                  </Text>
+                </Tooltip>
+              ) : (
+                <Link to={link.path}>
+                  <Text
+                    px={2}
+                    py={1}
+                    rounded={"md"}
+                    color="white"
+                    position="relative"
+                    _hover={{
+                      _after: {
+                        transform: "scaleX(1)",
+                        transformOrigin: "bottom left",
+                      },
+                    }}
+                    _after={{
+                      content: '""',
+                      position: "absolute",
+                      width: "100%",
+                      transform: "scaleX(0)",
+                      height: "2px",
+                      bottom: "0",
+                      left: "0",
+                      backgroundColor: "#07ABE8",
+                      transformOrigin: "bottom right",
+                      transition: "transform 0.40s ease-out",
+                    }}
+                    cursor={"pointer"}
+                    fontFamily={"Roboto"}
+                    fontWeight={500}
+                    fontSize={["1rem", "1rem", "1.25rem"]}
+                  >
+                    {link.option}
+                  </Text>
+                </Link>
+              )}
+            </React.Fragment>
           ))}
         </Flex>
 
         {/* Right Side - Contact Us Button */}
-        <Flex alignItems={'center'}>
-          <LearnMoreButton  display={{ base: "none", md: "inline-block" }} />
+        <Flex alignItems={"center"}>
+          <LearnMoreButton display={{ base: "none", md: "inline-block" }} />
           {/* Hamburger Menu for Mobile */}
           <IconButton
-            size={'md'}
+            size={"md"}
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-            aria-label={'Open Menu'}
-            display={{ md: 'none' }}
+            aria-label={"Open Menu"}
+            display={{ md: "none" }}
             onClick={isOpen ? onClose : onOpen}
           />
         </Flex>
@@ -68,21 +247,156 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <Collapse in={isOpen} animateOpacity>
-        <Box pb={4} display={{ md: 'none' }}>
-          <Flex flexDirection={'column'} alignItems={'start'} gap={2}>
-            {['Home', 'About', 'Services', 'Portfolio', 'Blog'].map((link, index) => (
-              <Link
-                key={index}
-                px={2}
-                py={1}
-                rounded={'md'}
-                _hover={{ bg: 'blue.700' }}
-                href="#"
-              >
-                {link}
-              </Link>
+        <Box pb={4} display={{ md: "none" }}>
+          <Flex flexDirection={"column"} alignItems={"start"} gap={2}>
+            {options.map((link, index) => (
+              <React.Fragment key={index}>
+                {link.option === "Services" ? (
+                  <Popover trigger="hover">
+                    <PopoverTrigger
+                      border={"none"}
+                      as={Button}
+                      _hover={{ bg: "transparent" }}
+                      bg="transparent"
+                      position={"relative"}
+                      color={"white"}
+                      _active={{
+                        bg: "transparent",
+                      }}
+                    >
+                      <Text
+                        px={2}
+                        py={1}
+                        rounded={"md"}
+                        color="white"
+                        position="relative"
+                        _hover={{
+                          _after: {
+                            transform: "scaleX(1)",
+                            transformOrigin: "bottom left",
+                          },
+                        }}
+                        _after={{
+                          content: '""',
+                          position: "absolute",
+                          width: "100%",
+                          transform: "scaleX(0)",
+                          height: "2px",
+                          bottom: "0",
+                          left: "0",
+                          backgroundColor: "#07ABE8",
+                          transformOrigin: "bottom right",
+                          transition: "transform 0.40s ease-out",
+                        }}
+                        cursor={"pointer"}
+                        fontFamily={"Roboto"}
+                        fontWeight={500}
+                        fontSize={["1rem", "1rem", "1.25rem"]}
+                      >
+                        {"Services"}
+                      </Text>
+                    </PopoverTrigger>
+
+                    <PopoverContent
+                      bg={"#00000090"}
+                      boxShadow="0px 2px 10px #07ABE8"
+                      border={"none"}
+                      mt={2}
+                      w={"fit-content"}
+                      pr={"3rem"}
+                      ml={"3rem"}
+                    >
+                      {servicesOptions.map((service, serviceIndex) => (
+                        <PopoverBody
+                          cursor={"pointer"}
+                          bg={"#00000090"}
+                          key={serviceIndex}
+                          onClick={() => navigate(service.path)}
+                          _hover={{ bg: "transparent" }}
+                        >
+                          {service.option}
+                        </PopoverBody>
+                      ))}
+                    </PopoverContent>
+                  </Popover>
+                ) : link.option === "Blog" ? (
+                  <Tooltip
+                    color={"white"}
+                    bg={"#07ABE8"}
+                    placement="auto-end"
+                    label="Coming Soon"
+                    aria-label="Coming Soon"
+                  >
+                    <Text
+                      px={2}
+                      py={1}
+                      rounded={"md"}
+                      color="white"
+                      position="relative"
+                      _hover={{
+                        _after: {
+                          transform: "scaleX(1)",
+                          transformOrigin: "bottom left",
+                        },
+                      }}
+                      _after={{
+                        content: '""',
+                        position: "absolute",
+                        width: "100%",
+                        transform: "scaleX(0)",
+                        height: "2px",
+                        bottom: "0",
+                        left: "0",
+                        backgroundColor: "#07ABE8",
+                        transformOrigin: "bottom right",
+                        transition: "transform 0.40s ease-out",
+                      }}
+                      cursor={"pointer"}
+                      fontFamily={"Roboto"}
+                      fontWeight={500}
+                      fontSize={["1rem", "1rem", "1.25rem"]}
+                    >
+                      {link.option}
+                    </Text>
+                  </Tooltip>
+                ) : (
+                  <Link to={link.path}>
+                    <Text
+                      px={2}
+                      py={1}
+                      rounded={"md"}
+                      color="white"
+                      position="relative"
+                      _hover={{
+                        _after: {
+                          transform: "scaleX(1)",
+                          transformOrigin: "bottom left",
+                        },
+                      }}
+                      _after={{
+                        content: '""',
+                        position: "absolute",
+                        width: "100%",
+                        transform: "scaleX(0)",
+                        height: "2px",
+                        bottom: "0",
+                        left: "0",
+                        backgroundColor: "#07ABE8",
+                        transformOrigin: "bottom right",
+                        transition: "transform 0.40s ease-out",
+                      }}
+                      cursor={"pointer"}
+                      fontFamily={"Roboto"}
+                      fontWeight={500}
+                      fontSize={["1rem", "1rem", "1.25rem"]}
+                    >
+                      {link.option}
+                    </Text>
+                  </Link>
+                )}
+              </React.Fragment>
             ))}
-            <LearnMoreButton text={"white"} bg={"#07ABE8"} />
+            <LearnMoreButton onClose={onClose} text={"white"} bg={"#07ABE8"} />
           </Flex>
         </Box>
       </Collapse>
@@ -92,14 +406,17 @@ const Navbar = () => {
 
 export default Navbar;
 
-const LearnMoreButton = ({ display, text, bg }) => {
-  const navigate = useNavigate()
-  const handleRoute = (route)=> {
-     navigate(route)
-  }
+const LearnMoreButton = ({ display, text, bg, onClose }) => {
+  const navigate = useNavigate();
+  const handleRoute = (route) => {
+    navigate(route);
+  };
   return (
     <Button
-    onClick={()=> handleRoute("/contact")}
+      onClick={() => {
+        handleRoute("/contact");
+        onClose();
+      }}
       position="relative"
       display={display}
       cursor="pointer"
@@ -121,7 +438,7 @@ const LearnMoreButton = ({ display, text, bg }) => {
       _hover={{
         ".circle": { width: "100%" },
         ".circle .icon": { transform: "translate(3.2rem, 0)" },
-        ".button-text": { color: "#FFFFFF" }
+        ".button-text": { color: "#FFFFFF" },
       }}
     >
       <Flex
