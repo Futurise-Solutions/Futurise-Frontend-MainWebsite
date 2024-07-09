@@ -11,7 +11,7 @@ import { reviews } from "../../utils/Constant";
 
 const ClientsReviews = () => {
   return (
-    <Box position={"relative"} width={{ base: "95%", md: "90%" }} m={"auto"} textAlign={"center"}>
+    <Box position={"relative"} width={{ base: "95%", md: "90%" }} m={"auto"} textAlign={"center"} mb="5rem">
       <CustomText
         variant="heading"
         children={"Get To Know Our Clients"}

@@ -1,4 +1,4 @@
-import { AppDevHover, AppDevelopment, BlockchainDevelopment, BlockchainHover, DigitalMarketing, DigitalMarketingHover, SmartContract, SmartContractHover, UIUXDevelopment, UIUXHover, WebDevelopment, clientIconHover,  clienticon,  expertiseicon,  expertiseiconHover,  postIconHover, posticon, quailtyicon,qualityIconHover,timeIconHover,timeicon,webDevHover } from "../../assests";
+import { AppDevHover, AppDevNavbarIcon, AppDevelopment, BlockchainDevNavbarIcon, BlockchainDevelopment, BlockchainHover, ClientLogo, DigiMarketingNavbarIcon, DigitalMarketing, DigitalMarketingHover, SmartContract, SmartContractHover, SmartContractNavbarIcon, UIUXDevelopment, UIUXHover, UIUXNavbarIcon, WebDevNavbarIcon, WebDevelopment, clientIconHover,  clienticon,  expertiseicon,  expertiseiconHover,  postIconHover, posticon, quailtyicon,qualityIconHover,timeIconHover,timeicon,webDevHover } from "../../assests";
 
 // ****************OUR SERVICES DATA ****************
 export const OurServiceData = [
@@ -196,4 +196,53 @@ export const reviews = [
       "The team at The Futurise solution is truly remarkable. Their dedication, expertise, and attention to detail ensured that our project was a great success. We highly recommend their services.",
     rating: 4,
   },
+];
+
+// ************************Our PARTNERS****************************
+export const partners=[
+  {
+    img:ClientLogo
+  },
+  {
+    img:ClientLogo
+  },
+  {
+    img:ClientLogo
+  },
+  {
+    img:ClientLogo
+  },
+  {
+    img:ClientLogo
+  },
+  {
+    img:ClientLogo
+  },
+  {
+    img:ClientLogo
+  },
+  {
+    img:ClientLogo
+  },
+  {
+    img:ClientLogo
+  }
+]
+
+// *********************NAVBAR OPTIONS***********************
+export const navbarOptions=[
+  { option: "Home", path: "/" },
+  { option: "About", path: "/about" },
+  { option: "Services", path: "/" },
+  { option: "Portfolio", path: "/portfolio" },
+  { option: "Blog", path: "/" },
+]
+// *********************NAVBAR SERVICE OPTIONS***********************
+export const NavbarservicesOptions = [
+  { option: "Web Development",icon:WebDevNavbarIcon, path: "/service/web-development" },
+  { option: "App Development",icon:AppDevNavbarIcon, path: "/service/app-development" },
+  { option: "UI-UX Development",icon:UIUXNavbarIcon, path: "/service/ui-ux-design" },
+  { option: "Blockchain Development",icon:BlockchainDevNavbarIcon, path: "/service/blockchain-development" },
+  { option: "Smart Contract",icon:SmartContractNavbarIcon, path: "/service/smart-contract" },
+  { option: "Digital Marketing",icon:DigiMarketingNavbarIcon, path: "/service/digital-marketing" },
 ];

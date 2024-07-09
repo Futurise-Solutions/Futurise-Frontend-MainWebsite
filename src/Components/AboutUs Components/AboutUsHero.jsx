@@ -20,8 +20,7 @@ const AboutUsHero = () => {
       position={"relative"}
       p={{ base: "1rem", lg: "5rem" }}
     >
-      <Box
-        position="absolute"
+      <Box position="absolute"
         top={0}
         left={0}
         h="100%"
@@ -41,7 +40,7 @@ const AboutUsHero = () => {
           variant="subheading6"
           styles={{ fontFamily: "Oxanium" }}
         >
-          About Futurise Solution
+          About Futurise Solutions
         </CustomText>
         <CustomText
           variant="callout6"

@@ -29,9 +29,19 @@ const Portfolio = () => {
     return (
         <Box >
             {/* ***********Hero Section FOR PORTFOLIO **************** */}
-            <Box backgroundImage={`url(${OurPortfolioBg})`} h={{ base: "27rem", md: "30rem", lg: "50rem" }} bgRepeat={"no-repeat"} backgroundSize={"cover"} opacity={1} overflow={"hidden"} display={"flex"} alignItems={"center"}>
+            <Box backgroundImage={`url(${OurPortfolioBg})`} h={{ base: "27rem", md: "30rem", lg: "40rem" }} bgRepeat={"no-repeat"} backgroundSize={"cover"} opacity={1} overflow={"hidden"} display={"flex"} alignItems={"center"} pos={"relative"}>
 
-                <Box pl={"2rem"} >
+                <Box position="absolute"
+                    top={0}
+                    left={0}
+                    h="100%"
+                    w="100%"
+                    bg="#3d3b3b"
+                    zIndex={0}
+                    opacity={0.6}
+                />
+
+                <Box pl={"2rem"} zIndex={1}>
                     <CustomText variant='subheading6' styles={{ fontFamily: "Oxanium" }}>
                         Our Portfolio
                     </CustomText>
@@ -55,11 +65,11 @@ const Portfolio = () => {
             {
                 Projects.map((el) => (
                     // console.log(el,'el')
-                    <Flex w={{base:"96%",md:"90%"}} m={"auto"}
-                        gap={"2%"} borderRadius={"2rem"} mb={"2rem"} boxShadow={"#8f9292 0px 3px 8px;"} mt={{base:"2rem",md:"3rem",lg:"5rem"}}
-                        direction={{base:"column",sm:"column",md:"column",lg:"row"}}>
+                    <Flex w={{ base: "96%", md: "90%" }} m={"auto"}
+                        gap={"2%"} borderRadius={"2rem"} mb={"2rem"} boxShadow={"#8f9292 0px 3px 8px;"} mt={{ base: "2rem", md: "3rem", lg: "5rem" }}
+                        direction={{ base: "column", sm: "column", md: "column", lg: "row" }}>
                         {/* Flex Box 1  */}
-                        <Box w={{base:"100%",sm:"100%",md:"100%",lg:"49%"}} bg={"linear-gradient(90deg, #8f9292 0%, #e6eaeb 100%)"} borderRadius={"2rem"}>
+                        <Box w={{ base: "100%", sm: "100%", md: "100%", lg: "49%" }} bg={"linear-gradient(90deg, #8f9292 0%, #e6eaeb 100%)"} borderRadius={"2rem"}>
                             <Swiper
                                 slidesPerView={1}
                                 loop={true}
@@ -76,7 +86,7 @@ const Portfolio = () => {
                             </Swiper>
                         </Box>
                         {/* Flex Box 2 */}
-                        <Box w={{base:"100%",sm:"100%",md:"100%",lg:"49%"}} p={"1rem"} >
+                        <Box w={{ base: "100%", sm: "100%", md: "100%", lg: "49%" }} p={"1rem"} >
                             <Flex gap={"1rem"} justifyContent={"flex-end"} pr={'3rem'} >
                                 {/* <CustomButton variant='primary' text={el.location}/>
                                 <CustomButton variant='primary' text={el.projectType}/> */}
