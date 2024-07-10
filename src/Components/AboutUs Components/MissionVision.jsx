@@ -1,6 +1,7 @@
 import { Box, Flex, Image } from "@chakra-ui/react";
 import React from "react";
 import { CustomText } from "../../utils/Texts";
+import { Mission, Vision } from "../../assests";
 
 const MissionVision = () => {
   return (
@@ -91,9 +92,7 @@ const MissionVision = () => {
           pr={{ base: "1rem", sm: "1rem", md: "2rem", lg: "2rem" }}
         >
           <Image
-            src={
-              "https://i.pinimg.com/736x/0c/e0/2e/0ce02ec86da2e3c031bea90008f0f527.jpg"
-            }
+            src={Mission}
             borderRadius={{ base: "none", sm: "none", md: "full", lg: "full" }}
             boxSize={{ base: "200px", sm: "400px", md: "200px" }}
             alt="Mission"
@@ -176,9 +175,7 @@ const MissionVision = () => {
           </CustomText>
         </Box>
         <Image
-          src={
-            "https://i.pinimg.com/564x/88/31/32/883132146a377308813d3dcf5e81c3ac.jpg"
-          }
+          src={Vision}
           borderRadius={{ base: "none", sm: "none", md: "full", lg: "full" }}
           boxSize={{ base: "200px", sm: "400px", md: "200px" }}
           alt="Mission"
