@@ -2,10 +2,8 @@ import React, { useEffect } from "react";
 import {
   Box,
   Flex,
-  Text,
   Input,
   Textarea,
-  Button,
   IconButton,
   VStack,
   HStack,
@@ -21,9 +19,9 @@ import { contactUsBanner } from "../assests";
 
 const ContactUs = () => {
   const isMobile = useBreakpointValue({ base: true, md: false });
-useEffect(() => {
- window.scroll(0,0)
-},[])
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
   return (
     <Box pt={"5rem"} m="auto">
       <Box
@@ -34,17 +32,16 @@ useEffect(() => {
         position={"relative"}
         overflow={"hidden"}
       >
-         <Box
-        position="absolute"
-        top={0}
-        left={0}
-        h="1000px"
-        w="100%"
-        bg="black" 
-        zIndex={0}
-        opacity={0.7}
-        
-      />
+        <Box
+          position="absolute"
+          top={0}
+          left={0}
+          h="1000px"
+          w="100%"
+          bg="black"
+          zIndex={0}
+          opacity={0.7}
+        />
         <Flex
           w={"90%"}
           m={"auto"}
@@ -54,12 +51,11 @@ useEffect(() => {
           zIndex={1000}
         >
           <Box
-           
             textAlign={isMobile ? "center" : "left"}
             mt={4}
             mb={isMobile ? 8 : 0}
             zIndex={1000}
-            w={isMobile ? "100%":"40%"}
+            w={isMobile ? "100%" : "40%"}
           >
             <SlideFade in offsetY={20}>
               <CustomText variant="callout5">
@@ -104,9 +100,14 @@ useEffect(() => {
               </HStack>
             </SlideFade>
           </Box>
-          <Box zIndex={1000} w={isMobile ? "100%":"55%"}  position={"relative"} overflow={"hidden"}>
+          <Box
+            zIndex={1000}
+            w={isMobile ? "100%" : "55%"}
+            position={"relative"}
+            overflow={"hidden"}
+          >
             <SlideFade in offsetY={20}>
-              <Box overflow={"hidden"}  borderRadius="md" boxShadow="xl">
+              <Box overflow={"hidden"} borderRadius="md" boxShadow="xl">
                 <Box
                   position="absolute"
                   top="0"
@@ -147,7 +148,7 @@ useEffect(() => {
                       text="Send Message"
                       variant="primary"
                       size="lg"
-                      m={ isMobile ?"auto":"none"}
+                      m={isMobile ? "auto" : "none"}
                     />
                   </VStack>
                 </form>
@@ -164,4 +165,3 @@ useEffect(() => {
 };
 
 export default ContactUs;
-

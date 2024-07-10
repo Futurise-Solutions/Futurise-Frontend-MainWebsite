@@ -11,63 +11,18 @@ import {
   Icon,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import {
-  FaClipboardList,
-  FaPencilRuler,
-  FaBullseye,
-  FaHammer,
-  FaCheckCircle,
-  FaRocket,
-  FaTools,
-} from "react-icons/fa";
-import { CustomText } from "../../utils/Texts";
 
-const processSteps = [
-  {
-    icon: FaClipboardList,
-    title: "Planning",
-    content: "Details about planning phase",
-  },
-  {
-    icon: FaPencilRuler,
-    title: "Designing",
-    content: "Details about designing phase",
-  },
-  {
-    icon: FaBullseye,
-    title: "Defining",
-    content: "Details about defining phase",
-  },
-  {
-    icon: FaHammer,
-    title: "Building",
-    content: "Details about building phase",
-  },
-  {
-    icon: FaCheckCircle,
-    title: "Testing",
-    content: "Details about testing phase",
-  },
-  {
-    icon: FaRocket,
-    title: "Deployment",
-    content: "Details about deployment phase",
-  },
-  {
-    icon: FaTools,
-    title: "Maintenance",
-    content: "Details about maintenance phase",
-  },
-];
+import { CustomText } from "../../utils/Texts";
+import { processSteps } from "../../utils/Constant";
 
 const ProcessSection = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const translateValues = useBreakpointValue({
-    base: { translateX: 120, translateY: 90 },  // for mobile screens
-    sm: { translateX: 130, translateY: 100 },    // for small screens
-    md: { translateX: 130, translateY: 100 },    // for medium screens
-    lg: { translateX: 150, translateY: 130 },    // for large screens
-    xl: { translateX: 150, translateY: 130 }     // for extra-large screens
+    base: { translateX: 120, translateY: 90 }, // for mobile screens
+    sm: { translateX: 130, translateY: 100 }, // for small screens
+    md: { translateX: 130, translateY: 100 }, // for medium screens
+    lg: { translateX: 150, translateY: 130 }, // for large screens
+    xl: { translateX: 150, translateY: 130 }, // for extra-large screens
   });
 
   return (
@@ -79,8 +34,9 @@ const ProcessSection = () => {
       <Flex
         position={"relative"}
         direction={{ base: "column-reverse", md: "row" }}
-        mt={"3rem"}
+        mt={"6rem"}
         justifyContent="space-around"
+        mb={"10rem"}
       >
         <Box
           overflow={"hidden"}
@@ -149,7 +105,11 @@ const ProcessSection = () => {
                   alignItems="center"
                   position="absolute"
                   style={{
-                    transform: `rotate(${(index / processSteps.length) * 360}deg) translate(${translateValues.translateX}px, ${translateValues.translateY}px) rotate(${-(index / processSteps.length) * 360}deg)`
+                    transform: `rotate(${
+                      (index / processSteps.length) * 360
+                    }deg) translate(${translateValues.translateX}px, ${
+                      translateValues.translateY
+                    }px) rotate(${-(index / processSteps.length) * 360}deg)`,
                   }}
                 >
                   <Box
@@ -175,11 +135,11 @@ const ProcessSection = () => {
               {/* Dotted lines connecting the steps */}
               <Box
                 position="absolute"
-                width={{ base: '60px', md: '80px', lg: '100px' }}
-                height={{ base: '60px', md: '80px', lg: '100px' }}
+                width={{ base: "60px", md: "80px", lg: "100px" }}
+                height={{ base: "60px", md: "80px", lg: "100px" }}
                 borderRadius="50%"
                 bg="transparent"
-               border="1px solid #07ABE8"
+                border="1px solid #07ABE8"
                 display="flex"
                 justifyContent="center"
                 alignItems="center"

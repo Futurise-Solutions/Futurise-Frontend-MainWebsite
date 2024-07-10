@@ -1,5 +1,13 @@
-import { AppDevHover, AppDevNavbarIcon, AppDevelopment, BlockchainDevNavbarIcon, BlockchainDevelopment, BlockchainHover, ClientLogo, DigiMarketingNavbarIcon, DigitalMarketing, DigitalMarketingHover, SmartContract, SmartContractHover, SmartContractNavbarIcon, UIUXDevelopment, UIUXHover, UIUXNavbarIcon, WebDevNavbarIcon, WebDevelopment, clientIconHover,  clienticon,  expertiseicon,  expertiseiconHover,  postIconHover, posticon, quailtyicon,qualityIconHover,timeIconHover,timeicon,webDevHover } from "../../assests";
-
+import {mobiledevelop  , appdevelop, AppDevHover, AppDevNavbarIcon, AppDevelopment, BlockchainDevNavbarIcon, BlockchainDevelopment, BlockchainHover, ClientLogo, DigiMarketingNavbarIcon, DigitalMarketing, DigitalMarketingHover, SmartContract, SmartContractHover, SmartContractNavbarIcon, UIUXDevelopment, UIUXHover, UIUXNavbarIcon, WebDevNavbarIcon, WebDevelopment, clientIconHover,  clienticon,  expertiseicon,  expertiseiconHover,  postIconHover, posticon, quailtyicon,qualityIconHover,timeIconHover,timeicon,webDevHover } from "../../assests";
+import {
+  FaClipboardList,
+  FaPencilRuler,
+  FaBullseye,
+  FaHammer,
+  FaCheckCircle,
+  FaRocket,
+  FaTools,
+} from "react-icons/fa";
 // ****************OUR SERVICES DATA ****************
 export const OurServiceData = [
   {
@@ -245,4 +253,235 @@ export const NavbarservicesOptions = [
   { option: "Blockchain Development",icon:BlockchainDevNavbarIcon, path: "/service/blockchain-development" },
   { option: "Smart Contract",icon:SmartContractNavbarIcon, path: "/service/smart-contract" },
   { option: "Digital Marketing",icon:DigiMarketingNavbarIcon, path: "/service/digital-marketing" },
+];
+
+
+
+// ******************* Location Pin from Contact us Page************88
+
+export const locations = [
+  { name: 'USA', coordinates: [37.0902, -95.7129] },
+  { name: 'Australia', coordinates: [-25.2744, 133.7751] },
+  { name: 'Denmark', coordinates: [56.2639, 10.4515] },
+  { name: 'South Africa', coordinates: [-30.5595, 22.9375] },
+  { name: 'UAE', coordinates: [25.2048, 55.1713] },
+  { name: 'India', coordinates: [20.5937, 78.9629] },
+  { name: 'UK', coordinates: [55.378051, -3.435973] },
+];
+
+
+
+
+// --------- Strengeth from About Us Section Technology excellence---------------
+export  const strengths = [
+  {
+    name: "App Development",
+    description: [
+      "Developing high-quality mobile applications with robust functionality and seamless performance.",
+      "Ensuring cross-platform compatibility for iOS and Android to reach a wider audience.",
+      "Designing user-friendly interfaces that provide an intuitive and engaging user experience."
+    ],
+    icon: AppDevHover,
+    bg: AppDevelopment,
+  },
+  {
+    name: "Web Development",
+    description: [
+      "Creating responsive web designs that adapt seamlessly to different screen sizes and devices.",
+      "Building dynamic websites with interactive features and optimized performance.",
+      "Implementing SEO best practices to enhance visibility and search engine rankings."
+    ],
+    icon: webDevHover,
+    bg: WebDevelopment,
+  },
+  {
+    name: "Blockchain Development",
+    description: [
+      "Providing secure blockchain solutions to ensure data integrity and transparency.",
+      "Developing decentralized applications (dApps) that leverage the power of blockchain technology.",
+      "Creating and managing smart contracts to automate processes and enforce agreements."
+    ],
+    icon: BlockchainHover,
+    bg: BlockchainDevelopment,
+  },
+  {
+    name: "Smart Contract",
+    description: [
+      "Designing efficient smart contracts that facilitate trustless transactions and operations.",
+      "Automating complex workflows and reducing the need for intermediaries.",
+      "Integrating blockchain technology to enhance security and transparency."
+    ],
+    icon: SmartContractHover,
+    bg: SmartContract,
+  },
+  {
+    name: "UI/UX Development",
+    description: [
+      "Crafting user-centric designs that focus on the needs and preferences of the target audience.",
+      "Developing intuitive interfaces that enhance usability and accessibility.",
+      "Providing an enhanced user experience through thoughtful design and functionality."
+    ],
+    icon: UIUXHover,
+    bg: UIUXDevelopment,
+  },
+  {
+    name: "Digital Marketing",
+    description: [
+      "Boosting online presence with targeted digital marketing strategies.",
+      "Developing engagement strategies to interact with and retain customers.",
+      "Utilizing social media marketing to increase brand awareness and drive traffic."
+    ],
+    icon: DigitalMarketingHover,
+    bg: DigitalMarketing,
+  },
+];
+
+
+
+// ***********************Service Page services*****************************************
+export const services = {
+  "app-development": {
+    image: appdevelop,
+    title: "App Development",
+    whatWeDo: "WHAT WE DO",
+    description:
+      "We mould Custom-Built Android and iOS Solutions for diverse industries.",
+    details:
+      "Equitysoft's Design team is a separate unit comprising a skilled team of UXDesigners, UI Designers, and Graphic Designers.",
+  },
+  "web-development": {
+    image: appdevelop,
+    title: "Web Development",
+    whatWeDo: "WHAT WE DO",
+    description: "We build responsive and robust web applications.",
+    details:
+      "Our team excels in creating high-performing websites and web applications.",
+  },
+  "blockchain-development": {
+    image: appdevelop,
+    title: "Blockchain Development",
+    whatWeDo: "WHAT WE DO",
+    description: "We develop secure and scalable blockchain solutions.",
+    details:
+      "Our expertise covers various blockchain technologies and platforms.",
+  },
+  "smart-contract": {
+    image: appdevelop,
+    title: "Smart Contract",
+    whatWeDo: "WHAT WE DO",
+    description: "We create reliable and efficient smart contracts.",
+    details:
+      "Our team ensures the highest standards of smart contract development.",
+  },
+  "ui-ux-design": {
+    image: appdevelop,
+    title: "UI/UX Design",
+    whatWeDo: "WHAT WE DO",
+    description: "We design user-centric and visually appealing interfaces.",
+    details:
+      "Our designers craft exceptional user experiences for all platforms.",
+  },
+  "digital-marketing": {
+    image: appdevelop,
+    title: "Digital Marketing",
+    whatWeDo: "WHAT WE DO",
+    description: "We provide comprehensive digital marketing solutions.",
+    details:
+      "Our strategies help businesses grow their online presence effectively.",
+  },
+};
+
+
+// *************************Service Page teck stack***************************************
+export const techStacks = {
+  "web-development": {
+    title: "Web Development",
+    stacks: [
+      {
+        title: "Web Development",
+        subtitle: "Frontend Development",
+        description:
+          "We use modern frontend technologies to build responsive and interactive web applications.",
+        techStack: "React, HTML, CSS, JavaScript",
+        image: mobiledevelop,
+      },
+      {
+        title: "Web Development",
+        subtitle: "Backend Development",
+        description:
+          "Our backend solutions are robust, scalable, and secure, built with the latest technologies.",
+        techStack: "Node.js, Express, MongoDB",
+        image: mobiledevelop,
+      },
+      {
+        title: "Web Development",
+        subtitle: "WordPress Development",
+        description:
+          "We create custom WordPress themes and plugins tailored to your business needs.",
+        techStack: "WordPress",
+        image: mobiledevelop,
+      },
+    ],
+  },
+  // Add other services and their tech stacks here
+  "app-development": {
+    title: "App Development",
+    stacks: [
+      {
+        title: "iOS Development",
+        subtitle: "Swift, Objective-C",
+        description:
+          "We build high-performance iOS applications using Swift and Objective-C.",
+        techStack: "Swift, Objective-C",
+        image: mobiledevelop, 
+      },
+      {
+        title: "Android Development",
+        subtitle: "Kotlin, Java",
+        description:
+          "Our Android applications are developed using Kotlin and Java for optimal performance.",
+        techStack: "Kotlin, Java",
+        image: mobiledevelop, 
+      },
+    ],
+  },
+};
+
+
+export const processSteps = [
+  {
+    icon: FaClipboardList,
+    title: "Planning",
+    content: "Details about planning phase",
+  },
+  {
+    icon: FaPencilRuler,
+    title: "Designing",
+    content: "Details about designing phase",
+  },
+  {
+    icon: FaBullseye,
+    title: "Defining",
+    content: "Details about defining phase",
+  },
+  {
+    icon: FaHammer,
+    title: "Building",
+    content: "Details about building phase",
+  },
+  {
+    icon: FaCheckCircle,
+    title: "Testing",
+    content: "Details about testing phase",
+  },
+  {
+    icon: FaRocket,
+    title: "Deployment",
+    content: "Details about deployment phase",
+  },
+  {
+    icon: FaTools,
+    title: "Maintenance",
+    content: "Details about maintenance phase",
+  },
 ];

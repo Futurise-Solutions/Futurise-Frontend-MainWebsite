@@ -1,63 +1,11 @@
 import { Box, Flex, Image, Text, Button } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { appdevelop } from "../assests";
 import ProcessSection from "../Components/ServiceComponents/ProcessSection";
 import { CustomText } from "../utils/Texts";
 import { CustomButton } from "../utils/Buttons";
 import ServiceStack from "../Components/ServiceComponents/ServiceStack";
-
-const services = {
-  "app-development": {
-    image: appdevelop,
-    title: "App Development",
-    whatWeDo: "WHAT WE DO",
-    description:
-      "We mould Custom-Built Android and iOS Solutions for diverse industries.",
-    details:
-      "Equitysoft's Design team is a separate unit comprising a skilled team of UXDesigners, UI Designers, and Graphic Designers.",
-  },
-  "web-development": {
-    image: appdevelop,
-    title: "Web Development",
-    whatWeDo: "WHAT WE DO",
-    description: "We build responsive and robust web applications.",
-    details:
-      "Our team excels in creating high-performing websites and web applications.",
-  },
-  "blockchain-development": {
-    image: appdevelop,
-    title: "Blockchain Development",
-    whatWeDo: "WHAT WE DO",
-    description: "We develop secure and scalable blockchain solutions.",
-    details:
-      "Our expertise covers various blockchain technologies and platforms.",
-  },
-  "smart-contract": {
-    image: appdevelop,
-    title: "Smart Contract",
-    whatWeDo: "WHAT WE DO",
-    description: "We create reliable and efficient smart contracts.",
-    details:
-      "Our team ensures the highest standards of smart contract development.",
-  },
-  "ui-ux-design": {
-    image: appdevelop,
-    title: "UI/UX Design",
-    whatWeDo: "WHAT WE DO",
-    description: "We design user-centric and visually appealing interfaces.",
-    details:
-      "Our designers craft exceptional user experiences for all platforms.",
-  },
-  "digital-marketing": {
-    image: appdevelop,
-    title: "Digital Marketing",
-    whatWeDo: "WHAT WE DO",
-    description: "We provide comprehensive digital marketing solutions.",
-    details:
-      "Our strategies help businesses grow their online presence effectively.",
-  },
-};
+import { services } from "../utils/Constant";
 
 const ServicePage = () => {
   const { serviceName } = useParams();
@@ -66,9 +14,9 @@ const ServicePage = () => {
   if (!service) {
     return <Text>Service not found</Text>;
   }
-useEffect(() => {
- window.scroll(0,0)
-},[])
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
   return (
     <Box>
       <Box pt={{ base: "3rem", md: "5rem" }} w="90%" m="auto">
@@ -122,7 +70,7 @@ useEffect(() => {
         </CustomText>
         <CustomButton text={"Connect With Us"} px={20}></CustomButton>
       </Box>
-  <ServiceStack service={serviceName} />
+      <ServiceStack service={serviceName} />
       <ProcessSection />
     </Box>
   );

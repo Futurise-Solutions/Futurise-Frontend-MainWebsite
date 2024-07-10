@@ -1,21 +1,9 @@
 import React from 'react';
-import { Box, Text } from '@chakra-ui/react';
-// import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import L from 'leaflet';
+import { Box } from '@chakra-ui/react';
 import 'leaflet/dist/leaflet.css';
 import { CustomText } from '../../utils/Texts';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
-
-
-const locations = [
-  { name: 'USA', coordinates: [37.0902, -95.7129] },
-  { name: 'Australia', coordinates: [-25.2744, 133.7751] },
-  { name: 'Denmark', coordinates: [56.2639, 10.4515] },
-  { name: 'South Africa', coordinates: [-30.5595, 22.9375] },
-  { name: 'UAE', coordinates: [25.2048, 55.1713] },
-  { name: 'India', coordinates: [20.5937, 78.9629] },
-  { name: 'UK', coordinates: [55.378051, -3.435973] },
-];
+import { locations } from '../../utils/Constant';
 
 const ServicesWorldwide = () => {
   return (
@@ -39,8 +27,6 @@ const ServicesWorldwide = () => {
             <Marker
               key={index}
               position={location.coordinates}
-            //   icon={customMarkerIcon}
-              
             >
                 
               <Popup>

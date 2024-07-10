@@ -1,6 +1,5 @@
 import { Box, Tag, TagLabel } from "@chakra-ui/react";
 import React from "react";
-
 import { CustomText } from "../../utils/Texts";
 import { CustomButton } from "../../utils/Buttons";
 import { AboutUsHeroBg } from "../../assests";
@@ -9,7 +8,6 @@ const AboutUsHero = () => {
   return (
     <Box
       backgroundImage={`url(${AboutUsHeroBg})`}
-      
       bgRepeat={"no-repeat"}
       backgroundSize={"cover"}
       opacity={1}
@@ -51,11 +49,11 @@ const AboutUsHero = () => {
             marginBottom: "1rem",
           }}
         >
-          At Futurise Solution, we bring innovative tech solutions to life. Our
+          {`At Futurise Solution, we bring innovative tech solutions to life. Our
           expert team specializes in full-stack development, web and mobile
           applications, blockchain, and smart contracts. We are dedicated to
           delivering high-quality results and transforming ideas into reality
-          for clients worldwide.
+          for clients worldwide.`}
         </CustomText>
         <CustomButton variant="primary" text={"Contact Us"} />
       </Box>
