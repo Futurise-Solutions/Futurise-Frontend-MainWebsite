@@ -9,6 +9,7 @@ import { services } from "../utils/Constant";
 
 const ServicePage = () => {
   const { serviceName } = useParams();
+  console.log("serviceName:", serviceName);
   const service = services[serviceName];
 
   if (!service) {
