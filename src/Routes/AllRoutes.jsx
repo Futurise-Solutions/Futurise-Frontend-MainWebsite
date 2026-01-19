@@ -1,17 +1,41 @@
-import React from "react";
+import  { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
-import { AboutUs, Contactus, HomePage, Portfolio, ServiceSingalPage } from "../Pages";
+
+// Lazy load all page components
+const HomePage = lazy(() => import("../Pages/HomePage"));
+const Contactus = lazy(() => import("../Pages/ContactusPage"));
+const AboutUs = lazy(() => import("../Pages/AboutUs"));
+const Portfolio = lazy(() => import("../Pages/Portfolio"));
+const ServiceSingalPage = lazy(() => import("../Pages/ServicePage"));
+
+// Loading component
+const LoadingSpinner = () => (
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      height: "100vh",
+      fontSize: "18px",
+      color: "#333",
+    }}
+  >
+    <div>Loading...</div>
+  </div>
+);
 
 const AllRoutes = () => {
   return (
-    <div> 
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/contact" element={<Contactus />} />
-        <Route path="/About" element={<AboutUs/>} />
-        <Route path="/portfolio" element={<Portfolio/>} />
-        <Route path="/service/:serviceName" element={<ServiceSingalPage />} />
-      </Routes>
+    <div>
+      <Suspense fallback={<LoadingSpinner />}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/contact" element={<Contactus />} />
+          <Route path="/About" element={<AboutUs />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/service/:serviceName" element={<ServiceSingalPage />} />
+        </Routes>
+      </Suspense>
     </div>
   );
 };
