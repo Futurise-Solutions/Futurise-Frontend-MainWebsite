@@ -14,6 +14,7 @@ import { techStacks } from "../../utils/Constant";
 
 const ServiceStack = ({ service }) => {
   const serviceData = techStacks[service];
+  console.log("serviceData:", serviceData);
   useEffect(() => {
     AOS.init({ duration: 2000, easing: "ease-in-sine",  
       disable: window.innerWidth < 900

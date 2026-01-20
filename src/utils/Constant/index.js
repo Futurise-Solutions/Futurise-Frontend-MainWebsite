@@ -445,6 +445,58 @@ export const techStacks = {
       },
     ],
   },
+  "blockchain-development": {
+    title: "Blockchain Development",
+    stacks: [
+      {
+        title: "Blockchain Development",
+        subtitle: "Solidity, Ethers.js",
+        description:
+          "We develop secure and scalable blockchain solutions using Solidity and Ethers.js.",
+        techStack: "Solidity, Ethers.js",
+        image: mobiledevelop, 
+      },
+    ],
+  },
+  "smart-contract": {
+    title: "Smart Contract",
+    stacks: [
+      {
+        title: "Smart Contract Development",
+        subtitle: "Solidity, Truffle",
+        description:
+          "We create reliable and efficient smart contracts using Solidity and Truffle.",
+        techStack: "Solidity, Truffle",
+        image: mobiledevelop, 
+      },
+    ],
+  },
+  "ui-ux-design": {
+    title: "UI/UX Design",
+    stacks: [
+      {
+        title: "UI/UX Design",
+        subtitle: "Figma, Adobe XD",
+        description:
+          "We design user-centric and visually appealing interfaces using Figma and Adobe XD.",
+        techStack: "Figma, Adobe XD",
+        image: mobiledevelop, 
+      },
+    ],
+  },
+  "digital-marketing": {
+    title: "Digital Marketing",
+    stacks: [
+      {
+        title: "Digital Marketing",
+        subtitle: "Social Media Marketing",
+        description:
+          "We provide comprehensive digital marketing solutions, including social media marketing.",
+        techStack: "Social Media Marketing",
+        image: mobiledevelop, 
+      },
+    ],
+    }
 };
 
 
