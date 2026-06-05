@@ -1,27 +1,28 @@
-import { Box } from '@chakra-ui/react'
-import React from 'react'
-import { AboutUsHero, MissionVision } from '../Components'
-import { CustomText } from '../utils/Texts'
-import { CustomButton } from '../utils/Buttons'
-import TechnologyExcellence from '../Components/ContactCusCpmponents/TechnologyExcellence'
+import React from "react";
+import { Box } from "@chakra-ui/react";
+import { AboutUsHero, MissionVision, CompanyStats } from "../Components";
+import CoreValues from "../Components/AboutUs Components/CoreValues";
+import Team from "../Components/AboutUs Components/Team";
+import TechnologyExcellence from "../Components/ContactCusCpmponents/TechnologyExcellence";
+import { CTASection } from "../Components/common";
 
 const AboutUs = () => {
   return (
     <Box>
-        <AboutUsHero />
-        <Box mt={"5rem"} py={12} bg={"#2C3A4780"} textAlign={"center"} className="contact">
-        <CustomText variant="callout4">{"LET’S DISCUSS YOUR IDEA"}</CustomText>
-        <CustomText variant="callout3">
-          {
-            "Get a free consultation and let us know your vision to pivot it into a unique digital creation."
-          }
-        </CustomText>
-        <CustomButton text={"Connect With Us"} px={20}></CustomButton>
-      </Box>
-        <MissionVision/>
-        <TechnologyExcellence/>
+      <AboutUsHero />
+      <CompanyStats />
+      <MissionVision />
+      <CoreValues />
+      <TechnologyExcellence />
+      <Team />
+      <CTASection
+        eyebrow="Let’s work together"
+        title="Ready to build something"
+        highlight="exceptional?"
+        subtitle="Tell us about your idea and we’ll help you turn it into a product your users will love."
+      />
     </Box>
-  )
-}
+  );
+};
 
-export default AboutUs
+export default AboutUs;

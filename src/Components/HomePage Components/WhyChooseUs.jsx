@@ -1,130 +1,47 @@
-import React from 'react';
-import { Box, Image, Flex } from '@chakra-ui/react';
-import { CustomText } from '../../utils/Texts';
-import { Pagination, EffectCoverflow } from "swiper/modules";
-import { Autoplay } from "swiper/modules";
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-import 'swiper/css/effect-coverflow';
-import { Swiper, SwiperSlide } from "swiper/react";
-import { cards } from '../../utils/Constant';
-
-
+import React from "react";
+import { SimpleGrid, Image, Text, Heading, Flex } from "@chakra-ui/react";
+import { cards } from "../../utils/Constant";
+import { Section, SectionHeading, GlassCard, Reveal } from "../common";
 
 const WhyChooseUs = () => {
   return (
-    <Box w={"90%"} m={"auto"} textAlign="center" >
-      <CustomText
-        variant="heading"
-        children="Why Choose Us"
-        styles={{ zIndex: 1000 }}
+    <Section>
+      <SectionHeading
+        eyebrow="Why Futurise"
+        title="Built on trust,"
+        highlight="delivered with care"
+        subtitle="We obsess over the details that make a product successful — and the relationship that makes the project enjoyable."
+        mb={{ base: 10, md: 14 }}
       />
-      <Swiper
-        loop
-        effect="coverflow"
-        grabCursor={true}
-        autoplay={{
-          delay: 1500,
-          disableOnInteraction: false,
-        }}
-        slidesPerView="auto"
-        coverflowEffect={{
-          rotate: 20,
-          stretch: 0,
-          depth: 200,
-          modifier: 1,
-          slideShadows: true,
-        }}
 
-        modules={[EffectCoverflow, Pagination, Autoplay]}
-        className="mySwiper"
-        breakpoints={{
-          320: {
-            slidesPerView: 1,
-            spaceBetween: 10,
-          },
-          480: {
-            slidesPerView: 2,
-            spaceBetween: 10,
-          },
-          640: {
-            slidesPerView: 3,
-            spaceBetween: 10,
-          },
-          768: {
-            slidesPerView: 4,
-            spaceBetween: 20,
-          },
-          1024: {
-            slidesPerView: 4,
-            spaceBetween: 40,
-          },
-        }}
-      >
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
         {cards.map((el, index) => (
-          <SwiperSlide key={index} style={{position:"relative"}}>
-            <Flex
-            gap="14px"
-            m={"auto"}
-            mt={4}
-            justifyContent="center"
-            alignItems="center"
-            bg="#FFFFFF30"
-            border="1px solid #FFFFFF6E"
-            borderRadius="10px"
-            boxShadow="rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
-            flexDir="column"
-            width={{ base: '300px', md: '250px', lg: '300px' }}
-            height={{ base: '400px', md: '300px', lg: '400px' }}
-            position={"relative"}
-            _hover={{
-              '& .overlay': {
-                opacity: 1,
-                visibility: 'visible',
-              }
-            }}
-          >
-            <Box
-              className="overlay"
-              position="absolute"
-              top={0}
-              left={0}
-              width="100%"
-              height="100%"
-              bg="rgba(0, 0, 0, 0.8)"
-              alignItems="center"
-              justifyContent="center"
-              opacity={0}
-              visibility="hidden"
-              transition="all 0.3s ease-in-out"
-              display="flex"
-              flexDir={"column"}
-              zIndex={1}
-            >
-              <Image color="white" src={el.icon} alt='icon' />
-              <CustomText variant='subheading2' styles={{ marginTop: "1rem" }}>Know More</CustomText>
-            </Box>
-            <Image
-              src={el.image}
-              alt={el.title}
-              borderRadius="10px"
-              w={"280px"}
-              h={"310px"}
-              mb={"10px"}
-            />
-            <CustomText
-              variant="callout3"
-              children={el.title}
-              fontWeight="bold"
-              textAlign="center"
-            />
-          </Flex>
-
-          </SwiperSlide>
+          <Reveal key={el.title + index} delay={(index % 3) * 0.08}>
+            <GlassCard h="full" p={{ base: 6, md: 7 }}>
+              <Flex
+                w="52px"
+                h="52px"
+                borderRadius="14px"
+                align="center"
+                justify="center"
+                bgGradient="linear(135deg, rgba(79,123,255,0.2), rgba(157,92,255,0.2))"
+                border="1px solid"
+                borderColor="rgba(111,147,255,0.25)"
+                mb={5}
+              >
+                <Image src={el.icon} alt="" w="26px" h="26px" />
+              </Flex>
+              <Heading as="h3" fontSize="lg" fontWeight={600} mb={2}>
+                {el.title}
+              </Heading>
+              <Text color="text.muted" fontSize="15px" lineHeight={1.7}>
+                {el.description}
+              </Text>
+            </GlassCard>
+          </Reveal>
         ))}
-      </Swiper>
-    </Box>
+      </SimpleGrid>
+    </Section>
   );
 };
 

@@ -1,134 +1,54 @@
-import {
-  Box,
-  Flex,
-  Text,
-  VStack,
-  Grid,
-  GridItem,
-  keyframes,
-  Image,
-} from "@chakra-ui/react";
 import React from "react";
-import { CustomText } from "../../utils/Texts";
+import { SimpleGrid, Box, Heading, Text, VStack, HStack, Image, Icon } from "@chakra-ui/react";
+import { FiCheck } from "react-icons/fi";
 import { strengths } from "../../utils/Constant";
-
-const hoverEffect = keyframes`
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-`;
+import { Section, SectionHeading, GlassCard, Reveal } from "../common";
 
 const TechnologyExcellence = () => {
   return (
-    <Box mt="10rem" mb="10rem" textAlign="center">
-      <CustomText
-        mb="5rem"
-        variant="heading"
-        children=" Technology Excellence"
-        styles={{ zIndex: 1000, textAlign: "center" }}
+    <Section>
+      <SectionHeading
+        eyebrow="Our expertise"
+        title="Technology"
+        highlight="excellence"
+        subtitle="Deep, hands-on capability across the full modern technology stack — so we can build whatever your product needs."
+        mb={{ base: 10, md: 14 }}
       />
-
-      <Grid
-        templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
-        gap={6}
-        px={{ base: "2rem", md: "5rem" }}
-        position={"relative"}
-      >
-        {/* BOX FOR GLOW EFFECT */}
-        <Box
-          position="absolute"
-          top="40%"
-          left="50%"
-          bottom="40%"
-          transform="translateX(-50%)"
-          width="90%"
-          m={"auto"}
-          zIndex={1}
-          height={{ base: "400px", md: "350px", lg: "70%" }}
-          bg="radial-gradient(50% 50% at 50% 50%, rgba(49, 129, 187, 0.6) 6.24%, rgba(38, 145, 223, 0) 100%)"
-          display={{ base: "none", sm: "none", md: "block", lg: "block" }}
-        ></Box>
-        {strengths.map((strength) => (
-          <GridItem
-            // clipPath="polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)"
-            zIndex={10}
-            p={{ base: "2rem", md: "4rem" }}
-            key={strength.name}
-            position="relative"
-            backgroundImage={`url(${strength.bg})`}
-            bgRepeat={"no-repeat"}
-            backgroundSize={"cover"}
-            color="white"
-            borderRadius="lg"
-            overflow="hidden"
-            _hover={{
-              ".hoverBox": {
-                animation: `${hoverEffect} 0.7s forwards`,
-                bg: "rgba(0, 0, 0, 0.8)",
-              },
-              ".headingclass": {
-                opacity: 0.3,
-              },
-            }}
-          >
-            <Box
-              position="absolute"
-              top={0}
-              left={0}
-              h="100%"
-              w="100%"
-              bg="black"
-              zIndex={0}
-              opacity={0.6}
-            />
-            <VStack
-              p={6}
-              justifyContent="center"
-              alignItems="center"
-              height="200px"
-              textAlign="center"
-              position="relative"
-              className="headingclass"
-            >
-              <CustomText variant="subheading2">{strength.name}</CustomText>
-            </VStack>
-            <Box
-              className="hoverBox"
-              position="absolute"
-              top="0"
-              left="0"
-              width="100%"
-              height="100%"
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-              justifyContent="center"
-              color="white"
-              opacity="0"
-              p={4}
-              pt={10}
-            >
-              <Image h={"70px"} w={"70px"} src={strength.icon} />
-              <VStack m={"auto"} alignItems={"flex-start"} spacing={2}>
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
+        {strengths.map((strength, i) => (
+          <Reveal key={strength.name} delay={(i % 3) * 0.08}>
+            <GlassCard h="full" p={{ base: 6, md: 7 }}>
+              <HStack spacing={4} mb={5}>
+                <Box
+                  w="52px"
+                  h="52px"
+                  borderRadius="14px"
+                  display="grid"
+                  placeItems="center"
+                  bgGradient="linear(135deg, rgba(79,123,255,0.2), rgba(157,92,255,0.2))"
+                  border="1px solid"
+                  borderColor="rgba(111,147,255,0.25)"
+                  flexShrink={0}
+                >
+                  <Image src={strength.icon} alt="" w="26px" h="26px" />
+                </Box>
+                <Heading as="h3" fontSize="lg" fontWeight={600}>
+                  {strength.name}
+                </Heading>
+              </HStack>
+              <VStack align="start" spacing={3}>
                 {strength.description.map((point, index) => (
-                  <Flex key={index}>
-                    <Box
-                      as="span"
-                      mr={2}
-                      bg="white"
-                      p={0.5}
-                      borderRadius="full"
-                      alignItems={"flex-start"}
-                    />
-
-                    <Text textAlign={"start"}>{point}</Text>
-                  </Flex>
+                  <HStack key={index} spacing={3} align="start">
+                    <Icon as={FiCheck} color="accent.solid" boxSize={4} mt={1} flexShrink={0} />
+                    <Text color="text.muted" fontSize="14px" lineHeight={1.6}>{point}</Text>
+                  </HStack>
                 ))}
               </VStack>
-            </Box>
-          </GridItem>
+            </GlassCard>
+          </Reveal>
         ))}
-      </Grid>
-    </Box>
+      </SimpleGrid>
+    </Section>
   );
 };
 

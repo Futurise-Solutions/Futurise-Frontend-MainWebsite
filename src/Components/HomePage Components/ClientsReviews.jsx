@@ -1,97 +1,47 @@
-import { Navigation, Autoplay } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { CustomText } from "../../utils/Texts";
-import { noteIcon } from "../../assests";
-import { reviews } from "../../utils/Constant";
-
-
+import React from "react";
+import { SimpleGrid, Image, Text, HStack, VStack, Icon } from "@chakra-ui/react";
+import { FiStar } from "react-icons/fi";
+import { FaQuoteLeft } from "react-icons/fa6";
+import { testimonials } from "../../utils/Constant";
+import { Section, SectionHeading, GlassCard, Reveal } from "../common";
 
 const ClientsReviews = () => {
   return (
-    <Box position={"relative"} width={{ base: "95%", md: "90%" }} m={"auto"} textAlign={"center"} mb="5rem">
-      <CustomText
-        variant="heading"
-        children={"Get To Know Our Clients"}
-        styles={{ zIndex: 1000 }}
+    <Section>
+      <SectionHeading
+        eyebrow="Testimonials"
+        title="Loved by the clients"
+        highlight="we work with"
+        subtitle="Don’t just take our word for it — here’s what teams say after shipping with Futurise."
+        mb={{ base: 10, md: 14 }}
       />
-      <Box
-        position="absolute"
-        top="-4rem"
-        left="50%"
-        transform="translateX(-50%)"
-        width={{ base: "100%", md: "800px" }}
-        height={{ base: "320px", md: "350px", lg: "400px" }}
-        // borderRadius="50%"
-        bg="radial-gradient(50% 50% at 50% 50%, rgba(38, 145, 223, 0.4) 6.24%, rgba(38, 145, 223, 0) 100%)"
-      ></Box>
-      <Swiper
-        modules={[Autoplay, Navigation]}
-        spaceBetween={50}
-        slidesPerView={1}
-        navigation
-        loop={true}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
-      >
-        {reviews.map((review, index) => (
-          <SwiperSlide key={index}>
-            <Flex
-              direction="column"
-              alignItems="center"
-              textAlign="center"
-              bg="rgba(255, 255, 255, 0.19)"
-              p={{ base: 4, md: 6 }}
-              border={"1px solid #FFFFFF6E"}
-              borderRadius="md"
-              shadow="md"
-              m={4}
-            >
-              <Image
-                w={"40px"}
-                h={"40px"}
-                top={"15%"}
-                left={"20%"}
-                position={"absolute"}
-                alt="note"
-                src={noteIcon}
-              />
-              <Image
-                borderRadius="full"
-                width={"60px"}
-                height={"60px"}
-                src={review.avatar}
-                alt={review.name}
-                mb={4}
-                zIndex={100000}
-              />
-              <Flex bg={"transparent"} mb={2}>
-                {Array.from({ length: review.rating }, (_, i) => (
-                  <Text key={i} bg={"transparent"}>
-                    ⭐
-                  </Text>
+
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
+        {testimonials.map((t, index) => (
+          <Reveal key={t.name} delay={(index % 3) * 0.08}>
+            <GlassCard h="full" p={{ base: 6, md: 7 }} display="flex" flexDirection="column">
+              <Icon as={FaQuoteLeft} boxSize={6} color="rgba(111,147,255,0.5)" mb={4} />
+              <Text color="text.primary" fontSize="15px" lineHeight={1.75} flex="1">
+                “{t.review}”
+              </Text>
+              <HStack spacing={1} my={4}>
+                {[...Array(5)].map((_, i) => (
+                  <Icon key={i} as={FiStar} color="#FFB547" fill="#FFB547" boxSize={4} />
                 ))}
-              </Flex>
-              <CustomText
-                styles={{ background: "transparent" }}
-                variant="callout"
-                children={review?.name}
-              />
-              <CustomText
-                variant="subheading"
-                styles={{ background: "transparent" }}
-              >
-                {review.description}
-              </CustomText>
-            </Flex>
-          </SwiperSlide>
+              </HStack>
+              <HStack spacing={3}>
+                <Image src={t.avatar} alt={t.name} w="44px" h="44px" borderRadius="full" objectFit="cover" />
+                <VStack align="start" spacing={0}>
+                  <Text fontWeight={600} fontSize="15px">{t.name}</Text>
+                  <Text fontSize="13px" color="text.faint">{t.title}</Text>
+                </VStack>
+              </HStack>
+            </GlassCard>
+          </Reveal>
         ))}
-      </Swiper>
-    </Box>
+      </SimpleGrid>
+    </Section>
   );
 };
+
 export default ClientsReviews;

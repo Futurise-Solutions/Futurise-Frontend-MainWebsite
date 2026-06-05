@@ -1,71 +1,40 @@
 import React from "react";
-import { Box, Image, keyframes, Progress } from "@chakra-ui/react";
-import logoLoading from "../../assests/logoLoading.png"; // Replace with the actual path to your logo
+import { Box, keyframes } from "@chakra-ui/react";
+import { Logo } from "../common";
 
-const glow = keyframes`
-  0% {
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.7), 0 0 10px rgba(255, 255, 255, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 0.7);
-  }
-  100% {
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.7), 0 0 10px rgba(255, 255, 255, 0.5);
-  }
+const pulse = keyframes`
+  0%, 100% { opacity: 0.6; transform: scale(0.98); }
+  50% { opacity: 1; transform: scale(1.02); }
 `;
-
-const progressAnimation = keyframes`
-  0% { width: 0%; }
-  100% { width: 100%; }
+const slide = keyframes`
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(250%); }
 `;
 
 const LoadingIndicator = () => {
   return (
     <Box
       position="fixed"
-      top="0"
-      left="0"
-      width="100vw"
-      height="100vh"
+      inset="0"
       display="flex"
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
-      bg="#000000"
-      zIndex="1000"
-    // border={"1px solid red"}
+      bg="bg.canvas"
+      zIndex={2000}
     >
-      <Box
-        position="relative"
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        w="300px"
-        h="100px"
-        mb="20px"
-        animation={`${glow} 2s infinite alternate`}
-        borderRadius={"0.5rem"}
-      // border={"5px solid white"}
-      >
-        <Image src={logoLoading} alt="Logo" />
+      <Box position="absolute" w="320px" h="320px" bg="rgba(79,123,255,0.2)" filter="blur(100px)" rounded="full" />
+      <Box position="relative" animation={`${pulse} 1.8s ease-in-out infinite`} mb={8} sx={{ transform: "scale(1.4)" }}>
+        <Logo size="lg" />
       </Box>
-      <Box
-        position="relative"
-        w="30%"
-        h="10px"
-        bg="#e9e4e4"
-        borderRadius="5px"
-        overflow="hidden"
-      // border={"5px solid teal"}
-
-      >
+      <Box position="relative" w="180px" h="4px" bg="rgba(255,255,255,0.08)" borderRadius="full" overflow="hidden">
         <Box
           position="absolute"
           h="100%"
-          bg="skyblue"
-          animation={`${progressAnimation} 3s ease-in-out infinite`}
-        // border={"2px solid yellow"}
-
+          w="40%"
+          borderRadius="full"
+          bgGradient="linear(90deg, brand.500, violet.500)"
+          animation={`${slide} 1.2s ease-in-out infinite`}
         />
       </Box>
     </Box>

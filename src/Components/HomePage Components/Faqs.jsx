@@ -1,87 +1,69 @@
-import { Box, Flex, IconButton, Collapse } from "@chakra-ui/react";
-import { useState } from "react";
-import { AddIcon, MinusIcon } from "@chakra-ui/icons";
-import { CustomText } from "../../utils/Texts";
+import React from "react";
+import {
+  Flex, Box, Heading, Text, Button, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon,
+} from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+import { FiArrowRight } from "react-icons/fi";
 import { faqs } from "../../utils/Constant";
-
-
+import { Section, Reveal, Eyebrow } from "../common";
 
 const Faqs = () => {
-  const [openFaqIndex, setOpenFaqIndex] = useState(null);
-
-  const toggleFaq = (index) => {
-    setOpenFaqIndex(openFaqIndex === index ? null : index);
-  };
-
+  const navigate = useNavigate();
   return (
-    <Box textAlign={"center"} mb={"5rem"}>
-      <CustomText
-        variant="heading"
-        children={"Frequently Asked Questions"}
-        styles={{ zIndex: 1000 }}
-      />
-      <Box
-        border={"1px solid #FFFFFF57"}
-        w={{ base: "100%", md: "90%", lg: "80%" }}
-        m={"auto"}
-        bg={"rgba(255, 255, 255, 0.1)"}
-        textAlign={"center"}
-        borderRadius={"10px"}
-        p={5}
-        position={"relative"}
-        overflow={"hidden"}
-      >
-        <Box
-          position="absolute"
-          top="1%"
-          left="50%"
-          transform="translateX(-50%)"
-          width="100%"
-          height="100%"
-          bg="radial-gradient(50% 50% at 50% 50%, rgba(38, 145, 223, 0.30) 6.24%, rgba(38, 145, 223, 0) 100%)"
-        ></Box>
-        <Box w={"90%"} m={"auto"} zIndex={10} position={"relative"}>
-          {faqs.map((faq, index) => (
-            <Box key={index} borderBottom="1px solid gray">
-              <Flex
-                justifyContent="space-between"
-                alignItems="center"
-                p={4}
-                cursor="pointer"
-                onClick={() => toggleFaq(index)}
-              >
-                <CustomText
-                  variant="callout3"
-                  children={faq.question}
-                  styles={{ textAlign: "start", color: "white", zIndex: 1000 }}
-                />
-                <IconButton
-                  icon={openFaqIndex === index ? <MinusIcon /> : <AddIcon />}
-                  variant="ghost"
-                  aria-label="Toggle FAQ"
-                  w={"24px"}
-                  h={"24px"}
-                  color="#fff"
-                  _hover={{
-                    color:"#fff"
-                  }}
-                  zIndex={1000}
-                />
-              </Flex>
-              <Collapse in={openFaqIndex === index}>
-                <Box textAlign={"start"} p={4}>
-                  <CustomText
-                    styles={{ color: "#FFFFFF", zIndex: 1000 }}
-                    variant="callout2"
-                    children={faq.answer}
-                  />
-                </Box>
-              </Collapse>
-            </Box>
-          ))}
+    <Section>
+      <Flex direction={{ base: "column", lg: "row" }} gap={{ base: 10, lg: 16 }} align="start">
+        {/* Left */}
+        <Box flex={{ lg: "0 0 38%" }}>
+          <Reveal><Eyebrow>FAQ</Eyebrow></Reveal>
+          <Reveal delay={0.05}>
+            <Heading mt={4} fontSize={{ base: "30px", md: "40px" }} lineHeight={1.15}>
+              Questions?{" "}
+              <Box as="span" className="gradient-text">We’ve got answers.</Box>
+            </Heading>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <Text mt={4} color="text.muted" fontSize={{ base: "md", md: "lg" }} lineHeight={1.7}>
+              Everything you need to know about working with us. Can’t find what you’re looking for?
+            </Text>
+          </Reveal>
+          <Reveal delay={0.15}>
+            <Button mt={6} variant="gradient" rightIcon={<FiArrowRight />} onClick={() => navigate("/contact")}>
+              Talk to us
+            </Button>
+          </Reveal>
         </Box>
-      </Box>
-    </Box>
+
+        {/* Right accordion */}
+        <Box flex="1" w="full">
+          <Accordion allowToggle defaultIndex={[0]}>
+            {faqs.map((faq, index) => (
+              <Reveal key={index} delay={index * 0.04}>
+                <AccordionItem
+                  border="1px solid"
+                  borderColor="border.subtle"
+                  borderRadius="16px"
+                  mb={3}
+                  bg="bg.surface"
+                  overflow="hidden"
+                  _hover={{ borderColor: "rgba(111,147,255,0.35)" }}
+                  transition="border-color .2s"
+                >
+                  <AccordionButton py={5} px={6} _hover={{ bg: "transparent" }} _expanded={{ color: "accent.solid" }}>
+                    <Box flex="1" textAlign="left" fontWeight={600} fontSize={{ base: "15px", md: "16px" }}>
+                      {faq.question}
+                    </Box>
+                    <AccordionIcon />
+                  </AccordionButton>
+                  <AccordionPanel px={6} pb={5} color="text.muted" lineHeight={1.7}>
+                    {faq.answer}
+                  </AccordionPanel>
+                </AccordionItem>
+              </Reveal>
+            ))}
+          </Accordion>
+        </Box>
+      </Flex>
+    </Section>
   );
 };
 

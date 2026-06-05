@@ -1,88 +1,80 @@
-import React from 'react';
-import { Box, Grid, GridItem, Image, Flex } from '@chakra-ui/react';
-import { CustomText } from '../../utils/Texts';
-import { InfoIcon } from '@chakra-ui/icons'; // Example icon, you can replace it with any icon you prefer
-import { OurServiceData } from '../../utils/Constant';
-import { Link } from 'react-router-dom';
-
+import React from "react";
+import { SimpleGrid, Image, Text, Heading, HStack, Icon, Flex } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import { FiArrowUpRight } from "react-icons/fi";
+import { OurServiceData } from "../../utils/Constant";
+import { Section, SectionHeading, GlassCard, Reveal } from "../common";
 
 const OurServices = () => {
   return (
-    <Box
-    py={"5rem"}
-      w={"90%"}
-      m={"auto"}
-      position={"relative"}
-      overflow={"hidden"}>
-
-      <CustomText
-        variant="heading"
-        children="Our Services"
-        styles={{ zIndex: 1000,textAlign:"center"}}
+    <Section>
+      <SectionHeading
+        eyebrow="What we do"
+        title="Services that move your"
+        highlight="business forward"
+        subtitle="From a single feature to an entire platform, we offer end-to-end product capabilities under one roof."
+        mb={{ base: 10, md: 14 }}
       />
-      {/* BOX FOR GLOW EFFECT */}
-      <Box
-        position="absolute"
-        top="40%"
-        left="50%"
-        bottom="40%"
-        transform="translateX(-50%)"
-        width="90%"
-        m={"auto"}
-        height={{ base: "400px", md: "350px", lg: "70%" }}
-        bg="radial-gradient(50% 50% at 50% 50%, rgba(49, 129, 187, 0.4) 6.24%, rgba(38, 145, 223, 0) 100%)"
-        display={{ base: "none", sm: "none", md: "block", lg: "block" }}
-      ></Box>
 
-      <Grid gridTemplateColumns={{ base: "repeat(1,1fr)", md: "repeat(2,1fr)", lg: "repeat(3,1fr)" }} gap={"1.5rem"} >
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
         {OurServiceData.map((el, index) => (
-          <GridItem
-            key={index}
-            position="relative"
-            bg={"linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)"}
-            borderRadius={"1rem"}
-            pb={"1rem"}
-            overflow="hidden"
-            _hover={{
-              '& .overlay': {
-                opacity: 1,
-                visibility: 'visible',
-              }
-            }}
-            // border={"1px solid red"}
-          >
-            {/* Overlay */}
-            <Link to={`/service/${el.route}`}>
+          <Reveal key={el.serviceName} delay={(index % 3) * 0.08}>
+            <GlassCard
+              as={Link}
+              to={`/service/${el.route}`}
+              display="block"
+              h="full"
+              p={{ base: 6, md: 7 }}
+              role="group"
+            >
               <Flex
-                className="overlay"
-                position="absolute"
-                top={0}
-                left={0}
-                width="100%"
-                height="100%"
-                bg="rgba(0, 0, 0, 0.7)"
-                alignItems="center"
-                justifyContent="center"
-                opacity={0}
-                visibility="hidden"
-                transition="all 0.3s ease-in-out"
-                flexDir={"column"}
+                w="56px"
+                h="56px"
+                borderRadius="16px"
+                align="center"
+                justify="center"
+                bgGradient="linear(135deg, rgba(79,123,255,0.2), rgba(157,92,255,0.2))"
+                border="1px solid"
+                borderColor="rgba(111,147,255,0.25)"
+                mb={5}
+                transition="transform .3s"
+                _groupHover={{ transform: "scale(1.08)" }}
               >
-                <Image color="white" src={el.icon} alt='icon' />
-                <CustomText variant='subheading2' styles={{ marginTop: "1rem" }}>Know More</CustomText>
+                <Image src={el.icon} alt="" w="28px" h="28px" />
               </Flex>
-            </Link>
 
-            {/* Image */}
-            <Image src={el.image} py={"0.5rem"} px={"0.5rem"} w={"100%"} />
-            {/* Service Name */}
-            <CustomText variant='subheading2' styles={{ textAlign: "center", color: "rgba(255, 255, 255, 1)", paddingTop: "1rem" }}>{el.serviceName}</CustomText>
-            {/* Service Desc */}
-            <CustomText variant='subheading3' styles={{ textAlign: "center", color: "rgba(255, 255, 255, 1)", paddingTop: "1rem", paddingLeft: "12px", paddingRight: "12px" }}>{el.serviceDesc}</CustomText>
-          </GridItem>
+              <HStack justify="space-between" align="start">
+                <Heading as="h3" fontSize="xl" fontWeight={600}>
+                  {el.serviceName}
+                </Heading>
+                <Icon
+                  as={FiArrowUpRight}
+                  boxSize={5}
+                  color="text.faint"
+                  transition="all .3s"
+                  _groupHover={{ color: "accent.solid", transform: "translate(2px,-2px)" }}
+                />
+              </HStack>
+
+              <Text mt={3} color="text.muted" fontSize="15px" lineHeight={1.7}>
+                {el.serviceDesc}
+              </Text>
+
+              <Text
+                mt={5}
+                fontSize="sm"
+                fontWeight={600}
+                color="accent.solid"
+                opacity={0.85}
+                _groupHover={{ opacity: 1 }}
+              >
+                Learn more →
+              </Text>
+            </GlassCard>
+          </Reveal>
         ))}
-      </Grid>
-    </Box>
+      </SimpleGrid>
+    </Section>
   );
 };
 
