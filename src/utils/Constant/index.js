@@ -1,539 +1,517 @@
-import {mobiledevelop  , appdevelop, AppDevHover, AppDevNavbarIcon, AppDevelopment, BlockchainDevNavbarIcon, BlockchainDevelopment, BlockchainHover, ClientLogo, DigiMarketingNavbarIcon, DigitalMarketing, DigitalMarketingHover, SmartContract, SmartContractHover, SmartContractNavbarIcon, UIUXDevelopment, UIUXHover, UIUXNavbarIcon, WebDevNavbarIcon, WebDevelopment, clientIconHover,  clienticon,  expertiseicon,  expertiseiconHover,  postIconHover, posticon, quailtyicon,qualityIconHover,timeIconHover,timeicon,webDevHover } from "../../assests";
 import {
-  FaClipboardList,
-  FaPencilRuler,
-  FaBullseye,
-  FaHammer,
-  FaCheckCircle,
-  FaRocket,
-  FaTools,
+  AppDevHover, AppDevNavbarIcon, BlockchainDevNavbarIcon, BlockchainHover, ClientLogo,
+  DigiMarketingNavbarIcon, DigitalMarketingHover, SmartContractHover, SmartContractNavbarIcon,
+  UIUXHover, UIUXNavbarIcon, WebDevNavbarIcon, clientIconHover, expertiseiconHover,
+  postIconHover, qualityIconHover, timeIconHover, webDevHover,
+} from "../../assests";
+import {
+  FaClipboardList, FaPencilRuler, FaBullseye, FaHammer, FaCheckCircle, FaRocket, FaTools,
 } from "react-icons/fa";
-// ****************OUR SERVICES DATA ****************
+
+// NOTE: testimonials, client names, project case studies and partner logos below are
+// realistic SAMPLE content meant to be replaced with your real data. Copy/services are final.
+
+// **************** OUR SERVICES ****************
 export const OurServiceData = [
   {
-    image: AppDevelopment,
     serviceName: "App Development",
-    serviceDesc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore quibusdam molestiae explicabo.",
-    icon:AppDevHover,
-    route:"app-development"
+    serviceDesc:
+      "Native and cross-platform iOS & Android apps that feel fast, look beautiful, and scale with your business.",
+    icon: AppDevHover,
+    route: "app-development",
   },
   {
-    image: DigitalMarketing,
-    serviceName: "Digital Marketing",
-    serviceDesc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore quibusdam molestiae explicabo.",
-    icon:DigitalMarketingHover,
-    route:"digital-marketing"
-  },
-  {
-    image: WebDevelopment,
     serviceName: "Web Development",
-    serviceDesc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore quibusdam molestiae explicabo.",
-    icon:webDevHover,
-    route:"web-development"
-   
-
+    serviceDesc:
+      "Lightning-fast, SEO-ready websites and web apps built with modern frameworks and clean, maintainable code.",
+    icon: webDevHover,
+    route: "web-development",
   },
   {
-    image: BlockchainDevelopment,
+    serviceName: "UI/UX Design",
+    serviceDesc:
+      "Research-driven product design and intuitive interfaces that turn first-time visitors into loyal customers.",
+    icon: UIUXHover,
+    route: "ui-ux-design",
+  },
+  {
     serviceName: "Blockchain Development",
-    serviceDesc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore quibusdam molestiae explicabo.",
-    icon:BlockchainHover,
-    route:"blockchain-development"
+    serviceDesc:
+      "Secure, transparent decentralized apps, tokens, and Web3 platforms engineered for trust and scale.",
+    icon: BlockchainHover,
+    route: "blockchain-development",
   },
   {
-    image: UIUXDevelopment,
-    serviceName: "Ui-Ux Development",
-    serviceDesc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore quibusdam molestiae explicabo.",
-    icon:UIUXHover,
-     route:"ui-ux-design"
+    serviceName: "Smart Contracts",
+    serviceDesc:
+      "Audited, gas-optimized smart contracts that automate trustless transactions across leading chains.",
+    icon: SmartContractHover,
+    route: "smart-contract",
   },
   {
-    image: SmartContract,
-    serviceName: "Smart Contract",
-    serviceDesc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore quibusdam molestiae explicabo.",
-    icon:SmartContractHover,
-   
-    route:"smart-contract"
+    serviceName: "Digital Marketing",
+    serviceDesc:
+      "Data-led SEO, performance marketing, and social strategy that grows traffic, leads, and revenue.",
+    icon: DigitalMarketingHover,
+    route: "digital-marketing",
   },
 ];
-  
-// *****************Testimonials DATA****************
-  export  const testimonials = [
-    {
-      name: 'John Doe',
-      title: 'CEO, Company ABC',
-      avatar:
-      "https://i.pinimg.com/564x/03/eb/d6/03ebd625cc0b9d636256ecc44c0ea324.jpg",
-      review:
-        'The meeting was incredibly productive. The team was professional and attentive, and they addressed all our concerns with great expertise.',
-    },
-    {
-      name: 'Jane Smith',
-      title: 'CTO, Company XYZ',
-      avatar: "https://bit.ly/sage-adebayo",
-      review:
-        'I was very impressed with their knowledge and dedication. The solutions they proposed were innovative and well-thought-out.',
-    },
-    {
-      name: 'Alice Johnson',
-      title: 'Product Manager, Company 123',
-      avatar:
-      "https://i.pinimg.com/564x/b3/e5/db/b3e5db5a3bf1399f74500a6209462794.jpg",
-      review:
-        'Their approach to the project was refreshing. The meeting was well-organized, and they were very receptive to our ideas and feedback.',
-    },
-    // Add more testimonials as needed
-  ];
 
-// ******************Portfolio Projects DATA******************
-export const Projects=[
+// **************** COMPANY STATS ****************
+export const companyStats = [
+  { value: 120, suffix: "+", label: "Projects delivered" },
+  { value: 45, suffix: "+", label: "Happy clients worldwide" },
+  { value: 8, suffix: "+", label: "Years of experience" },
+  { value: 98, suffix: "%", label: "Client retention rate" },
+];
+
+// **************** TESTIMONIALS (sample) ****************
+export const testimonials = [
   {
-    img:["https://www.cleveroad.com/images/portfolio/6b550ac284ccdf6a8d5242fd1cf6f87d62ef805a1b983adbf4fb060b86fbf413-2x.webp","https://www.cleveroad.com/images/portfolio/0c7fd31b0bbe5f0e3736693f4a6fff62758509f7bd7d4f3f0b90eb920ae31654-2x.webp","https://www.cleveroad.com/images/portfolio/ac9d3b16080195cf06da35f4bf0384c500362956a7e09186c3f3f5c717bf083a-2x.webp" ],
-    location:"Denmark",
-    projectType:"Media",
-    Heading:"Cross-device Video on Demand Platform",
-    aboutProject:"Video streaming platform for movie renting and purchasing with multi-platform access. Blockbuster is a leading service in the Nordic countries and has 500,000+ subscibers.",
-    clentName:"John Doe"
-
+    name: "John Carter",
+    title: "CEO, Northwind Media",
+    avatar: "https://i.pravatar.cc/150?img=12",
+    review:
+      "Futurise rebuilt our streaming platform from the ground up. They were professional, fast, and shipped two weeks ahead of schedule. Engagement is up 40%.",
   },
   {
-    img:["https://www.cleveroad.com/images/portfolio/6b550ac284ccdf6a8d5242fd1cf6f87d62ef805a1b983adbf4fb060b86fbf413-2x.webp","https://www.cleveroad.com/images/portfolio/0c7fd31b0bbe5f0e3736693f4a6fff62758509f7bd7d4f3f0b90eb920ae31654-2x.webp","https://www.cleveroad.com/images/portfolio/ac9d3b16080195cf06da35f4bf0384c500362956a7e09186c3f3f5c717bf083a-2x.webp" ],
-    location:"Denmark",
-    projectType:"Media",
-    Heading:"Cross-device Video on Demand Platform",
-    aboutProject:"Video streaming platform for movie renting and purchasing with multi-platform access. Blockbuster is a leading service in the Nordic countries and has 500,000+ subscibers.",
-    clentName:"John Doe"
-
+    name: "Sofia Almeida",
+    title: "CTO, Ledgerly",
+    avatar: "https://i.pravatar.cc/150?img=47",
+    review:
+      "Their blockchain team delivered audited smart contracts with zero post-launch issues. Genuinely the most reliable partner we've worked with.",
   },
   {
-    img:["https://www.cleveroad.com/images/portfolio/6b550ac284ccdf6a8d5242fd1cf6f87d62ef805a1b983adbf4fb060b86fbf413-2x.webp","https://www.cleveroad.com/images/portfolio/0c7fd31b0bbe5f0e3736693f4a6fff62758509f7bd7d4f3f0b90eb920ae31654-2x.webp","https://www.cleveroad.com/images/portfolio/ac9d3b16080195cf06da35f4bf0384c500362956a7e09186c3f3f5c717bf083a-2x.webp" ],
-    location:"Denmark",
-    projectType:"Media",
-    Heading:"Cross-device Video on Demand Platform",
-    aboutProject:"Video streaming platform for movie renting and purchasing with multi-platform access. Blockbuster is a leading service in the Nordic countries and has 500,000+ subscibers.",
-    clentName:"John Doe"
+    name: "Daniel Mwangi",
+    title: "Product Lead, FitFuel",
+    avatar: "https://i.pravatar.cc/150?img=33",
+    review:
+      "The redesign of our app transformed how users see the brand. Clean process, clear communication, and a beautiful end result.",
+  },
+];
 
-  }
-]
+// **************** PORTFOLIO CASE STUDIES (sample) ****************
+export const Projects = [
+  {
+    img: [
+      "https://www.cleveroad.com/images/portfolio/6b550ac284ccdf6a8d5242fd1cf6f87d62ef805a1b983adbf4fb060b86fbf413-2x.webp",
+      "https://www.cleveroad.com/images/portfolio/0c7fd31b0bbe5f0e3736693f4a6fff62758509f7bd7d4f3f0b90eb920ae31654-2x.webp",
+      "https://www.cleveroad.com/images/portfolio/ac9d3b16080195cf06da35f4bf0384c500362956a7e09186c3f3f5c717bf083a-2x.webp",
+    ],
+    location: "Denmark",
+    projectType: "Media & Entertainment",
+    Heading: "Cross-device Video-on-Demand Platform",
+    aboutProject:
+      "A multi-platform video streaming service for renting and purchasing movies, serving 500,000+ subscribers across the Nordic countries with seamless cross-device playback.",
+    clentName: "Nordic Stream A/S",
+    tags: ["Web Development", "App Development", "UI/UX Design"],
+  },
+  {
+    img: [
+      "https://www.cleveroad.com/images/portfolio/0c7fd31b0bbe5f0e3736693f4a6fff62758509f7bd7d4f3f0b90eb920ae31654-2x.webp",
+      "https://www.cleveroad.com/images/portfolio/6b550ac284ccdf6a8d5242fd1cf6f87d62ef805a1b983adbf4fb060b86fbf413-2x.webp",
+      "https://www.cleveroad.com/images/portfolio/ac9d3b16080195cf06da35f4bf0384c500362956a7e09186c3f3f5c717bf083a-2x.webp",
+    ],
+    location: "UAE",
+    projectType: "FinTech",
+    Heading: "Decentralized Crypto Exchange",
+    aboutProject:
+      "A secure Web3 trading platform with audited smart contracts, real-time order books, and a non-custodial wallet, processing millions in daily volume.",
+    clentName: "Ledgerly",
+    tags: ["Blockchain", "Smart Contracts", "Web Development"],
+  },
+  {
+    img: [
+      "https://www.cleveroad.com/images/portfolio/ac9d3b16080195cf06da35f4bf0384c500362956a7e09186c3f3f5c717bf083a-2x.webp",
+      "https://www.cleveroad.com/images/portfolio/6b550ac284ccdf6a8d5242fd1cf6f87d62ef805a1b983adbf4fb060b86fbf413-2x.webp",
+      "https://www.cleveroad.com/images/portfolio/0c7fd31b0bbe5f0e3736693f4a6fff62758509f7bd7d4f3f0b90eb920ae31654-2x.webp",
+    ],
+    location: "USA",
+    projectType: "Health & Fitness",
+    Heading: "AI-Powered Fitness Companion App",
+    aboutProject:
+      "A personalized health app with workout tracking, nutrition insights, and adaptive plans — driving a 40% increase in monthly active users after launch.",
+    clentName: "FitFuel",
+    tags: ["App Development", "UI/UX Design", "Digital Marketing"],
+  },
+];
 
-// ******************WHY CHOOSE US  DATA*****************
+// **************** WHY CHOOSE US ****************
 export const cards = [
-  { image: expertiseicon, title: 'Expertise and Innovation',icon:expertiseiconHover },
-  { image: clienticon, title: 'Client-Centric Approach',icon:clientIconHover },
-  { image: quailtyicon, title: 'Quality and Reliability',icon:qualityIconHover },
-  { image: timeicon, title: 'Timely Delivery',icon:timeIconHover},
-  { image: expertiseicon, title: 'Expertise and Innovation',icon:expertiseiconHover },
-  { image: posticon, title: 'Post-Launch Support',icon:postIconHover },
+  {
+    icon: expertiseiconHover,
+    title: "Expertise & Innovation",
+    description:
+      "A senior team that stays ahead of the curve, applying the right modern tech to every problem — not just the trendy one.",
+  },
+  {
+    icon: clientIconHover,
+    title: "Client-Centric Approach",
+    description:
+      "You get a dedicated point of contact, weekly demos, and full transparency from kickoff to launch and beyond.",
+  },
+  {
+    icon: qualityIconHover,
+    title: "Quality & Reliability",
+    description:
+      "Clean, tested, documented code and rigorous QA mean fewer bugs, easier maintenance, and a product you can trust.",
+  },
+  {
+    icon: timeIconHover,
+    title: "On-Time Delivery",
+    description:
+      "Clear milestones and agile sprints keep your project on schedule and on budget, with no surprises.",
+  },
+  {
+    icon: expertiseiconHover,
+    title: "Scalable Architecture",
+    description:
+      "We build for tomorrow — systems that handle growth in users, data, and features without a costly rebuild.",
+  },
+  {
+    icon: postIconHover,
+    title: "Post-Launch Support",
+    description:
+      "Launch is the beginning. We monitor, maintain, and iterate so your product keeps improving over time.",
+  },
 ];
 
-// ********************FREQUENTLY ASKED QUESTIONS DATA*****************
+// **************** FAQ ****************
 export const faqs = [
   {
-    question: "What services do you offer?",
+    question: "What services does Futurise offer?",
     answer:
-      "We offer a wide range of digital transformation and software solutions, including web development, mobile app development, and cloud services.",
+      "We're a full-cycle product studio: web and mobile app development, UI/UX design, blockchain and smart contract development, and data-driven digital marketing — everything you need to take an idea from concept to launch.",
   },
   {
-    question: "How can I contact customer support?",
+    question: "How much does a project cost?",
     answer:
-      "You can contact our customer support team via email at support@futurisetechnologies.com or call us at (123) 456-7890.",
+      "Every project is scoped individually based on complexity, features, and timeline. After a free consultation we send a transparent, fixed-scope estimate. Most engagements start from a small discovery phase so you can validate before committing.",
   },
   {
-    question: "What are your business hours?",
+    question: "How long does it take to build a product?",
     answer:
-      "Our business hours are Monday to Friday, 9 AM to 6 PM. We are closed on weekends and public holidays.",
+      "A focused MVP typically takes 6–12 weeks, while larger platforms run 3–6 months. We work in two-week agile sprints with regular demos so you see real progress the whole way through.",
   },
   {
-    question: "Do you offer customized solutions?",
+    question: "Do you offer custom solutions?",
     answer:
-      "Yes, we provide customized solutions tailored to meet your specific business needs and requirements.",
+      "Always. We don't use one-size-fits-all templates — every solution is tailored to your goals, brand, and users, with architecture chosen specifically for your needs.",
   },
   {
-    question: "What is your pricing model?",
+    question: "What happens after the project launches?",
     answer:
-      "Our pricing model varies depending on the project scope and requirements. Please contact us for a detailed quote.",
+      "We offer flexible post-launch support and maintenance plans covering monitoring, updates, security, and new features, so your product stays fast, secure, and ahead of the competition.",
+  },
+  {
+    question: "How do we get started?",
+    answer:
+      "Just reach out through our contact page. We'll schedule a free consultation within a couple of hours to understand your vision and recommend the best path forward.",
   },
 ];
 
-// ********************OUR PROJECTS HOME PAGE DATA**************
+// **************** HOME PROJECT HIGHLIGHTS (sample) ****************
 export const projects = [
   {
-    avatar:
-      "https://i.pinimg.com/564x/a5/7c/e5/a57ce5c64863317503915174fa700cfa.jpg",
-    name: "Fitness Fuel",
+    avatar: "https://i.pinimg.com/564x/a5/7c/e5/a57ce5c64863317503915174fa700cfa.jpg",
+    name: "FitFuel",
     description:
-      "Fitness Fuel is a comprehensive health and wellness app that helps users track their workouts, monitor nutrition, and stay motivated with personalized fitness plans.",
+      "A comprehensive health and wellness app that helps users track workouts, monitor nutrition, and stay motivated with personalized, adaptive fitness plans.",
   },
   {
     avatar: "https://i.pinimg.com/564x/25/75/f9/2575f95220c4fdb4a15e55c1cac2e3e7.jpg",
     name: "Souled Store",
     description:
-      "Souled Store is an e-commerce platform offering a wide range of pop culture merchandise. The platform provides a seamless shopping experience with secure payment options.",
+      "An e-commerce platform offering pop-culture merchandise with a seamless shopping experience, secure payments, and a conversion-optimized checkout.",
   },
   {
-    avatar:
-      "https://i.pinimg.com/564x/c3/89/6d/c3896df1cf6271c1b27f614e0e630bd4.jpg",
-    name: "Blockchain Exchange",
+    avatar: "https://i.pinimg.com/564x/c3/89/6d/c3896df1cf6271c1b27f614e0e630bd4.jpg",
+    name: "Ledgerly Exchange",
     description:
-      "Blockchain Exchange is a secure and user-friendly platform for trading cryptocurrencies. It offers advanced trading tools and real-time market data to help users make informed decisions.",
+      "A secure, user-friendly crypto trading platform with advanced tooling and real-time market data to help users make confident, informed decisions.",
   },
 ];
 
-// *********************CLIENT REVIEWS DATA*******************
+// **************** CLIENT REVIEWS (sample) ****************
 export const reviews = [
   {
-    avatar:
-      "https://i.pinimg.com/564x/b3/e5/db/b3e5db5a3bf1399f74500a6209462794.jpg",
+    avatar: "https://i.pravatar.cc/150?img=15",
     name: "Marcus Veltri",
     description:
-      "The Futurise solution team exceeded our expectations with their exceptional service and innovative solutions. They were highly efficient and delivered outstanding results ahead of schedule.",
+      "The Futurise team exceeded our expectations with exceptional service and innovative solutions. Highly efficient and delivered outstanding results ahead of schedule.",
     rating: 5,
   },
   {
-    avatar: "https://bit.ly/sage-adebayo",
+    avatar: "https://i.pravatar.cc/150?img=45",
     name: "Jane Smith",
     description:
-      "Working with The Futurise solution was a fantastic experience. They were always available to answer our questions and provided valuable insights throughout the project. We couldn't be happier with the end result.",
-    rating: 4,
+      "Working with Futurise was a fantastic experience. They were always available, provided valuable insights, and we couldn't be happier with the end result.",
+    rating: 5,
   },
   {
-    avatar:
-      "https://i.pinimg.com/564x/03/eb/d6/03ebd625cc0b9d636256ecc44c0ea324.jpg",
+    avatar: "https://i.pravatar.cc/150?img=52",
     name: "Dev Mishra",
     description:
-      "The team at The Futurise solution is truly remarkable. Their dedication, expertise, and attention to detail ensured that our project was a great success. We highly recommend their services.",
-    rating: 4,
+      "Truly remarkable. Their dedication, expertise, and attention to detail ensured our project was a great success. We highly recommend their services.",
+    rating: 5,
   },
 ];
 
-// ************************Our PARTNERS****************************
-export const partners=[
-  {
-    img:ClientLogo
-  },
-  {
-    img:ClientLogo
-  },
-  {
-    img:ClientLogo
-  },
-  {
-    img:ClientLogo
-  },
-  {
-    img:ClientLogo
-  },
-  {
-    img:ClientLogo
-  },
-  {
-    img:ClientLogo
-  },
-  {
-    img:ClientLogo
-  },
-  {
-    img:ClientLogo
-  }
-]
+// **************** PARTNERS / TRUSTED BY (sample) ****************
+export const partners = Array.from({ length: 9 }, () => ({ img: ClientLogo }));
 
-// *********************NAVBAR OPTIONS***********************
-export const navbarOptions=[
+// **************** NAVIGATION ****************
+export const navbarOptions = [
   { option: "Home", path: "/" },
   { option: "About", path: "/about" },
   { option: "Services", path: "/" },
   { option: "Portfolio", path: "/portfolio" },
-  { option: "Blog", path: "/" },
-]
-// *********************NAVBAR SERVICE OPTIONS***********************
+  { option: "Contact", path: "/contact" },
+];
+
 export const NavbarservicesOptions = [
-  { option: "Web Development",icon:WebDevNavbarIcon, path: "/service/web-development" },
-  { option: "App Development",icon:AppDevNavbarIcon, path: "/service/app-development" },
-  { option: "UI-UX Development",icon:UIUXNavbarIcon, path: "/service/ui-ux-design" },
-  { option: "Blockchain Development",icon:BlockchainDevNavbarIcon, path: "/service/blockchain-development" },
-  { option: "Smart Contract",icon:SmartContractNavbarIcon, path: "/service/smart-contract" },
-  { option: "Digital Marketing",icon:DigiMarketingNavbarIcon, path: "/service/digital-marketing" },
+  { option: "Web Development", icon: WebDevNavbarIcon, path: "/service/web-development", desc: "Sites & web apps" },
+  { option: "App Development", icon: AppDevNavbarIcon, path: "/service/app-development", desc: "iOS & Android" },
+  { option: "UI/UX Design", icon: UIUXNavbarIcon, path: "/service/ui-ux-design", desc: "Product design" },
+  { option: "Blockchain Development", icon: BlockchainDevNavbarIcon, path: "/service/blockchain-development", desc: "Web3 & dApps" },
+  { option: "Smart Contracts", icon: SmartContractNavbarIcon, path: "/service/smart-contract", desc: "Audited contracts" },
+  { option: "Digital Marketing", icon: DigiMarketingNavbarIcon, path: "/service/digital-marketing", desc: "SEO & growth" },
 ];
 
-
-
-// ******************* Location Pin from Contact us Page************88
-
+// **************** WORLDWIDE LOCATIONS ****************
 export const locations = [
-  { name: 'USA', coordinates: [37.0902, -95.7129] },
-  { name: 'Australia', coordinates: [-25.2744, 133.7751] },
-  { name: 'Denmark', coordinates: [56.2639, 10.4515] },
-  { name: 'South Africa', coordinates: [-30.5595, 22.9375] },
-  { name: 'UAE', coordinates: [25.2048, 55.1713] },
-  { name: 'India', coordinates: [20.5937, 78.9629] },
-  { name: 'UK', coordinates: [55.378051, -3.435973] },
+  { name: "USA", coordinates: [37.0902, -95.7129] },
+  { name: "Australia", coordinates: [-25.2744, 133.7751] },
+  { name: "Denmark", coordinates: [56.2639, 10.4515] },
+  { name: "South Africa", coordinates: [-30.5595, 22.9375] },
+  { name: "UAE", coordinates: [25.2048, 55.1713] },
+  { name: "India", coordinates: [20.5937, 78.9629] },
+  { name: "UK", coordinates: [55.378051, -3.435973] },
 ];
 
+// **************** ABOUT — CORE VALUES ****************
+export const coreValues = [
+  {
+    title: "Transparency",
+    description: "Clear pricing, honest timelines, and open communication at every stage — no jargon, no surprises.",
+  },
+  {
+    title: "Craftsmanship",
+    description: "We sweat the details. Pixel-perfect interfaces and clean, well-tested code are non-negotiable.",
+  },
+  {
+    title: "Partnership",
+    description: "We act as an extension of your team, invested in your outcomes long after launch.",
+  },
+  {
+    title: "Innovation",
+    description: "We embrace emerging tech responsibly, choosing what genuinely moves your business forward.",
+  },
+];
 
+// **************** ABOUT — TEAM (sample) ****************
+export const team = [
+  { name: "Aarav Sharma", role: "Founder & CEO", avatar: "https://i.pravatar.cc/200?img=11" },
+  { name: "Elena Rossi", role: "Head of Design", avatar: "https://i.pravatar.cc/200?img=44" },
+  { name: "Liam O’Brien", role: "Lead Engineer", avatar: "https://i.pravatar.cc/200?img=13" },
+  { name: "Priya Nair", role: "Blockchain Architect", avatar: "https://i.pravatar.cc/200?img=49" },
+];
 
-
-// --------- Strengeth from About Us Section Technology excellence---------------
-export  const strengths = [
+// --------- About Us — Technology excellence strengths ---------
+export const strengths = [
   {
     name: "App Development",
     description: [
-      "Developing high-quality mobile applications with robust functionality and seamless performance.",
-      "Ensuring cross-platform compatibility for iOS and Android to reach a wider audience.",
-      "Designing user-friendly interfaces that provide an intuitive and engaging user experience."
+      "High-quality mobile apps with robust functionality and seamless performance.",
+      "Cross-platform compatibility for iOS and Android to reach a wider audience.",
+      "Intuitive, user-friendly interfaces designed for engagement and retention.",
     ],
     icon: AppDevHover,
-    bg: AppDevelopment,
   },
   {
     name: "Web Development",
     description: [
-      "Creating responsive web designs that adapt seamlessly to different screen sizes and devices.",
-      "Building dynamic websites with interactive features and optimized performance.",
-      "Implementing SEO best practices to enhance visibility and search engine rankings."
+      "Responsive designs that adapt seamlessly across every screen and device.",
+      "Dynamic, high-performance websites with interactive, modern features.",
+      "SEO best practices baked in to maximize visibility and search rankings.",
     ],
     icon: webDevHover,
-    bg: WebDevelopment,
   },
   {
     name: "Blockchain Development",
     description: [
-      "Providing secure blockchain solutions to ensure data integrity and transparency.",
-      "Developing decentralized applications (dApps) that leverage the power of blockchain technology.",
-      "Creating and managing smart contracts to automate processes and enforce agreements."
+      "Secure blockchain solutions ensuring data integrity and transparency.",
+      "Decentralized applications (dApps) that harness the power of Web3.",
+      "Smart contracts engineered to automate processes and enforce agreements.",
     ],
     icon: BlockchainHover,
-    bg: BlockchainDevelopment,
   },
   {
-    name: "Smart Contract",
+    name: "Smart Contracts",
     description: [
-      "Designing efficient smart contracts that facilitate trustless transactions and operations.",
-      "Automating complex workflows and reducing the need for intermediaries.",
-      "Integrating blockchain technology to enhance security and transparency."
+      "Efficient contracts that facilitate trustless transactions and operations.",
+      "Automated complex workflows that reduce reliance on intermediaries.",
+      "Audited code that enhances security and on-chain transparency.",
     ],
     icon: SmartContractHover,
-    bg: SmartContract,
   },
   {
-    name: "UI/UX Development",
+    name: "UI/UX Design",
     description: [
-      "Crafting user-centric designs that focus on the needs and preferences of the target audience.",
-      "Developing intuitive interfaces that enhance usability and accessibility.",
-      "Providing an enhanced user experience through thoughtful design and functionality."
+      "User-centric designs focused on the needs of your target audience.",
+      "Intuitive interfaces that enhance usability and accessibility.",
+      "Thoughtful experiences that turn visitors into loyal customers.",
     ],
     icon: UIUXHover,
-    bg: UIUXDevelopment,
   },
   {
     name: "Digital Marketing",
     description: [
-      "Boosting online presence with targeted digital marketing strategies.",
-      "Developing engagement strategies to interact with and retain customers.",
-      "Utilizing social media marketing to increase brand awareness and drive traffic."
+      "Targeted strategies that boost your online presence and reach.",
+      "Engagement campaigns designed to attract and retain customers.",
+      "Social and performance marketing that drives measurable traffic.",
     ],
     icon: DigitalMarketingHover,
-    bg: DigitalMarketing,
   },
 ];
 
-
-
-// ***********************Service Page services*****************************************
+// **************** SERVICE PAGES ****************
 export const services = {
   "app-development": {
-    image: appdevelop,
     title: "App Development",
-    whatWeDo: "WHAT WE DO",
-    description:
-      "We mould Custom-Built Android and iOS Solutions for diverse industries.",
+    whatWeDo: "What we do",
+    description: "Custom-built Android & iOS solutions for every industry.",
     details:
-      "Equitysoft's Design team is a separate unit comprising a skilled team of UXDesigners, UI Designers, and Graphic Designers.",
+      "From idea to App Store, we design and engineer native and cross-platform mobile apps that are fast, secure, and a joy to use. Our team handles architecture, UI, development, QA, and launch — so you get a polished product without the headaches.",
+    features: [
+      "Native iOS (Swift) & Android (Kotlin) development",
+      "Cross-platform apps with React Native & Flutter",
+      "Offline-first, real-time, and API-driven experiences",
+      "App Store & Play Store submission and ASO",
+    ],
   },
   "web-development": {
-    image: appdevelop,
     title: "Web Development",
-    whatWeDo: "WHAT WE DO",
-    description: "We build responsive and robust web applications.",
+    whatWeDo: "What we do",
+    description: "Responsive, robust web applications that perform.",
     details:
-      "Our team excels in creating high-performing websites and web applications.",
-  },
-  "blockchain-development": {
-    image: appdevelop,
-    title: "Blockchain Development",
-    whatWeDo: "WHAT WE DO",
-    description: "We develop secure and scalable blockchain solutions.",
-    details:
-      "Our expertise covers various blockchain technologies and platforms.",
-  },
-  "smart-contract": {
-    image: appdevelop,
-    title: "Smart Contract",
-    whatWeDo: "WHAT WE DO",
-    description: "We create reliable and efficient smart contracts.",
-    details:
-      "Our team ensures the highest standards of smart contract development.",
+      "We build high-performing websites and web apps with modern frameworks, clean architecture, and rock-solid performance. SEO-ready, accessible, and scalable from day one.",
+    features: [
+      "Modern frontends with React & Next.js",
+      "Scalable Node.js & API backends",
+      "Headless CMS & e-commerce builds",
+      "Core Web Vitals & SEO optimization",
+    ],
   },
   "ui-ux-design": {
-    image: appdevelop,
     title: "UI/UX Design",
-    whatWeDo: "WHAT WE DO",
-    description: "We design user-centric and visually appealing interfaces.",
+    whatWeDo: "What we do",
+    description: "User-centric, visually stunning interfaces.",
     details:
-      "Our designers craft exceptional user experiences for all platforms.",
+      "Our design team crafts exceptional experiences grounded in research. From wireframes to a complete design system, we make products that are beautiful, usable, and on-brand.",
+    features: [
+      "UX research, user flows & wireframing",
+      "High-fidelity UI design in Figma",
+      "Interactive prototypes & usability testing",
+      "Reusable design systems & component libraries",
+    ],
+  },
+  "blockchain-development": {
+    title: "Blockchain Development",
+    whatWeDo: "What we do",
+    description: "Secure and scalable blockchain solutions.",
+    details:
+      "We design and build decentralized applications and Web3 platforms across leading chains, with a relentless focus on security, transparency, and great UX.",
+    features: [
+      "dApp & DeFi platform development",
+      "Token design & tokenomics (ERC-20 / ERC-721)",
+      "Wallet integration & on-chain data",
+      "Multi-chain support (Ethereum, Polygon, Solana)",
+    ],
+  },
+  "smart-contract": {
+    title: "Smart Contracts",
+    whatWeDo: "What we do",
+    description: "Reliable, audited, gas-optimized contracts.",
+    details:
+      "We write and audit smart contracts that automate trustless transactions to the highest standards of security and efficiency, with thorough testing and documentation.",
+    features: [
+      "Solidity development & best practices",
+      "Security audits & vulnerability testing",
+      "Gas optimization for lower fees",
+      "Upgradeable & modular contract patterns",
+    ],
   },
   "digital-marketing": {
-    image: appdevelop,
     title: "Digital Marketing",
-    whatWeDo: "WHAT WE DO",
-    description: "We provide comprehensive digital marketing solutions.",
+    whatWeDo: "What we do",
+    description: "Comprehensive, data-driven growth marketing.",
     details:
-      "Our strategies help businesses grow their online presence effectively.",
+      "We help businesses grow their online presence with strategies rooted in data — turning visibility into traffic, leads, and revenue.",
+    features: [
+      "SEO & content strategy",
+      "Performance & paid social campaigns",
+      "Conversion rate optimization (CRO)",
+      "Analytics, reporting & growth experiments",
+    ],
   },
 };
 
-
-// *************************Service Page teck stack***************************************
+// **************** SERVICE PAGE TECH STACKS ****************
 export const techStacks = {
   "web-development": {
     title: "Web Development",
     stacks: [
-      {
-        title: "Web Development",
-        subtitle: "Frontend Development",
-        description:
-          "We use modern frontend technologies to build responsive and interactive web applications.",
-        techStack: "React, HTML, CSS, JavaScript",
-        image: mobiledevelop,
-      },
-      {
-        title: "Web Development",
-        subtitle: "Backend Development",
-        description:
-          "Our backend solutions are robust, scalable, and secure, built with the latest technologies.",
-        techStack: "Node.js, Express, MongoDB",
-        image: mobiledevelop,
-      },
-      {
-        title: "Web Development",
-        subtitle: "WordPress Development",
-        description:
-          "We create custom WordPress themes and plugins tailored to your business needs.",
-        techStack: "WordPress",
-        image: mobiledevelop,
-      },
+      { title: "Frontend Development", subtitle: "Interfaces that delight", description: "We use modern frontend technologies to build responsive, interactive web applications.", techStack: "React, Next.js, TypeScript" },
+      { title: "Backend Development", subtitle: "Robust & scalable APIs", description: "Secure, scalable backends built with the latest technologies and best practices.", techStack: "Node.js, Express, PostgreSQL" },
+      { title: "CMS & E-commerce", subtitle: "Content you control", description: "Custom themes, plugins, and headless setups tailored to your business needs.", techStack: "WordPress, Shopify, Strapi" },
     ],
   },
-  // Add other services and their tech stacks here
   "app-development": {
     title: "App Development",
     stacks: [
-      {
-        title: "iOS Development",
-        subtitle: "Swift, Objective-C",
-        description:
-          "We build high-performance iOS applications using Swift and Objective-C.",
-        techStack: "Swift, Objective-C",
-        image: mobiledevelop, 
-      },
-      {
-        title: "Android Development",
-        subtitle: "Kotlin, Java",
-        description:
-          "Our Android applications are developed using Kotlin and Java for optimal performance.",
-        techStack: "Kotlin, Java",
-        image: mobiledevelop, 
-      },
-    ],
-  },
-  "blockchain-development": {
-    title: "Blockchain Development",
-    stacks: [
-      {
-        title: "Blockchain Development",
-        subtitle: "Solidity, Ethers.js",
-        description:
-          "We develop secure and scalable blockchain solutions using Solidity and Ethers.js.",
-        techStack: "Solidity, Ethers.js",
-        image: mobiledevelop, 
-      },
-    ],
-  },
-  "smart-contract": {
-    title: "Smart Contract",
-    stacks: [
-      {
-        title: "Smart Contract Development",
-        subtitle: "Solidity, Truffle",
-        description:
-          "We create reliable and efficient smart contracts using Solidity and Truffle.",
-        techStack: "Solidity, Truffle",
-        image: mobiledevelop, 
-      },
+      { title: "iOS Development", subtitle: "Built for Apple", description: "High-performance iOS apps using Swift and the latest Apple frameworks.", techStack: "Swift, SwiftUI" },
+      { title: "Android Development", subtitle: "Built for Android", description: "Polished Android apps developed with Kotlin for optimal performance.", techStack: "Kotlin, Jetpack Compose" },
+      { title: "Cross-Platform", subtitle: "One codebase, every device", description: "Ship to both platforms faster with a shared, maintainable codebase.", techStack: "React Native, Flutter" },
     ],
   },
   "ui-ux-design": {
     title: "UI/UX Design",
     stacks: [
-      {
-        title: "UI/UX Design",
-        subtitle: "Figma, Adobe XD",
-        description:
-          "We design user-centric and visually appealing interfaces using Figma and Adobe XD.",
-        techStack: "Figma, Adobe XD",
-        image: mobiledevelop, 
-      },
+      { title: "Product Design", subtitle: "Research to reality", description: "User-centric, visually appealing interfaces designed end to end.", techStack: "Figma, Adobe XD" },
+      { title: "Prototyping", subtitle: "Test before you build", description: "Interactive prototypes that validate ideas with real users.", techStack: "Figma, Framer" },
+    ],
+  },
+  "blockchain-development": {
+    title: "Blockchain Development",
+    stacks: [
+      { title: "dApp Development", subtitle: "Decentralized by design", description: "Secure, scalable blockchain solutions across leading networks.", techStack: "Solidity, Ethers.js, Hardhat" },
+      { title: "Web3 Integration", subtitle: "Connect to the chain", description: "Wallet connections, on-chain data, and seamless Web3 UX.", techStack: "Wagmi, Web3.js, IPFS" },
+    ],
+  },
+  "smart-contract": {
+    title: "Smart Contracts",
+    stacks: [
+      { title: "Contract Development", subtitle: "Trustless automation", description: "Reliable, efficient smart contracts written and tested with care.", techStack: "Solidity, Foundry" },
+      { title: "Security Audits", subtitle: "Ship with confidence", description: "Thorough audits and testing to keep your contracts safe.", techStack: "Slither, Mythril" },
     ],
   },
   "digital-marketing": {
     title: "Digital Marketing",
     stacks: [
-      {
-        title: "Digital Marketing",
-        subtitle: "Social Media Marketing",
-        description:
-          "We provide comprehensive digital marketing solutions, including social media marketing.",
-        techStack: "Social Media Marketing",
-        image: mobiledevelop, 
-      },
+      { title: "SEO & Content", subtitle: "Get found", description: "Rank higher and attract qualified organic traffic that converts.", techStack: "Ahrefs, GA4, Search Console" },
+      { title: "Paid & Social", subtitle: "Scale what works", description: "Performance campaigns across search and social, optimized for ROI.", techStack: "Meta Ads, Google Ads" },
     ],
-    }
+  },
 };
 
-
+// **************** PROCESS ****************
 export const processSteps = [
-  {
-    icon: FaClipboardList,
-    title: "Planning",
-    content: "Details about planning phase",
-  },
-  {
-    icon: FaPencilRuler,
-    title: "Designing",
-    content: "Details about designing phase",
-  },
-  {
-    icon: FaBullseye,
-    title: "Defining",
-    content: "Details about defining phase",
-  },
-  {
-    icon: FaHammer,
-    title: "Building",
-    content: "Details about building phase",
-  },
-  {
-    icon: FaCheckCircle,
-    title: "Testing",
-    content: "Details about testing phase",
-  },
-  {
-    icon: FaRocket,
-    title: "Deployment",
-    content: "Details about deployment phase",
-  },
-  {
-    icon: FaTools,
-    title: "Maintenance",
-    content: "Details about maintenance phase",
-  },
+  { icon: FaClipboardList, title: "Discovery", content: "We dig into your goals, users, and market to define a clear, focused scope." },
+  { icon: FaPencilRuler, title: "Design", content: "Wireframes and high-fidelity UI bring your product to life before a line of code." },
+  { icon: FaBullseye, title: "Planning", content: "We map architecture, milestones, and sprints so everyone knows the path ahead." },
+  { icon: FaHammer, title: "Build", content: "Agile development in two-week sprints with regular demos and full transparency." },
+  { icon: FaCheckCircle, title: "Testing", content: "Rigorous QA and automated tests ensure a stable, secure, polished release." },
+  { icon: FaRocket, title: "Launch", content: "We deploy with confidence and monitor closely for a smooth go-live." },
+  { icon: FaTools, title: "Support", content: "Post-launch maintenance and iteration keep your product ahead over time." },
 ];

@@ -5,10 +5,7 @@ export {default as OurProjects} from "./HomePage Components/OurProjects";
 export {default as WhyChooseUs} from "./HomePage Components/WhyChooseUs";
 export {default as ClientsReviews} from "./HomePage Components/ClientsReviews";
 export {default as Partners} from "./HomePage Components/Partners";
+export {default as CompanyStats} from "./HomePage Components/CompanyStats";
+export {default as Process} from "./HomePage Components/Process";
 export {default as AboutUsHero} from "./AboutUs Components/AboutUsHero";
 export {default as MissionVision} from "./AboutUs Components/MissionVision";
-
-
-
-
-

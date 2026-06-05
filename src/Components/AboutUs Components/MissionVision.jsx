@@ -1,189 +1,58 @@
-import { Box, Flex, Image } from "@chakra-ui/react";
 import React from "react";
-import { CustomText } from "../../utils/Texts";
-import { Mission, Vision } from "../../assests";
+import { SimpleGrid, Heading, Text, Flex, Icon } from "@chakra-ui/react";
+import { FiTarget, FiEye } from "react-icons/fi";
+import { Section, SectionHeading, GlassCard, Reveal } from "../common";
+
+const items = [
+  {
+    icon: FiTarget,
+    title: "Our Mission",
+    text: "To help enterprises accelerate the adoption of new technologies, untangle the complexity that comes with digital evolution, and orchestrate ongoing innovation — so our clients can focus on what they do best.",
+  },
+  {
+    icon: FiEye,
+    title: "Our Vision",
+    text: "To revolutionize the tech industry by delivering innovative solutions that empower businesses to achieve digital excellence and sustainable growth, positioning Futurise as a trusted partner for enterprises worldwide.",
+  },
+];
 
 const MissionVision = () => {
   return (
-    <Box mt={"5rem"} p={{ base: "2rem", md: "5rem" }}>
-      <Flex
-        flexDir={{ base: "column", sm: "column", md: "column", lg: "row" }}
-        alignItems={{
-          base: "center",
-          sm: "center",
-          md: "center",
-          lg: "flex-start",
-        }}
-        justifyContent={"space-between"}
-      >
-        <Box
-          w={{
-            base: "fit-content",
-            sm: "fit-content",
-            md: "fit-content",
-            lg: "40%",
-          }}
-          textAlign={{
-            base: "center",
-            sm: "center",
-            md: "center",
-            lg: "start",
-          }}
-        >
-          <CustomText
-            display={{
-              base: "inline",
-              sm: "inline",
-              md: "inline",
-              lg: "block",
-            }}
-            variant="callout7"
-          >
-            Our Mission
-          </CustomText>
-          <CustomText
-            display={{
-              base: "inline",
-              sm: "inline",
-              md: "inline",
-              lg: "block",
-            }}
-            variant="callout7"
-          >
-            & Vision
-          </CustomText>
-          <Box
-            m={{ base: "auto", sm: "auto", sm: "auto", md: "auto", lg: "0" }}
-            h={1}
-            w={{ base: "100%", sm: "100%", md: "100%", lg: "200px" }}
-            bg={"#07ABE8"}
-          ></Box>
-          <Box
-            m={{ base: "auto", sm: "auto", sm: "auto", md: "auto", lg: "0" }}
-            h={1}
-            w={{ base: "100%", sm: "100%", md: "100%", lg: "200px" }}
-            bg={"black"}
-          ></Box>
-          <Box
-            m={{ base: "auto", sm: "auto", sm: "auto", md: "auto", lg: "0px" }}
-            h={1}
-            w={{ base: "100%", sm: "100%", md: "100%", lg: "200px" }}
-            bg={"linear-gradient(90deg, #015371 0%, #8ADEFE 100%)"}
-          ></Box>
-        </Box>
-        <Flex
-          direction={{ base: "column", md: "row" }}
-          alignItems="center"
-          mt={{ base: "2rem", sm: "2rem", md: "2rem", lg: "0px" }}
-          mb={{ base: "2rem", md: "4rem" }}
-          bg="rgba(255, 255, 255, 0.19)"
-          border={"1px solid #FFFFFF6E"}
-        boxShadow={"#068bbb -5px 5px"}
-
-          borderRadius={{ base: "15px", sm: "15px", md: "15px", lg: "15px" }}
-          borderLeftRadius={{
-            base: "0px",
-            sm: "0px",
-            md: "100px",
-            lg: "100px",
-          }}
-          w={{ base: "80%", sm: "80%", md: "100%", lg: "70%" }}
-          p={{ base: "1rem", sm: "1rem", md: "0rem", lg: "0rem" }}
-          pr={{ base: "1rem", sm: "1rem", md: "2rem", lg: "2rem" }}
-        >
-          <Image
-            src={Mission}
-            borderRadius={{ base: "none", sm: "none", md: "full", lg: "full" }}
-            boxSize={{ base: "200px", sm: "400px", md: "200px" }}
-            alt="Mission"
-            mr={{ base: 0, sm: 0, md: "2rem" }}
-            mb={{ base: "1rem", md: 0 }}
-          />
-          <Box flex="1">
-            <CustomText
-              textAlign={{
-                base: "center",
-                sm: "center",
-                md: "start",
-                lg: "start",
-              }}
-              variant="heading1"
-            >
-              Mission
-            </CustomText>
-            <CustomText
-              textAlign={{
-                base: "center",
-                sm: "center",
-                md: "start",
-                lg: "start",
-              }}
-              variant="subheading"
-            >
-              Our mission is to help enterprises accelerate adoption of new
-              technologies, untangle complex issues that always emerge during
-              digital evolution, and orchestrate ongoing innovation
-            </CustomText>
-          </Box>
-        </Flex>
-      </Flex>
-      <Flex
-        direction={{ base: "column-reverse", md: "row" }}
-        alignItems="center"
-        m={{ base: "auto", sm: "auto", md: "0", lg: "0px" }}
-        mt={{ base: "2rem", sm: "2rem", md: "2rem", lg: "0px" }}
-        mb={{ base: "2rem", md: "4rem" }}
-        bg="rgba(255, 255, 255, 0.19)"
-        border={"1px solid #FFFFFF6E"}
-        boxShadow={"#068bbb -5px 5px"}
-        borderRadius={{ base: "15px", sm: "15px", md: "15px", lg: "15px" }}
-        borderRightRadius={{
-          base: "0px",
-          sm: "0px",
-          md: "100px",
-          lg: "100px",
-        }}
-        w={{ base: "80%", sm: "80%", md: "100%", lg: "70%" }}
-        p={{ base: "1rem", sm: "1rem", md: "0rem", lg: "0rem" }}
-        pl={{ base: "1rem", sm: "1rem", md: "2rem", lg: "2rem" }}
-      >
-        <Box textAlign={"end"} flex="1">
-          <CustomText
-            textAlign={{
-              base: "center",
-              sm: "center",
-              md: "end",
-              lg: "end",
-            }}
-            variant="heading1"
-          >
-            Vision
-          </CustomText>
-          <CustomText
-            textAlign={{
-              base: "center",
-              sm: "center",
-              md: "end",
-              lg: "end",
-            }}
-            variant="subheading"
-          >
-            Our vision is to revolutionize the tech industry by providing
-            innovative solutions that empower businesses to achieve digital
-            excellence and drive sustainable growth, positioning ourselves as a
-            trusted partner for enterprises worldwide.
-          </CustomText>
-        </Box>
-        <Image
-          src={Vision}
-          borderRadius={{ base: "none", sm: "none", md: "full", lg: "full" }}
-          boxSize={{ base: "200px", sm: "400px", md: "200px" }}
-          alt="Mission"
-          ml={{ base: 0, sm: 0, md: "2rem" }}
-          mb={{ base: "1rem", md: 0 }}
-        />
-      </Flex>
-    </Box>
+    <Section>
+      <SectionHeading
+        eyebrow="Purpose"
+        title="Mission &"
+        highlight="Vision"
+        subtitle="What drives us forward and where we’re headed."
+        mb={{ base: 10, md: 14 }}
+      />
+      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
+        {items.map((it, i) => (
+          <Reveal key={it.title} delay={i * 0.1}>
+            <GlassCard h="full" p={{ base: 7, md: 9 }}>
+              <Flex
+                w="60px"
+                h="60px"
+                borderRadius="16px"
+                align="center"
+                justify="center"
+                bgGradient="linear(135deg, brand.500, violet.500)"
+                mb={6}
+                boxShadow="0 12px 30px -12px rgba(79,123,255,0.7)"
+              >
+                <Icon as={it.icon} boxSize={7} color="white" />
+              </Flex>
+              <Heading as="h3" fontSize={{ base: "22px", md: "26px" }} mb={3}>
+                {it.title}
+              </Heading>
+              <Text color="text.muted" fontSize={{ base: "md", md: "lg" }} lineHeight={1.75}>
+                {it.text}
+              </Text>
+            </GlassCard>
+          </Reveal>
+        ))}
+      </SimpleGrid>
+    </Section>
   );
 };
 

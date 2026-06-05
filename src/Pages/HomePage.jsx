@@ -1,53 +1,45 @@
 import React, { useEffect, useState } from "react";
+import { Box } from "@chakra-ui/react";
 import {
   Aboutus,
   ClientsReviews,
+  CompanyStats,
   HeroSection,
   OurProjects,
   OurServices,
   Partners,
+  Process,
   WhyChooseUs,
 } from "../Components";
 import Faqs from "../Components/HomePage Components/Faqs";
-import { Box } from "@chakra-ui/react";
+import { CTASection } from "../Components/common";
 import LoadingIndicator from "../Components/LoadingComponent/LoadingIndicator";
 
 const HomePage = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(() => !sessionStorage.getItem("hasVisited"));
 
   useEffect(() => {
-      const hasVisited = sessionStorage.getItem('hasVisited');
-
-      if (!hasVisited) {
-          sessionStorage.setItem('hasVisited', 'true');
-
-          // Simulate a network request
-          const timer = setTimeout(() => {
-              setIsLoading(false);
-          }, 2000); // Adjust the timeout as needed
-
-          return () => clearTimeout(timer);
-      } else {
-          setIsLoading(false);
-      }
-  }, []);
-  useEffect(() => {
-    window.scroll(0, 0);
-  }, []);
-
+    if (isLoading) {
+      sessionStorage.setItem("hasVisited", "true");
+      const timer = setTimeout(() => setIsLoading(false), 1400);
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading]);
 
   return (
     <Box>
-      
       {isLoading && <LoadingIndicator />}
       <HeroSection />
+      <Partners />
+      <CompanyStats />
       <Aboutus />
       <OurServices />
-      <OurProjects />
       <WhyChooseUs />
+      <Process />
+      <OurProjects />
       <ClientsReviews />
-      <Partners />
       <Faqs />
+      <CTASection />
     </Box>
   );
 };

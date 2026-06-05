@@ -1,217 +1,68 @@
-import React, { useEffect, useState, useRef } from "react";
-import emailjs from '@emailjs/browser';
-import {
-  Box,
-  Flex,
-  Input,
-  Textarea,
-  IconButton,
-  VStack,
-  HStack,
-  useBreakpointValue,
-  SlideFade,
-  useToast,
-} from "@chakra-ui/react";
-import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
-import { CustomText } from ".././utils/Texts";
-import { CustomButton } from ".././utils/Buttons";
-import ClientTestimonials from "../Components/ContactCusCpmponents/ClientTestimonials ";
+import React from "react";
+import { Box, Container, Flex, Heading, Text, VStack, HStack, Icon } from "@chakra-ui/react";
+import { FiMail, FiPhone, FiMapPin, FiClock } from "react-icons/fi";
+import { Reveal, Eyebrow, ContactForm } from "../Components/common";
 import ServicesWorldwide from "../Components/ContactCusCpmponents/ServicesWorldwide ";
-import { contactUsBanner } from "../assests";
+import ClientsReviews from "../Components/HomePage Components/ClientsReviews";
+
+const contactInfo = [
+  { icon: FiMail, label: "Email us", value: "support@futurisetechnologies.com" },
+  { icon: FiPhone, label: "Call us", value: "+1 (123) 456-7890" },
+  { icon: FiMapPin, label: "Location", value: "Serving clients worldwide" },
+  { icon: FiClock, label: "Working hours", value: "Mon–Fri, 9:00 AM – 6:00 PM" },
+];
 
 const ContactUs = () => {
-  const isMobile = useBreakpointValue({ base: true, md: false });
-  const form = useRef();
-  const toast = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  useEffect(() => {
-    window.scroll(0, 0);
-  }, []);
-
-  const sendEmail = (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    emailjs
-      .sendForm(
-        'service_aklnuiw',      // Replace with your Service ID
-        'template_gk2kprc',     // Replace with your Template ID
-        form.current,
-        'FntxJE6K20dcaUpvs'       // Replace with your Public Key
-      )
-      .then(
-        (result) => {
-          console.log('SUCCESS!', result.text);
-          toast({
-            title: "Message sent successfully!",
-            description: "We'll contact you within a couple of hours.",
-            status: "success",
-            duration: 5000,
-            isClosable: true,
-            position: "bottom",
-          });
-          form.current.reset();
-          setIsSubmitting(false);
-        },
-        (error) => {
-          console.log('FAILED...', error.text);
-          toast({
-            title: "Failed to send message.",
-            description: "Please try again later.",
-            status: "error",
-            duration: 5000,
-            isClosable: true,
-            position: "bottom",
-          });
-          setIsSubmitting(false);
-        }
-      );
-  };
   return (
-    <Box pt={"5rem"} m="auto">
-      <Box
-        backgroundImage={`url(${contactUsBanner})`}
-        bgRepeat={"no-repeat"}
-        backgroundSize={"cover"}
-        opacity={1}
-        position={"relative"}
-        overflow={"hidden"}
-      >
-        <Box
-          position="absolute"
-          top={0}
-          left={0}
-          h="1000px"
-          w="100%"
-          bg="black"
-          zIndex={0}
-          opacity={0.7}
-        />
-        <Flex
-          w={"90%"}
-          m={"auto"}
-          direction={{ base: "column-reverse", md: "row" }}
-          justifyContent="space-between"
-          alignItems="start"
-          zIndex={1000}
-        >
-          <Box
-            textAlign={isMobile ? "center" : "left"}
-            mt={4}
-            mb={isMobile ? 8 : 0}
-            zIndex={1000}
-            w={isMobile ? "100%" : "40%"}
-          >
-            <SlideFade in offsetY={20}>
-              <CustomText variant="callout5">
-                Tell us about your Project
-              </CustomText>
-              <CustomText variant="subheading4" mt={4} color={"#59C6EE"}>
-                We’ll contact you within a couple of hours to schedule a meeting
-                to discuss your goals.
-              </CustomText>
-              <HStack
-                mt={8}
-                spacing={4}
-                justifyContent={isMobile ? "center" : "flex-start"}
-              >
-                <IconButton
-                  icon={<FaPhone />}
-                  aria-label="Phone"
-                  variant="outline"
-                  isRound
-                  size="lg"
-                  colorScheme="blue"
-                  _hover={{ bg: "blue.500", color: "white" }}
-                />
-                <IconButton
-                  icon={<FaEnvelope />}
-                  aria-label="Email"
-                  variant="outline"
-                  isRound
-                  size="lg"
-                  colorScheme="blue"
-                  _hover={{ bg: "blue.500", color: "white" }}
-                />
-                <IconButton
-                  icon={<FaMapMarkerAlt />}
-                  aria-label="Location"
-                  variant="outline"
-                  isRound
-                  size="lg"
-                  colorScheme="blue"
-                  _hover={{ bg: "blue.500", color: "white" }}
-                />
-              </HStack>
-            </SlideFade>
-          </Box>
-          <Box
-            zIndex={1000}
-            w={isMobile ? "100%" : "55%"}
-            position={"relative"}
-            overflow={"hidden"}
-          >
-            <SlideFade in offsetY={20}>
-              <Box overflow={"hidden"} borderRadius="md" boxShadow="xl">
-                <Box
-                  position="absolute"
-                  top="0"
-                  left="50%"
-                  transform="translateX(-50%)"
-                  width="100%"
-                  height="100%"
-                  bg="radial-gradient(50% 50% at 50% 50%, rgba(38, 145, 223, 0.40) 6.24%, rgba(38, 145, 223, 0) 100%)"
-                ></Box>
-                <form className="form"  ref={form} onSubmit={sendEmail}>
-                  <VStack spacing={4} align="stretch">
-                    <Flex
-                      flexDir={{ base: "column", md: "row" }}
-                      alignItems={"center"}
-                      justifyContent={"center"}
-                      gap={2}
-                    >
-                      <Input  name="user_name" placeholder="Name" size="lg" variant="outline" required />
-                      <Input
-                        name="company"
-                        placeholder="Company"
-                        size="lg"
-                        variant="outline"
-                      />
-                    </Flex>
-                    <Input name="user_email" placeholder="Email" size="lg" variant="outline"  required/>
-                    <Input
-                    name="phone"
-                      placeholder="Phone Number"
-                      size="lg"
-                      variant="outline"
-                    />
-                    <Textarea
-                    name="message"
-                      placeholder="About Your Project"
-                      size="lg"
-                      variant="outline"
-                      required
-                    />
-                    <CustomButton
-                      px={"5rem"}
-                      text={isSubmitting ? "Sending..." : "Send Message"}
-                      variant="primary"
-                      size="lg"
-                      m={isMobile ? "auto" : "none"}
-                      type="submit"
-                      isDisabled={isSubmitting}
-                    />
-                  </VStack>
-                </form>
-              </Box>
-            </SlideFade>
-          </Box>
-        </Flex>
+    <Box>
+      <Box position="relative" overflow="hidden" pt={{ base: 12, md: 20 }} pb={{ base: 12, md: 16 }}>
+        <Box position="absolute" top="-15%" left="-5%" w="500px" h="500px" bg="rgba(79,123,255,0.18)" filter="blur(120px)" rounded="full" pointerEvents="none" />
+        <Box position="absolute" bottom="-20%" right="-8%" w="420px" h="420px" bg="rgba(157,92,255,0.16)" filter="blur(120px)" rounded="full" pointerEvents="none" />
+
+        <Container maxW="1200px" px={{ base: 5, md: 8 }} position="relative">
+          <Flex direction={{ base: "column", lg: "row" }} gap={{ base: 12, lg: 16 }} align="start">
+            {/* Left: copy + info */}
+            <VStack flex="1" align="start" spacing={6}>
+              <Reveal><Eyebrow>Contact us</Eyebrow></Reveal>
+              <Reveal delay={0.05}>
+                <Heading as="h1" fontSize={{ base: "36px", md: "50px" }} lineHeight={1.1} letterSpacing="-0.02em">
+                  Tell us about your{" "}
+                  <Box as="span" className="gradient-text">project.</Box>
+                </Heading>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <Text color="text.muted" fontSize={{ base: "md", md: "lg" }} maxW="480px" lineHeight={1.7}>
+                  Share a few details and we’ll get back to you within a couple of hours to schedule a call and discuss your goals.
+                </Text>
+              </Reveal>
+
+              <Reveal delay={0.15} w="full">
+                <VStack align="stretch" spacing={3} w="full" maxW="460px" pt={2}>
+                  {contactInfo.map((c) => (
+                    <HStack key={c.label} spacing={4} p={4} borderRadius="14px" border="1px solid" borderColor="border.subtle" bg="bg.surface">
+                      <Flex w="44px" h="44px" borderRadius="12px" align="center" justify="center" bgGradient="linear(135deg, rgba(79,123,255,0.2), rgba(157,92,255,0.2))" border="1px solid" borderColor="rgba(111,147,255,0.25)" flexShrink={0}>
+                        <Icon as={c.icon} color="accent.solid" boxSize={5} />
+                      </Flex>
+                      <Box>
+                        <Text fontSize="xs" color="text.faint" textTransform="uppercase" letterSpacing="0.08em">{c.label}</Text>
+                        <Text fontWeight={600} fontSize={{ base: "14px", md: "15px" }}>{c.value}</Text>
+                      </Box>
+                    </HStack>
+                  ))}
+                </VStack>
+              </Reveal>
+            </VStack>
+
+            {/* Right: form */}
+            <Reveal from="left" flex="1" w="full" maxW={{ lg: "560px" }}>
+              <ContactForm />
+            </Reveal>
+          </Flex>
+        </Container>
       </Box>
 
-      <ClientTestimonials />
       <ServicesWorldwide />
+      <ClientsReviews />
     </Box>
   );
 };

@@ -1,97 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-
-@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap');
-#app{
-    background-color: #000000;
-    color: rgba(255, 255, 255, 1);
-    font-family: "Roboto";
-    
+#app {
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
-/* Custom Swiper Navigation Buttons */
+
+/* Reusable utility classes */
+.gradient-text {
+  background: linear-gradient(135deg, #6f93ff 0%, #b07dff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Swiper navigation theming */
 .swiper-button-next,
 .swiper-button-prev {
-  background-color: rgba(111, 109, 109, 0.5);
-  border-radius: 50%; 
-  width: 40px; 
-  height: 40px; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  color: #6f93ff !important;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(6px);
+  border-radius: 50%;
+  width: 42px !important;
+  height: 42px !important;
 }
-
 .swiper-button-next::after,
 .swiper-button-prev::after {
-  font-size: 12px; 
-  color: white;
+  font-size: 16px !important;
+  font-weight: 700;
+}
+.swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.4);
+}
+.swiper-pagination-bullet-active {
+  background: #6f93ff;
 }
 
-
-.box {
-  position: relative;
-  /* overflow: hidden; */
-  justify-content: center;
-  align-items: center;
-}
-
-.box:hover .img1 {
-
-
-  transform: translate(-20%, 50%);
-  transition: transform 0.3s ease;
-}
-
-.box:hover .img2 {
-  transform: translate(-50%,40%);
-  transition: transform 0.3s ease;
-}
-
-.box:hover .img3 {
-  transform: translate(-70%, -30%);
-  transition: transform 0.3s ease;
-}
-
-
-body::-webkit-scrollbar {
-  width: 10px;
-}
-
-body::-webkit-scrollbar-track {
-  background: #1d1c1c;
-}
-
-body::-webkit-scrollbar-thumb {
-  background: #07ABE8 ;
-  border-radius: 3px;
-}
-
-
-
-
-/* styles.css */
-
+/* Contact form (used by Contact + Portfolio) */
 .form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 10px;
-  /* max-width: 350px; */
-  padding: 20px;
-  border-radius: 20px;
+  gap: 14px;
+  padding: 28px;
+  border-radius: 22px;
   position: relative;
-  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 1;
+  background: rgba(10, 17, 36, 0.72);
+  backdrop-filter: blur(14px);
   color: #fff;
-  border: 1px solid #333;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.7);
 }
-
 .form input,
 .form textarea {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.05);
   color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
 }
-
+.form input:focus,
+.form textarea:focus {
+  border-color: #6f93ff;
+  box-shadow: 0 0 0 1px #6f93ff;
+  outline: none;
+}
 .form input::placeholder,
 .form textarea::placeholder {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* Leaflet tiles look better muted on dark canvas */
+.map-container .leaflet-tile {
+  filter: grayscale(0.4) brightness(0.85) contrast(1.05);
+}
+.leaflet-container {
+  background: #0a1124 !important;
+  border-radius: 20px;
 }

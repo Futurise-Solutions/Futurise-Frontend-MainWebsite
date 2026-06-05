@@ -1,91 +1,72 @@
-import { Navigation, Autoplay } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { CustomText } from "../../utils/Texts";
-import { noteIcon } from "../../assests";
-import { CustomButton } from "../../utils/Buttons";
-import { projects } from "../../utils/Constant";
-
-
+import React from "react";
+import { Box, SimpleGrid, Image, Text, Heading, HStack, Tag, Flex, Button } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+import { FiArrowRight } from "react-icons/fi";
+import { Projects } from "../../utils/Constant";
+import { Section, SectionHeading, GlassCard, Reveal } from "../common";
 
 const OurProjects = () => {
+  const navigate = useNavigate();
   return (
-    <Box position={"relative"} width={{ base: "95%", md: "90%" }} m={"auto"} textAlign={"center"} py={{ base: 4, md: 8 }}>
-      <CustomText
-        variant="heading"
-        children={"Our Projects"}
-        styles={{ zIndex: 1000 }}
-      />
-      <Box
-        position="absolute"
-        bottom={{ base: "-2rem", md: "-4rem" }}
-        left="50%"
-        transform="translateX(-50%)"
-        width={{ base: "100%", md: "800px" }}
-        height={{ base: "320px", md: "350px", lg: "400px" }}
-        // borderRadius="50%"
-        bg="radial-gradient(50% 50% at 50% 50%, rgba(38, 145, 223, 0.4) 6.24%, rgba(38, 145, 223, 0) 100%)"
-      ></Box>
-      <Swiper
-        modules={[Autoplay, Navigation]}
-        spaceBetween={50}
-        slidesPerView={1}
-        navigation
-        loop={true}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
-      >
-        {projects.map((project, index) => (
-          <SwiperSlide key={index}>
-            <Flex
-              direction={{ base: "column-reverse", md: "row" }}
-              justifyContent={"space-around"}
-              alignItems="center"
-              textAlign="center"
-              bg="rgba(255, 255, 255, 0.19)"
-              p={{ base: 4, md: 6 }}
-              border={"1px solid #FFFFFF6E"}
-              borderRadius="md"
-              shadow="md"
-              m={4}
-            >
-              <Flex
-                gap={"1rem"}
-                w={{ base: "100%", md: "40%" }}
-                align={{ base: "center", md: "flex-start" }}
-                flexDir={"column"}
-              >
-                <CustomText
-                  styles={{ color: "#07ABE8" }}
-                  variant="callout"
-                  children={project?.name}
+    <Section>
+      <Flex direction={{ base: "column", md: "row" }} justify="space-between" align={{ md: "end" }} gap={6} mb={{ base: 10, md: 14 }}>
+        <SectionHeading
+          align="left"
+          eyebrow="Featured work"
+          title="Projects we’re"
+          highlight="proud of"
+          subtitle="A selection of products we’ve designed and engineered for clients across industries and continents."
+          mx={0}
+        />
+        <Reveal from="left" display={{ base: "none", md: "block" }} flexShrink={0}>
+          <Button variant="outlineGlow" rightIcon={<FiArrowRight />} onClick={() => navigate("/portfolio")}>
+            View all work
+          </Button>
+        </Reveal>
+      </Flex>
+
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
+        {Projects.map((project, index) => (
+          <Reveal key={project.Heading} delay={(index % 3) * 0.08}>
+            <GlassCard h="full" overflow="hidden" role="group" cursor="pointer" onClick={() => navigate("/portfolio")}>
+              <Box overflow="hidden" h="200px">
+                <Image
+                  src={project.img[0]}
+                  alt={project.Heading}
+                  w="full"
+                  h="full"
+                  objectFit="cover"
+                  transition="transform .5s ease"
+                  _groupHover={{ transform: "scale(1.06)" }}
                 />
-                <CustomText
-                  variant="subheading"
-                  styles={{ textAlign: "start" }}
-                >
-                  {project.description}
-                </CustomText>
-                <CustomButton text="Know More" variant="primary" />
-              </Flex>
-              <Image
-                borderRadius="10px"
-                width={{ base: "70%", sm:"50%", md: "400px" }}
-                height={{ base: "auto", md: "275px" }}
-                src={project.avatar}
-                alt={project.name}
-                mb={4}
-                zIndex={100000}
-              />
-            </Flex>
-          </SwiperSlide>
+              </Box>
+              <Box p={6}>
+                <HStack spacing={2} mb={3} flexWrap="wrap">
+                  <Tag size="sm" bg="rgba(111,147,255,0.14)" color="accent.solid" borderRadius="full" px={3}>
+                    {project.projectType}
+                  </Tag>
+                  <Tag size="sm" bg="rgba(255,255,255,0.06)" color="text.muted" borderRadius="full" px={3}>
+                    {project.location}
+                  </Tag>
+                </HStack>
+                <Heading as="h3" fontSize="lg" fontWeight={600} mb={2} noOfLines={2}>
+                  {project.Heading}
+                </Heading>
+                <Text color="text.muted" fontSize="14px" lineHeight={1.65} noOfLines={3}>
+                  {project.aboutProject}
+                </Text>
+              </Box>
+            </GlassCard>
+          </Reveal>
         ))}
-      </Swiper>
-    </Box>
+      </SimpleGrid>
+
+      <Flex justify="center" mt={10} display={{ base: "flex", md: "none" }}>
+        <Button variant="outlineGlow" rightIcon={<FiArrowRight />} onClick={() => navigate("/portfolio")}>
+          View all work
+        </Button>
+      </Flex>
+    </Section>
   );
 };
 
