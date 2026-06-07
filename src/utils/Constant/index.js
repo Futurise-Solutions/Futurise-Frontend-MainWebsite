@@ -3,6 +3,8 @@ import {
   DigiMarketingNavbarIcon, DigitalMarketingHover, SmartContractHover, SmartContractNavbarIcon,
   UIUXHover, UIUXNavbarIcon, WebDevNavbarIcon, clientIconHover, expertiseiconHover,
   postIconHover, qualityIconHover, timeIconHover, webDevHover,
+  propertyDashboard1, propertyDashboard2, realState1, realState2, realState3,
+  marty1, marty2, marty3, crypto1, crypto2, jewel1, jewel2, jewel3, hotel1, hotel2, hotel3,
 } from "../../assests";
 import {
   FaClipboardList, FaPencilRuler, FaBullseye, FaHammer, FaCheckCircle, FaRocket, FaTools,
@@ -90,49 +92,95 @@ export const testimonials = [
   },
 ];
 
-// **************** PORTFOLIO CASE STUDIES (sample) ****************
+// **************** PORTFOLIO PROJECTS ****************
+// Real client work. `featured: true` marks the projects highlighted on the home page.
+// Each image carries descriptive alt text (with market keywords) for SEO + accessibility.
 export const Projects = [
   {
+    featured: true,
     img: [
-      "https://www.cleveroad.com/images/portfolio/6b550ac284ccdf6a8d5242fd1cf6f87d62ef805a1b983adbf4fb060b86fbf413-2x.webp",
-      "https://www.cleveroad.com/images/portfolio/0c7fd31b0bbe5f0e3736693f4a6fff62758509f7bd7d4f3f0b90eb920ae31654-2x.webp",
-      "https://www.cleveroad.com/images/portfolio/ac9d3b16080195cf06da35f4bf0384c500362956a7e09186c3f3f5c717bf083a-2x.webp",
+      { src: propertyDashboard1, alt: "HOMIES property management dashboard showing income, expenses, and unit analytics for a real-estate portfolio in the USA and India" },
+      { src: propertyDashboard2, alt: "HOMIES dashboard detail view with property performance charts and recent transactions" },
     ],
-    location: "Denmark",
-    projectType: "Media & Entertainment",
-    Heading: "Cross-device Video-on-Demand Platform",
+    location: "USA & India",
+    projectType: "PropTech · SaaS Dashboard",
+    Heading: "HOMIES — Property Management & Analytics Dashboard",
     aboutProject:
-      "A multi-platform video streaming service for renting and purchasing movies, serving 500,000+ subscribers across the Nordic countries with seamless cross-device playback.",
-    clentName: "Nordic Stream A/S",
-    tags: ["Web Development", "App Development", "UI/UX Design"],
+      "HOMIES is a property management and analytics dashboard that gives real-estate teams a single view of income, expenses, occupancy, and unit performance. We designed and engineered the interface in React, Vite, and Chakra UI, with interactive charts that turn raw portfolio data into fast, confident decisions. Built for property managers and agencies across India and the USA, it handles thousands of listings while staying fast and fully responsive — from large back-office monitors down to a phone on a site visit.",
+    clentName: "HOMIES PropTech",
+    tags: ["Web Development", "UI/UX Design", "Data Visualization"],
+  },
+  {
+    featured: true,
+    img: [
+      { src: marty1, alt: "Marty-QR AI review platform landing page with a 'Review Simplified' hero" },
+      { src: marty2, alt: "Marty-QR features overview for collecting customer reviews via QR codes" },
+      { src: marty3, alt: "Marty-QR client portal for managing online reputation and feedback" },
+    ],
+    location: "USA & India",
+    projectType: "SaaS · AI Review Platform",
+    Heading: "Marty-QR — AI-Powered Review Management",
+    aboutProject:
+      "Marty-QR is an AI-powered review and customer-feedback platform that helps local businesses collect, manage, and grow their online reputation through simple QR touchpoints and seamless Google integration. We delivered the marketing site and client portal in React, Vite, and Chakra UI, with a bold, high-contrast brand and smooth animation throughout. Serving service businesses across the USA and India, the product turns in-store moments into five-star reviews and measurable growth — all wrapped in an interface that's fast, accessible, and effortless to use.",
+    clentName: "Marty-QR",
+    tags: ["Web Development", "App Development", "Digital Marketing"],
+  },
+  {
+    featured: true,
+    img: [
+      { src: jewel1, alt: "David Tishbi luxury jewelry storefront hero featuring fine gems and rings" },
+      { src: jewel2, alt: "David Tishbi jewelry collection page with product listings" },
+      { src: jewel3, alt: "David Tishbi watches and bullion category for premium shoppers in the USA and India" },
+    ],
+    location: "USA",
+    projectType: "Luxury E-commerce",
+    Heading: "David Tishbi — Luxury Jewelry E-commerce",
+    aboutProject:
+      "David Tishbi is a luxury jewelry e-commerce experience for a boutique designer brand, spanning fine jewelry, watches, and bullion. We crafted an elegant, image-led storefront in React, Vite, and Chakra UI, with refined typography, appointment booking, and a checkout designed to convert high-intent shoppers. Tailored for premium audiences in the USA and India, the site balances editorial storytelling with fast performance and accessible, mobile-first design — turning first-time visitors into loyal collectors and booked consultations.",
+    clentName: "David Tishbi Jewelry",
+    tags: ["Web Development", "UI/UX Design", "Digital Marketing"],
+  },
+  {
+    featured: true,
+    img: [
+      { src: realState1, alt: "Estate real-estate platform homepage with a property search hero for buyers in India and the USA" },
+      { src: realState2, alt: "Estate property listings page showing homes for sale and rent" },
+      { src: realState3, alt: "Estate agent profiles and featured property details" },
+    ],
+    location: "India & USA",
+    projectType: "Real Estate · Web Platform",
+    Heading: "Estate — Property Search & Listings Platform",
+    aboutProject:
+      "Estate is a conversion-focused real-estate platform where buyers and renters discover their next home. We built a fast, SEO-friendly property search with rich filtering, agent profiles, and featured listings, engineered in React, Vite, and Chakra UI for speed on every device. Designed for growing agencies in India and the USA, the experience pairs a striking hero with clear calls to action that move visitors from browsing to booking a viewing — backed by clean, maintainable code and strong Core Web Vitals.",
+    clentName: "Estate Realty",
+    tags: ["Web Development", "UI/UX Design", "SEO"],
   },
   {
     img: [
-      "https://www.cleveroad.com/images/portfolio/0c7fd31b0bbe5f0e3736693f4a6fff62758509f7bd7d4f3f0b90eb920ae31654-2x.webp",
-      "https://www.cleveroad.com/images/portfolio/6b550ac284ccdf6a8d5242fd1cf6f87d62ef805a1b983adbf4fb060b86fbf413-2x.webp",
-      "https://www.cleveroad.com/images/portfolio/ac9d3b16080195cf06da35f4bf0384c500362956a7e09186c3f3f5c717bf083a-2x.webp",
+      { src: crypto1, alt: "Crypto trading terminal with a live candlestick chart, order book, and buy/sell order form" },
+      { src: crypto2, alt: "Crypto exchange market view with depth chart and perpetuals trading tools" },
     ],
-    location: "UAE",
-    projectType: "FinTech",
-    Heading: "Decentralized Crypto Exchange",
+    location: "USA & India",
+    projectType: "FinTech · Web3",
+    Heading: "Crypto Exchange — Perpetuals Trading Terminal",
     aboutProject:
-      "A secure Web3 trading platform with audited smart contracts, real-time order books, and a non-custodial wallet, processing millions in daily volume.",
-    clentName: "Ledgerly",
+      "A professional crypto trading terminal for spot and perpetuals, featuring real-time candlestick charts, live order books, depth visualization, and a streamlined buy/sell order form. We engineered the high-density, data-heavy interface in React and Vite with Chakra UI, optimized for split-second updates without sacrificing clarity. Built for Web3 traders in the USA and India, the platform balances advanced tooling with an approachable layout — and is backed by audited smart-contract integrations for secure, transparent, non-custodial trading at scale.",
+    clentName: "GDT Exchange",
     tags: ["Blockchain", "Smart Contracts", "Web Development"],
   },
   {
     img: [
-      "https://www.cleveroad.com/images/portfolio/ac9d3b16080195cf06da35f4bf0384c500362956a7e09186c3f3f5c717bf083a-2x.webp",
-      "https://www.cleveroad.com/images/portfolio/6b550ac284ccdf6a8d5242fd1cf6f87d62ef805a1b983adbf4fb060b86fbf413-2x.webp",
-      "https://www.cleveroad.com/images/portfolio/0c7fd31b0bbe5f0e3736693f4a6fff62758509f7bd7d4f3f0b90eb920ae31654-2x.webp",
+      { src: hotel1, alt: "Platinum Peak hotel booking website showcasing luxury rooms" },
+      { src: hotel2, alt: "Platinum Peak suite gallery highlighting amenities and interiors" },
+      { src: hotel3, alt: "Platinum Peak direct reservation booking section" },
     ],
-    location: "USA",
-    projectType: "Health & Fitness",
-    Heading: "AI-Powered Fitness Companion App",
+    location: "India & USA",
+    projectType: "Hospitality · Booking",
+    Heading: "Platinum Peak — Luxury Hotel Booking Experience",
     aboutProject:
-      "A personalized health app with workout tracking, nutrition insights, and adaptive plans — driving a 40% increase in monthly active users after launch.",
-    clentName: "FitFuel",
-    tags: ["App Development", "UI/UX Design", "Digital Marketing"],
+      "Platinum Peak is a hospitality and room-booking website for a luxury hotel brand, designed to showcase suites and drive direct reservations. We built an immersive, image-rich experience in React, Vite, and Chakra UI, with smooth scrolling, clear room galleries, and a frictionless booking call to action. Created for hotels and resorts in India and the USA, the site reduces dependence on third-party platforms by making it effortless for guests to explore rooms and reserve directly — fast, responsive, and beautifully on-brand.",
+    clentName: "Platinum Peak Hotels",
+    tags: ["Web Development", "UI/UX Design", "App Development"],
   },
 ];
 
@@ -207,28 +255,6 @@ export const faqs = [
     question: "How do we get started?",
     answer:
       "Just reach out through our contact page. We'll schedule a free consultation within a couple of hours to understand your vision and recommend the best path forward.",
-  },
-];
-
-// **************** HOME PROJECT HIGHLIGHTS (sample) ****************
-export const projects = [
-  {
-    avatar: "https://i.pinimg.com/564x/a5/7c/e5/a57ce5c64863317503915174fa700cfa.jpg",
-    name: "FitFuel",
-    description:
-      "A comprehensive health and wellness app that helps users track workouts, monitor nutrition, and stay motivated with personalized, adaptive fitness plans.",
-  },
-  {
-    avatar: "https://i.pinimg.com/564x/25/75/f9/2575f95220c4fdb4a15e55c1cac2e3e7.jpg",
-    name: "Souled Store",
-    description:
-      "An e-commerce platform offering pop-culture merchandise with a seamless shopping experience, secure payments, and a conversion-optimized checkout.",
-  },
-  {
-    avatar: "https://i.pinimg.com/564x/c3/89/6d/c3896df1cf6271c1b27f614e0e630bd4.jpg",
-    name: "Ledgerly Exchange",
-    description:
-      "A secure, user-friendly crypto trading platform with advanced tooling and real-time market data to help users make confident, informed decisions.",
   },
 ];
 
@@ -307,14 +333,6 @@ export const coreValues = [
     title: "Innovation",
     description: "We embrace emerging tech responsibly, choosing what genuinely moves your business forward.",
   },
-];
-
-// **************** ABOUT — TEAM (sample) ****************
-export const team = [
-  { name: "Aarav Sharma", role: "Founder & CEO", avatar: "https://i.pravatar.cc/200?img=11" },
-  { name: "Elena Rossi", role: "Head of Design", avatar: "https://i.pravatar.cc/200?img=44" },
-  { name: "Liam O’Brien", role: "Lead Engineer", avatar: "https://i.pravatar.cc/200?img=13" },
-  { name: "Priya Nair", role: "Blockchain Architect", avatar: "https://i.pravatar.cc/200?img=49" },
 ];
 
 // --------- About Us — Technology excellence strengths ---------

@@ -40,8 +40,8 @@ const colors = {
 };
 
 const fonts = {
-  heading: `'Space Grotesk', 'Inter', -apple-system, system-ui, sans-serif`,
-  body: `'Inter', -apple-system, system-ui, sans-serif`,
+  heading: `'Zangezi', 'Aeonik Trial', -apple-system, system-ui, sans-serif`,
+  body: `'Aeonik Trial', -apple-system, system-ui, sans-serif`,
 };
 
 const semanticTokens = {

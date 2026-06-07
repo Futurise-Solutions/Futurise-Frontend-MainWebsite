@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Container, Flex, Heading, Text, VStack, HStack, Icon } from "@chakra-ui/react";
 import { FiMail, FiPhone, FiMapPin, FiClock } from "react-icons/fi";
-import { Reveal, Eyebrow, ContactForm } from "../Components/common";
+import { Reveal, Eyebrow, ContactForm, Seo } from "../Components/common";
 import ServicesWorldwide from "../Components/ContactCusCpmponents/ServicesWorldwide ";
 import ClientsReviews from "../Components/HomePage Components/ClientsReviews";
 
@@ -15,6 +15,11 @@ const contactInfo = [
 const ContactUs = () => {
   return (
     <Box>
+      <Seo
+        title="Contact Us — Start Your Project"
+        description="Tell Futurise Solutions about your project. We reply within hours to schedule a free consultation for web, mobile, and Web3 builds. Serving clients across India, the USA, and worldwide."
+        path="/contact"
+      />
       <Box position="relative" overflow="hidden" pt={{ base: 12, md: 20 }} pb={{ base: 12, md: 16 }}>
         <Box position="absolute" top="-15%" left="-5%" w="500px" h="500px" bg="rgba(79,123,255,0.18)" filter="blur(120px)" rounded="full" pointerEvents="none" />
         <Box position="absolute" bottom="-20%" right="-8%" w="420px" h="420px" bg="rgba(157,92,255,0.16)" filter="blur(120px)" rounded="full" pointerEvents="none" />

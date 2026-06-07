@@ -1,11 +1,12 @@
 import React from "react";
 import {
-  Box, Container, Flex, Heading, Text, Button, HStack, VStack, Stack, Avatar, AvatarGroup, Icon, SimpleGrid,
+  Box, Container, Flex, Heading, Text, Button, HStack, VStack, Stack, Avatar, AvatarGroup, Icon, Image,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { FiArrowRight, FiStar, FiCheck } from "react-icons/fi";
+import { FiArrowRight, FiStar } from "react-icons/fi";
 import { FaReact, FaApple, FaAndroid, FaEthereum, FaFigma } from "react-icons/fa6";
+import { propertyDashboard1 } from "../../assests";
 
 const MotionBox = motion(Box);
 
@@ -127,7 +128,7 @@ const HeroSection = () => {
                 p={{ base: 6, md: 8 }}
                 boxShadow="0 40px 80px -30px rgba(0,0,0,0.7)"
               >
-                <HStack justify="space-between" mb={6}>
+                <HStack justify="space-between" mb={5}>
                   <HStack spacing={2}>
                     <Box w="11px" h="11px" rounded="full" bg="#ff5f57" />
                     <Box w="11px" h="11px" rounded="full" bg="#febc2e" />
@@ -136,28 +137,16 @@ const HeroSection = () => {
                   <Text fontSize="xs" color="text.faint">futurise.studio</Text>
                 </HStack>
 
-                {/* fake metric cards */}
-                <SimpleGrid columns={2} spacing={4} mb={5}>
-                  <Box borderRadius="16px" p={4} bgGradient="linear(135deg, rgba(79,123,255,0.25), rgba(79,123,255,0.05))" border="1px solid" borderColor="rgba(111,147,255,0.25)">
-                    <Text fontSize="xs" color="text.muted">Performance</Text>
-                    <Text fontSize="28px" fontWeight={700} fontFamily="heading">98<Box as="span" fontSize="md">/100</Box></Text>
-                  </Box>
-                  <Box borderRadius="16px" p={4} bgGradient="linear(135deg, rgba(157,92,255,0.25), rgba(157,92,255,0.05))" border="1px solid" borderColor="rgba(157,92,255,0.25)">
-                    <Text fontSize="xs" color="text.muted">Delivered</Text>
-                    <Text fontSize="28px" fontWeight={700} fontFamily="heading">120+</Text>
-                  </Box>
-                </SimpleGrid>
-
-                <VStack align="stretch" spacing={3}>
-                  {["Design system shipped", "Smart contract audited", "App launched to stores"].map((t) => (
-                    <HStack key={t} spacing={3} p={3} borderRadius="12px" bg="rgba(255,255,255,0.03)" border="1px solid" borderColor="border.subtle">
-                      <Flex w="22px" h="22px" rounded="full" bgGradient="linear(135deg, brand.500, violet.500)" align="center" justify="center" flexShrink={0}>
-                        <Icon as={FiCheck} boxSize={3} color="white" />
-                      </Flex>
-                      <Text fontSize="sm">{t}</Text>
-                    </HStack>
-                  ))}
-                </VStack>
+                {/* real product screenshot — HOMIES property dashboard we built */}
+                <Box borderRadius="14px" overflow="hidden" border="1px solid" borderColor="border.subtle" boxShadow="0 20px 50px -24px rgba(0,0,0,0.7)">
+                  <Image
+                    src={propertyDashboard1}
+                    alt="HOMIES property management dashboard built by Futurise Solutions, showing income, expenses, and unit analytics"
+                    w="full"
+                    display="block"
+                    loading="eager"
+                  />
+                </Box>
               </Box>
 
               {/* floating tech pill */}

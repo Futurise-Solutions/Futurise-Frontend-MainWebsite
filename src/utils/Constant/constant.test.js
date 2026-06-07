@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import {
   OurServiceData, services, techStacks, NavbarservicesOptions, navbarOptions,
-  companyStats, faqs, testimonials, processSteps, strengths, coreValues, team, partners,
+  companyStats, faqs, testimonials, processSteps, strengths, coreValues, partners, Projects,
 } from "./index";
 
 describe("services data integrity", () => {
@@ -55,8 +55,25 @@ describe("content quality", () => {
     expect(testimonials.length).toBeGreaterThanOrEqual(3);
     expect(processSteps.length).toBeGreaterThanOrEqual(5);
     expect(coreValues.length).toBeGreaterThanOrEqual(3);
-    expect(team.length).toBeGreaterThanOrEqual(3);
     expect(partners.length).toBeGreaterThan(0);
+  });
+
+  it("every portfolio project has imagery with alt text, copy, and tags", () => {
+    expect(Projects.length).toBeGreaterThanOrEqual(6);
+    Projects.forEach((p) => {
+      expect(p.Heading, "project heading").toBeTruthy();
+      expect(p.aboutProject?.length, `${p.Heading} description length`).toBeGreaterThan(120);
+      expect(p.img?.length, `${p.Heading} images`).toBeGreaterThan(0);
+      p.img.forEach((image) => {
+        expect(image.src, `${p.Heading} image src`).toBeTruthy();
+        expect(image.alt, `${p.Heading} image alt`).toBeTruthy();
+      });
+      expect(p.tags?.length, `${p.Heading} tags`).toBeGreaterThan(0);
+    });
+  });
+
+  it("home page features exactly four highlighted projects", () => {
+    expect(Projects.filter((p) => p.featured).length).toBe(4);
   });
 
   it("company stats each have a numeric value and a label", () => {

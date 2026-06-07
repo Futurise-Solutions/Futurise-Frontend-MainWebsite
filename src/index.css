@@ -1,7 +1,93 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+/* ============================================================
+   Brand typography — Zangezi (display headings) + Aeonik Trial (body)
+   Self-hosted from src/assests/fonts so there's no Google Fonts call.
+   Zangezi ships only Light / SemiLight / Regular cuts (no true bold),
+   so heavier weights are mapped to its Regular cut to avoid faux-bold.
+   ============================================================ */
+
+/* — Zangezi (headings) — */
+@font-face {
+  font-family: 'Zangezi';
+  src: url('./assests/fonts/Zangezi08_Trial-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Zangezi';
+  src: url('./assests/fonts/Zangezi08_Trial-SemiLight.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Zangezi';
+  src: url('./assests/fonts/Zangezi08_Trial-Regular.otf') format('opentype');
+  font-weight: 500 800; /* variable-style range: heavier requests get the Regular cut, no synthetic bold */
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Zangezi';
+  src: url('./assests/fonts/Zangezi08_Trial-LightItalic.otf') format('opentype');
+  font-weight: 300 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Zangezi';
+  src: url('./assests/fonts/Zangezi08_Trial-Italic.otf') format('opentype');
+  font-weight: 500 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* — Aeonik Trial (body / UI) — */
+@font-face {
+  font-family: 'Aeonik Trial';
+  src: url('./assests/fonts/aeoniktrial-light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Aeonik Trial';
+  src: url('./assests/fonts/aeoniktrial-regular.otf') format('opentype');
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Aeonik Trial';
+  src: url('./assests/fonts/aeoniktrial-bold.otf') format('opentype');
+  font-weight: 600 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Aeonik Trial';
+  src: url('./assests/fonts/aeoniktrial-lightitalic.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Aeonik Trial';
+  src: url('./assests/fonts/aeoniktrial-regularitalic.otf') format('opentype');
+  font-weight: 400 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Aeonik Trial';
+  src: url('./assests/fonts/aeoniktrial-bolditalic.otf') format('opentype');
+  font-weight: 600 800;
+  font-style: italic;
+  font-display: swap;
+}
 
 #app {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Aeonik Trial', 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }

@@ -7,13 +7,18 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { FiArrowRight, FiMapPin } from "react-icons/fi";
 import { Projects } from "../utils/Constant";
-import { Section, Reveal, GlassCard, CTASection } from "../Components/common";
+import { Section, Reveal, GlassCard, CTASection, Seo } from "../Components/common";
 import { PageHero } from "../Components/AboutUs Components/AboutUsHero";
 
 const Portfolio = () => {
   const navigate = useNavigate();
   return (
     <Box>
+      <Seo
+        title="Portfolio — Web, App & Web3 Projects"
+        description="Explore Futurise Solutions' portfolio: property dashboards, real-estate platforms, AI review software, crypto trading terminals, luxury e-commerce, and hotel booking sites built with React, Vite, and Chakra UI for clients in India and the USA."
+        path="/portfolio"
+      />
       <PageHero
         eyebrow="Our portfolio"
         title="Crafting innovation with"
@@ -40,7 +45,7 @@ const Portfolio = () => {
                   >
                     {el.img?.map((item, i) => (
                       <SwiperSlide key={i}>
-                        <Image src={item} w="100%" h={{ base: "240px", md: "360px" }} objectFit="cover" alt={el.Heading} />
+                        <Image src={item.src} alt={item.alt} loading="lazy" w="100%" h={{ base: "240px", md: "360px" }} objectFit="cover" objectPosition="top" />
                       </SwiperSlide>
                     ))}
                   </Swiper>

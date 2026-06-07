@@ -7,3 +7,4 @@ export { default as ScrollToTop } from "./ScrollToTop";
 export { default as Logo } from "./Logo";
 export { default as ProcessTimeline } from "./ProcessTimeline";
 export { default as ContactForm } from "./ContactForm";
+export { default as Seo } from "./Seo";

@@ -17,6 +17,19 @@ const PageHero = ({
   const navigate = useNavigate();
   return (
     <Box position="relative" overflow="hidden" pt={{ base: 14, md: 20 }} pb={{ base: 12, md: 16 }}>
+      {/* subtle dot-grid backdrop, faded toward the edges */}
+      <Box
+        position="absolute"
+        inset={0}
+        pointerEvents="none"
+        opacity={0.5}
+        backgroundImage="radial-gradient(rgba(111,147,255,0.16) 1px, transparent 1px)"
+        backgroundSize="22px 22px"
+        sx={{
+          maskImage: "radial-gradient(60% 60% at 50% 35%, #000 0%, transparent 75%)",
+          WebkitMaskImage: "radial-gradient(60% 60% at 50% 35%, #000 0%, transparent 75%)",
+        }}
+      />
       <Box position="absolute" top="-20%" left="50%" transform="translateX(-50%)" w="700px" h="500px" bg="rgba(79,123,255,0.18)" filter="blur(120px)" rounded="full" pointerEvents="none" />
       <Box position="absolute" bottom="-30%" right="-5%" w="420px" h="420px" bg="rgba(157,92,255,0.16)" filter="blur(110px)" rounded="full" pointerEvents="none" />
       <Container maxW="900px" px={{ base: 5, md: 8 }} textAlign="center" position="relative">

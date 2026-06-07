@@ -5,7 +5,7 @@ import { FiArrowRight, FiCheckCircle } from "react-icons/fi";
 import ProcessSection from "../Components/ServiceComponents/ProcessSection";
 import ServiceStack from "../Components/ServiceComponents/ServiceStack";
 import { services } from "../utils/Constant";
-import { Reveal, Eyebrow, CTASection } from "../Components/common";
+import { Reveal, Eyebrow, CTASection, Seo } from "../Components/common";
 import NotFound from "./NotFound";
 
 const ServicePage = () => {
@@ -17,6 +17,11 @@ const ServicePage = () => {
 
   return (
     <Box>
+      <Seo
+        title={`${service.title} Services for India & USA`}
+        description={`${service.description} ${service.details}`.slice(0, 300)}
+        path={`/service/${serviceName}`}
+      />
       {/* Hero */}
       <Box position="relative" overflow="hidden" pt={{ base: 12, md: 20 }} pb={{ base: 10, md: 14 }}>
         <Box position="absolute" top="-15%" left="-5%" w="500px" h="500px" bg="rgba(79,123,255,0.18)" filter="blur(120px)" rounded="full" pointerEvents="none" />

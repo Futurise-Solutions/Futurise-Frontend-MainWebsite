@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import {
-  Box, SimpleGrid, Text, Input, Button, HStack, VStack, Flex, Icon, Link as CLink, useToast,
+  Box, SimpleGrid, Text, Input, Button, HStack, VStack, Flex, Icon, Image, Link as CLink, useToast,
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
-import { FiArrowRight, FiMail, FiPhone, FiMapPin } from "react-icons/fi";
+import { FiArrowRight, FiArrowUpRight, FiMail, FiPhone, FiMapPin } from "react-icons/fi";
 import { FaLinkedinIn, FaXTwitter, FaInstagram, FaFacebookF } from "react-icons/fa6";
 import { Logo } from "../Components/common";
-import { NavbarservicesOptions } from "../utils/Constant";
+import { NavbarservicesOptions, Projects } from "../utils/Constant";
+
+const footerWork = Projects.filter((p) => p.featured).slice(0, 4);
 
 const FooterCol = ({ title, children }) => (
   <VStack align="start" spacing={3}>
@@ -57,6 +59,72 @@ const Footer = () => {
   return (
     <Box as="footer" mt="auto" borderTop="1px solid" borderColor="border.subtle" bg="rgba(6,10,24,0.6)">
       <Box maxW="1200px" mx="auto" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
+        {/* Complementary visual — selected work preview */}
+        <Flex
+          direction={{ base: "column", sm: "row" }}
+          justify="space-between"
+          align={{ base: "start", sm: "end" }}
+          gap={3}
+          mb={6}
+        >
+          <Text fontSize="sm" fontWeight={600} letterSpacing="0.08em" textTransform="uppercase" color="text.faint">
+            Selected work
+          </Text>
+          <CLink
+            as={Link}
+            to="/portfolio"
+            fontSize="sm"
+            color="accent.solid"
+            display="inline-flex"
+            alignItems="center"
+            gap={1}
+            _hover={{ color: "text.primary" }}
+          >
+            View all projects <Icon as={FiArrowUpRight} />
+          </CLink>
+        </Flex>
+        <SimpleGrid columns={{ base: 2, md: 4 }} spacing={4} mb={{ base: 12, md: 16 }}>
+          {footerWork.map((project) => (
+            <Box
+              key={project.Heading}
+              as={Link}
+              to="/portfolio"
+              role="group"
+              position="relative"
+              overflow="hidden"
+              borderRadius="14px"
+              border="1px solid"
+              borderColor="border.subtle"
+              h={{ base: "92px", md: "120px" }}
+            >
+              <Image
+                src={project.img[0].src}
+                alt={project.img[0].alt}
+                loading="lazy"
+                w="full"
+                h="full"
+                objectFit="cover"
+                objectPosition="top"
+                transition="transform .5s ease"
+                _groupHover={{ transform: "scale(1.07)" }}
+              />
+              <Box position="absolute" inset={0} bgGradient="linear(to-t, rgba(6,10,24,0.85), rgba(6,10,24,0) 60%)" />
+              <Text
+                position="absolute"
+                bottom={2}
+                left={3}
+                right={3}
+                fontSize="xs"
+                fontWeight={600}
+                color="text.primary"
+                noOfLines={1}
+              >
+                {project.clentName}
+              </Text>
+            </Box>
+          ))}
+        </SimpleGrid>
+
         <SimpleGrid columns={{ base: 1, md: 2, lg: 5 }} spacing={{ base: 10, lg: 8 }}>
           {/* Brand + newsletter */}
           <VStack align="start" spacing={5} gridColumn={{ lg: "span 2" }} pr={{ lg: 8 }}>

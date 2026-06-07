@@ -5,6 +5,8 @@ import { FiArrowRight } from "react-icons/fi";
 import { Projects } from "../../utils/Constant";
 import { Section, SectionHeading, GlassCard, Reveal } from "../common";
 
+const featuredProjects = Projects.filter((p) => p.featured);
+
 const OurProjects = () => {
   const navigate = useNavigate();
   return (
@@ -25,17 +27,19 @@ const OurProjects = () => {
         </Reveal>
       </Flex>
 
-      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
-        {Projects.map((project, index) => (
-          <Reveal key={project.Heading} delay={(index % 3) * 0.08}>
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={6}>
+        {featuredProjects.map((project, index) => (
+          <Reveal key={project.Heading} delay={(index % 4) * 0.08}>
             <GlassCard h="full" overflow="hidden" role="group" cursor="pointer" onClick={() => navigate("/portfolio")}>
               <Box overflow="hidden" h="200px">
                 <Image
-                  src={project.img[0]}
-                  alt={project.Heading}
+                  src={project.img[0].src}
+                  alt={project.img[0].alt}
+                  loading="lazy"
                   w="full"
                   h="full"
                   objectFit="cover"
+                  objectPosition="top"
                   transition="transform .5s ease"
                   _groupHover={{ transform: "scale(1.06)" }}
                 />
