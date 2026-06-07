@@ -291,3 +291,42 @@ After implementing these improvements, review the entire website again and ident
 * Visually weak
 
 Then refine those areas until the website feels truly production-ready, premium, modern, and capable of impressing potential clients within the first few seconds of visiting.
+
+## Additional Fixes & Final QA
+
+### Mobile Navigation
+
+* The mobile navbar drawer/menu is currently not closing properly. Please identify and fix the issue.
+* Ensure the drawer closes when:
+
+  * A navigation link is clicked
+  * Clicking outside the drawer
+  * Pressing the close button/icon
+  * Navigating between routes/pages
+
+### Responsiveness Review
+
+* Perform a complete responsiveness audit across all pages and components.
+* Test on mobile, tablet, laptop, and large desktop screen sizes.
+* Fix any issues related to:
+
+  * Overflow
+  * Horizontal scrolling
+  * Broken layouts
+  * Improper spacing
+  * Image scaling/cropping
+  * Typography scaling
+  * Navigation behavior
+
+### Contact Information
+
+Please add our official business contact information strategically throughout the website (not randomly), especially in high-conversion areas such as the Footer, Contact Page, CTA sections, and where appropriate in the Navbar.
+
+**Email:** [business@futurisesolutions.com](mailto:business@futurisesolutions.com)
+**Phone:** +91 7665013356
+
+Ensure the email uses a `mailto:` link and the phone number uses a `tel:` link for better user experience.
+
+### Final Review
+
+After completing all changes, perform one final pass through the entire website and fix any remaining UI inconsistencies, responsiveness issues, animation glitches, or areas that still feel generic or unfinished.
