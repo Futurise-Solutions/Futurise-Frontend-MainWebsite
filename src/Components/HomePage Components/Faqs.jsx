@@ -45,7 +45,7 @@ const Faqs = () => {
                   mb={3}
                   bg="bg.surface"
                   overflow="hidden"
-                  _hover={{ borderColor: "rgba(111,147,255,0.35)" }}
+                  _hover={{ borderColor: "rgba(180,160,255,0.35)" }}
                   transition="border-color .2s"
                 >
                   <AccordionButton py={5} px={6} _hover={{ bg: "transparent" }} _expanded={{ color: "accent.solid" }}>

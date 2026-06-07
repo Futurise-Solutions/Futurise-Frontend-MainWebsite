@@ -4,6 +4,7 @@ export { default as Reveal } from "./Reveal";
 export { default as GlassCard } from "./GlassCard";
 export { default as CTASection } from "./CTASection";
 export { default as ScrollToTop } from "./ScrollToTop";
+export { default as PageTransition } from "./PageTransition";
 export { default as Logo } from "./Logo";
 export { default as ProcessTimeline } from "./ProcessTimeline";
 export { default as ContactForm } from "./ContactForm";

@@ -27,9 +27,9 @@ const Highlight = () => (
     position="absolute"
     inset={0}
     borderRadius="full"
-    bgGradient="linear(135deg, rgba(79,123,255,0.22), rgba(157,92,255,0.22))"
+    bgGradient="linear(135deg, rgba(123,108,255,0.22), rgba(181,123,255,0.22))"
     border="1px solid"
-    borderColor="rgba(111,147,255,0.4)"
+    borderColor="rgba(180,160,255,0.4)"
     transition={{ type: "spring", stiffness: 380, damping: 30 }}
   />
 );
@@ -59,7 +59,7 @@ const ServicesMenu = ({ navigate, active, hovered, setHovered, index }) => {
       </PopoverTrigger>
       <PopoverContent
         w="640px"
-        bg="#0b1228"
+        bg="#0f0f1a"
         border="1px solid"
         borderColor="border.subtle"
         borderRadius="20px"
@@ -80,10 +80,10 @@ const ServicesMenu = ({ navigate, active, hovered, setHovered, index }) => {
               transition="all .2s"
               role="group"
               border="1px solid transparent"
-              _hover={{ bg: "rgba(111,147,255,0.08)", borderColor: "rgba(111,147,255,0.25)", transform: "translateY(-2px)" }}
+              _hover={{ bg: "rgba(180,160,255,0.08)", borderColor: "rgba(180,160,255,0.25)", transform: "translateY(-2px)" }}
               onClick={() => navigate(s.path)}
             >
-              <Flex w="40px" h="40px" align="center" justify="center" borderRadius="11px" bgGradient="linear(135deg, rgba(79,123,255,0.2), rgba(157,92,255,0.2))" border="1px solid" borderColor="rgba(111,147,255,0.25)">
+              <Flex w="40px" h="40px" align="center" justify="center" borderRadius="11px" bgGradient="linear(135deg, rgba(123,108,255,0.2), rgba(181,123,255,0.2))" border="1px solid" borderColor="rgba(180,160,255,0.25)">
                 <Image src={s.icon} alt="" w="20px" h="20px" />
               </Flex>
               <Box>
@@ -96,7 +96,7 @@ const ServicesMenu = ({ navigate, active, hovered, setHovered, index }) => {
             </VStack>
           ))}
         </SimpleGrid>
-        <Flex mt={2} px={4} py={3} borderRadius="14px" align="center" justify="space-between" bgGradient="linear(135deg, rgba(79,123,255,0.14), rgba(157,92,255,0.14))" border="1px solid" borderColor="rgba(111,147,255,0.2)">
+        <Flex mt={2} px={4} py={3} borderRadius="14px" align="center" justify="space-between" bgGradient="linear(135deg, rgba(123,108,255,0.14), rgba(181,123,255,0.14))" border="1px solid" borderColor="rgba(180,160,255,0.2)">
           <Text fontSize="14px" color="text.muted">Not sure what you need? Let’s figure it out together.</Text>
           <Button size="sm" variant="gradient" rightIcon={<FiArrowRight />} onClick={() => navigate("/contact")}>Book a call</Button>
         </Flex>
@@ -151,6 +151,21 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Robustly close the mobile drawer on every route change — covers link taps,
+  // the in-drawer logo, service sub-items, and browser back/forward navigation.
+  useEffect(() => {
+    onClose();
+    setServicesOpen(false);
+  }, [location.pathname]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Lock body scroll while the drawer is open so the page behind doesn't move.
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   return (
     <Box
       as="header"
@@ -158,7 +173,7 @@ const Navbar = () => {
       top={0}
       zIndex={1000}
       transition="all .3s ease"
-      bg={scrolled ? "rgba(7,11,24,0.82)" : "rgba(7,11,24,0.35)"}
+      bg={scrolled ? "rgba(8,8,13,0.82)" : "rgba(8,8,13,0.35)"}
       backdropFilter="blur(16px)"
       borderBottom="1px solid"
       borderColor={scrolled ? "border.subtle" : "transparent"}
@@ -188,17 +203,30 @@ const Navbar = () => {
         </HStack>
 
         <HStack spacing={3}>
-          <Button
-            display={{ base: "none", lg: "inline-flex" }}
-            variant="gradient"
-            size="sm"
-            px={6}
-            rightIcon={<FiArrowRight />}
-            onClick={() => navigate("/contact")}
-            sx={{ "& svg": { transition: "transform .25s" }, _hover: { "& svg": { transform: "translateX(4px)" } } }}
-          >
-            Get a quote
-          </Button>
+          <Box display={{ base: "none", lg: "inline-flex" }} position="relative" role="group">
+            <MotionBox
+              position="absolute"
+              inset="-3px"
+              borderRadius="full"
+              bgGradient="linear(135deg, brand.500, violet.500)"
+              filter="blur(12px)"
+              opacity={0.35}
+              animate={{ opacity: [0.25, 0.5, 0.25] }}
+              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+              pointerEvents="none"
+            />
+            <Button
+              position="relative"
+              variant="gradient"
+              size="sm"
+              px={6}
+              rightIcon={<FiArrowRight />}
+              onClick={() => navigate("/contact")}
+              sx={{ "& svg": { transition: "transform .25s" }, _hover: { "& svg": { transform: "translateX(4px)" } } }}
+            >
+              Get a quote
+            </Button>
+          </Box>
           <IconButton
             display={{ base: "inline-flex", lg: "none" }}
             aria-label="Open menu"
@@ -212,14 +240,14 @@ const Navbar = () => {
 
       {/* Scroll progress bar */}
       <Box position="absolute" bottom={0} left={0} right={0} h="2px" bg="transparent">
-        <Box h="full" bgGradient="linear(90deg, brand.500, violet.500)" style={{ width: `${progress * 100}%` }} transition="width .1s linear" boxShadow="0 0 10px rgba(111,147,255,0.7)" />
+        <Box h="full" bgGradient="linear(90deg, brand.500, violet.500)" style={{ width: `${progress * 100}%` }} transition="width .1s linear" boxShadow="0 0 10px rgba(180,160,255,0.7)" />
       </Box>
 
       {/* Mobile drawer */}
       <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="xs">
         <DrawerOverlay backdropFilter="blur(6px)" bg="rgba(0,0,0,0.5)" />
         <DrawerContent bg="navy.800" borderLeft="1px solid" borderColor="border.subtle">
-          <Box position="absolute" top="-10%" right="-20%" w="260px" h="260px" bg="rgba(157,92,255,0.18)" filter="blur(80px)" rounded="full" pointerEvents="none" />
+          <Box position="absolute" top="-10%" right="-20%" w="260px" h="260px" bg="rgba(181,123,255,0.18)" filter="blur(80px)" rounded="full" pointerEvents="none" />
           <DrawerCloseButton mt={3} color="text.muted" />
           <Box px={6} py={5} position="relative">
             <Logo />
@@ -273,7 +301,7 @@ const Navbar = () => {
                             _hover={{ color: "accent.solid", pl: 3 }}
                             transition="all .2s"
                           >
-                            <Flex w="32px" h="32px" align="center" justify="center" borderRadius="9px" bg="rgba(111,147,255,0.12)">
+                            <Flex w="32px" h="32px" align="center" justify="center" borderRadius="9px" bg="rgba(180,160,255,0.12)">
                               <Image src={s.icon} alt="" w="18px" h="18px" />
                             </Flex>
                             <Text fontSize="15px" color="text.muted">{s.option}</Text>
@@ -288,9 +316,14 @@ const Navbar = () => {
                   <Button w="full" variant="gradient" size="lg" rightIcon={<FiArrowRight />} onClick={() => { navigate("/contact"); onClose(); }}>
                     Get a quote
                   </Button>
-                  <Text mt={4} fontSize="sm" color="text.faint" textAlign="center">
-                    support@futurisetechnologies.com
-                  </Text>
+                  <VStack spacing={1} mt={4}>
+                    <Text as="a" href="mailto:business@futurisesolutions.com" fontSize="sm" color="text.muted" _hover={{ color: "accent.solid" }} transition="color .2s">
+                      business@futurisesolutions.com
+                    </Text>
+                    <Text as="a" href="tel:+917665013356" fontSize="sm" color="text.muted" _hover={{ color: "accent.solid" }} transition="color .2s">
+                      +91 76650 13356
+                    </Text>
+                  </VStack>
                 </MotionBox>
               </VStack>
             </AnimatePresence>

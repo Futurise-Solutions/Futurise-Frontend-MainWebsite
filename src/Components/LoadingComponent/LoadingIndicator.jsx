@@ -23,7 +23,7 @@ const LoadingIndicator = () => {
       bg="bg.canvas"
       zIndex={2000}
     >
-      <Box position="absolute" w="320px" h="320px" bg="rgba(79,123,255,0.2)" filter="blur(100px)" rounded="full" />
+      <Box position="absolute" w="320px" h="320px" bg="rgba(123,108,255,0.2)" filter="blur(100px)" rounded="full" />
       <Box position="relative" animation={`${pulse} 1.8s ease-in-out infinite`} mb={8} sx={{ transform: "scale(1.4)" }}>
         <Logo size="lg" />
       </Box>

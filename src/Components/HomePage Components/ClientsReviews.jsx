@@ -20,7 +20,7 @@ const ClientsReviews = () => {
         {testimonials.map((t, index) => (
           <Reveal key={t.name} delay={(index % 3) * 0.08}>
             <GlassCard h="full" p={{ base: 6, md: 7 }} display="flex" flexDirection="column">
-              <Icon as={FaQuoteLeft} boxSize={6} color="rgba(111,147,255,0.5)" mb={4} />
+              <Icon as={FaQuoteLeft} boxSize={6} color="rgba(180,160,255,0.5)" mb={4} />
               <Text color="text.primary" fontSize="15px" lineHeight={1.75} flex="1">
                 “{t.review}”
               </Text>

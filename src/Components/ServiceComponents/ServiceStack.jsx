@@ -41,7 +41,7 @@ const ServiceStack = ({ service }) => {
                 </Text>
                 <HStack flexWrap="wrap" spacing={2} pt={1}>
                   {stack.techStack.split(",").map((tech, idx) => (
-                    <Tag key={idx} bg="rgba(111,147,255,0.12)" color="accent.solid" borderRadius="full" px={4} py={2} fontSize="sm">
+                    <Tag key={idx} bg="rgba(180,160,255,0.12)" color="accent.solid" borderRadius="full" px={4} py={2} fontSize="sm">
                       {tech.trim()}
                     </Tag>
                   ))}
@@ -54,7 +54,7 @@ const ServiceStack = ({ service }) => {
               {/* Visual */}
               <Box flex="1" w="full">
                 <GlassCard p={{ base: 6, md: 8 }} hover={false} position="relative" overflow="hidden">
-                  <Box position="absolute" top="-30%" right="-10%" w="240px" h="240px" bg="rgba(157,92,255,0.25)" filter="blur(70px)" rounded="full" />
+                  <Box position="absolute" top="-30%" right="-10%" w="240px" h="240px" bg="rgba(181,123,255,0.25)" filter="blur(70px)" rounded="full" />
                   <Flex w="60px" h="60px" borderRadius="16px" align="center" justify="center" bgGradient="linear(135deg, brand.500, violet.500)" mb={6}>
                     <FiCode size={26} color="white" />
                   </Flex>

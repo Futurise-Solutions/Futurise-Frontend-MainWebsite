@@ -8,7 +8,7 @@ import { useEffect } from "react";
  */
 
 const SITE_NAME = "Futurise Solutions";
-const SITE_URL = "https://futurisetechnologies.com";
+const SITE_URL = "https://futurisesolutions.com";
 const DEFAULT_IMAGE = `${SITE_URL}/og-cover.png`;
 
 const upsertMeta = (selector, attr, key, content) => {

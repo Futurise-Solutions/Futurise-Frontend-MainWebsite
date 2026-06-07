@@ -6,8 +6,8 @@ import ServicesWorldwide from "../Components/ContactCusCpmponents/ServicesWorldw
 import ClientsReviews from "../Components/HomePage Components/ClientsReviews";
 
 const contactInfo = [
-  { icon: FiMail, label: "Email us", value: "support@futurisetechnologies.com" },
-  { icon: FiPhone, label: "Call us", value: "+1 (123) 456-7890" },
+  { icon: FiMail, label: "Email us", value: "business@futurisesolutions.com", href: "mailto:business@futurisesolutions.com" },
+  { icon: FiPhone, label: "Call us", value: "+91 76650 13356", href: "tel:+917665013356" },
   { icon: FiMapPin, label: "Location", value: "Serving clients worldwide" },
   { icon: FiClock, label: "Working hours", value: "Mon–Fri, 9:00 AM – 6:00 PM" },
 ];
@@ -21,8 +21,8 @@ const ContactUs = () => {
         path="/contact"
       />
       <Box position="relative" overflow="hidden" pt={{ base: 12, md: 20 }} pb={{ base: 12, md: 16 }}>
-        <Box position="absolute" top="-15%" left="-5%" w="500px" h="500px" bg="rgba(79,123,255,0.18)" filter="blur(120px)" rounded="full" pointerEvents="none" />
-        <Box position="absolute" bottom="-20%" right="-8%" w="420px" h="420px" bg="rgba(157,92,255,0.16)" filter="blur(120px)" rounded="full" pointerEvents="none" />
+        <Box position="absolute" top="-15%" left="-5%" w="500px" h="500px" bg="rgba(123,108,255,0.18)" filter="blur(120px)" rounded="full" pointerEvents="none" />
+        <Box position="absolute" bottom="-20%" right="-8%" w="420px" h="420px" bg="rgba(181,123,255,0.16)" filter="blur(120px)" rounded="full" pointerEvents="none" />
 
         <Container maxW="1200px" px={{ base: 5, md: 8 }} position="relative">
           <Flex direction={{ base: "column", lg: "row" }} gap={{ base: 12, lg: 16 }} align="start">
@@ -44,8 +44,20 @@ const ContactUs = () => {
               <Reveal delay={0.15} w="full">
                 <VStack align="stretch" spacing={3} w="full" maxW="460px" pt={2}>
                   {contactInfo.map((c) => (
-                    <HStack key={c.label} spacing={4} p={4} borderRadius="14px" border="1px solid" borderColor="border.subtle" bg="bg.surface">
-                      <Flex w="44px" h="44px" borderRadius="12px" align="center" justify="center" bgGradient="linear(135deg, rgba(79,123,255,0.2), rgba(157,92,255,0.2))" border="1px solid" borderColor="rgba(111,147,255,0.25)" flexShrink={0}>
+                    <HStack
+                      key={c.label}
+                      as={c.href ? "a" : "div"}
+                      href={c.href}
+                      spacing={4}
+                      p={4}
+                      borderRadius="14px"
+                      border="1px solid"
+                      borderColor="border.subtle"
+                      bg="bg.surface"
+                      transition="all .25s"
+                      _hover={c.href ? { borderColor: "rgba(180,160,255,0.4)", transform: "translateY(-2px)", bg: "bg.surfaceHover" } : undefined}
+                    >
+                      <Flex w="44px" h="44px" borderRadius="12px" align="center" justify="center" bgGradient="linear(135deg, rgba(123,108,255,0.2), rgba(181,123,255,0.2))" border="1px solid" borderColor="rgba(180,160,255,0.25)" flexShrink={0}>
                         <Icon as={c.icon} color="accent.solid" boxSize={5} />
                       </Flex>
                       <Box>

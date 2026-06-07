@@ -18,13 +18,13 @@ const About = () => {
         {/* Visual */}
         <Reveal from="right" flex="1" w="full">
           <Box position="relative" maxW="520px" mx="auto">
-            <Box position="absolute" inset="-12% -8%" bg="rgba(79,123,255,0.18)" filter="blur(80px)" rounded="full" />
+            <Box position="absolute" inset="-12% -8%" bg="rgba(123,108,255,0.18)" filter="blur(80px)" rounded="full" />
             <SimpleGrid columns={2} spacing={4} position="relative">
               {[
-                { k: "Design", v: "Pixel-perfect UI", grad: "linear(135deg, rgba(79,123,255,0.3), rgba(79,123,255,0.06))", b: "rgba(111,147,255,0.3)" },
-                { k: "Engineering", v: "Clean, tested code", grad: "linear(135deg, rgba(157,92,255,0.3), rgba(157,92,255,0.06))", b: "rgba(157,92,255,0.3)" },
-                { k: "Web3", v: "Audited contracts", grad: "linear(135deg, rgba(157,92,255,0.3), rgba(157,92,255,0.06))", b: "rgba(157,92,255,0.3)" },
-                { k: "Growth", v: "Data-driven marketing", grad: "linear(135deg, rgba(79,123,255,0.3), rgba(79,123,255,0.06))", b: "rgba(111,147,255,0.3)" },
+                { k: "Design", v: "Pixel-perfect UI", grad: "linear(135deg, rgba(123,108,255,0.3), rgba(123,108,255,0.06))", b: "rgba(180,160,255,0.3)" },
+                { k: "Engineering", v: "Clean, tested code", grad: "linear(135deg, rgba(181,123,255,0.3), rgba(181,123,255,0.06))", b: "rgba(181,123,255,0.3)" },
+                { k: "Web3", v: "Audited contracts", grad: "linear(135deg, rgba(181,123,255,0.3), rgba(181,123,255,0.06))", b: "rgba(181,123,255,0.3)" },
+                { k: "Growth", v: "Data-driven marketing", grad: "linear(135deg, rgba(123,108,255,0.3), rgba(123,108,255,0.06))", b: "rgba(180,160,255,0.3)" },
               ].map((c, i) => (
                 <Box
                   key={c.k}

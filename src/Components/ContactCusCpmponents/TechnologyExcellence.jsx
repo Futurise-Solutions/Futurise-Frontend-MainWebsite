@@ -25,9 +25,9 @@ const TechnologyExcellence = () => {
                   borderRadius="14px"
                   display="grid"
                   placeItems="center"
-                  bgGradient="linear(135deg, rgba(79,123,255,0.2), rgba(157,92,255,0.2))"
+                  bgGradient="linear(135deg, rgba(123,108,255,0.2), rgba(181,123,255,0.2))"
                   border="1px solid"
-                  borderColor="rgba(111,147,255,0.25)"
+                  borderColor="rgba(180,160,255,0.25)"
                   flexShrink={0}
                 >
                   <Image src={strength.icon} alt="" w="26px" h="26px" />

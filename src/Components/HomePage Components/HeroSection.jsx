@@ -4,7 +4,7 @@ import {
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { FiArrowRight, FiStar } from "react-icons/fi";
+import { FiArrowRight, FiStar, FiCpu } from "react-icons/fi";
 import { FaReact, FaApple, FaAndroid, FaEthereum, FaFigma } from "react-icons/fa6";
 import { propertyDashboard1 } from "../../assests";
 
@@ -24,6 +24,7 @@ const techIcons = [
   { icon: FaApple, label: "iOS" },
   { icon: FaAndroid, label: "Android" },
   { icon: FaEthereum, label: "Web3" },
+  { icon: FiCpu, label: "AI" },
   { icon: FaFigma, label: "Design" },
 ];
 
@@ -33,8 +34,8 @@ const HeroSection = () => {
   return (
     <Box position="relative" overflow="hidden">
       {/* ambient glow orbs */}
-      <Box position="absolute" top="-10%" left="-5%" w="480px" h="480px" bg="rgba(79,123,255,0.22)" filter="blur(120px)" rounded="full" pointerEvents="none" />
-      <Box position="absolute" top="20%" right="-8%" w="420px" h="420px" bg="rgba(157,92,255,0.2)" filter="blur(120px)" rounded="full" pointerEvents="none" />
+      <Box position="absolute" top="-10%" left="-5%" w="480px" h="480px" bg="rgba(123,108,255,0.22)" filter="blur(120px)" rounded="full" pointerEvents="none" />
+      <Box position="absolute" top="20%" right="-8%" w="420px" h="420px" bg="rgba(181,123,255,0.2)" filter="blur(120px)" rounded="full" pointerEvents="none" />
 
       <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 16, md: 24 }}>
         <Flex direction={{ base: "column", lg: "row" }} align="center" gap={{ base: 14, lg: 10 }}>
@@ -46,9 +47,9 @@ const HeroSection = () => {
                 px={3}
                 py={1.5}
                 borderRadius="full"
-                bg="rgba(111,147,255,0.1)"
+                bg="rgba(180,160,255,0.1)"
                 border="1px solid"
-                borderColor="rgba(111,147,255,0.25)"
+                borderColor="rgba(180,160,255,0.25)"
               >
                 <Box w="7px" h="7px" borderRadius="full" bgGradient="linear(135deg, brand.400, violet.500)" />
                 <Text fontSize="xs" fontWeight={600} letterSpacing="0.14em" textTransform="uppercase" color="accent.solid">
@@ -159,7 +160,7 @@ const HeroSection = () => {
                 px={4}
                 py={3}
                 borderRadius="16px"
-                bg="rgba(10,17,36,0.9)"
+                bg="rgba(13,13,22,0.9)"
                 border="1px solid"
                 borderColor="border.strong"
                 backdropFilter="blur(10px)"
@@ -181,7 +182,7 @@ const HeroSection = () => {
                 px={4}
                 py={3}
                 borderRadius="16px"
-                bg="rgba(10,17,36,0.9)"
+                bg="rgba(13,13,22,0.9)"
                 border="1px solid"
                 borderColor="border.strong"
                 backdropFilter="blur(10px)"

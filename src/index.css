@@ -94,7 +94,7 @@
 
 /* Reusable utility classes */
 .gradient-text {
-  background: linear-gradient(135deg, #6f93ff 0%, #b07dff 100%);
+  background: linear-gradient(135deg, #b4a0ff 0%, #d4a5ff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -103,7 +103,7 @@
 /* Swiper navigation theming */
 .swiper-button-next,
 .swiper-button-prev {
-  color: #6f93ff !important;
+  color: #b4a0ff !important;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(6px);
@@ -120,7 +120,7 @@
   background: rgba(255, 255, 255, 0.4);
 }
 .swiper-pagination-bullet-active {
-  background: #6f93ff;
+  background: #b4a0ff;
 }
 
 /* Contact form (used by Contact + Portfolio) */
@@ -132,7 +132,7 @@
   border-radius: 22px;
   position: relative;
   z-index: 1;
-  background: rgba(10, 17, 36, 0.72);
+  background: rgba(13, 13, 22, 0.72);
   backdrop-filter: blur(14px);
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -147,8 +147,8 @@
 }
 .form input:focus,
 .form textarea:focus {
-  border-color: #6f93ff;
-  box-shadow: 0 0 0 1px #6f93ff;
+  border-color: #b4a0ff;
+  box-shadow: 0 0 0 1px #b4a0ff;
   outline: none;
 }
 .form input::placeholder,
@@ -161,6 +161,6 @@
   filter: grayscale(0.4) brightness(0.85) contrast(1.05);
 }
 .leaflet-container {
-  background: #0a1124 !important;
+  background: #0d0d16 !important;
   border-radius: 20px;
 }

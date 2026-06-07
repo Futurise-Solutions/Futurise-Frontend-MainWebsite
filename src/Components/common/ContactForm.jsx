@@ -59,7 +59,7 @@ const ContactForm = () => {
       borderRadius="22px"
       border="1px solid"
       borderColor="border.subtle"
-      bg="rgba(10,17,36,0.6)"
+      bg="rgba(13,13,22,0.6)"
       backdropFilter="blur(14px)"
       p={{ base: 6, md: 8 }}
       boxShadow="0 24px 60px -28px rgba(0,0,0,0.7)"

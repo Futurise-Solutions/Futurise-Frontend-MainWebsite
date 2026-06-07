@@ -3,6 +3,7 @@ import AllRoutes from './Routes/AllRoutes'
 import { Footer, Navbar } from './Layout'
 import { Box } from '@chakra-ui/react'
 import ScrollToTop from './Components/common/ScrollToTop'
+import { PageTransition } from './Components/common'
 import "./index.css"
 
 const App = () => {
@@ -11,7 +12,9 @@ const App = () => {
       <ScrollToTop />
       <Navbar />
       <Box as="main" flex="1">
-        <AllRoutes />
+        <PageTransition>
+          <AllRoutes />
+        </PageTransition>
       </Box>
       <Footer />
     </Box>

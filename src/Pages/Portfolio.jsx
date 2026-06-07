@@ -5,10 +5,45 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import Marquee from "react-fast-marquee";
 import { FiArrowRight, FiMapPin } from "react-icons/fi";
 import { Projects } from "../utils/Constant";
 import { Section, Reveal, GlassCard, CTASection, Seo } from "../Components/common";
 import { PageHero } from "../Components/AboutUs Components/AboutUsHero";
+
+/** Hero thumbnail marquee — immediately showcases delivered work. */
+const PortfolioThumbs = () => (
+  <Box
+    position="relative"
+    sx={{
+      maskImage: "linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent)",
+      WebkitMaskImage: "linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent)",
+    }}
+  >
+    <Marquee gradient={false} speed={36} pauseOnHover>
+      {Projects.map((p) => (
+        <Box
+          key={p.Heading}
+          w={{ base: "240px", md: "300px" }}
+          h={{ base: "150px", md: "186px" }}
+          mx={3}
+          borderRadius="16px"
+          overflow="hidden"
+          border="1px solid"
+          borderColor="border.subtle"
+          boxShadow="0 24px 50px -28px rgba(0,0,0,0.8)"
+          position="relative"
+        >
+          <Image src={p.img[0].src} alt={p.img[0].alt} loading="lazy" w="full" h="full" objectFit="cover" objectPosition="top" />
+          <Box position="absolute" inset={0} bgGradient="linear(to-t, rgba(8,8,13,0.8), rgba(8,8,13,0) 55%)" />
+          <Text position="absolute" bottom={3} left={4} right={4} fontSize="13px" fontWeight={600} noOfLines={1}>
+            {p.clentName}
+          </Text>
+        </Box>
+      ))}
+    </Marquee>
+  </Box>
+);
 
 const Portfolio = () => {
   const navigate = useNavigate();
@@ -27,6 +62,7 @@ const Portfolio = () => {
         primaryLabel="Start your project"
         secondaryLabel="Our services"
         secondaryTo="/service/web-development"
+        media={<PortfolioThumbs />}
       />
 
       <Section pt={{ base: 4, md: 6 }}>
@@ -54,7 +90,7 @@ const Portfolio = () => {
                 {/* Details */}
                 <VStack flex="1" align="start" spacing={4}>
                   <HStack spacing={2} flexWrap="wrap">
-                    <Tag bg="rgba(111,147,255,0.14)" color="accent.solid" borderRadius="full" px={3}>{el.projectType}</Tag>
+                    <Tag bg="rgba(180,160,255,0.14)" color="accent.solid" borderRadius="full" px={3}>{el.projectType}</Tag>
                     <Tag bg="rgba(255,255,255,0.06)" color="text.muted" borderRadius="full" px={3}>
                       <FiMapPin style={{ marginRight: 6 }} /> {el.location}
                     </Tag>

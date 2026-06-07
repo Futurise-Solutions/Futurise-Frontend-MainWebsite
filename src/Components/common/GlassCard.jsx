@@ -17,8 +17,8 @@ const GlassCard = ({ children, hover = true, ...rest }) => (
       hover
         ? {
             transform: "translateY(-6px)",
-            borderColor: "rgba(111,147,255,0.45)",
-            boxShadow: "0 24px 50px -24px rgba(79,123,255,0.45)",
+            borderColor: "rgba(180,160,255,0.45)",
+            boxShadow: "0 24px 50px -24px rgba(123,108,255,0.45)",
             bg: "bg.surfaceHover",
           }
         : undefined

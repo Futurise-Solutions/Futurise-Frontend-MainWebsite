@@ -21,7 +21,7 @@ describe("Footer", () => {
     expect(screen.getByText("Company")).toBeInTheDocument();
     expect(screen.getByText("Services")).toBeInTheDocument();
     expect(screen.getByText(/Get in touch/i)).toBeInTheDocument();
-    expect(screen.getByText(/support@futurisetechnologies\.com/)).toBeInTheDocument();
+    expect(screen.getByText(/business@futurisesolutions\.com/)).toBeInTheDocument();
     expect(
       screen.getByText(new RegExp(`${new Date().getFullYear()}`))
     ).toBeInTheDocument();

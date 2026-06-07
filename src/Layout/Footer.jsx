@@ -57,7 +57,7 @@ const Footer = () => {
   };
 
   return (
-    <Box as="footer" mt="auto" borderTop="1px solid" borderColor="border.subtle" bg="rgba(6,10,24,0.6)">
+    <Box as="footer" mt="auto" borderTop="1px solid" borderColor="border.subtle" bg="rgba(8,8,13,0.6)">
       <Box maxW="1200px" mx="auto" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
         {/* Complementary visual — selected work preview */}
         <Flex
@@ -108,7 +108,7 @@ const Footer = () => {
                 transition="transform .5s ease"
                 _groupHover={{ transform: "scale(1.07)" }}
               />
-              <Box position="absolute" inset={0} bgGradient="linear(to-t, rgba(6,10,24,0.85), rgba(6,10,24,0) 60%)" />
+              <Box position="absolute" inset={0} bgGradient="linear(to-t, rgba(8,8,13,0.85), rgba(8,8,13,0) 60%)" />
               <Text
                 position="absolute"
                 bottom={2}
@@ -170,11 +170,15 @@ const Footer = () => {
           <FooterCol title="Get in touch">
             <HStack spacing={3} align="start">
               <Icon as={FiMail} color="accent.solid" mt={1} />
-              <FLink>support@futurisetechnologies.com</FLink>
+              <CLink href="mailto:business@futurisesolutions.com" fontSize="15px" color="text.muted" _hover={{ color: "text.primary" }} transition="color .2s">
+                business@futurisesolutions.com
+              </CLink>
             </HStack>
             <HStack spacing={3} align="start">
               <Icon as={FiPhone} color="accent.solid" mt={1} />
-              <FLink>+1 (123) 456-7890</FLink>
+              <CLink href="tel:+917665013356" fontSize="15px" color="text.muted" _hover={{ color: "text.primary" }} transition="color .2s">
+                +91 76650 13356
+              </CLink>
             </HStack>
             <HStack spacing={3} align="start">
               <Icon as={FiMapPin} color="accent.solid" mt={1} />
@@ -212,7 +216,7 @@ const Footer = () => {
                 borderColor="border.subtle"
                 color="text.muted"
                 transition="all .25s"
-                _hover={{ color: "white", borderColor: "brand.400", bg: "rgba(111,147,255,0.12)", transform: "translateY(-2px)" }}
+                _hover={{ color: "white", borderColor: "brand.400", bg: "rgba(180,160,255,0.12)", transform: "translateY(-2px)" }}
               >
                 <Icon as={s.icon} />
               </CLink>

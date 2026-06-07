@@ -1,9 +1,10 @@
 import React from "react";
-import { Box, Container, Flex, Heading, Text, Button, Stack, VStack, HStack, Icon } from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, Text, Button, Stack, VStack, HStack, Icon, SimpleGrid } from "@chakra-ui/react";
 import { useParams, useNavigate } from "react-router-dom";
 import { FiArrowRight, FiCheckCircle } from "react-icons/fi";
 import ProcessSection from "../Components/ServiceComponents/ProcessSection";
 import ServiceStack from "../Components/ServiceComponents/ServiceStack";
+import ServiceHeroVisual from "../Components/ServiceComponents/ServiceHeroVisual";
 import { services } from "../utils/Constant";
 import { Reveal, Eyebrow, CTASection, Seo } from "../Components/common";
 import NotFound from "./NotFound";
@@ -24,11 +25,11 @@ const ServicePage = () => {
       />
       {/* Hero */}
       <Box position="relative" overflow="hidden" pt={{ base: 12, md: 20 }} pb={{ base: 10, md: 14 }}>
-        <Box position="absolute" top="-15%" left="-5%" w="500px" h="500px" bg="rgba(79,123,255,0.18)" filter="blur(120px)" rounded="full" pointerEvents="none" />
-        <Box position="absolute" top="10%" right="-8%" w="420px" h="420px" bg="rgba(157,92,255,0.16)" filter="blur(120px)" rounded="full" pointerEvents="none" />
+        <Box position="absolute" top="-15%" left="-5%" w="500px" h="500px" bg="rgba(123,108,255,0.18)" filter="blur(120px)" rounded="full" pointerEvents="none" />
+        <Box position="absolute" top="10%" right="-8%" w="420px" h="420px" bg="rgba(181,123,255,0.16)" filter="blur(120px)" rounded="full" pointerEvents="none" />
 
         <Container maxW="1200px" px={{ base: 5, md: 8 }} position="relative">
-          <Flex direction={{ base: "column", lg: "row" }} align="center" gap={{ base: 10, lg: 16 }}>
+          <Flex direction={{ base: "column", lg: "row" }} align="center" gap={{ base: 16, lg: 16 }}>
             <VStack flex="1" align="start" spacing={5}>
               <Reveal><Eyebrow>{service.whatWeDo}</Eyebrow></Reveal>
               <Reveal delay={0.05}>
@@ -58,31 +59,28 @@ const ServicePage = () => {
               </Reveal>
             </VStack>
 
-            {/* Feature list card */}
+            {/* Service-specific hero visual */}
             <Reveal from="left" flex="1" w="full">
-              <Box
-                borderRadius="24px"
-                border="1px solid"
-                borderColor="border.subtle"
-                bg="bg.surface"
-                backdropFilter="blur(12px)"
-                p={{ base: 7, md: 9 }}
-                position="relative"
-                overflow="hidden"
-              >
-                <Box position="absolute" top="-30%" right="-10%" w="240px" h="240px" bg="rgba(79,123,255,0.22)" filter="blur(70px)" rounded="full" />
-                <Text fontWeight={600} mb={5} fontSize="lg" position="relative">What’s included</Text>
-                <VStack align="stretch" spacing={4} position="relative">
-                  {service.features?.map((f) => (
-                    <HStack key={f} spacing={3} align="start">
-                      <Icon as={FiCheckCircle} color="accent.solid" boxSize={5} mt={0.5} flexShrink={0} />
-                      <Text color="text.muted">{f}</Text>
-                    </HStack>
-                  ))}
-                </VStack>
-              </Box>
+              <ServiceHeroVisual service={serviceName} />
             </Reveal>
           </Flex>
+
+          {/* What's included — compact strip below the hero */}
+          <Reveal delay={0.1}>
+            <Box mt={{ base: 14, md: 16 }} pt={{ base: 8, md: 10 }} borderTop="1px solid" borderColor="border.subtle">
+              <Text fontSize="sm" fontWeight={600} letterSpacing="0.08em" textTransform="uppercase" color="text.faint" mb={5}>
+                What’s included
+              </Text>
+              <SimpleGrid columns={{ base: 1, sm: 2 }} spacingX={10} spacingY={4}>
+                {service.features?.map((f) => (
+                  <HStack key={f} spacing={3} align="start">
+                    <Icon as={FiCheckCircle} color="accent.solid" boxSize={5} mt={0.5} flexShrink={0} />
+                    <Text color="text.muted">{f}</Text>
+                  </HStack>
+                ))}
+              </SimpleGrid>
+            </Box>
+          </Reveal>
         </Container>
       </Box>
 

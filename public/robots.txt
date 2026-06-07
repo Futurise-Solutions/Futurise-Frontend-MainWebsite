@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://futurisetechnologies.com/sitemap.xml
+Sitemap: https://futurisesolutions.com/sitemap.xml

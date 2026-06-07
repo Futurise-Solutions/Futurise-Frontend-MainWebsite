@@ -1,8 +1,9 @@
 import React from "react";
-import { Box, Container, Heading, Text, Button, Stack, HStack } from "@chakra-ui/react";
+import { Box, Container, Heading, Text, Button, Stack, HStack, SimpleGrid } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
 import { Reveal, Eyebrow } from "../common";
+import { companyStats } from "../../utils/Constant";
 
 const PageHero = ({
   eyebrow = "About us",
@@ -13,6 +14,7 @@ const PageHero = ({
   primaryTo = "/contact",
   secondaryLabel,
   secondaryTo,
+  media,
 }) => {
   const navigate = useNavigate();
   return (
@@ -23,15 +25,15 @@ const PageHero = ({
         inset={0}
         pointerEvents="none"
         opacity={0.5}
-        backgroundImage="radial-gradient(rgba(111,147,255,0.16) 1px, transparent 1px)"
+        backgroundImage="radial-gradient(rgba(180,160,255,0.16) 1px, transparent 1px)"
         backgroundSize="22px 22px"
         sx={{
           maskImage: "radial-gradient(60% 60% at 50% 35%, #000 0%, transparent 75%)",
           WebkitMaskImage: "radial-gradient(60% 60% at 50% 35%, #000 0%, transparent 75%)",
         }}
       />
-      <Box position="absolute" top="-20%" left="50%" transform="translateX(-50%)" w="700px" h="500px" bg="rgba(79,123,255,0.18)" filter="blur(120px)" rounded="full" pointerEvents="none" />
-      <Box position="absolute" bottom="-30%" right="-5%" w="420px" h="420px" bg="rgba(157,92,255,0.16)" filter="blur(110px)" rounded="full" pointerEvents="none" />
+      <Box position="absolute" top="-20%" left="50%" transform="translateX(-50%)" w="700px" h="500px" bg="rgba(123,108,255,0.18)" filter="blur(120px)" rounded="full" pointerEvents="none" />
+      <Box position="absolute" bottom="-30%" right="-5%" w="420px" h="420px" bg="rgba(181,123,255,0.16)" filter="blur(110px)" rounded="full" pointerEvents="none" />
       <Container maxW="900px" px={{ base: 5, md: 8 }} textAlign="center" position="relative">
         <Reveal><HStack justify="center"><Eyebrow>{eyebrow}</Eyebrow></HStack></Reveal>
         <Reveal delay={0.05}>
@@ -59,10 +61,45 @@ const PageHero = ({
             )}
           </Stack>
         </Reveal>
+        {media && (
+          <Reveal delay={0.2}>
+            <Box mt={{ base: 12, md: 16 }}>{media}</Box>
+          </Reveal>
+        )}
       </Container>
     </Box>
   );
 };
+
+/** Trust-stat band shown under the About hero — communicates scale + reliability. */
+const TrustStats = () => (
+  <SimpleGrid
+    columns={{ base: 2, md: 4 }}
+    spacing={{ base: 4, md: 6 }}
+    maxW="760px"
+    mx="auto"
+  >
+    {companyStats.map((s) => (
+      <Box
+        key={s.label}
+        py={{ base: 5, md: 6 }}
+        px={3}
+        borderRadius="16px"
+        border="1px solid"
+        borderColor="border.subtle"
+        bg="bg.surface"
+        backdropFilter="blur(8px)"
+      >
+        <Text fontSize={{ base: "28px", md: "34px" }} fontWeight={700} lineHeight={1} className="gradient-text">
+          {s.value}{s.suffix}
+        </Text>
+        <Text mt={2} fontSize={{ base: "12px", md: "13px" }} color="text.muted" lineHeight={1.3}>
+          {s.label}
+        </Text>
+      </Box>
+    ))}
+  </SimpleGrid>
+);
 
 const AboutUsHero = () => (
   <PageHero
@@ -73,6 +110,7 @@ const AboutUsHero = () => (
     primaryLabel="Work with us"
     secondaryLabel="See our work"
     secondaryTo="/portfolio"
+    media={<TrustStats />}
   />
 );
 
