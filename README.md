@@ -1,79 +1,293 @@
+# Additional Website Redesign Improvements Required
 
-Project brief (reframed)
+The changes you've implemented so far are good and moving in the right direction. However, after comparing the current implementation with our provided references, there are still several areas that need significant improvement to achieve the premium, production-level experience we're targeting.
 
-AI Assistant Instructions (supervisory prompt)
-- Act as: a Senior Software Engineer and a Professional UI/UX Designer working together. When asked, perform both roles: implement code changes (engineering) and refine visual/UX decisions (design).
+## Important References
 
-Reference
-- Primary inspiration: https://www.wednesday.is/
-- Theme (which we want including) reference image: C:\Users\Dharmik Puri Goswami\Desktop\Futurise Solutions\Futurise-Frontend-MainWebsite\image.png
+### Primary Inspiration
 
-Typography
-- Headings and sub-headings: Zangezi
-- Body, paragraphs, UI text: Aeonik Trial
-- Font files are here: C:\Users\Dharmik Puri Goswami\Desktop\Futurise Solutions\Futurise-Frontend-MainWebsite\src\assests\fonts
+https://www.wednesday.is/
 
-Content + SEO
-- Improve content quality across all sections to be SEO friendly.
-- Target geographies: India and USA. Make the copy reflect both markets and keywords.
-- Keep text natural, benefits-first, and clear for business audiences.
+### Theme Reference
 
-Structure / sections
-- About Us page: remove the "Meet the team" section.
-- Keep all existing animations and effects exactly as they are.
-- "What we do" section uses icons. Ensure icons match the headings; if possible, use a higher-quality icon set or small GIFs for better visual impact.
+Please refer to the design reference image attached in the project:
 
-Hero sections and imagery
-- Every page hero (Home, About, each Service, Contact, Portfolio if used) needs a strong image or background image aligned to the page theme.
-- Follow the reference image style for hero effects.
-- Add a complementary image in the footer section (as per reference image).
+`image.png`
 
-UX + responsiveness
-- Fully responsive across all screen sizes.
-- Smooth scroll and transitions should feel production-ready and client-facing.
-- Visual quality should feel close to wednesday.is, not just a template.
+This image represents the overall visual direction, color palette, mood, and premium feel that we want the website to achieve.
 
-Suggestions after code review
-- Update the font setup in both the global CSS and Chakra theme to use Zangezi (heading) and Aeonik Trial (body), since the code currently uses Inter/Space Grotesk. This avoids mixed typography.
-- Add a clear source for hero images (local assets or CDN) and wire them into Home/About/Service/Contact/Portfolio hero components so visuals are consistent across pages.
-- Add descriptive `alt` text for all imagery and ensure headings follow a single H1 per page for SEO clarity.
-- Consider adding meta tags (title/description), Open Graph data, and a sitemap for stronger SEO delivery.
-- Replace sample avatars/testimonials/projects with real client-facing content and locations focused on India + USA to match the target audience.
+---
 
+# 1. Color Palette & Visual Identity
 
-Featured Projects — Reframed & SEO-ready
+Currently, the website still feels AI-generated and generic.
 
-Overview
-- This section showcases selected production work demonstrating frontend engineering, UI/UX design, and theme development targeted at business audiences in India and the USA. Development is led by a Senior Software Engineer and the visual/theme work is handled by a professional UI/UX Designer to ensure a polished, client-facing presentation.
+Although typography and spacing have improved, the color palette, gradients, highlights, and visual identity do not match the provided references.
 
-References
-- Reference website: https://rdsdigital.in/
-- Reference image: C:\Users\Dharmik Puri Goswami\Desktop\Futurise Solutions\Futurise-Frontend-MainWebsite\image1.png
+### Required Changes
 
-Project Assets
-- Project images folder: C:\Users\Dharmik Puri Goswami\Desktop\Futurise Solutions\Futurise-Frontend-MainWebsite\src\assests\Project Images
+* Analyze the color palette used in the reference website and attached image.
+* Create a stronger visual identity using:
 
-Projects (source folders / image groups)
-- Project 1 — propertyDashboard (all images)
-- Project 2 — realState (all images)
-- Project 3 — marty (all images)
-- Project 4 — CryptoDashboard (all images)
-- Project 5 — jewel (all images)
-- Project 6 — hotelBooking (all images)
+  * Premium gradients
+  * Accent colors
+  * Hover states
+  * Background treatments
+  * Depth and contrast
+* Ensure the website no longer looks like a standard AI-generated template.
+* The brand should feel like a modern premium technology agency.
 
-Usage Guidelines (SEO + Presentation)
-- Adjust imagery to match the reference UI style and visual hierarchy used across the site.
-- Featured selection for the Home hero: use four highlight projects — Project 1 (propertyDashboard), Project 3 (marty), Project 5 (jewel), and Project 2 (realState) — to demonstrate variety and industry reach.
-- Portfolio/Projects page: display all projects one-by-one with a clear heading, a concise subheading, and an SEO-friendly description of ~80–100 words. Each description should mention the business value delivered, relevant technologies (e.g., React, Vite, Chakra UI), and target markets (India & USA) to improve search relevance.
-- Always include descriptive alt text for each image (describe the screen or feature and include location keywords where relevant) and enable lazy loading to improve performance.
+---
 
-SEO & Accessibility Tips
-- Use a single H1 per page and descriptive H2/H3s for project titles and sections.
-- Add meta title/description and Open Graph tags for each project page where applicable.
-- Prefer locally hosted or CDN-served hero images with clear filenames and `alt` attributes.
+# 2. Navbar Enhancement
 
-Important Notes
-1. Follow best practices for front-end performance and accessibility.
-2. Avoid dead or unnecessary code; keep the codebase clean and maintainable.
-3. Ensure all pages and project descriptions are SEO friendly and target both India and USA audiences.
-4. Use React Suspense and lazy loading for heavy components and images to improve initial load performance.
+The current navbar feels too simple.
+
+### Keep
+
+* Existing font family
+* Existing clean structure
+
+### Improve
+
+* Visual hierarchy
+* Hover interactions
+* Active states
+* Subtle animations
+* Premium feel
+* More eye-catching appearance
+
+The goal is to create a navbar that feels modern, memorable, and high-end without becoming overly flashy.
+
+---
+
+# 3. Hero Sections Need Strong Visual Storytelling
+
+This is currently one of the biggest weaknesses.
+
+The hero section is the first thing users see, and first impressions matter.
+
+Most hero sections currently rely heavily on text and lack compelling visual content.
+
+## Required
+
+Every major page should have a visually engaging hero section.
+
+### Home Page
+
+The hero section should immediately communicate:
+
+* Technology
+* Innovation
+* AI
+* Digital Transformation
+* Full-Stack Expertise
+
+### About Page
+
+The hero section should communicate:
+
+* Company vision
+* Innovation
+* Team expertise
+* Trust
+
+### Service Pages
+
+Each service page should have visuals related to its specific service:
+
+#### Web Development
+
+* Modern web experiences
+* UI/UX
+* Responsive design
+
+#### Mobile Development
+
+* Mobile apps
+* Devices
+* Cross-platform experiences
+
+#### Blockchain
+
+* Blockchain networks
+* Decentralized systems
+
+#### Smart Contracts
+
+* Automation
+* Secure transactions
+
+#### AI SaaS
+
+* AI workflows
+* Automation
+* Intelligence systems
+
+#### Dashboards
+
+* Analytics
+* Data visualization
+* Business intelligence
+
+### Portfolio Page
+
+Should immediately showcase creativity, quality, and delivered work.
+
+### Contact Page
+
+Should feel welcoming, premium, and trustworthy.
+
+---
+
+## Image Selection Guidelines
+
+Do NOT randomly pick stock images.
+
+Choose visuals that:
+
+* Match the overall brand aesthetic
+* Follow the website color palette
+* Feel premium and modern
+* Support the content
+* Create emotional impact
+
+Analyze whether each section would benefit more from:
+
+* Full background image
+* Split layout with image and content
+* Abstract visual composition
+* Custom illustration
+* Technology-focused imagery
+
+Select whichever creates the strongest user experience.
+
+Use high-quality open-source assets where appropriate.
+
+---
+
+# 4. Projects Showcase Section
+
+Currently, some project images are getting cropped and losing impact.
+
+Instead of a traditional slider/carousel, explore a more premium showcase layout.
+
+Reference:
+`project showcase.png`
+
+Possible approaches:
+
+* Layered image stacks
+* Overlapping project cards
+* Interactive project gallery
+* Bento-grid layouts
+* Showcase-style presentation
+
+The goal is to highlight project visuals without aggressive cropping.
+
+---
+
+# 5. Section-Specific Visual Improvements
+
+## Home Page → Who We Are
+
+Currently feels text-heavy.
+
+Add meaningful imagery or visual storytelling elements.
+
+---
+
+## About Page → Mission & Vision
+
+Add strong supporting visuals.
+
+This section should feel inspirational and communicate company purpose.
+
+---
+
+## Home Page → What We Do
+
+The current service icons/logos look basic.
+
+Explore improvements using:
+
+* Animated SVGs
+* GSAP-powered interactions
+* Premium icon libraries
+* Motion-enhanced service cards
+* Modern visual treatments
+
+The services section should feel alive and interactive.
+
+---
+
+# 6. Animation & Motion Design Improvements
+
+The existing animations are good, but we can elevate the experience further.
+
+## Recommended Technologies
+
+* GSAP
+* Framer Motion
+* Three.js (only where appropriate)
+* Lenis (if smooth scrolling is beneficial)
+
+---
+
+## Inspiration
+
+Use the GSAP website as a benchmark:
+
+https://gsap.com/
+
+I'm not asking for heavy or complex animations.
+
+The goal is:
+
+* Smooth
+* Elegant
+* Premium
+* Performance-friendly
+
+We want users to think:
+
+"This agency clearly pays attention to detail. If their website is this polished, their work must be high quality."
+
+---
+
+## Animation Principles
+
+Avoid:
+
+* Excessive motion
+* Laggy effects
+* Over-engineered interactions
+* Animations that hurt performance
+
+Focus on:
+
+* Scroll-triggered reveals
+* Subtle parallax
+* Hover interactions
+* Content transitions
+* Micro-interactions
+* Section entrances
+* Premium motion design
+
+Everything should remain smooth on desktop and mobile.
+
+---
+
+# Final Objective
+
+The website should feel comparable to modern premium digital agencies and SaaS companies.
+
+After implementing these improvements, review the entire website again and identify any remaining areas that still feel:
+
+* Generic
+* AI-generated
+* Incomplete
+* Outdated
+* Visually weak
+
+Then refine those areas until the website feels truly production-ready, premium, modern, and capable of impressing potential clients within the first few seconds of visiting.
