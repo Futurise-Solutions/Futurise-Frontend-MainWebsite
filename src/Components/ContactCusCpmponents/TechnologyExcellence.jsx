@@ -1,8 +1,8 @@
 import React from "react";
-import { SimpleGrid, Box, Heading, Text, VStack, HStack, Image, Icon } from "@chakra-ui/react";
+import { SimpleGrid, Heading, Text, VStack, HStack, Image, Icon } from "@chakra-ui/react";
 import { FiCheck } from "react-icons/fi";
 import { strengths } from "../../utils/Constant";
-import { Section, SectionHeading, GlassCard, Reveal } from "../common";
+import { Section, SectionHeading, GlassCard, Reveal, IconTile } from "../common";
 
 const TechnologyExcellence = () => {
   return (
@@ -16,22 +16,12 @@ const TechnologyExcellence = () => {
       />
       <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
         {strengths.map((strength, i) => (
-          <Reveal key={strength.name} delay={(i % 3) * 0.08}>
-            <GlassCard h="full" p={{ base: 6, md: 7 }}>
+          <Reveal key={strength.name} delay={(i % 3) * 0.08} h="full">
+            <GlassCard h="full" p={{ base: 6, md: 7 }} role="group">
               <HStack spacing={4} mb={5}>
-                <Box
-                  w="52px"
-                  h="52px"
-                  borderRadius="14px"
-                  display="grid"
-                  placeItems="center"
-                  bgGradient="linear(135deg, rgba(123,108,255,0.2), rgba(181,123,255,0.2))"
-                  border="1px solid"
-                  borderColor="rgba(180,160,255,0.25)"
-                  flexShrink={0}
-                >
+                <IconTile size="52px" radius="14px">
                   <Image src={strength.icon} alt="" w="26px" h="26px" />
-                </Box>
+                </IconTile>
                 <Heading as="h3" fontSize="lg" fontWeight={600}>
                   {strength.name}
                 </Heading>

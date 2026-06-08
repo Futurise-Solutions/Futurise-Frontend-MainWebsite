@@ -70,18 +70,26 @@ const Portfolio = () => {
           {Projects.map((el, idx) => (
             <Reveal key={el.Heading}>
               <Flex direction={{ base: "column", lg: idx % 2 ? "row-reverse" : "row" }} gap={{ base: 8, lg: 14 }} align="center">
-                {/* Image carousel */}
-                <GlassCard flex="1" w="full" hover={false} overflow="hidden" p={0}>
+                {/* Image carousel — full screenshots, never cropped (natural ratio + autoHeight) */}
+                <GlassCard flex="1" w="full" hover={false} overflow="hidden" p={0} sx={{ ".swiper": { paddingBottom: "36px" } }}>
+                  {/* browser chrome */}
+                  <HStack px={4} py={3} spacing={1.5} borderBottom="1px solid" borderColor="border.subtle">
+                    <Box w="9px" h="9px" rounded="full" bg="#ff5f57" />
+                    <Box w="9px" h="9px" rounded="full" bg="#febc2e" />
+                    <Box w="9px" h="9px" rounded="full" bg="#28c840" />
+                  </HStack>
                   <Swiper
                     slidesPerView={1}
                     loop
+                    autoHeight
+                    grabCursor
                     pagination={{ clickable: true }}
                     autoplay={{ delay: 2600, disableOnInteraction: false }}
                     modules={[Autoplay, Pagination]}
                   >
                     {el.img?.map((item, i) => (
                       <SwiperSlide key={i}>
-                        <Image src={item.src} alt={item.alt} loading="lazy" w="100%" h={{ base: "240px", md: "360px" }} objectFit="cover" objectPosition="top" />
+                        <Image src={item.src} alt={item.alt} loading="lazy" w="100%" h="auto" display="block" />
                       </SwiperSlide>
                     ))}
                   </Swiper>

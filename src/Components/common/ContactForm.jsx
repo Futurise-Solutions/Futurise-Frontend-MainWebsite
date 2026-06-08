@@ -9,7 +9,10 @@ const field = {
   borderColor: "border.subtle",
   borderRadius: "12px",
   size: "lg",
-  _placeholder: { color: "text.faint" },
+  // Brand display font (Zangezi) used consistently across form controls, per brief.
+  fontFamily: "'Zangezi', 'Aeonik Trial', sans-serif",
+  letterSpacing: "0.01em",
+  _placeholder: { color: "text.faint", fontFamily: "'Zangezi', 'Aeonik Trial', sans-serif" },
   _hover: { borderColor: "border.strong" },
   _focus: { borderColor: "brand.400", boxShadow: "0 0 0 1px var(--chakra-colors-brand-400)" },
 };

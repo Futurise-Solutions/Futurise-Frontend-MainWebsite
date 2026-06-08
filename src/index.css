@@ -164,3 +164,36 @@
   background: #0d0d16 !important;
   border-radius: 20px;
 }
+
+/* ============================================================
+   Content & image protection (item 9 & 10)
+   - Disables casual text selection / image dragging for a premium,
+     app-like feel. Does NOT affect SEO or screen readers: the DOM,
+     headings, and alt text are untouched and fully crawlable/announced.
+   - Usability is preserved where it matters: form fields and copyable
+     contact links (mailto/tel) remain selectable.
+   ============================================================ */
+#app {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#app input,
+#app textarea,
+#app [contenteditable="true"],
+#app a[href^="mailto:"],
+#app a[href^="tel:"],
+#app [data-selectable="true"] {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+#app img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-select: none;
+}

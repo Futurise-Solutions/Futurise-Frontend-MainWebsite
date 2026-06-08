@@ -2,6 +2,7 @@ export { default as Section } from "./Section";
 export { default as SectionHeading, Eyebrow } from "./SectionHeading";
 export { default as Reveal } from "./Reveal";
 export { default as GlassCard } from "./GlassCard";
+export { default as IconTile } from "./IconTile";
 export { default as CTASection } from "./CTASection";
 export { default as ScrollToTop } from "./ScrollToTop";
 export { default as PageTransition } from "./PageTransition";

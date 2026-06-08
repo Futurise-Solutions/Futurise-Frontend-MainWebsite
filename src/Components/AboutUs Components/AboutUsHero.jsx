@@ -1,9 +1,8 @@
 import React from "react";
-import { Box, Container, Heading, Text, Button, Stack, HStack, SimpleGrid } from "@chakra-ui/react";
+import { Box, Container, Heading, Text, Button, Stack, HStack } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
 import { Reveal, Eyebrow } from "../common";
-import { companyStats } from "../../utils/Constant";
 
 const PageHero = ({
   eyebrow = "About us",
@@ -71,36 +70,6 @@ const PageHero = ({
   );
 };
 
-/** Trust-stat band shown under the About hero — communicates scale + reliability. */
-const TrustStats = () => (
-  <SimpleGrid
-    columns={{ base: 2, md: 4 }}
-    spacing={{ base: 4, md: 6 }}
-    maxW="760px"
-    mx="auto"
-  >
-    {companyStats.map((s) => (
-      <Box
-        key={s.label}
-        py={{ base: 5, md: 6 }}
-        px={3}
-        borderRadius="16px"
-        border="1px solid"
-        borderColor="border.subtle"
-        bg="bg.surface"
-        backdropFilter="blur(8px)"
-      >
-        <Text fontSize={{ base: "28px", md: "34px" }} fontWeight={700} lineHeight={1} className="gradient-text">
-          {s.value}{s.suffix}
-        </Text>
-        <Text mt={2} fontSize={{ base: "12px", md: "13px" }} color="text.muted" lineHeight={1.3}>
-          {s.label}
-        </Text>
-      </Box>
-    ))}
-  </SimpleGrid>
-);
-
 const AboutUsHero = () => (
   <PageHero
     eyebrow="About Futurise"
@@ -110,7 +79,6 @@ const AboutUsHero = () => (
     primaryLabel="Work with us"
     secondaryLabel="See our work"
     secondaryTo="/portfolio"
-    media={<TrustStats />}
   />
 );
 
