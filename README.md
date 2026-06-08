@@ -2,331 +2,420 @@
 
 The changes you've implemented so far are good and moving in the right direction. However, after comparing the current implementation with our provided references, there are still several areas that need significant improvement to achieve the premium, production-level experience we're targeting.
 
-## Important References
+Here's a cleaner, more professional, and Claude-friendly version of your implementation brief.
 
-### Primary Inspiration
+# Website Redesign & Premium Experience Enhancement
 
-https://www.wednesday.is/
+## Important Before Starting
 
-### Theme Reference
+Before implementing any of the requested changes, please carefully review all requirements below.
 
-Please refer to the design reference image attached in the project:
+If anything is unclear, technically challenging, or requires clarification regarding design, animations, functionality, performance, responsiveness, or implementation approach, please ask questions first before making assumptions.
+
+The goal is to achieve a premium, production-ready agency website experience while maintaining excellent performance and responsiveness.
+
+---
+
+# Design References
+
+## Primary Inspiration
+
+[https://www.wednesday.is/](https://www.wednesday.is/)
+
+## Motion & Interaction Reference
+
+[https://gsap.com/](https://gsap.com/)
+
+## Theme & Visual Direction
+
+Please refer to the provided design reference:
 
 `image.png`
 
-This image represents the overall visual direction, color palette, mood, and premium feel that we want the website to achieve.
+This image should guide:
+
+* Visual style
+* Color palette
+* Layout direction
+* Premium feel
+* Typography treatment
+* Overall user experience
 
 ---
 
-# 1. Color Palette & Visual Identity
+# Home Page Improvements
 
-Currently, the website still feels AI-generated and generic.
+## 1. Service Cards Icon Effects
 
-Although typography and spacing have improved, the color palette, gradients, highlights, and visual identity do not match the provided references.
+### Section:
+
+**"Services that move your business forward"**
+
+Currently, the icon hover effect only appears when hovering over the card.
 
 ### Required Changes
 
-* Analyze the color palette used in the reference website and attached image.
-* Create a stronger visual identity using:
+* Make the icon effect visible by default.
+* Apply the same premium icon treatment anywhere similar icons are used across the website.
+* Use the provided reference screenshot:
 
-  * Premium gradients
-  * Accent colors
-  * Hover states
-  * Background treatments
-  * Depth and contrast
-* Ensure the website no longer looks like a standard AI-generated template.
-* The brand should feel like a modern premium technology agency.
+`Screenshot 2026-06-08 145016.png`
+
+Ensure consistency across all sections using similar icon styles.
 
 ---
 
-# 2. Navbar Enhancement
+## 2. Projects Section Layout Fix
 
-The current navbar feels too simple.
+### Section:
 
-### Keep
+**"Projects we're proud of"**
 
-* Existing font family
-* Existing clean structure
+### Current Issues
 
-### Improve
+* Project images are being cropped.
+* Images appear cut off inside their containers.
 
-* Visual hierarchy
-* Hover interactions
-* Active states
-* Subtle animations
-* Premium feel
-* More eye-catching appearance
+### Required Changes
 
-The goal is to create a navbar that feels modern, memorable, and high-end without becoming overly flashy.
+* Images must always be fully visible.
+* Use a Masonry Grid Layout.
+* Ensure proper aspect ratio handling.
+* Avoid unnecessary cropping or hidden image content.
 
----
+### Important
 
-# 3. Hero Sections Need Strong Visual Storytelling
-
-This is currently one of the biggest weaknesses.
-
-The hero section is the first thing users see, and first impressions matter.
-
-Most hero sections currently rely heavily on text and lack compelling visual content.
-
-## Required
-
-Every major page should have a visually engaging hero section.
-
-### Home Page
-
-The hero section should immediately communicate:
-
-* Technology
-* Innovation
-* AI
-* Digital Transformation
-* Full-Stack Expertise
-
-### About Page
-
-The hero section should communicate:
-
-* Company vision
-* Innovation
-* Team expertise
-* Trust
-
-### Service Pages
-
-Each service page should have visuals related to its specific service:
-
-#### Web Development
-
-* Modern web experiences
-* UI/UX
-* Responsive design
-
-#### Mobile Development
-
-* Mobile apps
-* Devices
-* Cross-platform experiences
-
-#### Blockchain
-
-* Blockchain networks
-* Decentralized systems
-
-#### Smart Contracts
-
-* Automation
-* Secure transactions
-
-#### AI SaaS
-
-* AI workflows
-* Automation
-* Intelligence systems
-
-#### Dashboards
-
-* Analytics
-* Data visualization
-* Business intelligence
-
-### Portfolio Page
-
-Should immediately showcase creativity, quality, and delivered work.
-
-### Contact Page
-
-Should feel welcoming, premium, and trustworthy.
+Review the entire website and ensure images are never unnecessarily cut, cropped, or hidden.
 
 ---
 
-## Image Selection Guidelines
+## 3. Client Testimonials Carousel
 
-Do NOT randomly pick stock images.
+### Section:
 
-Choose visuals that:
+**"Loved by the clients we work with"**
 
-* Match the overall brand aesthetic
-* Follow the website color palette
-* Feel premium and modern
-* Support the content
-* Create emotional impact
+### Required Changes
 
-Analyze whether each section would benefit more from:
+Convert client testimonials into a smooth carousel/slider.
 
-* Full background image
-* Split layout with image and content
-* Abstract visual composition
-* Custom illustration
-* Technology-focused imagery
+### Reference
 
-Select whichever creates the strongest user experience.
+Use the same carousel implementation currently used in the Portfolio section for project showcases.
 
-Use high-quality open-source assets where appropriate.
+Requirements:
+
+* Smooth transitions
+* Mobile friendly
+* Touch support
+* Auto-play (optional)
+* Elegant animations
 
 ---
 
-# 4. Projects Showcase Section
+## 4. FAQ Accordion Fix
 
-Currently, some project images are getting cropped and losing impact.
+### Section:
 
-Instead of a traditional slider/carousel, explore a more premium showcase layout.
+**"Questions? We've got answers."**
 
-Reference:
-`project showcase.png`
+### Current Issue
 
-Possible approaches:
+All FAQ items appear expanded by default.
 
-* Layered image stacks
-* Overlapping project cards
-* Interactive project gallery
-* Bento-grid layouts
-* Showcase-style presentation
+### Required Changes
 
-The goal is to highlight project visuals without aggressive cropping.
+* Only the first FAQ item should be open initially.
+* Remaining items should stay collapsed.
+* Maintain proper accordion behavior.
 
 ---
 
-# 5. Section-Specific Visual Improvements
+# About Page
 
-## Home Page → Who We Are
+## 5. Remove Unwanted Image
 
-Currently feels text-heavy.
+Please remove: the number showing in img we need to remove it because it again coming in better way just below it
 
-Add meaningful imagery or visual storytelling elements.
+`image-1.png`
 
----
-
-## About Page → Mission & Vision
-
-Add strong supporting visuals.
-
-This section should feel inspirational and communicate company purpose.
+from the About page.
 
 ---
 
-## Home Page → What We Do
+# Global Image Handling
 
-The current service icons/logos look basic.
+## 6. Image Cropping Audit
 
-Explore improvements using:
+### Reference
 
-* Animated SVGs
-* GSAP-powered interactions
-* Premium icon libraries
-* Motion-enhanced service cards
-* Modern visual treatments
+`image-2.png`
 
-The services section should feel alive and interactive.
+Perform a complete image review across the entire website.
+
+### Requirements
+
+* No image should be unnecessarily cropped.
+* No important visual content should be hidden.
+* Maintain aspect ratios.
+* Ensure responsive scaling on all screen sizes.
 
 ---
 
-# 6. Animation & Motion Design Improvements
+# Contact Page Redesign
 
-The existing animations are good, but we can elevate the experience further.
+## 7. Contact Section Redesign
+
+### Reference
+
+`image-3.png`
+
+### Current Issue
+
+The information section becomes significantly longer than the contact form when content grows.
+
+### Required Changes
+
+Redesign the section to ensure:
+
+* Better visual balance
+* Consistent height alignment
+* Improved spacing
+* Premium layout structure
+
+### Typography Requirement
+
+Use **Zingzui** font family consistently inside:
+
+* Input fields
+* Textareas
+* Form controls
+
+Apply wherever appropriate throughout the website.
+
+---
+
+# Interactive Elements
+
+## 8. Button Hover Effects
+
+All primary and secondary action buttons should include premium hover interactions.
+
+Examples:
+
+* Subtle lift
+* Glow
+* Scale
+* Background transitions
+* Border animations
+
+Avoid overly aggressive effects.
+
+---
+
+# Content Protection
+
+## 9. Text Selection
+
+Prevent users from selecting/copying website text **only if it does not negatively impact SEO, accessibility, or usability.**
+
+If it impacts SEO or accessibility, do not implement.
+
+---
+
+## 10. Image Protection
+
+Prevent easy image downloading where possible.
+
+Examples:
+
+* Disable drag behavior
+* Disable right-click on images
+* Additional protection techniques where appropriate
+
+### Important
+
+Only implement if it does not negatively affect:
+
+* SEO
+* Accessibility
+* Website performance
+
+Note: Understand that complete image protection is impossible once images are delivered to the browser.
+
+---
+
+# Loader Enhancement
+
+## 11. Initial Loading Experience
+
+Redesign the initial loader.
+
+Requirements:
+
+* Premium appearance
+* Brand-focused
+* Smooth animations
+* Fast execution
+* No delays to actual content loading
+
+The loader should feel polished and intentional.
+
+---
+
+# Animation & Motion Design Upgrade
+
+The current animations are good but can be elevated further.
 
 ## Recommended Technologies
 
 * GSAP
 * Framer Motion
-* Three.js (only where appropriate)
-* Lenis (if smooth scrolling is beneficial)
+* Three.js (only where truly beneficial)
+* Lenis (if smooth scrolling adds value)
 
 ---
 
-## Inspiration
+## Animation Philosophy
 
-Use the GSAP website as a benchmark:
-
-https://gsap.com/
-
-I'm not asking for heavy or complex animations.
-
-The goal is:
-
-* Smooth
-* Elegant
-* Premium
-* Performance-friendly
-
-We want users to think:
-
-"This agency clearly pays attention to detail. If their website is this polished, their work must be high quality."
-
----
-
-## Animation Principles
-
-Avoid:
+### Avoid
 
 * Excessive motion
-* Laggy effects
-* Over-engineered interactions
-* Animations that hurt performance
+* Heavy effects
+* Laggy interactions
+* Over-engineered animations
+* Performance issues
 
-Focus on:
+### Focus On
 
 * Scroll-triggered reveals
-* Subtle parallax
-* Hover interactions
+* Elegant section entrances
+* Subtle parallax effects
+* Premium hover interactions
 * Content transitions
 * Micro-interactions
-* Section entrances
-* Premium motion design
+* Smooth state changes
 
-Everything should remain smooth on desktop and mobile.
+### Goal
+
+The experience should feel:
+
+* Smooth
+* Modern
+* Premium
+* Intentional
+* Performance-friendly
+
+Users should immediately feel that this is a high-quality digital agency website.
 
 ---
 
-# Final Objective
+# Mobile Navigation Fixes
 
-The website should feel comparable to modern premium digital agencies and SaaS companies.
+The mobile navigation drawer is currently not behaving correctly.
 
-After implementing these improvements, review the entire website again and identify any remaining areas that still feel:
+## Required Fixes
+
+Ensure the mobile drawer closes when:
+
+* A navigation item is clicked
+* Clicking outside the drawer
+* Clicking the close button
+* Navigating between routes/pages
+
+Verify behavior across all devices.
+
+---
+
+# Responsiveness Audit
+
+Perform a complete responsiveness review across the entire website.
+
+## Test Devices
+
+* Mobile
+* Tablet
+* Laptop
+* Desktop
+* Large desktop screens
+
+## Fix Any Issues Related To
+
+* Overflow
+* Horizontal scrolling
+* Broken layouts
+* Incorrect spacing
+* Typography scaling
+* Navigation behavior
+* Image responsiveness
+* Cropping issues
+* Grid inconsistencies
+
+---
+
+# Contact Information Integration
+
+Please strategically add official business contact information throughout the website.
+
+Do not place it randomly.
+
+## Recommended Locations
+
+* Footer
+* Contact Page
+* CTA Sections
+* Navbar (where appropriate)
+
+## Business Details
+
+Email:
+[business@futurisesolutions.com](mailto:business@futurisesolutions.com)
+
+Phone:
++91 7665013356
+
+### Requirements
+
+* Email must use mailto:
+* Phone must use tel:
+* Ensure proper accessibility and UX
+
+---
+
+# Final Quality Assurance Pass
+
+After all implementation work is completed:
+
+## Conduct a Full Website Review
+
+Identify and improve any remaining areas that feel:
 
 * Generic
 * AI-generated
 * Incomplete
 * Outdated
 * Visually weak
+* Inconsistent
 
-Then refine those areas until the website feels truly production-ready, premium, modern, and capable of impressing potential clients within the first few seconds of visiting.
+---
 
-## Additional Fixes & Final QA
+# Final Objective
 
-### Mobile Navigation
+The website should feel comparable to modern premium digital agencies and high-end SaaS companies.
 
-* The mobile navbar drawer/menu is currently not closing properly. Please identify and fix the issue.
-* Ensure the drawer closes when:
+The final result should communicate:
 
-  * A navigation link is clicked
-  * Clicking outside the drawer
-  * Pressing the close button/icon
-  * Navigating between routes/pages
+* Professionalism
+* Attention to detail
+* Trust
+* Design maturity
+* Technical excellence
 
-### Responsiveness Review
+When a potential client visits the website, the first impression should immediately communicate that Futurise Solutions delivers premium-quality work.
 
-* Perform a complete responsiveness audit across all pages and components.
-* Test on mobile, tablet, laptop, and large desktop screen sizes.
-* Fix any issues related to:
+Do not stop after implementing the listed tasks.
 
-  * Overflow
-  * Horizontal scrolling
-  * Broken layouts
-  * Improper spacing
-  * Image scaling/cropping
-  * Typography scaling
-  * Navigation behavior
+Perform a final design, UX, motion, responsiveness, accessibility, and quality review to ensure the website feels fully production-ready.
 
-### Contact Information
+This version is much clearer for Claude, Cursor, Windsurf, or any senior frontend developer and reduces the chances of requirements being missed or misinterpreted.
 
-Please add our official business contact information strategically throughout the website (not randomly), especially in high-conversion areas such as the Footer, Contact Page, CTA sections, and where appropriate in the Navbar.
-
-**Email:** [business@futurisesolutions.com](mailto:business@futurisesolutions.com)
-**Phone:** +91 7665013356
-
-Ensure the email uses a `mailto:` link and the phone number uses a `tel:` link for better user experience.
-
-### Final Review
-
-After completing all changes, perform one final pass through the entire website and fix any remaining UI inconsistencies, responsiveness issues, animation glitches, or areas that still feel generic or unfinished.
