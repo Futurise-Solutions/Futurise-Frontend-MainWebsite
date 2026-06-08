@@ -1,9 +1,12 @@
 import React from "react";
-import { Box, SimpleGrid, Image, Text, Heading, HStack, Icon } from "@chakra-ui/react";
+import { Box, SimpleGrid, Image, Text, Heading, HStack, Icon, Flex } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 import { OurServiceData } from "../../utils/Constant";
-import { Section, SectionHeading, GlassCard, Reveal, IconTile } from "../common";
+import { Section, SectionHeading, GlassCard, Reveal } from "../common";
+
+const MotionBox = motion(Box);
 
 const ServiceCard = ({ el, index }) => (
   <GlassCard
@@ -43,10 +46,34 @@ const ServiceCard = ({ el, index }) => (
       {String(index + 1).padStart(2, "0")}
     </Text>
 
-    {/* premium icon tile — glow visible by default */}
-    <IconTile mb={5}>
-      <Image src={el.icon} alt="" w="28px" h="28px" />
-    </IconTile>
+    {/* icon with animated rotating gradient ring */}
+    <Box position="relative" w="56px" h="56px" mb={5}>
+      <MotionBox
+        position="absolute"
+        inset="-3px"
+        borderRadius="18px"
+        opacity={0.7}
+        animate={{ rotate: 360 }}
+        transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+        sx={{ background: "conic-gradient(from 0deg, #7b6cff, #b57bff, #7b6cff)", filter: "blur(2px)" }}
+      />
+      <Flex
+        position="relative"
+        w="56px"
+        h="56px"
+        borderRadius="16px"
+        align="center"
+        justify="center"
+        bgGradient="linear(135deg, rgba(123,108,255,0.2), rgba(181,123,255,0.2))"
+        border="1px solid"
+        borderColor="rgba(180,160,255,0.25)"
+        transition="transform .3s"
+        _groupHover={{ transform: "scale(1.08)" }}
+        bg="bg.canvas"
+      >
+        <Image src={el.icon} alt="" w="28px" h="28px" />
+      </Flex>
+    </Box>
 
     <HStack justify="space-between" align="start" position="relative">
       <Heading as="h3" fontSize="xl" fontWeight={600}>

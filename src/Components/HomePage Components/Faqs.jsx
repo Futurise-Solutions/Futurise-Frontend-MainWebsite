@@ -33,15 +33,12 @@ const Faqs = () => {
           </Reveal>
         </Box>
 
-        {/* Right accordion — only the first item is open initially. AccordionItems
-            are direct children of Accordion (no per-item motion wrapper) so Chakra's
-            descendant indexing + defaultIndex work correctly. */}
+        {/* Right accordion */}
         <Box flex="1" w="full">
-          <Reveal>
-            <Accordion allowToggle defaultIndex={[0]}>
-              {faqs.map((faq, index) => (
+          <Accordion allowToggle defaultIndex={[0]}>
+            {faqs.map((faq, index) => (
+              <Reveal key={index} delay={index * 0.04}>
                 <AccordionItem
-                  key={index}
                   border="1px solid"
                   borderColor="border.subtle"
                   borderRadius="16px"
@@ -61,9 +58,9 @@ const Faqs = () => {
                     {faq.answer}
                   </AccordionPanel>
                 </AccordionItem>
-              ))}
-            </Accordion>
-          </Reveal>
+              </Reveal>
+            ))}
+          </Accordion>
         </Box>
       </Flex>
     </Section>
