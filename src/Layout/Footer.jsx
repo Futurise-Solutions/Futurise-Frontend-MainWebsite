@@ -5,7 +5,7 @@ import {
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiArrowRight, FiArrowUpRight, FiMail, FiPhone, FiMapPin } from "react-icons/fi";
-import { FaLinkedinIn, FaXTwitter, FaInstagram, FaFacebookF } from "react-icons/fa6";
+import { FaLinkedinIn, FaInstagram, FaFacebookF } from "react-icons/fa6";
 import { Logo } from "../Components/common";
 import { NavbarservicesOptions, Projects } from "../utils/Constant";
 
@@ -36,10 +36,9 @@ const FLink = ({ to, children, onClick }) => (
 );
 
 const socials = [
-  { icon: FaLinkedinIn, label: "LinkedIn", href: "#" },
-  { icon: FaXTwitter, label: "X", href: "#" },
-  { icon: FaInstagram, label: "Instagram", href: "#" },
-  { icon: FaFacebookF, label: "Facebook", href: "#" },
+  { icon: FaLinkedinIn, label: "LinkedIn", href: "https://www.linkedin.com/company/futurisesolutions/" },
+  { icon: FaInstagram, label: "Instagram", href: "https://www.instagram.com/futurisesolutions" },
+  { icon: FaFacebookF, label: "Facebook", href: "https://www.facebook.com/share/1E6xe2C5DW/" },
 ];
 
 const Footer = () => {
