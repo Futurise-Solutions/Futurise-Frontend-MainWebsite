@@ -1,79 +1,421 @@
+# Additional Website Redesign Improvements Required
 
-Project brief (reframed)
+The changes you've implemented so far are good and moving in the right direction. However, after comparing the current implementation with our provided references, there are still several areas that need significant improvement to achieve the premium, production-level experience we're targeting.
 
-AI Assistant Instructions (supervisory prompt)
-- Act as: a Senior Software Engineer and a Professional UI/UX Designer working together. When asked, perform both roles: implement code changes (engineering) and refine visual/UX decisions (design).
+Here's a cleaner, more professional, and Claude-friendly version of your implementation brief.
 
-Reference
-- Primary inspiration: https://www.wednesday.is/
-- Theme (which we want including) reference image: C:\Users\Dharmik Puri Goswami\Desktop\Futurise Solutions\Futurise-Frontend-MainWebsite\image.png
+# Website Redesign & Premium Experience Enhancement
 
-Typography
-- Headings and sub-headings: Zangezi
-- Body, paragraphs, UI text: Aeonik Trial
-- Font files are here: C:\Users\Dharmik Puri Goswami\Desktop\Futurise Solutions\Futurise-Frontend-MainWebsite\src\assests\fonts
+## Important Before Starting
 
-Content + SEO
-- Improve content quality across all sections to be SEO friendly.
-- Target geographies: India and USA. Make the copy reflect both markets and keywords.
-- Keep text natural, benefits-first, and clear for business audiences.
+Before implementing any of the requested changes, please carefully review all requirements below.
 
-Structure / sections
-- About Us page: remove the "Meet the team" section.
-- Keep all existing animations and effects exactly as they are.
-- "What we do" section uses icons. Ensure icons match the headings; if possible, use a higher-quality icon set or small GIFs for better visual impact.
+If anything is unclear, technically challenging, or requires clarification regarding design, animations, functionality, performance, responsiveness, or implementation approach, please ask questions first before making assumptions.
 
-Hero sections and imagery
-- Every page hero (Home, About, each Service, Contact, Portfolio if used) needs a strong image or background image aligned to the page theme.
-- Follow the reference image style for hero effects.
-- Add a complementary image in the footer section (as per reference image).
+The goal is to achieve a premium, production-ready agency website experience while maintaining excellent performance and responsiveness.
 
-UX + responsiveness
-- Fully responsive across all screen sizes.
-- Smooth scroll and transitions should feel production-ready and client-facing.
-- Visual quality should feel close to wednesday.is, not just a template.
+---
 
-Suggestions after code review
-- Update the font setup in both the global CSS and Chakra theme to use Zangezi (heading) and Aeonik Trial (body), since the code currently uses Inter/Space Grotesk. This avoids mixed typography.
-- Add a clear source for hero images (local assets or CDN) and wire them into Home/About/Service/Contact/Portfolio hero components so visuals are consistent across pages.
-- Add descriptive `alt` text for all imagery and ensure headings follow a single H1 per page for SEO clarity.
-- Consider adding meta tags (title/description), Open Graph data, and a sitemap for stronger SEO delivery.
-- Replace sample avatars/testimonials/projects with real client-facing content and locations focused on India + USA to match the target audience.
+# Design References
 
+## Primary Inspiration
 
-Featured Projects — Reframed & SEO-ready
+[https://www.wednesday.is/](https://www.wednesday.is/)
 
-Overview
-- This section showcases selected production work demonstrating frontend engineering, UI/UX design, and theme development targeted at business audiences in India and the USA. Development is led by a Senior Software Engineer and the visual/theme work is handled by a professional UI/UX Designer to ensure a polished, client-facing presentation.
+## Motion & Interaction Reference
 
-References
-- Reference website: https://rdsdigital.in/
-- Reference image: C:\Users\Dharmik Puri Goswami\Desktop\Futurise Solutions\Futurise-Frontend-MainWebsite\image1.png
+[https://gsap.com/](https://gsap.com/)
 
-Project Assets
-- Project images folder: C:\Users\Dharmik Puri Goswami\Desktop\Futurise Solutions\Futurise-Frontend-MainWebsite\src\assests\Project Images
+## Theme & Visual Direction
 
-Projects (source folders / image groups)
-- Project 1 — propertyDashboard (all images)
-- Project 2 — realState (all images)
-- Project 3 — marty (all images)
-- Project 4 — CryptoDashboard (all images)
-- Project 5 — jewel (all images)
-- Project 6 — hotelBooking (all images)
+Please refer to the provided design reference:
 
-Usage Guidelines (SEO + Presentation)
-- Adjust imagery to match the reference UI style and visual hierarchy used across the site.
-- Featured selection for the Home hero: use four highlight projects — Project 1 (propertyDashboard), Project 3 (marty), Project 5 (jewel), and Project 2 (realState) — to demonstrate variety and industry reach.
-- Portfolio/Projects page: display all projects one-by-one with a clear heading, a concise subheading, and an SEO-friendly description of ~80–100 words. Each description should mention the business value delivered, relevant technologies (e.g., React, Vite, Chakra UI), and target markets (India & USA) to improve search relevance.
-- Always include descriptive alt text for each image (describe the screen or feature and include location keywords where relevant) and enable lazy loading to improve performance.
+`image.png`
 
-SEO & Accessibility Tips
-- Use a single H1 per page and descriptive H2/H3s for project titles and sections.
-- Add meta title/description and Open Graph tags for each project page where applicable.
-- Prefer locally hosted or CDN-served hero images with clear filenames and `alt` attributes.
+This image should guide:
 
-Important Notes
-1. Follow best practices for front-end performance and accessibility.
-2. Avoid dead or unnecessary code; keep the codebase clean and maintainable.
-3. Ensure all pages and project descriptions are SEO friendly and target both India and USA audiences.
-4. Use React Suspense and lazy loading for heavy components and images to improve initial load performance.
+* Visual style
+* Color palette
+* Layout direction
+* Premium feel
+* Typography treatment
+* Overall user experience
+
+---
+
+# Home Page Improvements
+
+## 1. Service Cards Icon Effects
+
+### Section:
+
+**"Services that move your business forward"**
+
+Currently, the icon hover effect only appears when hovering over the card.
+
+### Required Changes
+
+* Make the icon effect visible by default.
+* Apply the same premium icon treatment anywhere similar icons are used across the website.
+* Use the provided reference screenshot:
+
+`Screenshot 2026-06-08 145016.png`
+
+Ensure consistency across all sections using similar icon styles.
+
+---
+
+## 2. Projects Section Layout Fix
+
+### Section:
+
+**"Projects we're proud of"**
+
+### Current Issues
+
+* Project images are being cropped.
+* Images appear cut off inside their containers.
+
+### Required Changes
+
+* Images must always be fully visible.
+* Use a Masonry Grid Layout.
+* Ensure proper aspect ratio handling.
+* Avoid unnecessary cropping or hidden image content.
+
+### Important
+
+Review the entire website and ensure images are never unnecessarily cut, cropped, or hidden.
+
+---
+
+## 3. Client Testimonials Carousel
+
+### Section:
+
+**"Loved by the clients we work with"**
+
+### Required Changes
+
+Convert client testimonials into a smooth carousel/slider.
+
+### Reference
+
+Use the same carousel implementation currently used in the Portfolio section for project showcases.
+
+Requirements:
+
+* Smooth transitions
+* Mobile friendly
+* Touch support
+* Auto-play (optional)
+* Elegant animations
+
+---
+
+## 4. FAQ Accordion Fix
+
+### Section:
+
+**"Questions? We've got answers."**
+
+### Current Issue
+
+All FAQ items appear expanded by default.
+
+### Required Changes
+
+* Only the first FAQ item should be open initially.
+* Remaining items should stay collapsed.
+* Maintain proper accordion behavior.
+
+---
+
+# About Page
+
+## 5. Remove Unwanted Image
+
+Please remove: the number showing in img we need to remove it because it again coming in better way just below it
+
+`image-1.png`
+
+from the About page.
+
+---
+
+# Global Image Handling
+
+## 6. Image Cropping Audit
+
+### Reference
+
+`image-2.png`
+
+Perform a complete image review across the entire website.
+
+### Requirements
+
+* No image should be unnecessarily cropped.
+* No important visual content should be hidden.
+* Maintain aspect ratios.
+* Ensure responsive scaling on all screen sizes.
+
+---
+
+# Contact Page Redesign
+
+## 7. Contact Section Redesign
+
+### Reference
+
+`image-3.png`
+
+### Current Issue
+
+The information section becomes significantly longer than the contact form when content grows.
+
+### Required Changes
+
+Redesign the section to ensure:
+
+* Better visual balance
+* Consistent height alignment
+* Improved spacing
+* Premium layout structure
+
+### Typography Requirement
+
+Use **Zingzui** font family consistently inside:
+
+* Input fields
+* Textareas
+* Form controls
+
+Apply wherever appropriate throughout the website.
+
+---
+
+# Interactive Elements
+
+## 8. Button Hover Effects
+
+All primary and secondary action buttons should include premium hover interactions.
+
+Examples:
+
+* Subtle lift
+* Glow
+* Scale
+* Background transitions
+* Border animations
+
+Avoid overly aggressive effects.
+
+---
+
+# Content Protection
+
+## 9. Text Selection
+
+Prevent users from selecting/copying website text **only if it does not negatively impact SEO, accessibility, or usability.**
+
+If it impacts SEO or accessibility, do not implement.
+
+---
+
+## 10. Image Protection
+
+Prevent easy image downloading where possible.
+
+Examples:
+
+* Disable drag behavior
+* Disable right-click on images
+* Additional protection techniques where appropriate
+
+### Important
+
+Only implement if it does not negatively affect:
+
+* SEO
+* Accessibility
+* Website performance
+
+Note: Understand that complete image protection is impossible once images are delivered to the browser.
+
+---
+
+# Loader Enhancement
+
+## 11. Initial Loading Experience
+
+Redesign the initial loader.
+
+Requirements:
+
+* Premium appearance
+* Brand-focused
+* Smooth animations
+* Fast execution
+* No delays to actual content loading
+
+The loader should feel polished and intentional.
+
+---
+
+# Animation & Motion Design Upgrade
+
+The current animations are good but can be elevated further.
+
+## Recommended Technologies
+
+* GSAP
+* Framer Motion
+* Three.js (only where truly beneficial)
+* Lenis (if smooth scrolling adds value)
+
+---
+
+## Animation Philosophy
+
+### Avoid
+
+* Excessive motion
+* Heavy effects
+* Laggy interactions
+* Over-engineered animations
+* Performance issues
+
+### Focus On
+
+* Scroll-triggered reveals
+* Elegant section entrances
+* Subtle parallax effects
+* Premium hover interactions
+* Content transitions
+* Micro-interactions
+* Smooth state changes
+
+### Goal
+
+The experience should feel:
+
+* Smooth
+* Modern
+* Premium
+* Intentional
+* Performance-friendly
+
+Users should immediately feel that this is a high-quality digital agency website.
+
+---
+
+# Mobile Navigation Fixes
+
+The mobile navigation drawer is currently not behaving correctly.
+
+## Required Fixes
+
+Ensure the mobile drawer closes when:
+
+* A navigation item is clicked
+* Clicking outside the drawer
+* Clicking the close button
+* Navigating between routes/pages
+
+Verify behavior across all devices.
+
+---
+
+# Responsiveness Audit
+
+Perform a complete responsiveness review across the entire website.
+
+## Test Devices
+
+* Mobile
+* Tablet
+* Laptop
+* Desktop
+* Large desktop screens
+
+## Fix Any Issues Related To
+
+* Overflow
+* Horizontal scrolling
+* Broken layouts
+* Incorrect spacing
+* Typography scaling
+* Navigation behavior
+* Image responsiveness
+* Cropping issues
+* Grid inconsistencies
+
+---
+
+# Contact Information Integration
+
+Please strategically add official business contact information throughout the website.
+
+Do not place it randomly.
+
+## Recommended Locations
+
+* Footer
+* Contact Page
+* CTA Sections
+* Navbar (where appropriate)
+
+## Business Details
+
+Email:
+[business@futurisesolutions.com](mailto:business@futurisesolutions.com)
+
+Phone:
++91 7665013356
+
+### Requirements
+
+* Email must use mailto:
+* Phone must use tel:
+* Ensure proper accessibility and UX
+
+---
+
+# Final Quality Assurance Pass
+
+After all implementation work is completed:
+
+## Conduct a Full Website Review
+
+Identify and improve any remaining areas that feel:
+
+* Generic
+* AI-generated
+* Incomplete
+* Outdated
+* Visually weak
+* Inconsistent
+
+---
+
+# Final Objective
+
+The website should feel comparable to modern premium digital agencies and high-end SaaS companies.
+
+The final result should communicate:
+
+* Professionalism
+* Attention to detail
+* Trust
+* Design maturity
+* Technical excellence
+
+When a potential client visits the website, the first impression should immediately communicate that Futurise Solutions delivers premium-quality work.
+
+Do not stop after implementing the listed tasks.
+
+Perform a final design, UX, motion, responsiveness, accessibility, and quality review to ensure the website feels fully production-ready.
+
+This version is much clearer for Claude, Cursor, Windsurf, or any senior frontend developer and reduces the chances of requirements being missed or misinterpreted.
+

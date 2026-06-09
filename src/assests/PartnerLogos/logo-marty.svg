@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 48" fill="none">
+  <!-- QR-style grid icon -->
+  <rect x="6"  y="10" width="7" height="7" rx="1.5" fill="#7b6cff"/>
+  <rect x="15" y="10" width="7" height="7" rx="1.5" fill="#b57bff"/>
+  <rect x="6"  y="19" width="7" height="7" rx="1.5" fill="#b57bff"/>
+  <rect x="15" y="19" width="7" height="7" rx="1.5" fill="#7b6cff"/>
+  <rect x="6"  y="28" width="7" height="7" rx="1.5" fill="#7b6cff"/>
+  <rect x="15" y="28" width="7" height="7" rx="1.5" fill="#b57bff"/>
+  <rect x="6"  y="37" width="7" height="3"  rx="1"   fill="#b57bff" opacity="0.5"/>
+  <rect x="15" y="37" width="7" height="3"  rx="1"   fill="#7b6cff" opacity="0.5"/>
+  <!-- wordmark -->
+  <text x="30" y="27" font-family="system-ui,-apple-system,Arial,sans-serif" font-size="20" font-weight="800" fill="white" letter-spacing="-0.3">MARTY</text>
+  <text x="30" y="40" font-family="system-ui,-apple-system,Arial,sans-serif" font-size="10" font-weight="600" fill="#b57bff" letter-spacing="1.5">QR PLATFORM</text>
+</svg>

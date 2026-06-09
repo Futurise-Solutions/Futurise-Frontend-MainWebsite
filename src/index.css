@@ -1,14 +1,100 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+/* ============================================================
+   Brand typography — Zangezi (display headings) + Aeonik Trial (body)
+   Self-hosted from src/assests/fonts so there's no Google Fonts call.
+   Zangezi ships only Light / SemiLight / Regular cuts (no true bold),
+   so heavier weights are mapped to its Regular cut to avoid faux-bold.
+   ============================================================ */
+
+/* — Zangezi (headings) — */
+@font-face {
+  font-family: 'Zangezi';
+  src: url('./assests/fonts/Zangezi08_Trial-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Zangezi';
+  src: url('./assests/fonts/Zangezi08_Trial-SemiLight.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Zangezi';
+  src: url('./assests/fonts/Zangezi08_Trial-Regular.otf') format('opentype');
+  font-weight: 500 800; /* variable-style range: heavier requests get the Regular cut, no synthetic bold */
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Zangezi';
+  src: url('./assests/fonts/Zangezi08_Trial-LightItalic.otf') format('opentype');
+  font-weight: 300 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Zangezi';
+  src: url('./assests/fonts/Zangezi08_Trial-Italic.otf') format('opentype');
+  font-weight: 500 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* — Aeonik Trial (body / UI) — */
+@font-face {
+  font-family: 'Aeonik Trial';
+  src: url('./assests/fonts/aeoniktrial-light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Aeonik Trial';
+  src: url('./assests/fonts/aeoniktrial-regular.otf') format('opentype');
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Aeonik Trial';
+  src: url('./assests/fonts/aeoniktrial-bold.otf') format('opentype');
+  font-weight: 600 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Aeonik Trial';
+  src: url('./assests/fonts/aeoniktrial-lightitalic.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Aeonik Trial';
+  src: url('./assests/fonts/aeoniktrial-regularitalic.otf') format('opentype');
+  font-weight: 400 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Aeonik Trial';
+  src: url('./assests/fonts/aeoniktrial-bolditalic.otf') format('opentype');
+  font-weight: 600 800;
+  font-style: italic;
+  font-display: swap;
+}
 
 #app {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Aeonik Trial', 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 /* Reusable utility classes */
 .gradient-text {
-  background: linear-gradient(135deg, #6f93ff 0%, #b07dff 100%);
+  background: linear-gradient(135deg, #b4a0ff 0%, #d4a5ff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -17,7 +103,7 @@
 /* Swiper navigation theming */
 .swiper-button-next,
 .swiper-button-prev {
-  color: #6f93ff !important;
+  color: #b4a0ff !important;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(6px);
@@ -34,7 +120,7 @@
   background: rgba(255, 255, 255, 0.4);
 }
 .swiper-pagination-bullet-active {
-  background: #6f93ff;
+  background: #b4a0ff;
 }
 
 /* Contact form (used by Contact + Portfolio) */
@@ -46,7 +132,7 @@
   border-radius: 22px;
   position: relative;
   z-index: 1;
-  background: rgba(10, 17, 36, 0.72);
+  background: rgba(13, 13, 22, 0.72);
   backdrop-filter: blur(14px);
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -61,8 +147,8 @@
 }
 .form input:focus,
 .form textarea:focus {
-  border-color: #6f93ff;
-  box-shadow: 0 0 0 1px #6f93ff;
+  border-color: #b4a0ff;
+  box-shadow: 0 0 0 1px #b4a0ff;
   outline: none;
 }
 .form input::placeholder,
@@ -75,6 +161,39 @@
   filter: grayscale(0.4) brightness(0.85) contrast(1.05);
 }
 .leaflet-container {
-  background: #0a1124 !important;
+  background: #0d0d16 !important;
   border-radius: 20px;
+}
+
+/* ============================================================
+   Content & image protection (item 9 & 10)
+   - Disables casual text selection / image dragging for a premium,
+     app-like feel. Does NOT affect SEO or screen readers: the DOM,
+     headings, and alt text are untouched and fully crawlable/announced.
+   - Usability is preserved where it matters: form fields and copyable
+     contact links (mailto/tel) remain selectable.
+   ============================================================ */
+#app {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#app input,
+#app textarea,
+#app [contenteditable="true"],
+#app a[href^="mailto:"],
+#app a[href^="tel:"],
+#app [data-selectable="true"] {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+#app img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-select: none;
 }

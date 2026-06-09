@@ -1,60 +1,66 @@
 import { extendTheme } from "@chakra-ui/react";
 
 /**
- * Futurise design system — "Deep navy + gradient".
- * Dark navy canvas, blue→violet brand gradient, glass surfaces.
+ * Futurise design system — "Near-black + lavender/violet".
+ * Deep charcoal canvas, periwinkle→lavender brand gradient, glass surfaces.
+ * Tuned to the premium agency reference (image.png / wednesday.is): a very dark,
+ * almost-black base with soft lavender accents and purple glow.
  * Reusable tokens keep every page visually consistent.
  */
 
-export const GRADIENT = "linear-gradient(135deg, #4F7BFF 0%, #9D5CFF 100%)";
+export const GRADIENT = "linear-gradient(135deg, #7B6CFF 0%, #B57BFF 100%)";
 export const GRADIENT_SOFT =
-  "linear-gradient(135deg, rgba(79,123,255,0.18) 0%, rgba(157,92,255,0.18) 100%)";
+  "linear-gradient(135deg, rgba(123,108,255,0.18) 0%, rgba(181,123,255,0.18) 100%)";
 
 const colors = {
+  // Periwinkle → indigo brand ramp (primary accent)
   brand: {
-    50: "#eef3ff",
-    100: "#dbe6ff",
-    200: "#b8cdff",
-    300: "#8aabff",
-    400: "#6f93ff",
-    500: "#4f7bff",
-    600: "#3a5fe6",
-    700: "#2f4cbf",
-    800: "#283f99",
-    900: "#1f2e6b",
+    50: "#f1efff",
+    100: "#e3dfff",
+    200: "#c8bfff",
+    300: "#a99cff",
+    400: "#8f7dff",
+    500: "#7b6cff",
+    600: "#6450e6",
+    700: "#503fbf",
+    800: "#3f3299",
+    900: "#2a2168",
   },
+  // Lavender → purple secondary
   violet: {
-    300: "#c4a3ff",
-    400: "#b07dff",
-    500: "#9d5cff",
-    600: "#8438f0",
+    300: "#dcc0ff",
+    400: "#c596ff",
+    500: "#b57bff",
+    600: "#9d4edd",
   },
+  // Near-black charcoal canvas (kept under the `navy` key so existing token
+  // references keep working — the values are now deep neutral-violet black).
   navy: {
-    900: "#060a18",
-    800: "#0a1124",
-    700: "#0e1730",
-    600: "#13203f",
-    500: "#1b2c50",
+    900: "#08080d",
+    800: "#0d0d16",
+    700: "#13131f",
+    600: "#1a1a2b",
+    500: "#24243a",
   },
   // Default brand color scheme for Chakra components (e.g. colorScheme="brand")
 };
 
 const fonts = {
-  heading: `'Space Grotesk', 'Inter', -apple-system, system-ui, sans-serif`,
-  body: `'Inter', -apple-system, system-ui, sans-serif`,
+  heading: `'Zangezi', 'Aeonik Trial', -apple-system, system-ui, sans-serif`,
+  body: `'Aeonik Trial', -apple-system, system-ui, sans-serif`,
 };
 
 const semanticTokens = {
   colors: {
-    "bg.canvas": "#070b18",
+    "bg.canvas": "#08080d",
     "bg.surface": "rgba(255,255,255,0.035)",
     "bg.surfaceHover": "rgba(255,255,255,0.06)",
     "border.subtle": "rgba(255,255,255,0.08)",
     "border.strong": "rgba(255,255,255,0.16)",
-    "text.primary": "#f5f7ff",
-    "text.muted": "#aab4d4",
-    "text.faint": "#7a85a8",
-    "accent.solid": "#6f93ff",
+    "text.primary": "#f4f2ff",
+    "text.muted": "#b0a8c8",
+    "text.faint": "#7d748f",
+    "accent.solid": "#b4a0ff",
   },
 };
 
@@ -67,16 +73,16 @@ const styles = {
     },
     body: {
       backgroundImage:
-        "radial-gradient(60% 50% at 15% -5%, rgba(79,123,255,0.16) 0%, rgba(7,11,24,0) 60%), radial-gradient(55% 45% at 95% 0%, rgba(157,92,255,0.14) 0%, rgba(7,11,24,0) 55%)",
+        "radial-gradient(60% 50% at 15% -5%, rgba(123,108,255,0.16) 0%, rgba(8,8,13,0) 60%), radial-gradient(55% 45% at 95% 0%, rgba(181,123,255,0.14) 0%, rgba(8,8,13,0) 55%)",
       backgroundAttachment: "fixed",
       backgroundRepeat: "no-repeat",
       overflowX: "hidden",
     },
-    "::selection": { background: "rgba(111,147,255,0.35)" },
+    "::selection": { background: "rgba(123,108,255,0.35)" },
     "*::-webkit-scrollbar": { width: "10px", height: "10px" },
-    "*::-webkit-scrollbar-track": { background: "#0a1124" },
+    "*::-webkit-scrollbar-track": { background: "#0d0d16" },
     "*::-webkit-scrollbar-thumb": {
-      background: "linear-gradient(180deg,#4f7bff,#9d5cff)",
+      background: "linear-gradient(180deg,#7b6cff,#b57bff)",
       borderRadius: "8px",
     },
   },
@@ -89,14 +95,15 @@ const components = {
       gradient: {
         bgGradient: "linear(135deg, brand.500, violet.500)",
         color: "white",
-        boxShadow: "0 10px 30px -10px rgba(79,123,255,0.6)",
-        transition: "all .25s ease",
+        boxShadow: "0 10px 30px -10px rgba(123,108,255,0.6)",
+        transition: "transform .25s cubic-bezier(0.22,1,0.36,1), box-shadow .25s ease, filter .25s ease",
         _hover: {
-          transform: "translateY(-2px)",
-          boxShadow: "0 16px 40px -12px rgba(157,92,255,0.7)",
-          _disabled: { transform: "none" },
+          transform: "translateY(-2px) scale(1.02)",
+          boxShadow: "0 18px 46px -12px rgba(181,123,255,0.8)",
+          filter: "brightness(1.06)",
+          _disabled: { transform: "none", filter: "none" },
         },
-        _active: { transform: "translateY(0)" },
+        _active: { transform: "translateY(0) scale(0.99)" },
       },
       outlineGlow: {
         bg: "transparent",
@@ -104,16 +111,19 @@ const components = {
         border: "1px solid",
         borderColor: "border.strong",
         backdropFilter: "blur(6px)",
-        transition: "all .25s ease",
+        transition: "transform .25s cubic-bezier(0.22,1,0.36,1), box-shadow .25s ease, border-color .25s ease, background .25s ease",
         _hover: {
           borderColor: "brand.400",
-          bg: "rgba(111,147,255,0.08)",
-          transform: "translateY(-2px)",
+          bg: "rgba(180,160,255,0.1)",
+          transform: "translateY(-2px) scale(1.02)",
+          boxShadow: "0 12px 30px -12px rgba(123,108,255,0.55)",
         },
+        _active: { transform: "translateY(0) scale(0.99)" },
       },
       ghostLink: {
         bg: "transparent",
         color: "text.muted",
+        transition: "color .2s ease, background .2s ease",
         _hover: { color: "text.primary", bg: "rgba(255,255,255,0.04)" },
       },
     },

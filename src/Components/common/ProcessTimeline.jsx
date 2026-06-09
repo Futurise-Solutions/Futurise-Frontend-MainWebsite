@@ -10,7 +10,7 @@ const ProcessTimeline = ({ columns = { base: 1, sm: 2, lg: 4 } }) => {
     <SimpleGrid columns={columns} spacing={5}>
       {processSteps.map((step, i) => (
         <Reveal key={step.title} delay={(i % 4) * 0.07}>
-          <GlassCard h="full" p={6} hover={false} _hover={{ borderColor: "rgba(111,147,255,0.45)" }}>
+          <GlassCard h="full" p={6} hover={false} _hover={{ borderColor: "rgba(180,160,255,0.45)" }}>
             <Flex justify="space-between" align="center" mb={4}>
               <Flex
                 w="48px"
@@ -18,9 +18,9 @@ const ProcessTimeline = ({ columns = { base: 1, sm: 2, lg: 4 } }) => {
                 borderRadius="14px"
                 align="center"
                 justify="center"
-                bgGradient="linear(135deg, rgba(79,123,255,0.2), rgba(157,92,255,0.2))"
+                bgGradient="linear(135deg, rgba(123,108,255,0.2), rgba(181,123,255,0.2))"
                 border="1px solid"
-                borderColor="rgba(111,147,255,0.25)"
+                borderColor="rgba(180,160,255,0.25)"
               >
                 <Icon as={step.icon} boxSize={5} color="accent.solid" />
               </Flex>

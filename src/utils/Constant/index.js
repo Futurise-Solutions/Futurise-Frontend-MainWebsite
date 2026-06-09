@@ -3,6 +3,9 @@ import {
   DigiMarketingNavbarIcon, DigitalMarketingHover, SmartContractHover, SmartContractNavbarIcon,
   UIUXHover, UIUXNavbarIcon, WebDevNavbarIcon, clientIconHover, expertiseiconHover,
   postIconHover, qualityIconHover, timeIconHover, webDevHover,
+  propertyDashboard1, propertyDashboard2, realState1, realState2, realState3,
+  marty1, marty2, marty3, crypto1, crypto2, jewel1, jewel2, jewel3, hotel1, hotel2, hotel3,
+  logoHomies, logoMarty, logoDavidTishbi, logoEstate, logoGdt, logoPlatinumPeak,
 } from "../../assests";
 import {
   FaClipboardList, FaPencilRuler, FaBullseye, FaHammer, FaCheckCircle, FaRocket, FaTools,
@@ -59,10 +62,10 @@ export const OurServiceData = [
 
 // **************** COMPANY STATS ****************
 export const companyStats = [
-  { value: 120, suffix: "+", label: "Projects delivered" },
-  { value: 45, suffix: "+", label: "Happy clients worldwide" },
-  { value: 8, suffix: "+", label: "Years of experience" },
-  { value: 98, suffix: "%", label: "Client retention rate" },
+  { value: 30, suffix: "+", label: "Projects delivered" },
+  { value: 14, suffix: "+", label: "Happy clients worldwide" },
+  { value: 10, suffix: "+", label: "Team Members" },
+  { value: 97, suffix: "%", label: "Client retention rate" },
 ];
 
 // **************** TESTIMONIALS (sample) ****************
@@ -90,49 +93,143 @@ export const testimonials = [
   },
 ];
 
-// **************** PORTFOLIO CASE STUDIES (sample) ****************
+// **************** PORTFOLIO PROJECTS ****************
+// Real client work. `featured: true` marks the projects highlighted on the home page.
+// Each image carries descriptive alt text (with market keywords) for SEO + accessibility.
 export const Projects = [
   {
+    featured: true,
     img: [
-      "https://www.cleveroad.com/images/portfolio/6b550ac284ccdf6a8d5242fd1cf6f87d62ef805a1b983adbf4fb060b86fbf413-2x.webp",
-      "https://www.cleveroad.com/images/portfolio/0c7fd31b0bbe5f0e3736693f4a6fff62758509f7bd7d4f3f0b90eb920ae31654-2x.webp",
-      "https://www.cleveroad.com/images/portfolio/ac9d3b16080195cf06da35f4bf0384c500362956a7e09186c3f3f5c717bf083a-2x.webp",
+      { src: propertyDashboard1, alt: "HOMIES property management dashboard showing income, expenses, and unit analytics for a real-estate portfolio in the USA and India" },
+      { src: propertyDashboard2, alt: "HOMIES dashboard detail view with property performance charts and recent transactions" },
     ],
-    location: "Denmark",
-    projectType: "Media & Entertainment",
-    Heading: "Cross-device Video-on-Demand Platform",
+    location: "USA & India",
+    projectType: "PropTech · SaaS Dashboard",
+    Heading: "HOMIES — Property Management & Analytics Dashboard",
     aboutProject:
-      "A multi-platform video streaming service for renting and purchasing movies, serving 500,000+ subscribers across the Nordic countries with seamless cross-device playback.",
-    clentName: "Nordic Stream A/S",
-    tags: ["Web Development", "App Development", "UI/UX Design"],
+      "A unified SaaS dashboard giving real-estate teams a single view of income, expenses, occupancy, and unit performance — engineered in React, Vite, and Chakra UI with interactive charts built for speed on any device.",
+    problem:
+      "Property managers were juggling multiple spreadsheets and outdated tools to track income, expenses, and occupancy across their portfolio — causing costly errors and slow decision-making.",
+    solution:
+      "We built a unified SaaS dashboard with real-time analytics and interactive charts that gives property teams instant, accurate visibility across thousands of listings from any device.",
+    stats: [
+      { value: "+62%", label: "Faster Reporting" },
+      { value: "+45%", label: "Admin Time Saved" },
+      { value: "98%", label: "Data Accuracy" },
+    ],
+    clentName: "HOMIES PropTech",
   },
   {
+    featured: true,
     img: [
-      "https://www.cleveroad.com/images/portfolio/0c7fd31b0bbe5f0e3736693f4a6fff62758509f7bd7d4f3f0b90eb920ae31654-2x.webp",
-      "https://www.cleveroad.com/images/portfolio/6b550ac284ccdf6a8d5242fd1cf6f87d62ef805a1b983adbf4fb060b86fbf413-2x.webp",
-      "https://www.cleveroad.com/images/portfolio/ac9d3b16080195cf06da35f4bf0384c500362956a7e09186c3f3f5c717bf083a-2x.webp",
+      { src: marty1, alt: "Marty-QR AI review platform landing page with a 'Review Simplified' hero" },
+      { src: marty2, alt: "Marty-QR features overview for collecting customer reviews via QR codes" },
+      { src: marty3, alt: "Marty-QR client portal for managing online reputation and feedback" },
     ],
-    location: "UAE",
-    projectType: "FinTech",
-    Heading: "Decentralized Crypto Exchange",
+    location: "USA & India",
+    projectType: "SaaS · AI Review Platform",
+    Heading: "Marty-QR — AI-Powered Review Management",
     aboutProject:
-      "A secure Web3 trading platform with audited smart contracts, real-time order books, and a non-custodial wallet, processing millions in daily volume.",
-    clentName: "Ledgerly",
-    tags: ["Blockchain", "Smart Contracts", "Web Development"],
+      "An AI-powered review and feedback platform that helps local businesses collect, manage, and grow their online reputation through QR touchpoints and seamless Google integration.",
+    problem:
+      "Local businesses were losing customers to competitors with stronger online reviews, but had no simple, consistent system to capture feedback from satisfied customers at the right moment.",
+    solution:
+      "We delivered an AI-powered platform with QR touchpoints that capture in-moment reviews, automate responses, and sync directly with Google — turning every visit into a potential five-star rating.",
+    stats: [
+      { value: "3.2x", label: "Review Collection Rate" },
+      { value: "+89%", label: "Google Rating Lift" },
+      { value: "+55%", label: "New Customer Conversions" },
+    ],
+    clentName: "Marty-QR",
   },
   {
+    featured: true,
     img: [
-      "https://www.cleveroad.com/images/portfolio/ac9d3b16080195cf06da35f4bf0384c500362956a7e09186c3f3f5c717bf083a-2x.webp",
-      "https://www.cleveroad.com/images/portfolio/6b550ac284ccdf6a8d5242fd1cf6f87d62ef805a1b983adbf4fb060b86fbf413-2x.webp",
-      "https://www.cleveroad.com/images/portfolio/0c7fd31b0bbe5f0e3736693f4a6fff62758509f7bd7d4f3f0b90eb920ae31654-2x.webp",
+      { src: jewel1, alt: "David Tishbi luxury jewelry storefront hero featuring fine gems and rings" },
+      { src: jewel2, alt: "David Tishbi jewelry collection page with product listings" },
+      { src: jewel3, alt: "David Tishbi watches and bullion category for premium shoppers in the USA and India" },
     ],
     location: "USA",
-    projectType: "Health & Fitness",
-    Heading: "AI-Powered Fitness Companion App",
+    projectType: "Luxury E-commerce",
+    Heading: "David Tishbi — Luxury Jewelry E-commerce",
     aboutProject:
-      "A personalized health app with workout tracking, nutrition insights, and adaptive plans — driving a 40% increase in monthly active users after launch.",
-    clentName: "FitFuel",
-    tags: ["App Development", "UI/UX Design", "Digital Marketing"],
+      "A bespoke luxury e-commerce storefront for a boutique jewelry brand — editorial storytelling, appointment booking, and a conversion-optimized checkout crafted for high-intent premium shoppers.",
+    problem:
+      "The brand's existing site failed to convey the premium quality of their pieces — slow load times, poor mobile experience, and a generic layout were driving high bounce rates and lost sales.",
+    solution:
+      "We crafted a bespoke luxury storefront with editorial design, refined typography, appointment booking, and a streamlined checkout — turning first-time visitors into loyal collectors.",
+    stats: [
+      { value: "+73%", label: "Session Duration" },
+      { value: "+48%", label: "Direct Bookings" },
+      { value: "-38%", label: "Bounce Rate" },
+    ],
+    clentName: "David Tishbi Jewelry",
+  },
+  {
+    featured: true,
+    img: [
+      { src: realState1, alt: "Estate real-estate platform homepage with a property search hero for buyers in India and the USA" },
+      { src: realState2, alt: "Estate property listings page showing homes for sale and rent" },
+      { src: realState3, alt: "Estate agent profiles and featured property details" },
+    ],
+    location: "India & USA",
+    projectType: "Real Estate · Web Platform",
+    Heading: "Estate — Property Search & Listings Platform",
+    aboutProject:
+      "A conversion-focused real-estate platform with rich property search, agent profiles, and featured listings — fast, SEO-friendly, and built to move visitors from browsing to booking.",
+    problem:
+      "Growing agencies were stuck on generic listing platforms with poor SEO, no brand differentiation, and a clunky search experience that caused high lead drop-off before enquiry.",
+    solution:
+      "We built a fast, SEO-optimized property platform with rich filtering, agent profiles, and compelling calls-to-action that guide visitors naturally from discovery to booking a viewing.",
+    stats: [
+      { value: "+58%", label: "Organic Traffic" },
+      { value: "+41%", label: "Lead Conversion" },
+      { value: "3x", label: "Page Speed Score" },
+    ],
+    clentName: "Estate Realty",
+  },
+  {
+    img: [
+      { src: crypto1, alt: "Crypto trading terminal with a live candlestick chart, order book, and buy/sell order form" },
+      { src: crypto2, alt: "Crypto exchange market view with depth chart and perpetuals trading tools" },
+    ],
+    location: "USA & India",
+    projectType: "FinTech · Web3",
+    Heading: "Crypto Exchange — Perpetuals Trading Terminal",
+    aboutProject:
+      "A professional trading terminal for spot and perpetuals with real-time charts, live order books, and audited smart-contract integrations — optimized for split-second decisions without sacrificing clarity.",
+    problem:
+      "Experienced traders were forced to use bloated, confusing interfaces that sacrificed usability for data density — leading to costly mistakes and high platform abandonment.",
+    solution:
+      "We engineered a precision trading terminal with real-time candlestick charts, live order books, and a clean buy/sell interface — optimized for speed, clarity, and non-custodial security.",
+    stats: [
+      { value: "+67%", label: "Trade Execution Speed" },
+      { value: "+52%", label: "User Retention" },
+      { value: "-28%", label: "Order Error Rate" },
+    ],
+    clentName: "GDT Exchange",
+  },
+  {
+    img: [
+      { src: hotel1, alt: "Platinum Peak hotel booking website showcasing luxury rooms" },
+      { src: hotel2, alt: "Platinum Peak suite gallery highlighting amenities and interiors" },
+      { src: hotel3, alt: "Platinum Peak direct reservation booking section" },
+    ],
+    location: "India & USA",
+    projectType: "Hospitality · Booking",
+    Heading: "Platinum Peak — Luxury Hotel Booking Experience",
+    aboutProject:
+      "An immersive hotel booking website with stunning room galleries and a frictionless direct-reservation flow — designed to convert guests and reduce dependency on costly OTA platforms.",
+    problem:
+      "The hotel was losing a majority of bookings to OTA platforms (Booking.com, Expedia), paying steep commissions and losing direct relationships with guests.",
+    solution:
+      "We built an immersive direct-booking site with editorial room galleries, seamless reservation flow, and persuasive CTAs — making it effortless for guests to book without third parties.",
+    stats: [
+      { value: "+84%", label: "Direct Bookings" },
+      { value: "+61%", label: "Conversion Rate" },
+      { value: "-42%", label: "OTA Dependency" },
+    ],
+    clentName: "Platinum Peak Hotels",
   },
 ];
 
@@ -210,28 +307,6 @@ export const faqs = [
   },
 ];
 
-// **************** HOME PROJECT HIGHLIGHTS (sample) ****************
-export const projects = [
-  {
-    avatar: "https://i.pinimg.com/564x/a5/7c/e5/a57ce5c64863317503915174fa700cfa.jpg",
-    name: "FitFuel",
-    description:
-      "A comprehensive health and wellness app that helps users track workouts, monitor nutrition, and stay motivated with personalized, adaptive fitness plans.",
-  },
-  {
-    avatar: "https://i.pinimg.com/564x/25/75/f9/2575f95220c4fdb4a15e55c1cac2e3e7.jpg",
-    name: "Souled Store",
-    description:
-      "An e-commerce platform offering pop-culture merchandise with a seamless shopping experience, secure payments, and a conversion-optimized checkout.",
-  },
-  {
-    avatar: "https://i.pinimg.com/564x/c3/89/6d/c3896df1cf6271c1b27f614e0e630bd4.jpg",
-    name: "Ledgerly Exchange",
-    description:
-      "A secure, user-friendly crypto trading platform with advanced tooling and real-time market data to help users make confident, informed decisions.",
-  },
-];
-
 // **************** CLIENT REVIEWS (sample) ****************
 export const reviews = [
   {
@@ -257,8 +332,15 @@ export const reviews = [
   },
 ];
 
-// **************** PARTNERS / TRUSTED BY (sample) ****************
-export const partners = Array.from({ length: 9 }, () => ({ img: ClientLogo }));
+// **************** PARTNERS / TRUSTED BY ****************
+export const partners = [
+  { img: logoHomies,       name: "HOMIES PropTech" },
+  { img: logoMarty,        name: "Marty-QR" },
+  { img: logoDavidTishbi,  name: "David Tishbi Jewelry" },
+  { img: logoEstate,       name: "Estate Realty" },
+  { img: logoGdt,          name: "GDT Exchange" },
+  { img: logoPlatinumPeak, name: "Platinum Peak Hotels" },
+];
 
 // **************** NAVIGATION ****************
 export const navbarOptions = [
@@ -307,14 +389,6 @@ export const coreValues = [
     title: "Innovation",
     description: "We embrace emerging tech responsibly, choosing what genuinely moves your business forward.",
   },
-];
-
-// **************** ABOUT — TEAM (sample) ****************
-export const team = [
-  { name: "Aarav Sharma", role: "Founder & CEO", avatar: "https://i.pravatar.cc/200?img=11" },
-  { name: "Elena Rossi", role: "Head of Design", avatar: "https://i.pravatar.cc/200?img=44" },
-  { name: "Liam O’Brien", role: "Lead Engineer", avatar: "https://i.pravatar.cc/200?img=13" },
-  { name: "Priya Nair", role: "Blockchain Architect", avatar: "https://i.pravatar.cc/200?img=49" },
 ];
 
 // --------- About Us — Technology excellence strengths ---------

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 48" fill="none">
+  <!-- diamond gem icon -->
+  <path d="M18 10L26 10L30 18L18 38L6 18L10 10Z" fill="none" stroke="#c9a96e" stroke-width="1.5"/>
+  <path d="M10 18H30L18 38Z" fill="#c9a96e" opacity="0.25"/>
+  <path d="M10 18L14 10H22L26 18H10Z" fill="#c9a96e" opacity="0.5"/>
+  <line x1="18" y1="10" x2="18" y2="38" stroke="#c9a96e" stroke-width="0.5" opacity="0.4"/>
+  <!-- wordmark -->
+  <text x="38" y="24" font-family="Georgia,serif" font-size="16" font-weight="700" fill="white" letter-spacing="0.5">David Tishbi</text>
+  <text x="38" y="39" font-family="system-ui,-apple-system,Arial,sans-serif" font-size="9" font-weight="400" fill="#c9a96e" letter-spacing="3">JEWELRY</text>
+</svg>

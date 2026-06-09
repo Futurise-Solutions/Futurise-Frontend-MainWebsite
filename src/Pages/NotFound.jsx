@@ -1,11 +1,13 @@
 import { Box, Button, Heading, Text, Stack } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { FiArrowLeft, FiHome } from "react-icons/fi";
+import { Seo } from "../Components/common";
 
 const NotFound = () => {
   const navigate = useNavigate();
   return (
     <Box minH="80vh" display="grid" placeItems="center" px={6} textAlign="center">
+      <Seo title="Page Not Found (404)" description="The page you're looking for doesn't exist or has been moved." noindex />
       <Box>
         <Text
           fontFamily="heading"

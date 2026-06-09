@@ -21,7 +21,7 @@ const ServicesWorldwide = () => {
         <Wrap justify="center" spacing={3} mb={8}>
           {locations.map((loc) => (
             <WrapItem key={loc.name}>
-              <Tag size="lg" borderRadius="full" px={4} py={2} bg="rgba(111,147,255,0.12)" color="text.primary" border="1px solid" borderColor="rgba(111,147,255,0.25)">
+              <Tag size="lg" borderRadius="full" px={4} py={2} bg="rgba(180,160,255,0.12)" color="text.primary" border="1px solid" borderColor="rgba(180,160,255,0.25)">
                 <TagLeftIcon as={FiMapPin} color="accent.solid" />
                 <TagLabel>{loc.name}</TagLabel>
               </Tag>

@@ -1,12 +1,15 @@
 import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 import {
-  Box, SimpleGrid, Text, Input, Button, HStack, VStack, Flex, Icon, Link as CLink, useToast,
+  Box, SimpleGrid, Text, Input, Button, HStack, VStack, Flex, Icon, Image, Link as CLink, useToast,
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
-import { FiArrowRight, FiMail, FiPhone, FiMapPin } from "react-icons/fi";
-import { FaLinkedinIn, FaXTwitter, FaInstagram, FaFacebookF } from "react-icons/fa6";
+import { FiArrowRight, FiArrowUpRight, FiMail, FiPhone, FiMapPin } from "react-icons/fi";
+import { FaLinkedinIn, FaInstagram, FaFacebookF } from "react-icons/fa6";
 import { Logo } from "../Components/common";
-import { NavbarservicesOptions } from "../utils/Constant";
+import { NavbarservicesOptions, Projects } from "../utils/Constant";
+
+const footerWork = Projects.filter((p) => p.featured).slice(0, 4);
 
 const FooterCol = ({ title, children }) => (
   <VStack align="start" spacing={3}>
@@ -33,10 +36,9 @@ const FLink = ({ to, children, onClick }) => (
 );
 
 const socials = [
-  { icon: FaLinkedinIn, label: "LinkedIn", href: "#" },
-  { icon: FaXTwitter, label: "X", href: "#" },
-  { icon: FaInstagram, label: "Instagram", href: "#" },
-  { icon: FaFacebookF, label: "Facebook", href: "#" },
+  { icon: FaLinkedinIn, label: "LinkedIn", href: "https://www.linkedin.com/company/futurisesolutions/" },
+  { icon: FaInstagram, label: "Instagram", href: "https://www.instagram.com/futurisesolutions" },
+  { icon: FaFacebookF, label: "Facebook", href: "https://www.facebook.com/share/1E6xe2C5DW/" },
 ];
 
 const Footer = () => {
@@ -44,19 +46,107 @@ const Footer = () => {
   const toast = useToast();
   const [email, setEmail] = useState("");
 
+  const [isSubscribing, setIsSubscribing] = useState(false);
+
   const subscribe = (e) => {
     e.preventDefault();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       toast({ title: "Enter a valid email address", status: "warning", duration: 3000, isClosable: true });
       return;
     }
-    toast({ title: "You're subscribed!", description: "Thanks for joining the Futurise newsletter.", status: "success", duration: 4000, isClosable: true });
-    setEmail("");
+    setIsSubscribing(true);
+    emailjs
+      .send(
+        "service_jc2bgz1",
+        "template_dfwoqsd",
+        {
+          subscriber_email: email,
+          time: new Date().toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" }),
+        },
+        "nURJDAbLK8UpUR46a"
+      )
+      .then(
+        () => {
+          toast({ title: "You're subscribed!", description: "Thanks for joining the Futurise newsletter.", status: "success", duration: 4000, isClosable: true });
+          setEmail("");
+          setIsSubscribing(false);
+        },
+        () => {
+          toast({ title: "Subscription failed.", description: "Please try again or email us directly.", status: "error", duration: 4000, isClosable: true });
+          setIsSubscribing(false);
+        }
+      );
   };
 
   return (
-    <Box as="footer" mt="auto" borderTop="1px solid" borderColor="border.subtle" bg="rgba(6,10,24,0.6)">
+    <Box as="footer" mt="auto" borderTop="1px solid" borderColor="border.subtle" bg="rgba(8,8,13,0.6)">
       <Box maxW="1200px" mx="auto" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
+        {/* Complementary visual — selected work preview */}
+        <Flex
+          direction={{ base: "column", sm: "row" }}
+          justify="space-between"
+          align={{ base: "start", sm: "end" }}
+          gap={3}
+          mb={6}
+        >
+          <Text fontSize="sm" fontWeight={600} letterSpacing="0.08em" textTransform="uppercase" color="text.faint">
+            Selected work
+          </Text>
+          <CLink
+            as={Link}
+            to="/portfolio"
+            fontSize="sm"
+            color="accent.solid"
+            display="inline-flex"
+            alignItems="center"
+            gap={1}
+            _hover={{ color: "text.primary" }}
+          >
+            View all projects <Icon as={FiArrowUpRight} />
+          </CLink>
+        </Flex>
+        <SimpleGrid columns={{ base: 2, md: 4 }} spacing={4} mb={{ base: 12, md: 16 }}>
+          {footerWork.map((project) => (
+            <Box
+              key={project.Heading}
+              as={Link}
+              to="/portfolio"
+              role="group"
+              position="relative"
+              overflow="hidden"
+              borderRadius="14px"
+              border="1px solid"
+              borderColor="border.subtle"
+              h={{ base: "92px", md: "120px" }}
+            >
+              <Image
+                src={project.img[0].src}
+                alt={project.img[0].alt}
+                loading="lazy"
+                w="full"
+                h="full"
+                objectFit="cover"
+                objectPosition="top"
+                transition="transform .5s ease"
+                _groupHover={{ transform: "scale(1.07)" }}
+              />
+              <Box position="absolute" inset={0} bgGradient="linear(to-t, rgba(8,8,13,0.85), rgba(8,8,13,0) 60%)" />
+              <Text
+                position="absolute"
+                bottom={2}
+                left={3}
+                right={3}
+                fontSize="xs"
+                fontWeight={600}
+                color="text.primary"
+                noOfLines={1}
+              >
+                {project.clentName}
+              </Text>
+            </Box>
+          ))}
+        </SimpleGrid>
+
         <SimpleGrid columns={{ base: 1, md: 2, lg: 5 }} spacing={{ base: 10, lg: 8 }}>
           {/* Brand + newsletter */}
           <VStack align="start" spacing={5} gridColumn={{ lg: "span 2" }} pr={{ lg: 8 }}>
@@ -79,7 +169,7 @@ const Footer = () => {
                   _placeholder={{ color: "text.faint" }}
                   _focus={{ borderColor: "brand.400", boxShadow: "0 0 0 1px var(--chakra-colors-brand-400)" }}
                 />
-                <Button type="submit" variant="gradient" px={5} aria-label="Subscribe">
+                <Button type="submit" variant="gradient" px={5} aria-label="Subscribe" isLoading={isSubscribing}>
                   <Icon as={FiArrowRight} />
                 </Button>
               </HStack>
@@ -102,15 +192,31 @@ const Footer = () => {
           <FooterCol title="Get in touch">
             <HStack spacing={3} align="start">
               <Icon as={FiMail} color="accent.solid" mt={1} />
-              <FLink>support@futurisetechnologies.com</FLink>
+              <CLink href="mailto:business@futurisesolutions.com" fontSize="15px" color="text.muted" _hover={{ color: "text.primary" }} transition="color .2s">
+                business@futurisesolutions.com
+              </CLink>
             </HStack>
             <HStack spacing={3} align="start">
               <Icon as={FiPhone} color="accent.solid" mt={1} />
-              <FLink>+1 (123) 456-7890</FLink>
+              <CLink href="tel:+917665013356" fontSize="15px" color="text.muted" _hover={{ color: "text.primary" }} transition="color .2s">
+                +91 76650 13356
+              </CLink>
             </HStack>
             <HStack spacing={3} align="start">
-              <Icon as={FiMapPin} color="accent.solid" mt={1} />
-              <Text fontSize="15px" color="text.muted">Serving clients worldwide</Text>
+              <Icon as={FiMapPin} color="accent.solid" mt="3px" flexShrink={0} />
+              <CLink
+                href="https://maps.google.com/?q=Huddart+Parker+Building,+Wellington+Central,+Wellington+6011,+New+Zealand"
+                isExternal
+                fontSize="15px"
+                color="text.muted"
+                lineHeight={1.6}
+                _hover={{ color: "text.primary" }}
+                transition="color .2s"
+              >
+                Huddart Parker Building,<br />
+                Wellington Central,<br />
+                Wellington 6011, New Zealand
+              </CLink>
             </HStack>
           </FooterCol>
         </SimpleGrid>
@@ -144,7 +250,7 @@ const Footer = () => {
                 borderColor="border.subtle"
                 color="text.muted"
                 transition="all .25s"
-                _hover={{ color: "white", borderColor: "brand.400", bg: "rgba(111,147,255,0.12)", transform: "translateY(-2px)" }}
+                _hover={{ color: "white", borderColor: "brand.400", bg: "rgba(180,160,255,0.12)", transform: "translateY(-2px)" }}
               >
                 <Icon as={s.icon} />
               </CLink>

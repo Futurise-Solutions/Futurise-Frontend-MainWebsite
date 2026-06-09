@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Flex, Box, Heading, Text, Button, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon,
 } from "@chakra-ui/react";
@@ -9,6 +9,11 @@ import { Section, Reveal, Eyebrow } from "../common";
 
 const Faqs = () => {
   const navigate = useNavigate();
+  const [openIndex, setOpenIndex] = useState(0);
+
+  // Reset to first item on every mount (covers back/forward navigation)
+  useEffect(() => { setOpenIndex(0); }, []);
+
   return (
     <Section>
       <Flex direction={{ base: "column", lg: "row" }} gap={{ base: 10, lg: 16 }} align="start">
@@ -33,19 +38,24 @@ const Faqs = () => {
           </Reveal>
         </Box>
 
-        {/* Right accordion */}
+        {/* Right accordion — single Reveal wrapper prevents per-item re-animation bug */}
         <Box flex="1" w="full">
-          <Accordion allowToggle defaultIndex={[0]}>
-            {faqs.map((faq, index) => (
-              <Reveal key={index} delay={index * 0.04}>
+          <Reveal>
+            <Accordion
+              allowToggle
+              index={openIndex}
+              onChange={(idx) => setOpenIndex(idx)}
+            >
+              {faqs.map((faq, index) => (
                 <AccordionItem
+                  key={index}
                   border="1px solid"
                   borderColor="border.subtle"
                   borderRadius="16px"
                   mb={3}
                   bg="bg.surface"
                   overflow="hidden"
-                  _hover={{ borderColor: "rgba(111,147,255,0.35)" }}
+                  _hover={{ borderColor: "rgba(180,160,255,0.35)" }}
                   transition="border-color .2s"
                 >
                   <AccordionButton py={5} px={6} _hover={{ bg: "transparent" }} _expanded={{ color: "accent.solid" }}>
@@ -58,9 +68,9 @@ const Faqs = () => {
                     {faq.answer}
                   </AccordionPanel>
                 </AccordionItem>
-              </Reveal>
-            ))}
-          </Accordion>
+              ))}
+            </Accordion>
+          </Reveal>
         </Box>
       </Flex>
     </Section>

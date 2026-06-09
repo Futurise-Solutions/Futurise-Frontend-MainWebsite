@@ -12,7 +12,7 @@ const Logo = ({ size = "md", to = "/", ...rest }) => {
       display="inline-flex"
       alignItems="center"
       transition="transform .25s ease, filter .25s ease"
-      _hover={{ transform: "scale(1.04)", filter: "drop-shadow(0 4px 14px rgba(111,147,255,0.45))" }}
+      _hover={{ transform: "scale(1.04)", filter: "drop-shadow(0 4px 14px rgba(180,160,255,0.45))" }}
       {...rest}
     >
       <Image src={logo} alt="Futurise Solutions" h={h} w="auto" objectFit="contain" draggable={false} />

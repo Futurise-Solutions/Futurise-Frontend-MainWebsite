@@ -1,11 +1,12 @@
 import React from "react";
 import {
-  Box, Container, Flex, Heading, Text, Button, HStack, VStack, Stack, Avatar, AvatarGroup, Icon, SimpleGrid,
+  Box, Container, Flex, Heading, Text, Button, HStack, VStack, Stack, Avatar, AvatarGroup, Icon, Image,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { FiArrowRight, FiStar, FiCheck } from "react-icons/fi";
+import { FiArrowRight, FiStar, FiCpu } from "react-icons/fi";
 import { FaReact, FaApple, FaAndroid, FaEthereum, FaFigma } from "react-icons/fa6";
+import { propertyDashboard1 } from "../../assests";
 
 const MotionBox = motion(Box);
 
@@ -23,6 +24,7 @@ const techIcons = [
   { icon: FaApple, label: "iOS" },
   { icon: FaAndroid, label: "Android" },
   { icon: FaEthereum, label: "Web3" },
+  { icon: FiCpu, label: "AI" },
   { icon: FaFigma, label: "Design" },
 ];
 
@@ -32,8 +34,8 @@ const HeroSection = () => {
   return (
     <Box position="relative" overflow="hidden">
       {/* ambient glow orbs */}
-      <Box position="absolute" top="-10%" left="-5%" w="480px" h="480px" bg="rgba(79,123,255,0.22)" filter="blur(120px)" rounded="full" pointerEvents="none" />
-      <Box position="absolute" top="20%" right="-8%" w="420px" h="420px" bg="rgba(157,92,255,0.2)" filter="blur(120px)" rounded="full" pointerEvents="none" />
+      <Box position="absolute" top="-10%" left="-5%" w="480px" h="480px" bg="rgba(123,108,255,0.22)" filter="blur(120px)" rounded="full" pointerEvents="none" />
+      <Box position="absolute" top="20%" right="-8%" w="420px" h="420px" bg="rgba(181,123,255,0.2)" filter="blur(120px)" rounded="full" pointerEvents="none" />
 
       <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 16, md: 24 }}>
         <Flex direction={{ base: "column", lg: "row" }} align="center" gap={{ base: 14, lg: 10 }}>
@@ -45,13 +47,13 @@ const HeroSection = () => {
                 px={3}
                 py={1.5}
                 borderRadius="full"
-                bg="rgba(111,147,255,0.1)"
+                bg="rgba(180,160,255,0.1)"
                 border="1px solid"
-                borderColor="rgba(111,147,255,0.25)"
+                borderColor="rgba(180,160,255,0.25)"
               >
                 <Box w="7px" h="7px" borderRadius="full" bgGradient="linear(135deg, brand.400, violet.500)" />
                 <Text fontSize="xs" fontWeight={600} letterSpacing="0.14em" textTransform="uppercase" color="accent.solid">
-                  Digital product studio
+                  AI Agents · SaaS · Web · Mobile · Blockchain
                 </Text>
               </HStack>
             </MotionBox>
@@ -64,14 +66,14 @@ const HeroSection = () => {
                 letterSpacing="-0.03em"
                 maxW="640px"
               >
-                We build the future,{" "}
-                <Box as="span" className="gradient-text">ship it faster.</Box>
+                AI-powered apps &{" "}
+                <Box as="span" className="gradient-text">SaaS that scale.</Box>
               </Heading>
             </MotionBox>
 
             <MotionBox custom={2} variants={fadeUp} initial="hidden" animate="show">
               <Text fontSize={{ base: "md", md: "xl" }} color="text.muted" maxW="540px" lineHeight={1.7}>
-                Futurise is a full-cycle studio crafting high-performing web, mobile, and Web3 products — from first sketch to scaled launch.
+                We build AI agents, AI-integrated web apps, SaaS platforms, mobile apps, and Web3 products — end-to-end, from concept to scaled production.
               </Text>
             </MotionBox>
 
@@ -127,37 +129,25 @@ const HeroSection = () => {
                 p={{ base: 6, md: 8 }}
                 boxShadow="0 40px 80px -30px rgba(0,0,0,0.7)"
               >
-                <HStack justify="space-between" mb={6}>
+                <HStack justify="space-between" mb={5}>
                   <HStack spacing={2}>
                     <Box w="11px" h="11px" rounded="full" bg="#ff5f57" />
                     <Box w="11px" h="11px" rounded="full" bg="#febc2e" />
                     <Box w="11px" h="11px" rounded="full" bg="#28c840" />
                   </HStack>
-                  <Text fontSize="xs" color="text.faint">futurise.studio</Text>
+                  <Text fontSize="xs" color="text.faint">futurisesolutions.com</Text>
                 </HStack>
 
-                {/* fake metric cards */}
-                <SimpleGrid columns={2} spacing={4} mb={5}>
-                  <Box borderRadius="16px" p={4} bgGradient="linear(135deg, rgba(79,123,255,0.25), rgba(79,123,255,0.05))" border="1px solid" borderColor="rgba(111,147,255,0.25)">
-                    <Text fontSize="xs" color="text.muted">Performance</Text>
-                    <Text fontSize="28px" fontWeight={700} fontFamily="heading">98<Box as="span" fontSize="md">/100</Box></Text>
-                  </Box>
-                  <Box borderRadius="16px" p={4} bgGradient="linear(135deg, rgba(157,92,255,0.25), rgba(157,92,255,0.05))" border="1px solid" borderColor="rgba(157,92,255,0.25)">
-                    <Text fontSize="xs" color="text.muted">Delivered</Text>
-                    <Text fontSize="28px" fontWeight={700} fontFamily="heading">120+</Text>
-                  </Box>
-                </SimpleGrid>
-
-                <VStack align="stretch" spacing={3}>
-                  {["Design system shipped", "Smart contract audited", "App launched to stores"].map((t) => (
-                    <HStack key={t} spacing={3} p={3} borderRadius="12px" bg="rgba(255,255,255,0.03)" border="1px solid" borderColor="border.subtle">
-                      <Flex w="22px" h="22px" rounded="full" bgGradient="linear(135deg, brand.500, violet.500)" align="center" justify="center" flexShrink={0}>
-                        <Icon as={FiCheck} boxSize={3} color="white" />
-                      </Flex>
-                      <Text fontSize="sm">{t}</Text>
-                    </HStack>
-                  ))}
-                </VStack>
+                {/* real product screenshot — HOMIES property dashboard we built */}
+                <Box borderRadius="14px" overflow="hidden" border="1px solid" borderColor="border.subtle" boxShadow="0 20px 50px -24px rgba(0,0,0,0.7)">
+                  <Image
+                    src={propertyDashboard1}
+                    alt="HOMIES property management dashboard built by Futurise Solutions, showing income, expenses, and unit analytics"
+                    w="full"
+                    display="block"
+                    loading="eager"
+                  />
+                </Box>
               </Box>
 
               {/* floating tech pill */}
@@ -170,7 +160,7 @@ const HeroSection = () => {
                 px={4}
                 py={3}
                 borderRadius="16px"
-                bg="rgba(10,17,36,0.9)"
+                bg="rgba(13,13,22,0.9)"
                 border="1px solid"
                 borderColor="border.strong"
                 backdropFilter="blur(10px)"
@@ -192,7 +182,7 @@ const HeroSection = () => {
                 px={4}
                 py={3}
                 borderRadius="16px"
-                bg="rgba(10,17,36,0.9)"
+                bg="rgba(13,13,22,0.9)"
                 border="1px solid"
                 borderColor="border.strong"
                 backdropFilter="blur(10px)"

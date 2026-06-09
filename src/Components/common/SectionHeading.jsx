@@ -9,9 +9,9 @@ export const Eyebrow = ({ children, ...rest }) => (
     px={3}
     py={1.5}
     borderRadius="full"
-    bg="rgba(111,147,255,0.1)"
+    bg="rgba(180,160,255,0.1)"
     border="1px solid"
-    borderColor="rgba(111,147,255,0.25)"
+    borderColor="rgba(180,160,255,0.25)"
     {...rest}
   >
     <Box w="6px" h="6px" borderRadius="full" bgGradient="linear(135deg, brand.400, violet.500)" />

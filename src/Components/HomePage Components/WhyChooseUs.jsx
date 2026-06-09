@@ -24,12 +24,12 @@ const WhyChooseUs = () => {
                 borderRadius="14px"
                 align="center"
                 justify="center"
-                bgGradient="linear(135deg, rgba(79,123,255,0.2), rgba(157,92,255,0.2))"
+                bgGradient="linear(135deg, rgba(123,108,255,0.2), rgba(181,123,255,0.2))"
                 border="1px solid"
-                borderColor="rgba(111,147,255,0.25)"
+                borderColor="rgba(180,160,255,0.25)"
                 mb={5}
               >
-                <Image src={el.icon} alt="" w="26px" h="26px" />
+                <Image src={el.icon} alt={`${el.title} icon`} w="26px" h="26px" />
               </Flex>
               <Heading as="h3" fontSize="lg" fontWeight={600} mb={2}>
                 {el.title}
