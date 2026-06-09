@@ -36,8 +36,8 @@ export { default as logoEstate }       from "./PartnerLogos/logo-estate.svg";
 export { default as logoGdt }          from "./PartnerLogos/logo-gdt.svg";
 export { default as logoPlatinumPeak } from "./PartnerLogos/logo-platinum-peak.svg";
 
-// Brand logo (Futurise wordmark)
-export { default as logo } from "./logo.svg";
+// Brand logo (Futurise Solutions wordmark — new logo, transparent bg)
+export { default as logo } from "./New-logo.png";
 
 // Portfolio project screenshots (real client work — optimized WebP, lazy-loaded where rendered)
 export { default as propertyDashboard1 } from "./Project Images/propertyDashbaord1.webp";
