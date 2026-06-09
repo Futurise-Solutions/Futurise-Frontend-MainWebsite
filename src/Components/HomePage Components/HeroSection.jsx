@@ -53,7 +53,7 @@ const HeroSection = () => {
               >
                 <Box w="7px" h="7px" borderRadius="full" bgGradient="linear(135deg, brand.400, violet.500)" />
                 <Text fontSize="xs" fontWeight={600} letterSpacing="0.14em" textTransform="uppercase" color="accent.solid">
-                  Digital product studio
+                  AI Agents · SaaS · Web · Mobile · Blockchain
                 </Text>
               </HStack>
             </MotionBox>
@@ -66,14 +66,14 @@ const HeroSection = () => {
                 letterSpacing="-0.03em"
                 maxW="640px"
               >
-                We build the future,{" "}
-                <Box as="span" className="gradient-text">ship it faster.</Box>
+                AI-powered apps &{" "}
+                <Box as="span" className="gradient-text">SaaS that scale.</Box>
               </Heading>
             </MotionBox>
 
             <MotionBox custom={2} variants={fadeUp} initial="hidden" animate="show">
               <Text fontSize={{ base: "md", md: "xl" }} color="text.muted" maxW="540px" lineHeight={1.7}>
-                Futurise is a full-cycle studio crafting high-performing web, mobile, and Web3 products — from first sketch to scaled launch.
+                We build AI agents, AI-integrated web apps, SaaS platforms, mobile apps, and Web3 products — end-to-end, from concept to scaled production.
               </Text>
             </MotionBox>
 
@@ -135,7 +135,7 @@ const HeroSection = () => {
                     <Box w="11px" h="11px" rounded="full" bg="#febc2e" />
                     <Box w="11px" h="11px" rounded="full" bg="#28c840" />
                   </HStack>
-                  <Text fontSize="xs" color="text.faint">futurise.studio</Text>
+                  <Text fontSize="xs" color="text.faint">futurisesolutions.com</Text>
                 </HStack>
 
                 {/* real product screenshot — HOMIES property dashboard we built */}

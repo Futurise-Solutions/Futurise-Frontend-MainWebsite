@@ -5,6 +5,7 @@ import {
   postIconHover, qualityIconHover, timeIconHover, webDevHover,
   propertyDashboard1, propertyDashboard2, realState1, realState2, realState3,
   marty1, marty2, marty3, crypto1, crypto2, jewel1, jewel2, jewel3, hotel1, hotel2, hotel3,
+  logoHomies, logoMarty, logoDavidTishbi, logoEstate, logoGdt, logoPlatinumPeak,
 } from "../../assests";
 import {
   FaClipboardList, FaPencilRuler, FaBullseye, FaHammer, FaCheckCircle, FaRocket, FaTools,
@@ -61,10 +62,10 @@ export const OurServiceData = [
 
 // **************** COMPANY STATS ****************
 export const companyStats = [
-  { value: 120, suffix: "+", label: "Projects delivered" },
-  { value: 45, suffix: "+", label: "Happy clients worldwide" },
-  { value: 8, suffix: "+", label: "Years of experience" },
-  { value: 98, suffix: "%", label: "Client retention rate" },
+  { value: 30, suffix: "+", label: "Projects delivered" },
+  { value: 14, suffix: "+", label: "Happy clients worldwide" },
+  { value: 10, suffix: "+", label: "Team Members" },
+  { value: 97, suffix: "%", label: "Client retention rate" },
 ];
 
 // **************** TESTIMONIALS (sample) ****************
@@ -106,9 +107,17 @@ export const Projects = [
     projectType: "PropTech · SaaS Dashboard",
     Heading: "HOMIES — Property Management & Analytics Dashboard",
     aboutProject:
-      "HOMIES is a property management and analytics dashboard that gives real-estate teams a single view of income, expenses, occupancy, and unit performance. We designed and engineered the interface in React, Vite, and Chakra UI, with interactive charts that turn raw portfolio data into fast, confident decisions. Built for property managers and agencies across India and the USA, it handles thousands of listings while staying fast and fully responsive — from large back-office monitors down to a phone on a site visit.",
+      "A unified SaaS dashboard giving real-estate teams a single view of income, expenses, occupancy, and unit performance — engineered in React, Vite, and Chakra UI with interactive charts built for speed on any device.",
+    problem:
+      "Property managers were juggling multiple spreadsheets and outdated tools to track income, expenses, and occupancy across their portfolio — causing costly errors and slow decision-making.",
+    solution:
+      "We built a unified SaaS dashboard with real-time analytics and interactive charts that gives property teams instant, accurate visibility across thousands of listings from any device.",
+    stats: [
+      { value: "+62%", label: "Faster Reporting" },
+      { value: "+45%", label: "Admin Time Saved" },
+      { value: "98%", label: "Data Accuracy" },
+    ],
     clentName: "HOMIES PropTech",
-    tags: ["Web Development", "UI/UX Design", "Data Visualization"],
   },
   {
     featured: true,
@@ -121,9 +130,17 @@ export const Projects = [
     projectType: "SaaS · AI Review Platform",
     Heading: "Marty-QR — AI-Powered Review Management",
     aboutProject:
-      "Marty-QR is an AI-powered review and customer-feedback platform that helps local businesses collect, manage, and grow their online reputation through simple QR touchpoints and seamless Google integration. We delivered the marketing site and client portal in React, Vite, and Chakra UI, with a bold, high-contrast brand and smooth animation throughout. Serving service businesses across the USA and India, the product turns in-store moments into five-star reviews and measurable growth — all wrapped in an interface that's fast, accessible, and effortless to use.",
+      "An AI-powered review and feedback platform that helps local businesses collect, manage, and grow their online reputation through QR touchpoints and seamless Google integration.",
+    problem:
+      "Local businesses were losing customers to competitors with stronger online reviews, but had no simple, consistent system to capture feedback from satisfied customers at the right moment.",
+    solution:
+      "We delivered an AI-powered platform with QR touchpoints that capture in-moment reviews, automate responses, and sync directly with Google — turning every visit into a potential five-star rating.",
+    stats: [
+      { value: "3.2x", label: "Review Collection Rate" },
+      { value: "+89%", label: "Google Rating Lift" },
+      { value: "+55%", label: "New Customer Conversions" },
+    ],
     clentName: "Marty-QR",
-    tags: ["Web Development", "App Development", "Digital Marketing"],
   },
   {
     featured: true,
@@ -136,9 +153,17 @@ export const Projects = [
     projectType: "Luxury E-commerce",
     Heading: "David Tishbi — Luxury Jewelry E-commerce",
     aboutProject:
-      "David Tishbi is a luxury jewelry e-commerce experience for a boutique designer brand, spanning fine jewelry, watches, and bullion. We crafted an elegant, image-led storefront in React, Vite, and Chakra UI, with refined typography, appointment booking, and a checkout designed to convert high-intent shoppers. Tailored for premium audiences in the USA and India, the site balances editorial storytelling with fast performance and accessible, mobile-first design — turning first-time visitors into loyal collectors and booked consultations.",
+      "A bespoke luxury e-commerce storefront for a boutique jewelry brand — editorial storytelling, appointment booking, and a conversion-optimized checkout crafted for high-intent premium shoppers.",
+    problem:
+      "The brand's existing site failed to convey the premium quality of their pieces — slow load times, poor mobile experience, and a generic layout were driving high bounce rates and lost sales.",
+    solution:
+      "We crafted a bespoke luxury storefront with editorial design, refined typography, appointment booking, and a streamlined checkout — turning first-time visitors into loyal collectors.",
+    stats: [
+      { value: "+73%", label: "Session Duration" },
+      { value: "+48%", label: "Direct Bookings" },
+      { value: "-38%", label: "Bounce Rate" },
+    ],
     clentName: "David Tishbi Jewelry",
-    tags: ["Web Development", "UI/UX Design", "Digital Marketing"],
   },
   {
     featured: true,
@@ -151,9 +176,17 @@ export const Projects = [
     projectType: "Real Estate · Web Platform",
     Heading: "Estate — Property Search & Listings Platform",
     aboutProject:
-      "Estate is a conversion-focused real-estate platform where buyers and renters discover their next home. We built a fast, SEO-friendly property search with rich filtering, agent profiles, and featured listings, engineered in React, Vite, and Chakra UI for speed on every device. Designed for growing agencies in India and the USA, the experience pairs a striking hero with clear calls to action that move visitors from browsing to booking a viewing — backed by clean, maintainable code and strong Core Web Vitals.",
+      "A conversion-focused real-estate platform with rich property search, agent profiles, and featured listings — fast, SEO-friendly, and built to move visitors from browsing to booking.",
+    problem:
+      "Growing agencies were stuck on generic listing platforms with poor SEO, no brand differentiation, and a clunky search experience that caused high lead drop-off before enquiry.",
+    solution:
+      "We built a fast, SEO-optimized property platform with rich filtering, agent profiles, and compelling calls-to-action that guide visitors naturally from discovery to booking a viewing.",
+    stats: [
+      { value: "+58%", label: "Organic Traffic" },
+      { value: "+41%", label: "Lead Conversion" },
+      { value: "3x", label: "Page Speed Score" },
+    ],
     clentName: "Estate Realty",
-    tags: ["Web Development", "UI/UX Design", "SEO"],
   },
   {
     img: [
@@ -164,9 +197,17 @@ export const Projects = [
     projectType: "FinTech · Web3",
     Heading: "Crypto Exchange — Perpetuals Trading Terminal",
     aboutProject:
-      "A professional crypto trading terminal for spot and perpetuals, featuring real-time candlestick charts, live order books, depth visualization, and a streamlined buy/sell order form. We engineered the high-density, data-heavy interface in React and Vite with Chakra UI, optimized for split-second updates without sacrificing clarity. Built for Web3 traders in the USA and India, the platform balances advanced tooling with an approachable layout — and is backed by audited smart-contract integrations for secure, transparent, non-custodial trading at scale.",
+      "A professional trading terminal for spot and perpetuals with real-time charts, live order books, and audited smart-contract integrations — optimized for split-second decisions without sacrificing clarity.",
+    problem:
+      "Experienced traders were forced to use bloated, confusing interfaces that sacrificed usability for data density — leading to costly mistakes and high platform abandonment.",
+    solution:
+      "We engineered a precision trading terminal with real-time candlestick charts, live order books, and a clean buy/sell interface — optimized for speed, clarity, and non-custodial security.",
+    stats: [
+      { value: "+67%", label: "Trade Execution Speed" },
+      { value: "+52%", label: "User Retention" },
+      { value: "-28%", label: "Order Error Rate" },
+    ],
     clentName: "GDT Exchange",
-    tags: ["Blockchain", "Smart Contracts", "Web Development"],
   },
   {
     img: [
@@ -178,9 +219,17 @@ export const Projects = [
     projectType: "Hospitality · Booking",
     Heading: "Platinum Peak — Luxury Hotel Booking Experience",
     aboutProject:
-      "Platinum Peak is a hospitality and room-booking website for a luxury hotel brand, designed to showcase suites and drive direct reservations. We built an immersive, image-rich experience in React, Vite, and Chakra UI, with smooth scrolling, clear room galleries, and a frictionless booking call to action. Created for hotels and resorts in India and the USA, the site reduces dependence on third-party platforms by making it effortless for guests to explore rooms and reserve directly — fast, responsive, and beautifully on-brand.",
+      "An immersive hotel booking website with stunning room galleries and a frictionless direct-reservation flow — designed to convert guests and reduce dependency on costly OTA platforms.",
+    problem:
+      "The hotel was losing a majority of bookings to OTA platforms (Booking.com, Expedia), paying steep commissions and losing direct relationships with guests.",
+    solution:
+      "We built an immersive direct-booking site with editorial room galleries, seamless reservation flow, and persuasive CTAs — making it effortless for guests to book without third parties.",
+    stats: [
+      { value: "+84%", label: "Direct Bookings" },
+      { value: "+61%", label: "Conversion Rate" },
+      { value: "-42%", label: "OTA Dependency" },
+    ],
     clentName: "Platinum Peak Hotels",
-    tags: ["Web Development", "UI/UX Design", "App Development"],
   },
 ];
 
@@ -283,8 +332,15 @@ export const reviews = [
   },
 ];
 
-// **************** PARTNERS / TRUSTED BY (sample) ****************
-export const partners = Array.from({ length: 9 }, () => ({ img: ClientLogo }));
+// **************** PARTNERS / TRUSTED BY ****************
+export const partners = [
+  { img: logoHomies,       name: "HOMIES PropTech" },
+  { img: logoMarty,        name: "Marty-QR" },
+  { img: logoDavidTishbi,  name: "David Tishbi Jewelry" },
+  { img: logoEstate,       name: "Estate Realty" },
+  { img: logoGdt,          name: "GDT Exchange" },
+  { img: logoPlatinumPeak, name: "Platinum Peak Hotels" },
+];
 
 // **************** NAVIGATION ****************
 export const navbarOptions = [

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 import {
   Box, SimpleGrid, Text, Input, Button, HStack, VStack, Flex, Icon, Image, Link as CLink, useToast,
 } from "@chakra-ui/react";
@@ -46,14 +47,36 @@ const Footer = () => {
   const toast = useToast();
   const [email, setEmail] = useState("");
 
+  const [isSubscribing, setIsSubscribing] = useState(false);
+
   const subscribe = (e) => {
     e.preventDefault();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       toast({ title: "Enter a valid email address", status: "warning", duration: 3000, isClosable: true });
       return;
     }
-    toast({ title: "You're subscribed!", description: "Thanks for joining the Futurise newsletter.", status: "success", duration: 4000, isClosable: true });
-    setEmail("");
+    setIsSubscribing(true);
+    emailjs
+      .send(
+        "service_jc2bgz1",
+        "template_dfwoqsd",
+        {
+          subscriber_email: email,
+          time: new Date().toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" }),
+        },
+        "nURJDAbLK8UpUR46a"
+      )
+      .then(
+        () => {
+          toast({ title: "You're subscribed!", description: "Thanks for joining the Futurise newsletter.", status: "success", duration: 4000, isClosable: true });
+          setEmail("");
+          setIsSubscribing(false);
+        },
+        () => {
+          toast({ title: "Subscription failed.", description: "Please try again or email us directly.", status: "error", duration: 4000, isClosable: true });
+          setIsSubscribing(false);
+        }
+      );
   };
 
   return (
@@ -147,7 +170,7 @@ const Footer = () => {
                   _placeholder={{ color: "text.faint" }}
                   _focus={{ borderColor: "brand.400", boxShadow: "0 0 0 1px var(--chakra-colors-brand-400)" }}
                 />
-                <Button type="submit" variant="gradient" px={5} aria-label="Subscribe">
+                <Button type="submit" variant="gradient" px={5} aria-label="Subscribe" isLoading={isSubscribing}>
                   <Icon as={FiArrowRight} />
                 </Button>
               </HStack>
@@ -181,8 +204,20 @@ const Footer = () => {
               </CLink>
             </HStack>
             <HStack spacing={3} align="start">
-              <Icon as={FiMapPin} color="accent.solid" mt={1} />
-              <Text fontSize="15px" color="text.muted">Serving clients worldwide</Text>
+              <Icon as={FiMapPin} color="accent.solid" mt="3px" flexShrink={0} />
+              <CLink
+                href="https://maps.google.com/?q=Huddart+Parker+Building,+Wellington+Central,+Wellington+6011,+New+Zealand"
+                isExternal
+                fontSize="15px"
+                color="text.muted"
+                lineHeight={1.6}
+                _hover={{ color: "text.primary" }}
+                transition="color .2s"
+              >
+                Huddart Parker Building,<br />
+                Wellington Central,<br />
+                Wellington 6011, New Zealand
+              </CLink>
             </HStack>
           </FooterCol>
         </SimpleGrid>

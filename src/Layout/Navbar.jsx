@@ -84,7 +84,7 @@ const ServicesMenu = ({ navigate, active, hovered, setHovered, index }) => {
               onClick={() => navigate(s.path)}
             >
               <Flex w="40px" h="40px" align="center" justify="center" borderRadius="11px" bgGradient="linear(135deg, rgba(123,108,255,0.2), rgba(181,123,255,0.2))" border="1px solid" borderColor="rgba(180,160,255,0.25)">
-                <Image src={s.icon} alt="" w="20px" h="20px" />
+                <Image src={s.icon} alt={`${s.option} service icon`} w="20px" h="20px" />
               </Flex>
               <Box>
                 <HStack spacing={1}>
@@ -248,7 +248,7 @@ const Navbar = () => {
         <DrawerOverlay backdropFilter="blur(6px)" bg="rgba(0,0,0,0.5)" />
         <DrawerContent bg="navy.800" borderLeft="1px solid" borderColor="border.subtle">
           <Box position="absolute" top="-10%" right="-20%" w="260px" h="260px" bg="rgba(181,123,255,0.18)" filter="blur(80px)" rounded="full" pointerEvents="none" />
-          <DrawerCloseButton mt={3} color="text.muted" />
+          <DrawerCloseButton mt={3} color="text.muted" zIndex={10} />
           <Box px={6} py={5} position="relative">
             <Logo />
           </Box>
@@ -302,7 +302,7 @@ const Navbar = () => {
                             transition="all .2s"
                           >
                             <Flex w="32px" h="32px" align="center" justify="center" borderRadius="9px" bg="rgba(180,160,255,0.12)">
-                              <Image src={s.icon} alt="" w="18px" h="18px" />
+                              <Image src={s.icon} alt={`${s.option} service icon`} w="18px" h="18px" />
                             </Flex>
                             <Text fontSize="15px" color="text.muted">{s.option}</Text>
                           </HStack>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 208 48" fill="none">
+  <!-- mountain peak icon -->
+  <path d="M18 38L28 18L38 38Z" fill="none" stroke="#a8a8b3" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M6 38L18 20L24 30L28 18L38 38Z" fill="none" stroke="#a8a8b3" stroke-width="1.5" stroke-linejoin="round" opacity="0.5"/>
+  <path d="M24 18L28 14L32 18" fill="none" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+  <!-- wordmark -->
+  <text x="46" y="25" font-family="Georgia,serif" font-size="14" font-weight="700" fill="white" letter-spacing="0.5">PLATINUM</text>
+  <text x="46" y="40" font-family="Georgia,serif" font-size="14" font-weight="700" fill="#a8a8b3" letter-spacing="0.5">PEAK HOTELS</text>
+</svg>

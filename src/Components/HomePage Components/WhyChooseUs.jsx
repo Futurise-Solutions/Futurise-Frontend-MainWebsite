@@ -29,7 +29,7 @@ const WhyChooseUs = () => {
                 borderColor="rgba(180,160,255,0.25)"
                 mb={5}
               >
-                <Image src={el.icon} alt="" w="26px" h="26px" />
+                <Image src={el.icon} alt={`${el.title} icon`} w="26px" h="26px" />
               </Flex>
               <Heading as="h3" fontSize="lg" fontWeight={600} mb={2}>
                 {el.title}

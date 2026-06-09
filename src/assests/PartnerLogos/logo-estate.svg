@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 152 48" fill="none">
+  <!-- building icon -->
+  <rect x="6"  y="14" width="22" height="26" rx="1" fill="none" stroke="#4ecdc4" stroke-width="1.5"/>
+  <rect x="10" y="19" width="5"  height="5"  rx="0.5" fill="#4ecdc4" opacity="0.7"/>
+  <rect x="19" y="19" width="5"  height="5"  rx="0.5" fill="#4ecdc4" opacity="0.7"/>
+  <rect x="10" y="28" width="5"  height="5"  rx="0.5" fill="#4ecdc4" opacity="0.7"/>
+  <rect x="19" y="28" width="5"  height="5"  rx="0.5" fill="#4ecdc4" opacity="0.7"/>
+  <rect x="13" y="34" width="8"  height="6"  rx="0.5" fill="#4ecdc4" opacity="0.5"/>
+  <!-- wordmark -->
+  <text x="35" y="28" font-family="system-ui,-apple-system,Arial,sans-serif" font-size="21" font-weight="800" fill="white" letter-spacing="-0.5">ESTATE</text>
+  <text x="36" y="41" font-family="system-ui,-apple-system,Arial,sans-serif" font-size="9"  font-weight="400" fill="#4ecdc4" letter-spacing="2.5">REALTY</text>
+</svg>

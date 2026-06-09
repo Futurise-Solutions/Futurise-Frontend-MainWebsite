@@ -28,6 +28,14 @@ export { default as timeIconHover } from "./HomeAssest/timeIconHover.svg";
 // Partner / client logo
 export { default as ClientLogo } from "./HomeAssest/ClientLogo.png";
 
+// Partner logos (SVG wordmarks)
+export { default as logoHomies }       from "./PartnerLogos/logo-homies.svg";
+export { default as logoMarty }        from "./PartnerLogos/logo-marty.svg";
+export { default as logoDavidTishbi }  from "./PartnerLogos/logo-david-tishbi.svg";
+export { default as logoEstate }       from "./PartnerLogos/logo-estate.svg";
+export { default as logoGdt }          from "./PartnerLogos/logo-gdt.svg";
+export { default as logoPlatinumPeak } from "./PartnerLogos/logo-platinum-peak.svg";
+
 // Brand logo (Futurise wordmark)
 export { default as logo } from "./logo.svg";
 

@@ -38,7 +38,7 @@ const ServiceCard = ({ el, index }) => (
       fontWeight={700}
       lineHeight={1}
       color="whiteAlpha.300"
-      opacity={0.18}
+      opacity={0.30}
       transition="opacity .3s"
       _groupHover={{ opacity: 0.3 }}
       pointerEvents="none"
@@ -71,7 +71,7 @@ const ServiceCard = ({ el, index }) => (
         _groupHover={{ transform: "scale(1.08)" }}
         bg="bg.canvas"
       >
-        <Image src={el.icon} alt="" w="28px" h="28px" />
+        <Image src={el.icon} alt={`${el.serviceName} icon`} w="28px" h="28px" />
       </Flex>
     </Box>
 
