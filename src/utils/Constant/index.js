@@ -1,6 +1,6 @@
 import {
-  AppDevHover, AppDevNavbarIcon, BlockchainDevNavbarIcon, BlockchainHover, ClientLogo,
-  DigiMarketingNavbarIcon, DigitalMarketingHover, SmartContractHover, SmartContractNavbarIcon,
+  AppDevHover, AppDevNavbarIcon, BlockchainDevNavbarIcon, BlockchainHover,
+  DigiMarketingNavbarIcon, DigitalMarketingHover, AiMlHover, AiMlNavbarIcon,
   UIUXHover, UIUXNavbarIcon, WebDevNavbarIcon, clientIconHover, expertiseiconHover,
   postIconHover, qualityIconHover, timeIconHover, webDevHover,
   propertyDashboard1, propertyDashboard2, realState1, realState2, realState3,
@@ -17,11 +17,11 @@ import {
 // **************** OUR SERVICES ****************
 export const OurServiceData = [
   {
-    serviceName: "App Development",
+    serviceName: "AI & ML Solutions",
     serviceDesc:
-      "Native and cross-platform iOS & Android apps that feel fast, look beautiful, and scale with your business.",
-    icon: AppDevHover,
-    route: "app-development",
+      "Custom AI agents, LLM integrations, and ML-powered features that automate workflows and make your product smarter.",
+    icon: AiMlHover,
+    route: "ai-ml-solutions",
   },
   {
     serviceName: "Web Development",
@@ -29,6 +29,13 @@ export const OurServiceData = [
       "Lightning-fast, SEO-ready websites and web apps built with modern frameworks and clean, maintainable code.",
     icon: webDevHover,
     route: "web-development",
+  },
+  {
+    serviceName: "App Development",
+    serviceDesc:
+      "Native and cross-platform iOS & Android apps that feel fast, look beautiful, and scale with your business.",
+    icon: AppDevHover,
+    route: "app-development",
   },
   {
     serviceName: "UI/UX Design",
@@ -40,16 +47,9 @@ export const OurServiceData = [
   {
     serviceName: "Blockchain Development",
     serviceDesc:
-      "Secure, transparent decentralized apps, tokens, and Web3 platforms engineered for trust and scale.",
+      "Web3 frontends, DeFi platforms, MEV bots, launchpads, and multi-chain dApps — built for real production.",
     icon: BlockchainHover,
     route: "blockchain-development",
-  },
-  {
-    serviceName: "Smart Contracts",
-    serviceDesc:
-      "Audited, gas-optimized smart contracts that automate trustless transactions across leading chains.",
-    icon: SmartContractHover,
-    route: "smart-contract",
   },
   {
     serviceName: "Digital Marketing",
@@ -278,7 +278,7 @@ export const faqs = [
   {
     question: "What services does Futurise offer?",
     answer:
-      "We're a full-cycle product studio: web and mobile app development, UI/UX design, blockchain and smart contract development, and data-driven digital marketing — everything you need to take an idea from concept to launch.",
+      "We're a full-cycle product studio: AI agents & ML solutions, web and mobile app development, UI/UX design, blockchain & Web3 development, and data-driven digital marketing — everything you need to take an idea from concept to launch.",
   },
   {
     question: "How much does a project cost?",
@@ -356,7 +356,7 @@ export const NavbarservicesOptions = [
   { option: "App Development", icon: AppDevNavbarIcon, path: "/service/app-development", desc: "iOS & Android" },
   { option: "UI/UX Design", icon: UIUXNavbarIcon, path: "/service/ui-ux-design", desc: "Product design" },
   { option: "Blockchain Development", icon: BlockchainDevNavbarIcon, path: "/service/blockchain-development", desc: "Web3 & dApps" },
-  { option: "Smart Contracts", icon: SmartContractNavbarIcon, path: "/service/smart-contract", desc: "Audited contracts" },
+  { option: "AI & ML Solutions", icon: AiMlNavbarIcon, path: "/service/ai-ml-solutions", desc: "Agents & automation" },
   { option: "Digital Marketing", icon: DigiMarketingNavbarIcon, path: "/service/digital-marketing", desc: "SEO & growth" },
 ];
 
@@ -394,13 +394,13 @@ export const coreValues = [
 // --------- About Us — Technology excellence strengths ---------
 export const strengths = [
   {
-    name: "App Development",
+    name: "AI & ML Solutions",
     description: [
-      "High-quality mobile apps with robust functionality and seamless performance.",
-      "Cross-platform compatibility for iOS and Android to reach a wider audience.",
-      "Intuitive, user-friendly interfaces designed for engagement and retention.",
+      "Custom AI agents and LLM integrations that automate complex workflows.",
+      "Machine learning models trained on your data for smarter decisions.",
+      "AI-powered SaaS platforms and features that scale with your business.",
     ],
-    icon: AppDevHover,
+    icon: AiMlHover,
   },
   {
     name: "Web Development",
@@ -412,6 +412,15 @@ export const strengths = [
     icon: webDevHover,
   },
   {
+    name: "App Development",
+    description: [
+      "High-quality mobile apps with robust functionality and seamless performance.",
+      "Cross-platform compatibility for iOS and Android to reach a wider audience.",
+      "Intuitive, user-friendly interfaces designed for engagement and retention.",
+    ],
+    icon: AppDevHover,
+  },
+  {
     name: "Blockchain Development",
     description: [
       "Secure blockchain solutions ensuring data integrity and transparency.",
@@ -419,15 +428,6 @@ export const strengths = [
       "Smart contracts engineered to automate processes and enforce agreements.",
     ],
     icon: BlockchainHover,
-  },
-  {
-    name: "Smart Contracts",
-    description: [
-      "Efficient contracts that facilitate trustless transactions and operations.",
-      "Automated complex workflows that reduce reliance on intermediaries.",
-      "Audited code that enhances security and on-chain transparency.",
-    ],
-    icon: SmartContractHover,
   },
   {
     name: "UI/UX Design",
@@ -454,14 +454,14 @@ export const services = {
   "app-development": {
     title: "App Development",
     whatWeDo: "What we do",
-    description: "Custom-built Android & iOS solutions for every industry.",
+    description: "Cross-platform iOS & Android apps built with React Native & Expo.",
     details:
-      "From idea to App Store, we design and engineer native and cross-platform mobile apps that are fast, secure, and a joy to use. Our team handles architecture, UI, development, QA, and launch — so you get a polished product without the headaches.",
+      "From idea to App Store, we design and engineer cross-platform mobile apps with React Native and Expo that are fast, secure, and a joy to use. We handle architecture, UI, maps, push notifications, backend integration, and full store deployment — so you get a polished product on both platforms without the headaches.",
     features: [
-      "Native iOS (Swift) & Android (Kotlin) development",
-      "Cross-platform apps with React Native & Flutter",
-      "Offline-first, real-time, and API-driven experiences",
-      "App Store & Play Store submission and ASO",
+      "Cross-platform apps with React Native & Expo",
+      "Google Maps API, push notifications & deep linking",
+      "Firebase, Supabase, AWS & Google Cloud backends",
+      "App Store & Play Store deployment with OTA updates",
     ],
   },
   "web-development": {
@@ -469,12 +469,12 @@ export const services = {
     whatWeDo: "What we do",
     description: "Responsive, robust web applications that perform.",
     details:
-      "We build high-performing websites and web apps with modern frameworks, clean architecture, and rock-solid performance. SEO-ready, accessible, and scalable from day one.",
+      "We build high-performing websites and web apps with modern frameworks, clean architecture, and rock-solid performance. From pixel-perfect frontends to scalable Node.js backends, structured databases, CI/CD pipelines, and full test coverage — SEO-ready, accessible, and built to last.",
     features: [
-      "Modern frontends with React & Next.js",
-      "Scalable Node.js & API backends",
-      "Headless CMS & e-commerce builds",
-      "Core Web Vitals & SEO optimization",
+      "Modern frontends with React, Next.js, Astro & TypeScript",
+      "Node.js backends with REST & GraphQL APIs",
+      "MongoDB, PostgreSQL, MySQL & Redis databases",
+      "CI/CD pipelines, cloud deployment & automated testing",
     ],
   },
   "ui-ux-design": {
@@ -493,27 +493,27 @@ export const services = {
   "blockchain-development": {
     title: "Blockchain Development",
     whatWeDo: "What we do",
-    description: "Secure and scalable blockchain solutions.",
+    description: "Real Web3 products — DeFi, bots, launchpads & multi-chain.",
     details:
-      "We design and build decentralized applications and Web3 platforms across leading chains, with a relentless focus on security, transparency, and great UX.",
+      "We build production-grade Web3 products backed by real delivered projects: DeFi frontends with staking, swaps, and liquidity pools; MEV and transaction-bundling bots; Telegram-native trading platforms; launchpads and airdrop dashboards; and multi-chain EVM deployments across Ethereum, BSC, Base, Arbitrum, and Solana.",
     features: [
-      "dApp & DeFi platform development",
-      "Token design & tokenomics (ERC-20 / ERC-721)",
-      "Wallet integration & on-chain data",
-      "Multi-chain support (Ethereum, Polygon, Solana)",
+      "DeFi frontends — staking, AMM swaps, liquidity, launchpads",
+      "MEV bots, Solana/ETH bundle scripts & arbitrage automation",
+      "Telegram trading & analytics bots with real-time data",
+      "Multi-chain EVM deployments (Ethereum, BSC, Base, Arbitrum, Polygon)",
     ],
   },
-  "smart-contract": {
-    title: "Smart Contracts",
+  "ai-ml-solutions": {
+    title: "AI & ML Solutions",
     whatWeDo: "What we do",
-    description: "Reliable, audited, gas-optimized contracts.",
+    description: "Intelligent systems that learn, adapt, and automate.",
     details:
-      "We write and audit smart contracts that automate trustless transactions to the highest standards of security and efficiency, with thorough testing and documentation.",
+      "We design and build production-ready AI agents, ML-powered features, and fully integrated AI SaaS platforms — from data pipelines to deployed models — so your product gets smarter over time and your team operates at a higher level.",
     features: [
-      "Solidity development & best practices",
-      "Security audits & vulnerability testing",
-      "Gas optimization for lower fees",
-      "Upgradeable & modular contract patterns",
+      "Custom AI agents & LLM-powered workflow automation",
+      "ML model development, training & production deployment",
+      "AI-integrated web apps & SaaS platforms",
+      "NLP, computer vision & predictive analytics pipelines",
     ],
   },
   "digital-marketing": {
@@ -536,17 +536,65 @@ export const techStacks = {
   "web-development": {
     title: "Web Development",
     stacks: [
-      { title: "Frontend Development", subtitle: "Interfaces that delight", description: "We use modern frontend technologies to build responsive, interactive web applications.", techStack: "React, Next.js, TypeScript" },
-      { title: "Backend Development", subtitle: "Robust & scalable APIs", description: "Secure, scalable backends built with the latest technologies and best practices.", techStack: "Node.js, Express, PostgreSQL" },
-      { title: "CMS & E-commerce", subtitle: "Content you control", description: "Custom themes, plugins, and headless setups tailored to your business needs.", techStack: "WordPress, Shopify, Strapi" },
+      {
+        title: "Frontend Development",
+        subtitle: "Interfaces that delight",
+        description: "Pixel-perfect, accessible UIs built with modern frameworks and utility-first styling.",
+        techStack: "React, Next.js, Astro, TypeScript, HTML5, CSS3, JavaScript, Tailwind CSS, Material UI, Shadcn UI",
+      },
+      {
+        title: "Backend & APIs",
+        subtitle: "Robust & scalable",
+        description: "Secure, performant server-side logic and APIs that power your product at any scale.",
+        techStack: "Node.js, Express, REST, GraphQL",
+      },
+      {
+        title: "Databases",
+        subtitle: "Data you can trust",
+        description: "Structured schemas, optimized queries, and caching layers built for speed and reliability.",
+        techStack: "MongoDB, PostgreSQL, MySQL, Redis",
+      },
+      {
+        title: "DevOps & Deployment",
+        subtitle: "Ship with confidence",
+        description: "Automated pipelines and cloud infrastructure so every release is fast, safe, and repeatable.",
+        techStack: "Git, GitHub, CI/CD, AWS, Google Cloud, Vercel, Netlify, Render",
+      },
+      {
+        title: "Testing",
+        subtitle: "Quality at every layer",
+        description: "Unit, integration, and end-to-end tests that catch bugs before your users do.",
+        techStack: "Jest, React Testing Library, Cypress, Playwright",
+      },
     ],
   },
   "app-development": {
     title: "App Development",
     stacks: [
-      { title: "iOS Development", subtitle: "Built for Apple", description: "High-performance iOS apps using Swift and the latest Apple frameworks.", techStack: "Swift, SwiftUI" },
-      { title: "Android Development", subtitle: "Built for Android", description: "Polished Android apps developed with Kotlin for optimal performance.", techStack: "Kotlin, Jetpack Compose" },
-      { title: "Cross-Platform", subtitle: "One codebase, every device", description: "Ship to both platforms faster with a shared, maintainable codebase.", techStack: "React Native, Flutter" },
+      {
+        title: "Cross-Platform Development",
+        subtitle: "One codebase, every device",
+        description: "Ship to iOS and Android simultaneously with a single maintainable React Native & Expo codebase.",
+        techStack: "React Native, Expo, TypeScript, JavaScript",
+      },
+      {
+        title: "Maps & Native Features",
+        subtitle: "Rich mobile experiences",
+        description: "Location-aware apps with maps, real-time push notifications, deep linking, and offline support.",
+        techStack: "Google Maps API, Push Notifications, Expo Notifications, Deep Linking",
+      },
+      {
+        title: "Backend & Cloud",
+        subtitle: "Scalable infrastructure",
+        description: "Robust backend services and real-time data layers that power your app at any scale.",
+        techStack: "Firebase, Supabase, AWS, Google Cloud",
+      },
+      {
+        title: "Deployment",
+        subtitle: "Launch without friction",
+        description: "Full App Store and Play Store submission, review handling, and over-the-air updates via Expo.",
+        techStack: "App Store, Google Play Store, Expo EAS, OTA Updates",
+      },
     ],
   },
   "ui-ux-design": {
@@ -559,15 +607,17 @@ export const techStacks = {
   "blockchain-development": {
     title: "Blockchain Development",
     stacks: [
-      { title: "dApp Development", subtitle: "Decentralized by design", description: "Secure, scalable blockchain solutions across leading networks.", techStack: "Solidity, Ethers.js, Hardhat" },
-      { title: "Web3 Integration", subtitle: "Connect to the chain", description: "Wallet connections, on-chain data, and seamless Web3 UX.", techStack: "Wagmi, Web3.js, IPFS" },
+      { title: "DeFi & dApp Development", subtitle: "Decentralized by design", description: "Staking, AMM swaps, liquidity pools, launchpads, and airdrop dashboards built for real users.", techStack: "Solidity, Ethers.js, Hardhat, Wagmi" },
+      { title: "Web3 Automation & Bots", subtitle: "Speed meets precision", description: "MEV scripts, Solana/ETH bundle bots, Telegram trading platforms, and arbitrage automation.", techStack: "TypeScript, Python, Web3.js, gRPC" },
+      { title: "Multi-Chain Deployments", subtitle: "One build, every chain", description: "Cross-chain protocol duplication and EVM deployments across all major L1s and L2s.", techStack: "Ethereum, BSC, Base, Arbitrum, Polygon, Solana" },
     ],
   },
-  "smart-contract": {
-    title: "Smart Contracts",
+  "ai-ml-solutions": {
+    title: "AI & ML Solutions",
     stacks: [
-      { title: "Contract Development", subtitle: "Trustless automation", description: "Reliable, efficient smart contracts written and tested with care.", techStack: "Solidity, Foundry" },
-      { title: "Security Audits", subtitle: "Ship with confidence", description: "Thorough audits and testing to keep your contracts safe.", techStack: "Slither, Mythril" },
+      { title: "AI Agents & LLMs", subtitle: "Automate with intelligence", description: "Custom agents powered by state-of-the-art language models integrated directly into your product.", techStack: "OpenAI, Claude, LangChain, LlamaIndex" },
+      { title: "ML Development", subtitle: "Models that improve over time", description: "End-to-end ML pipelines from data preprocessing and training to production deployment.", techStack: "Python, PyTorch, TensorFlow, scikit-learn" },
+      { title: "AI-Powered SaaS", subtitle: "Build smarter products", description: "Web apps and SaaS platforms with AI-driven features on scalable cloud infrastructure.", techStack: "FastAPI, Node.js, AWS, Vercel" },
     ],
   },
   "digital-marketing": {
