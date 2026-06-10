@@ -9,6 +9,24 @@ import { services } from "../utils/Constant";
 import { Reveal, Eyebrow, CTASection, Seo } from "../Components/common";
 import NotFound from "./NotFound";
 
+const serviceImages = {
+  "web-development":       "/webdevelopment.png",
+  "app-development":       "/appdevlopment.png",
+  "ui-ux-design":          "/uiuxdevelopment.png",
+  "blockchain-development":"/blockchaindevelopment.png",
+  "ai-ml-solutions":       "/aimlsol.png",
+  "digital-marketing":     "/digitalmarkiting.png",
+};
+
+const serviceKeywords = {
+  "web-development":        "web development company, React developer, Next.js, Node.js, full stack development, website development New Zealand, India, USA",
+  "app-development":        "mobile app development, React Native, Expo, iOS Android app, cross-platform app, app developer New Zealand",
+  "ui-ux-design":           "UI UX design, Figma design, product design, user experience design, mobile UI design, web design New Zealand",
+  "blockchain-development": "blockchain development, DeFi development, Web3, dApp development, MEV bot, Solana, Ethereum, smart contract",
+  "ai-ml-solutions":        "AI development, ML solutions, AI agents, LLM integration, ChatGPT integration, AI SaaS, machine learning New Zealand",
+  "digital-marketing":      "digital marketing agency, SEO services, Google Ads, social media marketing, performance marketing New Zealand",
+};
+
 const ServicePage = () => {
   const { serviceName } = useParams();
   const navigate = useNavigate();
@@ -19,9 +37,32 @@ const ServicePage = () => {
   return (
     <Box>
       <Seo
-        title={`${service.title} Services for India & USA`}
+        title={`${service.title} | New Zealand, India & USA | Futurise Solutions`}
         description={`${service.description} ${service.details}`.slice(0, 300)}
         path={`/service/${serviceName}`}
+        image={serviceImages[serviceName] || "/home.png"}
+        keywords={serviceKeywords[serviceName] || ""}
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": `${service.title} — Futurise Solutions`,
+            "description": service.details,
+            "url": `https://futurisesolutions.com/service/${serviceName}`,
+            "provider": { "@type": "Organization", "name": "Futurise Solutions", "url": "https://futurisesolutions.com" },
+            "areaServed": ["NZ", "IN", "US"],
+            "serviceType": service.title,
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://futurisesolutions.com/" },
+              { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://futurisesolutions.com/" },
+              { "@type": "ListItem", "position": 3, "name": service.title, "item": `https://futurisesolutions.com/service/${serviceName}` },
+            ],
+          },
+        ]}
       />
       {/* Hero */}
       <Box position="relative" overflow="hidden" pt={{ base: 12, md: 20 }} pb={{ base: 10, md: 14 }}>

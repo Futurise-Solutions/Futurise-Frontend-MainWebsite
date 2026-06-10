@@ -6,7 +6,7 @@
 export { default as webDevHover } from "./HomeAssest/webDevHover.svg";
 export { default as AppDevHover } from "./HomeAssest/AppDevHover.svg";
 export { default as DigitalMarketingHover } from "./HomeAssest/DigitalMarketingHover.svg";
-export { default as SmartContractHover } from "./HomeAssest/SmartContractHover.svg";
+export { default as AiMlHover } from "./HomeAssest/AiMlHover.svg";
 export { default as UIUXHover } from "./HomeAssest/UIUXHover.svg";
 export { default as BlockchainHover } from "./HomeAssest/BlockChainHover.svg";
 
@@ -15,7 +15,7 @@ export { default as WebDevNavbarIcon } from "./HomeAssest/WebDevNavbarIcon.svg";
 export { default as AppDevNavbarIcon } from "./HomeAssest/AppDevNavbarIcon.svg";
 export { default as BlockchainDevNavbarIcon } from "./HomeAssest/BlockchainDevNavbarIcon.svg";
 export { default as DigiMarketingNavbarIcon } from "./HomeAssest/DigiMarketingNavbarIcon.svg";
-export { default as SmartContractNavbarIcon } from "./HomeAssest/SmartContractNavbarIcon.svg";
+export { default as AiMlNavbarIcon } from "./HomeAssest/AiMlNavbarIcon.svg";
 export { default as UIUXNavbarIcon } from "./HomeAssest/UIUXNavbarIcon.svg";
 
 // Why-choose-us icons (hover variants)

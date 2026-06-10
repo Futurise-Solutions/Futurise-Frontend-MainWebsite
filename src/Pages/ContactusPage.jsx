@@ -16,9 +16,19 @@ const ContactUs = () => {
   return (
     <Box>
       <Seo
-        title="Contact Us — Start Your Project"
-        description="Tell Futurise Solutions about your project. We reply within hours to schedule a free consultation for web, mobile, and Web3 builds. Serving clients across India, the USA, and worldwide."
+        title="Contact Us — Get a Free Quote | Futurise Solutions"
+        description="Start your AI, SaaS, web or mobile app project with Futurise Solutions. We reply within hours to schedule a free consultation. Based in Wellington, NZ — serving India, USA & worldwide."
         path="/contact"
+        image="/contactus.png"
+        keywords="contact Futurise Solutions, hire web developer New Zealand, get a quote AI app, start SaaS project, web development consultation, mobile app quote, free project consultation"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "ContactPage",
+          "name": "Contact Futurise Solutions",
+          "url": "https://futurisesolutions.com/contact",
+          "description": "Contact Futurise Solutions for AI, SaaS, web, mobile and blockchain development projects.",
+          "breadcrumb": { "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://futurisesolutions.com/" }, { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://futurisesolutions.com/contact" }] }
+        }}
       />
       <Box position="relative" overflow="hidden" pt={{ base: 12, md: 20 }} pb={{ base: 12, md: 16 }}>
         <Box position="absolute" top="-15%" left="-5%" w="500px" h="500px" bg="rgba(123,108,255,0.18)" filter="blur(120px)" rounded="full" pointerEvents="none" />
