@@ -67,9 +67,27 @@ const Portfolio = () => {
   return (
     <Box>
       <Seo
-        title="Portfolio — Web, App, Blockchain & UI/UX Projects | Futurise Solutions"
-        description="Explore Futurise Solutions' portfolio of delivered projects: property management SaaS dashboards, AI-powered review platforms, luxury jewelry e-commerce, real-estate listing sites, crypto trading terminals, and hotel booking experiences — built with React, Vite, and Chakra UI for clients in India and the USA."
+        title="Portfolio — AI, SaaS, Web & Mobile Projects | Futurise Solutions"
+        description="Explore our portfolio: SaaS dashboards, AI-powered platforms, luxury e-commerce, real-estate sites, crypto trading terminals & hotel booking apps — built for clients in New Zealand, India & USA."
         path="/portfolio"
+        image="/portfolio.png"
+        keywords="web development portfolio, AI app portfolio, SaaS portfolio, React projects, blockchain projects, mobile app portfolio, New Zealand web agency portfolio, case studies"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          "name": "Futurise Solutions Portfolio",
+          "url": "https://futurisesolutions.com/portfolio",
+          "description": "Portfolio of AI, SaaS, web, mobile and blockchain projects built by Futurise Solutions.",
+          "breadcrumb": { "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://futurisesolutions.com/" }, { "@type": "ListItem", "position": 2, "name": "Portfolio", "item": "https://futurisesolutions.com/portfolio" }] },
+          "hasPart": [
+            { "@type": "CreativeWork", "name": "HOMIES — Property Management SaaS", "description": "Unified SaaS dashboard for real-estate portfolio analytics." },
+            { "@type": "CreativeWork", "name": "Marty-QR — AI Review Platform", "description": "AI-powered review management platform for local businesses." },
+            { "@type": "CreativeWork", "name": "David Tishbi — Luxury E-commerce", "description": "Bespoke luxury jewelry storefront with appointment booking." },
+            { "@type": "CreativeWork", "name": "Estate — Property Listings Platform", "description": "SEO-optimized real-estate search and listings platform." },
+            { "@type": "CreativeWork", "name": "GDT — Crypto Trading Terminal", "description": "Professional perpetuals trading terminal with live charts." },
+            { "@type": "CreativeWork", "name": "Platinum Peak — Hotel Booking", "description": "Immersive direct hotel booking experience." }
+          ]
+        }}
       />
 
       <PageHero
