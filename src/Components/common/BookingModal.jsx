@@ -73,7 +73,7 @@ const BookingModal = () => {
           >
             <Text fontSize="sm" color="text.muted" lineHeight={1.75}>
               {
-                "Book a free 60-minute strategy call with the Futurise Solutions team. We'll discuss your project goals, recommend the right tech stack, and give you a clear build roadmap — whether it's an AI agent, SaaS platform, web app, or mobile app. No sales pitch. Just a focused conversation about your idea."
+                "Book a free 45-minute strategy call with the Futurise Solutions team. We'll discuss your project goals, recommend the right tech stack, and give you a clear build roadmap — whether it's an AI agent, SaaS platform, web app, or mobile app. No sales pitch. Just a focused conversation about your idea."
               }
             </Text>
           </Box>
