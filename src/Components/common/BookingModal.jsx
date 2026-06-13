@@ -58,7 +58,7 @@ const BookingModal = () => {
                 Book a free strategy call
               </Text>
               <Text fontSize="xs" color="text.faint" fontWeight={400}>
-                60 minutes · Futurise Solutions
+                45 minutes · Futurise Solutions
               </Text>
             </Box>
           </HStack>
