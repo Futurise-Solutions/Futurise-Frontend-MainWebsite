@@ -16,6 +16,7 @@ const CTASection = ({
   secondaryLabel = "View our work",
   primaryTo = "/contact",
   secondaryTo = "/portfolio",
+  onPrimary,
 }) => {
   const navigate = useNavigate();
   return (
@@ -47,7 +48,7 @@ const CTASection = ({
               {subtitle}
             </Text>
             <Stack direction={{ base: "column", sm: "row" }} spacing={4} justify="center" mt={8}>
-              <Button variant="gradient" size="lg" rightIcon={<FiArrowRight />} onClick={() => navigate(primaryTo)}>
+              <Button variant="gradient" size="lg" rightIcon={<FiArrowRight />} onClick={onPrimary ?? (() => navigate(primaryTo))}>
                 {primaryLabel}
               </Button>
               <Button variant="outlineGlow" size="lg" onClick={() => navigate(secondaryTo)}>

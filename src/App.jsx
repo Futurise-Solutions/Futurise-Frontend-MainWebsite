@@ -4,6 +4,8 @@ import { Footer, Navbar } from './Layout'
 import { Box } from '@chakra-ui/react'
 import ScrollToTop from './Components/common/ScrollToTop'
 import { PageTransition } from './Components/common'
+import BookingModal from './Components/common/BookingModal'
+import { BookingProvider } from './context/BookingContext'
 import "./index.css"
 
 const App = () => {
@@ -18,16 +20,19 @@ const App = () => {
   }, []);
 
   return (
-    <Box id='app' minH="100vh" display="flex" flexDirection="column">
-      <ScrollToTop />
-      <Navbar />
-      <Box as="main" flex="1">
-        <PageTransition>
-          <AllRoutes />
-        </PageTransition>
+    <BookingProvider>
+      <Box id='app' minH="100vh" display="flex" flexDirection="column">
+        <ScrollToTop />
+        <Navbar />
+        <Box as="main" flex="1">
+          <PageTransition>
+            <AllRoutes />
+          </PageTransition>
+        </Box>
+        <Footer />
+        <BookingModal />
       </Box>
-      <Footer />
-    </Box>
+    </BookingProvider>
   )
 }
 

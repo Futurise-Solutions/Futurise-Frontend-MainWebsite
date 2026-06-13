@@ -4,8 +4,10 @@ import { AboutUsHero, MissionVision, CompanyStats } from "../Components";
 import CoreValues from "../Components/AboutUs Components/CoreValues";
 import TechnologyExcellence from "../Components/ContactCusCpmponents/TechnologyExcellence";
 import { CTASection, Seo } from "../Components/common";
+import { useBooking } from "../context/BookingContext";
 
 const AboutUs = () => {
+  const { onOpen: openBooking } = useBooking();
   return (
     <Box>
       <Seo
@@ -33,6 +35,8 @@ const AboutUs = () => {
         title="Ready to build something"
         highlight="exceptional?"
         subtitle="Tell us about your idea and we’ll help you turn it into a product your users will love."
+        primaryLabel="Book a free call"
+        onPrimary={openBooking}
       />
     </Box>
   );

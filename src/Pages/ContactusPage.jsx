@@ -1,9 +1,10 @@
 import React from "react";
-import { Box, Container, Flex, Heading, Text, VStack, HStack, Icon, SimpleGrid } from "@chakra-ui/react";
-import { FiMail, FiPhone, FiMapPin, FiClock } from "react-icons/fi";
+import { Box, Container, Flex, Heading, Text, VStack, HStack, Icon, SimpleGrid, Button } from "@chakra-ui/react";
+import { FiMail, FiPhone, FiMapPin, FiClock, FiCalendar } from "react-icons/fi";
 import { Reveal, Eyebrow, ContactForm, Seo } from "../Components/common";
 import ServicesWorldwide from "../Components/ContactCusCpmponents/ServicesWorldwide ";
 import ClientsReviews from "../Components/HomePage Components/ClientsReviews";
+import { useBooking } from "../context/BookingContext";
 
 const contactInfo = [
   { icon: FiMail, label: "Email us", value: "business@futurisesolutions.com", href: "mailto:business@futurisesolutions.com" },
@@ -13,6 +14,8 @@ const contactInfo = [
 ];
 
 const ContactUs = () => {
+  const { onOpen: openBooking } = useBooking();
+
   return (
     <Box>
       <Seo
@@ -36,7 +39,6 @@ const ContactUs = () => {
 
         <Container maxW="1200px" px={{ base: 5, md: 8 }} position="relative">
           <Flex direction={{ base: "column", lg: "row" }} gap={{ base: 12, lg: 16 }} align={{ base: "start", lg: "stretch" }}>
-            {/* Left: copy + info — vertically centered so it balances the form height */}
             <VStack flex="1" align="start" spacing={6} justify="center">
               <Reveal><Eyebrow>Contact us</Eyebrow></Reveal>
               <Reveal delay={0.05}>
@@ -47,11 +49,10 @@ const ContactUs = () => {
               </Reveal>
               <Reveal delay={0.1}>
                 <Text color="text.muted" fontSize={{ base: "md", md: "lg" }} maxW="480px" lineHeight={1.7}>
-                  Share a few details and we’ll get back to you within a couple of hours to schedule a call and discuss your goals.
+                  {"Share a few details and we'll get back to you within a couple of hours to schedule a call and discuss your goals."}
                 </Text>
               </Reveal>
 
-              {/* compact 2×2 grid keeps the info section from outgrowing the form */}
               <Reveal delay={0.15} w="full">
                 <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={3} w="full" pt={2}>
                   {contactInfo.map((c) => (
@@ -81,9 +82,21 @@ const ContactUs = () => {
                   ))}
                 </SimpleGrid>
               </Reveal>
+
+              <Reveal delay={0.2} w="full">
+                <Button
+                  w="full"
+                  size="lg"
+                  variant="gradient"
+                  leftIcon={<Icon as={FiCalendar} />}
+                  onClick={openBooking}
+                  mt={1}
+                >
+                  Book a free strategy call
+                </Button>
+              </Reveal>
             </VStack>
 
-            {/* Right: form */}
             <Reveal from="left" flex="1" w="full" maxW={{ lg: "560px" }}>
               <ContactForm />
             </Reveal>
