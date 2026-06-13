@@ -7,6 +7,7 @@ import ServiceStack from "../Components/ServiceComponents/ServiceStack";
 import ServiceHeroVisual from "../Components/ServiceComponents/ServiceHeroVisual";
 import { services } from "../utils/Constant";
 import { Reveal, Eyebrow, CTASection, Seo } from "../Components/common";
+import { useBooking } from "../context/BookingContext";
 import NotFound from "./NotFound";
 
 const serviceImages = {
@@ -30,6 +31,7 @@ const serviceKeywords = {
 const ServicePage = () => {
   const { serviceName } = useParams();
   const navigate = useNavigate();
+  const { onOpen: openBooking } = useBooking();
   const service = services[serviceName];
 
   if (!service) return <NotFound />;
@@ -132,7 +134,8 @@ const ServicePage = () => {
         title="Ready to start your"
         highlight={`${service.title} project?`}
         subtitle="Get a free consultation and let’s turn your vision into a unique digital creation."
-        primaryLabel="Connect with us"
+        primaryLabel="Book appointment"
+        onPrimary={openBooking}
       />
     </Box>
   );

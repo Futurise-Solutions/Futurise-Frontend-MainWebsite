@@ -4,6 +4,7 @@ import {
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { useBooking } from "../../context/BookingContext";
 import { FiArrowRight, FiStar, FiCpu } from "react-icons/fi";
 import { FaReact, FaApple, FaAndroid, FaEthereum, FaFigma } from "react-icons/fa6";
 import { propertyDashboard1 } from "../../assests";
@@ -30,6 +31,7 @@ const techIcons = [
 
 const HeroSection = () => {
   const navigate = useNavigate();
+  const { onOpen: openBooking } = useBooking();
 
   return (
     <Box position="relative" overflow="hidden">
@@ -82,8 +84,8 @@ const HeroSection = () => {
                 <Button variant="gradient" size="lg" rightIcon={<FiArrowRight />} onClick={() => navigate("/contact")}>
                   Start your project
                 </Button>
-                <Button variant="outlineGlow" size="lg" onClick={() => navigate("/portfolio")}>
-                  View our work
+                <Button variant="outlineGlow" size="lg" onClick={openBooking}>
+                  Book appointment
                 </Button>
               </Stack>
             </MotionBox>

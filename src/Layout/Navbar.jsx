@@ -9,6 +9,7 @@ import { FiMenu, FiChevronDown, FiArrowRight, FiArrowUpRight } from "react-icons
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { navbarOptions, NavbarservicesOptions } from "../utils/Constant";
 import { Logo } from "../Components/common";
+import { useBooking } from "../context/BookingContext";
 
 const MotionBox = motion(Box);
 
@@ -131,6 +132,7 @@ const NavLinkItem = ({ item, index, hovered, setHovered }) => {
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { onOpen: openBooking } = useBooking();
   const [servicesOpen, setServicesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -221,10 +223,10 @@ const Navbar = () => {
               size="sm"
               px={6}
               rightIcon={<FiArrowRight />}
-              onClick={() => navigate("/contact")}
+              onClick={openBooking}
               sx={{ "& svg": { transition: "transform .25s" }, _hover: { "& svg": { transform: "translateX(4px)" } } }}
             >
-              Get a quote
+              Book appointment
             </Button>
           </Box>
           <IconButton
@@ -313,8 +315,8 @@ const Navbar = () => {
                 </MotionBox>
 
                 <MotionBox initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.28 }} pt={5}>
-                  <Button w="full" variant="gradient" size="lg" rightIcon={<FiArrowRight />} onClick={() => { navigate("/contact"); onClose(); }}>
-                    Get a quote
+                  <Button w="full" variant="gradient" size="lg" rightIcon={<FiArrowRight />} onClick={() => { openBooking(); onClose(); }}>
+                    Book appointment
                   </Button>
                   <VStack spacing={1} mt={4}>
                     <Text as="a" href="mailto:business@futurisesolutions.com" fontSize="sm" color="text.muted" _hover={{ color: "accent.solid" }} transition="color .2s">
