@@ -1,53 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Main Pages -->
+
   <url>
-    <loc>https://futurisesolutions.com/</loc>
+    <loc>https://www.futurisesolutions.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
   <url>
-    <loc>https://futurisesolutions.com/about</loc>
+    <loc>https://www.futurisesolutions.com/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
-    <loc>https://futurisesolutions.com/portfolio</loc>
+    <loc>https://www.futurisesolutions.com/portfolio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
-    <loc>https://futurisesolutions.com/contact</loc>
+    <loc>https://www.futurisesolutions.com/contact</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
+
+  <!-- Service Pages -->
+
   <url>
-    <loc>https://futurisesolutions.com/service/web-development</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://futurisesolutions.com/service/app-development</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://futurisesolutions.com/service/ui-ux-design</loc>
+    <loc>https://www.futurisesolutions.com/service/web-development</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+
   <url>
-    <loc>https://futurisesolutions.com/service/blockchain-development</loc>
+    <loc>https://www.futurisesolutions.com/service/app-development</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+
   <url>
-    <loc>https://futurisesolutions.com/service/ai-ml-solutions</loc>
+    <loc>https://www.futurisesolutions.com/service/ui-ux-design</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+
   <url>
-    <loc>https://futurisesolutions.com/service/digital-marketing</loc>
+    <loc>https://www.futurisesolutions.com/service/blockchain-development</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <url>
+    <loc>https://www.futurisesolutions.com/service/ai-ml-solutions</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.futurisesolutions.com/service/digital-marketing</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Blog Listing -->
+
+  <url>
+    <loc>https://www.futurisesolutions.com/blog</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Blog Posts -->
+
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/ai-and-ml-solutions-custom-ai-agents-llm-integrations-nlp-and-computer-vision-built-for-your-business</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/app-development-services-build-cross-platform-ios-and-android-apps-that-users-actually-love</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/blockchain-development-services-smart-contracts-defi-and-web3-solutions-for-modern-businesses</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/uiux-design-services-how-great-design-turns-visitors-into-loyal-customers</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/ai-and-ml-solutions-how-custom-ai-agents-llms-nlp-and-computer-vision-are-transforming-modern-businesses</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>

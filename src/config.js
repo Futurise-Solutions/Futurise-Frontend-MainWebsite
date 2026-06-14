@@ -4,7 +4,7 @@ export const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || "http://api.futurisesolutions.com:5000";
 
 // Admin dashboard password (gate only — not real auth). Override with VITE_ADMIN_PASSWORD.
-export const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || "futurise-admin";
+export const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || "12345678";
 
 const join = (base, path) =>
   `${base}${String(path).startsWith("/") ? "" : "/"}${path}`;
