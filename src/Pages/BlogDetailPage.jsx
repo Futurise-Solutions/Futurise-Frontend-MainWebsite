@@ -106,7 +106,7 @@ const BlogDetailPage = () => {
         {/* Hero image */}
         {blog.featuredImage && (
           <Box position="relative" borderRadius="22px" overflow="hidden" maxH="480px" mb={8} border="1px solid" borderColor="border.subtle">
-            <Image src={mediaUrl(blog.featuredImage)} alt={blog.title} w="full" maxH="480px" objectFit="cover" />
+            <Image src={mediaUrl(blog.featuredImage)} alt={blog.title} w="full" maxH="480px" objectFit="cover" objectPosition="top" />
             <Box position="absolute" inset={0} bgGradient="linear(to-t, rgba(8,8,13,0.6), transparent 50%)" pointerEvents="none" />
             <HStack position="absolute" top={4} left={4} spacing={3}>
               {blog.category && (
