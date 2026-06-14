@@ -8,7 +8,7 @@
 ![alt text](image-1.png)
 ## API Base URL
 ```
-http://localhost:5000/api   put in config js file 
+http://api.futurisesolutions.com:5000  put in config js file 
 ```
 
 ### Blog API Endpoints
