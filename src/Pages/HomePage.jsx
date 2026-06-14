@@ -12,6 +12,7 @@ import {
   WhyChooseUs,
 } from "../Components";
 import Faqs from "../Components/HomePage Components/Faqs";
+import LatestBlogs from "../Components/blog/LatestBlogs";
 import { CTASection, Seo } from "../Components/common";
 import LoadingIndicator from "../Components/LoadingComponent/LoadingIndicator";
 
@@ -67,6 +68,7 @@ const HomePage = () => {
       <ClientsReviews />
       <Faqs />
       <CTASection />
+      <LatestBlogs />
     </Box>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import AllRoutes from './Routes/AllRoutes'
 import { Footer, Navbar } from './Layout'
 import { Box } from '@chakra-ui/react'
@@ -9,6 +10,8 @@ import { BookingProvider } from './context/BookingContext'
 import "./index.css"
 
 const App = () => {
+  // Admin dashboard renders without the public navbar/footer/booking popup.
+  const isAdmin = useLocation().pathname.toLowerCase().startsWith('/futurise-admin')
   // Light image protection — block right-click "Save image" on <img> only.
   // Leaves all other context menus, SEO, and accessibility untouched.
   useEffect(() => {
@@ -23,14 +26,14 @@ const App = () => {
     <BookingProvider>
       <Box id='app' minH="100vh" display="flex" flexDirection="column">
         <ScrollToTop />
-        <Navbar />
+        {!isAdmin && <Navbar />}
         <Box as="main" flex="1">
           <PageTransition>
             <AllRoutes />
           </PageTransition>
         </Box>
-        <Footer />
-        <BookingModal />
+        {!isAdmin && <Footer />}
+        {!isAdmin && <BookingModal />}
       </Box>
     </BookingProvider>
   )

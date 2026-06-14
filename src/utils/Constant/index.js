@@ -348,6 +348,7 @@ export const navbarOptions = [
   { option: "About", path: "/about" },
   { option: "Services", path: "/" },
   { option: "Portfolio", path: "/portfolio" },
+  { option: "Blog", path: "/blog" },
   { option: "Contact", path: "/contact" },
 ];
 

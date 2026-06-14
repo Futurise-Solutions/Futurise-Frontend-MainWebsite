@@ -19,6 +19,7 @@ const NAV_ITEMS = [
   { label: "About", path: "/about" },
   { label: "Services", path: null, isServices: true },
   { label: "Portfolio", path: "/portfolio" },
+  { label: "Blog", path: "/blog" },
   { label: "Contact", path: "/contact" },
 ];
 
