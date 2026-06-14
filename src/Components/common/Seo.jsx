@@ -48,7 +48,9 @@ const Seo = ({
 }) => {
   const fullTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
   const url = `${SITE_URL}${path}`;
-  const ogImage = image ? `${SITE_URL}${image}` : DEFAULT_IMAGE;
+  const ogImage = image
+    ? (/^https?:\/\//i.test(image) ? image : `${SITE_URL}${image}`)
+    : DEFAULT_IMAGE;
 
   useEffect(() => {
     document.title = fullTitle;

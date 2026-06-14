@@ -19,7 +19,7 @@ const TestimonialCard = ({ t }) => (
   >
     <Icon as={FaQuoteLeft} boxSize={5} color="rgba(180,160,255,0.5)" mb={3} />
     <Text color="text.primary" fontSize="14px" lineHeight={1.75} flex="1" noOfLines={4} overflow="hidden">
-      "{t.review}"
+      &ldquo;{t.review}&rdquo;
     </Text>
     <HStack spacing={1} mb={4}>
       {[...Array(5)].map((_, i) => (
