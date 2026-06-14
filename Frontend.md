@@ -346,7 +346,7 @@ Use a `Drawer` (size="full") or navigate to a separate `/futurise-admin/blog/new
 **Markdown Editor:**
 Use `@uiw/react-md-editor` — it renders a split-pane markdown editor with preview built in.
 
-Install: `npm install @uiw/react-md-editor`
+Install: `npm install @uiw/react-md-editor`or cke editor use best
 
 ```jsx
 import MDEditor from "@uiw/react-md-editor";
