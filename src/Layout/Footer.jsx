@@ -234,6 +234,29 @@ const Footer = () => {
           <Text fontSize="sm" color="text.faint">
             © {new Date().getFullYear()} Futurise Solutions. All rights reserved.
           </Text>
+          <HStack spacing={4} flexWrap="wrap" justify="center">
+            <Text
+              as={Link}
+              to="/privacy"
+              fontSize="sm"
+              color="text.faint"
+              _hover={{ color: "text.muted" }}
+              transition="color .2s"
+            >
+              Privacy Policy
+            </Text>
+            <Text color="border.subtle" fontSize="sm">·</Text>
+            <Text
+              as={Link}
+              to="/terms"
+              fontSize="sm"
+              color="text.faint"
+              _hover={{ color: "text.muted" }}
+              transition="color .2s"
+            >
+              Terms & Conditions
+            </Text>
+          </HStack>
           <HStack spacing={3}>
             {socials.map((s) => (
               <CLink

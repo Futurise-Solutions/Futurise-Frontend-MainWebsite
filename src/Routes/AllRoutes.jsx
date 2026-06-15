@@ -11,6 +11,8 @@ const ServiceSingalPage = lazy(() => import("../Pages/ServicePage"));
 const BlogsPage = lazy(() => import("../Pages/BlogsPage"));
 const BlogDetailPage = lazy(() => import("../Pages/BlogDetailPage"));
 const AdminBlogPage = lazy(() => import("../Pages/AdminBlogPage"));
+const PrivacyPolicy = lazy(() => import("../Pages/PrivacyPolicy"));
+const TermsConditions = lazy(() => import("../Pages/TermsConditions"));
 const NotFound = lazy(() => import("../Pages/NotFound"));
 
 const LoadingSpinner = () => (
@@ -34,6 +36,8 @@ const AllRoutes = () => {
         <Route path="/blog" element={<BlogsPage />} />
         <Route path="/blog/:slug" element={<BlogDetailPage />} />
         <Route path="/futurise-admin/blog" element={<AdminBlogPage />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsConditions />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>
