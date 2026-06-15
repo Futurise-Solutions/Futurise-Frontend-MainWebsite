@@ -65,6 +65,20 @@
     <priority>0.9</priority>
   </url>
 
+  <!-- Legal pages -->
+  <url>
+    <loc>https://futurisesolutions.com/privacy</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://futurisesolutions.com/terms</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
   <!-- Blog listing -->
   <url>
     <loc>https://futurisesolutions.com/blog</loc>
