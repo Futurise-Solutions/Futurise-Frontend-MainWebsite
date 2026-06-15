@@ -24,7 +24,7 @@
     <loc>https://futurisesolutions.com/contact</loc>
     <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
 
   <!-- Service pages -->
@@ -70,6 +70,50 @@
     <loc>https://futurisesolutions.com/blog</loc>
     <lastmod>2026-06-15</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Blog posts -->
+  <url>
+    <loc>https://futurisesolutions.com/blog/ai-and-ml-solutions-custom-ai-agents-llm-integrations-nlp-and-computer-vision-built-for-your-business</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://futurisesolutions.com/blog/web-development-services-fast-scalable-and-seo-ready-websites-and-web-apps-built-to-convert</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://futurisesolutions.com/blog/app-development-services-build-cross-platform-ios-and-android-apps-that-users-actually-love</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://futurisesolutions.com/blog/blockchain-development-services-smart-contracts-defi-and-web3-solutions-for-modern-businesses</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://futurisesolutions.com/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://futurisesolutions.com/blog/uiux-design-services-how-great-design-turns-visitors-into-loyal-customers</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://futurisesolutions.com/blog/ai-and-ml-solutions-how-custom-ai-agents-llms-nlp-and-computer-vision-are-transforming-modern-businesses</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
