@@ -1,14 +1,13 @@
 {
   "redirects": [
     {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "www.futurisesolutions.com" }],
-      "destination": "https://futurisesolutions.com/$1",
+      "source": "/About",
+      "destination": "/about",
       "permanent": true
     },
     {
-      "source": "/About",
-      "destination": "/about",
+      "source": "/home",
+      "destination": "/",
       "permanent": true
     }
   ],
