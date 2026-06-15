@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /futurise-admin/
 
 Sitemap: https://futurisesolutions.com/sitemap.xml

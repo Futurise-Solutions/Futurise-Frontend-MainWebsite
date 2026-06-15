@@ -29,7 +29,6 @@ const AllRoutes = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/contact" element={<Contactus />} />
         <Route path="/about" element={<AboutUs />} />
-        <Route path="/About" element={<AboutUs />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/service/:serviceName" element={<ServiceSingalPage />} />
         <Route path="/blog" element={<BlogsPage />} />
