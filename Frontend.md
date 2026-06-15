@@ -1,414 +1,851 @@
-# Futurise Blog — Frontend Implementation Prompt
+# Futurise Solutions — AI Chatbot Implementation Plan
 
-# use the current theme and color to build the ui
-## blog page ui refrence
-![alt text](image.png)
+> Branch: `chat-bot`
+> Last Updated: 15 June 2025
+> Stack: React + Chakra UI (Vite) · Node.js/Express Backend · MongoDB Atlas Vector Search · Gemini 2.5 Flash
 
-## blog detail page ui refrence 
-![alt text](image-1.png)
-## API Base URL
+---
+
+## Overview
+
+Build a hybrid AI chatbot for futurisesolutions.com that:
+- Answers visitor questions about Futurise Solutions using RAG (backend + MongoDB vector search + Gemini 2.5 Flash)
+- Falls back to frontend keyword matching if Gemini API limit is hit (20 calls/day free tier)
+- Falls back to contact options (WhatsApp, Book a Call, Contact Page) if no answer found anywhere
+- Shows predefined quick-reply questions (Zomato-style chips) for instant answers
+- Has zero impact on SEO and initial page performance (fully lazy-loaded)
+- Never exposes Gemini usage to the user — branded as "Futurise Assistant"
+
+---
+
+## Architecture
+
 ```
-http://api.futurisesolutions.com:5000  put in config js file 
+┌─────────────────────────────────────────────────────────┐
+│                     FRONTEND (React)                     │
+│                                                         │
+│  FloatingChatBubble (lazy loaded, renders only on click)│
+│       ↓                                                 │
+│  ChatWidget                                             │
+│  ├── PredefinedChips (click → instant answer, 0 calls)  │
+│  ├── MessageInput (user types question)                 │
+│  └── Message flow:                                      │
+│       1. Send to Backend API → get AI answer            │
+│       2. If backend fails/quota → KeywordMatcher        │
+│       3. If keyword no match → ContactFallback          │
+└────────────────┬────────────────────────────────────────┘
+                 │ POST /api/chat
+                 ▼
+┌─────────────────────────────────────────────────────────┐
+│                     BACKEND (Node/Express)               │
+│                                                         │
+│  POST /api/chat                                         │
+│  ├── Embed user question → vector                       │
+│  ├── MongoDB Atlas Vector Search → top 3 content chunks │
+│  ├── Build prompt: system + context chunks + question   │
+│  ├── Call Gemini 2.5 Flash                              │
+│  └── Return { answer, source: "ai" }                   │
+│                                                         │
+│  If Gemini quota hit → return { source: "quota_exceeded"}│
+└────────────────┬────────────────────────────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────────────────────────────┐
+│               MONGODB ATLAS (Vector Search)             │
+│                                                         │
+│  Collection: page_content                               │
+│  Schema:                                                │
+│  {                                                      │
+│    _id, page, section, content (text),                  │
+│    embedding: [1536-dim float array],                   │
+│    updatedAt                                            │
+│  }                                                      │
+│                                                         │
+│  Pages stored: home, about, services (x6),              │
+│                portfolio, contact, blog, faq            │
+└─────────────────────────────────────────────────────────┘
 ```
 
-### Blog API Endpoints
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/blogs` | All published blogs (newest first) |
-| GET | `/api/blogs/admin/all` | All blogs including drafts (admin only) |
-| GET | `/api/blogs/:slug` | Single blog by slug |
-| POST | `/api/blogs` | Create blog |
-| PUT | `/api/blogs/:id` | Update blog by MongoDB `_id` |
-| DELETE | `/api/blogs/:id` | Delete blog by MongoDB `_id` |
-| POST | `/api/upload` | Upload image → returns `{ imageUrl, filename }` |
+---
 
-### Blog Document Shape
+## Detailed Flow
+
+### Flow 1 — Predefined Question (0 API calls)
+```
+User clicks chip "What services do you offer?"
+  → answer rendered instantly from hardcoded map
+  → no backend call, no Gemini call
+```
+
+### Flow 2 — Custom Question, Gemini Available
+```
+User types "Do you build Shopify stores?"
+  → Frontend: POST /api/chat { question, history[] }
+  → Backend:
+      1. Embed question with Gemini embedding model
+      2. MongoDB Atlas vector search → top 3 chunks (services page, home page)
+      3. Build prompt:
+           SYSTEM: "You are Futurise Assistant..."
+           CONTEXT: <retrieved chunks>
+           HISTORY: <last 5 messages>
+           USER: "Do you build Shopify stores?"
+      4. Gemini 2.5 Flash → answer
+      5. Return { answer: "...", source: "ai" }
+  → Frontend: render answer
+```
+
+### Flow 3 — Gemini Quota Hit (Frontend Fallback)
+```
+Backend returns { source: "quota_exceeded" }
+  → Frontend: run KeywordMatcher against question
+  → If match found → render static answer
+  → If no match → show ContactFallback
+```
+
+### Flow 4 — No Answer Found Anywhere
+```
+  → Show ContactFallback component:
+      "I couldn't find a specific answer. Here's how to reach us:"
+      [WhatsApp Button] [Book a Free Call] [Contact Page →]
+```
+
+---
+
+## MongoDB — `page_content` Collection
+
+### Document Schema
 ```json
 {
-  "_id": "...",
-  "title": "...",
-  "slug": "top-ai-trends-2025",
-  "shortDescription": "...",
-  "featuredImage": "/uploads/blogs/filename.webp",
-  "category": "AI",
-  "tags": ["AI", "tech"],
-  "meta": {
-    "metaTitle": "...",
-    "metaDescription": "...",
-    "metaKeywords": ["AI", "tech"],
-    "ogType": "article",
-    "robots": "index,follow"
-  },
-  "content": "# Markdown content here...",
-  "status": "draft | published",
-  "createdAt": "...",
-  "updatedAt": "..."
+  "_id": "ObjectId",
+  "page": "services",
+  "section": "ai-ml",
+  "title": "AI & Machine Learning Solutions",
+  "content": "We build custom AI agents, LLM integrations, automation pipelines...",
+  "keywords": ["ai", "machine learning", "llm", "agents", "automation"],
+  "embedding": [0.023, -0.187, ...],
+  "updatedAt": "2025-06-15T00:00:00Z"
+}
+```
+
+### Pages & Sections to Store
+| Page | Sections |
+|---|---|
+| home | hero, services-overview, stats, why-us, process, faq |
+| about | mission, vision, core-values, team-stats |
+| service/ai-ml | overview, features, tech-stack, process |
+| service/web-development | overview, features, tech-stack |
+| service/app-development | overview, features, tech-stack |
+| service/ui-ux-design | overview, features, process |
+| service/blockchain | overview, features, tech-stack |
+| service/digital-marketing | overview, features, process |
+| portfolio | project list with descriptions |
+| contact | contact details, location, working hours |
+| faq | all FAQ questions and answers |
+
+### Vector Index (Atlas Search)
+```json
+{
+  "fields": [{
+    "type": "vector",
+    "path": "embedding",
+    "numDimensions": 768,
+    "similarity": "cosine"
+  }]
 }
 ```
 
 ---
 
-## 1. Navbar — Add Blog Link
+## Backend — API Endpoint
+## get gemini api key from env 
+### `POST /api/chat`
 
-In `src/Layout/Navbar.jsx`, add `{ label: "Blog", path: "/blog" }` to the `NAV_ITEMS` array between "Portfolio" and "Contact":
+**Request:**
+```json
+{
+  "question": "What technologies do you use for mobile apps?",
+  "history": [
+    { "role": "user", "content": "Hello" },
+    { "role": "assistant", "content": "Hi! How can I help?" }
+  ]
+}
+```
+
+**Response (success):**
+```json
+{
+  "answer": "We build mobile apps using React Native and Expo...",
+  "source": "ai"
+}
+```
+
+**Response (quota exceeded):**
+```json
+{
+  "source": "quota_exceeded"
+}
+```
+
+**Response (error):**
+```json
+{
+  "source": "error",
+  "message": "Something went wrong"
+}
+```
+
+### System Prompt (Backend)
+```
+You are Futurise Assistant, the AI assistant for Futurise Solutions.
+You help website visitors learn about our services, portfolio, and how to get started.
+
+RULES:
+- Only answer questions about Futurise Solutions
+- Be friendly, concise, and professional
+- Keep answers under 120 words
+- If unsure, direct them to contact us
+- Never mention Gemini, Google AI, or any AI provider
+- Do not answer off-topic questions (coding help, general knowledge, etc.)
+
+COMPANY:
+- Name: Futurise Solutions
+- Type: Full-cycle digital product studio
+- Location: Wellington, New Zealand (serving India, USA & worldwide)
+- Email: business@futurisesolutions.com
+- Phone: +91 76650 13356
+- Stats: 30+ projects, 14+ clients, 97% retention
+
+CONTEXT FROM WEBSITE:
+{retrieved_chunks}
+```
+
+---
+
+## Frontend — Components
+
+### File Structure
+```
+src/
+├── Components/
+│   └── Chatbot/
+│       ├── index.js                  # exports
+│       ├── ChatWidget.jsx            # main chat window
+│       ├── ChatBubble.jsx            # floating trigger button
+│       ├── MessageList.jsx           # renders conversation
+│       ├── MessageInput.jsx          # text input + send
+│       ├── PredefinedChips.jsx       # quick-reply buttons
+│       ├── ContactFallback.jsx       # WhatsApp/booking/contact links
+│       ├── TypingIndicator.jsx       # animated dots while waiting
+│       ├── keywordMatcher.js         # pure function, no imports
+│       └── predefinedQA.js           # hardcoded Q&A + chips data
+└── App.jsx                           # lazy import ChatBubble here
+```
+
+### Lazy Loading in App.jsx
+```jsx
+// Load chat widget only after page is interactive
+const ChatBubble = lazy(() => import('./Components/Chatbot/ChatBubble'));
+
+// In JSX — renders outside main layout, fixed position
+<Suspense fallback={null}>
+  <ChatBubble />
+</Suspense>
+```
+> `fallback={null}` — no loading spinner shown for the chat widget.
+> Widget is position:fixed, completely outside the content flow → zero layout shift, zero CLS impact.
+
+---
+
+## Frontend — Predefined Questions (predefinedQA.js)
 
 ```js
-const NAV_ITEMS = [
-  { label: "Home", path: "/" },
-  { label: "About", path: "/about" },
-  { label: "Services", path: null, isServices: true },
-  { label: "Portfolio", path: "/portfolio" },
-  { label: "Blog", path: "/blog" },       // ← add this
-  { label: "Contact", path: "/contact" },
+export const predefinedChips = [
+  "What services do you offer?",
+  "How do I start a project?",
+  "What does it cost?",
+  "Show me your portfolio",
+  "How can I contact you?",
+  "How long does a project take?",
+];
+
+export const predefinedAnswers = {
+  "What services do you offer?":
+    "We offer 6 core services: AI & ML Solutions, Web Development, App Development, UI/UX Design, Blockchain/Web3, and Digital Marketing. Which one interests you?",
+
+  "How do I start a project?":
+    "Simple! Book a free strategy call and we'll discuss your idea, scope, and timeline. No commitment needed.",
+
+  "What does it cost?":
+    "We work on custom quotes based on your project scope. Book a free call and we'll give you a clear estimate.",
+
+  "Show me your portfolio":
+    "We've delivered 30+ projects including HOMIES, Marty-QR, GDT Exchange, and more. Check our portfolio page!",
+
+  "How can I contact you?":
+    "Email us at business@futurisesolutions.com, call +91 76650 13356, or use our contact page. We reply within hours.",
+
+  "How long does a project take?":
+    "It depends on scope. Most projects range from 4 to 16 weeks. We'll give you a clear timeline after the discovery call.",
+};
+```
+
+---
+
+## Frontend — Keyword Fallback (keywordMatcher.js)
+
+```js
+// Pure function — no React, no imports, no API calls
+// Covers 30+ intent categories — runs only when Gemini quota is exceeded
+const fallbackKB = [
+
+  // ── Services (general) ──────────────────────────────────────────────
+  {
+    keywords: ["service", "offer", "provide", "what do you do", "speciali", "capabilities", "can you", "help with", "expertise"],
+    answer: "We offer 6 core services: AI & ML, Web Development, App Development, UI/UX Design, Blockchain/Web3, and Digital Marketing. Which one interests you?",
+  },
+
+  // ── Pricing ─────────────────────────────────────────────────────────
+  {
+    keywords: ["price", "cost", "how much", "rate", "charge", "budget", "pricing", "quote", "estimate", "affordable", "expensive", "cheap", "fees", "invoice"],
+    answer: "We work on custom quotes based on your project scope. Book a free call and we'll give you a clear estimate — no commitment needed.",
+  },
+
+  // ── Contact ─────────────────────────────────────────────────────────
+  {
+    keywords: ["contact", "email", "reach", "talk", "speak", "call", "message", "get in touch", "whatsapp", "phone", "number", "mail"],
+    answer: "Email us at business@futurisesolutions.com or call +91 76650 13356. We reply within a few hours.",
+  },
+
+  // ── Location ────────────────────────────────────────────────────────
+  {
+    keywords: ["location", "based", "where", "country", "new zealand", "india", "usa", "office", "address", "city", "wellington", "remote", "onsite"],
+    answer: "We're based in Wellington, New Zealand, with team members in India — serving clients in USA, NZ, India and worldwide.",
+  },
+
+  // ── Portfolio / Past Work ────────────────────────────────────────────
+  {
+    keywords: ["portfolio", "project", "past work", "example", "case study", "built", "clients", "showcase", "sample", "previous", "done before"],
+    answer: "We've delivered 30+ projects including HOMIES, Marty-QR, GDT Exchange, and more. Check our portfolio page!",
+  },
+
+  // ── Timeline / Delivery ──────────────────────────────────────────────
+  {
+    keywords: ["timeline", "how long", "duration", "deadline", "weeks", "months", "delivery", "time", "fast", "quick", "urgent", "rush"],
+    answer: "Most projects take 4–16 weeks depending on scope. We'll give a clear timeline after the discovery call.",
+  },
+
+  // ── Getting Started / Hiring ─────────────────────────────────────────
+  {
+    keywords: ["start", "hire", "begin", "get started", "work together", "collaborate", "onboard", "kick off", "process", "next step", "how to", "ready"],
+    answer: "Book a free strategy call! We'll discuss your idea, scope it out, and put together a plan — no commitment needed.",
+  },
+
+  // ── AI & ML ──────────────────────────────────────────────────────────
+  {
+    keywords: ["ai", "artificial intelligence", "machine learning", "ml", "llm", "large language model", "gpt", "chatgpt", "openai", "gemini", "agent", "automation", "nlp", "computer vision", "data science", "model", "prediction", "recommendation"],
+    answer: "We build custom AI agents, LLM integrations, NLP systems, computer vision pipelines, and ML-powered features for your product.",
+  },
+
+  // ── Web Development ──────────────────────────────────────────────────
+  {
+    keywords: ["web", "website", "web app", "saas", "react", "next.js", "nextjs", "node", "nodejs", "frontend", "backend", "fullstack", "full stack", "graphql", "api", "rest", "dashboard", "portal", "platform"],
+    answer: "We build scalable web applications with React, Next.js, Node.js, and GraphQL — from SaaS platforms to dashboards and portals.",
+  },
+
+  // ── Mobile App Development ────────────────────────────────────────────
+  {
+    keywords: ["app", "mobile", "ios", "android", "react native", "expo", "cross-platform", "flutter", "native", "app store", "play store", "smartphone", "tablet"],
+    answer: "We build cross-platform mobile apps with React Native & Expo that run natively on both iOS and Android.",
+  },
+
+  // ── UI/UX Design ──────────────────────────────────────────────────────
+  {
+    keywords: ["design", "ui", "ux", "user experience", "user interface", "figma", "wireframe", "prototype", "mockup", "branding", "visual", "landing page", "redesign", "pixel", "creative", "logo"],
+    answer: "We offer full UI/UX design — user research, wireframes, Figma prototypes, design systems, and pixel-perfect handoffs.",
+  },
+
+  // ── Blockchain / Web3 ─────────────────────────────────────────────────
+  {
+    keywords: ["blockchain", "web3", "smart contract", "solidity", "defi", "nft", "dapp", "decentralized", "crypto", "ethereum", "solana", "token", "wallet", "mev", "dao"],
+    answer: "We build dApps, smart contracts, DeFi protocols, MEV bots, and Web3 solutions across major chains.",
+  },
+
+  // ── Digital Marketing ─────────────────────────────────────────────────
+  {
+    keywords: ["marketing", "seo", "search engine", "social media", "ads", "google ads", "facebook ads", "instagram", "linkedin", "content", "blog", "traffic", "leads", "conversion", "analytics", "growth", "campaign", "rank", "keywords"],
+    answer: "We offer SEO, performance marketing, content strategy, paid ads, and social media growth to drive real traffic and leads.",
+  },
+
+  // ── Team / Company Info ───────────────────────────────────────────────
+  {
+    keywords: ["team", "who are you", "about", "people", "member", "developer", "staff", "company", "agency", "studio", "futurise", "founded", "experience", "years"],
+    answer: "We're a senior team of 10+ developers, designers, and strategists. 30+ projects delivered with a 97% client retention rate.",
+  },
+
+  // ── Tech Stack ────────────────────────────────────────────────────────
+  {
+    keywords: ["technology", "tech stack", "tools", "framework", "language", "typescript", "javascript", "python", "aws", "cloud", "docker", "database", "mongodb", "postgres", "mysql"],
+    answer: "Our stack includes React, Next.js, Node.js, Python, MongoDB, PostgreSQL, AWS, and more — chosen based on what's best for your project.",
+  },
+
+  // ── Revisions / Support ───────────────────────────────────────────────
+  {
+    keywords: ["revision", "change", "update", "support", "maintenance", "bug", "fix", "after delivery", "post launch", "ongoing"],
+    answer: "Every project includes revision rounds defined upfront. We also offer post-launch support and maintenance packages.",
+  },
+
+  // ── NDA / Confidentiality ─────────────────────────────────────────────
+  {
+    keywords: ["nda", "confidential", "secret", "agreement", "legal", "contract", "sign", "privacy", "secure"],
+    answer: "Absolutely — we sign NDAs and keep all client information strictly confidential. Your idea is safe with us.",
+  },
+
+  // ── Refund / Guarantee ────────────────────────────────────────────────
+  {
+    keywords: ["refund", "guarantee", "money back", "quality", "satisfaction", "warranty", "assurance"],
+    answer: "We stand behind our work. Quality is defined upfront in the project scope, and revisions ensure you're satisfied with every deliverable.",
+  },
+
+  // ── Blog / Resources ──────────────────────────────────────────────────
+  {
+    keywords: ["blog", "article", "read", "resource", "guide", "learn", "insight", "news", "update"],
+    answer: "Check out our blog for insights on AI, web development, mobile apps, blockchain, and digital marketing!",
+  },
+
+  // ── Book a Call ───────────────────────────────────────────────────────
+  {
+    keywords: ["book", "schedule", "appointment", "meeting", "call", "consultation", "free call", "discovery", "demo"],
+    answer: "Book a free strategy call directly from our website — just click 'Book a free call' or visit our contact page.",
+  },
+
+  // ── Greetings ─────────────────────────────────────────────────────────
+  {
+    keywords: ["hello", "hi", "hey", "good morning", "good afternoon", "good evening", "howdy", "greetings", "sup", "what's up"],
+    answer: "Hey there! 👋 I'm Futurise Assistant. Ask me anything about our services, pricing, or how to get started!",
+  },
+
+  // ── Thank you ─────────────────────────────────────────────────────────
+  {
+    keywords: ["thank", "thanks", "thank you", "appreciate", "great", "awesome", "helpful"],
+    answer: "You're welcome! 😊 Feel free to ask anything else, or book a free call when you're ready to get started.",
+  },
+
+  // ── Partnership / Collaboration ───────────────────────────────────────
+  {
+    keywords: ["partner", "partnership", "collab", "collaboration", "reseller", "white label", "agency partner", "referral"],
+    answer: "We're open to agency partnerships and collaborations. Email us at business@futurisesolutions.com to discuss.",
+  },
+
+  // ── Internship / Jobs ─────────────────────────────────────────────────
+  {
+    keywords: ["job", "career", "intern", "internship", "hiring", "vacancy", "apply", "join", "work for", "opportunity"],
+    answer: "Interested in joining us? Email your portfolio and CV to business@futurisesolutions.com — we'd love to hear from you.",
+  },
+];
+
+export function matchKeyword(question) {
+  const q = question.toLowerCase().trim();
+  for (const entry of fallbackKB) {
+    if (entry.keywords.some((kw) => q.includes(kw))) {
+      return entry.answer;
+    }
+  }
+  return null; // no match → show ContactFallback
+}
+```
+
+---
+
+## Frontend — ContactFallback Component
+
+Shown when both Gemini and keyword matching fail to answer:
+
+```jsx
+// ContactFallback.jsx
+const ContactFallback = () => (
+  <Box p={4} borderRadius="14px" border="1px solid" borderColor="rgba(180,160,255,0.2)" bg="bg.surface">
+    <Text fontSize="14px" color="text.muted" mb={3}>
+      I couldn't find a specific answer. Here's how to reach us directly:
+    </Text>
+    <VStack spacing={2} align="stretch">
+      <Button as="a" href="https://wa.me/917665013356" target="_blank" size="sm" variant="outlineGlow" leftIcon={<FaWhatsapp />}>
+        Chat on WhatsApp
+      </Button>
+      <Button size="sm" variant="gradient" leftIcon={<FiCalendar />} onClick={openBooking}>
+        Book a Free Call
+      </Button>
+      <Button as={Link} to="/contact" size="sm" variant="ghostLink" rightIcon={<FiArrowRight />}>
+        Send us a message
+      </Button>
+    </VStack>
+  </Box>
+);
+```
+
+---
+
+## Performance & SEO Rules (Non-negotiable)
+
+| Rule | Implementation |
+|---|---|
+| No render on page load | `React.lazy()` + `Suspense fallback={null}` |
+| No layout shift | `position: fixed`, outside content flow |
+| No blocking scripts | Dynamic import only triggered on bubble click |
+| SEO safe | Chat content in React state, never in crawlable DOM |
+| No extra dependencies | Use existing Chakra UI, framer-motion, react-icons |
+| API key hidden | All Gemini calls go through backend — key never in frontend bundle |
+| Minimal bundle | Chat widget lazy chunk only loaded when user clicks bubble |
+| No IndexedDB/localStorage | Conversation in useState only — clears on refresh |
+
+---
+
+## Environment Variables
+
+### Frontend (.env)
+```
+VITE_CHAT_API_URL=https://api.futurisesolutions.com/api/chat
+```
+
+### Backend (.env)
+```
+GEMINI_API_KEY=your_gemini_api_key
+MONGODB_URI=mongodb+srv://...
+GEMINI_MODEL=gemini-2.5-flash
+EMBEDDING_MODEL=text-embedding-004
+VECTOR_SEARCH_INDEX=content_vector_index
+TOP_K_RESULTS=3
+```
+
+---
+
+## Content Seeding Script (Backend)
+
+### Decision: Prompt-to-Run (NOT auto on every code change)
+
+**Why not auto-run?**
+- Gemini embedding API has daily limits — running on every file save would waste quota
+- Content rarely changes — re-seeding on every build is unnecessary
+- Seeding is destructive (upserts DB records) — should be intentional
+
+**Chosen approach: Interactive CLI prompt**
+Developer runs `npm run seed` → script asks what to seed → confirms before writing to DB.
+
+---
+
+### Script Location
+```
+backend/
+└── scripts/
+    └── seedContent.js    ← main seed script
+    └── content/
+        ├── home.js       ← page content as JS objects
+        ├── about.js
+        ├── services.js
+        ├── portfolio.js
+        ├── contact.js
+        └── faq.js
+```
+
+---
+
+### npm Script (backend/package.json)
+```json
+{
+  "scripts": {
+    "seed": "node scripts/seedContent.js",
+    "seed:dry": "node scripts/seedContent.js --dry-run",
+    "seed:force": "node scripts/seedContent.js --force"
+  }
+}
+```
+
+---
+
+### seedContent.js — Full Script
+
+```js
+// backend/scripts/seedContent.js
+// Run: npm run seed
+// Flags:
+//   --dry-run   Preview what would be seeded, no DB writes, no API calls
+//   --force     Skip confirmation prompt, seed all pages immediately
+//   --page=home Seed only a specific page (e.g. --page=services)
+
+import "dotenv/config";
+import readline from "readline";
+import { MongoClient } from "mongodb";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+// ── Page content imports ─────────────────────────────────────────────
+import { homeContent }      from "./content/home.js";
+import { aboutContent }     from "./content/about.js";
+import { servicesContent }  from "./content/services.js";
+import { portfolioContent } from "./content/portfolio.js";
+import { contactContent }   from "./content/contact.js";
+import { faqContent }       from "./content/faq.js";
+
+const ALL_PAGES = {
+  home:      homeContent,
+  about:     aboutContent,
+  services:  servicesContent,
+  portfolio: portfolioContent,
+  contact:   contactContent,
+  faq:       faqContent,
+};
+
+// ── Parse CLI flags ──────────────────────────────────────────────────
+const args        = process.argv.slice(2);
+const DRY_RUN     = args.includes("--dry-run");
+const FORCE       = args.includes("--force");
+const PAGE_FLAG   = args.find((a) => a.startsWith("--page="));
+const TARGET_PAGE = PAGE_FLAG ? PAGE_FLAG.split("=")[1] : null;
+
+// ── Determine what to seed ────────────────────────────────────────────
+const pagesToSeed = TARGET_PAGE
+  ? { [TARGET_PAGE]: ALL_PAGES[TARGET_PAGE] }
+  : ALL_PAGES;
+
+if (TARGET_PAGE && !ALL_PAGES[TARGET_PAGE]) {
+  console.error(`\n❌ Unknown page: "${TARGET_PAGE}". Available: ${Object.keys(ALL_PAGES).join(", ")}\n`);
+  process.exit(1);
+}
+
+// ── Count chunks to be seeded ─────────────────────────────────────────
+const totalChunks = Object.values(pagesToSeed).reduce(
+  (sum, sections) => sum + sections.length, 0
+);
+
+// ── Summary print ─────────────────────────────────────────────────────
+console.log("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+console.log("  Futurise Solutions — Content Seeder");
+console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+console.log(`  Pages   : ${Object.keys(pagesToSeed).join(", ")}`);
+console.log(`  Chunks  : ${totalChunks} sections to embed`);
+console.log(`  Mode    : ${DRY_RUN ? "DRY RUN (no writes)" : "LIVE"}`);
+console.log(`  DB      : ${process.env.MONGODB_URI?.slice(0, 30)}...`);
+console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
+
+if (DRY_RUN) {
+  console.log("📋 DRY RUN — chunks that WOULD be seeded:\n");
+  Object.entries(pagesToSeed).forEach(([page, sections]) => {
+    sections.forEach((s) => {
+      console.log(`  [${page}] ${s.section} — ${s.content.slice(0, 80)}...`);
+    });
+  });
+  console.log("\n✅ Dry run complete. No DB writes. No API calls.\n");
+  process.exit(0);
+}
+
+// ── Confirmation prompt (skipped with --force) ────────────────────────
+async function confirm() {
+  if (FORCE) return true;
+  const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+  return new Promise((resolve) => {
+    rl.question(
+      `⚠️  This will upsert ${totalChunks} chunks into MongoDB.\n   Gemini embedding API will be called ${totalChunks} time(s).\n\n   Proceed? (y/N): `,
+      (ans) => { rl.close(); resolve(ans.trim().toLowerCase() === "y"); }
+    );
+  });
+}
+
+// ── Main seeding logic ────────────────────────────────────────────────
+async function seed() {
+  const ok = await confirm();
+  if (!ok) { console.log("\n🚫 Aborted. No changes made.\n"); process.exit(0); }
+
+  const client = new MongoClient(process.env.MONGODB_URI);
+  const genAI  = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+  const embedModel = genAI.getGenerativeModel({ model: "text-embedding-004" });
+
+  try {
+    await client.connect();
+    const db         = client.db("futurise");
+    const collection = db.collection("page_content");
+
+    let seeded = 0;
+    let failed = 0;
+
+    for (const [page, sections] of Object.entries(pagesToSeed)) {
+      console.log(`\n📄 Seeding page: ${page} (${sections.length} sections)`);
+
+      for (const section of sections) {
+        try {
+          // Generate embedding
+          const result    = await embedModel.embedContent(section.content);
+          const embedding = result.embedding.values;
+
+          // Upsert into MongoDB
+          await collection.updateOne(
+            { page: section.page, section: section.section },
+            {
+              $set: {
+                page:      section.page,
+                section:   section.section,
+                title:     section.title,
+                content:   section.content,
+                keywords:  section.keywords,
+                embedding,
+                updatedAt: new Date(),
+              },
+            },
+            { upsert: true }
+          );
+
+          console.log(`  ✅ ${section.section}`);
+          seeded++;
+
+          // Small delay to respect Gemini rate limits
+          await new Promise((r) => setTimeout(r, 300));
+
+        } catch (err) {
+          console.error(`  ❌ ${section.section} — ${err.message}`);
+          failed++;
+        }
+      }
+    }
+
+    console.log("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+    console.log(`  ✅ Seeded : ${seeded} chunks`);
+    if (failed > 0)
+      console.log(`  ❌ Failed : ${failed} chunks (re-run to retry)`);
+    console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
+
+  } finally {
+    await client.close();
+  }
+}
+
+seed().catch((err) => {
+  console.error("\n❌ Fatal error:", err.message);
+  process.exit(1);
+});
+```
+
+---
+
+### Content File Format (e.g. content/faq.js)
+
+```js
+// backend/scripts/content/faq.js
+export const faqContent = [
+  {
+    page: "faq",
+    section: "faq-services",
+    title: "What services does Futurise Solutions offer?",
+    content: `Futurise Solutions offers 6 core services:
+1. AI & ML Solutions — custom AI agents, LLM integrations, NLP, computer vision
+2. Web Development — React, Next.js, Node.js, GraphQL, SaaS platforms
+3. App Development — React Native, Expo, iOS and Android
+4. UI/UX Design — user research, Figma, design systems
+5. Blockchain/Web3 — smart contracts, DeFi, dApps, MEV
+6. Digital Marketing — SEO, performance marketing, social strategy`,
+    keywords: ["services", "offer", "what do you do"],
+  },
+  {
+    page: "faq",
+    section: "faq-pricing",
+    title: "How much does a project cost?",
+    content: `Futurise Solutions works on custom quotes based on project scope, complexity, and timeline.
+We do not have fixed packages — every project is different.
+To get an accurate estimate, book a free strategy call where we discuss your requirements.`,
+    keywords: ["price", "cost", "budget", "how much"],
+  },
+  {
+    page: "faq",
+    section: "faq-timeline",
+    title: "How long does a project take?",
+    content: `Project timelines at Futurise Solutions typically range from 4 to 16 weeks depending on scope.
+A simple landing page or MVP may take 3-4 weeks.
+A full SaaS platform or mobile app typically takes 8-16 weeks.
+We provide a clear timeline breakdown after the discovery call.`,
+    keywords: ["timeline", "how long", "duration", "delivery"],
+  },
+  // ... add all FAQ entries
 ];
 ```
 
-Also add it to `navbarOptions` constant (used for mobile drawer) so it appears in the mobile menu as well.
+---
+
+### When to Re-run the Seed Script
+
+| Trigger | Command | Notes |
+|---|---|---|
+| First setup | `npm run seed` | Seeds all pages |
+| Content updated on one page | `npm run seed -- --page=services` | Only re-embeds services content |
+| Preview without writing | `npm run seed:dry` | Shows all chunks, no API calls |
+| CI/CD deployment (optional) | `npm run seed:force` | Skips prompt, use in pipelines |
+| Testing output format | `npm run seed:dry -- --page=faq` | Preview single page |
+
+> **Rule:** Only re-seed when the actual text content of a page changes significantly.
+> Minor wording tweaks do not need re-seeding — the existing embeddings remain accurate enough.
 
 ---
 
-## 2. Routes — Add Blog Routes
+## Build Order
 
-In `src/Routes/AllRoutes.jsx`, lazy-load and add three new routes:
+### Phase 1 — Backend
+1. Setup Express route `POST /api/chat`
+2. Connect MongoDB Atlas, create `page_content` collection
+3. Create vector search index in Atlas UI
+4. Write `seedContent.js` — populate DB with page content + embeddings
+5. Implement RAG: embed question → vector search → build prompt → Gemini call
+6. Handle quota exceeded (429) → return `{ source: "quota_exceeded" }`
+7. Test with Postman/Thunder Client
 
-```jsx
-const BlogsPage      = lazy(() => import("../Pages/BlogsPage"));
-const BlogDetailPage = lazy(() => import("../Pages/BlogDetailPage"));
-const AdminBlogPage  = lazy(() => import("../Pages/AdminBlogPage"));
+### Phase 2 — Frontend
+1. Create `src/Components/Chatbot/` folder and all files
+2. Build `predefinedQA.js` and `keywordMatcher.js` (pure JS, no deps)
+3. Build `ContactFallback.jsx`
+4. Build `TypingIndicator.jsx`
+5. Build `MessageList.jsx` + `MessageInput.jsx`
+6. Build `PredefinedChips.jsx` (shown only at start of conversation)
+7. Build `ChatWidget.jsx` (assembles all pieces, holds useState for messages)
+8. Build `ChatBubble.jsx` (floating trigger, toggles widget open/close)
+9. Lazy import `ChatBubble` in `App.jsx`
+10. Test full flow: predefined → AI → keyword fallback → contact fallback
 
-// Inside <Routes>:
-<Route path="/blog"              element={<BlogsPage />} />
-<Route path="/blog/:slug"        element={<BlogDetailPage />} />
-<Route path="/futurise-admin/blog" element={<AdminBlogPage />} />
-```
-
----
-
-## 3. Homepage — Latest 4 Blogs Section
-
-**Location:** In `src/Pages/HomePage.jsx`, add a `<LatestBlogs />` section **just above** the `<Footer />` (i.e., as the last section inside the page, before the footer renders).
-
-### Component: `src/Components/blog/LatestBlogs.jsx`
-
-**Layout & Behavior:**
-- Section heading: `"Latest from the Blog"` — styled like other homepage section headings (gradient text on accent word)
-- Top-right corner: a ghost/link-style button `"View all articles →"` that navigates to `/blog` — use `variant="outlineGlow"` or a plain `Link` with `accent.solid` color and arrow icon (`FiArrowUpRight`)
-- Fetch `/api/blogs` on mount, take first 4 results
-- Display as a `SimpleGrid` with `columns={{ base: 1, md: 2, lg: 4 }}` and `spacing={6}`
-
-**Blog Card Design (glass card):**
-```
-- borderRadius="20px"
-- border="1px solid" borderColor="border.subtle"
-- bg="bg.surface"
-- overflow="hidden"
-- backdropFilter="blur(12px)"
-- transition="all .3s cubic-bezier(0.22,1,0.36,1)"
-- _hover:
-    transform="translateY(-6px)"
-    borderColor="rgba(180,160,255,0.4)"
-    boxShadow="0 24px 60px -20px rgba(123,108,255,0.35)"
-```
-
-**Card Content:**
-1. **Image** — `featuredImage` as full-width top image, `h="180px"`, `objectFit="cover"`, with a subtle gradient overlay at bottom `linear(to-t, rgba(8,8,13,0.7), transparent)`
-2. **Category badge** — small pill badge (`brand.500` bg, white text, `borderRadius="full"`, `fontSize="xs"`) positioned absolute top-left over image
-3. **Body padding** `p={5}`:
-   - `title` — `fontSize="md"` `fontWeight={700}` `color="text.primary"` `noOfLines={2}`
-   - `shortDescription` — `fontSize="sm"` `color="text.muted"` `noOfLines={2}` `mt={2}`
-   - Bottom row `mt={4}`: date (formatted `createdAt`) on left in `text.faint`, and `"Read more →"` link in `accent.solid` on right
-4. Entire card is wrapped in `<Link to={/blog/${slug}}>` (React Router)
-
-**Entry Animation:**
-Use Framer Motion `variants` with `staggerChildren` so cards animate in one by one:
-```js
-container: { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }
-card:       { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22,1,0.36,1] } } }
-```
-Use `whileInView` so animation triggers when section scrolls into view (`viewport={{ once: true, margin: "-80px" }}`).
-
-**Loading State:** Show 4 skeleton cards (use Chakra `Skeleton` with `borderRadius="20px"` and same height as cards).
+### Phase 3 — Polish
+1. Framer Motion open/close animation for chat window
+2. Auto-scroll to latest message
+3. Mobile responsive (full-screen on small devices)
+4. Typing indicator while waiting for backend
+5. Error toast if network down
+6. Rate limit UX — show fallback seamlessly (no "API limit" message shown to user)
 
 ---
 
-## 4. All Blogs Page — `/blog`
-
-### File: `src/Pages/BlogsPage.jsx`
-
-**Page Meta:** Set `<title>Blog | Futurise Solutions</title>` using `react-helmet-async` or `document.title` in `useEffect`.
-
-### 4A. Hero Section (Latest Blog)
-
-Fetch `/api/blogs`, use `blogs[0]` as the hero.
-
-**Layout:**
-- Full-width section, `minH="520px"`, relative position
-- Background: `featuredImage` as `<Image>` covering the full section with `objectFit="cover"`, with a dark overlay gradient `linear(to-r, rgba(8,8,13,0.92) 0%, rgba(8,8,13,0.65) 60%, rgba(8,8,13,0.2) 100%)`
-- Content positioned on left side: `maxW="600px"` inside `maxW="1200px"` container
-
-**Hero Content (left side):**
-- Category badge (same pill style as card)
-- `LATEST POST` label — `fontSize="xs"` `letterSpacing="0.15em"` `textTransform="uppercase"` `color="accent.solid"`
-- `title` — Large heading `fontSize={{ base: "3xl", md: "5xl" }}` `fontWeight={800}` `color="text.primary"` `lineHeight={1.1}` `noOfLines={3}`
-- `shortDescription` — `color="text.muted"` `fontSize="lg"` `noOfLines={3}` `mt={4}`
-- Date + read time estimate (`Math.ceil(wordCount / 200)` min read)
-- CTA Button: `variant="gradient"` `"Read Article"` with `FiArrowRight` icon → links to `/blog/${slug}`
-
-**Animation:** Hero content slides in from left (`x: -40 → 0`) on mount.
-
-### 4B. Category Filter Bar
-
-Below the hero, a sticky filter bar:
-- `position="sticky"` `top="74px"` (below navbar) `zIndex={10}` `bg="rgba(8,8,13,0.85)"` `backdropFilter="blur(16px)"` `borderBottom="1px solid" borderColor="border.subtle"`
-- Extract unique categories from all fetched blogs
-- Show `"All"` + each category as pill buttons
-- Active pill: `bgGradient={GRADIENT}` `color="white"` `boxShadow="0 4px 20px -8px rgba(123,108,255,0.6)"`
-- Inactive pill: `variant="outlineGlow"` `color="text.muted"`
-- Smooth `transition="all .2s"` between active states
-
-### 4C. Blog Grid (All Blogs)
-
-Below the filter bar, show all blogs (excluding `blogs[0]` which is already in hero) filtered by selected category.
-
-**Grid:** `SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}` inside `maxW="1200px" mx="auto" px={{ base: 5, md: 8 }} py={16}`
-
-Use the same **glass card** design from the LatestBlogs section (Section 3).
-
-**Effects:**
-- **Stagger animation on load:** cards animate in with `staggerChildren: 0.07` using `whileInView`
-- **Filter transition:** When switching categories, animate out old cards (`AnimatePresence` with `mode="wait"`) and stagger in new ones
-- **Hover glow:** purple glow `boxShadow` on hover as defined in card style above
-- **Empty state:** If no blogs in category, show centered message: `"No articles in this category yet."` with a subtle ghost icon
-
----
-
-## 5. Blog Detail Page — `/blog/:slug`
-
-### File: `src/Pages/BlogDetailPage.jsx`
-
-**Data fetch:** `GET /api/blogs/:slug` where `slug = useParams().slug`
-
-### 5A. Meta Tags (SEO)
-
-Use `react-helmet-async`. Install: `npm install react-helmet-async`.
-
-Wrap `App.jsx` root with `<HelmetProvider>`.
-
-In `BlogDetailPage`, set all meta tags from the `meta` object:
-
-```jsx
-<Helmet>
-  <title>{blog.meta?.metaTitle || blog.title} | Futurise Solutions</title>
-  <meta name="description"   content={blog.meta?.metaDescription || blog.shortDescription} />
-  <meta name="keywords"      content={blog.meta?.metaKeywords?.join(", ") || blog.tags?.join(", ")} />
-  <meta name="robots"        content={blog.meta?.robots || "index,follow"} />
-  <meta name="author"        content="Futurise Solutions" />
-
-  {/* Open Graph */}
-  <meta property="og:type"        content={blog.meta?.ogType || "article"} />
-  <meta property="og:title"       content={blog.meta?.metaTitle || blog.title} />
-  <meta property="og:description" content={blog.meta?.metaDescription || blog.shortDescription} />
-  <meta property="og:image"       content={`http://localhost:5000${blog.featuredImage}`} />
-  <meta property="og:url"         content={window.location.href} />
-
-  {/* Twitter Card */}
-  <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content={blog.meta?.metaTitle || blog.title} />
-  <meta name="twitter:description" content={blog.meta?.metaDescription || blog.shortDescription} />
-  <meta name="twitter:image"       content={`http://localhost:5000${blog.featuredImage}`} />
-</Helmet>
-```
-
-### 5B. Page Layout
-
-**Hero:**
-- Full-width `featuredImage`, `maxH="480px"`, `objectFit="cover"` with bottom gradient overlay
-- Over the image: category badge + `LATEST POST` label (if it is the latest)
-- Below image: title in large heading, date + read time + author "Futurise Solutions", tags as small pills
-
-**Content Area:**
-- `maxW="800px"` `mx="auto"` `px={{ base: 5, md: 8 }}` `py={12}`
-- Content is stored as **Markdown** — render using `react-markdown` with `remark-gfm`
-- Install: `npm install react-markdown remark-gfm`
-
-**Markdown Styling (custom components prop):**
-Style all markdown elements to match the theme:
-```jsx
-components={{
-  h1: ({ children }) => <Heading as="h1" fontSize="3xl" mt={10} mb={4} color="text.primary">{children}</Heading>,
-  h2: ({ children }) => <Heading as="h2" fontSize="2xl" mt={8} mb={3} color="text.primary">{children}</Heading>,
-  h3: ({ children }) => <Heading as="h3" fontSize="xl" mt={6} mb={2} color="text.primary">{children}</Heading>,
-  p:  ({ children }) => <Text fontSize="lg" lineHeight={1.9} color="text.muted" mb={5}>{children}</Text>,
-  a:  ({ href, children }) => <Link href={href} color="accent.solid" _hover={{ color: "text.primary" }} isExternal>{children}</Link>,
-  ul: ({ children }) => <Box as="ul" pl={6} mb={5} color="text.muted" fontSize="lg">{children}</Box>,
-  ol: ({ children }) => <Box as="ol" pl={6} mb={5} color="text.muted" fontSize="lg">{children}</Box>,
-  li: ({ children }) => <Box as="li" mb={2} lineHeight={1.8}>{children}</Box>,
-  blockquote: ({ children }) => (
-    <Box borderLeft="3px solid" borderColor="brand.500" pl={5} py={2} my={6}
-         bg="rgba(123,108,255,0.08)" borderRadius="0 12px 12px 0" color="text.muted" fontStyle="italic">
-      {children}
-    </Box>
-  ),
-  code: ({ inline, children }) => inline
-    ? <Box as="code" px={2} py={0.5} borderRadius="6px" bg="rgba(255,255,255,0.07)" color="accent.solid" fontSize="0.9em">{children}</Box>
-    : <Box as="pre" p={5} borderRadius="14px" bg="navy.700" border="1px solid" borderColor="border.subtle" overflowX="auto" mb={6} fontSize="sm"><code>{children}</code></Box>,
-  img: ({ src, alt }) => <Image src={src} alt={alt} borderRadius="14px" my={6} w="full" objectFit="cover" />,
-  hr: () => <Box borderTop="1px solid" borderColor="border.subtle" my={8} />,
-}}
-```
-
-**Side Panel (desktop only, `display={{ base: "none", lg: "block" }}`):**
-Sticky sidebar `position="sticky" top="100px"`:
-- Table of contents (parse `##` headings from markdown)
-- Tags list
-- "Share this article" buttons (copy link, LinkedIn, Twitter/X)
-
-**Back Navigation:**
-Top of page: `← Back to Blog` link using `FiArrowLeft` → navigates to `/blog`
-
-**Related Posts:**
-Below content: Show 3 blogs from the same category (exclude current) as small horizontal cards.
-
----
-
-## 6. Admin Blog Dashboard — `/futurise-admin/blog`
-
-### File: `src/Pages/AdminBlogPage.jsx`
-
-This route is **not linked anywhere** in the navbar or footer. Admin accesses it by typing the URL directly.
-
-### 6A. Password Gate
-
-On first visit (or if not authenticated), show a centered login card:
+## UI Design Spec
 
 ```
-- bg="navy.800" borderRadius="24px" border="1px solid" borderColor="border.subtle"
-- boxShadow="0 40px 80px -24px rgba(0,0,0,0.7)"
-- maxW="420px" mx="auto" mt="15vh" p={10}
-```
-
-**Fields:**
-- Password input (single field — no username needed)
-- `variant="gradient"` submit button `"Enter Dashboard"`
-- On submit: compare against hardcoded env variable `import.meta.env.VITE_ADMIN_PASSWORD`
-- On success: set `isAuthenticated = true` in `useState` (session only — no localStorage for security)
-- On fail: show red toast `"Incorrect password"`
-
-Add to `.env`:
-```
-VITE_ADMIN_PASSWORD=your_secure_password_here
-```
-
-### 6B. Admin Dashboard Layout
-
-Two-panel layout (after authentication):
-
-**Left sidebar `w="260px"` (desktop) / full top bar (mobile):**
-- Futurise logo
-- `"All Blogs"` count badge
-- `"+ New Blog"` gradient button → opens create modal/drawer
-- Status filters: All / Published / Draft
-
-**Main area:**
-- Search bar at top to filter blogs by title
-- Blog list table or card list
-
-### 6C. Blog List Table
-
-Each row shows:
-- `featuredImage` thumbnail (`w="60px" h="40px" borderRadius="8px" objectFit="cover"`)
-- `title` (truncated at 50 chars)
-- `category`
-- `status` badge — `"published"` → green pill, `"draft"` → yellow/amber pill
-- `createdAt` date
-- Actions: `View` (eye icon → `/blog/:slug`), `Edit` (pencil icon), `Delete` (trash icon with confirm dialog)
-
-**Delete confirmation:** Use Chakra `AlertDialog` — `"Are you sure you want to delete this blog? This action cannot be undone."`
-
-### 6D. Create / Edit Blog — Drawer or Full Page
-
-Use a `Drawer` (size="full") or navigate to a separate `/futurise-admin/blog/new` and `/futurise-admin/blog/edit/:id` route.
-
-**Form Fields:**
-
-| Field | Input Type |
-|-------|-----------|
-| Title | `Input` — auto-generates slug preview below it |
-| Short Description | `Textarea` (2-3 lines) |
-| Category | `Select` or `Input` |
-| Tags | Tag input — type tag + Enter to add, click × to remove |
-| Featured Image | Upload button → `POST /api/upload` → stores returned URL |
-| Status | `RadioGroup` — Draft / Published |
-| **Meta Section** (collapsible `Accordion`) | |
-| Meta Title | `Input` with character counter (max 60) |
-| Meta Description | `Textarea` with character counter (max 160) |
-| Meta Keywords | Same tag-input as Tags |
-| OG Type | `Select` — default "article" |
-| Robots | `Select` — default "index,follow" |
-| **Content** | **Markdown Editor** (see below) |
-
-**Markdown Editor:**
-Use `@uiw/react-md-editor` — it renders a split-pane markdown editor with preview built in.
-
-Install: `npm install @uiw/react-md-editor`or cke editor use best
-
-```jsx
-import MDEditor from "@uiw/react-md-editor";
-
-<MDEditor
-  value={content}
-  onChange={setContent}
-  height={500}
-  data-color-mode="dark"
-/>
-```
-
-This gives a GitHub-flavored markdown editor with toolbar (bold, italic, headings, code blocks, image insert, preview toggle) — no custom CKEditor config needed.
-
-**Image Insert in Editor:**
-Add a custom toolbar button that opens a file picker → uploads to `/api/upload` → inserts `![alt](imageUrl)` at cursor position.
-
-**Submit:**
-- Create: `POST /api/blogs` with full form body
-- Edit: `PUT /api/blogs/:id` with full form body (always send full `meta` object to avoid partial overwrite)
-- On success: show green toast, refresh blog list
-
----
-
-## 7. File Structure to Create
-
-```
-src/
-├── Pages/
-│   ├── BlogsPage.jsx          ← All blogs page (/blog)
-│   ├── BlogDetailPage.jsx     ← Single blog (/blog/:slug)
-│   └── AdminBlogPage.jsx      ← Admin dashboard (/futurise-admin/blog)
-├── Components/
-│   └── blog/
-│       ├── LatestBlogs.jsx    ← Homepage section (latest 4 blogs)
-│       ├── BlogCard.jsx       ← Reusable card used in LatestBlogs + BlogsPage
-│       ├── CategoryFilter.jsx ← Filter pill bar
-│       └── BlogMarkdown.jsx   ← react-markdown with theme components
-└── hooks/
-    └── useBlogs.js            ← Custom hook: fetch + cache blog data
+Widget position:   fixed, bottom-right, z-index 9999
+Bubble size:       56px × 56px, brand gradient bg, glow shadow
+Widget size:       380px wide × 560px tall (desktop)
+                   100vw × 100vh (mobile, <480px)
+Border radius:     20px
+Background:        rgba(13,13,22,0.95) + backdrop-blur(20px)
+Header:            "Futurise Assistant" + online indicator dot (green)
+Font:              Aeonik Trial (existing body font)
+Colors:            Match existing theme — bg.surface, text.muted, accent.solid, brand.400
+Message bubbles:
+  - User:          bg brand gradient, text white, right-aligned
+  - Assistant:     bg bg.surface border border.subtle, text text.muted, left-aligned
+Chips:             Eyebrow-style pill buttons, shown only before first user message
+Send button:       brand gradient, FiSend icon
 ```
 
 ---
 
-## 8. Packages to Install
+## Key Decisions Summary
 
-```bash
-npm install react-markdown remark-gfm react-helmet-async @uiw/react-md-editor
-```
-
----
-
-## 9. Key Implementation Notes
-
-- All user-facing pages (BlogsPage, BlogDetailPage) use **Framer Motion** for entry animations — consistent with existing pages
-- Use `whileInView` + `viewport={{ once: true }}` for scroll-triggered animations — never animate on every scroll
-- Images from the API: prepend `http://localhost:5000` to `featuredImage` (e.g., `http://localhost:5000/uploads/blogs/filename.webp`)
-- Admin page has **no navbar/footer** — wrap it in a conditional check in `App.jsx` or use a separate layout
-- The `slug` is auto-generated by the backend from `title` — show a preview `"/blog/top-ai-trends-2025"` below the title field in the admin form
-- Format dates using `new Date(createdAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })`
-- Read time: `Math.ceil(content.split(" ").length / 200)` minutes
+| Decision | Choice | Reason |
+|---|---|---|
+| AI Provider | Gemini 2.5 Flash | Free tier, 20 calls/day |
+| Embeddings | `text-embedding-004` | Free, high quality, 768-dim |
+| Vector DB | MongoDB Atlas Vector Search | Already using Mongo, no extra infra |
+| Fallback 1 | Frontend keyword matching | Zero API calls, instant |
+| Fallback 2 | Contact options (WA/Call/Contact) | Converts visitors even when AI fails |
+| Quick replies | Predefined chips (frontend) | Zomato-style, no API calls |
+| Performance | React.lazy + Suspense null | Zero impact on page load / LCP |
+| SEO | Chat in useState only | Never in crawlable DOM |
+| API key | Backend only | Key never exposed in frontend bundle |
+| Conversation memory | useState (session only) | No DB storage needed for chat history |
