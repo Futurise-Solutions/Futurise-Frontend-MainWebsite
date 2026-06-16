@@ -7,18 +7,18 @@ import { predefinedChips } from "./predefinedQA";
  */
 const PredefinedChips = ({ onSelect }) => (
   <Wrap spacing={2} px={4} pt={1} pb={3}>
-    {predefinedChips.map((chip) => (
-      <WrapItem key={chip}>
+    {predefinedChips.map((chip, idx) => (
+      <WrapItem key={chip} display={idx >= 3 ? { base: "none", sm: "block" } : "block"}>
         <Button
           variant="outlineGlow"
           borderRadius="full"
           fontWeight={500}
-          fontSize="12px"
+          fontSize={{ base: "11px", sm: "12px" }}
           whiteSpace="normal"
           height="auto"
-          minH="30px"
-          py="6px"
-          px="12px"
+          minH={{ base: "26px", sm: "30px" }}
+          py={{ base: "4px", sm: "6px" }}
+          px={{ base: "10px", sm: "12px" }}
           onClick={() => onSelect(chip)}
         >
           {chip}

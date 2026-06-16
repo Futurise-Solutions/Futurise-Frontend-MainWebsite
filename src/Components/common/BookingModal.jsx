@@ -25,6 +25,7 @@ const BookingModal = () => {
       size="5xl"
       isCentered
       scrollBehavior="inside"
+      trapFocus={false}
     >
       <ModalOverlay backdropFilter="blur(8px)" bg="rgba(0,0,0,0.6)" />
       <ModalContent
@@ -39,6 +40,7 @@ const BookingModal = () => {
           borderBottom="1px solid"
           borderColor="border.subtle"
           pb={4}
+          pr={{ base: "48px", md: "6" }}
         >
           <HStack spacing={3}>
             <Flex
