@@ -4,6 +4,7 @@ import App from './App.jsx'
 import { ChakraProvider, ColorModeScript } from '@chakra-ui/react'
 import { BrowserRouter } from 'react-router-dom'
 import theme from './theme'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -11,6 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <ChakraProvider theme={theme}>
       <BrowserRouter>
         <App />
+        <SpeedInsights />
       </BrowserRouter>
     </ChakraProvider>
   </React.StrictMode>
