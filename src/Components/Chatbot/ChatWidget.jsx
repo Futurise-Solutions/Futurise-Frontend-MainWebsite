@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Box, Flex, HStack, Text, IconButton, Circle } from "@chakra-ui/react";
+import { Box, Flex, HStack, Text, IconButton, Circle, Image } from "@chakra-ui/react";
 import { FiX } from "react-icons/fi";
 import MessageList from "./MessageList";
 import MessageInput from "./MessageInput";
@@ -89,11 +89,11 @@ const ChatWidget = ({ onClose }) => {
   return (
     <Flex
       direction="column"
-      w={{ base: "100vw", sm: "380px" }}
-      h={{ base: "100dvh", sm: "560px" }}
-      maxH={{ base: "100dvh", sm: "calc(100vh - 116px)" }}
+      w={{ base: "calc(100vw - 32px)", sm: "380px" }}
+      h={{ base: "420px", sm: "560px" }}
+      maxH={{ base: "calc(100dvh - 90px)", sm: "calc(100vh - 116px)" }}
       overflow="hidden"
-      borderRadius={{ base: 0, sm: "20px" }}
+      borderRadius="20px"
       bg="rgba(13,13,22,0.95)"
       backdropFilter="blur(20px)"
       border="1px solid"
@@ -114,12 +114,17 @@ const ChatWidget = ({ onClose }) => {
         <HStack spacing={3}>
           <Circle
             size="38px"
-            bgGradient="linear(135deg, brand.500, violet.500)"
-            color="white"
-            fontWeight={700}
-            fontSize="16px"
+            border="1px solid"
+            borderColor="border.subtle"
+            overflow="hidden"
+            p="0"
           >
-            F
+            <Image
+              src="/favicon-new.png"
+              alt="Futurise Assistant Logo"
+              boxSize="100%"
+              objectFit="cover"
+            />
           </Circle>
           <Box>
             <Text fontSize="14px" fontWeight={600} color="text.primary" lineHeight="1.1">
