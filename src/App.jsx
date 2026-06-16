@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, lazy, Suspense } from 'react'
 import { useLocation } from 'react-router-dom'
 import AllRoutes from './Routes/AllRoutes'
 import { Footer, Navbar } from './Layout'
@@ -8,6 +8,9 @@ import { PageTransition } from './Components/common'
 import BookingModal from './Components/common/BookingModal'
 import { BookingProvider } from './context/BookingContext'
 import "./index.css"
+
+// Chat widget — lazy so it stays out of the initial bundle and crawlable DOM.
+const ChatBubble = lazy(() => import('./Components/Chatbot/ChatBubble'))
 
 const App = () => {
   // Admin dashboard renders without the public navbar/footer/booking popup.
@@ -34,6 +37,11 @@ const App = () => {
         </Box>
         {!isAdmin && <Footer />}
         {!isAdmin && <BookingModal />}
+        {!isAdmin && (
+          <Suspense fallback={null}>
+            <ChatBubble />
+          </Suspense>
+        )}
       </Box>
     </BookingProvider>
   )
