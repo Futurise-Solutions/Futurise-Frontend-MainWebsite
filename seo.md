@@ -429,6 +429,20 @@ Every change should improve one or more of these outcomes.
 
 Optimize business results, not vanity metrics.
 
+## MONITORING & MEASUREMENT
+
+Where possible, improve the website so that success can be measured.
+
+Prioritize:
+
+- Search visibility
+- Service page impressions
+- Qualified inquiries
+- Contact form conversions
+- Discovery call requests
+
+Optimize not only for rankings, but for measurable business outcomes.
+
 ## BLOG JSON
 [
   {
