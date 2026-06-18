@@ -9,7 +9,7 @@ import { useBooking } from "../context/BookingContext";
 const contactInfo = [
   { icon: FiMail, label: "Email us", value: "business@futurisesolutions.com", href: "mailto:business@futurisesolutions.com" },
   { icon: FiPhone, label: "Call us", value: "+91 76650 13356", href: "tel:+917665013356" },
-  { icon: FiMapPin, label: "Location", value: "Serving clients worldwide" },
+  { icon: FiMapPin, label: "Location", value: "Wellington, NZ · Serving worldwide" },
   { icon: FiClock, label: "Working hours", value: "Mon–Fri, 9:00 AM – 6:00 PM" },
 ];
 
@@ -24,14 +24,40 @@ const ContactUs = () => {
         path="/contact"
         image="/contactus.png"
         keywords="contact Futurise Solutions, hire web developer New Zealand, get a quote AI app, start SaaS project, web development consultation, mobile app quote, free project consultation"
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "ContactPage",
-          "name": "Contact Futurise Solutions",
-          "url": "https://futurisesolutions.com/contact",
-          "description": "Contact Futurise Solutions for AI, SaaS, web, mobile and blockchain development projects.",
-          "breadcrumb": { "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://futurisesolutions.com/" }, { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://futurisesolutions.com/contact" }] }
-        }}
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            "name": "Contact Futurise Solutions",
+            "url": "https://futurisesolutions.com/contact",
+            "description": "Contact Futurise Solutions for AI, SaaS, web, mobile and blockchain development projects.",
+            "breadcrumb": { "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://futurisesolutions.com/" }, { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://futurisesolutions.com/contact" }] },
+            "mainEntity": { "@id": "https://futurisesolutions.com/#organization" }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "@id": "https://futurisesolutions.com/#organization",
+            "name": "Futurise Solutions",
+            "url": "https://futurisesolutions.com",
+            "logo": "https://futurisesolutions.com/favicon-new.png",
+            "email": "business@futurisesolutions.com",
+            "telephone": "+91-7665013356",
+            "address": { "@type": "PostalAddress", "addressLocality": "Wellington Central", "postalCode": "6011", "addressCountry": "NZ" },
+            "areaServed": ["New Zealand", "India", "United States", "United Kingdom", "Australia", "United Arab Emirates", "Canada", "Worldwide"],
+            "contactPoint": [
+              {
+                "@type": "ContactPoint",
+                "contactType": "sales",
+                "email": "business@futurisesolutions.com",
+                "telephone": "+91-7665013356",
+                "availableLanguage": ["English"],
+                "areaServed": ["NZ", "IN", "US", "GB", "AU", "AE", "CA"],
+                "hoursAvailable": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "09:00", "closes": "18:00" }
+              }
+            ]
+          }
+        ]}
       />
       <Box position="relative" overflow="hidden" pt={{ base: 12, md: 20 }} pb={{ base: 12, md: 16 }}>
         <Box position="absolute" top="-15%" left="-5%" w="500px" h="500px" bg="rgba(123,108,255,0.18)" filter="blur(120px)" rounded="full" pointerEvents="none" />
