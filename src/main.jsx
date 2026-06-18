@@ -5,7 +5,7 @@ import { ChakraProvider, ColorModeScript } from '@chakra-ui/react'
 import { BrowserRouter } from 'react-router-dom'
 import theme from './theme'
 import { SpeedInsights } from '@vercel/speed-insights/react'
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/react"
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
