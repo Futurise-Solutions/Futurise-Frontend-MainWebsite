@@ -1,10 +1,11 @@
 import React from "react";
-import { Box, Container, Flex, Heading, Text, Button, Stack, VStack, HStack, Icon, SimpleGrid } from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, Text, Button, Stack, VStack, HStack, Icon, SimpleGrid, Wrap, WrapItem } from "@chakra-ui/react";
 import { useParams, useNavigate } from "react-router-dom";
 import { FiArrowRight, FiCheckCircle } from "react-icons/fi";
 import ProcessSection from "../Components/ServiceComponents/ProcessSection";
 import ServiceStack from "../Components/ServiceComponents/ServiceStack";
 import ServiceHeroVisual from "../Components/ServiceComponents/ServiceHeroVisual";
+import Faqs from "../Components/HomePage Components/Faqs";
 import { services } from "../utils/Constant";
 import { Reveal, Eyebrow, CTASection, Seo } from "../Components/common";
 import { useBooking } from "../context/BookingContext";
@@ -39,8 +40,8 @@ const ServicePage = () => {
   return (
     <Box>
       <Seo
-        title={`${service.title} | New Zealand, India & USA | Futurise Solutions`}
-        description={`${service.description} ${service.details}`.slice(0, 300)}
+        title={service.metaTitle || `${service.title} — New Zealand, India & USA`}
+        description={service.metaDescription || `${service.description} ${service.details}`.slice(0, 160)}
         path={`/service/${serviceName}`}
         image={serviceImages[serviceName] || "/home.png"}
         keywords={serviceKeywords[serviceName] || ""}
@@ -64,6 +65,17 @@ const ServicePage = () => {
               { "@type": "ListItem", "position": 3, "name": service.title, "item": `https://futurisesolutions.com/service/${serviceName}` },
             ],
           },
+          ...(service.faqs?.length
+            ? [{
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": service.faqs.map((f) => ({
+                  "@type": "Question",
+                  "name": f.question,
+                  "acceptedAnswer": { "@type": "Answer", "text": f.answer },
+                })),
+              }]
+            : []),
         ]}
       />
       {/* Hero */}
@@ -129,6 +141,61 @@ const ServicePage = () => {
 
       <ServiceStack service={serviceName} />
       <ProcessSection />
+
+      {/* Industries we serve */}
+      {service.industries?.length > 0 && (
+        <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 10, md: 14 }}>
+          <Reveal><Eyebrow>Industries we serve</Eyebrow></Reveal>
+          <Reveal delay={0.05}>
+            <Heading mt={4} fontSize={{ base: "26px", md: "36px" }} lineHeight={1.15} maxW="760px">
+              {service.title} for{" "}
+              <Box as="span" className="gradient-text">teams in every industry</Box>
+            </Heading>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <Text mt={4} color="text.muted" fontSize={{ base: "md", md: "lg" }} lineHeight={1.7} maxW="640px">
+              We’ve shipped {service.title.toLowerCase()} work for founders and product teams across these sectors —
+              and adapt fast to yours.
+            </Text>
+          </Reveal>
+          <Reveal delay={0.15}>
+            <Wrap spacing={3} mt={7}>
+              {service.industries.map((ind) => (
+                <WrapItem key={ind}>
+                  <HStack
+                    spacing={2.5}
+                    px={4}
+                    py={2.5}
+                    borderRadius="full"
+                    bg="bg.surface"
+                    border="1px solid"
+                    borderColor="border.subtle"
+                    _hover={{ borderColor: "rgba(180,160,255,0.35)" }}
+                    transition="border-color .2s"
+                  >
+                    <Icon as={FiCheckCircle} color="accent.solid" boxSize={4} />
+                    <Text fontSize={{ base: "sm", md: "md" }} color="text.primary" fontWeight={500}>
+                      {ind}
+                    </Text>
+                  </HStack>
+                </WrapItem>
+              ))}
+            </Wrap>
+          </Reveal>
+        </Container>
+      )}
+
+      {/* Service-specific FAQ (also emits FAQPage schema above) */}
+      {service.faqs?.length > 0 && (
+        <Faqs
+          items={service.faqs}
+          eyebrow="FAQ"
+          title="Frequently asked"
+          highlight="questions"
+          intro={`Common questions about our ${service.title.toLowerCase()} services. Can’t find what you’re looking for?`}
+        />
+      )}
+
       <CTASection
         eyebrow="Let’s discuss your idea"
         title="Ready to start your"

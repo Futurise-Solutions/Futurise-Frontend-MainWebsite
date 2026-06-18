@@ -75,7 +75,7 @@ const AboutUsHero = () => (
     eyebrow="About Futurise"
     title="We turn bold ideas into"
     highlight="products that scale."
-    subtitle="Futurise is a full-cycle digital product studio. Our expert team specializes in web and mobile development, product design, blockchain, and smart contracts — delivering high-quality results for clients worldwide."
+    subtitle="Futurise is a full-cycle digital product studio. Our senior team builds AI & ML systems, web and mobile apps, SaaS platforms, product design, and Web3 — delivering production-grade results for clients in New Zealand, India, the USA and worldwide."
     primaryLabel="Work with us"
     secondaryLabel="See our work"
     secondaryTo="/portfolio"

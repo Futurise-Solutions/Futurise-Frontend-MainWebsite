@@ -105,7 +105,7 @@ const HeroSection = () => {
                     ))}
                     <Text fontSize="sm" fontWeight={600} ml={1}>4.9/5</Text>
                   </HStack>
-                  <Text fontSize="sm" color="text.faint">Trusted by 45+ clients worldwide</Text>
+                  <Text fontSize="sm" color="text.faint">Trusted by teams across NZ, India & the USA</Text>
                 </Box>
               </HStack>
             </MotionBox>
