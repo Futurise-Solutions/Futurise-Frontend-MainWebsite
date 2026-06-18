@@ -100,47 +100,72 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Futurise Solutions",
-        "url": "https://futurisesolutions.com",
-        "logo": "https://futurisesolutions.com/favicon-new.png",
-        "telephone": "+91-7665013356",
-        "email": "business@futurisesolutions.com",
-        "foundingDate": "2024",
-        "description": "Futurise Solutions is a global software development company specializing in AI development, SaaS products, web applications, mobile apps, blockchain solutions and custom software development services.",
-        "areaServed": [
-          "United States",
-          "Canada",
-          "India",
-          "New Zealand",
-          "Worldwide"
-        ],
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Huddart Parker Building",
-          "addressLocality": "Wellington Central",
-          "postalCode": "6011",
-          "addressCountry": "NZ"
-        },
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "contactType": "sales",
-          "email": "business@futurisesolutions.com",
-          "telephone": "+91-7665013356"
-        },
-        "sameAs": [
-          "https://www.linkedin.com/company/futurisesolutions/",
-          "https://www.instagram.com/futurisesolutions",
-          "https://www.facebook.com/share/1E6xe2C5DW/"
-        ],
-        "knowsAbout": [
-          "Artificial Intelligence",
-          "SaaS Development",
-          "Web Development",
-          "Mobile App Development",
-          "Blockchain Development",
-          "UI UX Design",
-          "Custom Software Development"
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://futurisesolutions.com/#organization",
+            "name": "Futurise Solutions",
+            "alternateName": "Futurise",
+            "url": "https://futurisesolutions.com",
+            "logo": "https://futurisesolutions.com/favicon-new.png",
+            "image": "https://futurisesolutions.com/home.png",
+            "slogan": "Full-cycle digital product studio",
+            "description": "Futurise Solutions is a full-cycle digital product studio that designs, builds and scales AI & ML systems, SaaS platforms, web and mobile apps, UI/UX design, blockchain, and digital marketing for startups, founders and enterprises.",
+            "foundingDate": "2024",
+            "email": "business@futurisesolutions.com",
+            "telephone": "+91-7665013356",
+            "numberOfEmployees": { "@type": "QuantitativeValue", "minValue": 10 },
+            "knowsLanguage": ["English"],
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Huddart Parker Building",
+              "addressLocality": "Wellington Central",
+              "postalCode": "6011",
+              "addressCountry": "NZ"
+            },
+            "areaServed": ["New Zealand", "India", "United States", "United Kingdom", "Australia", "United Arab Emirates", "Canada", "Worldwide"],
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "sales",
+              "email": "business@futurisesolutions.com",
+              "telephone": "+91-7665013356",
+              "availableLanguage": ["English"]
+            },
+            "sameAs": [
+              "https://www.linkedin.com/company/futurisesolutions/",
+              "https://www.instagram.com/futurisesolutions",
+              "https://www.facebook.com/share/1E6xe2C5DW/"
+            ],
+            "knowsAbout": [
+              "AI Development", "AI Agents", "LLM Integration", "RAG Systems", "Machine Learning",
+              "Web Development", "Mobile App Development", "UI/UX Design", "Blockchain Development", "Digital Marketing",
+              "SaaS Development", "Custom Software Development",
+              "React", "Next.js", "Node.js", "TypeScript", "Python", "React Native", "MongoDB", "PostgreSQL",
+              "OpenAI", "Anthropic Claude", "Google Gemini", "LangChain", "AWS", "Vercel",
+              "SaaS", "Startups", "FinTech", "Healthcare", "Real Estate", "E-commerce", "Education", "Enterprise Software"
+            ],
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Futurise Solutions Services",
+              "itemListElement": [
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI & ML Solutions", "url": "https://futurisesolutions.com/service/ai-ml-solutions", "description": "Custom AI agents, LLM & RAG integrations, NLP and computer vision that automate workflows and make products smarter." } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web Development", "url": "https://futurisesolutions.com/service/web-development", "description": "Custom websites, SaaS platforms and web apps built with React, Next.js and Node.js — fast, SEO-ready and scalable." } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "App Development", "url": "https://futurisesolutions.com/service/app-development", "description": "Cross-platform iOS & Android apps built with React Native and Expo from a single codebase." } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "UI/UX Design", "url": "https://futurisesolutions.com/service/ui-ux-design", "description": "UX research, wireframing, high-fidelity Figma UI, prototypes and design systems that convert." } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Blockchain Development", "url": "https://futurisesolutions.com/service/blockchain-development", "description": "Audited smart contracts, DeFi platforms, MEV bots and multi-chain dApps across Ethereum, Solana and more." } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Digital Marketing", "url": "https://futurisesolutions.com/service/digital-marketing", "description": "SEO, paid ads, paid social, CRO and analytics tied to real revenue, not vanity metrics." } }
+              ]
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://futurisesolutions.com/#website",
+            "url": "https://futurisesolutions.com",
+            "name": "Futurise Solutions",
+            "description": "Full-cycle digital product studio building AI, web, mobile and Web3 products.",
+            "publisher": { "@id": "https://futurisesolutions.com/#organization" },
+            "inLanguage": "en"
+          }
         ]
       }
     </script>
