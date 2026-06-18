@@ -454,6 +454,9 @@ export const strengths = [
 export const services = {
   "app-development": {
     title: "App Development",
+    metaTitle: "App Development Company — iOS & Android (React Native)",
+    metaDescription:
+      "Cross-platform iOS & Android apps built with React Native & Expo — fast, polished and scalable from one codebase. Serving NZ, India, the USA & worldwide.",
     whatWeDo: "What we do",
     description: "Cross-platform iOS & Android apps built with React Native & Expo.",
     details:
@@ -464,9 +467,47 @@ export const services = {
       "Firebase, Supabase, AWS & Google Cloud backends",
       "App Store & Play Store deployment with OTA updates",
     ],
+    industries: [
+      "Consumer & Lifestyle",
+      "Marketplaces & On-Demand",
+      "FinTech & Wallets",
+      "Real Estate & Booking",
+      "Health & Fitness",
+      "B2B & SaaS",
+    ],
+    faqs: [
+      {
+        question: "How long does it take to build an app?",
+        answer:
+          "A focused MVP usually takes 8–14 weeks; a full product with custom backend and payments runs 16–24 weeks. We scope it precisely after a free discovery call so there are no surprises.",
+      },
+      {
+        question: "Why cross-platform instead of separate native apps?",
+        answer:
+          "React Native and Expo give you true native performance from a single codebase — both platforms ship together, typically at 40–60% less cost than building two separate native apps.",
+      },
+      {
+        question: "Do you handle App Store and Play Store submission?",
+        answer:
+          "Yes. We manage the full submission process — developer accounts, metadata, screenshots, privacy requirements, and responding to reviewer feedback.",
+      },
+      {
+        question: "Can you add features to an existing app?",
+        answer:
+          "Absolutely. We audit the existing codebase first, then scope feature additions cleanly so we extend your app without piling on technical debt.",
+      },
+      {
+        question: "Which devices will the app support?",
+        answer:
+          "We target iOS 14+ and Android 8+ as a baseline — over 95% of active devices — and test on real hardware across multiple OS versions, not just simulators.",
+      },
+    ],
   },
   "web-development": {
     title: "Web Development",
+    metaTitle: "Web Development Company — React, Next.js & Node.js",
+    metaDescription:
+      "Custom websites, SaaS platforms and web apps built with React, Next.js and Node.js — fast, SEO-ready and scalable. Serving NZ, India, the USA & worldwide.",
     whatWeDo: "What we do",
     description: "Responsive, robust web applications that perform.",
     details:
@@ -477,22 +518,93 @@ export const services = {
       "MongoDB, PostgreSQL, MySQL & Redis databases",
       "CI/CD pipelines, cloud deployment & automated testing",
     ],
+    industries: [
+      "SaaS & Startups",
+      "E-commerce & Retail",
+      "Real Estate & PropTech",
+      "Professional Services",
+      "Healthcare",
+      "FinTech",
+    ],
+    faqs: [
+      {
+        question: "Do you work with existing codebases or only new projects?",
+        answer:
+          "Both. We audit your existing code, decide what to keep versus rebuild, and work incrementally when a full rewrite isn't practical.",
+      },
+      {
+        question: "Can you build from our Figma designs?",
+        answer:
+          "Yes. We regularly translate Figma files from in-house or third-party designers into pixel-perfect, production-ready code.",
+      },
+      {
+        question: "Will my website be fast and SEO-ready?",
+        answer:
+          "Performance and SEO are built into the architecture — server-side rendering, semantic HTML, structured data, and Core Web Vitals tuned for sub-2-second loads.",
+      },
+      {
+        question: "Do you provide hosting and maintenance after launch?",
+        answer:
+          "We deploy to your preferred infrastructure (Vercel, AWS, GCP) and offer ongoing maintenance for updates, security patches, and new features.",
+      },
+      {
+        question: "How long does a web project take?",
+        answer:
+          "A marketing site typically takes 3–6 weeks; a full web app or SaaS platform runs 8–16 weeks. You get a clear timeline after a free discovery call.",
+      },
+    ],
   },
   "ui-ux-design": {
     title: "UI/UX Design",
+    metaTitle: "UI/UX Design Agency — Product Design & Figma",
+    metaDescription:
+      "User-centric UI/UX design — UX research, wireframing, high-fidelity Figma UI, prototypes and design systems that cut churn and lift conversions worldwide.",
     whatWeDo: "What we do",
     description: "User-centric, visually stunning interfaces.",
     details:
-      "Our design team crafts exceptional experiences grounded in research. From wireframes to a complete design system, we make products that are beautiful, usable, and on-brand.",
+      "Our design team turns research into interfaces people love to use. From UX discovery and user flows to high-fidelity Figma UI, interactive prototypes, and a scalable design system, we craft experiences that are beautiful, accessible (WCAG 2.1), and engineered to convert visitors into customers.",
     features: [
       "UX research, user flows & wireframing",
       "High-fidelity UI design in Figma",
       "Interactive prototypes & usability testing",
       "Reusable design systems & component libraries",
     ],
+    industries: [
+      "SaaS & Dashboards",
+      "E-commerce",
+      "FinTech",
+      "Healthcare",
+      "Real Estate",
+      "EdTech & Marketplaces",
+    ],
+    faqs: [
+      {
+        question: "Do I need UX research if I already know my users?",
+        answer:
+          "Almost every team discovers something surprising in the first week of research. What users say and what they actually do rarely match — research removes expensive assumptions before you build.",
+      },
+      {
+        question: "How long does a UI/UX project take?",
+        answer:
+          "A focused landing page or feature redesign takes 2–3 weeks; a full product design with a design system runs 6–12 weeks depending on scope and feedback cycles.",
+      },
+      {
+        question: "Can you redesign an existing product without breaking it?",
+        answer:
+          "Yes. We audit the current experience, prioritise the highest-impact changes, and roll them out incrementally so your current users aren't disrupted.",
+      },
+      {
+        question: "Do you work with our existing development team?",
+        answer:
+          "Always. We design in Figma with developer handoff in mind and work directly with your engineers to answer implementation questions throughout the build.",
+      },
+    ],
   },
   "blockchain-development": {
     title: "Blockchain Development",
+    metaTitle: "Blockchain Development — Smart Contracts, DeFi & Web3",
+    metaDescription:
+      "Production-grade blockchain development — audited smart contracts, DeFi platforms, MEV bots and multi-chain dApps across Ethereum, Solana, Base & more.",
     whatWeDo: "What we do",
     description: "Real Web3 products — DeFi, bots, launchpads & multi-chain.",
     details:
@@ -503,9 +615,42 @@ export const services = {
       "Telegram trading & analytics bots with real-time data",
       "Multi-chain EVM deployments (Ethereum, BSC, Base, Arbitrum, Polygon)",
     ],
+    industries: [
+      "DeFi & Exchanges",
+      "NFT & Gaming",
+      "FinTech",
+      "Launchpads & DAOs",
+      "Trading & MEV",
+      "Web3 Startups",
+    ],
+    faqs: [
+      {
+        question: "Which chains do you build on?",
+        answer:
+          "We deploy across Ethereum, BSC, Base, Arbitrum, Polygon and Solana, and build cross-chain bridges and aggregators when your users need to move assets between them.",
+      },
+      {
+        question: "Are your smart contracts audited?",
+        answer:
+          "Security comes first. Every contract goes through rigorous testing (Hardhat, Foundry fuzzing, Slither static analysis) and is structured for third-party audit before mainnet deployment.",
+      },
+      {
+        question: "Can you make Web3 usable for non-crypto users?",
+        answer:
+          "Yes. We abstract wallet and transaction complexity behind clean UX so mainstream users can onboard and transact without friction.",
+      },
+      {
+        question: "Do you build trading bots and on-chain automation?",
+        answer:
+          "We build MEV bots, arbitrage and liquidation automation, mempool monitoring, and Telegram-native trading tools with gas-optimised, competitive execution.",
+      },
+    ],
   },
   "ai-ml-solutions": {
     title: "AI & ML Solutions",
+    metaTitle: "AI & ML Development — AI Agents, LLMs & Computer Vision",
+    metaDescription:
+      "Production-ready AI — custom AI agents, LLM & RAG integrations, NLP and computer vision that automate workflows, cut costs and make your product smarter.",
     whatWeDo: "What we do",
     description: "Intelligent systems that learn, adapt, and automate.",
     details:
@@ -516,18 +661,81 @@ export const services = {
       "AI-integrated web apps & SaaS platforms",
       "NLP, computer vision & predictive analytics pipelines",
     ],
+    industries: [
+      "SaaS & Startups",
+      "E-commerce",
+      "FinTech",
+      "Healthcare",
+      "Legal & Finance",
+      "Customer Support",
+    ],
+    faqs: [
+      {
+        question: "What's the difference between an AI agent and an LLM integration?",
+        answer:
+          "An LLM integration adds language features — search, Q&A, generation — to your product. An AI agent goes further: it reasons, calls tools and APIs, and completes multi-step tasks autonomously.",
+      },
+      {
+        question: "Can the AI use our own data?",
+        answer:
+          "Yes. We build RAG (retrieval-augmented generation) and fine-tuning pipelines so the AI answers from your documents and data, not generic internet content.",
+      },
+      {
+        question: "Which AI models do you use?",
+        answer:
+          "We're model-agnostic — OpenAI, Anthropic Claude, Google Gemini, Meta Llama and open-source models — and recommend what best fits your budget, latency and accuracy needs.",
+      },
+      {
+        question: "Will it work reliably in production?",
+        answer:
+          "We build for production, not demos — with evaluation, guardrails, monitoring, fallback handling and cost controls in from day one.",
+      },
+    ],
   },
   "digital-marketing": {
     title: "Digital Marketing",
+    metaTitle: "Digital Marketing Agency — SEO, Paid Ads & CRO",
+    metaDescription:
+      "Data-driven digital marketing — SEO, Google & Meta ads, paid social, CRO and analytics tied to real revenue, not vanity metrics. NZ, India, the USA & beyond.",
     whatWeDo: "What we do",
     description: "Comprehensive, data-driven growth marketing.",
     details:
-      "We help businesses grow their online presence with strategies rooted in data — turning visibility into traffic, leads, and revenue.",
+      "We build digital marketing systems that remove guesswork. From technical SEO and content strategy to performance ads across Google, Meta and LinkedIn, conversion rate optimisation, and full analytics and attribution — every channel we run is tied to a measurable business outcome: traffic, leads, pipeline, or revenue.",
     features: [
       "SEO & content strategy",
       "Performance & paid social campaigns",
       "Conversion rate optimization (CRO)",
       "Analytics, reporting & growth experiments",
+    ],
+    industries: [
+      "SaaS",
+      "E-commerce",
+      "Professional Services",
+      "Real Estate",
+      "Healthcare",
+      "Hospitality",
+    ],
+    faqs: [
+      {
+        question: "How long before we see results from SEO?",
+        answer:
+          "Meaningful organic growth typically takes 3–6 months for competitive terms and 1–3 months for lower-competition niches. Paid channels deliver results from week one, so we often run both in parallel.",
+      },
+      {
+        question: "What ad budget do we need?",
+        answer:
+          "We work with budgets from around $2,000/month for a single channel; $5,000–$10,000/month in spend is where multi-channel compounding starts. We're always clear about what a budget can realistically achieve.",
+      },
+      {
+        question: "Do you create the content, or do we?",
+        answer:
+          "Either. We have in-house copywriters, designers and video editors, or we work alongside your internal team for strategy and distribution.",
+      },
+      {
+        question: "Can you take over from our current marketing agency?",
+        answer:
+          "Yes. We start with a full audit of what's been done and what's working, then transition carefully so live campaigns aren't disrupted.",
+      },
     ],
   },
 };

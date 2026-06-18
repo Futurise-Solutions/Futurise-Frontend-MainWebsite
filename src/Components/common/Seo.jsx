@@ -15,6 +15,11 @@ const upsertMeta = (selector, attr, key, content) => {
   el.setAttribute("content", content);
 };
 
+const removeMeta = (selector) => {
+  const el = document.head.querySelector(selector);
+  if (el) el.remove();
+};
+
 const upsertCanonical = (href) => {
   let el = document.head.querySelector('link[rel="canonical"]');
   if (!el) {
@@ -36,6 +41,17 @@ const upsertJsonLd = (id, data) => {
   el.textContent = JSON.stringify(data);
 };
 
+// Drop any page JSON-LD blocks left over from a previously rendered route beyond
+// `keep`, so stale structured data never leaks across client-side navigations.
+const pruneJsonLd = (keep) => {
+  document.head
+    .querySelectorAll('script[data-schema^="page-schema-"]')
+    .forEach((el) => {
+      const i = Number(el.getAttribute("data-schema").replace("page-schema-", ""));
+      if (Number.isNaN(i) || i >= keep) el.remove();
+    });
+};
+
 const Seo = ({
   title,
   description,
@@ -45,6 +61,9 @@ const Seo = ({
   noindex = false,
   keywords = "",
   jsonLd = null,
+  publishedTime = "",
+  modifiedTime = "",
+  section = "",
 }) => {
   const fullTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
   const url = `${SITE_URL}${path}`;
@@ -74,11 +93,23 @@ const Seo = ({
     upsertMeta('meta[name="twitter:description"]', "name", "twitter:description", description);
     upsertMeta('meta[name="twitter:image"]', "name", "twitter:image", ogImage);
 
-    if (jsonLd) {
-      const schemas = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
-      schemas.forEach((schema, i) => upsertJsonLd(`page-schema-${i}`, schema));
-    }
-  }, [fullTitle, description, url, ogImage, type, noindex, keywords, jsonLd]);
+    // Article-only Open Graph tags — set on article pages, cleared elsewhere so
+    // they never linger when navigating to a non-article route.
+    const isArticle = type === "article";
+    const articleMeta = [
+      ['meta[property="article:published_time"]', "article:published_time", publishedTime],
+      ['meta[property="article:modified_time"]', "article:modified_time", modifiedTime],
+      ['meta[property="article:section"]', "article:section", section],
+    ];
+    articleMeta.forEach(([sel, key, content]) => {
+      if (isArticle && content) upsertMeta(sel, "property", key, content);
+      else removeMeta(sel);
+    });
+
+    const schemas = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+    schemas.forEach((schema, i) => upsertJsonLd(`page-schema-${i}`, schema));
+    pruneJsonLd(schemas.length);
+  }, [fullTitle, description, url, ogImage, type, noindex, keywords, jsonLd, publishedTime, modifiedTime, section]);
 
   return null;
 };

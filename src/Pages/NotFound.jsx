@@ -18,7 +18,7 @@ const NotFound = () => {
         >
           404
         </Text>
-        <Heading mt={2} fontSize={{ base: "24px", md: "32px" }}>
+        <Heading as="h1" mt={2} fontSize={{ base: "24px", md: "32px" }}>
           This page drifted into the future.
         </Heading>
         <Text mt={3} color="text.muted" maxW="480px" mx="auto">

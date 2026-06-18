@@ -66,12 +66,49 @@ const BlogsPage = () => {
     [rest, active]
   );
 
+  const jsonLd = useMemo(() => {
+    const schemas = [
+      {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        name: "Blog | Futurise Solutions",
+        url: "https://futurisesolutions.com/blog",
+        description:
+          "Insights, deep-dives and engineering notes from Futurise Solutions on AI, SaaS, web and mobile development.",
+        isPartOf: { "@type": "WebSite", name: "Futurise Solutions", url: "https://futurisesolutions.com" },
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: "https://futurisesolutions.com/" },
+          { "@type": "ListItem", position: 2, name: "Blog", item: "https://futurisesolutions.com/blog" },
+        ],
+      },
+    ];
+    if (blogs.length) {
+      schemas.push({
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        itemListElement: blogs.slice(0, 20).map((b, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          url: `https://futurisesolutions.com/blog/${b.slug}`,
+          name: b.title,
+        })),
+      });
+    }
+    return schemas;
+  }, [blogs]);
+
   return (
     <Box>
       <Seo
         title="Blog"
         description="Insights, deep-dives and engineering notes from Futurise Solutions on AI, SaaS, web and mobile development."
         path="/blog"
+        keywords="software development blog, AI development insights, web development, SaaS, app development, futurise solutions"
+        jsonLd={jsonLd}
       />
 
       {/* Hero */}

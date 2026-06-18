@@ -14,6 +14,7 @@ import {
 import Faqs from "../Components/HomePage Components/Faqs";
 import LatestBlogs from "../Components/blog/LatestBlogs";
 import { CTASection, Seo } from "../Components/common";
+import { faqs } from "../utils/Constant";
 import LoadingIndicator from "../Components/LoadingComponent/LoadingIndicator";
 
 const HomePage = () => {
@@ -47,12 +48,11 @@ const HomePage = () => {
           {
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            "mainEntity": [
-              { "@type": "Question", "name": "What services does Futurise Solutions offer?", "acceptedAnswer": { "@type": "Answer", "text": "We offer AI & ML solutions, web development, mobile app development, UI/UX design, blockchain development, and digital marketing." } },
-              { "@type": "Question", "name": "How much does a project cost?", "acceptedAnswer": { "@type": "Answer", "text": "Every project is scoped individually. After a free consultation we send a transparent fixed-scope estimate. Most engagements start from a small discovery phase." } },
-              { "@type": "Question", "name": "How long does it take to build a product?", "acceptedAnswer": { "@type": "Answer", "text": "A focused MVP typically takes 6–12 weeks, while larger platforms run 3–6 months. We work in two-week agile sprints." } },
-              { "@type": "Question", "name": "Do you work with clients in New Zealand?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we are based in Wellington, New Zealand and serve clients across NZ, India, the USA, and worldwide." } }
-            ]
+            "mainEntity": faqs.map((f) => ({
+              "@type": "Question",
+              "name": f.question,
+              "acceptedAnswer": { "@type": "Answer", "text": f.answer },
+            })),
           }
         ]}
       />

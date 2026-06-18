@@ -84,6 +84,9 @@ const BlogDetailPage = () => {
         type={blog.meta?.ogType || "article"}
         keywords={(blog.meta?.metaKeywords || blog.tags || []).join(", ")}
         noindex={blog.meta?.robots ? /noindex/i.test(blog.meta.robots) : false}
+        publishedTime={blog.createdAt}
+        modifiedTime={blog.updatedAt || blog.createdAt}
+        section={blog.category}
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "BlogPosting",
