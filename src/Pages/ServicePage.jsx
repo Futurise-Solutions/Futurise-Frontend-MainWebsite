@@ -49,12 +49,15 @@ const ServicePage = () => {
           {
             "@context": "https://schema.org",
             "@type": "Service",
+            "@id": `https://futurisesolutions.com/service/${serviceName}#service`,
             "name": `${service.title} — Futurise Solutions`,
-            "description": service.details,
+            "description": service.metaDescription || service.details,
             "url": `https://futurisesolutions.com/service/${serviceName}`,
-            "provider": { "@type": "Organization", "name": "Futurise Solutions", "url": "https://futurisesolutions.com" },
-            "areaServed": ["NZ", "IN", "US"],
             "serviceType": service.title,
+            "category": service.title,
+            "provider": { "@id": "https://futurisesolutions.com/#organization" },
+            "areaServed": ["New Zealand", "India", "United States", "United Kingdom", "Australia", "United Arab Emirates", "Canada"],
+            "audience": { "@type": "Audience", "audienceType": "Startup founders, SaaS companies, product teams and enterprises" },
           },
           {
             "@context": "https://schema.org",

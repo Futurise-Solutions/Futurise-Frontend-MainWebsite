@@ -43,6 +43,8 @@ const HomePage = () => {
             "name": "Futurise Solutions — AI, SaaS & Web App Development Studio",
             "url": "https://futurisesolutions.com/",
             "description": "Futurise Solutions builds AI agents, SaaS platforms, web apps, mobile apps & Web3 products end-to-end.",
+            "isPartOf": { "@id": "https://futurisesolutions.com/#website" },
+            "about": { "@id": "https://futurisesolutions.com/#organization" },
             "breadcrumb": { "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://futurisesolutions.com/" }] }
           },
           {

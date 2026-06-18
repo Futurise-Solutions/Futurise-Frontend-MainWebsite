@@ -1,0 +1,65 @@
+# Futurise Solutions
+
+> Futurise Solutions is a full-cycle digital product studio that designs, builds, and scales AI, web, mobile, and Web3 products. We help startup founders, SaaS companies, and enterprises take an idea from concept to scaled production. Based in Wellington, New Zealand; serving clients in the USA, UK, Australia, Canada, UAE, India, and worldwide.
+
+## What we do
+
+Futurise Solutions offers six core services, end-to-end (strategy, design, engineering, and growth):
+
+- **AI & ML Solutions** — [/service/ai-ml-solutions](https://futurisesolutions.com/service/ai-ml-solutions): Custom AI agents, LLM and RAG integrations, NLP pipelines, and computer vision. We are model-agnostic (OpenAI, Anthropic Claude, Google Gemini, Meta Llama) and build for production, not demos.
+- **Web Development** — [/service/web-development](https://futurisesolutions.com/service/web-development): Custom websites, SaaS platforms, dashboards, and APIs with React, Next.js, Node.js, and GraphQL. SEO-ready, sub-2-second load times, scalable architecture.
+- **App Development** — [/service/app-development](https://futurisesolutions.com/service/app-development): Cross-platform iOS and Android apps with React Native and Expo from a single codebase, with Firebase/Supabase backends, payments, push, and maps.
+- **UI/UX Design** — [/service/ui-ux-design](https://futurisesolutions.com/service/ui-ux-design): UX research, wireframing, high-fidelity Figma UI, interactive prototypes, and design systems (WCAG 2.1) that cut churn and lift conversions.
+- **Blockchain Development** — [/service/blockchain-development](https://futurisesolutions.com/service/blockchain-development): Audited smart contracts, DeFi platforms, MEV bots, and multi-chain dApps across Ethereum, BSC, Base, Arbitrum, Polygon, and Solana.
+- **Digital Marketing** — [/service/digital-marketing](https://futurisesolutions.com/service/digital-marketing): SEO, performance and paid social advertising, conversion rate optimisation (CRO), and analytics — tied to revenue, not vanity metrics.
+
+## Technologies we use
+
+React, Next.js, Astro, Node.js, Express, TypeScript, Python, React Native, Expo, GraphQL, REST, MongoDB, PostgreSQL, MySQL, Redis, OpenAI, Anthropic Claude, Google Gemini, Meta Llama, LangChain, LlamaIndex, PyTorch, TensorFlow, Solidity, Hardhat, Foundry, AWS, Google Cloud, Vercel, Docker, CI/CD.
+
+## Industries we serve
+
+SaaS, startups, FinTech, healthcare, real estate and PropTech, e-commerce, education, hospitality, and enterprise software.
+
+## Key facts
+
+- Type: Full-cycle digital product studio / software development company
+- Founded: 2024
+- Headquarters: Wellington, New Zealand
+- Markets served: New Zealand, India, USA, UK, Australia, Canada, UAE, and worldwide
+- Track record: 30+ projects delivered, 14+ clients, 97% client retention rate
+- Engagement model: Free discovery call, fixed-scope estimates, two-week agile sprints; NDAs signed on request; post-launch support and maintenance available
+- Typical timelines: MVPs 6–12 weeks; larger platforms 3–6 months
+
+## Contact
+
+- Email: business@futurisesolutions.com
+- Phone: +91 76650 13356
+- Book a free strategy call or send a message: [/contact](https://futurisesolutions.com/contact)
+
+## Key pages
+
+- [Home](https://futurisesolutions.com/)
+- [About](https://futurisesolutions.com/about)
+- [Portfolio](https://futurisesolutions.com/portfolio)
+- [Contact](https://futurisesolutions.com/contact)
+- [Blog](https://futurisesolutions.com/blog)
+
+## Selected work
+
+- HOMIES — property management and analytics SaaS dashboard (PropTech, USA & India)
+- Marty-QR — AI-powered review management platform (SaaS)
+- David Tishbi — luxury jewelry e-commerce storefront (USA)
+- Estate — property search and listings platform (real estate, India & USA)
+- GDT Exchange — crypto perpetuals trading terminal (FinTech / Web3)
+- Platinum Peak — direct hotel booking experience (hospitality)
+
+## Articles
+
+- [Web Development Services: Fast, Scalable & SEO-Ready Websites and Web Apps](https://futurisesolutions.com/blog/web-development-services-fast-scalable-and-seo-ready-websites-and-web-apps-built-to-convert)
+- [AI & ML Solutions: Custom AI Agents, LLM Integrations, NLP & Computer Vision](https://futurisesolutions.com/blog/ai-and-ml-solutions-custom-ai-agents-llm-integrations-nlp-and-computer-vision-built-for-your-business)
+- [App Development Services: Cross-Platform iOS & Android Apps](https://futurisesolutions.com/blog/app-development-services-build-cross-platform-ios-and-android-apps-that-users-actually-love)
+- [Blockchain Development Services: Smart Contracts, DeFi & Web3](https://futurisesolutions.com/blog/blockchain-development-services-smart-contracts-defi-and-web3-solutions-for-modern-businesses)
+- [Digital Marketing Services: The Data-Driven Strategy That Grows Traffic, Leads & Revenue](https://futurisesolutions.com/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue)
+- [UI/UX Design Services: How Great Design Turns Visitors Into Loyal Customers](https://futurisesolutions.com/blog/uiux-design-services-how-great-design-turns-visitors-into-loyal-customers)
+- [AI & ML Solutions: How Custom AI Agents, LLMs, NLP & Computer Vision Are Transforming Modern Businesses](https://futurisesolutions.com/blog/ai-and-ml-solutions-how-custom-ai-agents-llms-nlp-and-computer-vision-are-transforming-modern-businesses)
