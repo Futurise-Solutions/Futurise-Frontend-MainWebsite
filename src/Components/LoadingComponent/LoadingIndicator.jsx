@@ -54,7 +54,7 @@ const LoadingIndicator = () => {
       </MotionBox>
 
       {/* determinate progress fill */}
-      <Box position="relative" w="190px" h="3px" bg="rgba(255,255,255,0.08)" borderRadius="full" overflow="hidden">
+      <Box position="relative" w="190px" h="3px" bg="bg.surfaceHover" borderRadius="full" overflow="hidden">
         <MotionBox
           position="absolute"
           left={0}

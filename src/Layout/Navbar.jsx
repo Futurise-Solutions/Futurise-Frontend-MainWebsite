@@ -3,9 +3,10 @@ import {
   Box, Flex, Button, HStack, Image, Text, Icon, useDisclosure,
   IconButton, Drawer, DrawerBody, DrawerContent, DrawerOverlay, DrawerCloseButton,
   Popover, PopoverTrigger, PopoverContent, VStack, Collapse, SimpleGrid,
+  useColorMode, useColorModeValue,
 } from "@chakra-ui/react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiMenu, FiChevronDown, FiArrowRight, FiArrowUpRight } from "react-icons/fi";
+import { FiMenu, FiChevronDown, FiArrowRight, FiArrowUpRight, FiSun, FiMoon } from "react-icons/fi";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { navbarOptions, NavbarservicesOptions } from "../utils/Constant";
 import { Logo } from "../Components/common";
@@ -61,14 +62,15 @@ const ServicesMenu = ({ navigate, active, hovered, setHovered, index }) => {
       </PopoverTrigger>
       <PopoverContent
         w="640px"
-        bg="#0f0f1a"
+        bg="bg.glass"
+        backdropFilter="blur(20px)"
         border="1px solid"
         borderColor="border.subtle"
         borderRadius="20px"
-        boxShadow="0 40px 80px -28px rgba(0,0,0,0.85)"
+        boxShadow="0 40px 80px -28px rgba(40,30,90,0.45)"
         p={3}
         overflow="hidden"
-        _focus={{ outline: "none", boxShadow: "0 40px 80px -28px rgba(0,0,0,0.85)" }}
+        _focus={{ outline: "none", boxShadow: "0 40px 80px -28px rgba(40,30,90,0.45)" }}
       >
         <SimpleGrid columns={3} spacing={2}>
           {NavbarservicesOptions.map((s) => (
@@ -131,9 +133,28 @@ const NavLinkItem = ({ item, index, hovered, setHovered }) => {
   );
 };
 
+// Light/dark theme toggle — persists via Chakra's color-mode storage.
+const ThemeToggle = (props) => {
+  const { colorMode, toggleColorMode } = useColorMode();
+  return (
+    <IconButton
+      aria-label={colorMode === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+      title={colorMode === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+      icon={colorMode === "dark" ? <FiSun /> : <FiMoon />}
+      variant="outlineGlow"
+      size="md"
+      onClick={toggleColorMode}
+      {...props}
+    />
+  );
+};
+
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { onOpen: openBooking } = useBooking();
+  // Frosted header background — white in light mode, near-black in dark.
+  const navBgScrolled = useColorModeValue("rgba(255,255,255,0.8)", "rgba(8,8,13,0.82)");
+  const navBgTop = useColorModeValue("rgba(255,255,255,0.45)", "rgba(8,8,13,0.35)");
   const [servicesOpen, setServicesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -176,7 +197,7 @@ const Navbar = () => {
       top={0}
       zIndex={1000}
       transition="all .3s ease"
-      bg={scrolled ? "rgba(8,8,13,0.82)" : "rgba(8,8,13,0.35)"}
+      bg={scrolled ? navBgScrolled : navBgTop}
       backdropFilter="blur(16px)"
       borderBottom="1px solid"
       borderColor={scrolled ? "border.subtle" : "transparent"}
@@ -191,7 +212,7 @@ const Navbar = () => {
           px={2}
           py={1.5}
           borderRadius="full"
-          bg="rgba(255,255,255,0.03)"
+          bg="bg.surface"
           border="1px solid"
           borderColor="border.subtle"
           onMouseLeave={() => setHovered(null)}
@@ -230,6 +251,7 @@ const Navbar = () => {
               Book appointment
             </Button>
           </Box>
+          <ThemeToggle />
           <IconButton
             display={{ base: "inline-flex", lg: "none" }}
             aria-label="Open menu"
@@ -249,7 +271,7 @@ const Navbar = () => {
       {/* Mobile drawer */}
       <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="xs">
         <DrawerOverlay backdropFilter="blur(6px)" bg="rgba(0,0,0,0.5)" />
-        <DrawerContent bg="navy.800" borderLeft="1px solid" borderColor="border.subtle">
+        <DrawerContent bg="bg.canvas" borderLeft="1px solid" borderColor="border.subtle">
           <Box position="absolute" top="-10%" right="-20%" w="260px" h="260px" bg="rgba(181,123,255,0.18)" filter="blur(80px)" rounded="full" pointerEvents="none" />
           <DrawerCloseButton mt={3} color="text.muted" zIndex={10} />
           <Box px={6} py={5} position="relative">

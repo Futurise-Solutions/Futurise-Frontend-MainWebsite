@@ -1,11 +1,12 @@
 import React from "react";
-import { SimpleGrid, Text, Heading, Flex, Icon } from "@chakra-ui/react";
+import { SimpleGrid, Text, Heading, Flex, Icon, useColorModeValue } from "@chakra-ui/react";
 import { processSteps } from "../../utils/Constant";
 import GlassCard from "./GlassCard";
 import Reveal from "./Reveal";
 
 /** Numbered "how we work" steps. Shared by home + service pages. */
 const ProcessTimeline = ({ columns = { base: 1, sm: 2, lg: 4 } }) => {
+  const stepNumberColor = useColorModeValue("rgba(13,13,22,0.08)", "rgba(255,255,255,0.08)");
   return (
     <SimpleGrid columns={columns} spacing={5}>
       {processSteps.map((step, i) => (
@@ -24,7 +25,7 @@ const ProcessTimeline = ({ columns = { base: 1, sm: 2, lg: 4 } }) => {
               >
                 <Icon as={step.icon} boxSize={5} color="accent.solid" />
               </Flex>
-              <Text fontFamily="heading" fontWeight={700} fontSize="28px" color="rgba(255,255,255,0.08)">
+              <Text fontFamily="heading" fontWeight={700} fontSize="28px" color={stepNumberColor}>
                 0{i + 1}
               </Text>
             </Flex>

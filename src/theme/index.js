@@ -1,11 +1,16 @@
 import { extendTheme } from "@chakra-ui/react";
 
 /**
- * Futurise design system — "Near-black + lavender/violet".
- * Deep charcoal canvas, periwinkle→lavender brand gradient, glass surfaces.
- * Tuned to the premium agency reference (image.png / wednesday.is): a very dark,
- * almost-black base with soft lavender accents and purple glow.
- * Reusable tokens keep every page visually consistent.
+ * Futurise design system — dual light/dark theme.
+ *
+ * Brand: periwinkle (#7b6cff) → lavender (#b57bff) gradient.
+ * Dark mode = the original "near-black + lavender" design (unchanged values).
+ * Light mode = soft lavender-white surfaces with deep violet ink, derived from
+ * the brand palette (#08080d, #0d0d16, #7b6cff, #b57bff, #b4a0ff, #f4f2ff).
+ *
+ * Every surface/border/text color is a SEMANTIC TOKEN with { default, _dark }
+ * values, so the whole UI flips by changing color mode — components reference
+ * tokens, never raw theme colors. To re-tune a theme, edit the values here only.
  */
 
 export const GRADIENT = "linear-gradient(135deg, #7B6CFF 0%, #B57BFF 100%)";
@@ -33,8 +38,7 @@ const colors = {
     500: "#b57bff",
     600: "#9d4edd",
   },
-  // Near-black charcoal canvas (kept under the `navy` key so existing token
-  // references keep working — the values are now deep neutral-violet black).
+  // Near-black charcoal canvas (dark mode base)
   navy: {
     900: "#08080d",
     800: "#0d0d16",
@@ -42,7 +46,6 @@ const colors = {
     600: "#1a1a2b",
     500: "#24243a",
   },
-  // Default brand color scheme for Chakra components (e.g. colorScheme="brand")
 };
 
 const fonts = {
@@ -50,41 +53,49 @@ const fonts = {
   body: `'Aeonik Trial', -apple-system, system-ui, sans-serif`,
 };
 
+// Single source of truth for every theme-aware color. default = light, _dark = dark.
 const semanticTokens = {
   colors: {
-    "bg.canvas": "#08080d",
-    "bg.surface": "rgba(255,255,255,0.035)",
-    "bg.surfaceHover": "rgba(255,255,255,0.06)",
-    "border.subtle": "rgba(255,255,255,0.08)",
-    "border.strong": "rgba(255,255,255,0.16)",
-    "text.primary": "#f4f2ff",
-    "text.muted": "#b0a8c8",
-    "text.faint": "#7d748f",
-    "accent.solid": "#b4a0ff",
+    "bg.canvas": { default: "#f4f2ff", _dark: "#08080d" },
+    "bg.surface": { default: "#ffffff", _dark: "rgba(255,255,255,0.035)" },
+    "bg.surfaceHover": { default: "#f1eeff", _dark: "rgba(255,255,255,0.06)" },
+    // Frosted glass panels (navbar, chat widget, modals, hero cards).
+    "bg.glass": { default: "rgba(255,255,255,0.85)", _dark: "rgba(13,13,22,0.95)" },
+    "border.subtle": { default: "rgba(123,108,255,0.14)", _dark: "rgba(255,255,255,0.08)" },
+    "border.strong": { default: "rgba(123,108,255,0.28)", _dark: "rgba(255,255,255,0.16)" },
+    "text.primary": { default: "#16141f", _dark: "#f4f2ff" },
+    "text.muted": { default: "#56506e", _dark: "#b0a8c8" },
+    "text.faint": { default: "#79738f", _dark: "#7d748f" },
+    "accent.solid": { default: "#6450e6", _dark: "#b4a0ff" },
   },
 };
 
 const styles = {
-  global: {
-    "html, body, #root, #app": {
-      bg: "bg.canvas",
-      color: "text.primary",
-      scrollBehavior: "smooth",
-    },
-    body: {
-      backgroundImage:
-        "radial-gradient(60% 50% at 15% -5%, rgba(123,108,255,0.16) 0%, rgba(8,8,13,0) 60%), radial-gradient(55% 45% at 95% 0%, rgba(181,123,255,0.14) 0%, rgba(8,8,13,0) 55%)",
-      backgroundAttachment: "fixed",
-      backgroundRepeat: "no-repeat",
-      overflowX: "hidden",
-    },
-    "::selection": { background: "rgba(123,108,255,0.35)" },
-    "*::-webkit-scrollbar": { width: "10px", height: "10px" },
-    "*::-webkit-scrollbar-track": { background: "#0d0d16" },
-    "*::-webkit-scrollbar-thumb": {
-      background: "linear-gradient(180deg,#7b6cff,#b57bff)",
-      borderRadius: "8px",
-    },
+  global: (props) => {
+    const dark = props.colorMode === "dark";
+    return {
+      "html, body, #root, #app": {
+        bg: "bg.canvas",
+        color: "text.primary",
+        scrollBehavior: "smooth",
+      },
+      body: {
+        backgroundImage:
+          "radial-gradient(60% 50% at 15% -5%, rgba(123,108,255,0.16) 0%, rgba(123,108,255,0) 60%), radial-gradient(55% 45% at 95% 0%, rgba(181,123,255,0.14) 0%, rgba(181,123,255,0) 55%)",
+        backgroundAttachment: "fixed",
+        backgroundRepeat: "no-repeat",
+        overflowX: "hidden",
+        // Smooth color-mode switch.
+        transition: "background-color .3s ease, color .3s ease",
+      },
+      "::selection": { background: "rgba(123,108,255,0.35)", color: "#fff" },
+      "*::-webkit-scrollbar": { width: "10px", height: "10px" },
+      "*::-webkit-scrollbar-track": { background: dark ? "#0d0d16" : "#ece9ff" },
+      "*::-webkit-scrollbar-thumb": {
+        background: "linear-gradient(180deg,#7b6cff,#b57bff)",
+        borderRadius: "8px",
+      },
+    };
   },
 };
 
@@ -92,6 +103,7 @@ const components = {
   Button: {
     baseStyle: { fontWeight: 600, borderRadius: "full", letterSpacing: "0.01em" },
     variants: {
+      // Brand gradient button — identical in both themes (white on gradient).
       gradient: {
         bgGradient: "linear(135deg, brand.500, violet.500)",
         color: "white",
@@ -114,7 +126,7 @@ const components = {
         transition: "transform .25s cubic-bezier(0.22,1,0.36,1), box-shadow .25s ease, border-color .25s ease, background .25s ease",
         _hover: {
           borderColor: "brand.400",
-          bg: "rgba(180,160,255,0.1)",
+          bg: "rgba(123,108,255,0.1)",
           transform: "translateY(-2px) scale(1.02)",
           boxShadow: "0 12px 30px -12px rgba(123,108,255,0.55)",
         },
@@ -124,12 +136,12 @@ const components = {
         bg: "transparent",
         color: "text.muted",
         transition: "color .2s ease, background .2s ease",
-        _hover: { color: "text.primary", bg: "rgba(255,255,255,0.04)" },
+        _hover: { color: "text.primary", bg: "bg.surfaceHover" },
       },
     },
     defaultProps: { variant: "gradient" },
   },
-  Heading: { baseStyle: { fontWeight: 700, letterSpacing: "-0.02em" } },
+  Heading: { baseStyle: { fontWeight: 700, letterSpacing: "-0.02em", color: "text.primary" } },
   Link: {
     baseStyle: {
       color: "text.muted",
@@ -140,7 +152,9 @@ const components = {
 };
 
 const theme = extendTheme({
-  config: { initialColorMode: "dark", useSystemColorMode: false },
+  // Light is the new default; system preference is respected on first visit and
+  // the user's toggle choice persists (Chakra stores it in localStorage).
+  config: { initialColorMode: "system", useSystemColorMode: false },
   colors,
   fonts,
   semanticTokens,

@@ -197,3 +197,64 @@
   -o-user-drag: none;
   user-select: none;
 }
+
+/* ============================================================
+   LIGHT THEME OVERRIDES
+   The rules above are the dark-mode baseline (unchanged). Chakra adds the
+   `chakra-ui-light` class to <body> in light mode, so these scoped rules swap
+   only the colors of the few elements that use raw CSS (not Chakra tokens):
+   the heading gradient, Swiper controls, the contact form, and Leaflet maps.
+   ============================================================ */
+
+/* Heading gradient — deeper violet for contrast on a light canvas */
+.chakra-ui-light .gradient-text {
+  background: linear-gradient(135deg, #6450e6 0%, #9d4edd 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Swiper controls */
+.chakra-ui-light .swiper-button-next,
+.chakra-ui-light .swiper-button-prev {
+  color: #6450e6 !important;
+  background: rgba(123, 108, 255, 0.08);
+  border: 1px solid rgba(123, 108, 255, 0.2);
+}
+.chakra-ui-light .swiper-pagination-bullet {
+  background: rgba(20, 16, 60, 0.25);
+}
+.chakra-ui-light .swiper-pagination-bullet-active {
+  background: #6450e6;
+}
+
+/* Contact form */
+.chakra-ui-light .form {
+  background: rgba(255, 255, 255, 0.9);
+  color: #16141f;
+  border: 1px solid rgba(123, 108, 255, 0.16);
+  box-shadow: 0 24px 60px -28px rgba(80, 60, 180, 0.25);
+}
+.chakra-ui-light .form input,
+.chakra-ui-light .form textarea {
+  background-color: #ffffff;
+  color: #16141f;
+  border: 1px solid rgba(123, 108, 255, 0.22);
+}
+.chakra-ui-light .form input:focus,
+.chakra-ui-light .form textarea:focus {
+  border-color: #6450e6;
+  box-shadow: 0 0 0 1px #6450e6;
+}
+.chakra-ui-light .form input::placeholder,
+.chakra-ui-light .form textarea::placeholder {
+  color: rgba(20, 16, 60, 0.45);
+}
+
+/* Leaflet — full-colour tiles + light frame on a light canvas */
+.chakra-ui-light .leaflet-container {
+  background: #ece9ff !important;
+}
+.chakra-ui-light .map-container .leaflet-tile {
+  filter: none;
+}

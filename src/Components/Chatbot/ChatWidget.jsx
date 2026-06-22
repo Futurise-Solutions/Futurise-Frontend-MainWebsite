@@ -94,7 +94,7 @@ const ChatWidget = ({ onClose }) => {
       maxH={{ base: "calc(100dvh - 90px)", sm: "calc(100vh - 116px)" }}
       overflow="hidden"
       borderRadius="20px"
-      bg="rgba(13,13,22,0.95)"
+      bg="bg.glass"
       backdropFilter="blur(20px)"
       border="1px solid"
       borderColor="border.strong"
@@ -108,7 +108,7 @@ const ChatWidget = ({ onClose }) => {
         py={3}
         borderBottom="1px solid"
         borderColor="border.subtle"
-        bg="rgba(255,255,255,0.02)"
+        bg="bg.surface"
         flexShrink={0}
       >
         <HStack spacing={3}>

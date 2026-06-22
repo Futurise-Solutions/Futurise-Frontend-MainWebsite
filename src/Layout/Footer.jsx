@@ -79,7 +79,7 @@ const Footer = () => {
   };
 
   return (
-    <Box as="footer" mt="auto" borderTop="1px solid" borderColor="border.subtle" bg="rgba(8,8,13,0.6)">
+    <Box as="footer" mt="auto" borderTop="1px solid" borderColor="border.subtle" bg="bg.canvas">
       <Box maxW="1200px" mx="auto" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
         {/* Complementary visual — selected work preview */}
         <Flex
@@ -130,7 +130,7 @@ const Footer = () => {
                 transition="transform .5s ease"
                 _groupHover={{ transform: "scale(1.07)" }}
               />
-              <Box position="absolute" inset={0} bgGradient="linear(to-t, rgba(8,8,13,0.85), rgba(8,8,13,0) 60%)" />
+              <Box position="absolute" inset={0} bgGradient="linear(to-t, bg.canvas, transparent 60%)" />
               <Text
                 position="absolute"
                 bottom={2}
@@ -162,7 +162,7 @@ const Footer = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@company.com"
-                  bg="rgba(255,255,255,0.04)"
+                  bg="bg.surface"
                   border="1px solid"
                   borderColor="border.subtle"
                   borderRadius="full"
@@ -273,7 +273,7 @@ const Footer = () => {
                 borderColor="border.subtle"
                 color="text.muted"
                 transition="all .25s"
-                _hover={{ color: "white", borderColor: "brand.400", bg: "rgba(180,160,255,0.12)", transform: "translateY(-2px)" }}
+                _hover={{ color: "text.primary", borderColor: "brand.400", bg: "rgba(180,160,255,0.12)", transform: "translateY(-2px)" }}
               >
                 <Icon as={s.icon} />
               </CLink>

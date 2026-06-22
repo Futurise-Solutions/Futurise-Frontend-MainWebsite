@@ -48,7 +48,7 @@ const components = {
       return <Box as="code" className={className} display="block" fontFamily="mono" color="text.primary">{children}</Box>;
     }
     return (
-      <Box as="code" px={2} py={0.5} borderRadius="6px" bg="rgba(255,255,255,0.07)" color="accent.solid" fontSize="0.9em" fontFamily="mono">
+      <Box as="code" px={2} py={0.5} borderRadius="6px" bg="bg.surfaceHover" color="accent.solid" fontSize="0.9em" fontFamily="mono">
         {children}
       </Box>
     );
@@ -57,7 +57,7 @@ const components = {
   hr: () => <Box borderTop="1px solid" borderColor="border.subtle" my={8} />,
   table: ({ children }) => (
     <Box overflowX="auto" mb={6}>
-      <Box as="table" w="full" sx={{ borderCollapse: "collapse", "& th, & td": { border: "1px solid", borderColor: "border.subtle", px: 3, py: 2, textAlign: "left", fontSize: "sm" }, "& th": { color: "text.primary", bg: "rgba(255,255,255,0.03)" }, "& td": { color: "text.muted" } }}>
+      <Box as="table" w="full" sx={{ borderCollapse: "collapse", "& th, & td": { border: "1px solid", borderColor: "border.subtle", px: 3, py: 2, textAlign: "left", fontSize: "sm" }, "& th": { color: "text.primary", bg: "bg.surface" }, "& td": { color: "text.muted" } }}>
         {children}
       </Box>
     </Box>

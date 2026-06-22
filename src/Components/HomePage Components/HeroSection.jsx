@@ -126,7 +126,7 @@ const HeroSection = () => {
                 borderRadius="28px"
                 border="1px solid"
                 borderColor="border.subtle"
-                bg="rgba(255,255,255,0.04)"
+                bg="bg.surface"
                 backdropFilter="blur(16px)"
                 p={{ base: 6, md: 8 }}
                 boxShadow="0 40px 80px -30px rgba(0,0,0,0.7)"
@@ -162,7 +162,7 @@ const HeroSection = () => {
                 px={4}
                 py={3}
                 borderRadius="16px"
-                bg="rgba(13,13,22,0.9)"
+                bg="bg.glass"
                 border="1px solid"
                 borderColor="border.strong"
                 backdropFilter="blur(10px)"
@@ -184,7 +184,7 @@ const HeroSection = () => {
                 px={4}
                 py={3}
                 borderRadius="16px"
-                bg="rgba(13,13,22,0.9)"
+                bg="bg.glass"
                 border="1px solid"
                 borderColor="border.strong"
                 backdropFilter="blur(10px)"

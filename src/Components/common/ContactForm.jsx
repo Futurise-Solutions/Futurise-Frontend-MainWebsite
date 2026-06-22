@@ -5,7 +5,7 @@ import { FiSend } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 
 const field = {
-  bg: "rgba(255,255,255,0.05)",
+  bg: "bg.surface",
   border: "1px solid",
   borderColor: "border.subtle",
   borderRadius: "12px",
@@ -63,7 +63,7 @@ const ContactForm = () => {
       borderRadius="22px"
       border="1px solid"
       borderColor="border.subtle"
-      bg="rgba(13,13,22,0.6)"
+      bg="bg.glass"
       backdropFilter="blur(14px)"
       p={{ base: 6, md: 8 }}
       boxShadow="0 24px 60px -28px rgba(0,0,0,0.7)"

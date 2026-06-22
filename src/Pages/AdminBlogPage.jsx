@@ -45,7 +45,7 @@ const TagInput = ({ value = [], onChange, placeholder = "Type and press Enter" }
           if (e.key === "Enter") { e.preventDefault(); add(); }
         }}
         placeholder={placeholder}
-        bg="rgba(255,255,255,0.05)"
+        bg="bg.surface"
         borderColor="border.subtle"
       />
       {value.length > 0 && (
@@ -75,7 +75,7 @@ const LoginGate = ({ onSuccess }) => {
   };
   return (
     <Box minH="100vh" display="grid" placeItems="center" px={5}>
-      <Box as="form" onSubmit={submit} bg="navy.800" borderRadius="24px" border="1px solid" borderColor="border.subtle" boxShadow="0 40px 80px -24px rgba(0,0,0,0.7)" maxW="420px" w="full" p={{ base: 8, md: 10 }}>
+      <Box as="form" onSubmit={submit} bg="bg.canvas" borderRadius="24px" border="1px solid" borderColor="border.subtle" boxShadow="0 40px 80px -24px rgba(0,0,0,0.7)" maxW="420px" w="full" p={{ base: 8, md: 10 }}>
         <VStack spacing={6} align="stretch">
           <VStack spacing={3}>
             <Logo size="lg" to={null} />
@@ -83,7 +83,7 @@ const LoginGate = ({ onSuccess }) => {
           </VStack>
           <FormControl>
             <FormLabel fontSize="sm" color="text.muted">Password</FormLabel>
-            <Input type="password" value={pw} onChange={(e) => setPw(e.target.value)} placeholder="Enter password" bg="rgba(255,255,255,0.05)" borderColor="border.subtle" autoFocus />
+            <Input type="password" value={pw} onChange={(e) => setPw(e.target.value)} placeholder="Enter password" bg="bg.surface" borderColor="border.subtle" autoFocus />
           </FormControl>
           <Button type="submit" variant="gradient" size="lg" w="full">Enter Dashboard</Button>
         </VStack>
@@ -168,18 +168,18 @@ const BlogFormDrawer = ({ isOpen, onClose, editing, onSaved }) => {
               <VStack align="stretch" spacing={5}>
                 <FormControl isRequired>
                   <FormLabel fontSize="sm">Title</FormLabel>
-                  <Input value={form.title} onChange={(e) => set("title", e.target.value)} placeholder="Blog title" bg="rgba(255,255,255,0.05)" borderColor="border.subtle" />
+                  <Input value={form.title} onChange={(e) => set("title", e.target.value)} placeholder="Blog title" bg="bg.surface" borderColor="border.subtle" />
                   <Text fontSize="xs" color="text.faint" mt={1}>Slug preview: /blog/{slugify(form.slug || form.title) || "…"}</Text>
                 </FormControl>
 
                 <FormControl>
                   <FormLabel fontSize="sm">Short description</FormLabel>
-                  <Textarea value={form.shortDescription} onChange={(e) => set("shortDescription", e.target.value)} rows={3} placeholder="One or two lines shown on cards" bg="rgba(255,255,255,0.05)" borderColor="border.subtle" />
+                  <Textarea value={form.shortDescription} onChange={(e) => set("shortDescription", e.target.value)} rows={3} placeholder="One or two lines shown on cards" bg="bg.surface" borderColor="border.subtle" />
                 </FormControl>
 
                 <FormControl>
                   <FormLabel fontSize="sm">Category</FormLabel>
-                  <Input value={form.category} onChange={(e) => set("category", e.target.value)} placeholder="e.g. AI, Web, Product" bg="rgba(255,255,255,0.05)" borderColor="border.subtle" />
+                  <Input value={form.category} onChange={(e) => set("category", e.target.value)} placeholder="e.g. AI, Web, Product" bg="bg.surface" borderColor="border.subtle" />
                 </FormControl>
 
                 <FormControl>
@@ -190,7 +190,7 @@ const BlogFormDrawer = ({ isOpen, onClose, editing, onSaved }) => {
                 <FormControl>
                   <FormLabel fontSize="sm">Featured image</FormLabel>
                   <HStack spacing={4} align="start">
-                    <Box w="120px" h="80px" borderRadius="10px" overflow="hidden" border="1px solid" borderColor="border.subtle" bg="rgba(255,255,255,0.04)" flexShrink={0}>
+                    <Box w="120px" h="80px" borderRadius="10px" overflow="hidden" border="1px solid" borderColor="border.subtle" bg="bg.surface" flexShrink={0}>
                       {form.featuredImage && <Image src={mediaUrl(form.featuredImage)} alt="" w="full" h="full" objectFit="cover" />}
                     </Box>
                     <VStack align="start" spacing={2}>
@@ -198,7 +198,7 @@ const BlogFormDrawer = ({ isOpen, onClose, editing, onSaved }) => {
                       <Button size="sm" variant="outlineGlow" leftIcon={<FiUpload />} isLoading={uploading} onClick={() => fileRef.current?.click()}>
                         Upload image
                       </Button>
-                      <Input size="sm" value={form.featuredImage} onChange={(e) => set("featuredImage", e.target.value)} placeholder="or paste image URL/path" bg="rgba(255,255,255,0.05)" borderColor="border.subtle" />
+                      <Input size="sm" value={form.featuredImage} onChange={(e) => set("featuredImage", e.target.value)} placeholder="or paste image URL/path" bg="bg.surface" borderColor="border.subtle" />
                     </VStack>
                   </HStack>
                 </FormControl>
@@ -224,11 +224,11 @@ const BlogFormDrawer = ({ isOpen, onClose, editing, onSaved }) => {
                       <VStack align="stretch" spacing={4}>
                         <FormControl>
                           <FormLabel fontSize="sm" mb={1}>Meta title <Text as="span" color="text.faint">({form.meta.metaTitle.length}/60)</Text></FormLabel>
-                          <Input maxLength={60} value={form.meta.metaTitle} onChange={(e) => setMeta("metaTitle", e.target.value)} bg="rgba(255,255,255,0.05)" borderColor="border.subtle" />
+                          <Input maxLength={60} value={form.meta.metaTitle} onChange={(e) => setMeta("metaTitle", e.target.value)} bg="bg.surface" borderColor="border.subtle" />
                         </FormControl>
                         <FormControl>
                           <FormLabel fontSize="sm" mb={1}>Meta description <Text as="span" color="text.faint">({form.meta.metaDescription.length}/160)</Text></FormLabel>
-                          <Textarea maxLength={160} rows={2} value={form.meta.metaDescription} onChange={(e) => setMeta("metaDescription", e.target.value)} bg="rgba(255,255,255,0.05)" borderColor="border.subtle" />
+                          <Textarea maxLength={160} rows={2} value={form.meta.metaDescription} onChange={(e) => setMeta("metaDescription", e.target.value)} bg="bg.surface" borderColor="border.subtle" />
                         </FormControl>
                         <FormControl>
                           <FormLabel fontSize="sm">Meta keywords</FormLabel>
@@ -237,14 +237,14 @@ const BlogFormDrawer = ({ isOpen, onClose, editing, onSaved }) => {
                         <HStack spacing={4} align="start">
                           <FormControl>
                             <FormLabel fontSize="sm">OG type</FormLabel>
-                            <Select value={form.meta.ogType} onChange={(e) => setMeta("ogType", e.target.value)} bg="rgba(255,255,255,0.05)" borderColor="border.subtle">
+                            <Select value={form.meta.ogType} onChange={(e) => setMeta("ogType", e.target.value)} bg="bg.surface" borderColor="border.subtle">
                               <option value="article">article</option>
                               <option value="website">website</option>
                             </Select>
                           </FormControl>
                           <FormControl>
                             <FormLabel fontSize="sm">Robots</FormLabel>
-                            <Select value={form.meta.robots} onChange={(e) => setMeta("robots", e.target.value)} bg="rgba(255,255,255,0.05)" borderColor="border.subtle">
+                            <Select value={form.meta.robots} onChange={(e) => setMeta("robots", e.target.value)} bg="bg.surface" borderColor="border.subtle">
                               <option value="index,follow">index,follow</option>
                               <option value="noindex,follow">noindex,follow</option>
                               <option value="noindex,nofollow">noindex,nofollow</option>
@@ -354,19 +354,19 @@ const Dashboard = ({ onLogout }) => {
           <Heading fontSize="2xl">Blog Manager</Heading>
           <InputGroup maxW="320px">
             <InputLeftElement pointerEvents="none"><FiSearch color="gray" /></InputLeftElement>
-            <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search by title…" bg="rgba(255,255,255,0.05)" borderColor="border.subtle" />
+            <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search by title…" bg="bg.surface" borderColor="border.subtle" />
           </InputGroup>
         </Flex>
 
         {loading ? (
-          <Box py={20} display="grid" placeItems="center"><Spinner size="xl" color="brand.400" emptyColor="rgba(255,255,255,0.08)" /></Box>
+          <Box py={20} display="grid" placeItems="center"><Spinner size="xl" color="brand.400" emptyColor="border.subtle" /></Box>
         ) : filtered.length === 0 ? (
           <Box py={20} textAlign="center" color="text.faint">No blogs found.</Box>
         ) : (
           <VStack align="stretch" spacing={3}>
             {filtered.map((b) => (
               <Flex key={b._id || b.slug} align="center" gap={4} p={3} borderRadius="14px" border="1px solid" borderColor="border.subtle" bg="bg.surface" _hover={{ borderColor: "rgba(180,160,255,0.3)" }} transition="border-color .2s">
-                <Box w="60px" h="40px" borderRadius="8px" overflow="hidden" bg="rgba(255,255,255,0.04)" flexShrink={0}>
+                <Box w="60px" h="40px" borderRadius="8px" overflow="hidden" bg="bg.surface" flexShrink={0}>
                   {b.featuredImage && <Image src={mediaUrl(b.featuredImage)} alt="" w="full" h="full" objectFit="cover" />}
                 </Box>
                 <Box flex="1" minW={0}>
@@ -396,7 +396,7 @@ const Dashboard = ({ onLogout }) => {
 
       <AlertDialog isOpen={!!toDelete} leastDestructiveRef={cancelRef} onClose={() => setToDelete(null)} isCentered>
         <AlertDialogOverlay>
-          <AlertDialogContent bg="navy.800" border="1px solid" borderColor="border.subtle">
+          <AlertDialogContent bg="bg.canvas" border="1px solid" borderColor="border.subtle">
             <AlertDialogHeader>Delete blog</AlertDialogHeader>
             <AlertDialogBody color="text.muted">
               Are you sure you want to delete “{toDelete?.title}”? This action cannot be undone.

@@ -60,7 +60,7 @@ const ServiceStack = ({ service }) => {
                   </Flex>
                   <SimpleGrid columns={2} spacing={3} position="relative">
                     {stack.techStack.split(",").map((tech, idx) => (
-                      <Box key={idx} p={4} borderRadius="12px" bg="rgba(255,255,255,0.04)" border="1px solid" borderColor="border.subtle">
+                      <Box key={idx} p={4} borderRadius="12px" bg="bg.surface" border="1px solid" borderColor="border.subtle">
                         <Text fontWeight={600} fontSize="15px">{tech.trim()}</Text>
                       </Box>
                     ))}

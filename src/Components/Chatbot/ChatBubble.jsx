@@ -47,7 +47,7 @@ const LoadingPanel = () => (
     maxH={{ base: "100dvh", sm: "calc(100vh - 116px)" }}
     align="center"
     justify="center"
-    bg="rgba(13,13,22,0.95)"
+    bg="bg.glass"
     backdropFilter="blur(20px)"
     border="1px solid"
     borderColor="border.strong"
@@ -167,7 +167,7 @@ const ChatBubble = () => {
                 ease: "easeInOut",
               },
             }}
-            bg="rgba(13,13,22,0.95)"
+            bg="bg.glass"
             backdropFilter="blur(20px)"
             border="1px solid"
             borderColor="border.strong"
@@ -188,7 +188,7 @@ const ChatBubble = () => {
                 right: "-6px",
                 width: "12px",
                 height: "12px",
-                backgroundColor: "rgba(13,13,22,0.95)",
+                backgroundColor: "bg.glass",
                 borderRight: "1px solid",
                 borderTop: "1px solid",
                 borderColor: "border.strong",
@@ -214,7 +214,7 @@ const ChatBubble = () => {
               size="xs"
               variant="ghost"
               color="text.muted"
-              _hover={{ color: "text.primary", bg: "rgba(255,255,255,0.08)" }}
+              _hover={{ color: "text.primary", bg: "bg.surfaceHover" }}
               borderRadius="full"
               onClick={(e) => {
                 e.stopPropagation();

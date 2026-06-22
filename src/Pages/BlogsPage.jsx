@@ -113,7 +113,7 @@ const BlogsPage = () => {
 
       {/* Hero */}
       {loading ? (
-        <Skeleton h={{ base: "440px", md: "520px" }} startColor="rgba(255,255,255,0.04)" endColor="rgba(255,255,255,0.08)" />
+        <Skeleton h={{ base: "440px", md: "520px" }} startColor="bg.surfaceHover" endColor="bg.surface" />
       ) : hero ? (
         <HeroBlog blog={hero} />
       ) : (
@@ -129,7 +129,7 @@ const BlogsPage = () => {
 
       {/* Sticky category filter */}
       {!loading && categories.length > 0 && (
-        <Box position="sticky" top="64px" zIndex={10} bg="rgba(8,8,13,0.85)" backdropFilter="blur(16px)" borderBottom="1px solid" borderColor="border.subtle">
+        <Box position="sticky" top="64px" zIndex={10} bg="bg.glass" backdropFilter="blur(16px)" borderBottom="1px solid" borderColor="border.subtle">
           <Container maxW="1200px" px={{ base: 5, md: 8 }} py={3}>
             <CategoryFilter categories={categories} active={active} onChange={setActive} />
           </Container>
@@ -141,7 +141,7 @@ const BlogsPage = () => {
         {loading ? (
           <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
             {[...Array(6)].map((_, i) => (
-              <Skeleton key={i} h="340px" borderRadius="20px" startColor="rgba(255,255,255,0.04)" endColor="rgba(255,255,255,0.09)" />
+              <Skeleton key={i} h="340px" borderRadius="20px" startColor="bg.surfaceHover" endColor="bg.surface" />
             ))}
           </SimpleGrid>
         ) : filtered.length === 0 ? (

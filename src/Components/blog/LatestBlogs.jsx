@@ -41,7 +41,7 @@ const LatestBlogs = () => {
       {loading ? (
         <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={6}>
           {[...Array(4)].map((_, i) => (
-            <Skeleton key={i} h="340px" borderRadius="20px" startColor="rgba(255,255,255,0.04)" endColor="rgba(255,255,255,0.09)" />
+            <Skeleton key={i} h="340px" borderRadius="20px" startColor="bg.surfaceHover" endColor="bg.surface" />
           ))}
         </SimpleGrid>
       ) : (

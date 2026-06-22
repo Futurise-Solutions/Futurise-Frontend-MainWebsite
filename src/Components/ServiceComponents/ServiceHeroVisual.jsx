@@ -16,7 +16,7 @@ const Frame = ({ children, label, ...rest }) => (
     borderRadius="20px"
     border="1px solid"
     borderColor="border.strong"
-    bg="rgba(13,13,22,0.82)"
+    bg="bg.glass"
     backdropFilter="blur(14px)"
     boxShadow="0 40px 90px -36px rgba(0,0,0,0.85)"
     overflow="hidden"
@@ -34,7 +34,7 @@ const Frame = ({ children, label, ...rest }) => (
             fontSize="11px"
             color="text.faint"
             textAlign="center"
-            bg="rgba(255,255,255,0.04)"
+            bg="bg.surface"
             borderRadius="full"
             py={1}
             px={3}
@@ -66,7 +66,7 @@ const FloatChip = ({ icon, title, sub, animate, ...rest }) => (
     px={4}
     py={3}
     borderRadius="16px"
-    bg="rgba(13,13,22,0.92)"
+    bg="bg.glass"
     border="1px solid"
     borderColor="border.strong"
     backdropFilter="blur(10px)"
@@ -100,7 +100,7 @@ const WebVisual = () => (
       </Box>
       <SimpleGrid columns={3} spacing={3}>
         {[0, 1, 2].map((i) => (
-          <Box key={i} borderRadius="10px" bg="rgba(255,255,255,0.04)" border="1px solid" borderColor="border.subtle" p={3}>
+          <Box key={i} borderRadius="10px" bg="bg.surface" border="1px solid" borderColor="border.subtle" p={3}>
             <Box w="22px" h="22px" rounded="8px" bgGradient="linear(135deg, brand.500, violet.500)" mb={2} />
             <Bar w="100%" h="6px" mb={1.5} />
             <Bar w="60%" h="6px" />
@@ -113,7 +113,7 @@ const WebVisual = () => (
       position="absolute" bottom="-28px" right="-14px" w="92px"
       animate={{ y: [0, -10, 0] }} transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
     >
-      <Box borderRadius="16px" border="1px solid" borderColor="border.strong" bg="rgba(13,13,22,0.95)" p={2} boxShadow="0 24px 50px -20px rgba(0,0,0,0.8)">
+      <Box borderRadius="16px" border="1px solid" borderColor="border.strong" bg="bg.glass" p={2} boxShadow="0 24px 50px -20px rgba(0,0,0,0.8)">
         <Box borderRadius="9px" h="110px" bgGradient="linear(160deg, rgba(123,108,255,0.3), rgba(181,123,255,0.18))" p={2}>
           <Bar w="70%" h="6px" mb={2} />
           <Bar w="100%" h="22px" mb={2} grad opacity={0.8} />
@@ -128,7 +128,7 @@ const WebVisual = () => (
 
 const AppVisual = () => {
   const Phone = ({ tint, ...rest }) => (
-    <Box borderRadius="26px" border="1px solid" borderColor="border.strong" bg="rgba(13,13,22,0.95)"
+    <Box borderRadius="26px" border="1px solid" borderColor="border.strong" bg="bg.glass"
       p={2.5} boxShadow="0 30px 60px -24px rgba(0,0,0,0.85)" w="150px" {...rest}>
       <Box w="34px" h="4px" rounded="full" bg="rgba(255,255,255,0.18)" mx="auto" mb={2} />
       <Box borderRadius="18px" h="230px" overflow="hidden" bgGradient={tint} p={3}>
@@ -167,7 +167,7 @@ const UiUxVisual = () => (
           ))}
           <Box h="34px" borderRadius="10px" border="1px dashed" borderColor="border.strong" />
         </VStack>
-        <Box flex="1" borderRadius="12px" border="1px solid" borderColor="border.subtle" bg="rgba(255,255,255,0.02)" p={3} position="relative">
+        <Box flex="1" borderRadius="12px" border="1px solid" borderColor="border.subtle" bg="bg.surface" p={3} position="relative">
           <Bar w="50%" h="9px" mb={3} grad />
           <Bar w="100%" h="6px" mb={2} />
           <Bar w="85%" h="6px" mb={4} />
@@ -196,7 +196,7 @@ const BlockchainVisual = () => {
   return (
     <Box position="relative" maxW="460px" mx="auto" h="320px">
       <Box position="absolute" inset={0} borderRadius="24px" border="1px solid" borderColor="border.subtle"
-        bg="rgba(13,13,22,0.6)" backdropFilter="blur(10px)" overflow="hidden">
+        bg="bg.glass" backdropFilter="blur(10px)" overflow="hidden">
         <Box position="absolute" top="-20%" left="20%" w="240px" h="240px" bg="rgba(123,108,255,0.2)" filter="blur(70px)" />
         <Box as="svg" viewBox="0 0 100 100" width="100%" height="100%" preserveAspectRatio="none">
           {edges.map(([a, b], i) => (
@@ -262,14 +262,14 @@ const MarketingVisual = () => (
     <Frame label="Growth — last 30 days">
       <SimpleGrid columns={3} spacing={3} mb={4}>
         {[{ k: "Traffic", v: "+128%" }, { k: "Leads", v: "+64%" }, { k: "ROAS", v: "4.2×" }].map((m) => (
-          <Box key={m.k} borderRadius="12px" bg="rgba(255,255,255,0.03)" border="1px solid" borderColor="border.subtle" p={3}>
+          <Box key={m.k} borderRadius="12px" bg="bg.surface" border="1px solid" borderColor="border.subtle" p={3}>
             <Text fontSize="11px" color="text.faint" mb={1}>{m.k}</Text>
             <Text fontSize="lg" fontWeight={700} className="gradient-text">{m.v}</Text>
           </Box>
         ))}
       </SimpleGrid>
       {/* rising chart */}
-      <Box position="relative" h="120px" borderRadius="12px" bg="rgba(255,255,255,0.02)" border="1px solid" borderColor="border.subtle" overflow="hidden" p={2}>
+      <Box position="relative" h="120px" borderRadius="12px" bg="bg.surface" border="1px solid" borderColor="border.subtle" overflow="hidden" p={2}>
         <Box as="svg" viewBox="0 0 100 50" width="100%" height="100%" preserveAspectRatio="none">
           <defs>
             <linearGradient id="mkt" x1="0" y1="0" x2="0" y2="1">

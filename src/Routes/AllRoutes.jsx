@@ -18,7 +18,7 @@ const NotFound = lazy(() => import("../Pages/NotFound"));
 const LoadingSpinner = () => (
   <Box minH="70vh" display="grid" placeItems="center">
     <VStack spacing={4}>
-      <Spinner thickness="3px" speed="0.7s" size="xl" color="brand.400" emptyColor="rgba(255,255,255,0.08)" />
+      <Spinner thickness="3px" speed="0.7s" size="xl" color="brand.400" emptyColor="border.subtle" />
       <Text color="text.muted" fontSize="sm">Loading…</Text>
     </VStack>
   </Box>

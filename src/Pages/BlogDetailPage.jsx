@@ -42,7 +42,7 @@ const BlogDetailPage = () => {
   if (loading) {
     return (
       <Box minH="60vh" display="grid" placeItems="center">
-        <Spinner thickness="3px" speed="0.7s" size="xl" color="brand.400" emptyColor="rgba(255,255,255,0.08)" />
+        <Spinner thickness="3px" speed="0.7s" size="xl" color="brand.400" emptyColor="border.subtle" />
       </Box>
     );
   }

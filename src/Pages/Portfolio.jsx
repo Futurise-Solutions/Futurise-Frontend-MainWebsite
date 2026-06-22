@@ -152,7 +152,7 @@ const Portfolio = () => {
 
                       <HStack spacing={2} flexWrap="wrap">
                         <Tag bg="rgba(180,160,255,0.14)" color="accent.solid" borderRadius="full" px={3}>{el.projectType}</Tag>
-                        <Tag bg="rgba(255,255,255,0.06)" color="text.muted" borderRadius="full" px={3}>
+                        <Tag bg="bg.surfaceHover" color="text.muted" borderRadius="full" px={3}>
                           <FiMapPin style={{ marginRight: 6 }} />{el.location}
                         </Tag>
                       </HStack>
@@ -191,7 +191,7 @@ const Portfolio = () => {
                               key={s.label}
                               p={3}
                               borderRadius="12px"
-                              bg="rgba(255,255,255,0.03)"
+                              bg="bg.surface"
                               border="1px solid"
                               borderColor="border.subtle"
                               textAlign="center"
