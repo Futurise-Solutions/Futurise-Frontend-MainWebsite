@@ -1,5 +1,10 @@
 User-agent: *
 Allow: /
+
+# Block admin paths from indexing
 Disallow: /futurise-admin/
+
+# LLM Crawler Guide
+# Reference: https://futurisesolutions.com/llms.txt
 
 Sitemap: https://futurisesolutions.com/sitemap.xml
