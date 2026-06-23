@@ -72,17 +72,17 @@ const BlogsPage = () => {
         "@context": "https://schema.org",
         "@type": "CollectionPage",
         name: "Blog | Futurise Solutions",
-        url: "https://futurisesolutions.com/blog",
+        url: "https://www.futurisesolutions.com/blog",
         description:
           "Insights, deep-dives and engineering notes from Futurise Solutions on AI, SaaS, web and mobile development.",
-        isPartOf: { "@type": "WebSite", name: "Futurise Solutions", url: "https://futurisesolutions.com" },
+        isPartOf: { "@type": "WebSite", name: "Futurise Solutions", url: "https://www.futurisesolutions.com" },
       },
       {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: "https://futurisesolutions.com/" },
-          { "@type": "ListItem", position: 2, name: "Blog", item: "https://futurisesolutions.com/blog" },
+          { "@type": "ListItem", position: 1, name: "Home", item: "https://www.futurisesolutions.com/" },
+          { "@type": "ListItem", position: 2, name: "Blog", item: "https://www.futurisesolutions.com/blog" },
         ],
       },
     ];
@@ -93,7 +93,7 @@ const BlogsPage = () => {
         itemListElement: blogs.slice(0, 20).map((b, i) => ({
           "@type": "ListItem",
           position: i + 1,
-          url: `https://futurisesolutions.com/blog/${b.slug}`,
+          url: `https://www.futurisesolutions.com/blog/${b.slug}`,
           name: b.title,
         })),
       });

@@ -61,7 +61,7 @@ const BlogDetailPage = () => {
   const allBlogs = toBlogArray(blogs);
   const isLatest = allBlogs[0]?.slug === blog.slug;
   const related = allBlogs.filter((b) => b.category === blog.category && b.slug !== blog.slug).slice(0, 3);
-  const shareUrl = typeof window !== "undefined" ? window.location.href : `https://futurisesolutions.com/blog/${blog.slug}`;
+  const shareUrl = typeof window !== "undefined" ? window.location.href : `https://www.futurisesolutions.com/blog/${blog.slug}`;
 
   const copyLink = () => {
     navigator.clipboard?.writeText(shareUrl).then(
@@ -97,7 +97,7 @@ const BlogDetailPage = () => {
           dateModified: blog.updatedAt || blog.createdAt,
           author: { "@type": "Organization", name: "Futurise Solutions" },
           publisher: { "@type": "Organization", name: "Futurise Solutions" },
-          mainEntityOfPage: `https://futurisesolutions.com/blog/${blog.slug}`,
+          mainEntityOfPage: `https://www.futurisesolutions.com/blog/${blog.slug}`,
         }}
       />
 

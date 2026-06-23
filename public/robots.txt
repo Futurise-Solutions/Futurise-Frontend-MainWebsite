@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /futurise-admin/
 
-Sitemap: https://futurisesolutions.com/sitemap.xml
+Sitemap: https://www.futurisesolutions.com/sitemap.xml

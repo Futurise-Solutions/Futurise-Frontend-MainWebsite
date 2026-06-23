@@ -76,9 +76,9 @@ const Portfolio = () => {
           "@context": "https://schema.org",
           "@type": "CollectionPage",
           "name": "Futurise Solutions Portfolio",
-          "url": "https://futurisesolutions.com/portfolio",
+          "url": "https://www.futurisesolutions.com/portfolio",
           "description": "Portfolio of AI, SaaS, web, mobile and blockchain projects built by Futurise Solutions.",
-          "breadcrumb": { "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://futurisesolutions.com/" }, { "@type": "ListItem", "position": 2, "name": "Portfolio", "item": "https://futurisesolutions.com/portfolio" }] },
+          "breadcrumb": { "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.futurisesolutions.com/" }, { "@type": "ListItem", "position": 2, "name": "Portfolio", "item": "https://www.futurisesolutions.com/portfolio" }] },
           "hasPart": [
             { "@type": "CreativeWork", "name": "HOMIES — Property Management SaaS", "description": "Unified SaaS dashboard for real-estate portfolio analytics." },
             { "@type": "CreativeWork", "name": "Marty-QR — AI Review Platform", "description": "AI-powered review management platform for local businesses." },
