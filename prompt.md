@@ -1,39 +1,42 @@
-# Google Search Console Indexing Fix: Redirect Loop Conflict
+# Google Search Console Indexing Fix: DNS & Vercel Configuration
 
 Your pages (like `/about`, `/contact`, `/portfolio`, and `/service/*`) are currently not indexing on Google because of a mismatch between the Vercel domain routing and your React codebase.
 
----
-
-## 1. The Root Cause
-
-- **Vercel Redirect (Server-Side)**: Vercel redirects all traffic to the `www` version:
-  `https://futurisesolutions.com/about` ➔ redirects to ➔ `https://www.futurisesolutions.com/about`
-- **React Canonical (Client-Side)**: Your React code (specifically `Seo.jsx`, sitemaps, and schemas) specifies the `non-www` version as the canonical master copy:
-  `https://www.futurisesolutions.com/about` ➔ canonical points back to ➔ `https://futurisesolutions.com/about`
-
-This causes a conflict where Googlebot is redirected to the `www` version, but then told that the `non-www` version is the main page. Google flags this as a **"Redirect error"** or **"Alternative page with proper canonical tag"** and refuses to index them.
+Your React codebase is configured for the **non-www** domain (`https://futurisesolutions.com`), but Vercel currently redirects all traffic to the `www` version because the root domain has a **"DNS Change Recommended"** warning.
 
 ---
 
-## 2. Steps to Resolve
+## How to Fix This (Without Code Changes)
 
-### Step A: Set Non-WWW as the Primary Domain in Vercel (Recommended)
-This requires zero code changes and aligns the server with your existing sitemaps, schemas, and SEO components.
+To resolve the indexing issue without editing any website code, you need to point your root domain (`futurisesolutions.com`) to Vercel and make it the primary domain.
 
-1. Open the **Vercel Dashboard**.
-2. Navigate to your project settings: **Settings** > **Domains**.
-3. Locate **`futurisesolutions.com`** (without `www`).
-4. Click edit/options and select **Set as Primary**.
-5. Locate **`www.futurisesolutions.com`** (with `www`) and ensure it is configured to redirect to **`futurisesolutions.com`**.
-6. Once configured, go to Google Search Console and click **Re-submit** on your sitemap.
+### Step 1: Update DNS Records at your Domain Registrar (GoDaddy, Namecheap, Route 53, etc.)
+Log in to the dashboard where you bought your domain and update your DNS records:
+
+1. **Delete any existing A records** pointing to other IP addresses for the host `@`.
+2. **Add a new A Record** with the following details:
+   - **Type**: `A`
+   - **Name/Host**: `@` (or leave empty)
+   - **Value/Points to**: `76.76.21.21` (Vercel's official IP address)
+   - **TTL**: Default (or 3600/1 hour)
 
 ---
 
-## 3. Deployment Prompt / Message
-*If someone else is managing your Vercel / DNS panel, copy and paste this message to them to resolve the issue:*
+### Step 2: Configure the Primary Domain in Vercel
+Once the DNS change is active (Vercel will show a **green checkmark** and say **"Valid Configuration"** instead of the yellow warning):
 
-```text
-Hi! We are experiencing a Google indexing issue on futurisesolutions.com. The site currently redirects non-www to www at the DNS/Vercel level, but our React code, schema markup, and sitemaps are all canonicalized to the non-www version. 
+1. Go to your **Vercel Dashboard** > **Project Settings** > **Domains**.
+2. Find **`futurisesolutions.com`** (the non-www version).
+3. Click the **Edit** button next to it.
+4. Select **Set as Primary** (or toggle "Redirect to another domain" off and set as main).
+5. Locate **`www.futurisesolutions.com`** (the www version).
+6. Click **Edit**, select **Redirect to Another Domain**, and set it to redirect to **`futurisesolutions.com`** (using a `308 Permanent Redirect`).
 
-Can you please log into the Vercel Dashboard, go to Settings > Domains, and set 'futurisesolutions.com' (non-www) as the Primary Domain, and configure 'www.futurisesolutions.com' to redirect to it? Thanks!
-```
+---
+
+### Step 3: Re-submit Sitemap to Google
+After Vercel redirects `www` to `non-www` and the root domain is verified:
+1. Go to **Google Search Console**.
+2. Click **Sitemaps** in the left menu.
+3. Submit/Re-submit **`https://futurisesolutions.com/sitemap.xml`**.
+4. Google will now successfully index all 28 canonical pages without redirect errors!
