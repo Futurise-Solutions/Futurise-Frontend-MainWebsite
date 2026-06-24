@@ -234,13 +234,13 @@ const PrivacyPolicy = () => {
           "@context": "https://schema.org",
           "@type": "WebPage",
           "name": "Privacy Policy — Futurise Solutions",
-          "url": "https://futurisesolutions.com/privacy",
+          "url": "https://www.futurisesolutions.com/privacy",
           "description": "Privacy policy detailing how Futurise Solutions handles personal data.",
           "breadcrumb": {
             "@type": "BreadcrumbList",
             "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://futurisesolutions.com/" },
-              { "@type": "ListItem", "position": 2, "name": "Privacy Policy", "item": "https://futurisesolutions.com/privacy" },
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.futurisesolutions.com/" },
+              { "@type": "ListItem", "position": 2, "name": "Privacy Policy", "item": "https://www.futurisesolutions.com/privacy" },
             ],
           },
         }}

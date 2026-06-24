@@ -292,13 +292,13 @@ const TermsConditions = () => {
           "@context": "https://schema.org",
           "@type": "WebPage",
           "name": "Terms & Conditions — Futurise Solutions",
-          "url": "https://futurisesolutions.com/terms",
+          "url": "https://www.futurisesolutions.com/terms",
           "description": "Terms and Conditions governing use of Futurise Solutions website and engagement of services.",
           "breadcrumb": {
             "@type": "BreadcrumbList",
             "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://futurisesolutions.com/" },
-              { "@type": "ListItem", "position": 2, "name": "Terms & Conditions", "item": "https://futurisesolutions.com/terms" },
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.futurisesolutions.com/" },
+              { "@type": "ListItem", "position": 2, "name": "Terms & Conditions", "item": "https://www.futurisesolutions.com/terms" },
             ],
           },
         }}

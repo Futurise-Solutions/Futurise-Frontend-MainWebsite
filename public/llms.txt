@@ -6,12 +6,12 @@
 
 Futurise Solutions offers six core services, end-to-end (strategy, design, engineering, and growth):
 
-- **AI & ML Solutions** — [/service/ai-ml-solutions](https://futurisesolutions.com/service/ai-ml-solutions): Custom AI agents, LLM and RAG integrations, NLP pipelines, and computer vision. We are model-agnostic (OpenAI, Anthropic Claude, Google Gemini, Meta Llama) and build for production, not demos.
-- **Web Development** — [/service/web-development](https://futurisesolutions.com/service/web-development): Custom websites, SaaS platforms, dashboards, and APIs with React, Next.js, Node.js, and GraphQL. SEO-ready, sub-2-second load times, scalable architecture.
-- **App Development** — [/service/app-development](https://futurisesolutions.com/service/app-development): Cross-platform iOS and Android apps with React Native and Expo from a single codebase, with Firebase/Supabase backends, payments, push, and maps.
-- **UI/UX Design** — [/service/ui-ux-design](https://futurisesolutions.com/service/ui-ux-design): UX research, wireframing, high-fidelity Figma UI, interactive prototypes, and design systems (WCAG 2.1) that cut churn and lift conversions.
-- **Blockchain Development** — [/service/blockchain-development](https://futurisesolutions.com/service/blockchain-development): Audited smart contracts, DeFi platforms, MEV bots, and multi-chain dApps across Ethereum, BSC, Base, Arbitrum, Polygon, and Solana.
-- **Digital Marketing** — [/service/digital-marketing](https://futurisesolutions.com/service/digital-marketing): SEO, performance and paid social advertising, conversion rate optimisation (CRO), and analytics — tied to revenue, not vanity metrics.
+- **AI & ML Solutions** — [/service/ai-ml-solutions](https://www.futurisesolutions.com/service/ai-ml-solutions): Custom AI agents, LLM and RAG integrations, NLP pipelines, and computer vision. We are model-agnostic (OpenAI, Anthropic Claude, Google Gemini, Meta Llama) and build for production, not demos.
+- **Web Development** — [/service/web-development](https://www.futurisesolutions.com/service/web-development): Custom websites, SaaS platforms, dashboards, and APIs with React, Next.js, Node.js, and GraphQL. SEO-ready, sub-2-second load times, scalable architecture.
+- **App Development** — [/service/app-development](https://www.futurisesolutions.com/service/app-development): Cross-platform iOS and Android apps with React Native and Expo from a single codebase, with Firebase/Supabase backends, payments, push, and maps.
+- **UI/UX Design** — [/service/ui-ux-design](https://www.futurisesolutions.com/service/ui-ux-design): UX research, wireframing, high-fidelity Figma UI, interactive prototypes, and design systems (WCAG 2.1) that cut churn and lift conversions.
+- **Blockchain Development** — [/service/blockchain-development](https://www.futurisesolutions.com/service/blockchain-development): Audited smart contracts, DeFi platforms, MEV bots, and multi-chain dApps across Ethereum, BSC, Base, Arbitrum, Polygon, and Solana.
+- **Digital Marketing** — [/service/digital-marketing](https://www.futurisesolutions.com/service/digital-marketing): SEO, performance and paid social advertising, conversion rate optimisation (CRO), and analytics — tied to revenue, not vanity metrics.
 
 ## Technologies we use
 
@@ -35,16 +35,15 @@ SaaS, startups, FinTech, healthcare, real estate and PropTech, e-commerce, educa
 
 - Email: business@futurisesolutions.com
 - Phone: +91 76650 13356
-- Book a free strategy call or send a message: [/contact](https://futurisesolutions.com/contact)
+- Book a free strategy call or send a message: [/contact](https://www.futurisesolutions.com/contact)
 
 ## Key pages
 
-- [Home](https://futurisesolutions.com/)
-- [About](https://futurisesolutions.com/about)
-- [Portfolio](https://futurisesolutions.com/portfolio)
-- [Contact](https://futurisesolutions.com/contact)
-- [Case Studies](https://futurisesolutions.com/case-studies)
-- [Blog](https://futurisesolutions.com/blog)
+- [Home](https://www.futurisesolutions.com/)
+- [About](https://www.futurisesolutions.com/about)
+- [Portfolio](https://www.futurisesolutions.com/portfolio)
+- [Contact](https://www.futurisesolutions.com/contact)
+- [Blog](https://www.futurisesolutions.com/blog)
 
 ## Selected work
 
@@ -55,24 +54,12 @@ SaaS, startups, FinTech, healthcare, real estate and PropTech, e-commerce, educa
 - GDT Exchange — crypto perpetuals trading terminal (FinTech / Web3)
 - Platinum Peak — direct hotel booking experience (hospitality)
 
-## Case Studies
-
-Explore our verified client outcomes and process breakdowns:
-- [Case Studies Index](https://futurisesolutions.com/case-studies) — All published case studies.
-- [AI Customer Support Agent](https://futurisesolutions.com/case-studies/ai-support-agent) — Cut support tickets by 68% and deflected 64% of L1 queries for a US SaaS client in 14 weeks.
-- [SaaS Platform Scale](https://futurisesolutions.com/case-studies/saas-platform-scale) — Scaling a B2B SaaS PropTech dashboard to 1,200+ active users and dropping load times to 1.6s.
-- [Real Estate Mobile App](https://futurisesolutions.com/case-studies/real-estate-app) — Cross-platform React Native app with 10K+ downloads and 4.6★ rating.
-- [FinTech Dashboard Redesign](https://futurisesolutions.com/case-studies/fintech-ux-redesign) — Research-driven UX overhaul that increased user retention by 38% and cut time-to-insight to 90s.
-- [DeFi Protocol Launch](https://futurisesolutions.com/case-studies/defi-protocol-launch) — Audited Solidity staking contracts reaching $850K TVL in 90 days.
-- [SaaS SEO Growth](https://futurisesolutions.com/case-studies/saas-seo-growth) — B2B compliance SaaS SEO strategy resulting in +160% organic traffic in 6 months.
-
 ## Articles
 
-- [The Ultimate Tech Guide: Careers & Hiring Strategies for AI, Web Apps, Blockchain, and Marketing](https://futurisesolutions.com/blog/the-ultimate-tech-guide-careers-and-hiring-strategies-for-ai-web-apps-blockchain-and-marketing)
-- [Web Development Services: Fast, Scalable & SEO-Ready Websites and Web Apps](https://futurisesolutions.com/blog/web-development-services-fast-scalable-and-seo-ready-websites-and-web-apps-built-to-convert)
-- [AI & ML Solutions: Custom AI Agents, LLM Integrations, NLP & Computer Vision](https://futurisesolutions.com/blog/ai-and-ml-solutions-custom-ai-agents-llm-integrations-nlp-and-computer-vision-built-for-your-business)
-- [App Development Services: Cross-Platform iOS & Android Apps](https://futurisesolutions.com/blog/app-development-services-build-cross-platform-ios-and-android-apps-that-users-actually-love)
-- [Blockchain Development Services: Smart Contracts, DeFi & Web3](https://futurisesolutions.com/blog/blockchain-development-services-smart-contracts-defi-and-web3-solutions-for-modern-businesses)
-- [Digital Marketing Services: The Data-Driven Strategy That Grows Traffic, Leads & Revenue](https://futurisesolutions.com/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue)
-- [UI/UX Design Services: How Great Design Turns Visitors Into Loyal Customers](https://futurisesolutions.com/blog/uiux-design-services-how-great-design-turns-visitors-into-loyal-customers)
-- [AI & ML Solutions: How Custom AI Agents, LLMs, NLP & Computer Vision Are Transforming Modern Businesses](https://futurisesolutions.com/blog/ai-and-ml-solutions-how-custom-ai-agents-llms-nlp-and-computer-vision-are-transforming-modern-businesses)
+- [Web Development Services: Fast, Scalable & SEO-Ready Websites and Web Apps](https://www.futurisesolutions.com/blog/web-development-services-fast-scalable-and-seo-ready-websites-and-web-apps-built-to-convert)
+- [AI & ML Solutions: Custom AI Agents, LLM Integrations, NLP & Computer Vision](https://www.futurisesolutions.com/blog/ai-and-ml-solutions-custom-ai-agents-llm-integrations-nlp-and-computer-vision-built-for-your-business)
+- [App Development Services: Cross-Platform iOS & Android Apps](https://www.futurisesolutions.com/blog/app-development-services-build-cross-platform-ios-and-android-apps-that-users-actually-love)
+- [Blockchain Development Services: Smart Contracts, DeFi & Web3](https://www.futurisesolutions.com/blog/blockchain-development-services-smart-contracts-defi-and-web3-solutions-for-modern-businesses)
+- [Digital Marketing Services: The Data-Driven Strategy That Grows Traffic, Leads & Revenue](https://www.futurisesolutions.com/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue)
+- [UI/UX Design Services: How Great Design Turns Visitors Into Loyal Customers](https://www.futurisesolutions.com/blog/uiux-design-services-how-great-design-turns-visitors-into-loyal-customers)
+- [AI & ML Solutions: How Custom AI Agents, LLMs, NLP & Computer Vision Are Transforming Modern Businesses](https://www.futurisesolutions.com/blog/ai-and-ml-solutions-how-custom-ai-agents-llms-nlp-and-computer-vision-are-transforming-modern-businesses)
