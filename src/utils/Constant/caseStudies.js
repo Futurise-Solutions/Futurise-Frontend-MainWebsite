@@ -517,7 +517,7 @@ export const caseStudies = {
     industry: "DeFi / Web3",
     location: "USA & UAE",
     duration: "16 weeks",
-    year: "2024",
+    year: "2026",
 
     meta: {
       title: "DeFi Protocol Launch with $850K TVL in 90 Days | Futurise Solutions",
