@@ -2,7 +2,7 @@
 
 Your pages (like `/about`, `/contact`, `/portfolio`, and `/service/*`) are currently not indexing on Google because of a mismatch between the Vercel domain routing and your React codebase.
 
-Your React codebase is configured for the **non-www** domain (`https://futurisesolutions.com`), but Vercel currently redirects all traffic to the `www` version because the root domain has a **"DNS Change Recommended"** warning.
+Your React codebase is configured for the **non-www** domain (`https://www.futurisesolutions.com`), but Vercel currently redirects all traffic to the `www` version because the root domain has a **"DNS Change Recommended"** warning.
 
 ---
 
@@ -38,5 +38,5 @@ Once the DNS change is active (Vercel will show a **green checkmark** and say **
 After Vercel redirects `www` to `non-www` and the root domain is verified:
 1. Go to **Google Search Console**.
 2. Click **Sitemaps** in the left menu.
-3. Submit/Re-submit **`https://futurisesolutions.com/sitemap.xml`**.
+3. Submit/Re-submit **`https://www.futurisesolutions.com/sitemap.xml`**.
 4. Google will now successfully index all 28 canonical pages without redirect errors!
