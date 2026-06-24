@@ -13,6 +13,8 @@ const BlogDetailPage = lazy(() => import("../Pages/BlogDetailPage"));
 const AdminBlogPage = lazy(() => import("../Pages/AdminBlogPage"));
 const PrivacyPolicy = lazy(() => import("../Pages/PrivacyPolicy"));
 const TermsConditions = lazy(() => import("../Pages/TermsConditions"));
+const CaseStudiesPage = lazy(() => import("../Pages/CaseStudiesPage"));
+const CaseStudyDetailPage = lazy(() => import("../Pages/CaseStudyDetailPage"));
 const NotFound = lazy(() => import("../Pages/NotFound"));
 
 const LoadingSpinner = () => (
@@ -35,6 +37,13 @@ const AllRoutes = () => {
         <Route path="/service/:serviceName" element={<ServiceSingalPage />} />
         <Route path="/blog" element={<BlogsPage />} />
         <Route path="/blog/:slug" element={<BlogDetailPage />} />
+        <Route path="/case-studies" element={<CaseStudiesPage />} />
+        <Route path="/case-studies/ai-support-agent" element={<CaseStudyDetailPage slug="ai-support-agent" />} />
+        <Route path="/case-studies/saas-platform-scale" element={<CaseStudyDetailPage slug="saas-platform-scale" />} />
+        <Route path="/case-studies/real-estate-app" element={<CaseStudyDetailPage slug="real-estate-app" />} />
+        <Route path="/case-studies/fintech-ux-redesign" element={<CaseStudyDetailPage slug="fintech-ux-redesign" />} />
+        <Route path="/case-studies/defi-protocol-launch" element={<CaseStudyDetailPage slug="defi-protocol-launch" />} />
+        <Route path="/case-studies/saas-seo-growth" element={<CaseStudyDetailPage slug="saas-seo-growth" />} />
         <Route path="/futurise-admin/blog" element={<AdminBlogPage />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsConditions />} />

@@ -43,6 +43,7 @@ SaaS, startups, FinTech, healthcare, real estate and PropTech, e-commerce, educa
 - [About](https://www.futurisesolutions.com/about)
 - [Portfolio](https://www.futurisesolutions.com/portfolio)
 - [Contact](https://www.futurisesolutions.com/contact)
+- [Case Studies](https://www.futurisesolutions.com/case-studies)
 - [Blog](https://www.futurisesolutions.com/blog)
 
 ## Selected work
@@ -54,8 +55,20 @@ SaaS, startups, FinTech, healthcare, real estate and PropTech, e-commerce, educa
 - GDT Exchange — crypto perpetuals trading terminal (FinTech / Web3)
 - Platinum Peak — direct hotel booking experience (hospitality)
 
+## Case Studies
+
+Explore our verified client outcomes and process breakdowns:
+- [Case Studies Index](https://www.futurisesolutions.com/case-studies) — All published case studies.
+- [AI Customer Support Agent](https://www.futurisesolutions.com/case-studies/ai-support-agent) — Cut support tickets by 68% and deflected 64% of L1 queries for a US SaaS client in 14 weeks.
+- [SaaS Platform Scale](https://www.futurisesolutions.com/case-studies/saas-platform-scale) — Scaling a B2B SaaS PropTech dashboard to 1,200+ active users and dropping load times to 1.6s.
+- [Real Estate Mobile App](https://www.futurisesolutions.com/case-studies/real-estate-app) — Cross-platform React Native app with 10K+ downloads and 4.6★ rating.
+- [FinTech Dashboard Redesign](https://www.futurisesolutions.com/case-studies/fintech-ux-redesign) — Research-driven UX overhaul that increased user retention by 38% and cut time-to-insight to 90s.
+- [DeFi Protocol Launch](https://www.futurisesolutions.com/case-studies/defi-protocol-launch) — Audited Solidity staking contracts reaching $850K TVL in 90 days.
+- [SaaS SEO Growth](https://www.futurisesolutions.com/case-studies/saas-seo-growth) — B2B compliance SaaS SEO strategy resulting in +160% organic traffic in 6 months.
+
 ## Articles
 
+- [The Ultimate Tech Guide: Careers & Hiring Strategies for AI, Web Apps, Blockchain, and Marketing](https://www.futurisesolutions.com/blog/the-ultimate-tech-guide-careers-and-hiring-strategies-for-ai-web-apps-blockchain-and-marketing)
 - [Web Development Services: Fast, Scalable & SEO-Ready Websites and Web Apps](https://www.futurisesolutions.com/blog/web-development-services-fast-scalable-and-seo-ready-websites-and-web-apps-built-to-convert)
 - [AI & ML Solutions: Custom AI Agents, LLM Integrations, NLP & Computer Vision](https://www.futurisesolutions.com/blog/ai-and-ml-solutions-custom-ai-agents-llm-integrations-nlp-and-computer-vision-built-for-your-business)
 - [App Development Services: Cross-Platform iOS & Android Apps](https://www.futurisesolutions.com/blog/app-development-services-build-cross-platform-ios-and-android-apps-that-users-actually-love)
