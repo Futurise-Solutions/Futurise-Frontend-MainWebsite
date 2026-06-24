@@ -53,7 +53,7 @@ export const caseStudies = {
     industry: "SaaS / Customer Support",
     location: "USA",
     duration: "14 weeks",
-    year: "2024",
+    year: "2025",
 
     meta: {
       title: "How We Built an AI Support Agent That Cut Tickets by 68% | Futurise Solutions",
@@ -172,7 +172,7 @@ export const caseStudies = {
     industry: "B2B SaaS / PropTech",
     location: "USA & India",
     duration: "8 months",
-    year: "2024",
+    year: "2025",
 
     meta: {
       title: "From MVP to 1,200 Active Users in 8 Months — SaaS Web Platform | Futurise Solutions",
@@ -287,7 +287,7 @@ export const caseStudies = {
     industry: "Real Estate / PropTech",
     location: "India & USA",
     duration: "20 weeks",
-    year: "2024",
+    year: "2025",
 
     meta: {
       title: "Real Estate App with 10K+ Downloads — Mobile App Case Study | Futurise Solutions",
@@ -402,7 +402,7 @@ export const caseStudies = {
     industry: "FinTech / Wealth Management",
     location: "UK & Australia",
     duration: "10 weeks",
-    year: "2024",
+    year: "2026",
 
     meta: {
       title: "FinTech Dashboard Redesign That Increased Retention by 38% | Futurise Solutions",
@@ -632,7 +632,7 @@ export const caseStudies = {
     industry: "B2B SaaS",
     location: "New Zealand & Australia",
     duration: "6 months",
-    year: "2024",
+    year: "2026",
 
     meta: {
       title: "+160% Organic Traffic in 6 Months — SaaS SEO Case Study | Futurise Solutions",
