@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+Allow: /case-studies
+Allow: /case-studies/*
 
 # Block admin paths from indexing
 Disallow: /futurise-admin/
