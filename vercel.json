@@ -9,6 +9,11 @@
       "source": "/home",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/llms",
+      "destination": "https://www.futurisesolutions.com/llms.txt",
+      "permanent": true
     }
   ],
   "rewrites": [
