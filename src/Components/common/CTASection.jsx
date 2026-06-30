@@ -8,11 +8,11 @@ import Reveal from "./Reveal";
  * Reusable conversion CTA band. Used at the foot of most pages.
  */
 const CTASection = ({
-  eyebrow = "Let’s build together",
-  title = "Have a project in mind?",
-  highlight = "Let’s make it real.",
-  subtitle = "Book a free consultation and we’ll turn your vision into a polished, production-ready digital product.",
-  primaryLabel = "Get a free quote",
+  eyebrow = "Start building today",
+  title = "Got an idea? We'll build your",
+  highlight = "AI-powered product.",
+  subtitle = "Tell us your idea — we'll design, engineer, and launch your AI agent, SaaS platform, or app. Fixed scope. No fluff.",
+  primaryLabel = "Start your project",
   secondaryLabel = "View our work",
   primaryTo = "/contact",
   secondaryTo = "/portfolio",

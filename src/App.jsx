@@ -1,7 +1,7 @@
 import React, { useEffect, lazy, Suspense } from 'react'
 import { useLocation } from 'react-router-dom'
 import AllRoutes from './Routes/AllRoutes'
-import { Footer, Navbar } from './Layout'
+import { Footer, Navbar, AnnouncementBar } from './Layout'
 import { Box } from '@chakra-ui/react'
 import ScrollToTop from './Components/common/ScrollToTop'
 import { PageTransition } from './Components/common'
@@ -29,6 +29,7 @@ const App = () => {
     <BookingProvider>
       <Box id='app' minH="100vh" display="flex" flexDirection="column">
         <ScrollToTop />
+        {!isAdmin && <AnnouncementBar />}
         {!isAdmin && <Navbar />}
         <Box as="main" flex="1">
           <PageTransition>
