@@ -4,119 +4,226 @@ import {
   Text,
   Icon,
   HStack,
+  VStack,
+  Button,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
   ModalBody,
   ModalCloseButton,
-  Spinner,
 } from "@chakra-ui/react";
-import { FiCalendar } from "react-icons/fi";
+import {
+  FiCalendar,
+  FiClock,
+  FiArrowRight,
+  FiCheckCircle,
+} from "react-icons/fi";
+import { motion } from "framer-motion";
 import { useBooking } from "../../context/BookingContext";
 
+const MotionBox = motion(Box);
+
+/**
+ * BookingModal — Premium CTA design (iframe-free)
+ * -----------------------------------------------
+ * The original design embedded calendar.app.google in an <iframe>.
+ * Google sends X-Frame-Options: DENY on that URL, which causes
+ * "refused to connect" on every browser (not just Mac/Safari).
+ *
+ * Fix: open the booking link in a new tab, which works universally.
+ * The modal now serves as a high-converting "pre-click" frame that
+ * describes the call and gives the user confidence before they book.
+ */
+
+const BOOKING_URL = "https://calendar.app.google/oZ5ENgnwaCWAchAv6";
+
+const BENEFITS = [
+  "Discuss your project goals & tech requirements",
+  "Get a recommended tech stack for your idea",
+  "Receive a clear build roadmap & timeline estimate",
+  "No sales pitch — just honest, expert advice",
+];
+
 const BookingModal = () => {
-  const { isOpen, onClose, iframeLoaded, setIframeLoaded } = useBooking();
+  const { isOpen, onClose } = useBooking();
+
+  const handleBook = () => {
+    window.open(BOOKING_URL, "_blank", "noopener,noreferrer");
+    onClose();
+  };
 
   return (
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      size="5xl"
+      size="lg"
       isCentered
-      scrollBehavior="inside"
+      motionPreset="slideInBottom"
       trapFocus={false}
     >
-      <ModalOverlay backdropFilter="blur(8px)" bg="rgba(0,0,0,0.6)" />
+      <ModalOverlay backdropFilter="blur(10px)" bg="rgba(0,0,0,0.65)" />
       <ModalContent
-        bg="bg.card"
+        bg="#0d0d16"
         border="1px solid"
-        borderColor="border.subtle"
-        borderRadius="20px"
+        borderColor="rgba(180,160,255,0.2)"
+        borderRadius="24px"
         overflow="hidden"
         mx={4}
+        position="relative"
       >
+        {/* Background glow orbs */}
+        <Box
+          position="absolute"
+          top="-60px"
+          right="-40px"
+          w="200px"
+          h="200px"
+          bg="rgba(123,108,255,0.12)"
+          filter="blur(60px)"
+          borderRadius="full"
+          pointerEvents="none"
+        />
+        <Box
+          position="absolute"
+          bottom="-40px"
+          left="-30px"
+          w="160px"
+          h="160px"
+          bg="rgba(181,123,255,0.1)"
+          filter="blur(50px)"
+          borderRadius="full"
+          pointerEvents="none"
+        />
+
+        {/* Header */}
         <ModalHeader
           borderBottom="1px solid"
-          borderColor="border.subtle"
+          borderColor="rgba(255,255,255,0.07)"
           pb={4}
           pr={{ base: "48px", md: "6" }}
+          position="relative"
         >
           <HStack spacing={3}>
             <Flex
-              w="36px"
-              h="36px"
-              borderRadius="10px"
+              w="40px"
+              h="40px"
+              borderRadius="12px"
               align="center"
               justify="center"
-              bgGradient="linear(135deg, rgba(123,108,255,0.3), rgba(181,123,255,0.3))"
+              bgGradient="linear(135deg, rgba(123,108,255,0.35), rgba(181,123,255,0.35))"
               border="1px solid"
-              borderColor="rgba(180,160,255,0.3)"
+              borderColor="rgba(180,160,255,0.35)"
             >
-              <Icon as={FiCalendar} color="accent.solid" boxSize={4} />
+              <Icon as={FiCalendar} color="accent.solid" boxSize={5} />
             </Flex>
             <Box>
-              <Text fontSize="md" fontWeight={700}>
-                Book a free strategy call
+              <Text fontSize="md" fontWeight={700} color="text.primary">
+                Book a Free Strategy Call
               </Text>
-              <Text fontSize="xs" color="text.faint" fontWeight={400}>
-                45 minutes · Futurise Solutions
-              </Text>
+              <HStack spacing={1.5}>
+                <Icon as={FiClock} boxSize={3} color="text.faint" />
+                <Text fontSize="xs" color="text.faint" fontWeight={400}>
+                  45 minutes · Futurise Solutions
+                </Text>
+              </HStack>
             </Box>
           </HStack>
         </ModalHeader>
         <ModalCloseButton top={4} right={4} color="text.muted" />
-        <ModalBody p={0}>
-          <Box
-            px={5}
-            py={4}
-            borderBottom="1px solid"
-            borderColor="border.subtle"
-          >
-            <Text fontSize="sm" color="text.muted" lineHeight={1.75}>
-              {
-                "Book a free 45-minute strategy call with the Futurise Solutions team. We'll discuss your project goals, recommend the right tech stack, and give you a clear build roadmap — whether it's an AI agent, SaaS platform, web app, or mobile app. No sales pitch. Just a focused conversation about your idea."
-              }
-            </Text>
-          </Box>
 
-          <Box position="relative" h={{ base: "480px", md: "580px" }}>
-            {!iframeLoaded && (
-              <Flex
-                position="absolute"
-                inset={0}
-                align="center"
-                justify="center"
-                direction="column"
-                gap={3}
-                bg="bg.card"
-                zIndex={1}
-              >
-                <Spinner
-                  color="accent.solid"
-                  size="xl"
-                  thickness="3px"
-                  speed="0.8s"
-                />
-                <Text fontSize="sm" color="text.faint">
-                  Loading calendar…
-                </Text>
-              </Flex>
-            )}
+        {/* Body */}
+        <ModalBody py={6} px={6} position="relative">
+          <VStack spacing={6} align="stretch">
+            {/* Description */}
+            <Text fontSize="sm" color="text.muted" lineHeight={1.8}>
+              Talk to our experts about your project. We'll give you a clear
+              tech stack recommendation and build roadmap —{" "}
+              <Box as="span" color="accent.solid" fontWeight={600}>
+                completely free, no sales pitch.
+              </Box>
+            </Text>
+
+            {/* What to expect */}
             <Box
-              as="iframe"
-              sx={{
-                backgroundColor: "#fff",
-                display: "block",
-              }}
-              src="https://calendar.app.google/oZ5ENgnwaCWAchAv6"
-              w="full"
-              h="full"
-              border="none"
-              title="Book a strategy call with Futurise Solutions"
-              onLoad={() => setIframeLoaded(true)}
-            />
-          </Box>
+              p={4}
+              borderRadius="16px"
+              bg="rgba(123,108,255,0.07)"
+              border="1px solid"
+              borderColor="rgba(180,160,255,0.15)"
+            >
+              <Text
+                fontSize="11px"
+                fontWeight={700}
+                letterSpacing="0.1em"
+                textTransform="uppercase"
+                color="accent.solid"
+                mb={3}
+              >
+                What You'll Get
+              </Text>
+              <VStack spacing={2.5} align="stretch">
+                {BENEFITS.map((b) => (
+                  <HStack key={b} spacing={2.5} align="flex-start">
+                    <Icon
+                      as={FiCheckCircle}
+                      color="accent.solid"
+                      boxSize={4}
+                      mt="1px"
+                      flexShrink={0}
+                    />
+                    <Text fontSize="13px" color="text.muted" lineHeight={1.6}>
+                      {b}
+                    </Text>
+                  </HStack>
+                ))}
+              </VStack>
+            </Box>
+
+            {/* CTA */}
+            <MotionBox
+              position="relative"
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.99 }}
+            >
+              {/* Glow behind button */}
+              <Box
+                position="absolute"
+                inset="-4px"
+                borderRadius="full"
+                bgGradient="linear(135deg, brand.500, violet.500)"
+                filter="blur(14px)"
+                opacity={0.4}
+                pointerEvents="none"
+              />
+              <Button
+                w="full"
+                size="lg"
+                variant="gradient"
+                rightIcon={<FiArrowRight />}
+                onClick={handleBook}
+                position="relative"
+                fontSize="15px"
+                py={6}
+                sx={{
+                  "& svg": { transition: "transform .25s" },
+                  _hover: { "& svg": { transform: "translateX(5px)" } },
+                }}
+              >
+                Open Booking Calendar
+              </Button>
+            </MotionBox>
+
+            {/* Trust signal */}
+            <Text
+              textAlign="center"
+              fontSize="12px"
+              color="text.faint"
+              lineHeight={1.6}
+            >
+              Opens Google Calendar · Secure · Free · No commitment
+            </Text>
+          </VStack>
         </ModalBody>
       </ModalContent>
     </Modal>

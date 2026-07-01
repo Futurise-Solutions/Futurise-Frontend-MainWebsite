@@ -182,4 +182,24 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- New blog posts — 2026-06-30 -->
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/unlocking-dubais-ai-future-how-uae-businesses-are-implementing-autonomous-ai-agents-and-web3-platforms-under-the-national-ai-strategy-2031</loc>
+    <lastmod>2026-06-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/scaling-kiwi-startups-why-offshore-software-development-fails-and-how-custom-ai-and-saas-integrations-xero-hubspot-drive-nz-growth</loc>
+    <lastmod>2026-06-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/how-to-build-a-custom-ai-agent-for-your-business-the-complete-2026-roi-and-tech-stack-guide-for-us-and-canadian-startups</loc>
+    <lastmod>2026-06-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
 </urlset>
