@@ -63,6 +63,37 @@ const BlogDetailPage = () => {
   const related = allBlogs.filter((b) => b.category === blog.category && b.slug !== blog.slug).slice(0, 3);
   const shareUrl = typeof window !== "undefined" ? window.location.href : `https://www.futurisesolutions.com/blog/${blog.slug}`;
 
+  // Parse legacy space-separated or comma-separated tags into a clean array
+  const parsedTags = (() => {
+    if (!blog.tags || !Array.isArray(blog.tags)) return [];
+    if (blog.tags.length === 1 && typeof blog.tags[0] === "string") {
+      const single = blog.tags[0].trim();
+      if (single.includes(",")) {
+        return single.split(",").map(t => t.trim()).filter(Boolean);
+      }
+      if (single.split(/\s+/).length > 3) {
+        return single.split(/\s+/).map(t => t.trim()).filter(Boolean);
+      }
+    }
+    return blog.tags.flatMap(t => typeof t === "string" ? t.split(",").map(x => x.trim()) : t).filter(Boolean);
+  })();
+
+  // Parse legacy space-separated or comma-separated keywords into a clean array
+  const parsedKeywords = (() => {
+    const rawKeywords = blog.meta?.metaKeywords || blog.tags || [];
+    const keywords = Array.isArray(rawKeywords) ? rawKeywords : [rawKeywords];
+    if (keywords.length === 1 && typeof keywords[0] === "string") {
+      const single = keywords[0].trim();
+      if (single.includes(",")) {
+        return single.split(",").map(t => t.trim()).filter(Boolean);
+      }
+      if (single.split(/\s+/).length > 3) {
+        return single.split(/\s+/).map(t => t.trim()).filter(Boolean);
+      }
+    }
+    return keywords.flatMap(t => typeof t === "string" ? t.split(",").map(x => x.trim()) : t).filter(Boolean);
+  })();
+
   const copyLink = () => {
     navigator.clipboard?.writeText(shareUrl).then(
       () => toast({ title: "Link copied!", status: "success", duration: 2000, position: "top" }),
@@ -82,7 +113,7 @@ const BlogDetailPage = () => {
         path={`/blog/${blog.slug}`}
         image={mediaUrl(blog.featuredImage)}
         type={blog.meta?.ogType || "article"}
-        keywords={(blog.meta?.metaKeywords || blog.tags || []).join(", ")}
+        keywords={parsedKeywords.join(", ")}
         noindex={blog.meta?.robots ? /noindex/i.test(blog.meta.robots) : false}
         publishedTime={blog.createdAt}
         modifiedTime={blog.updatedAt || blog.createdAt}
@@ -135,9 +166,9 @@ const BlogDetailPage = () => {
           <HStack spacing={2}><Icon as={FiClock} /><Text>{readTime(blog.content)} min read</Text></HStack>
           <Text>By Futurise Solutions</Text>
         </HStack>
-        {blog.tags?.length > 0 && (
+        {parsedTags.length > 0 && (
           <HStack spacing={2} flexWrap="wrap" mb={2}>
-            {blog.tags.map((t) => (
+            {parsedTags.map((t) => (
               <Tag key={t} size="sm" bg="rgba(180,160,255,0.12)" color="accent.solid" borderRadius="full" px={3}>#{t}</Tag>
             ))}
           </HStack>

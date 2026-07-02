@@ -29,21 +29,49 @@ const EMPTY_FORM = {
 };
 
 /* ---------- Tag input ---------- */
-const TagInput = ({ value = [], onChange, placeholder = "Type and press Enter" }) => {
+const TagInput = ({ value = [], onChange, placeholder = "Type, use commas, or press Enter" }) => {
   const [text, setText] = useState("");
-  const add = () => {
-    const t = text.trim();
-    if (t && !value.includes(t)) onChange([...value, t]);
+
+  const add = (inputText) => {
+    const rawText = typeof inputText === "string" ? inputText : text;
+    const parts = rawText
+      .split(",")
+      .map((p) => p.trim())
+      .filter((p) => p && !value.includes(p));
+
+    if (parts.length > 0) {
+      onChange([...value, ...parts]);
+    }
     setText("");
   };
+
+  const handleChange = (e) => {
+    const val = e.target.value;
+    if (val.includes(",")) {
+      const parts = val.split(",");
+      const toAdd = parts.slice(0, -1).map((p) => p.trim()).filter((p) => p && !value.includes(p));
+      const remaining = parts[parts.length - 1];
+      if (toAdd.length > 0) {
+        onChange([...value, ...toAdd]);
+      }
+      setText(remaining);
+    } else {
+      setText(val);
+    }
+  };
+
   return (
     <Box>
       <Input
         value={text}
-        onChange={(e) => setText(e.target.value)}
+        onChange={handleChange}
         onKeyDown={(e) => {
-          if (e.key === "Enter") { e.preventDefault(); add(); }
+          if (e.key === "Enter") {
+            e.preventDefault();
+            add();
+          }
         }}
+        onBlur={() => add()}
         placeholder={placeholder}
         bg="rgba(255,255,255,0.05)"
         borderColor="border.subtle"
