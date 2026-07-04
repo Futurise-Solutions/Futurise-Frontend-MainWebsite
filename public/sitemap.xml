@@ -217,4 +217,27 @@
     <priority>0.85</priority>
   </url>
 
+  <!-- New blog posts — 2026-07-03 -->
+<url>
+    <loc>https://www.futurisesolutions.com/blog/ai-automation-for-small-businesses-in-new-zealand-the-complete-2026-growth-guide</loc>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/custom-software-development-cost-guide-2026-pricing-timeline-and-key-factors</loc>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- New blog posts — 2026-07-04 -->
+ <url>
+    <loc>https://www.futurisesolutions.com/blog/saas-development-cost-guide-2026-pricing-timeline-and-budget-breakdown</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
 </urlset>
