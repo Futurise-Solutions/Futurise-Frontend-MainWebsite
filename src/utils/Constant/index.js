@@ -5,6 +5,7 @@ import {
   postIconHover, qualityIconHover, timeIconHover, webDevHover,
   propertyDashboard1, propertyDashboard2, realState1, realState2, realState3,
   marty1, marty2, marty3, crypto1, crypto2, jewel1, jewel2, jewel3, hotel1, hotel2, hotel3,
+  infinityBay1, infinityBay2, infinityBay3, infinityBay4,
   logoHomies, logoMarty, logoDavidTishbi, logoEstate, logoGdt, logoPlatinumPeak,
 } from "../../assests";
 import {
@@ -100,6 +101,26 @@ export const Projects = [
   {
     featured: true,
     img: [
+      { src: infinityBay1, alt: "Infinity Bay Trading homepage hero — a Dubai, UAE one-stop FMCG, HORECA and industrial supply partner, rebuilt on Astro for fast loading" },
+      { src: infinityBay2, alt: "Infinity Bay Trading delivery truck carrying FMCG, kitchenware and industrial products — B2B wholesale distribution across Dubai and the UAE" },
+      { src: infinityBay3, alt: "Infinity Bay Trading product categories — coffee, beverages, confectionery, baby nutrition, spices, personal care and electronics for UAE businesses" },
+      { src: infinityBay4, alt: "Infinity Bay Trading footer with product categories, Dubai head-office contact details and 'Designed & Developed by Futurise Solutions'" },
+    ],
+    location: "Dubai, UAE",
+    projectType: "Wholesale Trading · Web Rebuild & SEO",
+    Heading: "Infinity Bay Trading — B2B Supply Website, Rebuilt for Speed & SEO",
+    aboutProject:
+      "A trusted Dubai-based supply partner covering FMCG, HORECA and industrial goods. We rebuilt their slow WordPress site as a fast, SEO-first website on Astro — with AEO/GEO-optimized content, a brand blog, and full Google Search Console indexing so buyers across the UAE can find them.",
+    problem:
+      "Their previous WordPress site loaded slowly, ranked poorly on Google, and had weak on-page SEO — costing Infinity Bay visibility and qualified B2B enquiries in a competitive Dubai and UAE market.",
+    solution:
+      "We rebuilt the site from the ground up on Astro for near-instant loads and smooth performance, restructured it around SEO/AEO/GEO-optimized, product-led content, launched an on-brand blog, and set up Google Search Console to get every page indexed and discoverable.",
+    tags: ["Web Development", "SEO", "Astro", "WordPress Migration", "AEO", "GEO", "Dubai", "UAE", "B2B Trading"],
+    clentName: "Infinity Bay Trading",
+  },
+  {
+    featured: true,
+    img: [
       { src: propertyDashboard1, alt: "HOMIES property management dashboard showing income, expenses, and unit analytics for a real-estate portfolio in the USA and India" },
       { src: propertyDashboard2, alt: "HOMIES dashboard detail view with property performance charts and recent transactions" },
     ],
@@ -117,6 +138,7 @@ export const Projects = [
       { value: "+45%", label: "Admin Time Saved" },
       { value: "98%", label: "Data Accuracy" },
     ],
+    tags: ["PropTech", "SaaS", "Analytics Dashboard", "React", "Real Estate"],
     clentName: "HOMIES PropTech",
   },
   {
@@ -140,6 +162,7 @@ export const Projects = [
       { value: "+89%", label: "Google Rating Lift" },
       { value: "+55%", label: "New Customer Conversions" },
     ],
+    tags: ["SaaS", "AI", "Review Management", "QR Code", "Online Reputation"],
     clentName: "Marty-QR",
   },
   {
@@ -163,6 +186,7 @@ export const Projects = [
       { value: "+48%", label: "Direct Bookings" },
       { value: "-38%", label: "Bounce Rate" },
     ],
+    tags: ["E-commerce", "Luxury Retail", "Jewelry", "Conversion Optimization", "Web Design"],
     clentName: "David Tishbi Jewelry",
   },
   {
@@ -186,6 +210,7 @@ export const Projects = [
       { value: "+41%", label: "Lead Conversion" },
       { value: "3x", label: "Page Speed Score" },
     ],
+    tags: ["Real Estate", "Web Platform", "Property Search", "SEO", "Lead Generation"],
     clentName: "Estate Realty",
   },
   {
@@ -207,6 +232,7 @@ export const Projects = [
       { value: "+52%", label: "User Retention" },
       { value: "-28%", label: "Order Error Rate" },
     ],
+    tags: ["FinTech", "Web3", "Crypto Exchange", "Trading Terminal", "Smart Contracts"],
     clentName: "GDT Exchange",
   },
   {
@@ -229,6 +255,7 @@ export const Projects = [
       { value: "+61%", label: "Conversion Rate" },
       { value: "-42%", label: "OTA Dependency" },
     ],
+    tags: ["Hospitality", "Hotel Booking", "Direct Booking", "Web Design", "CRO"],
     clentName: "Platinum Peak Hotels",
   },
 ];
