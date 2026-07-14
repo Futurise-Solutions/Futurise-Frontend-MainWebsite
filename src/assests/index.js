@@ -56,3 +56,8 @@ export { default as jewel3 } from "./Project Images/jewel3.webp";
 export { default as hotel1 } from "./Project Images/hotelBooking1.webp";
 export { default as hotel2 } from "./Project Images/hotelBooking2.webp";
 export { default as hotel3 } from "./Project Images/hotelBooking3.webp";
+export { default as infinityBay1 } from "./Project Images/infinitybay.webp";
+export { default as infinityBay2 } from "./Project Images/infinitybay2.webp";
+// NOTE: source filename is misspelled "infiity" (missing an "n"); the export name is correct.
+export { default as infinityBay3 } from "./Project Images/infiitybay3.webp";
+export { default as infinityBay4 } from "./Project Images/infinitybay4.webp";
