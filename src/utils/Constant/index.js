@@ -72,6 +72,13 @@ export const companyStats = [
 // **************** TESTIMONIALS (sample) ****************
 export const testimonials = [
   {
+    name: "Abbas Kagzi",
+    title: "Founder, Infinity Bay Trading",
+    avatar: "",
+    review:
+      "We came to Futurise with a slow WordPress site that barely showed up on Google. They rebuilt it on Astro — it loads instantly now, feels far smoother, and with the new SEO content and blog we're finally getting found by buyers across the UAE. Professional team, clear communication, handled everything from design to Google Search Console.",
+  },
+  {
     name: "John Carter",
     title: "CEO, Northwind Media",
     avatar: "https://i.pravatar.cc/150?img=12",
