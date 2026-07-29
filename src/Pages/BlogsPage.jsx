@@ -129,7 +129,7 @@ const BlogsPage = () => {
 
       {/* Sticky category filter */}
       {!loading && categories.length > 0 && (
-        <Box position="sticky" top="64px" zIndex={10} bg="rgba(8,8,13,0.85)" backdropFilter="blur(16px)" borderBottom="1px solid" borderColor="border.subtle">
+        <Box position="sticky" top="62px" zIndex={10} bg="rgba(8,8,13,0.85)" backdropFilter="blur(16px)" borderBottom="1px solid" borderColor="border.subtle">
           <Container maxW="1200px" px={{ base: 5, md: 8 }} py={3}>
             <CategoryFilter categories={categories} active={active} onChange={setActive} />
           </Container>

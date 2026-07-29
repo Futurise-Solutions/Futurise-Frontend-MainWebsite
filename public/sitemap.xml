@@ -125,7 +125,7 @@
   <!-- Blog listing -->
   <url>
     <loc>https://www.futurisesolutions.com/blog</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -274,6 +274,208 @@
   <url>
     <loc>https://www.futurisesolutions.com/blog/seo-for-ai-overviews-2026-how-to-rank-when-google-rewrites-your-content</loc>
     <lastmod>2026-07-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- New blog posts — 2026-07-16 -->
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/ai-agent-development-cost-2026-a-global-price-comparison-for-custom-ai-solutions</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/ai-agent-development-cost-in-new-zealand-2026-pricing-roi-and-implementation-guide</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/custom-ai-agent-development-cost-uk-2026-pricing-roi-and-what-uk-businesses-pay</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/how-to-build-a-custom-ai-agent-for-customer-support-in-2026-no-code-and-low-code-guide</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/how-to-build-an-autonomous-ai-agent-for-business-automation-in-2026-step-by-step-guide</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- New blog posts — 2026-07-17 -->
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/how-to-build-a-custom-ai-agent-for-lead-generation-in-2026-no-code-and-low-code-guide</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/how-to-build-a-vibe-coding-ai-agent-for-rapid-prototyping-in-2026-no-code-and-low-code-guide</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- New blog posts — 2026-07-19 -->
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/how-to-build-a-custom-ai-agent-for-data-analysis-and-reporting-in-2026-no-code-and-low-code-guide</loc>
+    <lastmod>2026-07-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- New blog posts — 2026-07-20 -->
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/beyond-ai-overviews-the-2026-seo-strategy-for-dominating-niche-serps-and-driving-conversions</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/why-your-ai-powered-website-isnt-converting-leads-and-how-to-fix-it-in-2026</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- New blog posts — 2026-07-21 -->
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/beyond-google-the-2026-seo-strategy-for-dominating-tiktok-youtube-and-niche-ai-search</loc>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/real-world-asset-tokenization-rwa-2026-the-trillion-dollar-opportunity-for-businesses</loc>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- New blog posts — 2026-07-22 -->
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/why-googles-e-e-a-t-algorithm-update-is-killing-your-website-traffic-in-2026</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/why-your-2026-digital-marketing-strategy-is-failing-and-how-to-fix-it-with-ai-and-hyper-personalization</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- New blog posts — 2026-07-23 -->
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/the-dark-social-seo-strategy-for-2026-how-to-track-and-optimize-unattributed-conversions</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/your-2026-digital-marketing-budget-is-wasted-heres-how-to-reallocate-for-ai-and-hyper-personalization-roi</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- New blog posts — 2026-07-24 -->
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/how-to-build-a-hyper-personalized-ai-marketing-agent-in-2026-no-code-and-low-code-guide</loc>
+    <lastmod>2026-07-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/your-2026-marketing-funnel-is-leaking-how-to-plug-the-gaps-with-predictive-ai-and-behavioral-economics</loc>
+    <lastmod>2026-07-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- New blog posts — 2026-07-25 -->
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/the-ai-paradox-why-your-business-is-investing-in-ai-but-not-seeing-roi-and-how-to-fix-it-in-2026</loc>
+    <lastmod>2026-07-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/the-innovation-debt-crisis-why-your-business-cant-adapt-fast-enough-in-2026-and-how-to-fix-it</loc>
+    <lastmod>2026-07-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- New blog posts — 2026-07-26 -->
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/the-ai-hallucination-trap-how-to-build-trustworthy-ai-agents-in-2026-rag-and-verification-strategies</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/the-data-silo-trap-why-your-ai-agents-cant-talk-to-each-other-and-how-to-build-a-unified-data-layer-in-2026</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- New blog posts — 2026-07-27 -->
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/beyond-google-ads-the-2026-ai-powered-strategy-for-niche-platform-advertising-and-customer-acquisition</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/the-ai-adoption-gap-why-your-business-isnt-using-ai-effectively-and-how-to-bridge-it-in-2026</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- New blog posts — 2026-07-28 -->
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/the-ai-ethics-gap-why-your-business-risks-reputation-and-regulation-and-how-to-build-responsible-ai-in-2026</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/the-ai-integration-nightmare-why-your-enterprise-ai-projects-fail-and-how-to-build-a-unified-ai-ecosystem-in-2026</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- New blog posts — 2026-07-29 -->
+  <url>
+    <loc>https://www.futurisesolutions.com/blog/the-ai-trust-deficit-why-your-customers-dont-trust-your-ai-and-how-to-build-transparent-ai-in-2026</loc>
+    <lastmod>2026-07-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
