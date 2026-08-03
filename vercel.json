@@ -1,38 +1,45 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
 
-  "//": [
-    "Routing order on Vercel is: redirects -> filesystem -> rewrites. Every route is",
-    "prerendered to its own folder by prerender.js, so the filesystem answers real URLs",
-    "and the rewrites below only fire for paths with no file behind them.",
-    "",
-    "The previous catch-all rewrite ('/(.*)' -> '/index.html') meant EVERY unknown URL",
-    "returned HTTP 200 with the SPA shell. Google treats that as a soft 404: crawl budget",
-    "is spent on URLs that do not exist, and they inflate the not-indexed count. Dropping",
-    "it lets unmatched paths fall through to 404.html with a real 404 status.",
-    "",
-    "/blog/:slug keeps an explicit rewrite because posts live in the CMS: a post published",
-    "after the last build has no prerendered file yet, and must still open in the SPA",
-    "rather than 404. Crawlers never reach this path - middleware.js renders those",
-    "server-side before the filesystem is consulted."
-  ],
-
   "trailingSlash": false,
 
   "redirects": [
     {
       "source": "/(.*)",
-      "has": [{ "type": "host", "value": "futurisesolutions.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "futurisesolutions.com"
+        }
+      ],
       "destination": "https://www.futurisesolutions.com/$1",
       "permanent": true
     },
-    { "source": "/About", "destination": "/about", "permanent": true },
-    { "source": "/home", "destination": "/", "permanent": true },
-    { "source": "/llms", "destination": "/llms.txt", "permanent": true }
+    {
+      "source": "/About",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/llms",
+      "destination": "/llms.txt",
+      "permanent": true
+    }
   ],
 
   "rewrites": [
-    { "source": "/blog/:slug", "destination": "/index.html" },
-    { "source": "/futurise-admin/:path*", "destination": "/index.html" }
+    {
+      "source": "/blog/:slug",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/futurise-admin/:path*",
+      "destination": "/index.html"
+    }
   ]
 }
