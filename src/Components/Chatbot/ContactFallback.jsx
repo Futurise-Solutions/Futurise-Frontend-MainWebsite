@@ -3,6 +3,8 @@ import { Link as RouterLink } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
 import { FiCalendar, FiArrowRight } from "react-icons/fi";
 import { useBooking } from "../../context/BookingContext";
+import { whatsappLink } from "../../utils/Constant";
+import { trackEvent, EVENTS } from "../../utils/analytics";
 
 /**
  * Last-resort answer: shown when both the AI and the keyword matcher fail to
@@ -26,9 +28,10 @@ const ContactFallback = () => {
       <VStack spacing={2} align="stretch">
         <Button
           as="a"
-          href="https://wa.me/917665013356"
+          href={whatsappLink()}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => trackEvent(EVENTS.WHATSAPP_CLICK, { location: "chatbot-fallback" })}
           size="sm"
           variant="outlineGlow"
           leftIcon={<FaWhatsapp />}
@@ -39,7 +42,7 @@ const ContactFallback = () => {
           size="sm"
           variant="gradient"
           leftIcon={<FiCalendar />}
-          onClick={openBooking}
+          onClick={() => openBooking?.("chatbot-fallback")}
           isDisabled={!openBooking}
         >
           Book a Free Call

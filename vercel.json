@@ -1,5 +1,20 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+
+  "trailingSlash": false,
+
   "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "futurisesolutions.com"
+        }
+      ],
+      "destination": "https://www.futurisesolutions.com/$1",
+      "permanent": true
+    },
     {
       "source": "/About",
       "destination": "/about",
@@ -12,11 +27,19 @@
     },
     {
       "source": "/llms",
-      "destination": "https://www.futurisesolutions.com/llms.txt",
+      "destination": "/llms.txt",
       "permanent": true
     }
   ],
+
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/blog/:slug",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/futurise-admin/:path*",
+      "destination": "/index.html"
+    }
   ]
 }

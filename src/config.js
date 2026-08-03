@@ -1,10 +1,24 @@
 // Central runtime config.
-// API base URL — override per-environment with VITE_API_BASE_URL in a .env file.
-export const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || "http://api.futurisesolutions.com:5000";
+//
+// IMPORTANT: every VITE_* value is inlined into the client bundle at build time and is
+// therefore public. Treat anything here as readable by anyone who opens devtools. Real
+// secrets belong on the API server, never in this file.
 
-// Admin dashboard password (gate only — not real auth). Override with VITE_ADMIN_PASSWORD.
-export const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || "12345678";
+// API base URL — set VITE_API_BASE_URL per environment.
+//
+// The fallback is https and portless to match the production API. It previously read
+// "http://api.futurisesolutions.com:5000", which an https page cannot call at all
+// (mixed content), so a deploy that forgot the env var broke every blog page silently
+// rather than loudly.
+export const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "https://api.futurisesolutions.com";
+
+// The admin password is deliberately NOT here any more. It used to be
+// `import.meta.env.VITE_ADMIN_PASSWORD`, which Vite inlines into public JavaScript —
+// the password was readable in devtools, so the gate protected nothing.
+//
+// It now lives in the server-only `ADMIN_PASSWORD` variable and is validated by
+// /api/admin-login. See api/_lib/adminSession.js.
 
 const join = (base, path) =>
   `${base}${String(path).startsWith("/") ? "" : "/"}${path}`;

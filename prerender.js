@@ -1,6 +1,24 @@
+// Post-build prerenderer.
+//
+// The app is a client-rendered SPA, so `vite build` emits a single index.html whose
+// body is an empty <div id="root"></div>. Search crawlers have to defer JavaScript
+// rendering to a second pass, and AI crawlers (GPTBot, ClaudeBot, PerplexityBot,
+// Google-Extended, CCBot …) never execute JavaScript at all — so they see nothing.
+//
+// This script loads every static route in headless Chrome, waits for React to finish,
+// and writes the fully rendered DOM — headings, body copy, and the per-page JSON-LD
+// that Seo.jsx injects at runtime — into dist/<route>/index.html. Crawlers then get
+// real content in the raw HTML; browsers still boot React over it as before.
+//
+// Blog articles are deliberately NOT rendered here: they live in the CMS and are
+// server-rendered per request by middleware.js, so they only need their meta tags
+// baked in for the (rare) non-crawler direct hit.
+
 import fs from 'fs';
 import path from 'path';
+import http from 'http';
 import { fileURLToPath } from 'url';
+import puppeteer from 'puppeteer';
 import { caseStudies } from './src/utils/Constant/caseStudies.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -20,19 +38,428 @@ if (fs.existsSync(envPath)) {
 }
 
 const API_BASE_URL = process.env.VITE_API_BASE_URL || 'https://api.futurisesolutions.com';
+const SITE_URL = 'https://www.futurisesolutions.com';
 const DIST_PATH = path.join(__dirname, 'dist');
 const INDEX_HTML_PATH = path.join(DIST_PATH, 'index.html');
+const PORT = Number(process.env.PRERENDER_PORT) || 41731;
+
+// The intro loader on the home page runs for 1400ms; CountUp stats animate for 2200ms.
+// These waits keep the loader overlay and half-counted "0+" stats out of the output.
+const LOADER_MS = 1600;
+const ANIMATION_MS = 2600;
+
+/*
+ * Hub pages whose cards come from the CMS at build time.
+ *
+ * When that fetch fails the page still renders its heading, intro and footer, so a
+ * word-count check passes while the page carries zero links to its children. That has
+ * already happened once: /blog shipped with 492 words and no links to any of its 46
+ * posts, and the build still reported success. A hub with no children is the specific
+ * failure worth catching, so it is asserted directly and fails the build.
+ */
+const HUB_ROUTES = [
+  { route: '/blog', prefix: '/blog/', min: 5 },
+  { route: '/case-studies', prefix: '/case-studies/', min: 5 },
+];
+
+/*
+ * The home-page stat band counts up on scroll. Any animation that starts at zero renders
+ * zero for a crawler, and this one has shipped as "0+ Projects delivered" twice — once
+ * from a sensor that reset on scroll-away, once from a fallback that rendered 0 when the
+ * sensor never fired at all. It is invisible in a browser and obvious to Googlebot, so
+ * the built HTML is asserted directly.
+ */
+function zeroedStats(html) {
+  const band = html.match(/gradient-text[^>]*>\s*<span>([\s\S]{0,40}?)<\/span>/g) || [];
+  return band.filter((s) => /<span>\s*0\+?\s*<\/span>|>\s*0%\s*</.test(s)).length;
+}
+
+function brokenHubs(results) {
+  return HUB_ROUTES.flatMap(({ route, prefix, min }) => {
+    const rendered = results.find((r) => r.route === route);
+    if (!rendered) return [];
+    const found = (rendered.links || []).filter((href) => href.startsWith(prefix)).length;
+    return found >= min ? [] : [{ route, prefix, min, found }];
+  });
+}
+
+// Returned for every proxied API call so the app's fetches survive the localhost origin.
+const CORS_HEADERS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS',
+  'Access-Control-Allow-Headers': '*',
+  'Access-Control-Max-Age': '86400',
+};
+
+const MIME = {
+  '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.mjs': 'text/javascript',
+  '.css': 'text/css', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg', '.gif': 'image/gif', '.svg': 'image/svg+xml', '.webp': 'image/webp',
+  '.ico': 'image/x-icon', '.woff': 'font/woff', '.woff2': 'font/woff2', '.ttf': 'font/ttf',
+  '.txt': 'text/plain; charset=utf-8', '.xml': 'application/xml', '.webmanifest': 'application/manifest+json',
+};
+
+// ---------------------------------------------------------------------------
+// Static server
+// ---------------------------------------------------------------------------
+
+// Serves real assets from dist, and the *pristine* build template for every route.
+// Serving the template (rather than whatever is on disk) matters: without it a second
+// prerender run would re-render its own previous output and compound it.
+function startServer(template) {
+  const server = http.createServer((req, res) => {
+    let urlPath;
+    try {
+      urlPath = decodeURIComponent(new URL(req.url, `http://localhost:${PORT}`).pathname);
+    } catch {
+      urlPath = '/';
+    }
+
+    const filePath = path.join(DIST_PATH, urlPath);
+    const isAsset =
+      urlPath !== '/' &&
+      filePath.startsWith(DIST_PATH) &&
+      fs.existsSync(filePath) &&
+      fs.statSync(filePath).isFile() &&
+      path.extname(filePath) !== '.html';
+
+    if (isAsset) {
+      res.writeHead(200, { 'Content-Type': MIME[path.extname(filePath)] || 'application/octet-stream' });
+      fs.createReadStream(filePath).pipe(res);
+      return;
+    }
+
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    res.end(template);
+  });
+
+  return new Promise((resolve, reject) => {
+    server.once('error', reject);
+    server.listen(PORT, '127.0.0.1', () => resolve(server));
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Rendering
+// ---------------------------------------------------------------------------
+
+async function renderRoute(browser, route) {
+  const page = await browser.newPage();
+  try {
+    await page.setViewport({ width: 1440, height: 1000 });
+
+    await page.setRequestInterception(true);
+    page.on('request', async (req) => {
+      const url = req.url();
+
+      // Analytics beacons never resolve in headless Chrome and would stall the load.
+      if (/vercel-insights|vitals\.vercel-insights|google-analytics|googletagmanager|api\.emailjs/.test(url)) {
+        return req.abort().catch(() => {});
+      }
+
+      // Skip image payloads. Only the <img src> attribute ends up in the HTML, and
+      // downloading them is pure cost — /blog alone pulls 50 Cloudinary images, which
+      // was enough to exhaust the browser and abort the rest of the run.
+      if (req.resourceType() === 'image' || req.resourceType() === 'media') {
+        return req.abort().catch(() => {});
+      }
+
+      // The API's CORS policy only allows the production origin, so a browser fetch
+      // from 127.0.0.1 is rejected with 403 and pages like /blog render empty. Proxy
+      // those calls through Node — CORS does not apply there — and return the payload
+      // with a permissive header so the app receives real data.
+      if (url.startsWith(API_BASE_URL)) {
+        // The app sends `Content-Type: application/json`, which makes this a
+        // non-simple request, so Chrome issues an OPTIONS preflight first. It has to
+        // be answered here too, or the real request is blocked before it is sent.
+        if (req.method() === 'OPTIONS') {
+          return req.respond({
+            status: 204,
+            headers: CORS_HEADERS,
+          }).catch(() => {});
+        }
+
+        try {
+          const upstream = await fetch(url, {
+            headers: { Origin: SITE_URL, 'User-Agent': 'FuturisePrerender/2.0' },
+          });
+          const body = await upstream.text();
+          return req.respond({
+            status: upstream.status,
+            contentType: upstream.headers.get('content-type') || 'application/json',
+            headers: CORS_HEADERS,
+            body,
+          }).catch(() => {});
+        } catch {
+          return req.abort().catch(() => {});
+        }
+      }
+
+      req.continue().catch(() => {});
+    });
+
+    // domcontentloaded rather than networkidle0: the explicit content check below is
+    // the real readiness signal, and networkidle0 stalls on long-polling or slow media.
+    await page.goto(`http://127.0.0.1:${PORT}${route}`, {
+      waitUntil: 'domcontentloaded',
+      timeout: 60000,
+    });
+
+    // Routes are React.lazy'd behind a Suspense spinner — wait for real copy, not the
+    // fallback, before treating the page as rendered.
+    await page.waitForFunction(
+      () => {
+        const root = document.getElementById('root');
+        return root && root.innerText.trim().length > 400;
+      },
+      { timeout: 45000, polling: 250 }
+    );
+
+    await new Promise((r) => setTimeout(r, LOADER_MS));
+
+    // Reveal.jsx animates on `whileInView` and CompanyStats renders a literal 0 until
+    // its VisibilitySensor fires. Nothing below the fold is in its final state until
+    // it has been scrolled past, so walk the whole page before capturing.
+    await page.evaluate(async () => {
+      await new Promise((resolve) => {
+        let y = 0;
+        const step = () => {
+          window.scrollTo(0, y);
+          y += Math.round(window.innerHeight * 0.75);
+          if (y < document.body.scrollHeight) setTimeout(step, 110);
+          else setTimeout(() => { window.scrollTo(0, 0); resolve(); }, 250);
+        };
+        step();
+      });
+    });
+
+    await new Promise((r) => setTimeout(r, ANIMATION_MS));
+
+    // Freeze the post-animation state into the markup. framer-motion leaves inline
+    // opacity/transform on every Reveal; captured mid-flight they would ship content
+    // that is invisible in the raw HTML — which Google discounts as hidden text.
+    await page.evaluate(() => {
+      document.querySelectorAll('#root [style]').forEach((el) => {
+        const o = el.style.opacity;
+        if (o !== '' && parseFloat(o) < 1) el.style.opacity = '1';
+        if (el.style.transform && el.style.transform !== 'none') el.style.transform = 'none';
+      });
+      // The intro loader is a fixed full-screen overlay; drop it if it is still mounted.
+      document.querySelectorAll('#root [style*="z-index: 2000"], #root [style*="z-index:2000"]')
+        .forEach((el) => el.remove());
+    });
+
+    const html = await page.content();
+    const stats = await page.evaluate(() => ({
+      h1: document.querySelectorAll('#root h1').length,
+      h2: document.querySelectorAll('#root h2').length,
+      jsonLd: document.querySelectorAll('script[type="application/ld+json"]').length,
+      words: (document.getElementById('root').innerText.match(/\S+/g) || []).length,
+      title: document.title,
+      // Internal links, so a hub page that failed to load its children can be caught.
+      // See HUB_ROUTES below for why counting words is not enough.
+      links: [...document.querySelectorAll('#root a[href^="/"]')]
+        .map((a) => a.getAttribute('href'))
+        .filter((href) => href && href !== '/'),
+    }));
+
+    return { html, stats };
+  } finally {
+    await page.close().catch(() => {});
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Meta-only injection (blog articles + fallback if Chrome is unavailable)
+// ---------------------------------------------------------------------------
+
+function injectMetadata(html, { title, description, imageUrl, keywords, url }) {
+  let modified = html;
+
+  const replaceMetaTag = (htmlText, attrName, newContent) => {
+    const metaTagRegex = new RegExp(`<meta\\s+([^>]*?(?:name|property)=["']${attrName}["'][^>]*?)>`, 'is');
+    return htmlText.replace(metaTagRegex, (match, attributes) => {
+      if (attributes.includes('content=')) {
+        return `<meta ${attributes.replace(/content=(["'])(.*?)\1/is, `content=$1${newContent}$1`)}>`;
+      }
+      return `<meta ${attributes} content="${newContent}">`;
+    });
+  };
+
+  modified = modified.replace(/<title>[\s\S]*?<\/title>/i, `<title>${title}</title>`);
+  modified = modified.replace(/<link\s+[^>]*?rel=["']canonical["'][^>]*?>/is, (match) =>
+    match.replace(/href=(["'])(.*?)\1/is, `href=$1${url}$1`)
+  );
+
+  modified = replaceMetaTag(modified, 'description', description);
+  modified = replaceMetaTag(modified, 'keywords', keywords);
+  modified = replaceMetaTag(modified, 'og:title', title);
+  modified = replaceMetaTag(modified, 'og:description', description);
+  modified = replaceMetaTag(modified, 'og:image', imageUrl);
+  modified = replaceMetaTag(modified, 'og:url', url);
+  modified = replaceMetaTag(modified, 'twitter:title', title);
+  modified = replaceMetaTag(modified, 'twitter:description', description);
+  modified = replaceMetaTag(modified, 'twitter:image', imageUrl);
+
+  return modified;
+}
+
+function writeRoute(route, html) {
+  const dir = route === '/' ? DIST_PATH : path.join(DIST_PATH, route);
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, 'index.html'), html, 'utf-8');
+}
+
+// ---------------------------------------------------------------------------
+// Route inventory
+// ---------------------------------------------------------------------------
+
+const servicesData = [
+  { slug: 'web-development', image: '/webdevelopment.png' },
+  { slug: 'app-development', image: '/appdevlopment.png' },
+  { slug: 'ui-ux-design', image: '/uiuxdevelopment.png' },
+  { slug: 'blockchain-development', image: '/blockchaindevelopment.png' },
+  { slug: 'ai-ml-solutions', image: '/aimlsol.png' },
+  { slug: 'digital-marketing', image: '/digitalmarkiting.png' },
+];
+
+const staticPages = ['about', 'contact', 'portfolio', 'case-studies', 'blog', 'pricing', 'privacy', 'terms'];
+
+// Every route rendered through Chrome. Seo.jsx supplies each page's title, description,
+// canonical and JSON-LD at runtime, so the captured HTML already carries correct metadata.
+function buildRouteList() {
+  return [
+    '/',
+    ...servicesData.map((s) => `/service/${s.slug}`),
+    ...Object.keys(caseStudies).map((slug) => `/case-studies/${slug}`),
+    ...staticPages.map((p) => `/${p}`),
+  ];
+}
+
+// ---------------------------------------------------------------------------
+// Main
+// ---------------------------------------------------------------------------
 
 async function run() {
   if (!fs.existsSync(INDEX_HTML_PATH)) {
-    console.error('❌ dist/index.html not found. Please run "npm run build" first.');
+    console.error('❌ dist/index.html not found. Run "vite build" first.');
     process.exit(1);
   }
 
   const template = fs.readFileSync(INDEX_HTML_PATH, 'utf-8');
+  const routes = buildRouteList();
 
-  // Fetch blogs from API
-  console.log(`📡 Fetching blogs from ${API_BASE_URL}...`);
+  console.log(`\n🚀 Prerendering ${routes.length} routes with headless Chrome\n`);
+
+  const server = await startServer(template);
+
+  const launch = () => puppeteer.launch({
+    headless: 'new',
+    protocolTimeout: 120000,
+    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+  });
+
+  let browser;
+  try {
+    browser = await launch();
+  } catch (err) {
+    // A missing Chrome download must not break the deploy — fall back to the previous
+    // meta-only behaviour so the build still ships something valid.
+    console.error(`\n⚠️  Could not launch Chrome: ${err.message}`);
+    console.error('⚠️  Falling back to meta-only prerendering for static routes.\n');
+    server.close();
+    await metaOnlyFallback(template);
+    return;
+  }
+
+  const results = [];
+  let failures = 0;
+
+  for (const route of routes) {
+    let lastErr;
+    // Two attempts: a heavy page can take the browser down with it, so a failure
+    // relaunches Chrome before retrying rather than cascading into every later route.
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      try {
+        if (!browser.connected) browser = await launch();
+        const { html, stats } = await renderRoute(browser, route);
+        writeRoute(route, html);
+        results.push({ route, ...stats, zeroStats: zeroedStats(html) });
+        console.log(
+          `✅ ${route.padEnd(42)} ${String(stats.words).padStart(5)} words · ` +
+          `h1:${stats.h1} h2:${String(stats.h2).padStart(2)} · ld+json:${stats.jsonLd}`
+        );
+        lastErr = null;
+        break;
+      } catch (err) {
+        lastErr = err;
+        if (attempt === 1) {
+          console.warn(`↻ ${route.padEnd(42)} retrying after: ${err.message}`);
+          try { if (browser.connected) await browser.close(); } catch { /* already gone */ }
+          browser = await launch();
+        }
+      }
+    }
+    if (lastErr) {
+      failures++;
+      console.error(`❌ ${route.padEnd(42)} ${lastErr.message}`);
+    }
+  }
+
+  // Vercel serves a root-level 404.html with a real 404 status for unmatched paths.
+  // Rendering the app's NotFound route into it keeps that page on-brand instead of
+  // falling back to Vercel's default error page.
+  try {
+    const { html } = await renderRoute(browser, '/this-route-does-not-exist');
+    fs.writeFileSync(path.join(DIST_PATH, '404.html'), html, 'utf-8');
+    console.log('✅ 404.html                                  rendered from NotFound route');
+  } catch (err) {
+    console.warn(`⚠️  Could not render 404.html: ${err.message}`);
+  }
+
+  await browser.close();
+  server.close();
+
+  const blogs = await prerenderBlogMeta(template);
+  writeSitemap(results.map((r) => r.route), blogs);
+
+  // Report anything that rendered but looks wrong, so a silent regression cannot pass.
+  const thin = results.filter((r) => r.words < 250);
+  const noH1 = results.filter((r) => r.h1 === 0);
+  const multiH1 = results.filter((r) => r.h1 > 1);
+  const noSchema = results.filter((r) => r.jsonLd < 2);
+  const emptyHubs = brokenHubs(results);
+
+  console.log('\n──────── summary ────────');
+  console.log(`rendered: ${results.length}/${routes.length}${failures ? ` (${failures} failed)` : ''}`);
+  if (thin.length)     console.log(`⚠️  thin (<250 words): ${thin.map((r) => r.route).join(', ')}`);
+  if (noH1.length)     console.log(`⚠️  missing <h1>:      ${noH1.map((r) => r.route).join(', ')}`);
+  if (multiH1.length)  console.log(`⚠️  multiple <h1>:     ${multiH1.map((r) => `${r.route}(${r.h1})`).join(', ')}`);
+  if (noSchema.length) console.log(`⚠️  <2 JSON-LD blocks: ${noSchema.map((r) => r.route).join(', ')}`);
+
+  const zeroed = results.filter((r) => r.zeroStats > 0);
+  for (const r of zeroed) {
+    console.error(
+      `❌ ${r.route} prerendered ${r.zeroStats} stat(s) as "0" — a count-up animation was ` +
+      `captured before it ran. Crawlers will read the zeros.`
+    );
+  }
+
+  for (const hub of emptyHubs) {
+    console.error(
+      `❌ ${hub.route} rendered ${hub.found} of the expected ${hub.min}+ "${hub.prefix}" links ` +
+      `— the CMS fetch almost certainly failed. Re-run the build.`
+    );
+  }
+
+  console.log('🎉 Pre-rendering complete.\n');
+
+  if (failures || emptyHubs.length || zeroed.length) process.exitCode = 1;
+}
+
+// Blog articles keep meta-only files — middleware.js server-renders their bodies.
+async function prerenderBlogMeta(template) {
+  console.log('📡 Fetching blogs for meta-only prerender…');
   let blogs = [];
   try {
     const res = await fetch(`${API_BASE_URL}/api/blogs/admin/all`);
@@ -40,247 +467,109 @@ async function run() {
       const data = await res.json();
       blogs = Array.isArray(data) ? data : (data?.blogs || data?.data || []);
     } else {
-      console.warn(`⚠️ Failed to fetch blogs: ${res.statusText}`);
+      console.warn(`⚠️  Failed to fetch blogs: ${res.statusText}`);
     }
   } catch (err) {
-    console.warn(`⚠️ Error fetching blogs: ${err.message}`);
+    console.warn(`⚠️  Error fetching blogs: ${err.message}`);
   }
 
-  console.log(`📝 Found ${blogs.length} blogs to pre-render.`);
-
-  // 1. Pre-render Blog Detail Pages
+  let count = 0;
   for (const blog of blogs) {
     if (!blog.slug) continue;
-
-    const slug = blog.slug;
-    const title = blog.meta?.metaTitle || blog.title || '';
-    const description = blog.meta?.metaDescription || blog.shortDescription || '';
-    const imageUrl = blog.featuredImage ? (
-      /^https?:\/\//i.test(blog.featuredImage) ? blog.featuredImage : `${API_BASE_URL}${blog.featuredImage}`
-    ) : 'https://www.futurisesolutions.com/home.png';
-    const keywords = (blog.meta?.metaKeywords || blog.tags || []).join(', ');
+    const imageUrl = blog.featuredImage
+      ? (/^https?:\/\//i.test(blog.featuredImage) ? blog.featuredImage : `${API_BASE_URL}${blog.featuredImage}`)
+      : `${SITE_URL}/home.png`;
 
     const html = injectMetadata(template, {
-      title: `${title} | Futurise Solutions`,
-      description,
+      title: `${blog.meta?.metaTitle || blog.title || ''} | Futurise Solutions`,
+      description: blog.meta?.metaDescription || blog.shortDescription || '',
       imageUrl,
-      keywords,
-      url: `https://www.futurisesolutions.com/blog/${slug}`,
+      keywords: (blog.meta?.metaKeywords || blog.tags || []).join(', '),
+      url: `${SITE_URL}/blog/${blog.slug}`,
     });
 
-    const dir = path.join(DIST_PATH, 'blog', slug);
-    fs.mkdirSync(dir, { recursive: true });
-    fs.writeFileSync(path.join(dir, 'index.html'), html, 'utf-8');
-    console.log(`✅ Pre-rendered: /blog/${slug}`);
+    writeRoute(`/blog/${blog.slug}`, html);
+    count++;
   }
-
-  // 2. Pre-render Case Study Detail Pages
-  const caseStudySlugs = Object.keys(caseStudies);
-  console.log(`📝 Found ${caseStudySlugs.length} case studies to pre-render.`);
-
-  for (const slug of caseStudySlugs) {
-    const study = caseStudies[slug];
-    const title = study.meta?.title || '';
-    const description = study.meta?.description || '';
-    const imageUrl = study.meta?.ogImage ? (
-      /^https?:\/\//i.test(study.meta.ogImage) ? study.meta.ogImage : `https://www.futurisesolutions.com${study.meta.ogImage}`
-    ) : 'https://www.futurisesolutions.com/home.png';
-    const keywords = study.meta?.keywords || '';
-
-    const html = injectMetadata(template, {
-      title,
-      description,
-      imageUrl,
-      keywords,
-      url: `https://www.futurisesolutions.com/case-studies/${slug}`,
-    });
-
-    const dir = path.join(DIST_PATH, 'case-studies', slug);
-    fs.mkdirSync(dir, { recursive: true });
-    fs.writeFileSync(path.join(dir, 'index.html'), html, 'utf-8');
-    console.log(`✅ Pre-rendered: /case-studies/${slug}`);
-  }
-
-  // 3. Pre-render Service Detail Pages
-  const servicesData = [
-    {
-      slug: 'web-development',
-      title: 'Web Development Services | Futurise Solutions',
-      desc: 'Lightning-fast, SEO-ready websites and web apps built with modern frameworks and clean, maintainable code. Serving NZ, India, USA & worldwide.',
-      keywords: 'web development company, React developer, Next.js, Node.js, full stack development, website development New Zealand, India, USA',
-      image: '/webdevelopment.png',
-    },
-    {
-      slug: 'app-development',
-      title: 'App Development Company — iOS & Android (React Native) | Futurise Solutions',
-      desc: 'Cross-platform iOS & Android apps built with React Native & Expo — fast, polished and scalable from one codebase. Serving NZ, India, the USA & worldwide.',
-      keywords: 'mobile app development, React Native, Expo, iOS Android app, cross-platform app, app developer New Zealand',
-      image: '/appdevlopment.png',
-    },
-    {
-      slug: 'ui-ux-design',
-      title: 'UI/UX Design Services | Futurise Solutions',
-      desc: 'Research-driven product design and intuitive interfaces that turn first-time visitors into loyal customers. Wireframes, design systems, prototypes.',
-      keywords: 'UI UX design, Figma design, product design, user experience design, mobile UI design, web design New Zealand',
-      image: '/uiuxdevelopment.png',
-    },
-    {
-      slug: 'blockchain-development',
-      title: 'Blockchain & Web3 Development Services | Futurise Solutions',
-      desc: 'Web3 frontends, DeFi platforms, MEV bots, launchpads, smart contracts, and multi-chain dApps built for real production on Ethereum, Solana, and BSC.',
-      keywords: 'blockchain development, DeFi development, Web3, dApp development, MEV bot, Solana, Ethereum, smart contract',
-      image: '/blockchaindevelopment.png',
-    },
-    {
-      slug: 'ai-ml-solutions',
-      title: 'AI & ML Solutions | Futurise Solutions',
-      desc: 'Custom AI agents, LLM & RAG integrations, machine learning, and AI-powered features that automate workflows and make your product smarter.',
-      keywords: 'AI development, ML solutions, AI agents, LLM integration, ChatGPT integration, AI SaaS, machine learning New Zealand',
-      image: '/aimlsol.png',
-    },
-    {
-      slug: 'digital-marketing',
-      title: 'Digital Marketing Services — SEO & Performance | Futurise Solutions',
-      desc: 'Data-led SEO, performance marketing, paid search, paid social, CRO, and analytics that grow traffic, leads, and revenue.',
-      keywords: 'digital marketing agency, SEO services, Google Ads, social media marketing, performance marketing New Zealand',
-      image: '/digitalmarkiting.png',
-    },
-  ];
-
-  console.log(`📝 Found ${servicesData.length} service pages to pre-render.`);
-  for (const svc of servicesData) {
-    const html = injectMetadata(template, {
-      title: svc.title,
-      description: svc.desc,
-      imageUrl: `https://www.futurisesolutions.com${svc.image}`,
-      keywords: svc.keywords,
-      url: `https://www.futurisesolutions.com/service/${svc.slug}`,
-    });
-
-    const dir = path.join(DIST_PATH, 'service', svc.slug);
-    fs.mkdirSync(dir, { recursive: true });
-    fs.writeFileSync(path.join(dir, 'index.html'), html, 'utf-8');
-    console.log(`✅ Pre-rendered: /service/${svc.slug}`);
-  }
-
-  // 4. Pre-render static pages to their own folders for SEO indexing
-  const staticPages = [
-    {
-      pathName: 'about',
-      title: 'About Us — AI & Web Development Studio | Futurise Solutions',
-      desc: 'Meet Futurise Solutions — a senior team building AI agents, SaaS platforms, web apps, mobile apps & Web3 products for ambitious brands in New Zealand, India & USA. Our mission, values & tech expertise.',
-      keywords: 'about Futurise Solutions, AI development team, web development company, mobile app developers, blockchain team, New Zealand tech agency, digital product studio',
-      image: '/about.png'
-    },
-    {
-      pathName: 'contact',
-      title: 'Contact Us — Get a Free Quote | Futurise Solutions',
-      desc: 'Start your AI, SaaS, web or mobile app project with Futurise Solutions. We reply within hours to schedule a free consultation. Based in Wellington, NZ — serving India, USA & worldwide.',
-      keywords: 'contact Futurise Solutions, hire web developer New Zealand, get a quote AI app, start SaaS project, web development consultation, mobile app quote, free project consultation',
-      image: '/contactus.png'
-    },
-    {
-      pathName: 'portfolio',
-      title: 'Portfolio — AI, SaaS, Web & Mobile Projects | Futurise Solutions',
-      desc: 'Explore our portfolio: SaaS dashboards, AI-powered platforms, luxury e-commerce, real-estate sites, crypto trading terminals & hotel booking apps — built for clients in New Zealand, India & USA.',
-      keywords: 'web development portfolio, AI app portfolio, SaaS portfolio, React projects, blockchain projects, mobile app portfolio, New Zealand web agency portfolio, case studies',
-      image: '/portfolio.png'
-    },
-    {
-      pathName: 'case-studies',
-      title: 'Case Studies — Real Results From Real Projects | Futurise Solutions',
-      desc: 'Explore how Futurise Solutions delivered measurable outcomes across AI, Web, App, Blockchain, UI/UX, and Digital Marketing — with verified results and client testimonials.',
-      keywords: 'Futurise Solutions case studies, AI development case study, SaaS platform case study, mobile app case study, DeFi protocol case study, UI UX redesign case study, SEO growth case study',
-      image: '/home.png'
-    },
-    {
-      pathName: 'blog',
-      title: 'Blog | Futurise Solutions',
-      desc: 'Insights, deep-dives and engineering notes from Futurise Solutions on AI, SaaS, web and mobile development.',
-      keywords: 'software development blog, AI development insights, web development, SaaS, app development, futurise solutions',
-      image: '/home.png'
-    },
-    {
-      pathName: 'privacy',
-      title: 'Privacy Policy | Futurise Solutions',
-      desc: 'Learn how Futurise Solutions collects, uses, and protects your personal information. Our privacy policy covers data handling for our AI, web, mobile, and blockchain services.',
-      keywords: 'Futurise Solutions privacy policy, data protection, personal information, GDPR, New Zealand Privacy Act, data security',
-      image: '/home.png'
-    },
-    {
-      pathName: 'terms',
-      title: 'Terms & Conditions | Futurise Solutions',
-      desc: 'Read the Terms and Conditions governing the use of Futurise Solutions\' website and services including AI development, web development, mobile apps, UI/UX design, blockchain, and digital marketing.',
-      keywords: 'Futurise Solutions terms and conditions, service agreement, client terms, web development contract, AI development terms, New Zealand digital agency terms',
-      image: '/home.png'
-    }
-  ];
-
-  for (const page of staticPages) {
-    const imageUrl = page.image && page.image.startsWith('/') 
-      ? `https://www.futurisesolutions.com${page.image}` 
-      : (page.image || 'https://www.futurisesolutions.com/home.png');
-
-    const html = injectMetadata(template, {
-      title: page.title,
-      description: page.desc,
-      imageUrl: imageUrl,
-      keywords: page.keywords,
-      url: `https://www.futurisesolutions.com/${page.pathName}`,
-    });
-
-    const dir = path.join(DIST_PATH, page.pathName);
-    fs.mkdirSync(dir, { recursive: true });
-    fs.writeFileSync(path.join(dir, 'index.html'), html, 'utf-8');
-    console.log(`✅ Pre-rendered: /${page.pathName}`);
-  }
-
-  console.log('🎉 Pre-rendering completed successfully!');
+  console.log(`✅ ${count} blog meta files written (bodies served by middleware.js)`);
+  return blogs;
 }
 
-function injectMetadata(html, { title, description, imageUrl, keywords, url }) {
-  let modified = html;
+// Generate sitemap.xml from what was actually built, rather than maintaining it by hand.
+// The committed public/sitemap.xml had to be edited on every publish, so <lastmod> dates
+// drifted and new posts were easy to forget; this derives both from the real output.
+//
+// No hreflang is emitted: the site has a single English version, and self-referencing
+// alternates add nothing. Add them alongside the first country page, not before.
+function writeSitemap(routes, blogs = []) {
+  const today = new Date().toISOString().slice(0, 10);
 
-  // Helper function to replace attributes in meta tags safely
-  const replaceMetaTag = (htmlText, keyName, attrName, newContent) => {
-    // Matches a <meta ... name/property="keyName" ...> tag, spanning across newlines if needed
-    const metaTagRegex = new RegExp(`<meta\\s+([^>]*?(?:name|property)=["']${attrName}["'][^>]*?)>`, 'is');
-    
-    return htmlText.replace(metaTagRegex, (match, attributes) => {
-      if (attributes.includes('content=')) {
-        // Replace existing content attribute value
-        return `<meta ${attributes.replace(/content=(["'])(.*?)\1/is, `content=$1${newContent}$1`)}>`;
-      } else {
-        // Append content attribute if it doesn't exist
-        return `<meta ${attributes} content="${newContent}">`;
-      }
-    });
+  // Crawl priority follows commercial value: services convert, legal pages do not.
+  const weightFor = (loc) => {
+    if (loc === '/') return { priority: '1.0', changefreq: 'weekly' };
+    if (loc.startsWith('/service/')) return { priority: '0.9', changefreq: 'monthly' };
+    if (loc.startsWith('/case-studies/')) return { priority: '0.8', changefreq: 'monthly' };
+    if (loc === '/blog') return { priority: '0.8', changefreq: 'daily' };
+    // High commercial intent: this is the page that answers the cost queries the blog
+    // already ranks for, so it should be crawled at service-page priority.
+    if (loc === '/pricing') return { priority: '0.9', changefreq: 'monthly' };
+    if (loc.startsWith('/blog/')) return { priority: '0.7', changefreq: 'monthly' };
+    if (loc === '/privacy' || loc === '/terms') return { priority: '0.3', changefreq: 'yearly' };
+    return { priority: '0.7', changefreq: 'monthly' };
   };
 
-  // Title tag (special case as it's not a meta tag)
-  modified = modified.replace(/<title>[^<]*<\/title>/is, `<title>${title}</title>`);
+  const entries = [
+    ...routes.map((route) => ({ loc: route, lastmod: today })),
+    ...blogs
+      .filter((b) => b.slug)
+      .map((b) => ({
+        loc: `/blog/${b.slug}`,
+        // Real publish/update dates, so lastmod means something to a crawler.
+        lastmod: String(b.updatedAt || b.publishedAt || b.createdAt || today).slice(0, 10),
+      })),
+  ];
 
-  // Canonical tag (special case)
-  modified = modified.replace(/<link\s+[^>]*?rel=["']canonical["'][^>]*?>/is, (match) => {
-    return match.replace(/href=(["'])(.*?)\1/is, `href=$1${url}$1`);
-  });
+  const seen = new Set();
+  const urls = entries
+    .filter((e) => (seen.has(e.loc) ? false : seen.add(e.loc)))
+    .map(({ loc, lastmod }) => {
+      const { priority, changefreq } = weightFor(loc);
+      return `  <url>
+    <loc>${SITE_URL}${loc === '/' ? '/' : loc}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority}</priority>
+  </url>`;
+    })
+    .join('\n');
 
-  // Basic meta tags
-  modified = replaceMetaTag(modified, 'description', 'description', description);
-  modified = replaceMetaTag(modified, 'keywords', 'keywords', keywords);
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls}
+</urlset>
+`;
 
-  // Open Graph meta tags
-  modified = replaceMetaTag(modified, 'og:title', 'og:title', title);
-  modified = replaceMetaTag(modified, 'og:description', 'og:description', description);
-  modified = replaceMetaTag(modified, 'og:image', 'og:image', imageUrl);
-  modified = replaceMetaTag(modified, 'og:url', 'og:url', url);
+  fs.writeFileSync(path.join(DIST_PATH, 'sitemap.xml'), xml, 'utf-8');
+  console.log(`✅ sitemap.xml generated with ${seen.size} URLs`);
+}
 
-  // Twitter meta tags
-  modified = replaceMetaTag(modified, 'twitter:title', 'twitter:title', title);
-  modified = replaceMetaTag(modified, 'twitter:description', 'twitter:description', description);
-  modified = replaceMetaTag(modified, 'twitter:image', 'twitter:image', imageUrl);
-
-  return modified;
+// Last-resort path when Chrome is unavailable in the build environment.
+async function metaOnlyFallback(template) {
+  for (const slug of Object.keys(caseStudies)) {
+    const study = caseStudies[slug];
+    writeRoute(`/case-studies/${slug}`, injectMetadata(template, {
+      title: study.meta?.title || '',
+      description: study.meta?.description || '',
+      imageUrl: study.meta?.ogImage
+        ? (/^https?:\/\//i.test(study.meta.ogImage) ? study.meta.ogImage : `${SITE_URL}${study.meta.ogImage}`)
+        : `${SITE_URL}/home.png`,
+      keywords: study.meta?.keywords || '',
+      url: `${SITE_URL}/case-studies/${slug}`,
+    }));
+  }
+  const blogs = await prerenderBlogMeta(template);
+  writeSitemap(buildRouteList(), blogs);
+  console.log('⚠️  Meta-only fallback complete — bodies are NOT prerendered.');
 }
 
 run();

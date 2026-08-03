@@ -51,7 +51,7 @@ const PortfolioThumbs = () => (
           boxShadow="0 24px 50px -28px rgba(0,0,0,0.8)"
           position="relative"
         >
-          <Image src={p.img[0].src} alt={p.img[0].alt} loading="lazy" w="full" h="full" objectFit="cover" objectPosition="top" />
+          <Image src={p.img[0].src} alt={p.img[0].alt} loading="lazy" decoding="async" w="full" h="full" objectFit="cover" objectPosition="top" />
           <Box position="absolute" inset={0} bgGradient="linear(to-t, rgba(8,8,13,0.8), rgba(8,8,13,0) 55%)" />
           <Text position="absolute" bottom={3} left={4} right={4} fontSize="13px" fontWeight={600} noOfLines={1}>
             {p.clentName}
@@ -67,7 +67,9 @@ const Portfolio = () => {
   return (
     <Box>
       <Seo
-        title="Portfolio — AI, SaaS, Web & Mobile Projects | Futurise Solutions"
+        // Brand omitted here on purpose: Seo.jsx appends it only when the result still
+        // fits Google's ~60-character render width. Hardcoding it forced a truncation.
+        title="Portfolio — AI, SaaS, Web & Mobile Projects"
         description="Explore our portfolio: SaaS dashboards, AI-powered platforms, luxury e-commerce, real-estate sites, crypto trading terminals & hotel booking apps — built for clients in New Zealand, India & USA."
         path="/portfolio"
         image="/portfolio.png"

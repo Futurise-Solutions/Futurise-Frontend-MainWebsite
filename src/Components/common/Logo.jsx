@@ -15,7 +15,21 @@ const Logo = ({ size = "md", to = "/", ...rest }) => {
       _hover={{ transform: "scale(1.04)", filter: "drop-shadow(0 4px 14px rgba(180,160,255,0.45))" }}
       {...rest}
     >
-      <Image src={logo} alt="Futurise Solutions" h={h} w="auto" objectFit="contain" draggable={false} />
+      {/* Intrinsic size of the 3x asset (see src/assests/index.js). Eager + high priority
+          because the wordmark sits in the navbar at the very top of every page. */}
+      <Image
+        src={logo}
+        alt="Futurise Solutions"
+        h={h}
+        w="auto"
+        htmlWidth="354"
+        htmlHeight="120"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+        objectFit="contain"
+        draggable={false}
+      />
     </Box>
   );
 };

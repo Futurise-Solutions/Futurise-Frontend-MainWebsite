@@ -33,7 +33,9 @@ const ServiceStack = ({ service }) => {
                 <Text fontSize="sm" fontWeight={600} color="accent.solid" letterSpacing="0.08em" textTransform="uppercase">
                   {stack.subtitle}
                 </Text>
-                <Heading fontSize={{ base: "26px", md: "32px" }} lineHeight={1.2}>
+                {/* h3: these sit under the section's h2, so the default h2 broke the
+                    document outline and flattened the page's heading hierarchy. */}
+                <Heading as="h3" fontSize={{ base: "26px", md: "32px" }} lineHeight={1.2}>
                   {stack.title}
                 </Heading>
                 <Text color="text.muted" fontSize={{ base: "md", md: "lg" }} lineHeight={1.7}>

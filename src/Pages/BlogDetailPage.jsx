@@ -3,12 +3,14 @@ import {
   Box, Container, Heading, Text, Image, Badge, HStack, VStack, Tag, Flex, Button, Icon, Spinner, useToast, SimpleGrid,
 } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
-import { FiArrowLeft, FiArrowRight, FiLink, FiClock, FiCalendar } from "react-icons/fi";
+import { FiArrowLeft, FiArrowRight, FiLink, FiClock, FiCalendar, FiUser } from "react-icons/fi";
 import { FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 import { Seo } from "../Components/common";
 import BlogMarkdown from "../Components/blog/BlogMarkdown";
 import BlogCard from "../Components/blog/BlogCard";
+import BlogCTA from "../Components/blog/BlogCTA";
 import { useBlogs } from "../hooks/useBlogs";
+import { articleAuthor, articleAuthorName } from "../utils/Constant/team";
 import { getBlogBySlug, toBlogArray } from "../api/blogs";
 import { mediaUrl } from "../config";
 import { formatDate, readTime, parseHeadings } from "../utils/blog";
@@ -126,8 +128,16 @@ const BlogDetailPage = () => {
           image: mediaUrl(blog.featuredImage),
           datePublished: blog.createdAt,
           dateModified: blog.updatedAt || blog.createdAt,
-          author: { "@type": "Organization", name: "Futurise Solutions" },
-          publisher: { "@type": "Organization", name: "Futurise Solutions" },
+          // Resolves to a named Person once the team is published, and to the
+          // Organization until then. A named author is a materially stronger E-E-A-T and
+          // AI-citation signal than an anonymous corporate byline.
+          author: articleAuthor(),
+          publisher: {
+            "@type": "Organization",
+            name: "Futurise Solutions",
+            // Google's Article guidance expects a publisher logo; it was missing.
+            logo: { "@type": "ImageObject", url: "https://www.futurisesolutions.com/favicon-new.png" },
+          },
           mainEntityOfPage: `https://www.futurisesolutions.com/blog/${blog.slug}`,
         }}
       />
@@ -140,7 +150,8 @@ const BlogDetailPage = () => {
         {/* Hero image */}
         {blog.featuredImage && (
           <Box position="relative" borderRadius="22px" overflow="hidden" maxH="480px" mb={8} border="1px solid" borderColor="border.subtle">
-            <Image src={mediaUrl(blog.featuredImage)} alt={blog.title} w="full" maxH="480px" objectFit="cover" objectPosition="top" />
+            {/* Article hero — the LCP element on every blog post. */}
+            <Image src={mediaUrl(blog.featuredImage)} alt={blog.title} w="full" maxH="480px" loading="eager" fetchpriority="high" decoding="async" objectFit="cover" objectPosition="top" />
             <Box position="absolute" inset={0} bgGradient="linear(to-t, rgba(8,8,13,0.6), transparent 50%)" pointerEvents="none" />
             <HStack position="absolute" top={4} left={4} spacing={3}>
               {blog.category && (
@@ -164,7 +175,14 @@ const BlogDetailPage = () => {
         <HStack spacing={5} color="text.faint" fontSize="sm" flexWrap="wrap" mb={3}>
           <HStack spacing={2}><Icon as={FiCalendar} /><Text>{formatDate(blog.createdAt)}</Text></HStack>
           <HStack spacing={2}><Icon as={FiClock} /><Text>{readTime(blog.content)} min read</Text></HStack>
-          <Text>By Futurise Solutions</Text>
+          {/* Byline links to /about so the claim of expertise is one click from the
+              evidence for it — and so the article passes a link to that page. */}
+          <HStack spacing={2}>
+            <Icon as={FiUser} />
+            <Text as={Link} to="/about" _hover={{ color: "accent.solid" }} transition="color .2s">
+              By {articleAuthorName()}
+            </Text>
+          </HStack>
         </HStack>
         {parsedTags.length > 0 && (
           <HStack spacing={2} flexWrap="wrap" mb={2}>
@@ -219,6 +237,10 @@ const BlogDetailPage = () => {
           </Box>
         </Flex>
       </Container>
+
+      {/* Offer before related posts: the reader is at peak intent having just finished
+          the article, and "Related articles" alone gave them no way to act on it. */}
+      <BlogCTA category={blog.category} />
 
       {/* Related posts */}
       {related.length > 0 && (

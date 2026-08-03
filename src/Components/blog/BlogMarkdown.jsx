@@ -53,7 +53,8 @@ const components = {
       </Box>
     );
   },
-  img: ({ src, alt }) => <Image src={src} alt={alt} borderRadius="14px" my={6} w="full" objectFit="cover" />,
+  // In-article images are always below the fold — the title and intro come first.
+  img: ({ src, alt }) => <Image src={src} alt={alt} loading="lazy" decoding="async" borderRadius="14px" my={6} w="full" objectFit="cover" />,
   hr: () => <Box borderTop="1px solid" borderColor="border.subtle" my={8} />,
   table: ({ children }) => (
     <Box overflowX="auto" mb={6}>

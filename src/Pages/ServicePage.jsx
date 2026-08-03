@@ -1,12 +1,14 @@
 import React from "react";
 import { Box, Container, Flex, Heading, Text, Button, Stack, VStack, HStack, Icon, SimpleGrid, Wrap, WrapItem } from "@chakra-ui/react";
-import { useParams, useNavigate } from "react-router-dom";
-import { FiArrowRight, FiCheckCircle } from "react-icons/fi";
+import { useParams, useNavigate, Link as RouterLink } from "react-router-dom";
+import { Link as ChakraLink } from "@chakra-ui/react";
+import { FiArrowRight, FiCheckCircle, FiArrowUpRight } from "react-icons/fi";
 import ProcessSection from "../Components/ServiceComponents/ProcessSection";
 import ServiceStack from "../Components/ServiceComponents/ServiceStack";
 import ServiceHeroVisual from "../Components/ServiceComponents/ServiceHeroVisual";
 import Faqs from "../Components/HomePage Components/Faqs";
-import { services } from "../utils/Constant";
+import { services, AREAS_SERVED } from "../utils/Constant";
+import { caseStudies, caseStudyForService } from "../utils/Constant/caseStudies";
 import { Reveal, Eyebrow, CTASection, Seo } from "../Components/common";
 import { useBooking } from "../context/BookingContext";
 import NotFound from "./NotFound";
@@ -37,6 +39,11 @@ const ServicePage = () => {
 
   if (!service) return <NotFound />;
 
+  const relatedCaseStudy = caseStudies[caseStudyForService[serviceName]];
+  const siblingServices = Object.entries(services)
+    .filter(([slug]) => slug !== serviceName)
+    .map(([slug, s]) => ({ slug, title: s.title }));
+
   return (
     <Box>
       <Seo
@@ -56,16 +63,18 @@ const ServicePage = () => {
             "serviceType": service.title,
             "category": service.title,
             "provider": { "@id": "https://www.futurisesolutions.com/#organization" },
-            "areaServed": ["New Zealand", "India", "United States", "United Kingdom", "Australia", "United Arab Emirates", "Canada"],
+            "areaServed": AREAS_SERVED,
             "audience": { "@type": "Audience", "audienceType": "Startup founders, SaaS companies, product teams and enterprises" },
           },
           {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
+            // A "Services" crumb pointing at "/" duplicated the Home crumb's target,
+            // which Google reports as an invalid breadcrumb trail. Dropped until a real
+            // /services hub page exists to point it at.
             "itemListElement": [
               { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.futurisesolutions.com/" },
-              { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.futurisesolutions.com/" },
-              { "@type": "ListItem", "position": 3, "name": service.title, "item": `https://www.futurisesolutions.com/service/${serviceName}` },
+              { "@type": "ListItem", "position": 2, "name": service.title, "item": `https://www.futurisesolutions.com/service/${serviceName}` },
             ],
           },
           ...(service.faqs?.length
@@ -188,6 +197,83 @@ const ServicePage = () => {
         </Container>
       )}
 
+      {/* Related work + sibling services.
+          These are the only body-content links from a service page to a case study or
+          to another service. Without them case studies were reachable only via the
+          navbar dropdown, and no service page linked to any other — so crawl paths
+          dead-ended here and page authority never flowed between them. */}
+      <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 10, md: 14 }}>
+        {relatedCaseStudy && (
+          <>
+            <Reveal><Eyebrow>Related work</Eyebrow></Reveal>
+            <Reveal delay={0.05}>
+              <Heading mt={4} mb={6} fontSize={{ base: "26px", md: "36px" }} lineHeight={1.15} maxW="760px">
+                See {service.title.toLowerCase()}{" "}
+                <Box as="span" className="gradient-text">in production</Box>
+              </Heading>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <ChakraLink
+                as={RouterLink}
+                to={`/case-studies/${relatedCaseStudy.slug}`}
+                display="block"
+                p={{ base: 6, md: 7 }}
+                borderRadius="20px"
+                bg="bg.surface"
+                border="1px solid"
+                borderColor="border.subtle"
+                _hover={{ borderColor: "rgba(180,160,255,0.35)", textDecoration: "none" }}
+                transition="border-color .2s"
+              >
+                <HStack justify="space-between" align="start" spacing={4}>
+                  <Box>
+                    <Text fontSize="sm" color="accent.solid" fontWeight={600} mb={1}>
+                      {relatedCaseStudy.industry} · {relatedCaseStudy.location}
+                    </Text>
+                    <Heading as="h3" fontSize={{ base: "20px", md: "24px" }} lineHeight={1.25}>
+                      {relatedCaseStudy.hero?.title} {relatedCaseStudy.hero?.highlight}
+                    </Heading>
+                    <Text mt={2} color="text.muted" fontSize={{ base: "sm", md: "md" }} lineHeight={1.7}>
+                      {relatedCaseStudy.hero?.subtitle}
+                    </Text>
+                  </Box>
+                  <Icon as={FiArrowUpRight} boxSize={6} color="accent.solid" flexShrink={0} mt={1} />
+                </HStack>
+              </ChakraLink>
+            </Reveal>
+          </>
+        )}
+
+        <Reveal delay={0.15}>
+          <Text mt={relatedCaseStudy ? 10 : 0} mb={4} fontSize="sm" fontWeight={600} letterSpacing="0.08em" textTransform="uppercase" color="text.faint">
+            Other services
+          </Text>
+          <Wrap spacing={3}>
+            {siblingServices.map((s) => (
+              <WrapItem key={s.slug}>
+                <ChakraLink
+                  as={RouterLink}
+                  to={`/service/${s.slug}`}
+                  px={4}
+                  py={2.5}
+                  borderRadius="full"
+                  bg="bg.surface"
+                  border="1px solid"
+                  borderColor="border.subtle"
+                  fontSize={{ base: "sm", md: "md" }}
+                  color="text.primary"
+                  fontWeight={500}
+                  _hover={{ borderColor: "rgba(180,160,255,0.35)", textDecoration: "none" }}
+                  transition="border-color .2s"
+                >
+                  {s.title}
+                </ChakraLink>
+              </WrapItem>
+            ))}
+          </Wrap>
+        </Reveal>
+      </Container>
+
       {/* Service-specific FAQ (also emits FAQPage schema above) */}
       {service.faqs?.length > 0 && (
         <Faqs
@@ -205,7 +291,7 @@ const ServicePage = () => {
         highlight={`${service.title} project?`}
         subtitle="Get a free consultation and let’s turn your vision into a unique digital creation."
         primaryLabel="Book appointment"
-        onPrimary={openBooking}
+        onPrimary={() => openBooking(`service-${serviceName}`)}
       />
     </Box>
   );

@@ -31,8 +31,12 @@ const HomePage = () => {
   return (
     <Box>
       <Seo
-        title="AI, SaaS & Web App Development Studio | New Zealand, India & USA"
-        description="Futurise Solutions builds AI agents, SaaS platforms, web apps, mobile apps & Web3 products end-to-end. Serving clients in New Zealand, India & USA. Get a free quote today."
+        // 85 characters with the brand suffix, so Google cut it mid-phrase and the
+        // trailing markets never rendered. "India" is also dropped from the title: it
+        // reads as offshore delivery to a New Zealand or US buyer scanning results,
+        // while adding nothing in India, where the traffic is already branded search.
+        title="AI, SaaS & Web App Development Company — NZ, UAE & USA"
+        description="Futurise Solutions builds AI agents, SaaS platforms, web and mobile apps end-to-end. Fixed-scope quotes, not hourly billing. Book a free 45-minute consultation."
         path="/"
         image="/home.png"
         keywords="AI app development, SaaS development, web development company, mobile app development, React Native, blockchain development, Web3, AI agents, digital marketing, New Zealand, India, USA, Futurise Solutions"

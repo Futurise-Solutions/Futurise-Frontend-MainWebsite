@@ -34,6 +34,8 @@ const Partners = () => (
               alt={item.name}
               h={{ base: "36px", md: "42px" }}
               w="auto"
+              loading="lazy"
+              decoding="async"
               objectFit="contain"
             />
           </Box>

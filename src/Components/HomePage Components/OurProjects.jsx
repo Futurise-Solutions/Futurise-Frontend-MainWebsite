@@ -22,6 +22,7 @@ const ProjectThumb = ({ p }) => (
       src={p.img[0].src}
       alt={p.img[0].alt}
       loading="lazy"
+      decoding="async"
       w="full"
       h="full"
       objectFit="cover"

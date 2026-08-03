@@ -38,6 +38,7 @@ const BlogCard = ({ blog }) => (
           h="full"
           objectFit="cover"
           loading="lazy"
+          decoding="async"
           transition="transform .5s cubic-bezier(0.22,1,0.36,1)"
           _groupHover={{ transform: "scale(1.05)" }}
         />

@@ -120,9 +120,13 @@ const ChatWidget = ({ onClose }) => {
             p="0"
           >
             <Image
-              src="/favicon-new.png"
+              src="/logo-mark-180.png"
               alt="Futurise Assistant Logo"
               boxSize="100%"
+              htmlWidth="180"
+              htmlHeight="180"
+              loading="lazy"
+              decoding="async"
               objectFit="cover"
             />
           </Circle>

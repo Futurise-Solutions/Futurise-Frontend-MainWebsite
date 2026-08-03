@@ -43,6 +43,18 @@ export const caseStudiesNav = [
   },
 ];
 
+// Each service page's matching case study. Case studies were previously reachable only
+// from the navbar dropdown — nothing in any page body linked to them, so they had almost
+// no internal links pointing at them and read as orphaned to a crawler.
+export const caseStudyForService = {
+  "ai-ml-solutions": "ai-support-agent",
+  "web-development": "saas-platform-scale",
+  "app-development": "real-estate-app",
+  "ui-ux-design": "fintech-ux-redesign",
+  "blockchain-development": "defi-protocol-launch",
+  "digital-marketing": "saas-seo-growth",
+};
+
 export const caseStudies = {
   /* ─────────────────────────────────────────────────────────────────────────
      1. AI & ML — Customer Support Agent

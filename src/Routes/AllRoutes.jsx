@@ -11,6 +11,7 @@ const ServiceSingalPage = lazy(() => import("../Pages/ServicePage"));
 const BlogsPage = lazy(() => import("../Pages/BlogsPage"));
 const BlogDetailPage = lazy(() => import("../Pages/BlogDetailPage"));
 const AdminBlogPage = lazy(() => import("../Pages/AdminBlogPage"));
+const PricingGuide = lazy(() => import("../Pages/PricingGuide"));
 const PrivacyPolicy = lazy(() => import("../Pages/PrivacyPolicy"));
 const TermsConditions = lazy(() => import("../Pages/TermsConditions"));
 const CaseStudiesPage = lazy(() => import("../Pages/CaseStudiesPage"));
@@ -45,6 +46,7 @@ const AllRoutes = () => {
         <Route path="/case-studies/defi-protocol-launch" element={<CaseStudyDetailPage slug="defi-protocol-launch" />} />
         <Route path="/case-studies/saas-seo-growth" element={<CaseStudyDetailPage slug="saas-seo-growth" />} />
         <Route path="/futurise-admin/blog" element={<AdminBlogPage />} />
+        <Route path="/pricing" element={<PricingGuide />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsConditions />} />
         <Route path="*" element={<NotFound />} />

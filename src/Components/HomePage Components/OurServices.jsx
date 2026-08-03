@@ -71,7 +71,7 @@ const ServiceCard = ({ el, index }) => (
         _groupHover={{ transform: "scale(1.08)" }}
         bg="bg.canvas"
       >
-        <Image src={el.icon} alt={`${el.serviceName} icon`} w="28px" h="28px" />
+        <Image src={el.icon} alt={`${el.serviceName} icon`} w="28px" h="28px" htmlWidth="28" htmlHeight="28" loading="lazy" decoding="async" />
       </Flex>
     </Box>
 
