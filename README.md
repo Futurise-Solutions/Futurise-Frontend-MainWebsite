@@ -48,6 +48,28 @@ Two mechanisms fix that, and both matter:
   all, at request time. Human visitors fall through to the SPA. AI crawlers matter most
   here: none of them execute JavaScript.
 
+## Routing (`vercel.json`)
+
+Vercel resolves in this order: **redirects → filesystem → rewrites.** `vercel.json` carries
+no comments — Vercel validates it against a strict schema and rejects unknown keys,
+including the `"//"` convention — so the reasoning lives here.
+
+**There is no `/(.*)` catch-all rewrite, deliberately.** That version returned HTTP 200
+with the SPA shell for *every* unknown URL, which Google treats as a soft 404: crawl
+budget goes to URLs that do not exist and they inflate the not-indexed count. Without it,
+unmatched paths fall through to `404.html` with a real 404 status.
+
+**Each real route is instead listed explicitly.** Dropping the catch-all made the site
+depend on `prerender.js` having produced a file for every route, and it cannot guarantee
+that — Puppeteer does not always launch on the build container. `/blog` shipped to
+production with no file behind it and served Vercel's raw `404: NOT_FOUND`. The explicit
+rewrites are a floor: the filesystem still wins whenever a prerendered file exists, so a
+healthy build behaves identically, but a route can never 404 again. Naming routes rather
+than restoring the catch-all keeps the soft-404 fix intact.
+
+**When adding a route,** add it in three places: `staticPages` (or `servicesData`) in
+`prerender.js`, the `rewrites` array in `vercel.json`, and `AllRoutes.jsx`.
+
 ## Environment variables
 
 See `.env.example`. Two kinds live there and the difference matters:

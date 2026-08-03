@@ -277,6 +277,10 @@ function injectMetadata(html, { title, description, imageUrl, keywords, url }) {
   let modified = html;
 
   const replaceMetaTag = (htmlText, attrName, newContent) => {
+    // A caller that has no value for this field must leave index.html's own tag in
+    // place. Replacing it would stamp the literal string "undefined" into the meta —
+    // worse than the generic site-wide default it overwrote.
+    if (newContent === undefined || newContent === null || newContent === '') return htmlText;
     const metaTagRegex = new RegExp(`<meta\\s+([^>]*?(?:name|property)=["']${attrName}["'][^>]*?)>`, 'is');
     return htmlText.replace(metaTagRegex, (match, attributes) => {
       if (attributes.includes('content=')) {
@@ -286,10 +290,16 @@ function injectMetadata(html, { title, description, imageUrl, keywords, url }) {
     });
   };
 
-  modified = modified.replace(/<title>[\s\S]*?<\/title>/i, `<title>${title}</title>`);
-  modified = modified.replace(/<link\s+[^>]*?rel=["']canonical["'][^>]*?>/is, (match) =>
-    match.replace(/href=(["'])(.*?)\1/is, `href=$1${url}$1`)
-  );
+  if (title) {
+    modified = modified.replace(/<title>[\s\S]*?<\/title>/i, `<title>${title}</title>`);
+  }
+  // The canonical must always be per-route, even when nothing else is known: leaving
+  // every page canonicalised to "/" would collapse the whole site into one URL.
+  if (url) {
+    modified = modified.replace(/<link\s+[^>]*?rel=["']canonical["'][^>]*?>/is, (match) =>
+      match.replace(/href=(["'])(.*?)\1/is, `href=$1${url}$1`)
+    );
+  }
 
   modified = replaceMetaTag(modified, 'description', description);
   modified = replaceMetaTag(modified, 'keywords', keywords);
@@ -553,7 +563,20 @@ ${urls}
   console.log(`✅ sitemap.xml generated with ${seen.size} URLs`);
 }
 
-// Last-resort path when Chrome is unavailable in the build environment.
+/*
+ * Last-resort path when Chrome is unavailable in the build environment.
+ *
+ * This used to write only /case-studies/* and blog-post meta, leaving /blog, /about,
+ * /contact, /portfolio, /pricing, /privacy, /terms and /service/* with no file on disk
+ * at all. Because vercel.json has no catch-all rewrite (deliberately — it caused soft
+ * 404s), those routes then served Vercel's raw "404: NOT_FOUND" in production. It
+ * shipped exactly that way once.
+ *
+ * Now every route in buildRouteList() gets a file. Bodies are still not prerendered —
+ * only Chrome can do that — but the route resolves, the SPA boots, and human visitors
+ * see the real page. vercel.json's explicit rewrites are the second layer of the same
+ * guarantee.
+ */
 async function metaOnlyFallback(template) {
   for (const slug of Object.keys(caseStudies)) {
     const study = caseStudies[slug];
@@ -567,9 +590,32 @@ async function metaOnlyFallback(template) {
       url: `${SITE_URL}/case-studies/${slug}`,
     }));
   }
+
+  // Service pages: each has a dedicated OG image, and Seo.jsx fills the rest at runtime.
+  for (const { slug, image } of servicesData) {
+    writeRoute(`/service/${slug}`, injectMetadata(template, {
+      imageUrl: `${SITE_URL}${image}`,
+      url: `${SITE_URL}/service/${slug}`,
+    }));
+  }
+
+  // The remaining static routes. Without these the SPA had no entry point for them.
+  for (const page of staticPages) {
+    writeRoute(`/${page}`, injectMetadata(template, {
+      imageUrl: `${SITE_URL}/home.png`,
+      url: `${SITE_URL}/${page}`,
+    }));
+  }
+
+  // 404.html still has to exist, or unmatched paths fall back to Vercel's error page.
+  fs.writeFileSync(path.join(DIST_PATH, '404.html'), template, 'utf-8');
+
   const blogs = await prerenderBlogMeta(template);
   writeSitemap(buildRouteList(), blogs);
-  console.log('⚠️  Meta-only fallback complete — bodies are NOT prerendered.');
+  console.log(
+    `⚠️  Meta-only fallback complete — ${buildRouteList().length} routes have files, ` +
+    'but bodies are NOT prerendered. Crawlers will see an empty <div id="root">.'
+  );
 }
 
 run();
