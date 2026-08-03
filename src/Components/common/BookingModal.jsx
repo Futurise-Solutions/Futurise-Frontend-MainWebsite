@@ -21,6 +21,7 @@ import {
 } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { useBooking } from "../../context/BookingContext";
+import { trackEvent, EVENTS } from "../../utils/analytics";
 
 const MotionBox = motion(Box);
 
@@ -46,9 +47,12 @@ const BENEFITS = [
 ];
 
 const BookingModal = () => {
-  const { isOpen, onClose } = useBooking();
+  const { isOpen, onClose, source } = useBooking();
 
   const handleBook = () => {
+    // The real conversion: the visitor has left for the booking calendar. Fired before
+    // window.open so a popup blocker cannot swallow the measurement too.
+    trackEvent(EVENTS.BOOKING_CALENDAR_OPEN, { location: source });
     window.open(BOOKING_URL, "_blank", "noopener,noreferrer");
     onClose();
   };

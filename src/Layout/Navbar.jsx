@@ -6,21 +6,28 @@ import {
 } from "@chakra-ui/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiMenu, FiChevronDown, FiArrowRight, FiArrowUpRight } from "react-icons/fi";
+import { FaWhatsapp } from "react-icons/fa6";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { navbarOptions, NavbarservicesOptions } from "../utils/Constant";
+import { navbarOptions, NavbarservicesOptions, CONTACT, whatsappLink } from "../utils/Constant";
 import { caseStudiesNav } from "../utils/Constant/caseStudies";
 import { Logo } from "../Components/common";
 import { useBooking } from "../context/BookingContext";
+import { trackEvent, EVENTS } from "../utils/analytics";
 
 const MotionBox = motion(Box);
 
 // ---- Desktop nav links with a shared moving highlight ----
+// Desktop nav is defined here rather than from `navbarOptions` because two entries are
+// dropdown triggers with no path of their own. Keep the two lists aligned — the mobile
+// menu still renders from `navbarOptions`, so an item added to only one of them appears
+// on one breakpoint and silently vanishes on the other.
 const NAV_ITEMS = [
   { label: "Home", path: "/" },
   { label: "About", path: "/about" },
   { label: "Services", path: null, isServices: true },
   { label: "Case Studies", path: null, isCaseStudies: true },
   { label: "Portfolio", path: "/portfolio" },
+  { label: "Pricing", path: "/pricing" },
   { label: "Blog", path: "/blog" },
   { label: "Contact", path: "/contact" },
 ];
@@ -38,7 +45,7 @@ const Highlight = () => (
   />
 );
 
-const ServicesMenu = ({ navigate, active, hovered, setHovered, index }) => {
+const ServicesMenu = ({ onBook, active, hovered, setHovered, index }) => {
   const showHighlight = hovered === index || (hovered === null && active);
   return (
     <Popover trigger="hover" placement="bottom" gutter={18} openDelay={0} closeDelay={120}>
@@ -73,9 +80,15 @@ const ServicesMenu = ({ navigate, active, hovered, setHovered, index }) => {
         _focus={{ outline: "none", boxShadow: "0 40px 80px -28px rgba(0,0,0,0.85)" }}
       >
         <SimpleGrid columns={3} spacing={2}>
+          {/* Real anchors, not click handlers. The services dropdown is the primary
+              path to all six service pages, and rendering it as onClick divs meant
+              those links did not exist for crawlers and could not be opened in a new
+              tab or reached by keyboard. */}
           {NavbarservicesOptions.map((s) => (
             <VStack
               key={s.option}
+              as={Link}
+              to={s.path}
               align="start"
               spacing={2}
               p={4}
@@ -84,11 +97,10 @@ const ServicesMenu = ({ navigate, active, hovered, setHovered, index }) => {
               transition="all .2s"
               role="group"
               border="1px solid transparent"
-              _hover={{ bg: "rgba(180,160,255,0.08)", borderColor: "rgba(180,160,255,0.25)", transform: "translateY(-2px)" }}
-              onClick={() => navigate(s.path)}
+              _hover={{ bg: "rgba(180,160,255,0.08)", borderColor: "rgba(180,160,255,0.25)", transform: "translateY(-2px)", textDecoration: "none" }}
             >
               <Flex w="40px" h="40px" align="center" justify="center" borderRadius="11px" bgGradient="linear(135deg, rgba(123,108,255,0.2), rgba(181,123,255,0.2))" border="1px solid" borderColor="rgba(180,160,255,0.25)">
-                <Image src={s.icon} alt={`${s.option} service icon`} w="20px" h="20px" />
+                <Image src={s.icon} alt={`${s.option} service icon`} w="20px" h="20px" htmlWidth="20" htmlHeight="20" loading="lazy" decoding="async" />
               </Flex>
               <Box>
                 <HStack spacing={1}>
@@ -102,7 +114,10 @@ const ServicesMenu = ({ navigate, active, hovered, setHovered, index }) => {
         </SimpleGrid>
         <Flex mt={2} px={4} py={3} borderRadius="14px" align="center" justify="space-between" bgGradient="linear(135deg, rgba(123,108,255,0.14), rgba(181,123,255,0.14))" border="1px solid" borderColor="rgba(180,160,255,0.2)">
           <Text fontSize="14px" color="text.muted">Not sure what you need? Let's figure it out together.</Text>
-          <Button size="sm" variant="gradient" rightIcon={<FiArrowRight />} onClick={() => navigate("/contact")}>Book a call</Button>
+          {/* Opens the booking modal directly. It previously routed to /contact, which
+              put a full page load between the visitor's highest-intent moment and the
+              action, and buried the booking calendar one further click down. */}
+          <Button size="sm" variant="gradient" rightIcon={<FiArrowRight />} onClick={() => onBook("services-dropdown")}>Book a call</Button>
         </Flex>
       </PopoverContent>
     </Popover>
@@ -143,12 +158,13 @@ const CaseStudiesMenu = ({ navigate, active, hovered, setHovered, index }) => {
           {caseStudiesNav.map((s) => (
             <VStack
               key={s.slug}
+              as={Link}
+              to={`/case-studies/${s.slug}`}
               align="start" spacing={2} p={4}
               borderRadius="14px" cursor="pointer"
               transition="all .2s" role="group"
               border="1px solid transparent"
-              _hover={{ bg: "rgba(180,160,255,0.08)", borderColor: "rgba(180,160,255,0.25)", transform: "translateY(-2px)" }}
-              onClick={() => navigate(`/case-studies/${s.slug}`)}
+              _hover={{ bg: "rgba(180,160,255,0.08)", borderColor: "rgba(180,160,255,0.25)", transform: "translateY(-2px)", textDecoration: "none" }}
             >
               <Box>
                 <HStack spacing={1}>
@@ -264,7 +280,7 @@ const Navbar = () => {
         >
           {NAV_ITEMS.map((item, i) =>
             item.isServices ? (
-              <ServicesMenu key="services" navigate={navigate} active={servicesActive} hovered={hovered} setHovered={setHovered} index={i} />
+              <ServicesMenu key="services" onBook={openBooking} active={servicesActive} hovered={hovered} setHovered={setHovered} index={i} />
             ) : item.isCaseStudies ? (
               <CaseStudiesMenu key="case-studies" navigate={navigate} active={caseStudiesActive} hovered={hovered} setHovered={setHovered} index={i} />
             ) : (
@@ -292,12 +308,30 @@ const Navbar = () => {
               size="sm"
               px={6}
               rightIcon={<FiArrowRight />}
-              onClick={openBooking}
+              onClick={() => openBooking("navbar-desktop")}
               sx={{ "& svg": { transition: "transform .25s" }, _hover: { "& svg": { transform: "translateX(4px)" } } }}
             >
               Book appointment
             </Button>
           </Box>
+          {/* WhatsApp is the default business channel in the UAE and India — two of the
+              five priority markets — and on a phone it is the lowest-friction way to
+              start a conversation. It previously lived only in the footer, a full page
+              scroll away from where mobile visitors actually decide to act. */}
+          <IconButton
+            as="a"
+            href={whatsappLink()}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackEvent(EVENTS.WHATSAPP_CLICK, { location: "navbar-mobile" })}
+            display={{ base: "inline-flex", lg: "none" }}
+            aria-label="Chat with Futurise Solutions on WhatsApp"
+            icon={<FaWhatsapp />}
+            variant="outlineGlow"
+            size="md"
+            color="#25D366"
+            _hover={{ color: "#25D366", borderColor: "#25D366" }}
+          />
           <IconButton
             display={{ base: "inline-flex", lg: "none" }}
             aria-label="Open menu"
@@ -373,7 +407,7 @@ const Navbar = () => {
                             transition="all .2s"
                           >
                             <Flex w="32px" h="32px" align="center" justify="center" borderRadius="9px" bg="rgba(180,160,255,0.12)">
-                              <Image src={s.icon} alt={`${s.option} service icon`} w="18px" h="18px" />
+                              <Image src={s.icon} alt={`${s.option} service icon`} w="18px" h="18px" htmlWidth="18" htmlHeight="18" loading="lazy" decoding="async" />
                             </Flex>
                             <Text fontSize="15px" color="text.muted">{s.option}</Text>
                           </HStack>
@@ -396,15 +430,39 @@ const Navbar = () => {
                 </MotionBox>
 
                 <MotionBox initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.28 }} pt={5}>
-                  <Button w="full" variant="gradient" size="lg" rightIcon={<FiArrowRight />} onClick={() => { openBooking(); onClose(); }}>
+                  <Button w="full" variant="gradient" size="lg" rightIcon={<FiArrowRight />} onClick={() => { openBooking("navbar-mobile"); onClose(); }}>
                     Book appointment
                   </Button>
+                  <Button
+                    as="a"
+                    href={whatsappLink()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => trackEvent(EVENTS.WHATSAPP_CLICK, { location: "navbar-drawer" })}
+                    w="full"
+                    mt={3}
+                    variant="outlineGlow"
+                    size="lg"
+                    leftIcon={<FaWhatsapp />}
+                  >
+                    Chat on WhatsApp
+                  </Button>
                   <VStack spacing={1} mt={4}>
-                    <Text as="a" href="mailto:business@futurisesolutions.com" fontSize="sm" color="text.muted" _hover={{ color: "accent.solid" }} transition="color .2s">
-                      business@futurisesolutions.com
+                    <Text
+                      as="a"
+                      href={`mailto:${CONTACT.email}`}
+                      onClick={() => trackEvent(EVENTS.EMAIL_CLICK, { location: "navbar-drawer" })}
+                      fontSize="sm" color="text.muted" _hover={{ color: "accent.solid" }} transition="color .2s"
+                    >
+                      {CONTACT.email}
                     </Text>
-                    <Text as="a" href="tel:+917665013356" fontSize="sm" color="text.muted" _hover={{ color: "accent.solid" }} transition="color .2s">
-                      +91 76650 13356
+                    <Text
+                      as="a"
+                      href={`tel:${CONTACT.phoneHref}`}
+                      onClick={() => trackEvent(EVENTS.PHONE_CLICK, { location: "navbar-drawer" })}
+                      fontSize="sm" color="text.muted" _hover={{ color: "accent.solid" }} transition="color .2s"
+                    >
+                      {CONTACT.phoneDisplay}
                     </Text>
                   </VStack>
                 </MotionBox>

@@ -1,14 +1,18 @@
 import React from "react";
 import { Box, Container, Flex, Heading, Text, VStack, HStack, Icon, SimpleGrid, Button } from "@chakra-ui/react";
 import { FiMail, FiPhone, FiMapPin, FiClock, FiCalendar } from "react-icons/fi";
+import { FaWhatsapp } from "react-icons/fa6";
 import { Reveal, Eyebrow, ContactForm, Seo } from "../Components/common";
 import ServicesWorldwide from "../Components/ContactCusCpmponents/ServicesWorldwide ";
 import ClientsReviews from "../Components/HomePage Components/ClientsReviews";
 import { useBooking } from "../context/BookingContext";
+import { AREAS_SERVED, AREAS_SERVED_ISO, CONTACT, whatsappLink } from "../utils/Constant";
+import { trackEvent, EVENTS } from "../utils/analytics";
 
 const contactInfo = [
-  { icon: FiMail, label: "Email us", value: "business@futurisesolutions.com", href: "mailto:business@futurisesolutions.com" },
-  { icon: FiPhone, label: "Call us", value: "+91 76650 13356", href: "tel:+917665013356" },
+  { icon: FiMail, label: "Email us", value: CONTACT.email, href: `mailto:${CONTACT.email}`, event: EVENTS.EMAIL_CLICK },
+  { icon: FiPhone, label: "Call us", value: CONTACT.phoneDisplay, href: `tel:${CONTACT.phoneHref}`, event: EVENTS.PHONE_CLICK },
+  { icon: FaWhatsapp, label: "WhatsApp", value: "Chat with us now", href: whatsappLink(), external: true, event: EVENTS.WHATSAPP_CLICK },
   { icon: FiMapPin, label: "Location", value: "Wellington, NZ · Serving worldwide" },
   { icon: FiClock, label: "Working hours", value: "Mon–Fri, 9:00 AM – 6:00 PM" },
 ];
@@ -44,7 +48,7 @@ const ContactUs = () => {
             "email": "business@futurisesolutions.com",
             "telephone": "+91-7665013356",
             "address": { "@type": "PostalAddress", "addressLocality": "Wellington Central", "postalCode": "6011", "addressCountry": "NZ" },
-            "areaServed": ["New Zealand", "India", "United States", "United Kingdom", "Australia", "United Arab Emirates", "Canada", "Worldwide"],
+            "areaServed": AREAS_SERVED,
             "contactPoint": [
               {
                 "@type": "ContactPoint",
@@ -52,7 +56,7 @@ const ContactUs = () => {
                 "email": "business@futurisesolutions.com",
                 "telephone": "+91-7665013356",
                 "availableLanguage": ["English"],
-                "areaServed": ["NZ", "IN", "US", "GB", "AU", "AE", "CA"],
+                "areaServed": AREAS_SERVED_ISO,
                 "hoursAvailable": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "09:00", "closes": "18:00" }
               }
             ]
@@ -86,6 +90,9 @@ const ContactUs = () => {
                       key={c.label}
                       as={c.href ? "a" : "div"}
                       href={c.href}
+                      target={c.external ? "_blank" : undefined}
+                      rel={c.external ? "noopener noreferrer" : undefined}
+                      onClick={c.event ? () => trackEvent(c.event, { location: "contact-page-cards" }) : undefined}
                       spacing={3}
                       p={4}
                       borderRadius="14px"
@@ -115,7 +122,7 @@ const ContactUs = () => {
                   size="lg"
                   variant="gradient"
                   leftIcon={<Icon as={FiCalendar} />}
-                  onClick={openBooking}
+                  onClick={() => openBooking("contact-page")}
                   mt={1}
                 >
                   Book a free strategy call

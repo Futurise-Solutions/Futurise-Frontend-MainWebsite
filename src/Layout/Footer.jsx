@@ -3,11 +3,12 @@ import emailjs from "@emailjs/browser";
 import {
   Box, SimpleGrid, Text, Input, Button, HStack, VStack, Flex, Icon, Image, Link as CLink, useToast,
 } from "@chakra-ui/react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FiArrowRight, FiArrowUpRight, FiMail, FiPhone, FiMapPin } from "react-icons/fi";
-import { FaLinkedinIn, FaInstagram, FaFacebookF, FaXTwitter } from "react-icons/fa6";
+import { FaLinkedinIn, FaInstagram, FaFacebookF, FaXTwitter, FaWhatsapp } from "react-icons/fa6";
 import { Logo } from "../Components/common";
-import { NavbarservicesOptions, Projects } from "../utils/Constant";
+import { NavbarservicesOptions, Projects, CONTACT, whatsappLink, SOCIAL_PROFILES } from "../utils/Constant";
+import { trackEvent, EVENTS } from "../utils/analytics";
 
 const footerWork = Projects.filter((p) => p.featured).slice(0, 4);
 
@@ -35,15 +36,17 @@ const FLink = ({ to, children, onClick }) => (
   </Text>
 );
 
-const socials = [
-  { icon: FaLinkedinIn, label: "LinkedIn", href: "https://www.linkedin.com/company/futurisesolutions/" },
-  { icon: FaInstagram, label: "Instagram", href: "https://www.instagram.com/futurisesolutions" },
-  { icon: FaFacebookF, label: "Facebook", href: "https://www.facebook.com/share/1E6xe2C5DW/" },
-  { icon: FaXTwitter, label: "Twitter", href: "https://x.com/futurisesol" },
-];
+// Icons only. The URLs come from SOCIAL_PROFILES so the footer and schema.org `sameAs`
+// can never drift apart again — they already had, with X linked here but absent there.
+const socialIcons = {
+  LinkedIn: FaLinkedinIn,
+  Instagram: FaInstagram,
+  Facebook: FaFacebookF,
+  "X (Twitter)": FaXTwitter,
+};
+const socials = SOCIAL_PROFILES.map((p) => ({ ...p, icon: socialIcons[p.label] }));
 
 const Footer = () => {
-  const navigate = useNavigate();
   const toast = useToast();
   const [email, setEmail] = useState("");
 
@@ -68,6 +71,7 @@ const Footer = () => {
       )
       .then(
         () => {
+          trackEvent(EVENTS.NEWSLETTER_SUBSCRIBE, { location: "footer" });
           toast({ title: "You're subscribed!", description: "Thanks for joining the Futurise newsletter.", status: "success", duration: 4000, isClosable: true });
           setEmail("");
           setIsSubscribing(false);
@@ -181,26 +185,56 @@ const Footer = () => {
             <FLink to="/">Home</FLink>
             <FLink to="/about">About Us</FLink>
             <FLink to="/portfolio">Portfolio</FLink>
+            <FLink to="/pricing">Pricing</FLink>
+            <FLink to="/case-studies">Case Studies</FLink>
             <FLink to="/contact">Contact</FLink>
           </FooterCol>
 
           <FooterCol title="Services">
-            {NavbarservicesOptions.slice(0, 5).map((s) => (
-              <FLink key={s.option} onClick={() => navigate(s.path)}>{s.option}</FLink>
+            {/* `to` matters: without it FLink falls back to a <span> with no href, so
+                these were invisible to crawlers and passed no link equity. Listing all
+                services rather than slice(0, 5), which silently dropped one. */}
+            {NavbarservicesOptions.map((s) => (
+              <FLink key={s.option} to={s.path}>{s.option}</FLink>
             ))}
           </FooterCol>
 
           <FooterCol title="Get in touch">
             <HStack spacing={3} align="start">
               <Icon as={FiMail} color="accent.solid" mt={1} />
-              <CLink href="mailto:business@futurisesolutions.com" fontSize="15px" color="text.muted" _hover={{ color: "text.primary" }} transition="color .2s">
-                business@futurisesolutions.com
+              <CLink
+                href={`mailto:${CONTACT.email}`}
+                onClick={() => trackEvent(EVENTS.EMAIL_CLICK, { location: "footer" })}
+                fontSize="15px" color="text.muted" _hover={{ color: "text.primary" }} transition="color .2s"
+              >
+                {CONTACT.email}
               </CLink>
             </HStack>
             <HStack spacing={3} align="start">
               <Icon as={FiPhone} color="accent.solid" mt={1} />
-              <CLink href="tel:+917665013356" fontSize="15px" color="text.muted" _hover={{ color: "text.primary" }} transition="color .2s">
-                +91 76650 13356
+              <CLink
+                href={`tel:${CONTACT.phoneHref}`}
+                onClick={() => trackEvent(EVENTS.PHONE_CLICK, { location: "footer" })}
+                fontSize="15px" color="text.muted" _hover={{ color: "text.primary" }} transition="color .2s"
+              >
+                {CONTACT.phoneDisplay}
+              </CLink>
+            </HStack>
+            {/* WhatsApp sits on every page because it is the default business channel
+                in the UAE and India, and the lowest-friction way to start a
+                conversation from a phone. */}
+            <HStack spacing={3} align="start">
+              <Icon as={FaWhatsapp} color="accent.solid" mt={1} />
+              <CLink
+                href={whatsappLink()}
+                isExternal
+                onClick={() => trackEvent(EVENTS.WHATSAPP_CLICK, { location: "footer" })}
+                fontSize="15px"
+                color="text.muted"
+                _hover={{ color: "text.primary" }}
+                transition="color .2s"
+              >
+                Chat on WhatsApp
               </CLink>
             </HStack>
             <HStack spacing={3} align="start">

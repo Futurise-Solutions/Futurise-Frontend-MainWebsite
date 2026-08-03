@@ -9,20 +9,13 @@
 
     <!-- Favicon -->
 
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/favicon-new.png?v=2"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="192x192"
-      href="/favicon-new.png?v=2"
-    />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon-new.png?v=2" />
-    <link rel="shortcut icon" href="/favicon-new.png?v=2" />
+    <!-- SVG first: 1 KB and resolution-independent, versus the 116 KB PNG that was
+         previously downloaded for a 32x32 slot. Every current browser prefers it, and
+         the PNG stays only for Apple touch icons, which must be raster. -->
+    <link rel="icon" type="image/svg+xml" href="/futurise-logo.svg?v=3" />
+    <!-- 180x180 exactly, not the 1254x1254 master: the slot is 180 CSS px, so the large
+         file was 116 KB downloaded to render 20 KB worth of pixels. -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo-mark-180.png?v=3" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#08080d" />
@@ -119,11 +112,10 @@
             "logo": "https://www.futurisesolutions.com/favicon-new.png",
             "image": "https://www.futurisesolutions.com/home.png",
             "slogan": "Full-cycle digital product studio",
-            "description": "Futurise Solutions is a full-cycle digital product studio that designs, builds and scales AI & ML systems, SaaS platforms, web and mobile apps, UI/UX design, blockchain, and digital marketing for startups, founders and enterprises.",
+            "description": "Futurise Solutions is a full-cycle digital product studio that designs, builds and scales AI & ML systems, SaaS platforms, web and mobile apps, UI/UX design, blockchain, and digital marketing for startups, founders and enterprises. Registered in Wellington, New Zealand, with delivered client work in the United Arab Emirates, the United States and India.",
             "foundingDate": "2024",
             "email": "business@futurisesolutions.com",
             "telephone": "+91-7665013356",
-            "numberOfEmployees": { "@type": "QuantitativeValue", "minValue": 10 },
             "knowsLanguage": ["English"],
             "address": {
               "@type": "PostalAddress",
@@ -132,7 +124,7 @@
               "postalCode": "6011",
               "addressCountry": "NZ"
             },
-            "areaServed": ["New Zealand", "India", "United States", "United Kingdom", "Australia", "United Arab Emirates", "Canada", "Worldwide"],
+            "areaServed": ["New Zealand", "United Arab Emirates", "United States", "Canada", "India", "United Kingdom", "Australia"],
             "contactPoint": {
               "@type": "ContactPoint",
               "contactType": "sales",
@@ -143,7 +135,8 @@
             "sameAs": [
               "https://www.linkedin.com/company/futurisesolutions/",
               "https://www.instagram.com/futurisesolutions",
-              "https://www.facebook.com/share/1E6xe2C5DW/"
+              "https://www.facebook.com/share/1E6xe2C5DW/",
+              "https://x.com/futurisesol"
             ],
             "knowsAbout": [
               "AI Development", "AI Agents", "LLM Integration", "RAG Systems", "Machine Learning",

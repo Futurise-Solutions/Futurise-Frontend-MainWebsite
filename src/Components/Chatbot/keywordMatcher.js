@@ -29,7 +29,9 @@ const fallbackKB = [
   // ── Portfolio / Past Work ────────────────────────────────────────────
   {
     keywords: ["portfolio", "project", "past work", "example", "case study", "built", "clients", "showcase", "sample", "previous", "done before"],
-    answer: "We've delivered 30+ projects including HOMIES, Marty-QR, GDT Exchange, and more. Check our portfolio page!",
+    // Keep the figure in step with `companyStats` in utils/Constant/index.js — a chatbot
+    // quoting a different number than the home page is the fastest way to look careless.
+    answer: "We've delivered 25+ projects including HOMIES, Marty-QR, GDT Exchange, and more. Check our portfolio page!",
   },
 
   // ── Timeline / Delivery ──────────────────────────────────────────────
@@ -83,7 +85,10 @@ const fallbackKB = [
   // ── Team / Company Info ───────────────────────────────────────────────
   {
     keywords: ["team", "who are you", "about", "people", "member", "developer", "staff", "company", "agency", "studio", "futurise", "founded", "experience", "years"],
-    answer: "We're a senior team of developers, designers, and strategists. 30+ projects delivered with a 97% client retention rate.",
+    // The "97% client retention rate" that used to sit here was dropped: it implies a
+    // tracked metric nobody can produce on request, and it is the first claim an informed
+    // buyer discounts. Concrete scope persuades better than an invented percentage.
+    answer: "We're a senior team of developers, designers, and strategists — 25+ projects delivered for 15+ clients across 4+ countries, spanning AI, web, mobile, UI/UX, blockchain and marketing.",
   },
 
   // ── Tech Stack ────────────────────────────────────────────────────────

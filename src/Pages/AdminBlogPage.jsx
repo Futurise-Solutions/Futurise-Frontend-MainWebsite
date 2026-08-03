@@ -13,7 +13,8 @@ import {
   FiPlus, FiSearch, FiEye, FiEdit2, FiTrash2, FiUpload, FiLogOut, FiCalendar,
 } from "react-icons/fi";
 import { Logo, Seo } from "../Components/common";
-import { ADMIN_PASSWORD, mediaUrl } from "../config";
+import { mediaUrl } from "../config";
+import { adminLogin, adminSession, adminLogout } from "../api/adminAuth";
 import {
   getAllBlogsAdmin, createBlog, updateBlog, deleteBlog, uploadImage, toBlogArray,
 } from "../api/blogs";
@@ -95,11 +96,29 @@ const TagInput = ({ value = [], onChange, placeholder = "Type, use commas, or pr
 /* ---------- Password gate ---------- */
 const LoginGate = ({ onSuccess }) => {
   const [pw, setPw] = useState("");
+  const [busy, setBusy] = useState(false);
   const toast = useToast();
-  const submit = (e) => {
+
+  // The password is checked by /api/admin-login on the server. It is never present in
+  // this bundle — the previous version compared against a VITE_ variable, which Vite
+  // inlines into public JavaScript.
+  const submit = async (e) => {
     e.preventDefault();
-    if (pw === ADMIN_PASSWORD) onSuccess();
-    else toast({ title: "Incorrect password", status: "error", duration: 2500, position: "top" });
+    setBusy(true);
+    try {
+      const ok = await adminLogin(pw);
+      if (ok) return onSuccess();
+      toast({ title: "Incorrect password", status: "error", duration: 2500, position: "top" });
+    } catch (err) {
+      toast({
+        title: err.message === "not-configured" ? "Admin access is not configured" : "Could not sign in",
+        description: err.message === "not-configured" ? "Set ADMIN_PASSWORD for this deployment." : "Please try again.",
+        status: "error", duration: 4000, position: "top",
+      });
+    } finally {
+      setBusy(false);
+      setPw("");
+    }
   };
   return (
     <Box minH="100vh" display="grid" placeItems="center" px={5}>
@@ -113,7 +132,7 @@ const LoginGate = ({ onSuccess }) => {
             <FormLabel fontSize="sm" color="text.muted">Password</FormLabel>
             <Input type="password" value={pw} onChange={(e) => setPw(e.target.value)} placeholder="Enter password" bg="rgba(255,255,255,0.05)" borderColor="border.subtle" autoFocus />
           </FormControl>
-          <Button type="submit" variant="gradient" size="lg" w="full">Enter Dashboard</Button>
+          <Button type="submit" variant="gradient" size="lg" w="full" isLoading={busy} loadingText="Checking…">Enter Dashboard</Button>
         </VStack>
       </Box>
     </Box>
@@ -441,11 +460,34 @@ const Dashboard = ({ onLogout }) => {
 };
 
 const AdminBlogPage = () => {
-  const [authed, setAuthed] = useState(false);
+  // `null` = still asking the server. The session cookie is HttpOnly, so only the server
+  // can answer whether it is valid; this also keeps a page refresh from forcing a
+  // re-login while the session is still good.
+  const [authed, setAuthed] = useState(null);
+
+  useEffect(() => {
+    let active = true;
+    adminSession().then((ok) => active && setAuthed(ok));
+    return () => { active = false; };
+  }, []);
+
+  const logout = async () => {
+    await adminLogout();
+    setAuthed(false);
+  };
+
   return (
     <Box bg="bg.canvas" minH="100vh">
       <Seo title="Admin" noindex path="/futurise-admin/blog" />
-      {authed ? <Dashboard onLogout={() => setAuthed(false)} /> : <LoginGate onSuccess={() => setAuthed(true)} />}
+      {authed === null ? (
+        <Flex minH="100vh" align="center" justify="center">
+          <Spinner thickness="3px" speed="0.7s" size="xl" color="brand.400" emptyColor="rgba(255,255,255,0.08)" />
+        </Flex>
+      ) : authed ? (
+        <Dashboard onLogout={logout} />
+      ) : (
+        <LoginGate onSuccess={() => setAuthed(true)} />
+      )}
     </Box>
   );
 };

@@ -65,7 +65,23 @@ const Seo = ({
   modifiedTime = "",
   section = "",
 }) => {
-  const fullTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
+  // Google renders roughly 60 characters of a title before truncating. Appending the
+  // brand unconditionally pushed 9 of 14 pages past that, so the suffix was cut
+  // mid-word and the keyword at the end of the title was lost — and pages that already
+  // ended with the brand rendered it twice.
+  //
+  // The brand is kept whenever it fits and dropped when it would cost visible keyword
+  // space. That trade is right while the brand has little recognition outside India:
+  // on a non-branded query the keyword earns the click, not the company name.
+  const TITLE_LIMIT = 60;
+  const withBrand = `${title} | ${SITE_NAME}`;
+  const fullTitle = !title
+    ? SITE_NAME
+    : title.includes(SITE_NAME)
+      ? title
+      : withBrand.length <= TITLE_LIMIT
+        ? withBrand
+        : title;
   const url = `${SITE_URL}${path}`;
   const ogImage = image
     ? (/^https?:\/\//i.test(image) ? image : `${SITE_URL}${image}`)

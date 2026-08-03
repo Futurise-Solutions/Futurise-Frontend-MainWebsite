@@ -17,8 +17,9 @@ const MotionBox = motion(Box);
 const HeroBlog = ({ blog }) => (
   <Box position="relative" minH={{ base: "440px", md: "520px" }} overflow="hidden" display="flex" alignItems="center">
     <Box position="absolute" inset={0}>
+      {/* Featured-post backdrop at the top of /blog — the LCP element on this page. */}
       {blog.featuredImage && (
-        <Image src={mediaUrl(blog.featuredImage)} alt={blog.title} w="full" h="full" objectFit="cover" />
+        <Image src={mediaUrl(blog.featuredImage)} alt={blog.title} w="full" h="full" loading="eager" fetchpriority="high" decoding="async" objectFit="cover" />
       )}
       <Box position="absolute" inset={0} bgGradient="linear(to-r, rgba(8,8,13,0.95) 0%, rgba(8,8,13,0.7) 55%, rgba(8,8,13,0.25) 100%)" />
       <Box position="absolute" inset={0} bgGradient="linear(to-t, rgba(8,8,13,0.9), transparent 50%)" />

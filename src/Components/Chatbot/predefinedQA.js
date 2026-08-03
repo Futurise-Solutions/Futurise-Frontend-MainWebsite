@@ -21,7 +21,7 @@ export const predefinedAnswers = {
     "We work on custom quotes based on your project scope. Book a free call and we'll give you a clear estimate.",
 
   "Show me your portfolio":
-    "We've delivered 30+ projects including HOMIES, Marty-QR, GDT Exchange, and more. Check our portfolio page!",
+    "We've delivered 25+ projects including HOMIES, Marty-QR, GDT Exchange, and more. Check our portfolio page!",
 
   "How can I contact you?":
     "Email us at business@futurisesolutions.com, call +91 76650 13356, or use our contact page. We reply within hours.",

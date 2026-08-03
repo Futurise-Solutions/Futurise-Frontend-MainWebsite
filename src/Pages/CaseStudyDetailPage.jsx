@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import {
   Box, Container, Flex, Heading, Text, Button, SimpleGrid,
-  HStack, VStack, Icon, Badge, Stack, Divider, List, ListItem,
-  ListIcon, Avatar, Wrap, WrapItem, Tag,
+  HStack, VStack, Icon, Badge, Stack, Divider,
+  Avatar, Wrap, WrapItem, Tag,
 } from "@chakra-ui/react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useParams, useNavigate, Link } from "react-router-dom";
@@ -310,7 +310,7 @@ const CaseStudyDetailPage = ({ slug: propSlug }) => {
               </Reveal>
               <Reveal delay={0.15}>
                 <Stack direction={{ base: "column", sm: "row" }} spacing={4} pt={2}>
-                  <Button variant="gradient" size="lg" rightIcon={<FiArrowRight />} onClick={openBooking}>
+                  <Button variant="gradient" size="lg" rightIcon={<FiArrowRight />} onClick={() => openBooking("case-study-detail")}>
                     Start a similar project
                   </Button>
                   <Button variant="outlineGlow" size="lg" onClick={() => navigate("/case-studies")}>
@@ -729,7 +729,7 @@ const CaseStudyDetailPage = ({ slug: propSlug }) => {
         highlight="success story."
         subtitle="Book a free 45-minute strategy call. We'll scope your project, recommend the best approach, and give you a clear roadmap — no strings attached."
         primaryLabel="Book appointment"
-        onPrimary={openBooking}
+        onPrimary={() => openBooking("case-study-detail-cta")}
         secondaryLabel="View all case studies"
         secondaryTo="/case-studies"
       />

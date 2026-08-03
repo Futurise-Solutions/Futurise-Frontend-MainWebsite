@@ -84,7 +84,7 @@ const HeroSection = () => {
                 <Button variant="gradient" size="lg" rightIcon={<FiArrowRight />} onClick={() => navigate("/contact")}>
                   Start your project
                 </Button>
-                <Button variant="outlineGlow" size="lg" onClick={openBooking}>
+                <Button variant="outlineGlow" size="lg" onClick={() => openBooking("home-hero")}>
                   Book appointment
                 </Button>
               </Stack>
@@ -147,7 +147,14 @@ const HeroSection = () => {
                     alt="HOMIES property management dashboard built by Futurise Solutions, showing income, expenses, and unit analytics"
                     w="full"
                     display="block"
+                    // This is the LCP element on the home page. `fetchpriority="high"`
+                    // pulls it out of the default low-priority queue for in-body images;
+                    // the intrinsic size lets the browser reserve its height up front
+                    // instead of reflowing the hero when it lands.
                     loading="eager"
+                    fetchpriority="high"
+                    htmlWidth="1400"
+                    htmlHeight="716"
                   />
                 </Box>
               </Box>

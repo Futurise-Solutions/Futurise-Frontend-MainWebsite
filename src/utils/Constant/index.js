@@ -12,8 +12,13 @@ import {
   FaClipboardList, FaPencilRuler, FaBullseye, FaHammer, FaCheckCircle, FaRocket, FaTools,
 } from "react-icons/fa";
 
-// NOTE: testimonials, client names, project case studies and partner logos below are
-// realistic SAMPLE content meant to be replaced with your real data. Copy/services are final.
+// TRUST CONTENT POLICY
+// Everything in this file that a visitor could read as evidence — stats, testimonials,
+// client names, logos — must be verifiable against real delivered work. Illustrative or
+// placeholder social proof is not acceptable here: fabricated testimonials breach
+// Google's spam policies and are prohibited outright by the FTC's 2024 Rule on Consumer
+// Reviews and Testimonials, the NZ Fair Trading Act and UAE consumer protection law.
+// When adding a testimonial, add the matching project to `Projects` in the same commit.
 
 // **************** OUR SERVICES ****************
 export const OurServiceData = [
@@ -61,43 +66,175 @@ export const OurServiceData = [
   },
 ];
 
-// **************** COMPANY STATS ****************
-export const companyStats = [
-  { value: 30, suffix: "+", label: "Projects delivered" },
-  { value: 14, suffix: "+", label: "Happy clients worldwide" },
-  { value: 10, suffix: "+", label: "Team Members" },
-  { value: 97, suffix: "%", label: "Client retention rate" },
+// **************** CONTACT CHANNELS ****************
+// One definition for every way to reach the company, so a number can be changed in a
+// single place. WhatsApp previously appeared only inside the chatbot's fallback panel —
+// several clicks deep — despite being the default business channel in the UAE and India,
+// two of the five priority markets.
+export const CONTACT = {
+  email: "business@futurisesolutions.com",
+  phoneDisplay: "+91 76650 13356",
+  phoneHref: "+917665013356",
+  whatsappHref: "https://wa.me/917665013356",
+  // Pre-filling the first message measurably lifts WhatsApp reply rates: it removes the
+  // "what do I even say" pause that kills the enquiry before it starts.
+  whatsappMessage: "Hi Futurise Solutions — I'd like to discuss a project.",
+  address: {
+    line1: "Huddart Parker Building",
+    line2: "Wellington Central",
+    line3: "Wellington 6011, New Zealand",
+    mapsUrl:
+      "https://maps.google.com/?q=Huddart+Parker+Building,+Wellington+Central,+Wellington+6011,+New+Zealand",
+  },
+};
+
+/** WhatsApp deep link with the opening message pre-filled. */
+export const whatsappLink = (message = CONTACT.whatsappMessage) =>
+  `${CONTACT.whatsappHref}?text=${encodeURIComponent(message)}`;
+
+// **************** SOCIAL PROFILES ****************
+// Drives both the footer icons and schema.org `sameAs`. These had drifted: the footer
+// linked four profiles while `sameAs` declared three, so the X profile was invisible to
+// search engines as a corroborating signal.
+//
+// `sameAs` is a primary entity-disambiguation input, and this brand needs it — "Futurise
+// Solutions" is one character from Futurice, an established Finnish consultancy with a
+// Wikipedia entry. Every additional verified profile makes the two easier to tell apart.
+//
+// Keep index.html's Organization schema in sync by hand: it is static HTML, outside the
+// bundle, and therefore cannot import this.
+export const SOCIAL_PROFILES = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/futurisesolutions/" },
+  { label: "Instagram", href: "https://www.instagram.com/futurisesolutions" },
+  { label: "Facebook", href: "https://www.facebook.com/share/1E6xe2C5DW/" },
+  { label: "X (Twitter)", href: "https://x.com/futurisesol" },
 ];
 
-// **************** TESTIMONIALS (sample) ****************
+/** Bare URL list, the shape schema.org `sameAs` expects. */
+export const SAME_AS = SOCIAL_PROFILES.map((p) => p.href);
+
+// **************** MARKETS ****************
+// Single source of truth for schema.org `areaServed`. This list previously existed as
+// five separate copies across index.html, AboutUs, ContactusPage and ServicePage, and
+// they had already drifted apart — the service pages were missing entries the others had.
+// Ordered by commercial priority, so the primary markets lead.
+// Keep index.html's Organization schema in sync by hand: it is static HTML, outside the
+// bundle, and therefore cannot import this.
+export const AREAS_SERVED = [
+  "New Zealand",
+  "United Arab Emirates",
+  "United States",
+  "Canada",
+  "India",
+  "United Kingdom",
+  "Australia",
+];
+
+// ISO 3166-1 alpha-2 form, for schema that expects codes rather than names.
+export const AREAS_SERVED_ISO = ["NZ", "AE", "US", "CA", "IN", "GB", "AU"];
+
+// **************** COMPANY STATS ****************
+// Whole-business operating figures, attested by the company — NOT a count of what is
+// published on this site. An earlier version derived these from `Projects.length`, which
+// understated the business badly: /portfolio shows selected featured work, not every
+// engagement delivered, so it was never the right denominator.
+//
+// Two rules keep these credible:
+//   1. Rounded down, with "+". A "+" figure reads as "at least this", which is both
+//      honest and unfalsifiable. Precise-looking numbers ("27 projects", "97% retention")
+//      imply measurement a prospect can ask to see, and invite doubt when it is not there.
+//   2. Every figure must survive the question "can you talk me through that?" on a sales
+//      call. These are the claims a buyer tests first.
+//
+// `Core service areas` is deliberately exact, not "+": there are exactly six service
+// pages, and claiming more than the navigation shows is a contradiction a visitor spots
+// in one click. One exact number beside rounded ones also reads as measured rather than
+// decorative.
+//
+// Still deliberately avoided: satisfaction and retention percentages ("97% client
+// retention", "100% on-time delivery"). They imply a tracked metric, are the first thing
+// an informed buyer discounts, and add no persuasion that "25+ projects" does not.
+export const companyStats = [
+  { value: 25, suffix: "+", label: "Projects delivered" },
+  { value: 15, suffix: "+", label: "Clients served" },
+  { value: 4, suffix: "+", label: "Countries served" },
+  { value: 6, suffix: "", label: "Core service areas" },
+];
+
+// **************** CLIENT TESTIMONIALS ****************
+// Attributed, first-party quotes only. Every entry names a real client whose project
+// appears in `Projects` below, so any claim here can be checked against the portfolio.
+// Add new entries only with the client's permission; anonymise as "First-name L.,
+// Role — sector, city" if they prefer, but never invent a person or a company.
 export const testimonials = [
   {
     name: "Abbas Kagzi",
-    title: "Founder, Infinity Bay Trading",
+    title: "Founder, Infinity Bay Trading — Dubai, UAE",
     avatar: "",
     review:
       "We came to Futurise with a slow WordPress site that barely showed up on Google. They rebuilt it on Astro — it loads instantly now, feels far smoother, and with the new SEO content and blog we're finally getting found by buyers across the UAE. Professional team, clear communication, handled everything from design to Google Search Console.",
   },
+];
+
+// **************** DELIVERY RECORD ****************
+// Shown alongside testimonials as verifiable proof of work. Testimonials depend on a
+// client agreeing to be quoted; shipped projects do not — so this carries the trust
+// load while the testimonial list is still short, without inventing anything.
+//
+// Each entry is deliberately written as a self-contained factual statement
+// (client → market → what was built → what changed). That phrasing is what answer
+// engines quote: they retrieve and cite passages, not pages, so a sentence that names
+// the entity, the place and the outcome is far more likely to be surfaced than a
+// generic claim like "we build great software".
+export const clientProof = [
   {
-    name: "John Carter",
-    title: "CEO, Northwind Media",
-    avatar: "https://i.pravatar.cc/150?img=12",
-    review:
-      "Futurise rebuilt our streaming platform from the ground up. They were professional, fast, and shipped two weeks ahead of schedule. Engagement is up 40%.",
+    client: "Infinity Bay Trading",
+    location: "Dubai, UAE",
+    discipline: "Web Development & SEO",
+    work: "Rebuilt a slow WordPress site as an SEO-first Astro site",
+    outcome: "Faster page loads, a structured brand blog, and full Google Search Console indexing for UAE B2B buyers",
   },
   {
-    name: "Sofia Almeida",
-    title: "CTO, Ledgerly",
-    avatar: "https://i.pravatar.cc/150?img=47",
-    review:
-      "Their blockchain team delivered audited smart contracts with zero post-launch issues. Genuinely the most reliable partner we've worked with.",
+    client: "HOMIES PropTech",
+    location: "USA & India",
+    discipline: "SaaS & Analytics",
+    work: "Built a unified property-management dashboard",
+    outcome: "Real-time income, expense and unit analytics across thousands of listings from any device",
   },
   {
-    name: "Daniel Mwangi",
-    title: "Product Lead, FitFuel",
-    avatar: "https://i.pravatar.cc/150?img=33",
-    review:
-      "The redesign of our app transformed how users see the brand. Clean process, clear communication, and a beautiful end result.",
+    client: "Marty-QR",
+    location: "USA & India",
+    discipline: "AI & SaaS",
+    work: "Built an AI-powered review-management platform",
+    outcome: "QR-driven review capture and online reputation management for multi-location businesses",
+  },
+  {
+    client: "David Tishbi Jewelry",
+    location: "USA",
+    discipline: "E-commerce & CRO",
+    work: "Designed and built a luxury jewellery storefront",
+    outcome: "A conversion-focused catalogue spanning fine jewellery, watches and bullion",
+  },
+  {
+    client: "Estate Realty",
+    location: "India & USA",
+    discipline: "Web Platform & SEO",
+    work: "Built a property search and listings platform",
+    outcome: "Search-led property discovery with an SEO structure built for inbound lead generation",
+  },
+  {
+    client: "GDT Exchange",
+    location: "USA & India",
+    discipline: "Blockchain & FinTech",
+    work: "Built a perpetuals crypto trading terminal",
+    outcome: "A dense trading interface built for experienced traders without sacrificing usability",
+  },
+  {
+    client: "Platinum Peak Hotels",
+    location: "India & USA",
+    discipline: "UI/UX & CRO",
+    work: "Designed a direct hotel booking experience",
+    outcome: "A booking flow built to win reservations directly rather than through third-party platforms",
   },
 ];
 
@@ -341,28 +478,51 @@ export const faqs = [
   },
 ];
 
-// **************** CLIENT REVIEWS (sample) ****************
-export const reviews = [
+// **************** BLOG → SERVICE ROUTING ****************
+// Blog posts are 48 of the site's 68 indexable URLs and earn most of its impressions,
+// but every post used to dead-end at "Related articles" — no offer, no service link, no
+// way to enquire. Readers arriving on a cost or how-to query had nowhere to go.
+//
+// Categories are free text in the CMS and have drifted ("AI & ML", "AI Development",
+// "AI & Technology" all exist), so match on a normalised substring rather than exact
+// keys, and fall back to the AI service, which covers 27 of the 50 published posts.
+const BLOG_CATEGORY_ROUTES = [
+  [/blockchain|web3|crypto/i, "blockchain-development"],
+  [/marketing|seo|growth/i, "digital-marketing"],
+  [/ui|ux|design|creative/i, "ui-ux-design"],
+  [/app\b|mobile/i, "app-development"],
+  [/web|software/i, "web-development"],
+  [/ai|ml|machine learning|technology/i, "ai-ml-solutions"],
+];
+
+/** Best-matching service slug for a blog category. Never returns undefined. */
+export const serviceForBlogCategory = (category = "") => {
+  const match = BLOG_CATEGORY_ROUTES.find(([pattern]) => pattern.test(category));
+  return match ? match[1] : "ai-ml-solutions";
+};
+
+// **************** ENGAGEMENT COMMITMENTS ****************
+// How we actually work, stated as commitments a prospect can hold us to. These carry
+// real trust weight — they are concrete and falsifiable, unlike adjectives — and they
+// answer the questions buyers ask before enquiring, which is exactly the phrasing
+// answer engines extract when someone asks "how does Futurise Solutions work?".
+// Anything added here must be something the team genuinely does on every project.
+export const engagementCommitments = [
   {
-    avatar: "https://i.pravatar.cc/150?img=15",
-    name: "Marcus Veltri",
-    description:
-      "The Futurise team exceeded our expectations with exceptional service and innovative solutions. Highly efficient and delivered outstanding results ahead of schedule.",
-    rating: 5,
+    label: "Free discovery call",
+    detail: "A no-obligation call to scope the work before any money is discussed.",
   },
   {
-    avatar: "https://i.pravatar.cc/150?img=45",
-    name: "Jane Smith",
-    description:
-      "Working with Futurise was a fantastic experience. They were always available, provided valuable insights, and we couldn't be happier with the end result.",
-    rating: 5,
+    label: "Fixed-scope estimates",
+    detail: "You get a defined scope and price up front, not an open-ended hourly count.",
   },
   {
-    avatar: "https://i.pravatar.cc/150?img=52",
-    name: "Dev Mishra",
-    description:
-      "Truly remarkable. Their dedication, expertise, and attention to detail ensured our project was a great success. We highly recommend their services.",
-    rating: 5,
+    label: "Two-week sprints",
+    detail: "Working software you can review every two weeks, not a silent build.",
+  },
+  {
+    label: "NDA on request",
+    detail: "We sign your NDA before we see anything confidential.",
   },
 ];
 
@@ -382,6 +542,9 @@ export const navbarOptions = [
   { option: "About", path: "/about" },
   { option: "Services", path: "/" },
   { option: "Portfolio", path: "/portfolio" },
+  // "How much does this cost" is the question buyers arrive with and the intent the
+  // blog already ranks for, so it earns a top-level slot rather than a footer link.
+  { option: "Pricing", path: "/pricing" },
   { option: "Blog", path: "/blog" },
   { option: "Contact", path: "/contact" },
 ];
@@ -490,7 +653,7 @@ export const services = {
     title: "App Development",
     metaTitle: "App Development Company — iOS & Android (React Native)",
     metaDescription:
-      "Cross-platform iOS & Android apps built with React Native & Expo — fast, polished and scalable from one codebase. Serving NZ, India, the USA & worldwide.",
+      "Cross-platform iOS & Android apps from one React Native codebase. Fixed-scope quotes instead of open-ended hourly billing. Book a free 45-minute consultation.",
     whatWeDo: "What we do",
     description: "Cross-platform iOS & Android apps built with React Native & Expo.",
     details:
@@ -541,7 +704,7 @@ export const services = {
     title: "Web Development",
     metaTitle: "Web Development Company — React, Next.js & Node.js",
     metaDescription:
-      "Custom websites, SaaS platforms and web apps built with React, Next.js and Node.js — fast, SEO-ready and scalable. Serving NZ, India, the USA & worldwide.",
+      "Custom websites, SaaS platforms and web apps in React, Next.js and Node.js. Fixed-scope quotes, not hourly billing. Book a free 45-minute consultation.",
     whatWeDo: "What we do",
     description: "Responsive, robust web applications that perform.",
     details:
@@ -592,7 +755,7 @@ export const services = {
     title: "UI/UX Design",
     metaTitle: "UI/UX Design Agency — Product Design & Figma",
     metaDescription:
-      "User-centric UI/UX design — UX research, wireframing, high-fidelity Figma UI, prototypes and design systems that cut churn and lift conversions worldwide.",
+      "UX research, Figma UI and design systems that cut churn and lift conversions. Fixed-scope quotes, not hourly billing. Book a free 45-minute consultation.",
     whatWeDo: "What we do",
     description: "User-centric, visually stunning interfaces.",
     details:
@@ -638,7 +801,7 @@ export const services = {
     title: "Blockchain Development",
     metaTitle: "Blockchain Development — Smart Contracts, DeFi & Web3",
     metaDescription:
-      "Production-grade blockchain development — audited smart contracts, DeFi platforms, MEV bots and multi-chain dApps across Ethereum, Solana, Base & more.",
+      "Audited smart contracts, DeFi platforms and multi-chain dApps on Ethereum, Solana and Base. Fixed-scope quotes. Book a free 45-minute consultation.",
     whatWeDo: "What we do",
     description: "Real Web3 products — DeFi, bots, launchpads & multi-chain.",
     details:
@@ -684,7 +847,7 @@ export const services = {
     title: "AI & ML Solutions",
     metaTitle: "AI & ML Development — AI Agents, LLMs & Computer Vision",
     metaDescription:
-      "Production-ready AI — custom AI agents, LLM & RAG integrations, NLP and computer vision that automate workflows, cut costs and make your product smarter.",
+      "Custom AI agents and LLM & RAG integrations that automate real workflows and cut costs. Fixed-scope quotes. Book a free 45-minute consultation.",
     whatWeDo: "What we do",
     description: "Intelligent systems that learn, adapt, and automate.",
     details:
@@ -730,7 +893,7 @@ export const services = {
     title: "Digital Marketing",
     metaTitle: "Digital Marketing Agency — SEO, Paid Ads & CRO",
     metaDescription:
-      "Data-driven digital marketing — SEO, Google & Meta ads, paid social, CRO and analytics tied to real revenue, not vanity metrics. NZ, India, the USA & beyond.",
+      "SEO, Google & Meta ads and CRO tied to revenue, not vanity metrics. Fixed-scope quotes and monthly reporting. Book a free 45-minute consultation.",
     whatWeDo: "What we do",
     description: "Comprehensive, data-driven growth marketing.",
     details:

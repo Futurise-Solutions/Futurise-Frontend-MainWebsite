@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { useBooking } from "../context/BookingContext";
 
 /**
@@ -11,10 +11,13 @@ import { useBooking } from "../context/BookingContext";
  * - aria-label + role for full accessibility.
  */
 
+// The third item names only markets with delivered client work. It previously read
+// "Trusted by Businesses Across USA, Canada, New Zealand & UAE" — Canada and New Zealand
+// have no delivered projects, putting an unverifiable trust claim on every page.
 const TEXT =
   "\u00a0\u00a0\u00a0\u00a0\u2022\u00a0\u00a0\u00a0\u00a0\uD83D\uDCC5\u00a0Book a Complimentary 45-Minute Strategy Call" +
   "\u00a0\u00a0\u00a0\u00a0\u2022\u00a0\u00a0\u00a0\u00a0\uD83D\uDE80\u00a0AI Agents, SaaS, Web \u0026 Mobile Solutions" +
-  "\u00a0\u00a0\u00a0\u00a0\u2022\u00a0\u00a0\u00a0\u00a0\uD83C\uDF0E\u00a0Trusted by Businesses Across USA, Canada, New Zealand \u0026 UAE";
+  "    •    🌎 Delivering for Businesses in the UAE, USA & India";
 
 const AnnouncementBar = () => {
   const { onOpen } = useBooking();
@@ -132,8 +135,8 @@ const AnnouncementBar = () => {
         role="banner"
         aria-label="Book a free 45-minute strategy call with Futurise Solutions experts"
         tabIndex={0}
-        onClick={onOpen}
-        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onOpen(); } }}
+        onClick={() => onOpen("announcement-bar")}
+        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onOpen("announcement-bar"); } }}
       >
         <div className="announcement-inner">
           {/*

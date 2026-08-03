@@ -3,6 +3,8 @@ import emailjs from "@emailjs/browser";
 import { Box, Input, Textarea, Button, VStack, SimpleGrid, Text, HStack, Heading, Divider, useToast } from "@chakra-ui/react";
 import { FiSend } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
+import { whatsappLink } from "../../utils/Constant";
+import { trackEvent, EVENTS } from "../../utils/analytics";
 
 const field = {
   bg: "rgba(255,255,255,0.05)",
@@ -18,7 +20,7 @@ const field = {
   _focus: { borderColor: "brand.400", boxShadow: "0 0 0 1px var(--chakra-colors-brand-400)" },
 };
 
-const ContactForm = () => {
+const ContactForm = ({ location = "contact-page" }) => {
   const form = useRef();
   const toast = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -26,10 +28,14 @@ const ContactForm = () => {
   const sendEmail = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    // Whether the visitor described the project is the single most useful qualification
+    // signal available at submit time, and it is now optional — so record it.
+    const described = Boolean(form.current?.elements?.message?.value?.trim());
     emailjs
       .sendForm("service_jc2bgz1", "template_j9ap29a", form.current, "nURJDAbLK8UpUR46a")
       .then(
         () => {
+          trackEvent(EVENTS.CONTACT_FORM_SUBMIT, { location, has_message: described });
           toast({
             title: "Message sent successfully!",
             description: "We’ll get back to you within a couple of hours.",
@@ -42,6 +48,9 @@ const ContactForm = () => {
           setIsSubmitting(false);
         },
         () => {
+          // Tracked separately: a spike here is a broken form, which otherwise looks
+          // identical to a drop in demand.
+          trackEvent(EVENTS.CONTACT_FORM_ERROR, { location });
           toast({
             title: "Failed to send message.",
             description: "Please try again or email us directly.",
@@ -78,9 +87,10 @@ const ContactForm = () => {
             <Text fontSize="sm" color="text.muted">Fill out the form below or</Text>
             <HStack
               as="a"
-              href="https://wa.me/917665013356?text=Hello"
+              href={whatsappLink()}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackEvent(EVENTS.WHATSAPP_CLICK, { location: "contact-form" })}
               spacing={1}
               color="#25D366"
               fontWeight={500}
@@ -103,12 +113,17 @@ const ContactForm = () => {
           <Input name="user_email" type="email" placeholder="Email address" {...field} required />
           <Input name="phone" placeholder="Phone (optional)" {...field} />
         </SimpleGrid>
-        <Textarea name="message" placeholder="Tell us about your project…" minH="140px" {...field} required />
+        {/* Deliberately NOT required. A mandatory free-text box is the largest single
+            drop-off point in a B2B enquiry form: a visitor who is ready to talk but has
+            not yet written a brief abandons rather than composes one. Name + email is
+            enough to start the conversation, and the follow-up email can ask the rest. */}
+        <Textarea name="message" placeholder="Tell us about your project (optional)" minH="140px" {...field} />
         <Button type="submit" variant="gradient" size="lg" rightIcon={<FiSend />} isLoading={isSubmitting} loadingText="Sending…">
           Send message
         </Button>
         <Text fontSize="xs" color="text.faint" textAlign="center">
-          We respect your privacy. Your details are only used to respond to your enquiry.
+          Only name and email are required — we’ll reply within a couple of hours.
+          Your details are used solely to respond to your enquiry.
         </Text>
       </VStack>
     </Box>

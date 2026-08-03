@@ -36,8 +36,17 @@ export { default as logoEstate }       from "./PartnerLogos/logo-estate.svg";
 export { default as logoGdt }          from "./PartnerLogos/logo-gdt.svg";
 export { default as logoPlatinumPeak } from "./PartnerLogos/logo-platinum-peak.svg";
 
-// Brand logo (Futurise Solutions wordmark — new logo, transparent bg)
-export { default as logo } from "./New-logo.png";
+// Brand logo (Futurise Solutions wordmark — transparent bg).
+//
+// Points at the 354x120 build rather than the 1604x544 original. The logo renders at a
+// maximum of 40px tall (see Components/common/Logo.jsx) and appears in the navbar and
+// footer of every page, so the source file was shipping ~308 KB to render ~40 px — the
+// largest render-blocking asset on the site. 354x120 is 3x the largest render size, so
+// it stays sharp on high-DPI screens, at 24 KB.
+//
+// New-logo.png is kept as the source of truth for future exports. It is not imported
+// anywhere, so Vite does not include it in the bundle.
+export { default as logo } from "./New-logo-3x.png";
 
 // Portfolio project screenshots (real client work — optimized WebP, lazy-loaded where rendered)
 export { default as propertyDashboard1 } from "./Project Images/propertyDashbaord1.webp";

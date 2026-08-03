@@ -64,12 +64,19 @@ const Faqs = ({
                   _hover={{ borderColor: "rgba(180,160,255,0.35)" }}
                   transition="border-color .2s"
                 >
-                  <AccordionButton py={5} px={6} _hover={{ bg: "transparent" }} _expanded={{ color: "accent.solid" }}>
-                    <Box flex="1" textAlign="left" fontWeight={600} fontSize={{ base: "15px", md: "16px" }}>
-                      {faq.question}
-                    </Box>
-                    <AccordionIcon />
-                  </AccordionButton>
+                  {/* Questions are wrapped in a heading (Chakra's documented accordion
+                      pattern) so they form real document structure. Search and answer
+                      engines match FAQ headings to queries; a plain <div> is invisible
+                      to that. The heading wraps the button rather than sitting inside
+                      it, since <button> only accepts phrasing content. */}
+                  <Box as="h3" m={0}>
+                    <AccordionButton py={5} px={6} _hover={{ bg: "transparent" }} _expanded={{ color: "accent.solid" }}>
+                      <Box flex="1" textAlign="left" fontWeight={600} fontSize={{ base: "15px", md: "16px" }}>
+                        {faq.question}
+                      </Box>
+                      <AccordionIcon />
+                    </AccordionButton>
+                  </Box>
                   <AccordionPanel px={6} pb={5} color="text.muted" lineHeight={1.7}>
                     {faq.answer}
                   </AccordionPanel>

@@ -2,6 +2,7 @@ import { useState, useEffect, lazy, Suspense } from "react";
 import { Box, Flex, IconButton, Spinner, Text, keyframes, Icon } from "@chakra-ui/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiX } from "react-icons/fi";
+import { trackEvent, EVENTS } from "../../utils/analytics";
 
 const pulseGlow = keyframes`
   0% { box-shadow: 0 12px 30px -8px rgba(123,108,255,0.7); }
@@ -65,6 +66,17 @@ const ChatBubble = () => {
   const [open, setOpen] = useState(false);
   const [showPrompt, setShowPrompt] = useState(false);
   const [dismissed, setDismissed] = useState(false);
+
+  // Opening the chat is an intent signal, not a lead — tracked so the widget's
+  // contribution to enquiries can be judged rather than assumed. Only the opening
+  // transition is recorded; closing is not a conversion event.
+  const toggleChat = (next) => {
+    setOpen((wasOpen) => {
+      const willOpen = typeof next === "boolean" ? next : !wasOpen;
+      if (willOpen && !wasOpen) trackEvent(EVENTS.CHATBOT_OPEN, { location: "chat-bubble" });
+      return willOpen;
+    });
+  };
 
   // Esc closes the window.
   useEffect(() => {
@@ -179,7 +191,7 @@ const ChatBubble = () => {
             alignItems="center"
             gap={2.5}
             cursor="pointer"
-            onClick={() => setOpen(true)}
+            onClick={() => toggleChat(true)}
             sx={{
               "&::after": {
                 content: '""',
@@ -249,7 +261,7 @@ const ChatBubble = () => {
       <IconButton
         aria-label={open ? "Close chat" : "Open chat"}
         icon={open ? <Icon as={FiX} boxSize={{ base: "18px", sm: "22px" }} /> : <Icon as={RobotIcon} boxSize={{ base: "24px", sm: "30px" }} />}
-        onClick={() => setOpen((o) => !o)}
+        onClick={() => toggleChat()}
         position="fixed"
         bottom={{ base: "16px", sm: "24px" }}
         right={{ base: "16px", sm: "24px" }}

@@ -4,9 +4,10 @@ import {
   HStack, VStack, Icon, Badge, Stack,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import { FiArrowRight, FiArrowUpRight, FiClock, FiMapPin } from "react-icons/fi";
 import { caseStudies } from "../utils/Constant/caseStudies";
+import { companyStats } from "../utils/Constant";
 import { Reveal, CTASection, Seo } from "../Components/common";
 import { Eyebrow } from "../Components/common/SectionHeading";
 import { useBooking } from "../context/BookingContext";
@@ -79,43 +80,25 @@ const ServiceIcon = ({ service, size = 28 }) => {
   return icons[service] || null;
 };
 
-// ── Stat strip ───────────────────────────────────────────────────────────────
-const StatStrip = ({ results }) => (
-  <SimpleGrid columns={{ base: 2, md: 4 }} spacing={4} mt={8}>
-    {results.slice(0, 4).map((r) => (
-      <Box
-        key={r.label}
-        p={4}
-        borderRadius="14px"
-        bg="rgba(255,255,255,0.03)"
-        border="1px solid"
-        borderColor="border.subtle"
-        textAlign="center"
-      >
-        <Text fontSize={{ base: "22px", md: "26px" }} fontWeight={700} className="gradient-text" lineHeight={1}>
-          {r.value}
-        </Text>
-        <Text fontSize="xs" color="text.faint" mt={1} lineHeight={1.4}>{r.label}</Text>
-      </Box>
-    ))}
-  </SimpleGrid>
-);
-
 // ── Card ─────────────────────────────────────────────────────────────────────
 const CaseStudyCard = ({ study, index }) => {
-  const navigate = useNavigate();
   const colors = serviceColor[study.service] || serviceColor["AI & ML Solutions"];
   const gradient = `linear-gradient(135deg, ${colors.from}22, ${colors.to}11)`;
 
   return (
+    // Rendered as a real <a>. This card previously navigated via onClick with no href,
+    // so the case-studies hub — the one page whose entire job is linking to them —
+    // shipped zero crawlable links, and every case study was orphaned. An anchor also
+    // restores keyboard focus and open-in-new-tab, which the click handler broke.
     <MotionBox
+      as={RouterLink}
+      to={`/case-studies/${study.slug}`}
+      display="block"
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.55, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      onClick={() => navigate(`/case-studies/${study.slug}`)}
       cursor="pointer"
-      role="article"
       p={{ base: 6, md: 8 }}
       borderRadius="24px"
       bg={gradient}
@@ -127,6 +110,7 @@ const CaseStudyCard = ({ study, index }) => {
         borderColor: `${colors.from}55`,
         transform: "translateY(-4px)",
         boxShadow: `0 24px 60px -20px ${colors.from}33`,
+        textDecoration: "none",
       }}
       sx={{ transition: "all 0.3s cubic-bezier(0.22,1,0.36,1)" }}
     >
@@ -293,7 +277,7 @@ const CaseStudiesPage = () => {
             </Reveal>
             <Reveal delay={0.15}>
               <Stack direction={{ base: "column", sm: "row" }} spacing={4} pt={2}>
-                <Button variant="gradient" size="lg" rightIcon={<FiArrowRight />} onClick={openBooking}>
+                <Button variant="gradient" size="lg" rightIcon={<FiArrowRight />} onClick={() => openBooking("case-studies-hub")}>
                   Discuss your project
                 </Button>
                 <Button variant="outlineGlow" size="lg" onClick={() => window.scrollTo({ top: 500, behavior: "smooth" })}>
@@ -309,11 +293,14 @@ const CaseStudiesPage = () => {
               p={6} borderRadius="20px"
               bg="rgba(255,255,255,0.02)" border="1px solid" borderColor="border.subtle"
             >
+              {/* Derived from the shared `companyStats` so this strip cannot drift away
+                  from the figures shown on the home page — it previously carried its own
+                  hardcoded copy that outlived the numbers it duplicated. */}
               {[
-                { value: "6", label: "Case Studies Published" },
-                { value: "30+", label: "Projects Delivered" },
-                { value: "97%", label: "Client Retention Rate" },
-                { value: "14+", label: "Global Clients" },
+                { value: String(studies.length), label: "Case Studies Published" },
+                ...companyStats
+                  .slice(0, 3)
+                  .map((s) => ({ value: `${s.value}${s.suffix}`, label: s.label })),
               ].map((s) => (
                 <Box key={s.label} textAlign="center">
                   <Text fontSize={{ base: "28px", md: "36px" }} fontWeight={700} className="gradient-text" lineHeight={1}>{s.value}</Text>
@@ -340,7 +327,7 @@ const CaseStudiesPage = () => {
         highlight="worth writing about."
         subtitle="Book a free strategy call and let's talk about what's possible for your product."
         primaryLabel="Book appointment"
-        onPrimary={openBooking}
+        onPrimary={() => openBooking("case-studies-cta")}
       />
     </Box>
   );

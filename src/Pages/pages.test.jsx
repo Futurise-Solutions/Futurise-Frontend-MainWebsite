@@ -5,6 +5,8 @@ import HeroSection from "../Components/HomePage Components/HeroSection";
 import NotFound from "./NotFound";
 import ServicePage from "./ServicePage";
 import { CTASection, ContactForm, SectionHeading } from "../Components/common";
+import TeamSection from "../Components/AboutUs Components/TeamSection";
+import { team, initialsOf } from "../utils/Constant/team";
 
 // emailjs makes a network call — mock it for the ContactForm test.
 vi.mock("@emailjs/browser", () => ({
@@ -76,5 +78,27 @@ describe("ContactForm", () => {
     expect(screen.getByPlaceholderText("Email address")).toBeInTheDocument();
     expect(screen.getByPlaceholderText(/Tell us about your project/i)).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /Send message/i })).toBeInTheDocument();
+  });
+});
+
+// TeamSection is invisible in production until TEAM_PUBLISHED is flipped, so a crash in
+// it would go unnoticed right up until the moment it goes live in front of buyers.
+describe("TeamSection", () => {
+  it("renders the roster without crashing and shows a heading per member", () => {
+    renderWithProviders(<TeamSection />);
+    // Vitest runs with DEV semantics, so the preview branch renders every member.
+    team.forEach((m) => {
+      expect(screen.getByText(m.role), `role "${m.role}" missing`).toBeInTheDocument();
+    });
+  });
+
+  it("falls back to initials when a member has no usable photo", () => {
+    renderWithProviders(<TeamSection />);
+    // Placeholder members must never request an image; they show initials instead.
+    team
+      .filter((m) => m.placeholder)
+      .forEach((m) => {
+        expect(screen.getByText(initialsOf(m.name)), `initials for ${m.id}`).toBeInTheDocument();
+      });
   });
 });

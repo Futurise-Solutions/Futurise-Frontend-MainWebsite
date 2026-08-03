@@ -20,7 +20,7 @@ const TechnologyExcellence = () => {
             <GlassCard h="full" p={{ base: 6, md: 7 }} role="group">
               <HStack spacing={4} mb={5}>
                 <IconTile size="52px" radius="14px">
-                  <Image src={strength.icon} alt={`${strength.name} icon`} w="26px" h="26px" />
+                  <Image src={strength.icon} alt={`${strength.name} icon`} w="26px" h="26px" htmlWidth="26" htmlHeight="26" loading="lazy" decoding="async" />
                 </IconTile>
                 <Heading as="h3" fontSize="lg" fontWeight={600}>
                   {strength.name}
