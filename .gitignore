@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Chrome for Testing, downloaded here by .puppeteerrc.cjs for the prerender step.
+# Build input, not build output — only dist/ is deployed.
+.cache
+
 # Local env files (keep .env.example committed)
 .env
 .env.*
