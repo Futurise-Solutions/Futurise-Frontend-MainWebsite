@@ -2,7 +2,7 @@
 //
 // WHY THIS EXISTS
 // The site is a client-rendered SPA, so the raw HTML it ships is an empty
-// <div id="root"></div>. Blog posts are 48 of the 68 URLs in sitemap.xml, and blog
+// <div id="root"></div>. Blog posts are 52 of the 73 URLs in sitemap.xml, and blog
 // content lives in the CMS API rather than in the repo, so it cannot be baked in at
 // build time without a redeploy per post. This middleware renders the real article —
 // headings, body copy, structured data — at the edge for any bot that cannot run JS.
@@ -99,11 +99,13 @@ function excerpt(markdown, max = 160) {
 /*
  * Serve the site's own 404 page with a real 404 status.
  *
- * vercel.json rewrites /blog/:slug to index.html, so an unknown slug used to answer
- * 200 with the prerendered homepage — a soft 404 across an unbounded URL space. The
- * CMS is the only thing that knows which slugs exist, so the 404 has to be issued
- * here. Falls back to a minimal body if 404.html cannot be read: by this point the
- * post is known not to exist, and the status code matters more than the design.
+ * An unknown slug used to answer 200 with the prerendered homepage — a soft 404 across
+ * an unbounded URL space. Only the CMS knows which slugs exist, and this path has
+ * already queried it, so the correct status is free here. Non-crawler traffic never
+ * reaches this function; /api/blog-fallback issues the same 404 for those requests.
+ *
+ * Falls back to a minimal body if 404.html cannot be read: by this point the post is
+ * known not to exist, and the status code matters more than the design.
  */
 async function notFound(origin) {
   let body =

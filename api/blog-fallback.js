@@ -30,9 +30,9 @@ const FALLBACK_404 =
   "<h1>Page not found</h1>" +
   `<p><a href="${SITE_URL}/blog">Back to Blog</a></p></body></html>`;
 
-async function originFile(origin, path, timeoutMs = 3000) {
+async function originFile(origin, path) {
   try {
-    const res = await fetch(`${origin}${path}`, { signal: AbortSignal.timeout(timeoutMs) });
+    const res = await fetch(`${origin}${path}`, { signal: AbortSignal.timeout(3000) });
     if (res.ok) return await res.text();
   } catch {
     // Fall through to the caller's default.
