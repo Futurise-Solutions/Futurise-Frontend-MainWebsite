@@ -42,10 +42,8 @@
     { "source": "/privacy", "destination": "/index.html" },
     { "source": "/terms", "destination": "/index.html" },
     { "source": "/blog", "destination": "/index.html" },
-    { "source": "/blog/:slug", "destination": "/index.html" },
+    { "source": "/blog/:slug", "destination": "/api/blog-fallback?slug=:slug" },
     { "source": "/case-studies", "destination": "/index.html" },
-    { "source": "/case-studies/:slug", "destination": "/index.html" },
-    { "source": "/service/:slug", "destination": "/index.html" },
     { "source": "/futurise-admin/:path*", "destination": "/index.html" }
   ]
 }

@@ -96,13 +96,50 @@ function excerpt(markdown, max = 160) {
   return text.length > max ? `${text.slice(0, max - 1).trimEnd()}…` : text;
 }
 
+/*
+ * Serve the site's own 404 page with a real 404 status.
+ *
+ * vercel.json rewrites /blog/:slug to index.html, so an unknown slug used to answer
+ * 200 with the prerendered homepage — a soft 404 across an unbounded URL space. The
+ * CMS is the only thing that knows which slugs exist, so the 404 has to be issued
+ * here. Falls back to a minimal body if 404.html cannot be read: by this point the
+ * post is known not to exist, and the status code matters more than the design.
+ */
+async function notFound(origin) {
+  let body =
+    '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">' +
+    "<title>Page Not Found (404) | Futurise Solutions</title>" +
+    '<meta name="robots" content="noindex, follow"></head><body>' +
+    "<h1>Page not found</h1>" +
+    `<p><a href="${SITE_URL}/blog">Back to Blog</a></p></body></html>`;
+
+  try {
+    const res = await fetch(`${origin}/404.html`, { signal: AbortSignal.timeout(3000) });
+    if (res.ok) body = await res.text();
+  } catch {
+    // Keep the inline fallback.
+  }
+
+  return new Response(body, {
+    status: 404,
+    headers: {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "public, max-age=60, s-maxage=3600",
+      "X-Rendered-By": "futurise-edge-404",
+    },
+  });
+}
+
 export default async function middleware(request) {
   const ua = request.headers.get("user-agent") || "";
 
-  // Humans get the React SPA — this path is for bots only.
+  // Humans get the React SPA — this path is for bots only. Keeping the gate here is
+  // what keeps a reader's request at ~64ms: a published post is served straight from
+  // its static file, and a slug without one falls through to /api/blog-fallback.
+  // Reaching the CMS on every reader request would cost ~400ms for no benefit.
   if (!CRAWLERS.test(ua)) return;
 
-  const { pathname } = new URL(request.url);
+  const { pathname, origin } = new URL(request.url);
   const slug = pathname.replace(/^\/blog\//, "").replace(/\/$/, "");
   if (!slug || slug.includes("/")) return;
 
@@ -112,7 +149,14 @@ export default async function middleware(request) {
       signal: AbortSignal.timeout(8000),
     });
 
+    // An explicit 404 from the CMS is the only thing allowed to produce a 404. The
+    // lookup is already paid for on this path, so the correct status costs nothing.
+    if (apiRes.status === 404) return notFound(origin);
+
+    // Anything else that is not ok (5xx, gateway errors) is a backend problem, not a
+    // missing post. Fail open — a blip must never make a live article disappear.
     if (!apiRes.ok) return;
+
     const payload = await apiRes.json();
     const blog = payload?.blog || payload?.data || payload;
     if (!blog?.title) return;
