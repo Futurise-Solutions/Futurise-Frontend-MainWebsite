@@ -1,6 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
 
+  "installCommand": "dnf install -y nss nss-util nspr mesa-libgbm && npm install",
+
   "trailingSlash": false,
 
   "redirects": [

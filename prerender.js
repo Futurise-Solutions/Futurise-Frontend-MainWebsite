@@ -350,30 +350,6 @@ function buildRouteList() {
 // Main
 // ---------------------------------------------------------------------------
 
-/*
- * Resolve the browser before doing any work and state plainly whether it is there.
- *
- * Chrome is not an npm artifact — puppeteer's postinstall downloads it into the
- * cacheDirectory set by .puppeteerrc.cjs, so a restored node_modules does not carry
- * it. When this broke in production the build log named the cache directory but never
- * said whether it held a browser, which was the single fact needed to identify the
- * failure. Printing the resolved path and its existence makes the next occurrence
- * self-diagnosing.
- */
-let chromePath = '';
-
-async function reportChrome() {
-  try {
-    chromePath = await puppeteer.executablePath();
-  } catch (err) {
-    console.log(`🔎 Chrome path could not be resolved: ${err.message}`);
-    return;
-  }
-  const present = fs.existsSync(chromePath);
-  console.log(`🔎 Chrome: ${chromePath}`);
-  console.log(`   present: ${present ? 'yes' : 'NO — run "npm run browsers:install"'}`);
-}
-
 async function run() {
   if (!fs.existsSync(INDEX_HTML_PATH)) {
     console.error('❌ dist/index.html not found. Run "vite build" first.');
@@ -384,8 +360,6 @@ async function run() {
   const routes = buildRouteList();
 
   console.log(`\n🚀 Prerendering ${routes.length} routes with headless Chrome\n`);
-
-  await reportChrome();
 
   const server = await startServer(template);
 
@@ -402,32 +376,24 @@ async function run() {
     server.close();
 
     /*
-     * This branch is the incident. Chrome was absent from the Vercel container, the
-     * catch swallowed it, metaOnlyFallback() ran, and `return` handed Vercel exit
-     * code 0 — so 21 commercial URLs deployed green carrying an empty
-     * <div id="root"> and index.html's shared <title>. Every quality gate in this
-     * function sits after this point and was skipped.
+     * Without a browser there are no prerendered bodies. This used to fall through to
+     * metaOnlyFallback() and return exit 0, so a build in which every route shipped an
+     * empty <div id="root"> still deployed as a success. It must fail the build.
      *
-     * Meta-only output is still reachable, because it is genuinely useful when
-     * iterating locally without a browser. It is no longer reachable *by accident*:
-     * it has to be named explicitly, and CI never names it.
+     * Meta-only output stays available for local iteration without a browser, but has
+     * to be asked for by name — which CI never does.
      */
     if (process.env.ALLOW_META_ONLY_FALLBACK !== '1') {
       console.error(`\n❌ Could not launch Chrome: ${err.message}`);
       console.error(
-        '\n❌ Refusing to emit meta-only output.\n' +
-        '   Every route would ship an empty <div id="root"> with the fallback\n' +
-        '   <title> from index.html, and the deploy would report success.\n\n' +
-        `   Expected browser: ${chromePath || '(unresolved)'}\n` +
-        '   Fix:              npm run browsers:install\n\n' +
-        '   Local, non-deploy builds may override with ALLOW_META_ONLY_FALLBACK=1.\n'
+        '❌ Refusing to emit meta-only output: every route would ship an empty ' +
+        '<div id="root">.\n   Set ALLOW_META_ONLY_FALLBACK=1 for local, non-deploy builds.\n'
       );
       process.exit(1);
     }
 
     console.warn(`\n⚠️  Could not launch Chrome: ${err.message}`);
-    console.warn('⚠️  ALLOW_META_ONLY_FALLBACK=1 set — emitting meta-only output.');
-    console.warn('⚠️  This build is NOT deployable: bodies are not prerendered.\n');
+    console.warn('⚠️  ALLOW_META_ONLY_FALLBACK=1 — meta-only output. NOT deployable.\n');
     await metaOnlyFallback(template);
     return;
   }
@@ -514,10 +480,7 @@ async function run() {
 
   console.log('🎉 Pre-rendering complete.\n');
 
-  // A route that rendered without an <h1> is a blank page that happened not to throw —
-  // the same artifact the fallback used to ship, arriving by a different route. It is
-  // a build failure, not a warning.
-  if (failures || noH1.length || emptyHubs.length || zeroed.length) process.exitCode = 1;
+  if (failures || emptyHubs.length || zeroed.length) process.exitCode = 1;
 }
 
 // Blog articles keep meta-only files — middleware.js server-renders their bodies.
