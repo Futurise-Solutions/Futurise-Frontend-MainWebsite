@@ -6,9 +6,8 @@ import {
 } from "@chakra-ui/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiMenu, FiChevronDown, FiArrowRight, FiArrowUpRight } from "react-icons/fi";
-import { FaWhatsapp } from "react-icons/fa6";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { navbarOptions, NavbarservicesOptions, CONTACT, whatsappLink } from "../utils/Constant";
+import { navbarOptions, NavbarservicesOptions, CONTACT } from "../utils/Constant";
 import { caseStudiesNav } from "../utils/Constant/caseStudies";
 import { Logo } from "../Components/common";
 import { useBooking } from "../context/BookingContext";
@@ -314,24 +313,6 @@ const Navbar = () => {
               Book appointment
             </Button>
           </Box>
-          {/* WhatsApp is the default business channel in the UAE and India — two of the
-              five priority markets — and on a phone it is the lowest-friction way to
-              start a conversation. It previously lived only in the footer, a full page
-              scroll away from where mobile visitors actually decide to act. */}
-          <IconButton
-            as="a"
-            href={whatsappLink()}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => trackEvent(EVENTS.WHATSAPP_CLICK, { location: "navbar-mobile" })}
-            display={{ base: "inline-flex", lg: "none" }}
-            aria-label="Chat with Futurise Solutions on WhatsApp"
-            icon={<FaWhatsapp />}
-            variant="outlineGlow"
-            size="md"
-            color="#25D366"
-            _hover={{ color: "#25D366", borderColor: "#25D366" }}
-          />
           <IconButton
             display={{ base: "inline-flex", lg: "none" }}
             aria-label="Open menu"
@@ -433,20 +414,6 @@ const Navbar = () => {
                   <Button w="full" variant="gradient" size="lg" rightIcon={<FiArrowRight />} onClick={() => { openBooking("navbar-mobile"); onClose(); }}>
                     Book appointment
                   </Button>
-                  <Button
-                    as="a"
-                    href={whatsappLink()}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => trackEvent(EVENTS.WHATSAPP_CLICK, { location: "navbar-drawer" })}
-                    w="full"
-                    mt={3}
-                    variant="outlineGlow"
-                    size="lg"
-                    leftIcon={<FaWhatsapp />}
-                  >
-                    Chat on WhatsApp
-                  </Button>
                   <VStack spacing={1} mt={4}>
                     <Text
                       as="a"
@@ -455,14 +422,6 @@ const Navbar = () => {
                       fontSize="sm" color="text.muted" _hover={{ color: "accent.solid" }} transition="color .2s"
                     >
                       {CONTACT.email}
-                    </Text>
-                    <Text
-                      as="a"
-                      href={`tel:${CONTACT.phoneHref}`}
-                      onClick={() => trackEvent(EVENTS.PHONE_CLICK, { location: "navbar-drawer" })}
-                      fontSize="sm" color="text.muted" _hover={{ color: "accent.solid" }} transition="color .2s"
-                    >
-                      {CONTACT.phoneDisplay}
                     </Text>
                   </VStack>
                 </MotionBox>

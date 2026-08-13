@@ -55,6 +55,14 @@ export const caseStudyForService = {
   "digital-marketing": "saas-seo-growth",
 };
 
+// The same relationship read the other way. The link above was one-directional: a service
+// page pointed at its case study, but the case study pointed back only at the home page and
+// the case-studies index, so authority flowed in and never returned. Derived rather than
+// written out a second time, so the two directions cannot drift apart.
+export const serviceForCaseStudy = Object.fromEntries(
+  Object.entries(caseStudyForService).map(([service, study]) => [study, service])
+);
+
 export const caseStudies = {
   /* ─────────────────────────────────────────────────────────────────────────
      1. AI & ML — Customer Support Agent

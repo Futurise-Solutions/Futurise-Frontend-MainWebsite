@@ -9,6 +9,7 @@ import ServiceHeroVisual from "../Components/ServiceComponents/ServiceHeroVisual
 import Faqs from "../Components/HomePage Components/Faqs";
 import { services, AREAS_SERVED } from "../utils/Constant";
 import { caseStudies, caseStudyForService } from "../utils/Constant/caseStudies";
+import { serviceResources } from "../utils/Constant/serviceResources";
 import { Reveal, Eyebrow, CTASection, Seo } from "../Components/common";
 import { useBooking } from "../context/BookingContext";
 import NotFound from "./NotFound";
@@ -40,6 +41,7 @@ const ServicePage = () => {
   if (!service) return <NotFound />;
 
   const relatedCaseStudy = caseStudies[caseStudyForService[serviceName]];
+  const resources = serviceResources[serviceName] || [];
   const siblingServices = Object.entries(services)
     .filter(([slug]) => slug !== serviceName)
     .map(([slug, s]) => ({ slug, title: s.title }));
@@ -273,6 +275,56 @@ const ServicePage = () => {
           </Wrap>
         </Reveal>
       </Container>
+
+      {/* Further reading.
+          Before this section the service pages linked to no blog post at all, so the
+          depth behind each service was reachable only from the /blog index. Anchor text
+          here is written to each post's informational angle and never repeats this
+          page's head term — the head term is what this page is trying to rank for, and
+          pointing it at a blog post would re-create the collision the re-targeting
+          removes. See the note at the top of Constant/serviceResources.js. */}
+      {resources.length > 0 && (
+        <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 10, md: 14 }}>
+          <Reveal><Eyebrow>Further reading</Eyebrow></Reveal>
+          <Reveal delay={0.05}>
+            <Heading mt={4} fontSize={{ base: "26px", md: "36px" }} lineHeight={1.15} maxW="760px">
+              Questions worth answering{" "}
+              <Box as="span" className="gradient-text">before you brief anyone</Box>
+            </Heading>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4} mt={8}>
+              {resources.map((r) => (
+                <ChakraLink
+                  key={r.to}
+                  as={RouterLink}
+                  to={r.to}
+                  display="block"
+                  p={{ base: 5, md: 6 }}
+                  borderRadius="16px"
+                  bg="bg.surface"
+                  border="1px solid"
+                  borderColor="border.subtle"
+                  _hover={{ borderColor: "rgba(180,160,255,0.35)", textDecoration: "none" }}
+                  transition="border-color .2s"
+                >
+                  <HStack justify="space-between" align="start" spacing={3}>
+                    <Box>
+                      <Heading as="h3" fontSize={{ base: "17px", md: "19px" }} lineHeight={1.3}>
+                        {r.title}
+                      </Heading>
+                      <Text mt={2} color="text.muted" fontSize={{ base: "sm", md: "md" }} lineHeight={1.7}>
+                        {r.blurb}
+                      </Text>
+                    </Box>
+                    <Icon as={FiArrowUpRight} boxSize={5} color="accent.solid" flexShrink={0} mt={1} />
+                  </HStack>
+                </ChakraLink>
+              ))}
+            </SimpleGrid>
+          </Reveal>
+        </Container>
+      )}
 
       {/* Service-specific FAQ (also emits FAQPage schema above) */}
       {service.faqs?.length > 0 && (

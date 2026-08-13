@@ -21,14 +21,16 @@ import { track } from "@vercel/analytics";
  * Canonical event names. Import these rather than typing string literals — a typo in a
  * literal produces a silently separate event in GA4 that nobody notices for months.
  */
+// `WHATSAPP_CLICK` and `PHONE_CLICK` were removed alongside the phone and WhatsApp
+// channels: with no element left to fire them, keeping the names invited someone to wire
+// up a lead event for a channel the site no longer offers. Historical GA4 data is
+// unaffected — it is keyed on the event string already recorded, not on this map.
 export const EVENTS = {
   CONTACT_FORM_SUBMIT: "contact_form_submit",
   CONTACT_FORM_ERROR: "contact_form_error",
   NEWSLETTER_SUBSCRIBE: "newsletter_subscribe",
-  WHATSAPP_CLICK: "whatsapp_click",
   BOOKING_MODAL_OPEN: "booking_modal_open",
   BOOKING_CALENDAR_OPEN: "booking_calendar_open",
-  PHONE_CLICK: "phone_click",
   EMAIL_CLICK: "email_click",
   CHATBOT_OPEN: "chatbot_open",
 };
@@ -43,9 +45,7 @@ export const EVENTS = {
  */
 const LEAD_EVENTS = new Set([
   EVENTS.CONTACT_FORM_SUBMIT,
-  EVENTS.WHATSAPP_CLICK,
   EVENTS.BOOKING_CALENDAR_OPEN,
-  EVENTS.PHONE_CLICK,
 ]);
 
 /**

@@ -41,6 +41,39 @@ const upsertJsonLd = (id, data) => {
   el.textContent = JSON.stringify(data);
 };
 
+// hreflang alternates for regional variants of the same English content — the homepage
+// and the country landing pages (/nz, /us, …).
+//
+// Two rules drive the shape of this. Google only honours an annotation when every page
+// in the cluster declares the whole cluster, including itself, so each variant ships the
+// full list rather than pointing one way. And the set must include `x-default` for the
+// visitor whose region we do not target, which is the global homepage.
+//
+// Any link matching rel="alternate"[hreflang] is one of ours, so no marker attribute is
+// needed to identify them. Anything left over after a sync is removed, which is what
+// stops a client-side navigation from /nz to a page with no regional variants leaving
+// stale tags behind that would claim alternates the new page does not have.
+const syncAlternates = (list) => {
+  const stale = new Map();
+  document.head
+    .querySelectorAll('link[rel="alternate"][hreflang]')
+    .forEach((el) => stale.set(el.getAttribute("hreflang"), el));
+
+  list.forEach(({ hrefLang, href }) => {
+    let el = stale.get(hrefLang);
+    if (!el) {
+      el = document.createElement("link");
+      el.setAttribute("rel", "alternate");
+      el.setAttribute("hreflang", hrefLang);
+      document.head.appendChild(el);
+    }
+    el.setAttribute("href", href);
+    stale.delete(hrefLang);
+  });
+
+  stale.forEach((el) => el.remove());
+};
+
 // Drop any page JSON-LD blocks left over from a previously rendered route beyond
 // `keep`, so stale structured data never leaks across client-side navigations.
 const pruneJsonLd = (keep) => {
@@ -64,6 +97,9 @@ const Seo = ({
   publishedTime = "",
   modifiedTime = "",
   section = "",
+  // [{ hrefLang: "en-NZ", path: "/nz" }, …]. `path` is site-relative; an absolute
+  // `href` is accepted too. Omit on pages that have no regional variants.
+  alternates = null,
 }) => {
   // Google renders roughly 60 characters of a title before truncating. Appending the
   // brand unconditionally pushed 9 of 14 pages past that, so the suffix was cut
@@ -87,6 +123,9 @@ const Seo = ({
     ? (/^https?:\/\//i.test(image) ? image : `${SITE_URL}${image}`)
     : DEFAULT_IMAGE;
 
+  // Serialised so an inline array literal does not re-run the effect on every render.
+  const alternatesKey = JSON.stringify(alternates || []);
+
   useEffect(() => {
     document.title = fullTitle;
 
@@ -94,6 +133,17 @@ const Seo = ({
     upsertMeta('meta[name="robots"]', "name", "robots", noindex ? "noindex, follow" : "index, follow");
     upsertMeta('meta[name="keywords"]', "name", "keywords", keywords);
     upsertCanonical(url);
+
+    // Each variant stays self-canonical; hreflang is what ties the cluster together.
+    // Canonicalising a country page to the global one would erase it from the index.
+    syncAlternates(
+      (JSON.parse(alternatesKey) || []).map(({ hrefLang, path: altPath, href }) => ({
+        hrefLang,
+        href: /^https?:\/\//i.test(href || altPath || "")
+          ? (href || altPath)
+          : `${SITE_URL}${href || altPath || ""}`,
+      }))
+    );
 
     upsertMeta('meta[property="og:title"]', "property", "og:title", fullTitle);
     upsertMeta('meta[property="og:description"]', "property", "og:description", description);
@@ -125,7 +175,7 @@ const Seo = ({
     const schemas = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     schemas.forEach((schema, i) => upsertJsonLd(`page-schema-${i}`, schema));
     pruneJsonLd(schemas.length);
-  }, [fullTitle, description, url, ogImage, type, noindex, keywords, jsonLd, publishedTime, modifiedTime, section]);
+  }, [fullTitle, description, url, ogImage, type, noindex, keywords, jsonLd, publishedTime, modifiedTime, section, alternatesKey]);
 
   return null;
 };

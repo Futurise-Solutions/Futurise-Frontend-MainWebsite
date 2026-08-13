@@ -75,7 +75,14 @@ const AboutUsHero = () => (
     eyebrow="About Futurise"
     title="We turn bold ideas into"
     highlight="products that scale."
-    subtitle="Futurise is a full-cycle digital product studio. Our senior team builds AI & ML systems, web and mobile apps, SaaS platforms, product design, and Web3 — delivering production-grade results for clients in New Zealand, India, the USA and worldwide."
+    // Market list corrected to the delivered record. This previously read "clients in New
+    // Zealand, India, the USA and worldwide", which contradicted the site's own evidence in
+    // two places: clientProof carries no New Zealand client (New Zealand is where the
+    // company is registered, not where a client is), and AnnouncementBar states "the UAE,
+    // USA & India". The page below now argues that distinction explicitly, so the hero
+    // could not keep asserting the opposite. "Worldwide" went with it — it claimed reach
+    // that nothing on the site evidences.
+    subtitle="Futurise is a full-cycle digital product studio. We build AI & ML systems, web and mobile apps, SaaS platforms, product design, and Web3 — with delivered work for clients in the UAE, the United States and India."
     primaryLabel="Work with us"
     secondaryLabel="See our work"
     secondaryTo="/portfolio"

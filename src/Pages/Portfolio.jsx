@@ -1,13 +1,13 @@
 import React from "react";
-import { Box, Flex, Image, Heading, Text, Tag, HStack, VStack, Button, SimpleGrid } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { Box, Flex, Image, Heading, Text, Tag, HStack, VStack, Button, SimpleGrid, Container, Wrap, WrapItem, Link as ChakraLink } from "@chakra-ui/react";
+import { useNavigate, Link as RouterLink } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import Marquee from "react-fast-marquee";
 import { FiArrowRight, FiMapPin, FiAlertCircle, FiZap } from "react-icons/fi";
-import { Projects } from "../utils/Constant";
+import { Projects, services } from "../utils/Constant";
 import { Section, Reveal, GlassCard, CTASection, Seo } from "../Components/common";
 import { PageHero } from "../Components/AboutUs Components/AboutUsHero";
 
@@ -70,7 +70,7 @@ const Portfolio = () => {
         // Brand omitted here on purpose: Seo.jsx appends it only when the result still
         // fits Google's ~60-character render width. Hardcoding it forced a truncation.
         title="Portfolio — AI, SaaS, Web & Mobile Projects"
-        description="Explore our portfolio: SaaS dashboards, AI-powered platforms, luxury e-commerce, real-estate sites, crypto trading terminals & hotel booking apps — built for clients in New Zealand, India & USA."
+        description="Explore our portfolio — SaaS dashboards, AI platforms, luxury e-commerce, real-estate sites and crypto trading terminals built for clients worldwide."
         path="/portfolio"
         image="/portfolio.png"
         keywords="web development portfolio, AI app portfolio, SaaS portfolio, React projects, blockchain projects, mobile app portfolio, New Zealand web agency portfolio, case studies"
@@ -223,6 +223,68 @@ const Portfolio = () => {
           </VStack>
         </Section>
       </Box>
+
+      {/* Disciplines. /portfolio was a measured dead end: two inbound links and zero
+          outbound ones, so the strongest evidence page on the site passed no authority to
+          the commercial pages it evidences. Linked at the discipline level rather than
+          per-project, because Projects carries no service key and inventing one would mean
+          a brittle title-keyed map for no extra crawl value. */}
+      <Container maxW="1200px" px={{ base: 5, md: 8 }} pb={{ base: 12, md: 16 }}>
+        <Reveal>
+          <Text fontSize="sm" fontWeight={600} letterSpacing="0.08em" textTransform="uppercase" color="text.faint" mb={2}>
+            The work behind these projects
+          </Text>
+          <Heading as="h2" fontSize={{ base: "24px", md: "30px" }} lineHeight={1.2} mb={4} maxW="700px">
+            Every project here came out of{" "}
+            <Box as="span" className="gradient-text">one of six disciplines</Box>
+          </Heading>
+          <Text color="text.muted" fontSize={{ base: "md", md: "lg" }} lineHeight={1.7} maxW="640px" mb={7}>
+            Each links through to what that work involves and how it is priced.
+          </Text>
+          <Wrap spacing={3}>
+            {Object.entries(services).map(([slug, s]) => (
+              <WrapItem key={slug}>
+                <ChakraLink
+                  as={RouterLink}
+                  to={`/service/${slug}`}
+                  px={4}
+                  py={2.5}
+                  borderRadius="full"
+                  bg="bg.surface"
+                  border="1px solid"
+                  borderColor="border.subtle"
+                  fontSize={{ base: "sm", md: "md" }}
+                  color="text.primary"
+                  fontWeight={500}
+                  _hover={{ borderColor: "rgba(180,160,255,0.35)", textDecoration: "none" }}
+                  transition="border-color .2s"
+                >
+                  {s.title}
+                </ChakraLink>
+              </WrapItem>
+            ))}
+            <WrapItem>
+              <ChakraLink
+                as={RouterLink}
+                to="/case-studies"
+                px={4}
+                py={2.5}
+                borderRadius="full"
+                bg="bg.surface"
+                border="1px solid"
+                borderColor="border.subtle"
+                fontSize={{ base: "sm", md: "md" }}
+                color="text.primary"
+                fontWeight={500}
+                _hover={{ borderColor: "rgba(180,160,255,0.35)", textDecoration: "none" }}
+                transition="border-color .2s"
+              >
+                Detailed case studies
+              </ChakraLink>
+            </WrapItem>
+          </Wrap>
+        </Reveal>
+      </Container>
 
       <CTASection
         eyebrow="Your project next"

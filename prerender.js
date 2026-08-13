@@ -20,6 +20,7 @@ import http from 'http';
 import { fileURLToPath } from 'url';
 import puppeteer from 'puppeteer';
 import { caseStudies } from './src/utils/Constant/caseStudies.js';
+import { COUNTRY_SLUGS } from './src/utils/Constant/countries.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -207,13 +208,37 @@ async function renderRoute(browser, route) {
 
     // Routes are React.lazy'd behind a Suspense spinner — wait for real copy, not the
     // fallback, before treating the page as rendered.
-    await page.waitForFunction(
-      () => {
-        const root = document.getElementById('root');
-        return root && root.innerText.trim().length > 400;
-      },
-      { timeout: 45000, polling: 250 }
-    );
+    //
+    // For a CMS-backed hub the text length alone is not a readiness signal. /blog's heading
+    // and intro clear 400 characters on their own, so this resolved while the post list was
+    // still in flight, and whether the cards reached the snapshot came down to whether the
+    // API answered inside the fixed loader + scroll + animation window. That is a race, and
+    // it showed: the same build emits "3154 words · h2:2" on one run and "187 words · h2:0"
+    // with the hub gate failing on the next, from identical inputs. Waiting for the children
+    // themselves makes the signal deterministic. Nothing else about the capture changes.
+    const hub = HUB_ROUTES.find((h) => h.route === route);
+    try {
+      await page.waitForFunction(
+        (prefix, min) => {
+          const root = document.getElementById('root');
+          if (!root || root.innerText.trim().length <= 400) return false;
+          if (!prefix) return true;
+          return document.querySelectorAll(`#root a[href^="${prefix}"]`).length >= min;
+        },
+        { timeout: 45000, polling: 250 },
+        hub ? hub.prefix : null,
+        hub ? hub.min : 0
+      );
+    } catch (err) {
+      // A hub whose children never arrive is a genuine failure, but brokenHubs() already
+      // reports it against the captured stats and fails the build with a message naming the
+      // route and the shortfall. Throwing here would replace that diagnosis with a timeout
+      // and send the route through the retry-and-relaunch path, which cannot fix a CMS
+      // outage. So for a hub, fall through and capture whatever state the page reached —
+      // exactly the behaviour that existed before this wait was introduced.
+      if (!hub) throw err;
+      console.warn(`⚠️  ${route.padEnd(42)} children did not arrive in 45s — hub gate will report it`);
+    }
 
     await new Promise((r) => setTimeout(r, LOADER_MS));
 
@@ -256,6 +281,10 @@ async function renderRoute(browser, route) {
       jsonLd: document.querySelectorAll('script[type="application/ld+json"]').length,
       words: (document.getElementById('root').innerText.match(/\S+/g) || []).length,
       title: document.title,
+      // Seo.jsx writes this from the page's own `path`, so it identifies which component
+      // actually rendered. A route with no match in AllRoutes.jsx renders NotFound, whose
+      // canonical will not be the route being prerendered — see the check in run().
+      canonical: document.querySelector('link[rel="canonical"]')?.getAttribute('href') || '',
       // Internal links, so a hub page that failed to load its children can be caught.
       // See HUB_ROUTES below for why counting words is not enough.
       links: [...document.querySelectorAll('#root a[href^="/"]')]
@@ -335,6 +364,12 @@ const servicesData = [
 
 const staticPages = ['about', 'contact', 'portfolio', 'case-studies', 'blog', 'pricing', 'privacy', 'terms'];
 
+// Country landing pages come from the shared registry in src/utils/Constant/countries.js,
+// which also derives the hreflang cluster the pages render. Reading both from one array
+// means a market cannot be prerendered without being in its own hreflang set, or vice
+// versa — the two drifting apart is otherwise a silent SEO failure.
+const countryPages = COUNTRY_SLUGS;
+
 // Every route rendered through Chrome. Seo.jsx supplies each page's title, description,
 // canonical and JSON-LD at runtime, so the captured HTML already carries correct metadata.
 function buildRouteList() {
@@ -343,6 +378,7 @@ function buildRouteList() {
     ...servicesData.map((s) => `/service/${s.slug}`),
     ...Object.keys(caseStudies).map((slug) => `/case-studies/${slug}`),
     ...staticPages.map((p) => `/${p}`),
+    ...countryPages.map((p) => `/${p}`),
   ];
 }
 
@@ -478,9 +514,24 @@ async function run() {
     );
   }
 
+  // A route with no match in AllRoutes.jsx renders NotFound, which has an <h1>, schema and
+  // 283 words — enough to pass every check above. Without this it would ship as a real
+  // page and be listed in the sitemap. Country pages make that easy to hit: adding a
+  // market to the countries registry creates the prerender route and the sitemap entry on
+  // its own, so forgetting the React route is a single omission with no other symptom.
+  const misrouted = results.filter(
+    (r) => r.canonical && r.canonical !== `${SITE_URL}${r.route === '/' ? '/' : r.route}`
+  );
+  for (const r of misrouted) {
+    console.error(
+      `❌ ${r.route} rendered a page whose canonical is ${r.canonical} — the route is ` +
+      `probably missing from src/Routes/AllRoutes.jsx, so NotFound rendered in its place.`
+    );
+  }
+
   console.log('🎉 Pre-rendering complete.\n');
 
-  if (failures || emptyHubs.length || zeroed.length) process.exitCode = 1;
+  if (failures || emptyHubs.length || zeroed.length || misrouted.length) process.exitCode = 1;
 }
 
 // Blog articles keep meta-only files — middleware.js server-renders their bodies.
@@ -525,8 +576,9 @@ async function prerenderBlogMeta(template) {
 // The committed public/sitemap.xml had to be edited on every publish, so <lastmod> dates
 // drifted and new posts were easy to forget; this derives both from the real output.
 //
-// No hreflang is emitted: the site has a single English version, and self-referencing
-// alternates add nothing. Add them alongside the first country page, not before.
+// hreflang is emitted per page by Seo.jsx (x-default on /, en-NZ on /nz) rather than in
+// the sitemap. Both mechanisms are valid to Google; doing it in one place keeps the
+// annotation next to the page that owns it instead of splitting it across two files.
 function writeSitemap(routes, blogs = []) {
   const today = new Date().toISOString().slice(0, 10);
 
@@ -539,6 +591,9 @@ function writeSitemap(routes, blogs = []) {
     // High commercial intent: this is the page that answers the cost queries the blog
     // already ranks for, so it should be crawled at service-page priority.
     if (loc === '/pricing') return { priority: '0.9', changefreq: 'monthly' };
+    // Country landing pages sit just under the homepage: they are the entry point for a
+    // whole market and target the highest-intent commercial queries we compete for.
+    if (countryPages.includes(loc.slice(1))) return { priority: '0.9', changefreq: 'monthly' };
     if (loc.startsWith('/blog/')) return { priority: '0.7', changefreq: 'monthly' };
     if (loc === '/privacy' || loc === '/terms') return { priority: '0.3', changefreq: 'yearly' };
     return { priority: '0.7', changefreq: 'monthly' };

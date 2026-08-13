@@ -1,10 +1,9 @@
 import { Box, Button, Heading, Text, Stack, HStack, Link as CLink, Icon } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { FiArrowRight, FiMail, FiPhone } from "react-icons/fi";
-import { FaWhatsapp } from "react-icons/fa6";
+import { FiArrowRight, FiMail } from "react-icons/fi";
 import Section from "./Section";
 import Reveal from "./Reveal";
-import { CONTACT, whatsappLink } from "../../utils/Constant";
+import { CONTACT } from "../../utils/Constant";
 import { trackEvent, EVENTS } from "../../utils/analytics";
 
 /**
@@ -67,23 +66,6 @@ const CTASection = ({
                 color="text.muted" _hover={{ color: "text.primary" }} transition="color .2s"
               >
                 <HStack spacing={2}><Icon as={FiMail} color="accent.solid" /><Text>{CONTACT.email}</Text></HStack>
-              </CLink>
-              <CLink
-                href={`tel:${CONTACT.phoneHref}`}
-                onClick={() => trackEvent(EVENTS.PHONE_CLICK, { location: "cta-section" })}
-                color="text.muted" _hover={{ color: "text.primary" }} transition="color .2s"
-              >
-                <HStack spacing={2}><Icon as={FiPhone} color="accent.solid" /><Text>{CONTACT.phoneDisplay}</Text></HStack>
-              </CLink>
-              {/* This band closes most pages, so WhatsApp belongs here too — it is the
-                  channel UAE and India visitors actually use. */}
-              <CLink
-                href={whatsappLink()}
-                isExternal
-                onClick={() => trackEvent(EVENTS.WHATSAPP_CLICK, { location: "cta-section" })}
-                color="text.muted" _hover={{ color: "text.primary" }} transition="color .2s"
-              >
-                <HStack spacing={2}><Icon as={FaWhatsapp} color="#25D366" /><Text>WhatsApp</Text></HStack>
               </CLink>
             </Stack>
           </Box>

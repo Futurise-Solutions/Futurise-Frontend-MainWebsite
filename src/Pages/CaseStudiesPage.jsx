@@ -248,7 +248,7 @@ const CaseStudiesPage = () => {
     <Box>
       <Seo
         title="Case Studies — Real Results From Real Projects"
-        description="Explore how Futurise Solutions delivered measurable outcomes across AI, Web, App, Blockchain, UI/UX, and Digital Marketing — with verified results and client testimonials."
+        description="See how Futurise Solutions delivered measurable outcomes across AI, web, app, blockchain, UI/UX and digital marketing — with the numbers behind each build."
         path="/case-studies"
         keywords="Futurise Solutions case studies, AI development case study, SaaS platform case study, mobile app case study, DeFi protocol case study, UI UX redesign case study, SEO growth case study"
         jsonLd={jsonLd}

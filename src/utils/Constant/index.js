@@ -67,18 +67,17 @@ export const OurServiceData = [
 ];
 
 // **************** CONTACT CHANNELS ****************
-// One definition for every way to reach the company, so a number can be changed in a
-// single place. WhatsApp previously appeared only inside the chatbot's fallback panel —
-// several clicks deep — despite being the default business channel in the UAE and India,
-// two of the five priority markets.
+// One definition for every way to reach the company.
+//
+// There is deliberately no phone number and no WhatsApp link here. Enquiries run through
+// three channels only: the strategy-call booking flow, the contact form, and email. A
+// published number was working against that — the only one we had was +91, sitting beside
+// a Wellington address, which reads as an offshore contact rather than a local one and
+// undercuts the New Zealand entity the rest of the site establishes. Removing it entirely
+// is a positioning decision, not an oversight: do not reintroduce a `phoneHref`,
+// `whatsappHref`, or `tel:`/`wa.me` link without revisiting that decision.
 export const CONTACT = {
   email: "business@futurisesolutions.com",
-  phoneDisplay: "+91 76650 13356",
-  phoneHref: "+917665013356",
-  whatsappHref: "https://wa.me/917665013356",
-  // Pre-filling the first message measurably lifts WhatsApp reply rates: it removes the
-  // "what do I even say" pause that kills the enquiry before it starts.
-  whatsappMessage: "Hi Futurise Solutions — I'd like to discuss a project.",
   address: {
     line1: "Huddart Parker Building",
     line2: "Wellington Central",
@@ -87,10 +86,6 @@ export const CONTACT = {
       "https://maps.google.com/?q=Huddart+Parker+Building,+Wellington+Central,+Wellington+6011,+New+Zealand",
   },
 };
-
-/** WhatsApp deep link with the opening message pre-filled. */
-export const whatsappLink = (message = CONTACT.whatsappMessage) =>
-  `${CONTACT.whatsappHref}?text=${encodeURIComponent(message)}`;
 
 // **************** SOCIAL PROFILES ****************
 // Drives both the footer icons and schema.org `sameAs`. These had drifted: the footer

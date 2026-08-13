@@ -10,7 +10,8 @@ import {
   FiArrowRight, FiMapPin, FiClock, FiCalendar, FiCheckCircle,
   FiChevronRight, FiArrowLeft, FiTrendingUp, FiStar,
 } from "react-icons/fi";
-import { caseStudies } from "../utils/Constant/caseStudies";
+import { caseStudies, serviceForCaseStudy } from "../utils/Constant/caseStudies";
+import { services } from "../utils/Constant";
 import { Reveal, CTASection, Seo } from "../Components/common";
 import { Eyebrow } from "../Components/common/SectionHeading";
 import { useBooking } from "../context/BookingContext";
@@ -697,6 +698,49 @@ const CaseStudyDetailPage = ({ slug: propSlug }) => {
               <FaqItem key={i} q={faq.q} a={faq.a} index={i} color={c} />
             ))}
           </VStack>
+        </Container>
+      )}
+
+      {/* ── The service behind this work ──
+          Return path for the service → case study link. Without it a case study sent
+          authority only to the home page and the index, so the loop between a commercial
+          page and the proof that supports it never closed. Anchor text is the service's own
+          title, which is correct here: this is the one link on the site where pointing the
+          head term AT the service page is exactly what we want. */}
+      {serviceForCaseStudy[study.slug] && services[serviceForCaseStudy[study.slug]] && (
+        <Container maxW="1200px" px={{ base: 5, md: 8 }} pt={{ base: 4, md: 6 }} pb={{ base: 2, md: 4 }}>
+          <Reveal>
+            <Box
+              as={Link}
+              to={`/service/${serviceForCaseStudy[study.slug]}`}
+              display="block"
+              p={{ base: 5, md: 6 }}
+              borderRadius="16px"
+              bg="bg.surface"
+              border="1px solid"
+              borderColor="border.subtle"
+              _hover={{ borderColor: "rgba(180,160,255,0.35)", textDecoration: "none" }}
+              transition="border-color .2s"
+            >
+              <HStack justify="space-between" align="center" spacing={4}>
+                <Box>
+                  <Text fontSize="sm" fontWeight={600} letterSpacing="0.08em" textTransform="uppercase" color="text.faint" mb={1}>
+                    The service behind this work
+                  </Text>
+                  {/* Deliberately NOT a heading. Rendering the service title as an <h2>
+                      put the service page's exact head term ("AI & ML Solutions") into this
+                      page's heading outline, which is the cannibalisation pattern Project 1
+                      removed from the blog. As anchor text it is correct and wanted — the
+                      whole card is the <a>, so the link still carries the head term TO the
+                      service page without this page competing for it. */}
+                  <Text fontSize={{ base: "20px", md: "24px" }} fontWeight={600} lineHeight={1.25} color="text.primary">
+                    {services[serviceForCaseStudy[study.slug]].title}
+                  </Text>
+                </Box>
+                <Icon as={FiArrowRight} boxSize={5} color="accent.solid" flexShrink={0} />
+              </HStack>
+            </Box>
+          </Reveal>
         </Container>
       )}
 

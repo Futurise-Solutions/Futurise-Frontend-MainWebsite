@@ -1,12 +1,13 @@
 import React from "react";
 import {
   Box, Container, Heading, Text, VStack, HStack, SimpleGrid, Icon, Flex, Button, Divider,
+  Wrap, WrapItem, Link as ChakraLink,
 } from "@chakra-ui/react";
 import { FiArrowRight, FiCheck, FiTrendingUp } from "react-icons/fi";
-import { FaWhatsapp } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 import { Reveal, Eyebrow, GlassCard, Seo, CTASection } from "../Components/common";
+import { services } from "../utils/Constant";
 import { useBooking } from "../context/BookingContext";
-import { whatsappLink } from "../utils/Constant";
 import {
   pricingMeta, costFactors, complexityTiers, engagementModels,
   timelinePhases, roiFramework, pricingFaqs,
@@ -78,16 +79,8 @@ const PricingGuide = () => {
               <Button variant="gradient" size="lg" rightIcon={<FiArrowRight />} onClick={() => openBooking("pricing-hero")}>
                 Get a fixed-scope estimate
               </Button>
-              <Button
-                as="a"
-                href={whatsappLink("Hi Futurise Solutions — I'd like to understand pricing for a project.")}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="outlineGlow"
-                size="lg"
-                leftIcon={<FaWhatsapp />}
-              >
-                Ask on WhatsApp
+              <Button as={Link} to="/contact" variant="outlineGlow" size="lg">
+                Send us your scope
               </Button>
             </HStack>
           </Reveal>
@@ -278,6 +271,65 @@ const PricingGuide = () => {
             </Reveal>
           ))}
         </VStack>
+      </Container>
+
+      {/* What is being priced. /pricing had five inbound links and exactly one outbound one
+          (/contact), so a page whose whole job is to explain what work costs never sent a
+          reader to the work itself. */}
+      <Container maxW="1200px" px={{ base: 5, md: 8 }} pb={{ base: 12, md: 16 }}>
+        <Reveal>
+          <Eyebrow>What is being priced</Eyebrow>
+          <Heading as="h2" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="760px">
+            The six kinds of work{" "}
+            <Box as="span" className="gradient-text">these numbers cover</Box>
+          </Heading>
+          <Text color="text.muted" fontSize={{ base: "md", md: "lg" }} lineHeight={1.7} maxW="680px" mb={7}>
+            Every estimate on this page resolves to one of these, or to a combination of
+            them. Each page sets out what the work involves and what shapes its cost.
+          </Text>
+          <Wrap spacing={3}>
+            {Object.entries(services).map(([slug, s]) => (
+              <WrapItem key={slug}>
+                <ChakraLink
+                  as={Link}
+                  to={`/service/${slug}`}
+                  px={4}
+                  py={2.5}
+                  borderRadius="full"
+                  bg="bg.surface"
+                  border="1px solid"
+                  borderColor="border.subtle"
+                  fontSize={{ base: "sm", md: "md" }}
+                  color="text.primary"
+                  fontWeight={500}
+                  _hover={{ borderColor: "rgba(180,160,255,0.35)", textDecoration: "none" }}
+                  transition="border-color .2s"
+                >
+                  {s.title}
+                </ChakraLink>
+              </WrapItem>
+            ))}
+            <WrapItem>
+              <ChakraLink
+                as={Link}
+                to="/case-studies"
+                px={4}
+                py={2.5}
+                borderRadius="full"
+                bg="bg.surface"
+                border="1px solid"
+                borderColor="border.subtle"
+                fontSize={{ base: "sm", md: "md" }}
+                color="text.primary"
+                fontWeight={500}
+                _hover={{ borderColor: "rgba(180,160,255,0.35)", textDecoration: "none" }}
+                transition="border-color .2s"
+              >
+                What these budgets produced
+              </ChakraLink>
+            </WrapItem>
+          </Wrap>
+        </Reveal>
       </Container>
 
       <Faqs

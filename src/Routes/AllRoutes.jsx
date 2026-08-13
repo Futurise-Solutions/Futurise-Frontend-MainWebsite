@@ -18,6 +18,15 @@ const CaseStudiesPage = lazy(() => import("../Pages/CaseStudiesPage"));
 const CaseStudyDetailPage = lazy(() => import("../Pages/CaseStudyDetailPage"));
 const NotFound = lazy(() => import("../Pages/NotFound"));
 
+// Country landing pages. Each one must also be added to `buildRouteList()` in
+// prerender.js — a route registered here but missing there ships a hard 404 in
+// production, because the wildcard rewrites that used to mask that were removed.
+const NewZealandPage = lazy(() => import("../Pages/NewZealandPage"));
+const UnitedStatesPage = lazy(() => import("../Pages/UnitedStatesPage"));
+const AustraliaPage = lazy(() => import("../Pages/AustraliaPage"));
+const CanadaPage = lazy(() => import("../Pages/CanadaPage"));
+const UAEPage = lazy(() => import("../Pages/UAEPage"));
+
 const LoadingSpinner = () => (
   <Box minH="70vh" display="grid" placeItems="center">
     <VStack spacing={4}>
@@ -49,6 +58,11 @@ const AllRoutes = () => {
         <Route path="/pricing" element={<PricingGuide />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsConditions />} />
+        <Route path="/nz" element={<NewZealandPage />} />
+        <Route path="/us" element={<UnitedStatesPage />} />
+        <Route path="/au" element={<AustraliaPage />} />
+        <Route path="/ca" element={<CanadaPage />} />
+        <Route path="/ae" element={<UAEPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>

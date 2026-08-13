@@ -12,6 +12,7 @@ import {
   WhyChooseUs,
 } from "../Components";
 import Faqs from "../Components/HomePage Components/Faqs";
+import { COUNTRY_ALTERNATES } from "../utils/Constant/countries";
 import LatestBlogs from "../Components/blog/LatestBlogs";
 import { CTASection, Seo } from "../Components/common";
 import { faqs } from "../utils/Constant";
@@ -31,14 +32,20 @@ const HomePage = () => {
   return (
     <Box>
       <Seo
-        // 85 characters with the brand suffix, so Google cut it mid-phrase and the
-        // trailing markets never rendered. "India" is also dropped from the title: it
-        // reads as offshore delivery to a New Zealand or US buyer scanning results,
-        // while adding nothing in India, where the traffic is already branded search.
-        title="AI, SaaS & Web App Development Company — NZ, UAE & USA"
+        // The country suffix is gone now that /nz exists. Two pages naming New Zealand in
+        // their title competed for the same query and Google had to pick one; the homepage
+        // is the global page, so it keeps the un-suffixed service terms and /nz owns
+        // everything ending in "New Zealand". At 38 characters the brand suffix also fits
+        // inside Google's ~60-character render width, so Seo.jsx appends it rather than
+        // dropping it — the full rendered title is
+        // "AI, SaaS & Web App Development Company | Futurise Solutions".
+        title="AI, SaaS & Web App Development Company"
         description="Futurise Solutions builds AI agents, SaaS platforms, web and mobile apps end-to-end. Fixed-scope quotes, not hourly billing. Book a free 45-minute consultation."
         path="/"
         image="/home.png"
+        // Shared with every country page, so reciprocity holds by construction rather
+        // than by remembering to edit each page when a market is added.
+        alternates={COUNTRY_ALTERNATES}
         keywords="AI app development, SaaS development, web development company, mobile app development, React Native, blockchain development, Web3, AI agents, digital marketing, New Zealand, India, USA, Futurise Solutions"
         jsonLd={[
           {

@@ -1,20 +1,22 @@
 import React from "react";
-import { Box, Container, Flex, Heading, Text, VStack, HStack, Icon, SimpleGrid, Button } from "@chakra-ui/react";
-import { FiMail, FiPhone, FiMapPin, FiClock, FiCalendar } from "react-icons/fi";
-import { FaWhatsapp } from "react-icons/fa6";
+import { Box, Container, Flex, Heading, Text, VStack, HStack, Icon, SimpleGrid, Button, Wrap, WrapItem, Link as ChakraLink } from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router-dom";
+import { FiMail, FiMapPin, FiClock, FiCalendar } from "react-icons/fi";
 import { Reveal, Eyebrow, ContactForm, Seo } from "../Components/common";
+import { services } from "../utils/Constant";
 import ServicesWorldwide from "../Components/ContactCusCpmponents/ServicesWorldwide ";
 import ClientsReviews from "../Components/HomePage Components/ClientsReviews";
 import { useBooking } from "../context/BookingContext";
-import { AREAS_SERVED, AREAS_SERVED_ISO, CONTACT, whatsappLink } from "../utils/Constant";
+import { AREAS_SERVED, AREAS_SERVED_ISO, CONTACT } from "../utils/Constant";
 import { trackEvent, EVENTS } from "../utils/analytics";
 
+// Enquiries run through the booking flow, this form, and email — no phone channel.
+// The response-time commitment is what replaces a number for an enterprise buyer.
 const contactInfo = [
   { icon: FiMail, label: "Email us", value: CONTACT.email, href: `mailto:${CONTACT.email}`, event: EVENTS.EMAIL_CLICK },
-  { icon: FiPhone, label: "Call us", value: CONTACT.phoneDisplay, href: `tel:${CONTACT.phoneHref}`, event: EVENTS.PHONE_CLICK },
-  { icon: FaWhatsapp, label: "WhatsApp", value: "Chat with us now", href: whatsappLink(), external: true, event: EVENTS.WHATSAPP_CLICK },
   { icon: FiMapPin, label: "Location", value: "Wellington, NZ · Serving worldwide" },
-  { icon: FiClock, label: "Working hours", value: "Mon–Fri, 9:00 AM – 6:00 PM" },
+  { icon: FiClock, label: "Working hours", value: "Mon–Fri, 9:00 AM – 6:00 PM (NZST)" },
+  { icon: FiCalendar, label: "Response time", value: "Within one business day" },
 ];
 
 const ContactUs = () => {
@@ -24,7 +26,7 @@ const ContactUs = () => {
     <Box>
       <Seo
         title="Contact Us — Get a Free Quote | Futurise Solutions"
-        description="Start your AI, SaaS, web or mobile app project with Futurise Solutions. We reply within hours to schedule a free consultation. Based in Wellington, NZ — serving India, USA & worldwide."
+        description="Start your AI, SaaS, web or mobile app project with Futurise Solutions. Book a strategy call or send us a message — we reply within one business day."
         path="/contact"
         image="/contactus.png"
         keywords="contact Futurise Solutions, hire web developer New Zealand, get a quote AI app, start SaaS project, web development consultation, mobile app quote, free project consultation"
@@ -46,7 +48,6 @@ const ContactUs = () => {
             "url": "https://www.futurisesolutions.com",
             "logo": "https://www.futurisesolutions.com/favicon-new.png",
             "email": "business@futurisesolutions.com",
-            "telephone": "+91-7665013356",
             "address": { "@type": "PostalAddress", "addressLocality": "Wellington Central", "postalCode": "6011", "addressCountry": "NZ" },
             "areaServed": AREAS_SERVED,
             "contactPoint": [
@@ -54,7 +55,7 @@ const ContactUs = () => {
                 "@type": "ContactPoint",
                 "contactType": "sales",
                 "email": "business@futurisesolutions.com",
-                "telephone": "+91-7665013356",
+                "url": "https://www.futurisesolutions.com/contact",
                 "availableLanguage": ["English"],
                 "areaServed": AREAS_SERVED_ISO,
                 "hoursAvailable": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "09:00", "closes": "18:00" }
@@ -139,6 +140,66 @@ const ContactUs = () => {
 
       <ServicesWorldwide />
       <ClientsReviews />
+
+      {/* Still scoping. /contact held six inbound links and passed none on — a crawl sink
+          at a page with real authority. Placed last, below the form and the reviews, so it
+          reaches people who were not ready to send a scope without competing with the form
+          for anyone who was. */}
+      <Container maxW="1200px" px={{ base: 5, md: 8 }} pb={{ base: 12, md: 16 }}>
+        <Reveal>
+          <Text fontSize="sm" fontWeight={600} letterSpacing="0.08em" textTransform="uppercase" color="text.faint" mb={2}>
+            Not ready to send a scope
+          </Text>
+          <Heading as="h2" fontSize={{ base: "24px", md: "30px" }} lineHeight={1.2} mb={4} maxW="700px">
+            Work out what you need{" "}
+            <Box as="span" className="gradient-text">before you write it down</Box>
+          </Heading>
+          <Wrap spacing={3}>
+            {Object.entries(services).map(([slug, s]) => (
+              <WrapItem key={slug}>
+                <ChakraLink
+                  as={RouterLink}
+                  to={`/service/${slug}`}
+                  px={4}
+                  py={2.5}
+                  borderRadius="full"
+                  bg="bg.surface"
+                  border="1px solid"
+                  borderColor="border.subtle"
+                  fontSize={{ base: "sm", md: "md" }}
+                  color="text.primary"
+                  fontWeight={500}
+                  _hover={{ borderColor: "rgba(180,160,255,0.35)", textDecoration: "none" }}
+                  transition="border-color .2s"
+                >
+                  {s.title}
+                </ChakraLink>
+              </WrapItem>
+            ))}
+            {[["/pricing", "What it costs"], ["/portfolio", "The delivered work"]].map(([to, label]) => (
+              <WrapItem key={to}>
+                <ChakraLink
+                  as={RouterLink}
+                  to={to}
+                  px={4}
+                  py={2.5}
+                  borderRadius="full"
+                  bg="bg.surface"
+                  border="1px solid"
+                  borderColor="border.subtle"
+                  fontSize={{ base: "sm", md: "md" }}
+                  color="text.primary"
+                  fontWeight={500}
+                  _hover={{ borderColor: "rgba(180,160,255,0.35)", textDecoration: "none" }}
+                  transition="border-color .2s"
+                >
+                  {label}
+                </ChakraLink>
+              </WrapItem>
+            ))}
+          </Wrap>
+        </Reveal>
+      </Container>
     </Box>
   );
 };
