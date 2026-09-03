@@ -18,6 +18,12 @@ import { gfmHeadingId } from "marked-gfm-heading-id";
 // disagree. Resolves to a named Person once TEAM_PUBLISHED is set, Organization until
 // then — see src/utils/Constant/team.js.
 import { articleAuthor, articleAuthorName } from "./src/utils/Constant/team.js";
+// The CMS origin comes from configuration rather than a literal, so the edge and the
+// browser bundle can never point at different backends. It was hardcoded to
+// https://api.futurisesolutions.com, which stopped responding — and because the fetch
+// below fails open, the only visible symptom was crawlers receiving a 12-word shell
+// while human visitors saw the full article. See api/_lib/apiBase.js.
+import { cmsUrl, hasApiBase } from "./api/_lib/apiBase.js";
 
 export const config = {
   matcher: ["/blog/:path+"],
@@ -45,7 +51,6 @@ const CRAWLERS = new RegExp(
   "i"
 );
 
-const API_BASE = "https://api.futurisesolutions.com";
 const SITE_URL = "https://www.futurisesolutions.com";
 const ORG_ID = `${SITE_URL}/#organization`;
 
@@ -145,8 +150,13 @@ export default async function middleware(request) {
   const slug = pathname.replace(/^\/blog\//, "").replace(/\/$/, "");
   if (!slug || slug.includes("/")) return;
 
+  // No CMS origin configured: fall through to the static file rather than fetching a
+  // relative path against this deployment, which would 404 and be indistinguishable
+  // from a genuinely missing post.
+  if (!hasApiBase) return;
+
   try {
-    const apiRes = await fetch(`${API_BASE}/api/blogs/${slug}`, {
+    const apiRes = await fetch(cmsUrl(`/api/blogs/${slug}`), {
       headers: { "User-Agent": "FuturisePrerender/2.0" },
       signal: AbortSignal.timeout(8000),
     });

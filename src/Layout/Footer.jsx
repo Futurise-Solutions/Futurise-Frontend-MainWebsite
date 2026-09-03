@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
 import {
-  Box, SimpleGrid, Text, Input, Button, HStack, VStack, Flex, Icon, Image, Link as CLink, useToast,
+  Box, SimpleGrid, Text, Input, Button, HStack, VStack, Flex, Icon, Image, Wrap, WrapItem,
+  Link as CLink, useToast,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { FiArrowRight, FiArrowUpRight, FiMail, FiPhone, FiMapPin } from "react-icons/fi";
-import { FaLinkedinIn, FaInstagram, FaFacebookF, FaXTwitter, FaWhatsapp } from "react-icons/fa6";
+import { FiArrowRight, FiArrowUpRight, FiMail, FiMapPin } from "react-icons/fi";
+import { FaLinkedinIn, FaInstagram, FaFacebookF, FaXTwitter } from "react-icons/fa6";
 import { Logo } from "../Components/common";
-import { NavbarservicesOptions, Projects, CONTACT, whatsappLink, SOCIAL_PROFILES } from "../utils/Constant";
+import { NavbarservicesOptions, Projects, CONTACT, SOCIAL_PROFILES } from "../utils/Constant";
+import { COUNTRIES } from "../utils/Constant/countries";
 import { trackEvent, EVENTS } from "../utils/analytics";
 
 const footerWork = Projects.filter((p) => p.featured).slice(0, 4);
@@ -85,7 +87,20 @@ const Footer = () => {
 
   return (
     <Box as="footer" mt="auto" borderTop="1px solid" borderColor="border.subtle" bg="rgba(8,8,13,0.6)">
-      <Box maxW="1200px" mx="auto" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
+      {/* Asymmetric vertical padding, deliberately.
+          The top keeps its full breathing room — that gap separates the footer from the
+          page above it and is doing real work. The bottom does not: the last element is a
+          thin legal row, and pairing it with the same 80px left ~95px of dead space under
+          "Terms & Conditions" before the viewport edge, which read as an accident rather
+          than as spacing. Halving only the bottom closes that without touching the rhythm
+          anywhere else. Measured at 375 / 768 / 1440. */}
+      <Box
+        maxW="container.site"
+        mx="auto"
+        px={{ base: 5, md: 8 }}
+        pt={{ base: 14, md: 20 }}
+        pb={{ base: 7, md: 10 }}
+      >
         {/* Complementary visual — selected work preview */}
         <Flex
           direction={{ base: "column", sm: "row" }}
@@ -181,6 +196,10 @@ const Footer = () => {
             </Box>
           </VStack>
 
+          {/* Company occupies this cell alone now. Markets used to stack underneath it as a
+              second full column of seven links, which made this the tallest cell in the grid
+              and drove the footer to ~1,880px on mobile. It moved to its own compact row
+              below the grid — see the "Markets" band. */}
           <FooterCol title="Company">
             <FLink to="/">Home</FLink>
             <FLink to="/about">About Us</FLink>
@@ -211,33 +230,6 @@ const Footer = () => {
               </CLink>
             </HStack>
             <HStack spacing={3} align="start">
-              <Icon as={FiPhone} color="accent.solid" mt={1} />
-              <CLink
-                href={`tel:${CONTACT.phoneHref}`}
-                onClick={() => trackEvent(EVENTS.PHONE_CLICK, { location: "footer" })}
-                fontSize="15px" color="text.muted" _hover={{ color: "text.primary" }} transition="color .2s"
-              >
-                {CONTACT.phoneDisplay}
-              </CLink>
-            </HStack>
-            {/* WhatsApp sits on every page because it is the default business channel
-                in the UAE and India, and the lowest-friction way to start a
-                conversation from a phone. */}
-            <HStack spacing={3} align="start">
-              <Icon as={FaWhatsapp} color="accent.solid" mt={1} />
-              <CLink
-                href={whatsappLink()}
-                isExternal
-                onClick={() => trackEvent(EVENTS.WHATSAPP_CLICK, { location: "footer" })}
-                fontSize="15px"
-                color="text.muted"
-                _hover={{ color: "text.primary" }}
-                transition="color .2s"
-              >
-                Chat on WhatsApp
-              </CLink>
-            </HStack>
-            <HStack spacing={3} align="start">
               <Icon as={FiMapPin} color="accent.solid" mt="3px" flexShrink={0} />
               <CLink
                 href="https://maps.google.com/?q=Huddart+Parker+Building,+Wellington+Central,+Wellington+6011,+New+Zealand"
@@ -256,8 +248,138 @@ const Footer = () => {
           </FooterCol>
         </SimpleGrid>
 
+        {/* Markets — one inline row rather than a seventh column.
+            As a stacked column of seven links this was the tallest cell in the grid above
+            and the single largest contributor to footer height. Inline, it carries exactly
+            the same seven links and the same crawl value in roughly a fifth of the vertical
+            space, and reads as a deliberate band rather than an afterthought below Company.
+            `nav` + aria-label so it stays a properly labelled landmark. */}
+        <Box
+          as="nav"
+          aria-label="Markets"
+          mt={{ base: 10, md: 12 }}
+          pt={{ base: 6, md: 7 }}
+          borderTop="1px solid"
+          borderColor="border.subtle"
+        >
+          <Text
+            fontSize="xs"
+            fontWeight={600}
+            letterSpacing="0.12em"
+            textTransform="uppercase"
+            color="text.faint"
+            mb={3}
+          >
+            Markets
+          </Text>
+          <Wrap spacing={0} shouldWrapChildren>
+            {[...COUNTRIES.map((c) => ({ to: c.path, label: c.label })),
+              // Listed by hand rather than from COUNTRIES: /europe is a region page, not a
+              // country page, and is deliberately outside that registry and the hreflang
+              // cluster it derives. It still belongs here for crawl discovery and for a
+              // reader scanning for their market.
+              { to: "/europe", label: "Europe" },
+            ].map((m, i, arr) => (
+              <WrapItem key={m.to} alignItems="center">
+                <FLink to={m.to}>{m.label}</FLink>
+                {i < arr.length - 1 && (
+                  <Text as="span" aria-hidden="true" color="border.subtle" px={3} fontSize="sm">
+                    ·
+                  </Text>
+                )}
+              </WrapItem>
+            ))}
+          </Wrap>
+        </Box>
+
+        {/* Dimensional wordmark.
+            An architectural watermark rather than footer content: the type is clipped
+            at the baseline so it reads as an extruded surface the page sits on, and it
+            is aria-hidden because the brand name is already announced by the logo above.
+            Pure CSS — no SVG payload, no WebGL, and it degrades to flat type wherever
+            background-clip:text is unsupported.
+
+            It sits BEHIND the content by construction: it is the last block in the flow,
+            carries no background of its own, and is pointer-events:none + aria-hidden, so
+            it can never intercept input or reduce the contrast of text above it. */}
+        <Box
+          aria-hidden="true"
+          mt={{ base: 11, md: 14 }}
+          position="relative"
+          overflow="hidden"
+          h={{ base: "34px", sm: "52px", md: "72px", lg: "80px" }}
+          userSelect="none"
+          pointerEvents="none"
+        >
+          <Text
+            position="absolute"
+            left="0"
+            right="0"
+            top="0"
+            textAlign="center"
+            whiteSpace="nowrap"
+            fontFamily="heading"
+            fontWeight={500}
+            // Sized so the 18-character wordmark fits the *container* width, not the
+            // viewport — at ~0.62em average advance, 18 chars needs about width/11.6.
+            // `cqw`-free: uses the container's own width via a clamp against 1200px.
+            fontSize={{
+              base: "min(8.6vw, 46px)",
+              sm: "min(8.8vw, 68px)",
+              md: "min(8.8vw, 98px)",
+              lg: "min(8.2vw, 110px)",
+            }}
+            lineHeight={0.94}
+            letterSpacing="-0.03em"
+            bgGradient="linear(180deg, rgba(200,186,255,0.38) 0%, rgba(140,120,255,0.14) 44%, rgba(123,108,255,0) 84%)"
+            bgClip="text"
+            sx={{
+              WebkitTextFillColor: "transparent",
+              // Faint top-edge highlight, as if lit from above.
+              textShadow: "0 1px 0 rgba(255,255,255,0.06)",
+            }}
+          >
+            FUTURISE SOLUTIONS
+          </Text>
+
+          {/* Reflection. A mirrored copy of the wordmark, flipped and faded almost to
+              nothing, so the type reads as standing on a polished surface rather than
+              floating. Deliberately restrained: it starts at ~7% and is gone by a third
+              of its own height, which is enough to imply depth and not enough to be
+              legible as a second wordmark. It inherits aria-hidden and pointer-events
+              from the wrapper, adds no request, and never overlaps footer text — the
+              wrapper clips it. */}
+          <Text
+            position="absolute"
+            left="0"
+            right="0"
+            top={{ base: "38px", sm: "52px", md: "69px", lg: "76px" }}
+            textAlign="center"
+            whiteSpace="nowrap"
+            fontFamily="heading"
+            fontWeight={500}
+            fontSize={{
+              base: "min(8.6vw, 46px)",
+              sm: "min(8.8vw, 68px)",
+              md: "min(8.8vw, 98px)",
+              lg: "min(8.2vw, 110px)",
+            }}
+            lineHeight={0.94}
+            letterSpacing="-0.03em"
+            bgGradient="linear(180deg, rgba(170,152,255,0.07) 0%, rgba(123,108,255,0) 34%)"
+            bgClip="text"
+            sx={{
+              WebkitTextFillColor: "transparent",
+              transform: "scaleY(-1)",
+              transformOrigin: "top center",
+            }}
+          >
+            FUTURISE SOLUTIONS
+          </Text>
+        </Box>
+
         <Flex
-          mt={{ base: 12, md: 16 }}
+          mt={{ base: 4, md: 6 }}
           pt={6}
           borderTop="1px solid"
           borderColor="border.subtle"

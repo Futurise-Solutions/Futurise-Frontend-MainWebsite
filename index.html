@@ -4,6 +4,15 @@
     <meta charset="UTF-8" />
 
     <!-- Speed up the first image fetch from the Cloudinary CDN (blog/portfolio media) -->
+    <!-- LCP: the home hero plate. Served from /public so the URL is stable and can be
+         preloaded here — as a hashed module asset the browser would not discover it
+         until the main bundle had parsed, costing ~1s of LCP. -->
+    <!-- Preload the AVIF only. Chromium speculatively fetches every typed image
+         preload rather than just the one it will use, so listing the WebP here too
+         cost a wasted 41kB download on every AVIF-capable browser. The WebP stays as
+         the <picture> fallback in HeroSection.jsx, where only non-AVIF browsers take
+         it — those simply miss the preload and still load it normally. -->
+    <link rel="preload" as="image" href="/hero-atmosphere.avif" type="image/avif" fetchpriority="high" />
     <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
     <link rel="dns-prefetch" href="https://res.cloudinary.com" />
 
@@ -97,7 +106,30 @@
       gtag('config', 'G-5FKB0BL3MQ');
     </script>
 
-    <!-- Structured Data -->
+    <!-- Structured Data
+
+         The @graph carries three nodes: Organization (the company entity), WebSite, and a
+         ProfessionalService node for the Wellington location.
+
+         WHY ProfessionalService FOR WELLINGTON
+         It is a LocalBusiness subtype, and the location is real: the company is registered
+         at this address and maintains a verified Google Business Profile for it, so the node
+         describes a checkable entity rather than a marketing claim. Google's LocalBusiness
+         documentation requires only `name` and `address`.
+
+         WHAT IS DELIBERATELY ABSENT, AND WHY
+         - `openingHoursSpecification` and `priceRange`: there are no published walk-in hours
+           and no rate card. Both properties are optional; inventing either would be the
+           misleading markup the structured data policies prohibit.
+         - `Review` / `aggregateRating`: a genuine review exists on the Google Business
+           Profile, NOT on this site. Google's review-snippet policy states "Don't aggregate
+           reviews or ratings from other websites", and that an entity controlling reviews
+           about itself is ineligible for the star feature. Marking it up here would be a
+           policy violation, so it is not marked up. This is not an oversight — do not add it.
+         - `Person` / `founder` / `employee`: no member of staff is named on this site, so no
+           Person node is emitted. Describing people who are not identified publicly would be
+           a fabricated-authority signal. See src/utils/Constant/team.js for the gate.
+    -->
 
     <script type="application/ld+json">
       {
@@ -115,12 +147,12 @@
             "description": "Futurise Solutions is a full-cycle digital product studio that designs, builds and scales AI & ML systems, SaaS platforms, web and mobile apps, UI/UX design, blockchain, and digital marketing for startups, founders and enterprises. Registered in Wellington, New Zealand, with delivered client work in the United Arab Emirates, the United States and India.",
             "foundingDate": "2024",
             "email": "business@futurisesolutions.com",
-            "telephone": "+91-7665013356",
             "knowsLanguage": ["English"],
             "address": {
               "@type": "PostalAddress",
               "streetAddress": "Huddart Parker Building",
               "addressLocality": "Wellington Central",
+              "addressRegion": "Wellington",
               "postalCode": "6011",
               "addressCountry": "NZ"
             },
@@ -129,7 +161,7 @@
               "@type": "ContactPoint",
               "contactType": "sales",
               "email": "business@futurisesolutions.com",
-              "telephone": "+91-7665013356",
+              "url": "https://www.futurisesolutions.com/contact",
               "availableLanguage": ["English"]
             },
             "sameAs": [
@@ -167,12 +199,313 @@
             "description": "Full-cycle digital product studio building AI, web, mobile and Web3 products.",
             "publisher": { "@id": "https://www.futurisesolutions.com/#organization" },
             "inLanguage": "en"
+          },
+          {
+            "@type": "ProfessionalService",
+            "@id": "https://www.futurisesolutions.com/#wellington",
+            "name": "Futurise Solutions",
+            "url": "https://www.futurisesolutions.com",
+            "image": "https://www.futurisesolutions.com/home.png",
+            "email": "business@futurisesolutions.com",
+            "parentOrganization": { "@id": "https://www.futurisesolutions.com/#organization" },
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Huddart Parker Building",
+              "addressLocality": "Wellington Central",
+              "addressRegion": "Wellington",
+              "postalCode": "6011",
+              "addressCountry": "NZ"
+            },
+            "areaServed": [
+              { "@type": "Country", "name": "New Zealand" },
+              { "@type": "AdministrativeArea", "name": "Wellington" }
+            ],
+            "availableLanguage": ["English"],
+            "currenciesAccepted": "NZD",
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Software development services",
+              "itemListElement": [
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI & ML Solutions", "url": "https://www.futurisesolutions.com/service/ai-ml-solutions" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web Development", "url": "https://www.futurisesolutions.com/service/web-development" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "App Development", "url": "https://www.futurisesolutions.com/service/app-development" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "UI/UX Design", "url": "https://www.futurisesolutions.com/service/ui-ux-design" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Blockchain Development", "url": "https://www.futurisesolutions.com/service/blockchain-development" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Digital Marketing", "url": "https://www.futurisesolutions.com/service/digital-marketing" } }
+              ]
+            }
           }
         ]
       }
     </script>
   </head>
   <body>
+    <!-- ===================================================================
+         FUTURISE BOOT LOADER
+
+         Lives here, in static HTML, rather than in a React component. That is
+         the whole point: React only mounts once the module bundle has been
+         fetched and parsed, so a React-rendered loader cannot cover the very
+         first frames — the requirement is that this is visible *before* the
+         page is, and only markup already in the document can be.
+
+         It is deliberately OUTSIDE #root. Three consequences, all wanted:
+
+           1. SEO is untouched. prerender.js captures and word-counts `#root`
+              only, so this element is invisible to it — no risk of the loader
+              landing in the prerendered HTML the way an in-#root overlay could.
+           2. React never owns it. ReactDOM renders into #root and cannot
+              clobber a sibling, so there is no reconciliation race.
+           3. No layout shift. It is position:fixed and removed from flow, so
+              it neither contributes to nor disturbs the document's layout —
+              CLS contribution is exactly zero.
+
+         LCP: `pointer-events:none` + removal on a timer means it never blocks
+         the hero. The hero image is preloaded in <head> and decodes *behind*
+         this veil, so the plate is already painted when the veil clears —
+         the loader overlaps the load rather than serialising after it.
+
+         Everything is inline: no bundle, no library, no extra request. ~2 kB.
+         =================================================================== -->
+    <style>
+      #fs-boot {
+        position: fixed;
+        inset: 0;
+        /* Above everything the app can mount. The chat bubble sits at 9999 and, being
+           later in document order, would otherwise tie-break above the veil and float
+           over it — which it visibly did. Nothing in src/ goes higher than this. */
+        z-index: 2147483647;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #08080d;
+        pointer-events: none;
+        /* Fallback for the reduced-motion / no-JS case; the JS path drives the
+           real fade via the .fs-boot-out class below. */
+        opacity: 1;
+      }
+      #fs-boot.fs-boot-out {
+        opacity: 0;
+        transition: opacity 420ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      /* Ambient brand glow behind the mark. */
+      #fs-boot .fs-glow {
+        position: absolute;
+        width: min(70vw, 460px);
+        height: min(70vw, 460px);
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(123, 44, 255, 0.28) 0%, rgba(123, 44, 255, 0.08) 45%, transparent 70%);
+        filter: blur(60px);
+        animation: fs-breathe 2.4s ease-in-out infinite;
+      }
+      #fs-boot .fs-stack {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* Fluid, so the mark is never clipped and never oversized. Bounded at
+           both ends rather than scaled by vw alone: pure vw would render a
+           14px mark on a 320px phone and a 200px one on a 4K display. */
+        gap: clamp(18px, 4vw, 26px);
+      }
+      #fs-boot svg {
+        width: clamp(52px, 13vw, 76px);
+        height: auto;
+        display: block;
+        overflow: visible;
+      }
+      /* The three chevrons of the Futurise mark, drawn in sequence — the
+         "powering up" beat. Each starts collapsed toward the spine and snaps
+         out, longest first, so the mark assembles rather than merely appearing. */
+      #fs-boot .fs-chev {
+        transform-origin: 180px center;
+        transform: scaleX(0.06);
+        opacity: 0;
+        animation: fs-chev 620ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+      #fs-boot .fs-chev-1 { animation-delay: 60ms; }
+      #fs-boot .fs-chev-2 { animation-delay: 170ms; }
+      #fs-boot .fs-chev-3 { animation-delay: 280ms; }
+      /* Signal sweep travelling up the mark once it has assembled. */
+      #fs-boot .fs-sweep {
+        animation: fs-sweep 1.5s cubic-bezier(0.4, 0, 0.2, 1) 420ms infinite;
+        transform-origin: center;
+      }
+      #fs-boot .fs-rail {
+        width: clamp(88px, 22vw, 128px);
+        height: 2px;
+        border-radius: 2px;
+        background: rgba(180, 160, 255, 0.14);
+        overflow: hidden;
+        position: relative;
+      }
+      #fs-boot .fs-rail::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #7b2cff, #e08bff);
+        transform: scaleX(0);
+        transform-origin: left center;
+        /* Duration is set from JS to match the real dwell, so the fill always
+           completes instead of stalling part-way when the loader clears. */
+        animation: fs-fill var(--fs-dur, 1000ms) cubic-bezier(0.33, 0, 0.2, 1) forwards;
+      }
+      #fs-boot .fs-word {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+        font-size: clamp(9px, 2.2vw, 10px);
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: rgba(180, 160, 255, 0.5);
+        white-space: nowrap;
+        opacity: 0;
+        animation: fs-word 700ms ease-out 340ms forwards;
+      }
+      @keyframes fs-chev {
+        to { transform: scaleX(1); opacity: 1; }
+      }
+      @keyframes fs-fill {
+        to { transform: scaleX(1); }
+      }
+      @keyframes fs-word {
+        to { opacity: 1; }
+      }
+      @keyframes fs-breathe {
+        0%, 100% { opacity: 0.55; transform: scale(0.95); }
+        50%      { opacity: 1;    transform: scale(1.06); }
+      }
+      @keyframes fs-sweep {
+        0%        { opacity: 0;    transform: translateY(14px); }
+        35%       { opacity: 0.85; }
+        70%, 100% { opacity: 0;    transform: translateY(-16px); }
+      }
+      /* Reduced motion: the loader still appears (it is a brand moment, and
+         removing it entirely would make the site behave differently for these
+         users) but nothing moves. Static mark, static full rail, plain fade. */
+      @media (prefers-reduced-motion: reduce) {
+        #fs-boot .fs-glow,
+        #fs-boot .fs-sweep { animation: none; }
+        #fs-boot .fs-chev {
+          animation: none;
+          transform: none;
+          opacity: 1;
+        }
+        #fs-boot .fs-word { animation: none; opacity: 1; }
+        #fs-boot .fs-rail::after { animation: none; transform: scaleX(1); }
+      }
+    </style>
+
+    <div id="fs-boot" role="status" aria-live="polite" aria-label="Loading Futurise Solutions">
+      <div class="fs-glow"></div>
+      <div class="fs-stack">
+        <!-- The Futurise mark, matching public/futurise-logo.svg exactly (same
+             three chevrons, same gradient stops) — drawn inline so it needs no
+             network request and can be animated per-shape. -->
+        <svg viewBox="140 40 240 370" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="fsBootG" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#7B2CFF" />
+              <stop offset="100%" stop-color="#E08BFF" />
+            </linearGradient>
+          </defs>
+          <g class="fs-sweep">
+            <polygon points="180,150 350,60 350,120 180,210" fill="url(#fsBootG)" opacity="0.5" />
+          </g>
+          <polygon class="fs-chev fs-chev-1" points="180,150 350,60 350,120 180,210" fill="url(#fsBootG)" />
+          <polygon class="fs-chev fs-chev-2" points="180,240 320,165 320,225 180,300" fill="url(#fsBootG)" />
+          <polygon class="fs-chev fs-chev-3" points="180,330 270,285 270,345 180,390" fill="url(#fsBootG)" />
+        </svg>
+        <div class="fs-rail"></div>
+        <div class="fs-word">Powering up</div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var el = document.getElementById("fs-boot");
+        if (!el) return;
+
+        // Home gets the full ~1s beat; every other route gets ~0.5s. Read from
+        // the URL because this runs before the router exists — and it only ever
+        // runs on a real document load (first visit, hard refresh, direct entry
+        // to a deep link), never on a client-side route change, which is exactly
+        // the brief. In-app navigation is untouched and still uses PageTransition.
+        var p = location.pathname.replace(/\/+$/, "");
+        var DWELL = p === "" || p === "/" ? 1000 : 500;
+
+        // How much of the budget is actually left at this moment. Everything below —
+        // the dismissal and the rail fill — is driven off this single figure so the
+        // fill completes exactly as the veil clears, instead of finishing early and
+        // sitting full, or being cut off part-way.
+        var remaining = Math.max(260, DWELL - performance.now());
+
+        el.style.setProperty("--fs-dur", remaining + "ms");
+
+        var FADE = 420;
+
+        // The dwell is measured from NAVIGATION START, not from the `load` event and
+        // not from this script running.
+        //
+        // Waiting for `load` was the obvious first attempt and it is wrong: `load`
+        // waits on every image and font, so it fired at ~1065ms on home here, and the
+        // loader then sat there until ~2200ms — more than twice the requested second,
+        // with the delay scaling up on exactly the slow connections where a visitor is
+        // least patient. The brief is a fixed ~1s brand beat, so the clock has to be
+        // the wall clock.
+        //
+        // performance.now() is already relative to navigation start, so the parse time
+        // spent before this script ran is counted in — the loader occupies the first
+        // second of the page's life rather than adding a second on top of it.
+        //
+        // A 260ms floor keeps it from being a subliminal flicker when the document is
+        // served from cache and we arrive with most of the budget already gone.
+        // `remaining` is computed once, above, and shared with the rail fill.
+        function remove() {
+          if (el.parentNode) el.parentNode.removeChild(el);
+        }
+
+        function fadeOut() {
+          el.classList.add("fs-boot-out");
+
+          // Remove on `transitionend`, not on a timer.
+          //
+          // The timer version measured badly. The opacity transition is GPU-composited, so
+          // it completes on schedule even while the main thread is busy — computed opacity
+          // reached 0 at ~1020ms. But the setTimeout scheduled to remove the node could not
+          // run until the thread finished parsing the React bundle, so the (already
+          // invisible) element was not removed until ~2289ms: a 420ms fade taking 1269ms.
+          //
+          // Nothing was visibly wrong during that window — the veil was transparent and
+          // pointer-events:none — but the node stayed in the document far longer than
+          // intended, and any future change that gave it a background or intercepted input
+          // would have turned that into a real bug. Listening for the transition ties
+          // removal to the thing that actually finished.
+          //
+          // The timer stays as a fallback: transitionend does not fire if the element is
+          // display:none, if the transition is interrupted, or under prefers-reduced-motion
+          // where the duration may be zeroed. `once` plus the null-guard in remove() make
+          // the two paths idempotent.
+          el.addEventListener("transitionend", remove, { once: true });
+          setTimeout(remove, FADE + 200);
+        }
+
+        // Re-check the clock when the timer fires instead of trusting it.
+        //
+        // setTimeout cannot preempt a blocked main thread, and parsing the React bundle
+        // blocks it hard: on a 4x-throttled CPU a timer scheduled for 686ms actually
+        // fired at 1897ms — 897ms late — which stretched the home loader to over three
+        // seconds. Re-measuring here means a late wake-up fades immediately rather than
+        // compounding the delay it already suffered, so the dwell degrades gracefully
+        // on a slow device instead of ballooning. The single re-arm covers the ordinary
+        // case where the timer is merely a little early.
+        setTimeout(function tick() {
+          var left = DWELL - performance.now();
+          if (left > 30) setTimeout(tick, left);
+          else fadeOut();
+        }, remaining);
+      })();
+    </script>
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

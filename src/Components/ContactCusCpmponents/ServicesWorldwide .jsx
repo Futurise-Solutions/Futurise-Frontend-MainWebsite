@@ -1,11 +1,19 @@
 import React from "react";
-import { Box, Wrap, WrapItem, Tag, TagLeftIcon, TagLabel } from "@chakra-ui/react";
+import { Wrap, WrapItem, Tag, TagLeftIcon, TagLabel } from "@chakra-ui/react";
 import { FiMapPin } from "react-icons/fi";
-import "leaflet/dist/leaflet.css";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { locations } from "../../utils/Constant";
-import { Section, SectionHeading, Reveal } from "../common";
+import { Section, SectionHeading, Reveal, WorldReachMap } from "../common";
 
+/**
+ * The map here used to be a react-leaflet OpenStreetMap embed. See
+ * common/WorldReachMap.jsx for why it is now drawn rather than fetched — in short, the
+ * default OSM raster tiles are a bright beige road atlas that fought every other
+ * surface on the site, its markers were rendering broken, and dropping it takes
+ * leaflet + react-leaflet out of this route's bundle entirely.
+ *
+ * The market names above the map are unchanged and still the accessible source of
+ * truth: the visualisation itself is decorative and hidden from assistive tech.
+ */
 const ServicesWorldwide = () => {
   return (
     <Section>
@@ -31,31 +39,7 @@ const ServicesWorldwide = () => {
       </Reveal>
 
       <Reveal delay={0.1}>
-        <Box
-          height={{ base: "340px", md: "480px" }}
-          borderRadius="20px"
-          overflow="hidden"
-          border="1px solid"
-          borderColor="border.subtle"
-        >
-          <MapContainer
-            center={[20, 0]}
-            zoom={2}
-            style={{ width: "100%", height: "100%" }}
-            scrollWheelZoom={false}
-            className="map-container"
-          >
-            <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            />
-            {locations.map((location, index) => (
-              <Marker key={index} position={location.coordinates}>
-                <Popup>{location.name}</Popup>
-              </Marker>
-            ))}
-          </MapContainer>
-        </Box>
+        <WorldReachMap height={{ base: "230px", md: "400px", lg: "470px" }} />
       </Reveal>
     </Section>
   );

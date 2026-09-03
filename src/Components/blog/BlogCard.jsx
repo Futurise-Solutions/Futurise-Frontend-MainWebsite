@@ -53,7 +53,9 @@ const BlogCard = ({ blog }) => (
 
     {/* Body */}
     <Box p={5} display="flex" flexDirection="column" flex="1">
-      <Text fontSize="md" fontWeight={700} color="text.primary" noOfLines={2} lineHeight={1.3}>
+      {/* Rendered as h3 so each card title sits under the archive's h2 in the document
+          outline. Chakra keeps Text's styling, so this is a semantic change only. */}
+      <Text as="h3" fontSize="md" fontWeight={700} color="text.primary" noOfLines={2} lineHeight={1.3}>
         {blog.title}
       </Text>
       <Text fontSize="sm" color="text.muted" noOfLines={2} mt={2} lineHeight={1.6}>

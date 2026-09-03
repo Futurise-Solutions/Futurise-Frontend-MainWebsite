@@ -59,6 +59,9 @@ const OurProjects = () => {
         gap={6}
         mb={{ base: 10, md: 14 }}
       >
+        {/* minW=0 lets the heading shrink inside the flex row. Without it the
+            640px-wide heading and the button together exceed the container at exactly
+            768px, pushing the button 16px past the viewport edge. */}
         <SectionHeading
           align="left"
           eyebrow="Featured work"
@@ -66,6 +69,7 @@ const OurProjects = () => {
           highlight="proud of"
           subtitle="A selection of products we've designed and engineered for clients across industries and continents."
           mx={0}
+          minW={0}
         />
         <Reveal from="left" display={{ base: "none", md: "block" }} flexShrink={0}>
           <Button variant="outlineGlow" rightIcon={<FiArrowRight />} onClick={() => navigate("/portfolio")}>

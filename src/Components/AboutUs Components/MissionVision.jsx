@@ -23,9 +23,9 @@ const items = [
 
 const MissionVision = () => {
   return (
-    <Section position="relative">
+    <Section position="relative" overflow="hidden">
       {/* ambient backdrop */}
-      <Box position="absolute" top="20%" left="50%" transform="translateX(-50%)" w="700px" h="360px" bg="rgba(123,108,255,0.1)" filter="blur(130px)" rounded="full" pointerEvents="none" />
+      <Box position="absolute" top="20%" left="50%" transform="translateX(-50%)" w="min(700px, 150vw)" h="min(360px, 80vw)" bg="rgba(123,108,255,0.1)" filter="blur(130px)" rounded="full" pointerEvents="none" />
 
       <SectionHeading
         eyebrow="Purpose"

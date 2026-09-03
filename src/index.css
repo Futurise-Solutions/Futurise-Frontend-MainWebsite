@@ -3,40 +3,46 @@
    Self-hosted from src/assests/fonts so there's no Google Fonts call.
    Zangezi ships only Light / SemiLight / Regular cuts (no true bold),
    so heavier weights are mapped to its Regular cut to avoid faux-bold.
+
+   WOFF2, not OTF. The eleven cuts shipped as 434 kB of uncompressed OpenType;
+   WOFF2 is the same outlines under Brotli and comes to 245 kB — 185 kB off the
+   wire for identical rendering. Every browser that supports WOFF2 (all of them
+   since IE11) prefers it, and the .otf sources are no longer kept in the repo:
+   re-export from the foundry files if a cut ever needs regenerating.
    ============================================================ */
 
 /* — Zangezi (headings) — */
 @font-face {
   font-family: 'Zangezi';
-  src: url('./assests/fonts/Zangezi08_Trial-Light.otf') format('opentype');
+  src: url('./assests/fonts/Zangezi08_Trial-Light.woff2') format('woff2');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Zangezi';
-  src: url('./assests/fonts/Zangezi08_Trial-SemiLight.otf') format('opentype');
+  src: url('./assests/fonts/Zangezi08_Trial-SemiLight.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Zangezi';
-  src: url('./assests/fonts/Zangezi08_Trial-Regular.otf') format('opentype');
+  src: url('./assests/fonts/Zangezi08_Trial-Regular.woff2') format('woff2');
   font-weight: 500 800; /* variable-style range: heavier requests get the Regular cut, no synthetic bold */
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Zangezi';
-  src: url('./assests/fonts/Zangezi08_Trial-LightItalic.otf') format('opentype');
+  src: url('./assests/fonts/Zangezi08_Trial-LightItalic.woff2') format('woff2');
   font-weight: 300 400;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Zangezi';
-  src: url('./assests/fonts/Zangezi08_Trial-Italic.otf') format('opentype');
+  src: url('./assests/fonts/Zangezi08_Trial-Italic.woff2') format('woff2');
   font-weight: 500 800;
   font-style: italic;
   font-display: swap;
@@ -45,42 +51,42 @@
 /* — Aeonik Trial (body / UI) — */
 @font-face {
   font-family: 'Aeonik Trial';
-  src: url('./assests/fonts/aeoniktrial-light.otf') format('opentype');
+  src: url('./assests/fonts/aeoniktrial-light.woff2') format('woff2');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Aeonik Trial';
-  src: url('./assests/fonts/aeoniktrial-regular.otf') format('opentype');
+  src: url('./assests/fonts/aeoniktrial-regular.woff2') format('woff2');
   font-weight: 400 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Aeonik Trial';
-  src: url('./assests/fonts/aeoniktrial-bold.otf') format('opentype');
+  src: url('./assests/fonts/aeoniktrial-bold.woff2') format('woff2');
   font-weight: 600 800;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Aeonik Trial';
-  src: url('./assests/fonts/aeoniktrial-lightitalic.otf') format('opentype');
+  src: url('./assests/fonts/aeoniktrial-lightitalic.woff2') format('woff2');
   font-weight: 300;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Aeonik Trial';
-  src: url('./assests/fonts/aeoniktrial-regularitalic.otf') format('opentype');
+  src: url('./assests/fonts/aeoniktrial-regularitalic.woff2') format('woff2');
   font-weight: 400 500;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Aeonik Trial';
-  src: url('./assests/fonts/aeoniktrial-bolditalic.otf') format('opentype');
+  src: url('./assests/fonts/aeoniktrial-bolditalic.woff2') format('woff2');
   font-weight: 600 800;
   font-style: italic;
   font-display: swap;
@@ -156,14 +162,9 @@
   color: rgba(255, 255, 255, 0.55);
 }
 
-/* Leaflet tiles look better muted on dark canvas */
-.map-container .leaflet-tile {
-  filter: grayscale(0.4) brightness(0.85) contrast(1.05);
-}
-.leaflet-container {
-  background: #0d0d16 !important;
-  border-radius: 20px;
-}
+/* Leaflet rules removed along with the OpenStreetMap embed on /contact. The world
+   map is now drawn as SVG (Components/common/WorldReachMap.jsx), so there are no
+   tiles left to mute and no .leaflet-container in the DOM. */
 
 /* ============================================================
    Content & image protection (item 9 & 10)
@@ -196,4 +197,52 @@
   -moz-user-drag: none;
   -o-user-drag: none;
   user-select: none;
+}
+
+/* ============================================================
+   HERO MOTION
+   Ambient drift for the home hero plate and its light veil.
+   Both are transform-only so they run on the compositor and can
+   never gate LCP — see the contract note in HeroParallax.jsx.
+   Long, offset durations (34s / 19s) mean the two layers never
+   fall into sync, so the movement stays organic rather than
+   reading as a loop.
+   ============================================================ */
+@keyframes heroDrift {
+  0%   { transform: scale(1.045) translate3d(0, 0, 0); }
+  50%  { transform: scale(1.075) translate3d(-1.1%, -0.7%, 0); }
+  100% { transform: scale(1.05) translate3d(0.9%, 0.5%, 0); }
+}
+
+@keyframes heroVeil {
+  0%   { transform: translate3d(0, 0, 0); opacity: 0.85; }
+  50%  { transform: translate3d(3.5%, -2.5%, 0); opacity: 1; }
+  100% { transform: translate3d(-2.5%, 2%, 0); opacity: 0.8; }
+}
+
+/* Belt-and-braces: the component already skips these under
+   prefers-reduced-motion, but a media query here means the
+   animation cannot run even if the class is applied some other way. */
+@media (prefers-reduced-motion: reduce) {
+  [style*="heroDrift"],
+  [style*="heroVeil"] {
+    animation: none !important;
+  }
+}
+
+/* ============================================================
+   ROUTE-CHANGE SCROLL JUMP
+   The theme sets `scroll-behavior: smooth` on html, body, #root
+   and #app, which is right for in-page anchor links and wrong for
+   a route change — it animates the page back to the top over
+   ~500ms, which reads as a jump and can be interrupted mid-flight.
+   ScrollToTop.jsx adds this class for exactly one frame while it
+   repositions. `!important` because the theme rule is emitted by
+   Emotion at the same specificity.
+   ============================================================ */
+html.scroll-jump,
+html.scroll-jump body,
+html.scroll-jump #root,
+html.scroll-jump #app {
+  scroll-behavior: auto !important;
 }

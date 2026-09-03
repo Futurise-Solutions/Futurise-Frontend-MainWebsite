@@ -20,15 +20,14 @@ const Partners = () => (
       _before={{ content: '""', position: "absolute", left: 0, top: 0, bottom: 0, w: { base: "40px", md: "120px" }, zIndex: 2, bgGradient: "linear(to-r, bg.canvas, transparent)" }}
       _after={{  content: '""', position: "absolute", right: 0, top: 0, bottom: 0, w: { base: "40px", md: "120px" }, zIndex: 2, bgGradient: "linear(to-l, bg.canvas, transparent)" }}
     >
+      {/* Logos render in their own brand colours at full opacity. They were previously
+          held at 0.5 opacity and lifted only on hover, which meant a visitor had to
+          hover a moving target to see whose logo it was — and on touch, where there is
+          no hover, never saw it at all. The marquee's speed, direction and
+          pause-on-hover are unchanged. */}
       <Marquee speed={40} gradient={false} pauseOnHover>
         {[...partners, ...partners].map((item, i) => (
-          <Box
-            key={i}
-            mx={{ base: 8, md: 12 }}
-            opacity={0.5}
-            transition="opacity .3s"
-            _hover={{ opacity: 1 }}
-          >
+          <Box key={i} mx={{ base: 8, md: 12 }}>
             <Image
               src={item.img}
               alt={item.name}

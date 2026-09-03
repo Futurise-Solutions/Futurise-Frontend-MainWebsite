@@ -1,12 +1,14 @@
 import React from "react";
 import {
   Box, Container, Heading, Text, VStack, HStack, SimpleGrid, Icon, Flex, Button, Divider,
+  Wrap, WrapItem, Link as ChakraLink,
 } from "@chakra-ui/react";
 import { FiArrowRight, FiCheck, FiTrendingUp } from "react-icons/fi";
-import { FaWhatsapp } from "react-icons/fa6";
-import { Reveal, Eyebrow, GlassCard, Seo, CTASection } from "../Components/common";
+import { Link } from "react-router-dom";
+import { Reveal, Eyebrow, GlassCard, Seo, CTASection, VisualBand } from "../Components/common";
+import { orderedTerrain } from "../assests";
+import { services } from "../utils/Constant";
 import { useBooking } from "../context/BookingContext";
-import { whatsappLink } from "../utils/Constant";
 import {
   pricingMeta, costFactors, complexityTiers, engagementModels,
   timelinePhases, roiFramework, pricingFaqs,
@@ -57,7 +59,7 @@ const PricingGuide = () => {
       {/* Hero */}
       <Box position="relative" overflow="hidden" pt={{ base: 12, md: 20 }} pb={{ base: 8, md: 12 }}>
         <Box position="absolute" top="-15%" left="-5%" w="500px" h="500px" bg="rgba(123,108,255,0.18)" filter="blur(120px)" rounded="full" pointerEvents="none" />
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} position="relative">
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} position="relative">
           <Reveal><Eyebrow>Pricing &amp; engagement</Eyebrow></Reveal>
           <Reveal delay={0.05}>
             <Heading as="h1" mt={5} fontSize={{ base: "38px", md: "56px" }} lineHeight={1.08} letterSpacing="-0.025em" maxW="900px">
@@ -78,16 +80,8 @@ const PricingGuide = () => {
               <Button variant="gradient" size="lg" rightIcon={<FiArrowRight />} onClick={() => openBooking("pricing-hero")}>
                 Get a fixed-scope estimate
               </Button>
-              <Button
-                as="a"
-                href={whatsappLink("Hi Futurise Solutions — I'd like to understand pricing for a project.")}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="outlineGlow"
-                size="lg"
-                leftIcon={<FaWhatsapp />}
-              >
-                Ask on WhatsApp
+              <Button as={Link} to="/contact" variant="outlineGlow" size="lg">
+                Send us your scope
               </Button>
             </HStack>
           </Reveal>
@@ -95,7 +89,7 @@ const PricingGuide = () => {
       </Box>
 
       {/* Cost factors */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
         <Reveal><Eyebrow>What moves the number</Eyebrow></Reveal>
         <Reveal delay={0.05}>
           <Heading as="h2" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="760px">
@@ -131,9 +125,21 @@ const PricingGuide = () => {
         </SimpleGrid>
       </Container>
 
+      {/* A pricing page is the densest reading on the site and this one carried no
+          image anywhere in its ~1900px. The band sits between the cost drivers and the
+          complexity tiers — the point where a reader most needs a beat before the next
+          block of figures. No copy, deliberately: nothing here should compete with the
+          numbers for attention. */}
+      <VisualBand
+        src={orderedTerrain}
+        height={{ base: "170px", md: "230px", lg: "260px" }}
+        focal="center 62%"
+        overlay={0.46}
+      />
+
       {/* Complexity tiers */}
       <Box bg="rgba(255,255,255,0.015)" borderY="1px solid" borderColor="border.subtle">
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
           <Reveal><Eyebrow>Project complexity</Eyebrow></Reveal>
           <Reveal delay={0.05}>
             <Heading as="h2" mt={4} mb={10} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="760px">
@@ -176,7 +182,7 @@ const PricingGuide = () => {
       </Box>
 
       {/* Engagement models */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
         <Reveal><Eyebrow>Engagement models</Eyebrow></Reveal>
         <Reveal delay={0.05}>
           <Heading as="h2" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="760px">
@@ -214,7 +220,7 @@ const PricingGuide = () => {
 
       {/* Timeline */}
       <Box bg="rgba(255,255,255,0.015)" borderY="1px solid" borderColor="border.subtle">
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
           <Reveal><Eyebrow>Timelines</Eyebrow></Reveal>
           <Reveal delay={0.05}>
             <Heading as="h2" mt={4} mb={10} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="760px">
@@ -243,7 +249,7 @@ const PricingGuide = () => {
       </Box>
 
       {/* ROI */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
         <Reveal><Eyebrow>Business value</Eyebrow></Reveal>
         <Reveal delay={0.05}>
           <Heading as="h2" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="760px">
@@ -278,6 +284,65 @@ const PricingGuide = () => {
             </Reveal>
           ))}
         </VStack>
+      </Container>
+
+      {/* What is being priced. /pricing had five inbound links and exactly one outbound one
+          (/contact), so a page whose whole job is to explain what work costs never sent a
+          reader to the work itself. */}
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} pb={{ base: 12, md: 16 }}>
+        <Reveal>
+          <Eyebrow>What is being priced</Eyebrow>
+          <Heading as="h2" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="760px">
+            The six kinds of work{" "}
+            <Box as="span" className="gradient-text">these numbers cover</Box>
+          </Heading>
+          <Text color="text.muted" fontSize={{ base: "md", md: "lg" }} lineHeight={1.7} maxW="680px" mb={7}>
+            Every estimate on this page resolves to one of these, or to a combination of
+            them. Each page sets out what the work involves and what shapes its cost.
+          </Text>
+          <Wrap spacing={3}>
+            {Object.entries(services).map(([slug, s]) => (
+              <WrapItem key={slug}>
+                <ChakraLink
+                  as={Link}
+                  to={`/service/${slug}`}
+                  px={4}
+                  py={2.5}
+                  borderRadius="full"
+                  bg="bg.surface"
+                  border="1px solid"
+                  borderColor="border.subtle"
+                  fontSize={{ base: "sm", md: "md" }}
+                  color="text.primary"
+                  fontWeight={500}
+                  _hover={{ borderColor: "rgba(180,160,255,0.35)", textDecoration: "none" }}
+                  transition="border-color .2s"
+                >
+                  {s.title}
+                </ChakraLink>
+              </WrapItem>
+            ))}
+            <WrapItem>
+              <ChakraLink
+                as={Link}
+                to="/case-studies"
+                px={4}
+                py={2.5}
+                borderRadius="full"
+                bg="bg.surface"
+                border="1px solid"
+                borderColor="border.subtle"
+                fontSize={{ base: "sm", md: "md" }}
+                color="text.primary"
+                fontWeight={500}
+                _hover={{ borderColor: "rgba(180,160,255,0.35)", textDecoration: "none" }}
+                transition="border-color .2s"
+              >
+                What these budgets produced
+              </ChakraLink>
+            </WrapItem>
+          </Wrap>
+        </Reveal>
       </Container>
 
       <Faqs

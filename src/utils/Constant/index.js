@@ -5,8 +5,12 @@ import {
   postIconHover, qualityIconHover, timeIconHover, webDevHover,
   propertyDashboard1, propertyDashboard2, realState1, realState2, realState3,
   marty1, marty2, marty3, crypto1, crypto2, jewel1, jewel2, jewel3, hotel1, hotel2, hotel3,
-  infinityBay1, infinityBay2, infinityBay3, infinityBay4,
+  infinityBay3,
+  infinityBayHome, infinityBayTruck, infinityBayReveal,
+  dhanlaxmi1, dhanlaxmi2, dhanlaxmi3,
+  palmvision1, palmvision2, palmvision3,
   logoHomies, logoMarty, logoDavidTishbi, logoEstate, logoGdt, logoPlatinumPeak,
+  logoInfinityBay, logoDhanlaxmi, logoPalmvision,
 } from "../../assests";
 import {
   FaClipboardList, FaPencilRuler, FaBullseye, FaHammer, FaCheckCircle, FaRocket, FaTools,
@@ -67,18 +71,17 @@ export const OurServiceData = [
 ];
 
 // **************** CONTACT CHANNELS ****************
-// One definition for every way to reach the company, so a number can be changed in a
-// single place. WhatsApp previously appeared only inside the chatbot's fallback panel —
-// several clicks deep — despite being the default business channel in the UAE and India,
-// two of the five priority markets.
+// One definition for every way to reach the company.
+//
+// There is deliberately no phone number and no WhatsApp link here. Enquiries run through
+// three channels only: the strategy-call booking flow, the contact form, and email. A
+// published number was working against that — the only one we had was +91, sitting beside
+// a Wellington address, which reads as an offshore contact rather than a local one and
+// undercuts the New Zealand entity the rest of the site establishes. Removing it entirely
+// is a positioning decision, not an oversight: do not reintroduce a `phoneHref`,
+// `whatsappHref`, or `tel:`/`wa.me` link without revisiting that decision.
 export const CONTACT = {
   email: "business@futurisesolutions.com",
-  phoneDisplay: "+91 76650 13356",
-  phoneHref: "+917665013356",
-  whatsappHref: "https://wa.me/917665013356",
-  // Pre-filling the first message measurably lifts WhatsApp reply rates: it removes the
-  // "what do I even say" pause that kills the enquiry before it starts.
-  whatsappMessage: "Hi Futurise Solutions — I'd like to discuss a project.",
   address: {
     line1: "Huddart Parker Building",
     line2: "Wellington Central",
@@ -87,10 +90,6 @@ export const CONTACT = {
       "https://maps.google.com/?q=Huddart+Parker+Building,+Wellington+Central,+Wellington+6011,+New+Zealand",
   },
 };
-
-/** WhatsApp deep link with the opening message pre-filled. */
-export const whatsappLink = (message = CONTACT.whatsappMessage) =>
-  `${CONTACT.whatsappHref}?text=${encodeURIComponent(message)}`;
 
 // **************** SOCIAL PROFILES ****************
 // Drives both the footer icons and schema.org `sameAs`. These had drifted: the footer
@@ -120,6 +119,14 @@ export const SAME_AS = SOCIAL_PROFILES.map((p) => p.href);
 // Ordered by commercial priority, so the primary markets lead.
 // Keep index.html's Organization schema in sync by hand: it is static HTML, outside the
 // bundle, and therefore cannot import this.
+// `areaServed` describes where a service is offered, not where the company has an
+// establishment, so listing a market served remotely is exactly what the property is for.
+// What it must not do is pair with copy implying local presence — see /europe, which states
+// in its own body that there is no European office, staff or entity.
+//
+// The United Kingdom stays on this list because /europe now argues that market explicitly
+// (EEA + UK), which makes it a market the site genuinely addresses rather than an aspiration
+// with nothing behind it. If /europe is ever removed, remove GB here too.
 export const AREAS_SERVED = [
   "New Zealand",
   "United Arab Emirates",
@@ -131,6 +138,7 @@ export const AREAS_SERVED = [
 ];
 
 // ISO 3166-1 alpha-2 form, for schema that expects codes rather than names.
+// Kept in the same order as AREAS_SERVED so the two can be read side by side.
 export const AREAS_SERVED_ISO = ["NZ", "AE", "US", "CA", "IN", "GB", "AU"];
 
 // **************** COMPANY STATS ****************
@@ -245,10 +253,10 @@ export const Projects = [
   {
     featured: true,
     img: [
-      { src: infinityBay1, alt: "Infinity Bay Trading homepage hero — a Dubai, UAE one-stop FMCG, HORECA and industrial supply partner, rebuilt on Astro for fast loading" },
-      { src: infinityBay2, alt: "Infinity Bay Trading delivery truck carrying FMCG, kitchenware and industrial products — B2B wholesale distribution across Dubai and the UAE" },
+      { src: infinityBayHome, alt: "Infinity Bay Trading homepage hero reading 'One hub for every space. Infinite supply.' — a Dubai, UAE one-stop FMCG, HORECA and industrial supply partner, rebuilt on Astro for fast loading" },
+      { src: infinityBayTruck, alt: "Infinity Bay Trading branded delivery truck in the scroll-driven hero, with category, brand and one-stop supply figures across the UAE" },
+      { src: infinityBayReveal, alt: "Infinity Bay Trading product reveal — FMCG beverages and confectionery, HORECA tableware and industrial bearings emerging from the delivery truck" },
       { src: infinityBay3, alt: "Infinity Bay Trading product categories — coffee, beverages, confectionery, baby nutrition, spices, personal care and electronics for UAE businesses" },
-      { src: infinityBay4, alt: "Infinity Bay Trading footer with product categories, Dubai head-office contact details and 'Designed & Developed by Futurise Solutions'" },
     ],
     location: "Dubai, UAE",
     projectType: "Wholesale Trading · Web Rebuild & SEO",
@@ -261,6 +269,44 @@ export const Projects = [
       "We rebuilt the site from the ground up on Astro for near-instant loads and smooth performance, restructured it around SEO/AEO/GEO-optimized, product-led content, launched an on-brand blog, and set up Google Search Console to get every page indexed and discoverable.",
     tags: ["Web Development", "SEO", "Astro", "WordPress Migration", "AEO", "GEO", "Dubai", "UAE", "B2B Trading"],
     clentName: "Infinity Bay Trading",
+  },
+  {
+    featured: true,
+    img: [
+      { src: dhanlaxmi1, alt: "Dhanlaxmi Property homepage — a land development and property advisory firm in Udaipur, Rajasthan, with a lake-city hero and enquiry-led calls to action" },
+      { src: dhanlaxmi2, alt: "Dhanlaxmi Property track-record section showing land transactions closed, families housed, customer rating and years in Udaipur" },
+      { src: dhanlaxmi3, alt: "Dhanlaxmi Property plotted-colony listings with aerial site photography, plot counts, plotted area and plot sizes for each project near Udaipur" },
+    ],
+    location: "Udaipur, India",
+    projectType: "Real Estate · Lead-Generation Site & SEO",
+    Heading: "Dhanlaxmi Property — Land Advisory Site Built for Qualified Enquiries",
+    aboutProject:
+      "A land development, project planning and property advisory firm operating in Udaipur since 1998. We built a lead-generation site on Next.js — not a listings marketplace — where the six plotted colonies each carry their own layout plan, plot sizes and aerial site footage, and every enquiry route is one tap away.",
+    problem:
+      "Buyers judging land in Udaipur — families, investors and NRIs buying from abroad — had no way to check a plotted colony without visiting it. Plot counts, approved sizes and what a site actually looks like today lived on paper layout plans and in the client's own drone footage, so every basic question became a phone call before anyone could be qualified.",
+    solution:
+      "We built the site around the six colonies rather than around a search box. Each project page carries the layout plan, the plot count, the plotted area, the plot sizes and aerial footage of the site as it stands, with phone, WhatsApp and form enquiry on every page. Figures are read off the client's own plans, and anything a plan does not state renders as 'On request' rather than being estimated.",
+    tags: ["Web Development", "Next.js", "SEO", "Local SEO", "Lead Generation", "Real Estate", "Udaipur", "India"],
+    clentName: "Dhanlaxmi Property",
+  },
+  {
+    featured: true,
+    img: [
+      { src: palmvision1, alt: "Palm Vision Technology homepage — CCTV, security systems and office technology supplied, installed and serviced in Fatehpura, Udaipur" },
+      { src: palmvision2, alt: "Palm Vision Technology service cards for CCTV and surveillance, biometric attendance, computers and laptops, printers and scanners, video door phone and projectors" },
+      { src: palmvision3, alt: "Palm Vision Technology site section showing supply, installation and service coverage for homes, shops, offices and factories in Udaipur" },
+    ],
+    location: "Udaipur, India",
+    projectType: "Security & IT Retail · Static Site & Local SEO",
+    Heading: "Palm Vision Technology — Ten Service Lines, One Findable Shop",
+    aboutProject:
+      "A CCTV, security systems and office technology business in Fatehpura, Udaipur, trading since 2006. We built a statically exported Next.js site covering all ten service lines and the brands they stock, published to a custom domain with nothing but React shipping to the browser.",
+    problem:
+      "The business sells ten distinct service lines — CCTV, biometric attendance, computers, printers, video door phones, projectors, intruder alarms, EPABX and more — each with its own buyers and its own search demand. With no page per service there was nothing for any of those searches to land on, and a customer looking for one line had no way to discover the other nine.",
+    solution:
+      "We gave every service line its own page, generated from typed content rather than hand-built, alongside a stocked-brands index and a set of buyer guides answering the questions that precede a quote. The whole site is statically exported and served from a custom domain, so pages load as flat files and the only runtime dependencies are React itself.",
+    tags: ["Web Development", "Next.js", "Static Export", "Local SEO", "Security Systems", "Udaipur", "India"],
+    clentName: "Palm Vision Technology",
   },
   {
     featured: true,
@@ -286,7 +332,6 @@ export const Projects = [
     clentName: "HOMIES PropTech",
   },
   {
-    featured: true,
     img: [
       { src: marty1, alt: "Marty-QR AI review platform landing page with a 'Review Simplified' hero" },
       { src: marty2, alt: "Marty-QR features overview for collecting customer reviews via QR codes" },
@@ -310,7 +355,6 @@ export const Projects = [
     clentName: "Marty-QR",
   },
   {
-    featured: true,
     img: [
       { src: jewel1, alt: "David Tishbi luxury jewelry storefront hero featuring fine gems and rings" },
       { src: jewel2, alt: "David Tishbi jewelry collection page with product listings" },
@@ -334,7 +378,6 @@ export const Projects = [
     clentName: "David Tishbi Jewelry",
   },
   {
-    featured: true,
     img: [
       { src: realState1, alt: "Estate real-estate platform homepage with a property search hero for buyers in India and the USA" },
       { src: realState2, alt: "Estate property listings page showing homes for sale and rent" },
@@ -528,8 +571,11 @@ export const engagementCommitments = [
 
 // **************** PARTNERS / TRUSTED BY ****************
 export const partners = [
+  { img: logoInfinityBay,  name: "Infinity Bay Trading" },
   { img: logoHomies,       name: "HOMIES PropTech" },
+  { img: logoDhanlaxmi,    name: "Dhanlaxmi Property" },
   { img: logoMarty,        name: "Marty-QR" },
+  { img: logoPalmvision,   name: "Palm Vision Technology" },
   { img: logoDavidTishbi,  name: "David Tishbi Jewelry" },
   { img: logoEstate,       name: "Estate Realty" },
   { img: logoGdt,          name: "GDT Exchange" },
@@ -921,7 +967,7 @@ export const services = {
       {
         question: "What ad budget do we need?",
         answer:
-          "We work with budgets from around $2,000/month for a single channel; $5,000–$10,000/month in spend is where multi-channel compounding starts. We're always clear about what a budget can realistically achieve.",
+          "It depends on your market, the competitiveness of the terms and how many channels you want running. Rather than quote a band that would be wrong for most readers, we look at your cost per acquisition target and what your competitors are paying for the same clicks, then tell you honestly whether the budget you have in mind can achieve what you want — including when the answer is that it cannot.",
       },
       {
         question: "Do you create the content, or do we?",

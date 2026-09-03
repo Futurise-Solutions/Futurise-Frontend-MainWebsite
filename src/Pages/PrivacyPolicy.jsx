@@ -227,7 +227,7 @@ const PrivacyPolicy = () => {
     <Box>
       <Seo
         title="Privacy Policy | Futurise Solutions"
-        description="Learn how Futurise Solutions collects, uses, and protects your personal information. Our privacy policy covers data handling for our AI, web, mobile, and blockchain services."
+        description="How Futurise Solutions collects, uses and protects your personal information across our AI, web, mobile and blockchain services."
         path="/privacy"
         keywords="Futurise Solutions privacy policy, data protection, personal information, GDPR, New Zealand Privacy Act, data security"
         jsonLd={{
@@ -251,7 +251,7 @@ const PrivacyPolicy = () => {
         <Box position="absolute" top="-20%" left="-10%" w="600px" h="600px" bg="rgba(123,108,255,0.12)" filter="blur(140px)" rounded="full" pointerEvents="none" />
         <Box position="absolute" bottom="-10%" right="-5%" w="400px" h="400px" bg="rgba(181,123,255,0.1)" filter="blur(120px)" rounded="full" pointerEvents="none" />
 
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} position="relative">
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} position="relative">
           <VStack align="start" spacing={5} maxW="720px">
             <Reveal>
               <Eyebrow>Legal</Eyebrow>
@@ -290,7 +290,7 @@ const PrivacyPolicy = () => {
       </Box>
 
       {/* ── Content ── */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} pb={{ base: 16, md: 24 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} pb={{ base: 16, md: 24 }}>
         <Box
           display={{ base: "block", lg: "grid" }}
           gridTemplateColumns={{ lg: "240px 1fr" }}

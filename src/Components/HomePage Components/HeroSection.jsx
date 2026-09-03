@@ -1,215 +1,260 @@
 import React from "react";
 import {
-  Box, Container, Flex, Heading, Text, Button, HStack, VStack, Stack, Avatar, AvatarGroup, Icon, Image,
+  Box, Container, Heading, Text, Button, HStack, VStack, Stack, Image,
 } from "@chakra-ui/react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useBooking } from "../../context/BookingContext";
-import { FiArrowRight, FiStar, FiCpu } from "react-icons/fi";
-import { FaReact, FaApple, FaAndroid, FaEthereum, FaFigma } from "react-icons/fa6";
-import { propertyDashboard1 } from "../../assests";
+import { FiArrowRight } from "react-icons/fi";
+import {
+  logoHomies, logoMarty, logoDavidTishbi, logoEstate, logoPlatinumPeak,
+} from "../../assests";
+import HeroParallax from "../common/HeroParallax";
+import HeroLattice from "../common/HeroLattice";
 
 const MotionBox = motion(Box);
+
+// Real client wordmarks — the same assets used by the "Trusted by" strip. These
+// replace the stock-photo avatars that previously stood in for customers.
+const heroClientLogos = [
+  { src: logoHomies, alt: "HOMIES" },
+  { src: logoMarty, alt: "Marty QR" },
+  { src: logoDavidTishbi, alt: "David Tishbi" },
+  { src: logoEstate, alt: "Estate" },
+  { src: logoPlatinumPeak, alt: "Platinum Peak Hotels" },
+];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
   show: (i) => ({ opacity: 1, y: 0, transition: { duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] } }),
 };
 
-const float = {
-  animate: { y: [0, -14, 0], transition: { duration: 5, repeat: Infinity, ease: "easeInOut" } },
-};
-
-const techIcons = [
-  { icon: FaReact, label: "React" },
-  { icon: FaApple, label: "iOS" },
-  { icon: FaAndroid, label: "Android" },
-  { icon: FaEthereum, label: "Web3" },
-  { icon: FiCpu, label: "AI" },
-  { icon: FaFigma, label: "Design" },
-];
-
+/**
+ * Home hero.
+ *
+ * Previously a browser frame containing a dashboard screenshot, floated beside the
+ * copy — the arrangement every SaaS template ships, which is why it read as generic
+ * despite the screenshot being real client work. That mockup is gone: the hero is now
+ * a single full-bleed cinematic plate with the headline set into its dark side, which
+ * is what makes the page feel like a studio rather than a product tour.
+ *
+ * The HOMIES dashboard did not lose its job — it moved to the "Products we've shipped"
+ * proof section further down, where evidence belongs and where it is read as evidence
+ * rather than decoration.
+ *
+ * LCP: the plate is the largest element, so it loads eagerly at high priority and the
+ * container reserves its height at every breakpoint — nothing here can shift.
+ */
 const HeroSection = () => {
   const navigate = useNavigate();
   const { onOpen: openBooking } = useBooking();
+  const reduce = useReducedMotion();
 
   return (
-    <Box position="relative" overflow="hidden">
-      {/* ambient glow orbs */}
-      <Box position="absolute" top="-10%" left="-5%" w="480px" h="480px" bg="rgba(123,108,255,0.22)" filter="blur(120px)" rounded="full" pointerEvents="none" />
-      <Box position="absolute" top="20%" right="-8%" w="420px" h="420px" bg="rgba(181,123,255,0.2)" filter="blur(120px)" rounded="full" pointerEvents="none" />
+    <Box
+      as="section"
+      position="relative"
+      overflow="hidden"
+      isolation="isolate"
+      // Fixed per-breakpoint height: the plate is absolutely positioned, so without
+      // this the section would collapse and the image would have nothing to fill.
+      minH={{ base: "580px", md: "620px", lg: "680px" }}
+      display="flex"
+      alignItems="center"
+    >
+      {/* Cinematic plate.
 
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 16, md: 24 }}>
-        <Flex direction={{ base: "column", lg: "row" }} align="center" gap={{ base: 14, lg: 10 }}>
-          {/* Left copy */}
-          <VStack align={{ base: "center", lg: "start" }} spacing={6} flex="1" textAlign={{ base: "center", lg: "left" }}>
-            <MotionBox custom={0} variants={fadeUp} initial="hidden" animate="show">
-              <HStack
-                spacing={2}
-                px={3}
-                py={1.5}
-                borderRadius="full"
-                bg="rgba(180,160,255,0.1)"
-                border="1px solid"
-                borderColor="rgba(180,160,255,0.25)"
-              >
-                <Box w="7px" h="7px" borderRadius="full" bgGradient="linear(135deg, brand.400, violet.500)" />
-                <Text fontSize="xs" fontWeight={600} letterSpacing="0.14em" textTransform="uppercase" color="accent.solid">
-                  AI Agents · SaaS · Web · Mobile · Blockchain
-                </Text>
-              </HStack>
-            </MotionBox>
+          PERFORMANCE — do not reintroduce an opacity fade on this element.
+          The plate is the LCP element. It decodes at ~820ms, but a Framer Motion
+          `opacity: 0 -> 1` entrance kept it visually incomplete until the tween
+          settled, and the browser does not award LCP to an element that is still
+          fading in: LCP landed at ~2.7s instead of ~1.0s purely because of the
+          animation, with the image itself downloading in under 50ms.
 
-            <MotionBox custom={1} variants={fadeUp} initial="hidden" animate="show">
-              <Heading
-                as="h1"
-                fontSize={{ base: "40px", md: "58px", lg: "64px" }}
-                lineHeight={1.05}
-                letterSpacing="-0.03em"
-                maxW="640px"
-              >
-                AI-powered apps &{" "}
-                <Box as="span" className="gradient-text">SaaS that scale.</Box>
-              </Heading>
-            </MotionBox>
+          The entrance now runs as scale only (a transform, which does not gate LCP)
+          plus a separate fading scrim below, so the arrival still reads exactly the
+          same on screen while the image itself is opaque from its very first paint.
 
-            <MotionBox custom={2} variants={fadeUp} initial="hidden" animate="show">
-              <Text fontSize={{ base: "md", md: "xl" }} color="text.muted" maxW="540px" lineHeight={1.7}>
-                We build AI agents, AI-integrated web apps, SaaS platforms, mobile apps, and Web3 products — end-to-end, from concept to scaled production.
-              </Text>
-            </MotionBox>
-
-            <MotionBox custom={3} variants={fadeUp} initial="hidden" animate="show" w={{ base: "full", lg: "auto" }}>
-              <Stack direction={{ base: "column", sm: "row" }} spacing={4} w={{ base: "full", sm: "auto" }}>
-                <Button variant="gradient" size="lg" rightIcon={<FiArrowRight />} onClick={() => navigate("/contact")}>
-                  Start your project
-                </Button>
-                <Button variant="outlineGlow" size="lg" onClick={() => openBooking("home-hero")}>
-                  Book appointment
-                </Button>
-              </Stack>
-            </MotionBox>
-
-            <MotionBox custom={4} variants={fadeUp} initial="hidden" animate="show" pt={2}>
-              <HStack spacing={4} flexWrap="wrap" justify={{ base: "center", lg: "start" }}>
-                <AvatarGroup size="sm" max={4}>
-                  <Avatar src="https://i.pravatar.cc/100?img=12" />
-                  <Avatar src="https://i.pravatar.cc/100?img=47" />
-                  <Avatar src="https://i.pravatar.cc/100?img=33" />
-                  <Avatar src="https://i.pravatar.cc/100?img=45" />
-                </AvatarGroup>
-                <Box>
-                  <HStack spacing={1}>
-                    {[...Array(5)].map((_, i) => (
-                      <Icon key={i} as={FiStar} color="#FFB547" fill="#FFB547" boxSize={3.5} />
-                    ))}
-                    <Text fontSize="sm" fontWeight={600} ml={1}>4.9/5</Text>
-                  </HStack>
-                  <Text fontSize="sm" color="text.faint">Trusted by teams across NZ, India & the USA</Text>
-                </Box>
-              </HStack>
-            </MotionBox>
-          </VStack>
-
-          {/* Right visual */}
-          <MotionBox
-            flex="1"
+          HeroParallax adds the ambient drift, the counter-moving light veil and the
+          damped pointer depth. It is transform-only and holds to the same contract —
+          see the note at the top of that file before changing either. */}
+      <HeroParallax veil>
+        {/* AVIF first, WebP fallback. At matched quality (SSIM 0.958) AVIF is 26.9kB
+            against WebP's 41.4kB for this plate — a 35% saving on the LCP byte. Both
+            live in /public rather than the bundle so index.html can preload the exact
+            URL a browser will pick; a hashed module asset cannot be named in static
+            HTML. Keep these three in sync: the two files, and the <link rel="preload">
+            pair in index.html. */}
+        <Box as="picture" display="block" w="full" h="full">
+          <source srcSet="/hero-atmosphere.avif" type="image/avif" />
+          <source srcSet="/hero-atmosphere.webp" type="image/webp" />
+          <Box
+            as="img"
+            src="/hero-atmosphere.webp"
+            alt=""
+            aria-hidden="true"
+            loading="eager"
+            fetchpriority="high"
+            // `sync` rather than `async`: this is the LCP element and is already in
+            // cache from the preload, so decoding it on the critical path costs a few
+            // ms and removes a frame of latency before it can be painted.
+            decoding="sync"
             w="full"
-            maxW={{ base: "440px", lg: "none" }}
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <Box position="relative" maxW="520px" mx="auto">
-              {/* main glass panel */}
-              <Box
-                borderRadius="28px"
-                border="1px solid"
-                borderColor="border.subtle"
-                bg="rgba(255,255,255,0.04)"
-                backdropFilter="blur(16px)"
-                p={{ base: 6, md: 8 }}
-                boxShadow="0 40px 80px -30px rgba(0,0,0,0.7)"
-              >
-                <HStack justify="space-between" mb={5}>
-                  <HStack spacing={2}>
-                    <Box w="11px" h="11px" rounded="full" bg="#ff5f57" />
-                    <Box w="11px" h="11px" rounded="full" bg="#febc2e" />
-                    <Box w="11px" h="11px" rounded="full" bg="#28c840" />
-                  </HStack>
-                  <Text fontSize="xs" color="text.faint">futurisesolutions.com</Text>
-                </HStack>
+            h="full"
+            objectFit="cover"
+            // Anchors the luminous sweep to the right on desktop, keeping the left
+            // third dark for the headline; recentres on mobile where copy is centred.
+            objectPosition={{ base: "68% center", lg: "center" }}
+            display="block"
+            // Held back so the plate reads as the *background* to the lattice rather
+            // than competing with it. This is a filter on the image, not an opacity
+            // animation and not a change to the file — the LCP element is still opaque
+            // and still paints in one go. See the note above.
+            filter="brightness(0.82) saturate(0.9)"
+          />
+        </Box>
+      </HeroParallax>
 
-                {/* real product screenshot — HOMIES property dashboard we built */}
-                <Box borderRadius="14px" overflow="hidden" border="1px solid" borderColor="border.subtle" boxShadow="0 20px 50px -24px rgba(0,0,0,0.7)">
-                  <Image
-                    src={propertyDashboard1}
-                    alt="HOMIES property management dashboard built by Futurise Solutions, showing income, expenses, and unit analytics"
-                    w="full"
-                    display="block"
-                    // This is the LCP element on the home page. `fetchpriority="high"`
-                    // pulls it out of the default low-priority queue for in-body images;
-                    // the intrinsic size lets the browser reserve its height up front
-                    // instead of reflowing the hero when it lands.
-                    loading="eager"
-                    fetchpriority="high"
-                    htmlWidth="1400"
-                    htmlHeight="716"
-                  />
-                </Box>
-              </Box>
+      {/* Animated system lattice — above the plate, below the entrance scrim (so it
+          arrives with the hero rather than on top of a black overlay) and below every
+          readability scrim, so it can never reduce headline contrast. See
+          HeroLattice.jsx for the concept and its LCP contract. */}
+      <HeroLattice zIndex={0} />
 
-              {/* floating tech pill */}
-              <MotionBox
-                variants={float}
-                animate="animate"
-                position="absolute"
-                top="-22px"
-                right={{ base: "-6px", md: "-26px" }}
-                px={4}
-                py={3}
-                borderRadius="16px"
-                bg="rgba(13,13,22,0.9)"
-                border="1px solid"
-                borderColor="border.strong"
-                backdropFilter="blur(10px)"
-                boxShadow="0 20px 40px -16px rgba(0,0,0,0.6)"
-              >
-                <HStack spacing={3}>
-                  {techIcons.map((t) => (
-                    <Icon key={t.label} as={t.icon} boxSize={5} color="accent.solid" />
-                  ))}
-                </HStack>
-              </MotionBox>
+      {/* Entrance scrim — carries the fade the image no longer does. It darkens the
+          plate at mount and clears over the same 1.8s curve, so the perceived result
+          is the previous fade-up while the LCP element stays fully opaque throughout. */}
+      {!reduce && (
+        <MotionBox
+          position="absolute"
+          inset={0}
+          zIndex={1}
+          pointerEvents="none"
+          bg="bg.canvas"
+          initial={{ opacity: 1 }}
+          animate={{ opacity: 0 }}
+          transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
+        />
+      )}
 
-              {/* floating rating chip */}
-              <MotionBox
-                animate={{ y: [0, 12, 0], transition: { duration: 6, repeat: Infinity, ease: "easeInOut" } }}
-                position="absolute"
-                bottom="-24px"
-                left={{ base: "-6px", md: "-28px" }}
-                px={4}
-                py={3}
-                borderRadius="16px"
-                bg="rgba(13,13,22,0.9)"
-                border="1px solid"
-                borderColor="border.strong"
-                backdropFilter="blur(10px)"
-                boxShadow="0 20px 40px -16px rgba(0,0,0,0.6)"
-              >
-                <HStack spacing={3}>
-                  <Flex w="38px" h="38px" rounded="12px" bgGradient="linear(135deg, brand.500, violet.500)" align="center" justify="center">
-                    <Icon as={FiArrowRight} color="white" />
-                  </Flex>
-                  <Box>
-                    <Text fontSize="lg" fontWeight={700} lineHeight={1}>+40%</Text>
-                    <Text fontSize="xs" color="text.faint">avg. engagement lift</Text>
-                  </Box>
-                </HStack>
-              </MotionBox>
-            </Box>
+      {/* Scrim: heavy on the left where the headline sits, clearing to the right so
+          the plate stays visible. Guarantees text contrast whatever the image does. */}
+      <Box
+        position="absolute"
+        inset={0}
+        zIndex={2}
+        pointerEvents="none"
+        bgGradient={{
+          base: "linear(to-b, rgba(8,8,13,0.78) 0%, rgba(8,8,13,0.62) 55%, rgba(8,8,13,0.88) 100%)",
+          lg: "linear(to-r, rgba(8,8,13,0.94) 0%, rgba(8,8,13,0.80) 38%, rgba(8,8,13,0.34) 72%, rgba(8,8,13,0.55) 100%)",
+        }}
+      />
+      {/* Bottom dissolve into the canvas so the hero flows into the next section. */}
+      <Box
+        position="absolute"
+        inset={0}
+        zIndex={2}
+        pointerEvents="none"
+        bgGradient="linear(to-b, rgba(8,8,13,0) 62%, bg.canvas 100%)"
+      />
+
+      <Container
+        maxW="container.site"
+        px={{ base: 5, md: 8 }}
+        py={{ base: 16, md: 20 }}
+        position="relative"
+        zIndex={3}
+      >
+        <VStack
+          align={{ base: "center", lg: "start" }}
+          spacing={6}
+          textAlign={{ base: "center", lg: "left" }}
+          maxW={{ lg: "700px" }}
+        >
+          <MotionBox custom={0} variants={fadeUp} initial="hidden" animate="show">
+            <HStack
+              spacing={2}
+              px={3}
+              py={1.5}
+              borderRadius="full"
+              bg="rgba(180,160,255,0.1)"
+              border="1px solid"
+              borderColor="rgba(180,160,255,0.25)"
+              backdropFilter="blur(8px)"
+            >
+              <Box w="7px" h="7px" borderRadius="full" bgGradient="linear(135deg, brand.400, violet.500)" />
+              <Text fontSize="xs" fontWeight={600} letterSpacing="0.14em" textTransform="uppercase" color="accent.solid">
+                AI Agents · SaaS · Web · Mobile · Blockchain
+              </Text>
+            </HStack>
           </MotionBox>
-        </Flex>
+
+          <MotionBox custom={1} variants={fadeUp} initial="hidden" animate="show">
+            <Heading
+              as="h1"
+              fontSize={{ base: "42px", md: "62px", lg: "72px" }}
+              lineHeight={1.03}
+              letterSpacing="-0.03em"
+              maxW="700px"
+              textShadow="0 2px 30px rgba(8,8,13,0.55)"
+            >
+              AI-powered apps &{" "}
+              <Box as="span" className="gradient-text">SaaS that scale.</Box>
+            </Heading>
+          </MotionBox>
+
+          <MotionBox custom={2} variants={fadeUp} initial="hidden" animate="show">
+            <Text
+              fontSize={{ base: "md", md: "xl" }}
+              color="text.muted"
+              maxW="560px"
+              lineHeight={1.7}
+              textShadow="0 1px 16px rgba(8,8,13,0.6)"
+            >
+              We build AI agents, AI-integrated web apps, SaaS platforms, mobile apps, and Web3 products — end-to-end, from concept to scaled production.
+            </Text>
+          </MotionBox>
+
+          <MotionBox custom={3} variants={fadeUp} initial="hidden" animate="show" w={{ base: "full", lg: "auto" }}>
+            <Stack direction={{ base: "column", sm: "row" }} spacing={4} w={{ base: "full", sm: "auto" }}>
+              <Button variant="gradient" size="lg" rightIcon={<FiArrowRight />} onClick={() => navigate("/contact")}>
+                Start your project
+              </Button>
+              <Button variant="outlineGlow" size="lg" onClick={() => openBooking("home-hero")}>
+                Book appointment
+              </Button>
+            </Stack>
+          </MotionBox>
+
+          {/* Trust strip — real client wordmarks, never stock portraits or an
+              invented rating. See the note in git history for what this replaced. */}
+          <MotionBox custom={4} variants={fadeUp} initial="hidden" animate="show" pt={3} w="full">
+            <Text fontSize="xs" letterSpacing="0.14em" textTransform="uppercase" color="text.faint" mb={3}>
+              Trusted by teams across NZ, India &amp; the USA
+            </Text>
+            <HStack
+              spacing={{ base: 5, md: 7 }}
+              flexWrap="wrap"
+              justify={{ base: "center", lg: "start" }}
+              rowGap={3}
+            >
+              {heroClientLogos.map((c) => (
+                <Image
+                  key={c.alt}
+                  src={c.src}
+                  alt={c.alt}
+                  h={{ base: "18px", md: "21px" }}
+                  w="auto"
+                  opacity={0.6}
+                  filter="grayscale(1) brightness(1.8)"
+                  transition="opacity .3s ease, filter .3s ease"
+                  _hover={{ opacity: 0.95, filter: "grayscale(0.2) brightness(1.5)" }}
+                  loading="lazy"
+                />
+              ))}
+            </HStack>
+          </MotionBox>
+        </VStack>
       </Container>
     </Box>
   );

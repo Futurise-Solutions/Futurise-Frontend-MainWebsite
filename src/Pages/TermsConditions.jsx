@@ -285,7 +285,7 @@ const TermsConditions = () => {
     <Box>
       <Seo
         title="Terms & Conditions | Futurise Solutions"
-        description="Read the Terms and Conditions governing the use of Futurise Solutions' website and services including AI development, web development, mobile apps, UI/UX design, blockchain, and digital marketing."
+        description="The terms governing use of the Futurise Solutions website and our AI, web, mobile, UI/UX, blockchain and digital marketing services."
         path="/terms"
         keywords="Futurise Solutions terms and conditions, service agreement, client terms, web development contract, AI development terms, New Zealand digital agency terms"
         jsonLd={{
@@ -309,7 +309,7 @@ const TermsConditions = () => {
         <Box position="absolute" top="-20%" right="-10%" w="600px" h="600px" bg="rgba(181,123,255,0.12)" filter="blur(140px)" rounded="full" pointerEvents="none" />
         <Box position="absolute" bottom="-10%" left="-5%" w="400px" h="400px" bg="rgba(123,108,255,0.1)" filter="blur(120px)" rounded="full" pointerEvents="none" />
 
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} position="relative">
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} position="relative">
           <VStack align="start" spacing={5} maxW="720px">
             <Reveal>
               <Eyebrow>Legal</Eyebrow>
@@ -348,7 +348,7 @@ const TermsConditions = () => {
       </Box>
 
       {/* ── Content ── */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} pb={{ base: 16, md: 24 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} pb={{ base: 16, md: 24 }}>
         <Box
           display={{ base: "block", lg: "grid" }}
           gridTemplateColumns={{ lg: "240px 1fr" }}

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
 import { faqs } from "../../utils/Constant";
 import { Section, Reveal, Eyebrow } from "../common";
+import AuroraField from "../common/AuroraField";
 
 const Faqs = ({
   items = faqs,
@@ -21,7 +22,11 @@ const Faqs = ({
   useEffect(() => { setOpenIndex(0); }, []);
 
   return (
-    <Section>
+    // The FAQ is the last long read before the CTA — a two-column block of accordion
+    // rows on flat canvas. The drifting light gives the end of the page somewhere to
+    // rest without adding a fourth interstitial band to a page that already has three.
+    <Section isolation="isolate" containerProps={{ position: "relative", zIndex: 2 }}>
+      <AuroraField intensity="soft" />
       <Flex direction={{ base: "column", lg: "row" }} gap={{ base: 10, lg: 16 }} align="start">
         {/* Left */}
         <Box flex={{ lg: "0 0 38%" }}>

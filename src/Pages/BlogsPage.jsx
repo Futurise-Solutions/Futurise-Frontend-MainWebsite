@@ -36,7 +36,9 @@ const HeroBlog = ({ blog }) => (
             Latest Post
           </Text>
         </HStack>
-        <Heading as="h1" fontSize={{ base: "3xl", md: "5xl" }} fontWeight={800} color="text.primary" lineHeight={1.1} noOfLines={3}>
+        {/* h2, not h1: this is the newest post, so an h1 here made the page's top-level
+            heading change with every publish. The stable page h1 lives above the hero. */}
+        <Heading as="h2" fontSize={{ base: "3xl", md: "5xl" }} fontWeight={800} color="text.primary" lineHeight={1.1} noOfLines={3}>
           {blog.title}
         </Heading>
         <Text color="text.muted" fontSize={{ base: "md", md: "lg" }} noOfLines={3} mt={4} maxW="600px" lineHeight={1.7}>
@@ -105,12 +107,27 @@ const BlogsPage = () => {
   return (
     <Box>
       <Seo
-        title="Blog"
-        description="Insights, deep-dives and engineering notes from Futurise Solutions on AI, SaaS, web and mobile development."
+        title="AI, SaaS & Web Development Insights"
+        description="Engineering notes and deep-dives on AI agents, SaaS architecture, web and mobile development from the Futurise Solutions team."
         path="/blog"
         keywords="software development blog, AI development insights, web development, SaaS, app development, futurise solutions"
         jsonLd={jsonLd}
       />
+
+      {/* Stable page header. The h1 has to describe the archive rather than its newest
+          article, otherwise the page's primary heading — and the topic Google reads from
+          it — changes every time a post is published. */}
+      <Box as="header" pt={{ base: 10, md: 16 }} pb={{ base: 6, md: 8 }}>
+        <Container maxW="1200px" px={{ base: 5, md: 8 }}>
+          <Heading as="h1" fontSize={{ base: "3xl", md: "5xl" }} fontWeight={800} lineHeight={1.1} letterSpacing="-0.02em">
+            Insights on AI, SaaS &amp; <Box as="span" className="gradient-text">Product Engineering</Box>
+          </Heading>
+          <Text color="text.muted" fontSize={{ base: "md", md: "lg" }} mt={4} maxW="720px" lineHeight={1.7}>
+            Engineering notes, architecture deep-dives and field lessons from building AI
+            agents, SaaS platforms and production apps.
+          </Text>
+        </Container>
+      </Box>
 
       {/* Hero */}
       {loading ? (
@@ -118,12 +135,9 @@ const BlogsPage = () => {
       ) : hero ? (
         <HeroBlog blog={hero} />
       ) : (
-        <Box minH="320px" display="flex" alignItems="center">
+        <Box minH="200px" display="flex" alignItems="center">
           <Container maxW="1200px" px={{ base: 5, md: 8 }}>
-            <Heading as="h1" fontSize={{ base: "3xl", md: "5xl" }} fontWeight={800}>
-              The <Box as="span" className="gradient-text">Blog</Box>
-            </Heading>
-            <Text color="text.muted" mt={3}>No articles published yet — check back soon.</Text>
+            <Text color="text.muted">No articles published yet — check back soon.</Text>
           </Container>
         </Box>
       )}
@@ -139,6 +153,13 @@ const BlogsPage = () => {
 
       {/* Grid */}
       <Container maxW="1200px" px={{ base: 5, md: 8 }} py={16}>
+        {/* Section heading for the archive. Gives the card list a labelled parent in the
+            outline instead of 52 orphaned links under the featured post. */}
+        {!loading && filtered.length > 0 && (
+          <Heading as="h2" fontSize={{ base: "xl", md: "2xl" }} fontWeight={700} color="text.primary" mb={8}>
+            {active === "All" ? "All articles" : `${active} articles`}
+          </Heading>
+        )}
         {loading ? (
           <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
             {[...Array(6)].map((_, i) => (

@@ -18,7 +18,7 @@
 export const pricingMeta = {
   title: "How We Price Projects — Costs, Scope & Engagement",
   description:
-    "What actually drives software project cost: scope, complexity, integrations and timeline. How our engagement models, estimates and sprints work. Book a free consultation.",
+    "What actually drives software project cost: scope, complexity, integrations and timeline — and how our engagement models, estimates and sprints work.",
   keywords:
     "software development pricing, project cost factors, fixed scope vs time and materials, software engagement models, development project timeline, software project ROI",
 };

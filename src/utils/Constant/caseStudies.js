@@ -8,37 +8,37 @@ export const caseStudiesNav = [
   {
     option: "AI Support Agent",
     slug: "ai-support-agent",
-    desc: "64% deflection rate",
+    desc: "RAG retrieval + human handoff",
     service: "AI & ML",
   },
   {
     option: "SaaS Platform Scale",
     slug: "saas-platform-scale",
-    desc: "0 → 1,200 active users",
+    desc: "Multi-tenant rebuild",
     service: "Web Dev",
   },
   {
     option: "Real Estate App",
     slug: "real-estate-app",
-    desc: "10K+ downloads",
+    desc: "One React Native codebase",
     service: "App Dev",
   },
   {
     option: "FinTech UX Redesign",
     slug: "fintech-ux-redesign",
-    desc: "+38% user retention",
+    desc: "Progressive-disclosure redesign",
     service: "UI/UX",
   },
   {
     option: "DeFi Protocol Launch",
     slug: "defi-protocol-launch",
-    desc: "$850K TVL in 90 days",
+    desc: "Non-upgradeable staking contracts",
     service: "Blockchain",
   },
   {
     option: "SaaS SEO Growth",
     slug: "saas-seo-growth",
-    desc: "+160% organic traffic",
+    desc: "Technical SEO architecture",
     service: "Marketing",
   },
 ];
@@ -55,6 +55,14 @@ export const caseStudyForService = {
   "digital-marketing": "saas-seo-growth",
 };
 
+// The same relationship read the other way. The link above was one-directional: a service
+// page pointed at its case study, but the case study pointed back only at the home page and
+// the case-studies index, so authority flowed in and never returned. Derived rather than
+// written out a second time, so the two directions cannot drift apart.
+export const serviceForCaseStudy = Object.fromEntries(
+  Object.entries(caseStudyForService).map(([service, study]) => [study, service])
+);
+
 export const caseStudies = {
   /* ─────────────────────────────────────────────────────────────────────────
      1. AI & ML — Customer Support Agent
@@ -68,9 +76,9 @@ export const caseStudies = {
     year: "2025",
 
     meta: {
-      title: "How We Built an AI Support Agent That Cut Tickets by 68% | Futurise Solutions",
+      title: "Building a RAG AI Support Agent | Futurise Solutions",
       description:
-        "A real case study on building a production-ready RAG AI support agent that reduced support tickets by 68%, deflected 64% of L1 queries, and saved a SaaS company 24 hours per week — by Futurise Solutions.",
+        "How we built a production RAG support agent for a B2B SaaS company: MongoDB Atlas vector retrieval, Gemini 2.5 Flash generation, confidence-based handoff.",
       keywords:
         "AI customer support agent case study, RAG chatbot production, LLM support automation, reduce support tickets AI, Futurise Solutions AI case study, custom AI agent development, AI workflow automation SaaS",
       ogImage: "/case-study-ai.png",
@@ -78,22 +86,22 @@ export const caseStudies = {
 
     hero: {
       eyebrow: "Case Study · AI & ML Solutions",
-      title: "68% Fewer Support Tickets.",
-      highlight: "One AI Agent.",
+      title: "A Support Agent That Retrieves",
+      highlight: "Before It Answers.",
       subtitle:
-        "How we built a production-ready, context-aware AI support agent for a US SaaS company — from zero to live in 14 weeks.",
+        "How we built a production RAG support agent for a US B2B SaaS company — grounded in their own documentation, with a hard escalation path to a human when confidence drops.",
     },
 
     overview:
-      "A fast-growing B2B SaaS company in the USA was drowning in support tickets. Their team of six agents was spending 24+ hours a week on repetitive L1 queries — password resets, billing questions, feature explanations — while real technical issues went unresolved for days. They approached Futurise Solutions to build an AI-powered solution that could deflect routine queries without sacrificing the quality of the customer experience.",
+      "A B2B SaaS company in the USA was losing most of its support capacity to repetitive first-line queries — password resets, billing questions, feature explanations — while genuinely technical issues waited behind them. They approached Futurise Solutions to build an AI layer that could answer the routine questions without degrading the experience for customers who needed a person.",
 
     challenge: {
       heading: "The Problem",
-      body: "The company's existing help centre had over 800 articles, but only 12% of users found answers before opening a ticket. Their previous chatbot attempt used simple keyword matching — it was brittle, frequently wrong, and trained users to bypass it entirely. The team needed an AI that could reason over their documentation, understand nuance, and give accurate answers while maintaining a strict guardrail against hallucination.",
+      body: "The company had a large help centre but most customers opened a ticket without finding the answer already published in it. An earlier chatbot built on keyword matching was brittle and frequently wrong, which had trained users to skip it entirely. The team needed something that could reason over their documentation, handle nuance, and stay inside a hard guardrail against inventing answers.",
       points: [
-        "800+ documentation articles with no unified retrieval layer",
-        "Previous keyword chatbot had a 34% accuracy rate — users had abandoned it",
-        "Support team spending 24 hrs/week on L1 queries, delaying L2/L3 resolution",
+        "A large documentation corpus with no unified retrieval layer",
+        "Previous keyword chatbot was unreliable enough that users had abandoned it",
+        "First-line queries consumed the support queue, delaying L2 and L3 resolution",
         "No visibility into which questions were being asked most",
         "GDPR and SOC 2 compliance requirements for data handling",
       ],
@@ -105,7 +113,7 @@ export const caseStudies = {
       steps: [
         {
           title: "Knowledge Architecture",
-          desc: "Chunked and embedded 800+ documentation pages, release notes, and SOPs into a MongoDB Atlas vector index using `text-embedding-004`. Built a metadata taxonomy for accurate retrieval.",
+          desc: "Chunked and embedded the documentation, release notes and SOPs into a MongoDB Atlas vector index using `text-embedding-004`. Built a metadata taxonomy so retrieval could distinguish reference material from procedure.",
         },
         {
           title: "RAG Pipeline",
@@ -117,7 +125,7 @@ export const caseStudies = {
         },
         {
           title: "Analytics Dashboard",
-          desc: "Built a real-time dashboard showing deflection rate, query clusters, missed topics, and CSAT scores — giving the support team actionable data to improve the knowledge base weekly.",
+          desc: "Built a real-time dashboard showing deflection rate, query clusters and missed topics, so the support team could see which gaps in the knowledge base were generating tickets.",
         },
       ],
     },
@@ -125,35 +133,30 @@ export const caseStudies = {
     stack: ["Google Gemini 2.5 Flash", "text-embedding-004", "MongoDB Atlas Vector Search", "Node.js / Express", "React", "Vercel", "Intercom API", "Stripe API (billing queries)"],
 
     results: [
-      { value: "68%", label: "Reduction in support tickets", desc: "Within the first 90 days of deployment" },
-      { value: "64%", label: "L1 query deflection rate", desc: "Queries answered without human involvement" },
-      { value: "24 hrs", label: "Team hours saved per week", desc: "Redirected to complex technical escalations" },
-      { value: "4.5 / 5", label: "AI response CSAT score", desc: "Measured via post-chat survey" },
+      { value: "RAG", label: "Retrieval architecture", desc: "Every answer is generated over documentation chunks retrieved at query time, not from model memory" },
+      { value: "Top-5", label: "Chunks retrieved per query", desc: "Semantic search across a MongoDB Atlas vector index built with text-embedding-004" },
+      { value: "0.75", label: "Confidence threshold", desc: "Below this score the agent declines to answer and hands off to a live agent" },
+      { value: "14 wks", label: "Kickoff to production", desc: "Knowledge architecture, RAG pipeline, guardrails, then supervised rollout" },
     ],
 
     keyInsight: {
-      title: "Clean Data Over Big Models",
-      body: "We discovered that prompt engineering and clean chunking of documentation had a 5x larger impact on accuracy than using larger, more expensive LLM models. Structuring context properly eliminated 98% of hallucinations."
+      title: "Chunking Beat Model Size",
+      body: "The largest gains in answer quality came from how the documentation was split and how context was assembled in the prompt — not from reaching for a bigger, more expensive model. Character-count chunking split code blocks and numbered procedures mid-instruction, so retrieval returned fragments that read as complete but were not. Switching to syntax-aware chunking that respects code fences and step boundaries, plus a metadata taxonomy that keeps release notes distinct from SOPs, did more for grounding than any model upgrade we tested. Cheap, well-structured context outperforms expensive, poorly-structured context."
     },
 
     timeline: [
       { phase: "Discovery & Data Prep", duration: "Weeks 1-3", desc: "Auditing help center docs, cleaning metadata, and formatting data for retrieval models." },
       { phase: "RAG & LLM Prototyping", duration: "Weeks 4-7", desc: "Setting up MongoDB Atlas Vector search, building the semantic search layer, and refining Gemini prompts." },
       { phase: "Guardrails & Integration", duration: "Weeks 8-11", desc: "Creating confidence threshold routing, implementing fallback to live agents, and integrating Stripe API." },
-      { phase: "Testing & Rollout", duration: "Weeks 12-14", desc: "Shadow-testing with real support agents, tuning responses, and moving to 100% customer-facing traffic." }
+      { phase: "Testing & Rollout", duration: "Weeks 12-14", desc: "Shadow-testing alongside human agents, tuning responses, then moving to customer-facing traffic." }
     ],
 
     lessonsLearned: [
       { title: "Dynamic Chunking Wins", desc: "Standard character-count chunking broke code blocks and step-by-step instructions. We switched to syntax-aware chunking to preserve procedural information." },
-      { title: "Human-in-the-Loop Backup", desc: "Initially, the agent tried to handle too much. Creating an early handoff trigger for frustrated sentiment preserved customer CSAT scores." }
+      { title: "Human-in-the-Loop Backup", desc: "Initially the agent tried to handle too much. Adding an early handoff trigger on frustrated sentiment mattered more than raising raw answer coverage." }
     ],
 
-    testimonial: {
-      quote:
-        "We expected the chatbot to handle maybe 30% of tickets. It handled 64% from week one, and the accuracy was genuinely impressive. The Futurise team understood our product deeply — this wasn't a generic AI deployment.",
-      name: "Marcus T.",
-      title: "VP of Customer Success, US SaaS Platform",
-    },
+    testimonial: null,
 
     faqs: [
       {
@@ -187,9 +190,9 @@ export const caseStudies = {
     year: "2025",
 
     meta: {
-      title: "From MVP to 1,200 Active Users in 8 Months — SaaS Web Platform | Futurise Solutions",
+      title: "Rebuilding a B2B SaaS Platform | Futurise Solutions",
       description:
-        "A real case study: how Futurise Solutions architected and shipped a B2B SaaS property management platform from MVP to 1,200 active users in 8 months — using React, Node.js, and MongoDB.",
+        "How we rebuilt a B2B property management SaaS on a multi-tenant architecture — React, Node.js, MongoDB namespacing, Redis caching, and CI/CD on AWS.",
       keywords:
         "SaaS platform development case study, React Node.js SaaS build, MVP to scale web app, B2B SaaS development company, property management SaaS, web application development case study, Futurise Solutions web dev",
       ogImage: "/case-study-saas.png",
@@ -197,10 +200,10 @@ export const caseStudies = {
 
     hero: {
       eyebrow: "Case Study · Web Development",
-      title: "MVP to 1,200 Users",
-      highlight: "in 8 Months.",
+      title: "Rebuilding a SaaS Platform",
+      highlight: "on Foundations That Hold.",
       subtitle:
-        "How we designed, built, and scaled a B2B SaaS property management platform from a napkin sketch to a product serving 1,200 active users.",
+        "A B2B property management platform inherited from a previous agency, rebuilt at the application layer: multi-tenant data isolation, a cached data access layer, and a deployment pipeline the team could actually ship through.",
     },
 
     overview:
@@ -208,7 +211,7 @@ export const caseStudies = {
 
     challenge: {
       heading: "The Problem",
-      body: "The client had already burned six months with a previous agency that delivered a poorly architected prototype — slow, unscalable, and full of technical debt. The real challenge wasn't just building a product; it was building one that could grow from 12 to 1,200+ users without architectural intervention.",
+      body: "The client had already spent months with a previous agency and been handed a prototype that was slow, hard to extend and carrying significant technical debt. The real problem was not shipping features; it was arriving at an architecture that could take sustained tenant growth without another rebuild.",
       points: [
         "Previous build had N+1 database queries causing 8-second load times at just 50 concurrent users",
         "No multi-tenancy: each customer's data was not properly isolated",
@@ -244,15 +247,15 @@ export const caseStudies = {
     stack: ["React 18", "Vite", "Node.js", "Express", "MongoDB", "Redis", "AWS EC2 & S3", "GitHub Actions", "Datadog", "Stripe", "React Query", "Recharts"],
 
     results: [
-      { value: "1,200+", label: "Active users at 8 months", desc: "Up from 12 at project start" },
-      { value: "1.6s", label: "Average page load time", desc: "Down from 8 seconds on the old build" },
-      { value: "48%", label: "Faster reporting workflows", desc: "Measured via user session data" },
-      { value: "99.9%", label: "Uptime since launch", desc: "Zero unplanned production outages" },
+      { value: "8 mo", label: "Discovery to production", desc: "One-week technical discovery sprint, then staged rebuild in two-week cycles" },
+      { value: "DB-per-tenant", label: "Multi-tenancy model", desc: "MongoDB namespacing on shared infrastructure — isolated data boundaries without separate clusters" },
+      { value: "Redis", label: "Caching layer", desc: "Hot data paths cached ahead of the database, with rate limiting at the API edge" },
+      { value: "Aggregation", label: "Data access pattern", desc: "Dashboard reads restructured into aggregation pipelines instead of per-record queries" },
     ],
 
     keyInsight: {
-      title: "Optimize DB Queries First",
-      body: "Identifying N+1 query bottlenecks and applying Redis cache solved 90% of scaling lag. Never throw server resources at what can be fixed with index optimization and queries optimization."
+      title: "Fix the Query Layer Before the Infrastructure",
+      body: "The inherited build was slow because of how it talked to the database, not because it lacked servers. Dashboard pages issued a separate query per record rather than fetching sets — the classic N+1 pattern — so cost grew with every row on screen. We profiled the access layer first, restructured those reads into aggregation pipelines, added indexes matched to the actual query shapes, and only then put Redis in front of the hot paths. Scaling the infrastructure would have made the same inefficiency more expensive without making it faster. Read the queries before you provision anything."
     },
 
     timeline: [
@@ -267,12 +270,7 @@ export const caseStudies = {
       { title: "Client-Side State", desc: "React Query dramatically cut duplicate fetch calls, optimizing dashboard loading for heavy data-views." }
     ],
 
-    testimonial: {
-      quote:
-        "The previous agency gave us technical debt we couldn't recover from. Futurise rebuilt everything properly and we went from 12 to 1,200 active users without touching the architecture. That's what we needed.",
-      name: "Alex K.",
-      title: "Co-Founder & CTO, HOMIES PropTech",
-    },
+    testimonial: null,
 
     faqs: [
       {
@@ -302,9 +300,9 @@ export const caseStudies = {
     year: "2025",
 
     meta: {
-      title: "Real Estate App with 10K+ Downloads — Mobile App Case Study | Futurise Solutions",
+      title: "React Native Property App for India & US Markets",
       description:
-        "How Futurise Solutions built a cross-platform React Native real estate app that reached 10,000+ downloads, 42% organic installs, and a 4.6-star rating in 9 months — serving buyers and agents in India and the USA.",
+        "How we built a cross-platform React Native property app for India and the USA — list virtualization, viewport-bounded maps and offline browsing.",
       keywords:
         "real estate mobile app development case study, React Native property app, cross-platform app development India USA, mobile app 10k downloads, property search app case study, Futurise Solutions app dev",
       ogImage: "/case-study-app.png",
@@ -312,22 +310,22 @@ export const caseStudies = {
 
     hero: {
       eyebrow: "Case Study · App Development",
-      title: "10,000+ Downloads.",
+      title: "Two Markets.",
       highlight: "One Codebase.",
       subtitle:
-        "How we built a cross-platform React Native real estate app — from design to App Store — that reached 10K+ downloads with a 4.6-star rating.",
+        "How we built a cross-platform React Native property app that had to behave the same on a budget Android in India as on an iPhone in New York.",
     },
 
     overview:
-      "A real estate platform operating in India and the USA needed a mobile-first experience to serve both property seekers and agents. Their existing web app had poor mobile conversion — 68% of traffic was mobile, but 91% of enquiries came from desktop. They needed a native-quality cross-platform app that worked as well on a budget Android phone in India as it did on an iPhone in New York.",
+      "A real estate platform operating in India and the USA needed a mobile-first experience for both property seekers and agents. Most of their traffic already arrived on phones, but enquiries were still overwhelmingly completed on desktop — the mobile web experience was losing people before they converted. They needed a native-quality cross-platform app that behaved as well on a budget Android handset in India as on an iPhone in New York.",
 
     challenge: {
       heading: "The Problem",
       body: "The core challenge was not just building a mobile app — it was building one that could serve two very different markets simultaneously. Indian users were on low-memory Android devices on 4G networks; US users expected a premium native iOS experience. The app needed to feel fast, native, and reliable for both — with the same codebase.",
       points: [
-        "68% of web traffic was mobile, but mobile conversion was 8x lower than desktop",
+        "Most traffic arrived on mobile, but enquiries were completed almost entirely on desktop",
         "Property listing data was served via a slow REST API with no pagination strategy",
-        "Map integration required real-time polygon boundary data for 50,000+ pin codes",
+        "Map integration required real-time polygon boundary data across a large set of postal regions",
         "Agent-to-buyer communication needed end-to-end encrypted in-app messaging",
         "App Store and Play Store compliance for data privacy in both jurisdictions",
       ],
@@ -359,15 +357,15 @@ export const caseStudies = {
     stack: ["React Native", "Expo", "TypeScript", "Firebase Realtime DB", "Google Maps API", "FlashList", "Expo Notifications", "AsyncStorage", "Node.js Backend", "AWS S3 + CloudFront"],
 
     results: [
-      { value: "10K+", label: "Downloads in 9 months", desc: "Across iOS and Android" },
-      { value: "4.6 ★", label: "Average app store rating", desc: "Combined across App Store & Play Store" },
-      { value: "42%", label: "Organic installs", desc: "Through ASO and word of mouth" },
-      { value: "+140%", label: "Mobile enquiry rate", desc: "Versus the previous mobile web experience" },
+      { value: "1", label: "Shared codebase, two platforms", desc: "React Native and Expo targeting iOS and Android from a single TypeScript source" },
+      { value: "20 wks", label: "Wireframes to store launch", desc: "Prototyping, build, encrypted chat layer, then App Store and Play Store submission" },
+      { value: "FlashList", label: "Listing virtualization", desc: "Replaced the default FlatList to hold scroll performance on low-memory Android hardware" },
+      { value: "Offline", label: "Recently viewed listings", desc: "Shortlists cached to AsyncStorage and background-synced when connectivity returns" },
     ],
 
     keyInsight: {
-      title: "Performance is the Best UX",
-      body: "Virtualizing large map clusters and applying aggressive JPEG compression allowed the app to run seamlessly on budget devices. When target markets include varying hardware tiers, visual budget and performance tuning is everything."
+      title: "Performance Is the Feature, Not the Polish",
+      body: "The device floor sets the design budget. We profiled throughout on a mid-range Galaxy A14 rather than a developer laptop, and that constraint drove the real decisions: virtualized lists instead of naive scrolling, clustered map markers with queries bounded to the visible viewport instead of loading a whole region's boundary data, compressed progressive images with placeholders instead of full-resolution assets. When your target markets span hardware tiers, performance tuning is not the last pass before launch — it is the architecture."
     },
 
     timeline: [
@@ -382,17 +380,12 @@ export const caseStudies = {
       { title: "Viewport-Limited Queries", desc: "Querying only visible map boundaries rather than the entire state database cut bandwidth bills by 85%." }
     ],
 
-    testimonial: {
-      quote:
-        "The app had to work brilliantly on a $150 Android and a $1,200 iPhone. Futurise delivered that. The map performance alone — 50,000 pin codes rendering smoothly — is something I've never seen in another property app.",
-      name: "Priya S.",
-      title: "Product Director, Estate Realty",
-    },
+    testimonial: null,
 
     faqs: [
       {
         q: "Why React Native over separate native apps?",
-        a: "With two markets (India and USA) and two platforms (iOS and Android), building separate native apps would have quadrupled the engineering cost and created maintenance overhead. React Native with Expo gave us 95% code sharing with true native performance — the right trade-off for this project.",
+        a: "With two markets (India and USA) and two platforms (iOS and Android), separate native builds would have multiplied both the engineering cost and the long-term maintenance surface. React Native with Expo let almost all of the code be shared while keeping native performance where it mattered — the right trade-off for this project.",
       },
       {
         q: "How did you handle performance on low-end Android devices?",
@@ -417,9 +410,9 @@ export const caseStudies = {
     year: "2026",
 
     meta: {
-      title: "FinTech Dashboard Redesign That Increased Retention by 38% | Futurise Solutions",
+      title: "FinTech Dashboard UX Redesign Case Study | Futurise",
       description:
-        "How Futurise Solutions redesigned a FinTech wealth management dashboard — from UX research to high-fidelity Figma to production — increasing user retention by 38% and reducing time-to-insight by 71%.",
+        "How we rebuilt a wealth management dashboard: user research, progressive-disclosure information architecture, a tokenised Figma design system, WCAG 2.1 AA.",
       keywords:
         "FinTech dashboard redesign case study, UI UX design fintech, user retention improvement design, SaaS dashboard UX, Figma design system case study, product design agency, Futurise Solutions UI UX",
       ogImage: "/case-study-uiux.png",
@@ -427,24 +420,24 @@ export const caseStudies = {
 
     hero: {
       eyebrow: "Case Study · UI/UX Design",
-      title: "+38% User Retention",
-      highlight: "Through Better Design.",
+      title: "Rebuilding a Wealth Dashboard",
+      highlight: "Around Progressive Disclosure.",
       subtitle:
-        "How a research-driven UX redesign of a FinTech wealth management dashboard turned churning users into power users — in 10 weeks.",
+        "A research-led redesign of a FinTech wealth management platform — interviews and session review, then a new information architecture, then a tokenised design system engineering could extend without us.",
     },
 
     overview:
-      "A UK-based wealth management FinTech was experiencing a serious retention problem. Their platform had strong acquisition numbers — a 40% trial-to-paid conversion rate — but a painful 62% churn rate within the first 90 days. Exit surveys pointed to the same issue repeatedly: the dashboard was overwhelming, the data was hard to understand, and users couldn't find the features they were paying for.",
+      "A UK-based wealth management FinTech had a retention problem rather than an acquisition one: trials converted well, but a large share of new customers left within their first few months. Exit surveys kept returning the same three complaints — the dashboard was overwhelming, the data was hard to interpret, and users could not find the features they were paying for.",
 
     challenge: {
       heading: "The Problem",
-      body: "The existing dashboard was built by engineers without dedicated design input — it showed every data point it could, with no hierarchy or user journey in mind. The result was a screen with 47 visible data points, 12 navigation items at the same visual weight, and no clear path from 'I logged in' to 'I took action on my portfolio.'",
+      body: "The existing dashboard presented a large number of data points at a uniform visual weight, with navigation items competing at the same level and no hierarchy guiding attention. The result was a screen that was complete but not usable: nothing carried a user from logging in to acting on their portfolio.",
       points: [
-        "62% churn within first 90 days despite strong trial conversion",
-        "Dashboard displayed 47 data points with no information hierarchy",
-        "Average time to complete a common task (check portfolio performance): 4.2 minutes",
-        "11% of paying users had never used the most valuable feature — it was buried 3 clicks deep",
-        "No mobile responsive design — 38% of users were trying to access via phone",
+        "Trial conversion was healthy, but early-life retention was not",
+        "Dashboard surfaced every available metric with no information hierarchy",
+        "Checking portfolio performance — the most common task — took far longer than it should",
+        "The most valuable feature sat three clicks deep and went undiscovered by many paying users",
+        "No responsive layout, despite a substantial share of users arriving on phones",
       ],
     },
 
@@ -454,7 +447,7 @@ export const caseStudies = {
       steps: [
         {
           title: "UX Research & Audit",
-          desc: "Conducted 14 user interviews, heatmap analysis (Hotjar), session recording review, and a cognitive walkthrough of the existing product. Identified 23 critical UX failures — mapped to specific churn moments in the user journey.",
+          desc: "Ran user interviews, heatmap analysis (Hotjar), session-recording review and a cognitive walkthrough of the existing product, then mapped each usability failure to the point in the journey where users were dropping out.",
         },
         {
           title: "Information Architecture",
@@ -474,15 +467,15 @@ export const caseStudies = {
     stack: ["Figma", "FigJam", "Hotjar", "Maze (usability testing)", "Lottie (micro-animations)", "WCAG 2.1 AA compliance audit", "Developer handoff via Figma tokens"],
 
     results: [
-      { value: "+38%", label: "User retention at 90 days", desc: "Up from previous baseline 90-day retention" },
-      { value: "90s", label: "Time-to-insight", desc: "Down from 4.2 minutes" },
-      { value: "+80%", label: "Feature discovery rate", desc: "For previously buried key features" },
-      { value: "75", label: "Core component system", desc: "Delivered for engineering team" },
+      { value: "10 wks", label: "Research to developer handoff", desc: "Kickoff through usability testing and design-token export to the engineering team" },
+      { value: "4 phases", label: "Research to handoff sequence", desc: "UX audit, wireframes and flows, design system, then usability testing and token export" },
+      { value: "Maze", label: "Moderated usability testing", desc: "Two rounds of remote testing with prototype iteration between them" },
+      { value: "WCAG 2.1 AA", label: "Accessibility standard audited against", desc: "Contrast, focus order and status states checked across light and dark themes" },
     ],
 
     keyInsight: {
-      title: "Progressive Disclosure Wins",
-      body: "Hiding secondary complex metrics behind interactive dropdowns and detail tabs increased visual clarity, lowering user drop-offs. Users don't need all the data all the time; they need visual cues that direct actions."
+      title: "Progressive Disclosure Beats Density",
+      body: "The original dashboard surfaced a large number of data points at the same visual weight, which left no clear path from logging in to acting on a portfolio. We inverted that: summary first, detail on demand, with secondary metrics moved behind interactive dropdowns and detail tabs, and navigation collapsed from a flat list into a three-tier hierarchy. The lesson is that in a data-heavy product, completeness is not the same as usefulness. Users do not need all the data all the time; they need visual cues that point at the next action. The related handoff lesson was that defining tokens inside Figma and exporting them as JSON let the frontend team style against the system directly rather than reinterpreting screens, which is what makes a design system survive after the design engagement ends."
     },
 
     timeline: [
@@ -497,12 +490,7 @@ export const caseStudies = {
       { title: "Simplified Navigation", desc: "Collapsing the sidebar into 3 core categories stopped early dashboard dropouts." }
     ],
 
-    testimonial: {
-      quote:
-        "I've worked with design agencies before who gave us beautiful screens that our engineers couldn't build. Futurise gave us a working design system that our team could extend themselves. The retention lift speaks for itself.",
-      name: "James R.",
-      title: "CEO, UK FinTech Wealth Platform",
-    },
+    testimonial: null,
 
     faqs: [
       {
@@ -515,7 +503,7 @@ export const caseStudies = {
       },
       {
         q: "Did you measure the business impact post-launch?",
-        a: "Yes. We tracked 90-day retention as the primary success metric — it moved to a solid 38% relative lift. We also measured feature discovery rate (users who clicked the key feature within the first session) and task completion time for 3 benchmark tasks.",
+        a: "Yes. Ninety-day retention was agreed as the primary success metric before the work started, alongside feature discovery rate — whether users reached the key feature in their first session — and task-completion time across a set of benchmark tasks. Those measurements belong to the client and we do not publish their figures.",
       },
     ],
   },
@@ -532,20 +520,20 @@ export const caseStudies = {
     year: "2026",
 
     meta: {
-      title: "DeFi Protocol Launch with $850K TVL in 90 Days | Futurise Solutions",
+      title: "DeFi Staking Protocol Build — Blockchain Case Study",
       description:
-        "How Futurise Solutions designed, built, and launched an audited DeFi staking and liquidity protocol that achieved $850,000 in Total Value Locked within 90 days of mainnet deployment.",
+        "How we architected and shipped a dual-pool DeFi staking and liquidity protocol — non-upgradeable contracts, MEV-resistant launch, Web3 frontend.",
       keywords:
-        "DeFi protocol development case study, smart contract development, staking protocol launch, DeFi TVL growth, blockchain development case study, Web3 startup, Ethereum DeFi, Futurise Solutions blockchain",
+        "DeFi protocol development case study, smart contract development, staking protocol launch, smart contract audit preparation, blockchain development case study, Web3 startup, Ethereum DeFi, Futurise Solutions blockchain",
       ogImage: "/case-study-blockchain.png",
     },
 
     hero: {
       eyebrow: "Case Study · Blockchain Development",
-      title: "$850K TVL.",
-      highlight: "90 Days After Mainnet.",
+      title: "Immutable Contracts.",
+      highlight: "An MEV-Resistant Launch.",
       subtitle:
-        "How we designed, audited, and launched a DeFi staking and liquidity protocol — from architecture to $850K in locked value — in 16 weeks.",
+        "How we rewrote a dual-pool staking and liquidity protocol from scratch, prepared it for external audit, and designed a token launch that front-running bots could not read ahead of.",
     },
 
     overview:
@@ -589,15 +577,15 @@ export const caseStudies = {
     stack: ["Solidity", "Hardhat", "Foundry", "OpenZeppelin", "Ethereum Mainnet", "React", "Wagmi", "Ethers.js", "The Graph (indexing)", "Chainlink (price feeds)", "IPFS (governance metadata)"],
 
     results: [
-      { value: "$850K", label: "TVL at 90 days", desc: "Total Value Locked across both liquidity pools" },
-      { value: "0", label: "Critical security findings post-audit", desc: "After full contract rewrite and external audit" },
-      { value: "1,200+", label: "Unique wallets", desc: "Participated in first-month staking" },
-      { value: "1.5x", label: "Token price appreciation", desc: "From launch to 90-day mark" },
+      { value: "4", label: "Contracts in the suite", desc: "Roughly 1,800 lines of Solidity, rewritten from the client's original drafts" },
+      { value: "16 wks", label: "Design to mainnet", desc: "Contract design, fuzz testing, audit preparation and wallet integration" },
+      { value: "Non-upgradeable", label: "Core staking contracts", desc: "No proxy, no admin upgrade path — removes admin-key compromise as an attack surface" },
+      { value: "48 hrs", label: "Governance time-lock", desc: "Reward-rate and lock-period changes are visible on-chain before they take effect" },
     ],
 
     keyInsight: {
-      title: "Security as a Marketing Tool",
-      body: "Fully transparent open-source code and audited smart contracts was the single biggest reason users committed funds. In a trustless environment, verified security audits build immediate traction."
+      title: "Security Decisions Are Public Decisions",
+      body: "In a trustless environment, the security architecture is not a private engineering concern — it is the thing users read before they commit funds. Open-source contracts, an audit-ready codebase and a deliberately non-upgradeable core were design choices made to be inspected, not just to be safe. The tradeoff is real and worth stating: immutability means no patch path, so every decision has to be settled before deployment rather than after."
     },
 
     timeline: [
@@ -612,17 +600,12 @@ export const caseStudies = {
       { title: "Non-Upgradeable Design", desc: "Keeping core contracts immutable built instant community trust over multi-sig configurations." }
     ],
 
-    testimonial: {
-      quote:
-        "In DeFi, trust is everything. Futurise didn't just build contracts — they built a system that we could prove was secure. The audit clean sheet and the transparent launch mechanics are what made our community commit capital.",
-      name: "David M.",
-      title: "Co-Founder, DeFi Protocol",
-    },
+    testimonial: null,
 
     faqs: [
       {
         q: "What was the cost of the security audit?",
-        a: "The external audit was scoped at $28,000 for the full contract suite (4 contracts, ~1,800 lines of Solidity). This is a standard range for a protocol of this complexity. We consider audits a non-negotiable cost of any protocol handling user funds.",
+        a: "Audit cost scales with the size and complexity of the contract suite — in this case four contracts of roughly 1,800 lines of Solidity. We quote it as a separate line item rather than absorbing it into the build, because it is paid to an independent firm and the client should see what they are buying. We treat an external audit as a non-negotiable cost for any protocol that holds user funds.",
       },
       {
         q: "How did you protect against MEV bots during the token launch?",
@@ -647,9 +630,9 @@ export const caseStudies = {
     year: "2026",
 
     meta: {
-      title: "+160% Organic Traffic in 6 Months — SaaS SEO Case Study | Futurise Solutions",
+      title: "SaaS SEO Architecture Case Study | Futurise Solutions",
       description:
-        "How Futurise Solutions grew a B2B SaaS platform's organic traffic by 160% in 6 months — ranking #1 for 6 high-intent keywords and generating 90% more inbound leads through technical SEO and content clustering.",
+        "How we built an organic search system for a B2B SaaS platform: technical foundation, intent-mapped topic clusters, internal linking and schema.",
       keywords:
         "SaaS SEO case study, organic traffic growth, B2B SaaS SEO strategy, content clustering SEO, traffic growth, SEO agency case study, digital marketing results, Futurise Solutions marketing",
       ogImage: "/case-study-marketing.png",
@@ -657,23 +640,23 @@ export const caseStudies = {
 
     hero: {
       eyebrow: "Case Study · Digital Marketing",
-      title: "+160% Organic Traffic",
-      highlight: "in 6 Months.",
+      title: "Building an SEO System",
+      highlight: "Foundation First.",
       subtitle:
-        "How we grew a B2B SaaS platform's organic presence from near-zero to #1 rankings on high-intent keywords — with no paid search spend.",
+        "How we rebuilt a B2B SaaS platform's organic search architecture — fixing the technical layer before publishing a single article, then structuring content as intent-mapped clusters.",
     },
 
     overview:
-      "A B2B SaaS company offering compliance management software for professional services firms had been investing in Google Ads for 18 months with a $12,000/month budget. Their organic presence was almost non-existent — 94% of their web traffic came from paid search. When their CPC started rising and their MQL cost hit $340, they needed to build an organic acquisition channel that would compound over time.",
+      "A B2B SaaS company selling compliance management software to professional services firms had been buying search traffic for over a year while their organic presence stayed close to non-existent. Almost all of their acquisition depended on paid search, so a rising cost-per-click translated directly into a rising cost per lead. They needed an organic channel that would compound instead of resetting each month.",
 
     challenge: {
       heading: "The Problem",
-      body: "The company's website had 23 pages, a domain rating of 14, and zero posts on their blog. Their core product pages were thin (under 400 words) and not optimised for any specific search intent. Competitors were ranking on the exact same keywords they were paying to appear for.",
+      body: "The site was small, had almost no earned authority, and its blog had never been used. Core product pages were thin and written without a specific search intent in mind, so they competed for nothing in particular. Competitors were ranking organically on the very keywords this company was paying to appear against.",
       points: [
-        "94% of web traffic from paid search — zero organic diversity",
-        "Domain Rating of 14 — minimal domain authority",
-        "Core product pages averaged 380 words with no semantic depth",
-        "Blog existed but had zero posts published in 14 months",
+        "Acquisition almost entirely dependent on paid search, with no organic diversity",
+        "Minimal earned domain authority",
+        "Core product pages were thin and carried no semantic depth",
+        "A blog existed but had gone unused for over a year",
         "No internal linking architecture — page authority was not distributed",
         "Core Web Vitals: LCP 5.8s, CLS 0.42 — failing across all metrics",
       ],
@@ -697,7 +680,7 @@ export const caseStudies = {
         },
         {
           title: "Link Acquisition",
-          desc: "Built 40 high-quality backlinks over 6 months through original research reports (published as downloadable assets), HARO responses, and targeted outreach — moving Domain Rating from 14 to 24.",
+          desc: "Earned links over six months through original research published as downloadable assets, HARO responses and targeted outreach, rather than bought placements.",
         },
       ],
     },
@@ -705,15 +688,15 @@ export const caseStudies = {
     stack: ["Ahrefs", "Google Search Console", "Screaming Frog", "SurferSEO", "Semrush", "Google Analytics 4", "Looker Studio", "Google Tag Manager", "Hotjar"],
 
     results: [
-      { value: "+160%", label: "Organic traffic growth", desc: "Month 1 vs Month 6" },
-      { value: "#1", label: "Rankings on 6 high-intent keywords", desc: "All within the 6-month window" },
-      { value: "+90%", label: "Inbound leads from organic", desc: "Marketing-qualified leads from SEO" },
-      { value: "DR 24", label: "Domain Rating", desc: "Up from DR 14 at project start" },
+      { value: "6 mo", label: "Engagement duration", desc: "Technical audit through link acquisition, run as four sequenced phases" },
+      { value: "4 stages", label: "Intent architecture", desc: "Keywords mapped across awareness, consideration, evaluation and decision" },
+      { value: "Pillar + cluster", label: "Content topology", desc: "Cluster articles link up to pillar pages, distributing authority through internal links" },
+      { value: "Gated", label: "Publication sequencing", desc: "No content shipped until crawl, canonical and sitemap architecture could support it" },
     ],
 
     keyInsight: {
-      title: "Topic Clustering Wins",
-      body: "Focusing on structured clusters targeting compliance laws yielded search authority much faster than scattered general articles. Internal link architecture kept crawl agents indexing content faster."
+      title: "Structure Beats Volume",
+      body: "Structured topic clusters built around a narrow subject area are a stronger foundation for search authority than a larger number of scattered, unrelated articles. The internal link architecture is what makes the difference: when every cluster article links up to a pillar page and the pillar links back down, crawlers find new content through existing indexed pages rather than waiting to discover orphans. The corollary is that the technical layer has to come first — publishing into a site with crawl errors, missing canonicals and a stale sitemap means the architecture you designed is not the architecture a crawler actually sees."
     },
 
     timeline: [
@@ -728,12 +711,7 @@ export const caseStudies = {
       { title: "Core Web Vitals Impact", desc: "Optimizing website load speeds was the catalyst for early keyword rank jumps." }
     ],
 
-    testimonial: {
-      quote:
-        "We were spending $12,000 a month on Google Ads and getting 94% of our traffic that way. Six months later, organic is generating 90% more leads than it was. The compounding effect is real — this investment will keep paying off.",
-      name: "Sarah L.",
-      title: "Head of Growth, Compliance SaaS Platform",
-    },
+    testimonial: null,
 
     faqs: [
       {

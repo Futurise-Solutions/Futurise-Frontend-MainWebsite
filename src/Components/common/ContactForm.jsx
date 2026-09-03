@@ -2,8 +2,6 @@ import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { Box, Input, Textarea, Button, VStack, SimpleGrid, Text, HStack, Heading, Divider, useToast } from "@chakra-ui/react";
 import { FiSend } from "react-icons/fi";
-import { FaWhatsapp } from "react-icons/fa";
-import { whatsappLink } from "../../utils/Constant";
 import { trackEvent, EVENTS } from "../../utils/analytics";
 
 const field = {
@@ -84,23 +82,7 @@ const ContactForm = ({ location = "contact-page" }) => {
             Share your Details
           </Heading>
           <HStack spacing={1} flexWrap="wrap">
-            <Text fontSize="sm" color="text.muted">Fill out the form below or</Text>
-            <HStack
-              as="a"
-              href={whatsappLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackEvent(EVENTS.WHATSAPP_CLICK, { location: "contact-form" })}
-              spacing={1}
-              color="#25D366"
-              fontWeight={500}
-              fontSize="sm"
-              _hover={{ color: "#1ebe5d", textDecoration: "none" }}
-              transition="color .2s"
-            >
-              <FaWhatsapp size={16} />
-              <Text fontSize="sm" fontWeight={500}>connect via WhatsApp</Text>
-            </HStack>
+            <Text fontSize="sm" color="text.muted">Fill out the form below and we&apos;ll reply within one business day.</Text>
           </HStack>
           <Divider mt={4} borderColor="border.subtle" />
         </Box>

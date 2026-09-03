@@ -18,7 +18,12 @@
  * malformed blog URL an indexable duplicate of the front page.
  */
 
-const API_BASE = "https://api.futurisesolutions.com";
+// Same configured CMS origin the middleware and the browser bundle use. This was also
+// hardcoded to the now-unresponsive https://api.futurisesolutions.com; because this
+// function fails open, that outage turned every ambiguous slug into the SPA shell
+// instead of a decision. See api/_lib/apiBase.js.
+import { cmsUrl, hasApiBase } from "./_lib/apiBase.js";
+
 const SITE_URL = "https://www.futurisesolutions.com";
 
 // Minimal body used only if the origin cannot serve its own 404 page. By this point
@@ -66,9 +71,14 @@ export default async function handler(req, res) {
 
   if (!slug) return send404();
 
+  // Without a CMS origin the two cases this function exists to separate — missing slug
+  // versus published-since-last-build — cannot be told apart. Serve the shell rather
+  // than guess, which is the same fail-open choice made for every other CMS failure.
+  if (!hasApiBase) return sendShell();
+
   let apiRes;
   try {
-    apiRes = await fetch(`${API_BASE}/api/blogs/${encodeURIComponent(slug)}`, {
+    apiRes = await fetch(cmsUrl(`/api/blogs/${encodeURIComponent(slug)}`), {
       headers: { "User-Agent": "FuturiseBlogFallback/1.0" },
       signal: AbortSignal.timeout(5000),
     });

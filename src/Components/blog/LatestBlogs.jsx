@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Box, SimpleGrid, Skeleton, Flex, Button } from "@chakra-ui/react";
+import { Box, SimpleGrid, Flex, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { FiArrowUpRight } from "react-icons/fi";
 import { Section, SectionHeading } from "../common";
@@ -20,7 +20,13 @@ const LatestBlogs = () => {
   const latest = blogs.slice(0, 4);
 
   // Hide the section entirely if there are no published blogs (or the API is unreachable).
-  if (!loading && latest.length === 0) return null;
+  //
+  // Returning null *after* a full-height loading skeleton has painted collapses roughly
+  // 740px of layout and drags the footer up with it — a ~0.18 CLS hit on the home page,
+  // which is most of the way to failing Core Web Vitals on its own. Rendering nothing
+  // from the very first paint, and only revealing the section once there is something
+  // real to show, removes the shift entirely: nothing that was on screen ever moves.
+  if (loading || latest.length === 0) return null;
 
   return (
     <Section>
@@ -38,23 +44,17 @@ const LatestBlogs = () => {
         </Button>
       </Flex>
 
-      {loading ? (
+      {/* No loading skeleton: the section does not mount until `latest` is populated,
+          so there is no intermediate state to fill. See the guard above. */}
+      <MotionBox variants={container} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}>
         <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={6}>
-          {[...Array(4)].map((_, i) => (
-            <Skeleton key={i} h="340px" borderRadius="20px" startColor="rgba(255,255,255,0.04)" endColor="rgba(255,255,255,0.09)" />
+          {latest.map((b) => (
+            <MotionBox key={b._id || b.slug} variants={cardVariant} h="full">
+              <BlogCard blog={b} />
+            </MotionBox>
           ))}
         </SimpleGrid>
-      ) : (
-        <MotionBox variants={container} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}>
-          <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={6}>
-            {latest.map((b) => (
-              <MotionBox key={b._id || b.slug} variants={cardVariant} h="full">
-                <BlogCard blog={b} />
-              </MotionBox>
-            ))}
-          </SimpleGrid>
-        </MotionBox>
-      )}
+      </MotionBox>
 
       <Flex justify="center" mt={10} display={{ base: "flex", md: "none" }}>
         <Button as={Link} to="/blog" variant="outlineGlow" rightIcon={<FiArrowUpRight />}>
