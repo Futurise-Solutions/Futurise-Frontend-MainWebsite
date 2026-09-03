@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Container, Flex, Heading, Text, VStack, HStack, Icon, SimpleGrid, Button, Wrap, WrapItem, Link as ChakraLink } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 import { FiMail, FiMapPin, FiClock, FiCalendar } from "react-icons/fi";
-import { Reveal, Eyebrow, ContactForm, Seo } from "../Components/common";
+import { Reveal, Eyebrow, ContactForm, Seo, AuroraField } from "../Components/common";
 import { services } from "../utils/Constant";
 import ServicesWorldwide from "../Components/ContactCusCpmponents/ServicesWorldwide ";
 import ClientsReviews from "../Components/HomePage Components/ClientsReviews";
@@ -68,7 +68,7 @@ const ContactUs = () => {
         <Box position="absolute" top="-15%" left="-5%" w="500px" h="500px" bg="rgba(123,108,255,0.18)" filter="blur(120px)" rounded="full" pointerEvents="none" />
         <Box position="absolute" bottom="-20%" right="-8%" w="420px" h="420px" bg="rgba(181,123,255,0.16)" filter="blur(120px)" rounded="full" pointerEvents="none" />
 
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} position="relative">
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} position="relative">
           <Flex direction={{ base: "column", lg: "row" }} gap={{ base: 12, lg: 16 }} align={{ base: "start", lg: "stretch" }}>
             <VStack flex="1" align="start" spacing={6} justify="center">
               <Reveal><Eyebrow>Contact us</Eyebrow></Reveal>
@@ -145,7 +145,12 @@ const ContactUs = () => {
           at a page with real authority. Placed last, below the form and the reviews, so it
           reaches people who were not ready to send a scope without competing with the form
           for anyone who was. */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} pb={{ base: 12, md: 16 }}>
+      {/* The page closes on a bare heading and a row of chips against flat canvas —
+          the weakest note to end on, on the page where a visitor is deciding whether
+          to make contact. The wash gives it presence without adding another asset. */}
+      <Box position="relative" isolation="isolate">
+        <AuroraField intensity="soft" />
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} pb={{ base: 12, md: 16 }} position="relative" zIndex={2}>
         <Reveal>
           <Text fontSize="sm" fontWeight={600} letterSpacing="0.08em" textTransform="uppercase" color="text.faint" mb={2}>
             Not ready to send a scope
@@ -199,7 +204,8 @@ const ContactUs = () => {
             ))}
           </Wrap>
         </Reveal>
-      </Container>
+        </Container>
+      </Box>
     </Box>
   );
 };

@@ -139,10 +139,40 @@ const components = {
   },
 };
 
+/**
+ * Content width.
+ *
+ * Every section on the site was capped at a literal `maxW="1200px"`. That is correct up
+ * to about a 1280px viewport and increasingly wrong above it: at 1440 the content column
+ * used 83% of the window, at 1680 it was 71%, at 1920 63%, and at 2560 it occupied less
+ * than half the screen with ~680px of dead margin on each side. Full-bleed elements (the
+ * hero plate, the interstitial bands, the marquees) kept spanning the whole viewport, so
+ * the page read as a narrow column of content trapped inside wide backgrounds — the
+ * "squeezed" look.
+ *
+ * `clamp` fixes the cause rather than patching breakpoints: the column tracks the
+ * viewport through the mid-range and stops at 1560px, which is roughly the widest a
+ * 16px paragraph can run before line length hurts readability. Below ~1330px the clamp
+ * resolves under 1200px, so small laptops and everything narrower are byte-for-byte
+ * what they were.
+ *
+ *   1280 -> 1200 (unchanged)   1680 -> 1428    2560 -> 1560 (capped)
+ *   1440 -> 1224               1920 -> 1560
+ *
+ * Sections that deliberately run narrower for readability (prose at 780px, forms at
+ * 640px) pass their own maxW and are untouched by this.
+ */
+const sizes = {
+  container: {
+    site: "clamp(1200px, 85vw, 1560px)",
+  },
+};
+
 const theme = extendTheme({
   config: { initialColorMode: "dark", useSystemColorMode: false },
   colors,
   fonts,
+  sizes,
   semanticTokens,
   styles,
   components,

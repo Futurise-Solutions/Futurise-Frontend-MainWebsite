@@ -1,15 +1,16 @@
 import React from "react";
 import {
-  Box, Container, Heading, Text, VStack, HStack, SimpleGrid, Icon, Flex, Button, List, ListItem,
+  Box, Container, Heading, Text, VStack, HStack, SimpleGrid, Icon, Flex, Button, List, ListItem, Image, Link as ChakraLink
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiCheck, FiArrowUpRight } from "react-icons/fi";
-import { Reveal, Eyebrow, GlassCard, Seo, CTASection } from "../Components/common";
+import { Reveal, Eyebrow, GlassCard, Seo, CTASection, MarketHero, VisualBand } from "../Components/common";
 import Faqs from "../Components/HomePage Components/Faqs";
 import { useBooking } from "../context/BookingContext";
 import { NavbarservicesOptions } from "../utils/Constant";
 import { COUNTRY_ALTERNATES } from "../utils/Constant/countries";
 import { buildCountrySchema } from "../utils/countrySchema";
+import { marketCa, marketReach } from "../assests";
 import {
   caMeta, caInterface, caQuebec, caChanges2026, caSupervision, caSred,
   caSectors, partnerFit, caCostModel, caResources, caFaqs,
@@ -67,10 +68,8 @@ const CanadaPage = () => {
         alternates={COUNTRY_ALTERNATES}
       />
 
-      {/* Hero */}
-      <Box position="relative" overflow="hidden" pt={{ base: 12, md: 20 }} pb={{ base: 8, md: 12 }}>
-        <Box position="absolute" top="-15%" left="-5%" w="500px" h="500px" bg="rgba(123,108,255,0.18)" filter="blur(120px)" rounded="full" pointerEvents="none" />
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} position="relative">
+      {/* Hero — market-specific atmosphere plate behind the shared texture. */}
+      <MarketHero image={marketCa}>
           <Reveal><Eyebrow>Canada</Eyebrow></Reveal>
           <Reveal delay={0.05}>
             <Heading as="h1" mt={5} fontSize={{ base: "38px", md: "56px" }} lineHeight={1.08} letterSpacing="-0.025em" maxW="940px">
@@ -97,11 +96,10 @@ const CanadaPage = () => {
               </Button>
             </HStack>
           </Reveal>
-        </Container>
-      </Box>
+      </MarketHero>
 
       {/* The interface obligations — the thesis */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
         <Reveal><Eyebrow>The starting point</Eyebrow></Reveal>
         <Reveal delay={0.05}>
           <Heading as="h2" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="860px">
@@ -134,7 +132,7 @@ const CanadaPage = () => {
 
       {/* Quebec */}
       <Box bg="rgba(255,255,255,0.015)" borderY="1px solid" borderColor="border.subtle">
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
           <Reveal><Eyebrow>Quebec</Eyebrow></Reveal>
           <Reveal delay={0.05}>
             <Heading as="h2" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="860px">
@@ -166,7 +164,7 @@ const CanadaPage = () => {
       </Box>
 
       {/* 2026 instruments */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
         <Reveal><Eyebrow>Recent legislation</Eyebrow></Reveal>
         <Reveal delay={0.05}>
           <Heading as="h2" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="860px">
@@ -199,7 +197,7 @@ const CanadaPage = () => {
 
       {/* Supplier supervision */}
       <Box bg="rgba(255,255,255,0.015)" borderY="1px solid" borderColor="border.subtle">
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
           <Reveal><Eyebrow>Oversight</Eyebrow></Reveal>
           <Reveal delay={0.05}>
             <Heading as="h2" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="860px">
@@ -232,7 +230,7 @@ const CanadaPage = () => {
       </Box>
 
       {/* SR&ED */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
         <Reveal><Eyebrow>Research credits</Eyebrow></Reveal>
         <Reveal delay={0.05}>
           <Heading as="h2" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="860px">
@@ -265,8 +263,20 @@ const CanadaPage = () => {
       </Container>
 
       {/* Sectors */}
+      {/* Mid-page visual break. These pages run eight or more text-and-card
+          sections back to back, which reads as documentation; this is the pause.
+          The line restates the page's own argument rather than adding a claim. */}
+      <VisualBand
+        src={marketReach}
+        title="Two languages,"
+        highlight="one product"
+        subtitle="Quebec obligations handled in the build, not bolted on after launch."
+        height={{ base: "260px", md: "340px", lg: "380px" }}
+        overlay={0.5}
+      />
+
       <Box bg="rgba(255,255,255,0.015)" borderY="1px solid" borderColor="border.subtle">
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
           <Reveal><Eyebrow>Who this reaches</Eyebrow></Reveal>
           <Reveal delay={0.05}>
             <Heading as="h2" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="860px">
@@ -303,7 +313,7 @@ const CanadaPage = () => {
       </Box>
 
       {/* Local vs distributed */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
         <Reveal><Eyebrow>Fit</Eyebrow></Reveal>
         <Reveal delay={0.05}>
           <Heading as="h2" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="860px">
@@ -343,7 +353,7 @@ const CanadaPage = () => {
 
       {/* Estimates */}
       <Box bg="rgba(255,255,255,0.015)" borderY="1px solid" borderColor="border.subtle">
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
           <Reveal><Eyebrow>Budgeting</Eyebrow></Reveal>
           <Reveal delay={0.05}>
             <Heading as="h2" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="860px">
@@ -386,7 +396,7 @@ const CanadaPage = () => {
       </Box>
 
       {/* Services + guides */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
         <Reveal><Eyebrow>Services &amp; cost guides</Eyebrow></Reveal>
         <Reveal delay={0.05}>
           <Heading as="h2" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="860px">
@@ -407,15 +417,67 @@ const CanadaPage = () => {
         {/* Single column on the narrowest phones: at 390px, two columns leave the longest
             labels too little room and the button's trailing icon pushes past the viewport,
             giving the page a horizontal scrollbar. */}
-        <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={3} mb={12}>
-          {NavbarservicesOptions.map((s, i) => (
-            <Reveal key={s.option} delay={0.02 * i}>
-              <Button as={Link} to={s.path} variant="outlineGlow" size="md" w="full" justifyContent="space-between" rightIcon={<FiArrowUpRight />} fontSize={{ base: "13px", md: "14px" }}>
-                {s.option}
-              </Button>
-            </Reveal>
-          ))}
-        </SimpleGrid>
+          <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={3} mb={12}>
+            {NavbarservicesOptions.map((s, i) => (
+              <Reveal key={s.option} delay={0.02 * i}>
+                <ChakraLink
+                  as={Link}
+                  to={s.path}
+                  role="group"
+                  display="flex"
+                  alignItems="center"
+                  gap={3}
+                  h="full"
+                  px={4}
+                  py={3.5}
+                  borderRadius="14px"
+                  bgGradient="linear(160deg, rgba(255,255,255,0.055) 0%, rgba(255,255,255,0.018) 100%)"
+                  border="1px solid"
+                  borderColor="border.subtle"
+                  boxShadow="inset 0 1px 0 rgba(255,255,255,0.07)"
+                  transition="transform .28s cubic-bezier(0.22,1,0.36,1), border-color .28s ease, box-shadow .28s ease"
+                  _hover={{
+                    textDecoration: "none",
+                    transform: "translateY(-3px)",
+                    borderColor: "rgba(180,160,255,0.34)",
+                    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.12), 0 18px 36px -22px rgba(123,108,255,0.6)",
+                  }}
+                >
+                  <Flex
+                    w="38px"
+                    h="38px"
+                    flexShrink={0}
+                    borderRadius="11px"
+                    align="center"
+                    justify="center"
+                    bg="rgba(180,160,255,0.1)"
+                    border="1px solid"
+                    borderColor="rgba(180,160,255,0.22)"
+                    transition="background .28s ease"
+                    _groupHover={{ bg: "rgba(180,160,255,0.18)" }}
+                  >
+                    <Image src={s.icon} alt="" aria-hidden="true" w="19px" h="19px" />
+                  </Flex>
+                  <Box flex="1" minW={0}>
+                    <Text fontSize={{ base: "13.5px", md: "14px" }} fontWeight={600} color="text.primary" lineHeight={1.3} noOfLines={1}>
+                      {s.option}
+                    </Text>
+                    <Text fontSize="11.5px" color="text.faint" lineHeight={1.35} noOfLines={1}>
+                      {s.desc}
+                    </Text>
+                  </Box>
+                  <Icon
+                    as={FiArrowUpRight}
+                    boxSize={4}
+                    color="text.faint"
+                    flexShrink={0}
+                    transition="color .28s ease, transform .28s ease"
+                    _groupHover={{ color: "accent.solid", transform: "translate(2px,-2px)" }}
+                  />
+                </ChakraLink>
+              </Reveal>
+            ))}
+          </SimpleGrid>
 
         <Reveal>
           <Heading as="h3" fontSize={{ base: "18px", md: "20px" }} mb={4}>Cost guides</Heading>

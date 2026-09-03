@@ -69,8 +69,8 @@ const Portfolio = () => {
       <Seo
         // Brand omitted here on purpose: Seo.jsx appends it only when the result still
         // fits Google's ~60-character render width. Hardcoding it forced a truncation.
-        title="Portfolio — AI, SaaS, Web & Mobile Projects"
-        description="Explore our portfolio — SaaS dashboards, AI platforms, luxury e-commerce, real-estate sites and crypto trading terminals built for clients worldwide."
+        title="Portfolio — AI, SaaS & Web Projects"
+        description="Real client work: Infinity Bay Trading, Dhanlaxmi Property, Palm Vision Technology and more — SaaS dashboards, AI platforms and real-estate builds we shipped."
         path="/portfolio"
         image="/portfolio.png"
         keywords="web development portfolio, AI app portfolio, SaaS portfolio, React projects, blockchain projects, mobile app portfolio, New Zealand web agency portfolio, case studies"
@@ -229,7 +229,7 @@ const Portfolio = () => {
           the commercial pages it evidences. Linked at the discipline level rather than
           per-project, because Projects carries no service key and inventing one would mean
           a brittle title-keyed map for no extra crawl value. */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} pb={{ base: 12, md: 16 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} pb={{ base: 12, md: 16 }}>
         <Reveal>
           <Text fontSize="sm" fontWeight={600} letterSpacing="0.08em" textTransform="uppercase" color="text.faint" mb={2}>
             The work behind these projects

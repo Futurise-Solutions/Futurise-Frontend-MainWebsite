@@ -1,7 +1,8 @@
 import React from "react";
-import { SimpleGrid, Image, Text, Heading, Flex } from "@chakra-ui/react";
+import { SimpleGrid, Image, Text, Heading, Flex, Box } from "@chakra-ui/react";
 import { cards } from "../../utils/Constant";
 import { Section, SectionHeading, GlassCard, Reveal } from "../common";
+import CircuitRail from "../common/CircuitRail";
 
 const WhyChooseUs = () => {
   return (
@@ -14,7 +15,17 @@ const WhyChooseUs = () => {
         mb={{ base: 10, md: 14 }}
       />
 
-      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
+      {/* Connector rail behind the grid. The six cards are one argument, but laid out
+          as six separate boxes they read as a list — the rail draws the relationship
+          without adding anything to read. Desktop only: at one and two columns the
+          cards stack, so a horizontal spine would connect nothing.
+          See CircuitRail.jsx. */}
+      <Box position="relative">
+        <Box display={{ base: "none", lg: "block" }} position="relative" h="30px" mb={2}>
+          <CircuitRail stops={3} height={30} top="0" />
+        </Box>
+
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6} position="relative" zIndex={1}>
         {cards.map((el, index) => (
           <Reveal key={el.title + index} delay={(index % 3) * 0.08}>
             <GlassCard h="full" p={{ base: 6, md: 7 }}>
@@ -40,7 +51,8 @@ const WhyChooseUs = () => {
             </GlassCard>
           </Reveal>
         ))}
-      </SimpleGrid>
+        </SimpleGrid>
+      </Box>
     </Section>
   );
 };

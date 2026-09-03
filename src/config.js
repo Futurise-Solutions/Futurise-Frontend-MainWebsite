@@ -6,12 +6,17 @@
 
 // API base URL — set VITE_API_BASE_URL per environment.
 //
-// The fallback is https and portless to match the production API. It previously read
-// "http://api.futurisesolutions.com:5000", which an https page cannot call at all
-// (mixed content), so a deploy that forgot the env var broke every blog page silently
-// rather than loudly.
-export const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || "https://api.futurisesolutions.com";
+// MUST BE AN ORIGIN, WITH NO PATH: `apiUrl()` below appends "/api/blogs" and friends, so
+// a value ending in "/api/blogs" produces "/api/blogs/api/blogs/..." and a 404. That has
+// happened.
+//
+// There is deliberately no hardcoded fallback origin. This used to default to
+// "https://api.futurisesolutions.com", which later stopped responding — and a default
+// that points at a dead host is worse than no default at all, because every caller then
+// fails slowly (connection timeout) instead of immediately, and the misconfiguration
+// looks like a backend outage. An empty base makes requests resolve against the site's
+// own origin, which fails fast and visibly in the network panel.
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
 // The admin password is deliberately NOT here any more. It used to be
 // `import.meta.env.VITE_ADMIN_PASSWORD`, which Vite inlines into public JavaScript —

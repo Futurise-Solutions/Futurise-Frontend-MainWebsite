@@ -1,16 +1,21 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Box, Container, Flex, Heading, Text, Button, Stack, VStack, HStack, Icon, SimpleGrid, Wrap, WrapItem } from "@chakra-ui/react";
 import { useParams, useNavigate, Link as RouterLink } from "react-router-dom";
 import { Link as ChakraLink } from "@chakra-ui/react";
 import { FiArrowRight, FiCheckCircle, FiArrowUpRight } from "react-icons/fi";
 import ProcessSection from "../Components/ServiceComponents/ProcessSection";
-import ServiceStack from "../Components/ServiceComponents/ServiceStack";
+// ServiceStack pulls ~53 authentic brand marks (~29kB gzip of SVG path data) for the
+// capability grid. It sits well below the fold, so loading it eagerly would put that
+// weight in front of the hero for no benefit. Split out, the LCP path stays as light
+// as it was before the logos existed.
+const ServiceStack = lazy(() => import("../Components/ServiceComponents/ServiceStack"));
 import ServiceHeroVisual from "../Components/ServiceComponents/ServiceHeroVisual";
 import Faqs from "../Components/HomePage Components/Faqs";
 import { services, AREAS_SERVED } from "../utils/Constant";
 import { caseStudies, caseStudyForService } from "../utils/Constant/caseStudies";
 import { serviceResources } from "../utils/Constant/serviceResources";
-import { Reveal, Eyebrow, CTASection, Seo } from "../Components/common";
+import { Reveal, Eyebrow, CTASection, Seo, AmbientCanvas, VisualBand } from "../Components/common";
+import { precisionLayers } from "../assests";
 import { useBooking } from "../context/BookingContext";
 import NotFound from "./NotFound";
 
@@ -94,10 +99,11 @@ const ServicePage = () => {
       />
       {/* Hero */}
       <Box position="relative" overflow="hidden" pt={{ base: 12, md: 20 }} pb={{ base: 10, md: 14 }}>
-        <Box position="absolute" top="-15%" left="-5%" w="500px" h="500px" bg="rgba(123,108,255,0.18)" filter="blur(120px)" rounded="full" pointerEvents="none" />
-        <Box position="absolute" top="10%" right="-8%" w="420px" h="420px" bg="rgba(181,123,255,0.16)" filter="blur(120px)" rounded="full" pointerEvents="none" />
+        {/* Shared atmosphere layer — same grid/aurora/grain system as the home hero,
+            so every service page reads as part of one visual system. */}
+        <AmbientCanvas variant="hero" />
 
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} position="relative">
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} position="relative" zIndex={1}>
           <Flex direction={{ base: "column", lg: "row" }} align="center" gap={{ base: 16, lg: 16 }}>
             <VStack flex="1" align="start" spacing={5}>
               <Reveal><Eyebrow>{service.whatWeDo}</Eyebrow></Reveal>
@@ -153,12 +159,29 @@ const ServicePage = () => {
         </Container>
       </Box>
 
-      <ServiceStack service={serviceName} />
+      {/* Reserve height so the lazy chunk landing cannot shift the sections below it. */}
+      <Suspense fallback={<Box minH={{ base: "600px", md: "800px" }} />}>
+        <ServiceStack service={serviceName} />
+      </Suspense>
       <ProcessSection />
+
+      {/* All six service pages run ~7600px of copy, chips, cards and accordions with no
+          image between the hero and the footer. This sits at the midpoint — after the
+          process timeline, before the industries list — so the second half of the page
+          starts on a visual rather than continuing the same run. No copy: a third
+          headline here would lengthen the reading, which is the problem it is solving.
+          The plate is shared across all six services on purpose; it is cached after the
+          first service page a visitor opens. */}
+      <VisualBand
+        src={precisionLayers}
+        height={{ base: "190px", md: "260px", lg: "300px" }}
+        focal="center"
+        overlay={0.5}
+      />
 
       {/* Industries we serve */}
       {service.industries?.length > 0 && (
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 10, md: 14 }}>
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 10, md: 14 }}>
           <Reveal><Eyebrow>Industries we serve</Eyebrow></Reveal>
           <Reveal delay={0.05}>
             <Heading mt={4} fontSize={{ base: "26px", md: "36px" }} lineHeight={1.15} maxW="760px">
@@ -204,7 +227,7 @@ const ServicePage = () => {
           to another service. Without them case studies were reachable only via the
           navbar dropdown, and no service page linked to any other — so crawl paths
           dead-ended here and page authority never flowed between them. */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 10, md: 14 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 10, md: 14 }}>
         {relatedCaseStudy && (
           <>
             <Reveal><Eyebrow>Related work</Eyebrow></Reveal>
@@ -274,6 +297,52 @@ const ServicePage = () => {
             ))}
           </Wrap>
         </Reveal>
+
+        {/* Markets.
+            The service pages linked to the market pages only through the footer, so the
+            Service -> Market half of the internal-link graph existed sitewide but not
+            contextually. This block closes it.
+
+            Anchors are written to what each market page actually argues — the obligation
+            or commercial fact a buyer there cares about — rather than repeating
+            "<service> in <country>" six times. Exact-match anchor repetition across
+            six pages x six markets would be the pattern to avoid, and the descriptive
+            version is more useful to a reader deciding whether the page is for them. */}
+        <Reveal delay={0.2}>
+          <Text mt={10} mb={4} fontSize="sm" fontWeight={600} letterSpacing="0.08em" textTransform="uppercase" color="text.faint">
+            Building from a specific market?
+          </Text>
+          <Wrap spacing={3}>
+            {[
+              { to: "/nz", label: "New Zealand — NZD quotes, Privacy Act 2020" },
+              { to: "/us", label: "United States — contracting and IP terms" },
+              { to: "/ca", label: "Canada — provincial privacy law" },
+              { to: "/au", label: "Australia — Consumer Data Right" },
+              { to: "/ae", label: "UAE — free zone, mainland and PDPL" },
+              { to: "/europe", label: "Europe — GDPR transfers and the EU AI Act" },
+            ].map((m) => (
+              <WrapItem key={m.to}>
+                <ChakraLink
+                  as={RouterLink}
+                  to={m.to}
+                  px={4}
+                  py={2.5}
+                  borderRadius="full"
+                  bg="bg.surface"
+                  border="1px solid"
+                  borderColor="border.subtle"
+                  fontSize={{ base: "sm", md: "md" }}
+                  color="text.primary"
+                  fontWeight={500}
+                  _hover={{ borderColor: "rgba(180,160,255,0.35)", textDecoration: "none" }}
+                  transition="border-color .2s"
+                >
+                  {m.label}
+                </ChakraLink>
+              </WrapItem>
+            ))}
+          </Wrap>
+        </Reveal>
       </Container>
 
       {/* Further reading.
@@ -284,7 +353,7 @@ const ServicePage = () => {
           pointing it at a blog post would re-create the collision the re-targeting
           removes. See the note at the top of Constant/serviceResources.js. */}
       {resources.length > 0 && (
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 10, md: 14 }}>
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 10, md: 14 }}>
           <Reveal><Eyebrow>Further reading</Eyebrow></Reveal>
           <Reveal delay={0.05}>
             <Heading mt={4} fontSize={{ base: "26px", md: "36px" }} lineHeight={1.15} maxW="760px">

@@ -1,11 +1,19 @@
 import React from "react";
-import { Box, Container, Heading, Text, Wrap, WrapItem, SimpleGrid, Link as ChakraLink } from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, Text, Wrap, WrapItem, SimpleGrid, Link as ChakraLink } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
-import { AboutUsHero, MissionVision, CompanyStats } from "../Components";
+// Imported by path rather than through ../Components. That barrel re-exports all eleven
+// home/about section components, and because a barrel is a single module the bundler
+// pulled every one of them into this page's chunk — including the seven homepage
+// sections /about never renders. Direct imports keep each page carrying only what it
+// uses. HomePage.jsx does the same, for the same reason.
+import AboutUsHero from "../Components/AboutUs Components/AboutUsHero";
+import MissionVision from "../Components/AboutUs Components/MissionVision";
+import CompanyStats from "../Components/HomePage Components/CompanyStats";
 import CoreValues from "../Components/AboutUs Components/CoreValues";
 import TeamSection from "../Components/AboutUs Components/TeamSection";
 import TechnologyExcellence from "../Components/ContactCusCpmponents/TechnologyExcellence";
-import { CTASection, Seo, Reveal, Eyebrow, GlassCard } from "../Components/common";
+import { CTASection, Seo, Reveal, Eyebrow, GlassCard, VisualBand, MarketGlobe } from "../Components/common";
+import { aboutAtrium, signalBraid } from "../assests";
 import { AREAS_SERVED, SAME_AS } from "../utils/Constant";
 import { COUNTRIES } from "../utils/Constant/countries";
 import { aboutEntity, aboutNotClaimed, aboutVerify } from "../utils/Constant/about";
@@ -17,14 +25,14 @@ import { useBooking } from "../context/BookingContext";
 // meta description is exactly what a prospect reads in the search result.
 // Kept under ~160 characters so Google renders it whole instead of truncating mid-sentence.
 const META_DESCRIPTION =
-  "Meet the senior team behind Futurise Solutions — AI agents, SaaS platforms, web and mobile products. Registered in Wellington, NZ, delivering worldwide.";
+  "A Wellington-registered digital product studio founded in 2024, with an engineering team in Udaipur, India. Fixed-scope quotes and senior engineers.";
 
 const AboutUs = () => {
   const { onOpen: openBooking } = useBooking();
   return (
     <Box>
       <Seo
-        title="About Us — AI & Web Development Studio | Futurise Solutions"
+        title="About Futurise Solutions — NZ-Registered Dev Studio"
         description={META_DESCRIPTION}
         path="/about"
         image="/about.png"
@@ -78,6 +86,28 @@ const AboutUs = () => {
       <MissionVision />
       <CoreValues />
       <TeamSection />
+
+      {/* Interstitial. Between the values grid and the expertise grid was the longest
+          unbroken run of card grids on the site — mission/vision, then values, then
+          six expertise cards, then three more EEAT grids after that. This is the one
+          pause in the middle of it. The copy restates the process the page already
+          describes rather than making a new claim, and it sets up "Technology
+          excellence" immediately below. */}
+      {/* focal sits at 88% because this plate is composed with its structure entirely
+          in the right third and near-black everywhere else — cropped any further left
+          the lit edge lands mid-band and reads as a pasted-in rectangle rather than as
+          a photograph. Cropping into the structure lets the scrim carry the left side. */}
+      <VisualBand
+        src={aboutAtrium}
+        eyebrow="How we work"
+        title="Structure first,"
+        highlight="surface second"
+        subtitle="The decisions that are expensive to change later are the ones we make before anything is built."
+        height={{ base: "280px", md: "380px", lg: "420px" }}
+        focal="88% center"
+        overlay={0.5}
+      />
+
       <TechnologyExcellence />
 
       {/* EEAT block — three sections, added as a contiguous group so the existing
@@ -89,7 +119,7 @@ const AboutUs = () => {
           competitor writes, and it is what makes the rest of the page credible.
           See src/utils/Constant/about.js for what these sections may not say — in
           particular why section 2 stays silent about statistics. */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
         <Reveal><Eyebrow>The company</Eyebrow></Reveal>
         <Reveal delay={0.05}>
           <Heading as="h2" mt={4} mb={3} fontSize={{ base: "26px", md: "34px" }} lineHeight={1.2} maxW="820px">
@@ -119,7 +149,7 @@ const AboutUs = () => {
       </Container>
 
       <Box bg="rgba(255,255,255,0.015)" borderY="1px solid" borderColor="border.subtle">
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
           <Reveal><Eyebrow>Negative space</Eyebrow></Reveal>
           <Reveal delay={0.05}>
             <Heading as="h2" mt={4} mb={3} fontSize={{ base: "26px", md: "34px" }} lineHeight={1.2} maxW="820px">
@@ -150,7 +180,22 @@ const AboutUs = () => {
         </Container>
       </Box>
 
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
+      {/* Three card grids run back to back here — "contracting with", "does not claim"
+          and "does claim" — which is the longest unbroken stretch on the page and the
+          most demanding to read, since all three are about what the company will and
+          won't assert. This is a pause between the disclaimer and the evidence. */}
+      <VisualBand
+        src={signalBraid}
+        height={{ base: "160px", md: "210px", lg: "240px" }}
+        focal="center"
+        overlay={0.62}
+        // The braid plate renders more saturated than the rest of the set. Desaturating
+        // and darkening pulls it back to the muted lavender the other plates sit at,
+        // rather than spending another generation on a re-roll.
+        tone="saturate(0.5) brightness(0.72)"
+      />
+
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
         <Reveal><Eyebrow>Verification</Eyebrow></Reveal>
         <Reveal delay={0.05}>
           <Heading as="h2" mt={4} mb={3} fontSize={{ base: "26px", md: "34px" }} lineHeight={1.2} maxW="820px">
@@ -209,7 +254,13 @@ const AboutUs = () => {
           hreflang cluster, the sitemap or the footer. Deliberately no prose about any
           individual market: each country page argues its own case, and restating it here
           would put competing copy on a second URL. */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
+        {/* Two columns from lg up. This section previously ran a single column of prose
+            and pills across the full 1200px and left the entire right half empty, which
+            is the flattest point on the page. The globe carries the same claim the copy
+            makes, so it earns the space rather than filling it. */}
+        <Flex direction={{ base: "column", lg: "row" }} align="center" gap={{ base: 10, lg: 16 }}>
+        <Box flex="1" minW={0}>
         <Reveal>
           <Text fontSize="sm" fontWeight={600} letterSpacing="0.08em" textTransform="uppercase" color="text.faint" mb={2}>
             Markets
@@ -267,6 +318,13 @@ const AboutUs = () => {
             </WrapItem>
           </Wrap>
         </Reveal>
+        </Box>
+        <Box flexShrink={0} w={{ base: "full", lg: "auto" }}>
+          <Reveal from="right">
+            <MarketGlobe size={{ base: "210px", md: "260px", lg: "300px" }} />
+          </Reveal>
+        </Box>
+        </Flex>
       </Container>
 
       <CTASection

@@ -1,13 +1,26 @@
 import React from "react";
-import { SimpleGrid, Text, Heading, Flex, Icon } from "@chakra-ui/react";
+import { SimpleGrid, Text, Heading, Flex, Icon, Box } from "@chakra-ui/react";
 import { processSteps } from "../../utils/Constant";
 import GlassCard from "./GlassCard";
 import Reveal from "./Reveal";
+import CircuitRail from "./CircuitRail";
 
 /** Numbered "how we work" steps. Shared by home + service pages. */
 const ProcessTimeline = ({ columns = { base: 1, sm: 2, lg: 4 } }) => {
   return (
-    <SimpleGrid columns={columns} spacing={5}>
+    <Box position="relative">
+      {/* Stepped rail *above* the grid, not behind it. This is the "how we work"
+          section: the point is that the seven steps are a sequence, and a plain grid of
+          seven boxes is the one layout that does not say so. Sitting it behind the cards
+          hid everything except the slivers in the gutters, so it runs above the row
+          instead, where the junctions line up with the cards below.
+          Desktop only — below `lg` the cards stack into one or two columns and a
+          horizontal spine would connect nothing. See CircuitRail.jsx. */}
+      <Box display={{ base: "none", lg: "block" }} position="relative" h="34px" mb={1}>
+        <CircuitRail stops={4} variant="stepped" height={34} top="0" />
+      </Box>
+
+      <SimpleGrid columns={columns} spacing={5} position="relative" zIndex={1}>
       {processSteps.map((step, i) => (
         <Reveal key={step.title} delay={(i % 4) * 0.07}>
           <GlassCard h="full" p={6} hover={false} _hover={{ borderColor: "rgba(180,160,255,0.45)" }}>
@@ -37,7 +50,8 @@ const ProcessTimeline = ({ columns = { base: 1, sm: 2, lg: 4 } }) => {
           </GlassCard>
         </Reveal>
       ))}
-    </SimpleGrid>
+      </SimpleGrid>
+    </Box>
   );
 };
 

@@ -28,7 +28,7 @@ SaaS, startups, FinTech, healthcare, real estate and PropTech, e-commerce, educa
 - Headquarters: Wellington, New Zealand
 - Primary markets: New Zealand, United Arab Emirates, United States, Canada, India
 - Client work delivered in: United Arab Emirates (Dubai), United States, India
-- Track record: 25+ projects delivered for 15+ clients across 4+ countries. The portfolio page and "Selected work" below show featured engagements only, not the full delivery history
+- Track record: the portfolio page lists the engagements we can name. We publish no project or client totals, because a count is not something a reader can verify and we would rather be checked than believed
 - Disciplines in-house: AI & ML, web development, mobile app development, UI/UX design, blockchain, digital marketing
 - Engagement model: Free discovery call, fixed-scope estimates, two-week agile sprints; NDAs signed on request; post-launch support and maintenance available
 - Typical timelines: MVPs 6–12 weeks; larger platforms 3–6 months
@@ -73,14 +73,17 @@ Named clients with delivered, verifiable projects:
 
 ## Case Studies
 
-Explore our verified client outcomes and process breakdowns:
+Engineering write-ups of how each system was built — architecture, tradeoffs and what we
+would do differently. They describe the work, not its commercial results: we do not publish
+performance figures we cannot ask a reader to verify.
+
 - [Case Studies Index](https://www.futurisesolutions.com/case-studies) — All published case studies.
-- [AI Customer Support Agent](https://www.futurisesolutions.com/case-studies/ai-support-agent) — Cut support tickets by 68% and deflected 64% of L1 queries for a US SaaS client in 14 weeks.
-- [SaaS Platform Scale](https://www.futurisesolutions.com/case-studies/saas-platform-scale) — Scaling a B2B SaaS PropTech dashboard to 1,200+ active users and dropping load times to 1.6s.
-- [Real Estate Mobile App](https://www.futurisesolutions.com/case-studies/real-estate-app) — Cross-platform React Native app with 10K+ downloads and 4.6★ rating.
-- [FinTech Dashboard Redesign](https://www.futurisesolutions.com/case-studies/fintech-ux-redesign) — Research-driven UX overhaul that increased user retention by 38% and cut time-to-insight to 90s.
-- [DeFi Protocol Launch](https://www.futurisesolutions.com/case-studies/defi-protocol-launch) — Audited Solidity staking contracts reaching $850K TVL in 90 days.
-- [SaaS SEO Growth](https://www.futurisesolutions.com/case-studies/saas-seo-growth) — B2B compliance SaaS SEO strategy resulting in +160% organic traffic in 6 months.
+- [AI Customer Support Agent](https://www.futurisesolutions.com/case-studies/ai-support-agent) — A retrieval-augmented support agent for a US SaaS company: documentation embedded into a vector index, grounded generation, and a confidence threshold that escalates to a human rather than guessing.
+- [SaaS Platform Scale](https://www.futurisesolutions.com/case-studies/saas-platform-scale) — Rebuilding a B2B PropTech dashboard inherited as an unscalable prototype: N+1 query elimination, caching and index work.
+- [Real Estate Mobile App](https://www.futurisesolutions.com/case-studies/real-estate-app) — A cross-platform React Native property app built to stay usable on low-end Android hardware as well as current iPhones.
+- [FinTech Dashboard Redesign](https://www.futurisesolutions.com/case-studies/fintech-ux-redesign) — Research-led information-architecture rework and a reusable component system for a wealth-management dashboard.
+- [DeFi Protocol Launch](https://www.futurisesolutions.com/case-studies/defi-protocol-launch) — Solidity staking and liquidity contracts rewritten for an external audit, and the architecture decisions behind them.
+- [SaaS SEO Growth](https://www.futurisesolutions.com/case-studies/saas-seo-growth) — The technical SEO method applied to a B2B compliance SaaS: crawl and indexation work, content architecture, internal linking and schema.
 
 ## Articles
 

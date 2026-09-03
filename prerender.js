@@ -38,14 +38,32 @@ if (fs.existsSync(envPath)) {
   });
 }
 
-const API_BASE_URL = process.env.VITE_API_BASE_URL || 'https://api.futurisesolutions.com';
+// Origin only — the paths below append "/api/blogs/...". A value carrying that suffix
+// produced "/api/blogs/api/blogs/admin/all" and a 404, which read as "no posts" and
+// silently dropped 82 blog URLs from the sitemap. Normalise rather than trust, and do not
+// fall back to a hardcoded host: the previous default (api.futurisesolutions.com) has
+// stopped responding, and a default that hangs is harder to diagnose than one that is
+// absent. writeSitemap() refuses to write when the fetch fails, so an unset value fails
+// the build instead of shipping a truncated sitemap.
+const API_BASE_URL = (() => {
+  const raw = (process.env.VITE_API_BASE_URL || '').trim();
+  if (!raw) return '';
+  try { return new URL(raw).origin; } catch { return raw.replace(/\/+$/, ''); }
+})();
 const SITE_URL = 'https://www.futurisesolutions.com';
 const DIST_PATH = path.join(__dirname, 'dist');
 const INDEX_HTML_PATH = path.join(DIST_PATH, 'index.html');
 const PORT = Number(process.env.PRERENDER_PORT) || 41731;
 
-// The intro loader on the home page runs for 1400ms; CountUp stats animate for 2200ms.
-// These waits keep the loader overlay and half-counted "0+" stats out of the output.
+// The intro loader runs ~1000ms on home and ~500ms elsewhere, plus a 420ms fade;
+// CountUp stats animate for 2200ms. These waits keep a half-faded loader and
+// half-counted "0+" stats out of the output.
+//
+// The loader itself no longer needs stripping from the captured markup: it lives in
+// index.html as a sibling of #root (see the #fs-boot block there), and everything this
+// script captures or counts is scoped to #root, so it is structurally invisible here.
+// The removal pass below is kept anyway as a cheap guard against a future in-#root
+// overlay reintroducing the problem.
 const LOADER_MS = 1600;
 const ANIMATION_MS = 2600;
 
@@ -343,10 +361,81 @@ function injectMetadata(html, { title, description, imageUrl, keywords, url }) {
   return modified;
 }
 
+/*
+ * Re-insert the boot loader into a captured page.
+ *
+ * `page.content()` serialises the LIVE DOM, and by the time we capture, the loader has
+ * already dismissed itself and removed its own node — so the markup we get back has no
+ * loader in it. Writing that straight to disk would mean every prerendered route (which
+ * is every route a visitor can land on directly) shipped *without* the loader, and only
+ * the un-prerendered dev entry point had one.
+ *
+ * So it is spliced back in verbatim from the built template. Taken as a literal slice of
+ * dist/index.html rather than re-templated here, so index.html stays the single source
+ * of truth for the loader's markup, styles and timing — edit it there and this follows.
+ */
+function extractBootLoader(template) {
+  // Both boundaries are matched by regex rather than by exact string, because both vary.
+  //
+  // The end boundary bit us: the first version looked for the literal `<div id="root"></div>`,
+  // which only exists in a *fresh* build. Running the prerenderer a second time against an
+  // already-prerendered dist/index.html — which has Chakra's style script and rendered markup
+  // inside #root — made that string absent, extraction returned null, and all 27 pages shipped
+  // without the loader. The warning in run() caught it, but the fragility was the real bug.
+  // Matching `<div id="root"` (no closing assumption) works in both states.
+  //
+  // The start boundary is regex for a related reason: it depended on the exact indentation
+  // Vite happened to emit, which is not a contract.
+  const startMatch = /<style>\s*#fs-boot/.exec(template);
+  if (!startMatch) return null;
+  const start = startMatch.index;
+
+  const endMatch = /<div id="root"/.exec(template.slice(start));
+  if (!endMatch) return null;
+
+  const block = template.slice(start, start + endMatch.index);
+
+  // Sanity-check the extraction rather than trusting the boundaries.
+  //
+  // `npm run build` always runs `vite build` (which wipes dist) before this script, so the
+  // template is clean in production. Running prerender.js standalone against an already-
+  // prerendered dist is not: the head then carries injected meta and JSON-LD, and the slice
+  // silently balloons from ~8 kB to ~16 kB of duplicated markup. Both boundaries still match,
+  // so only a content check catches it. The block must contain the loader's own markup and
+  // nothing that belongs to a rendered page.
+  const looksRight =
+    block.includes('id="fs-boot"') &&
+    block.includes('fsBootG') &&
+    !block.includes('application/ld+json') &&
+    block.length < 40000;
+
+  if (!looksRight) {
+    console.warn(
+      `⚠️  Boot loader extraction looked wrong (${block.length} bytes) — dist/index.html is probably ` +
+      `already-prerendered output rather than a fresh template. Run "vite build" first.`
+    );
+    return null;
+  }
+
+  return block;
+}
+
+let BOOT_LOADER_HTML = null;
+
+function withBootLoader(html) {
+  if (!BOOT_LOADER_HTML) return html;
+  // Already present (belt and braces — a future change might capture it live).
+  if (html.includes('id="fs-boot"')) return html;
+  const marker = '<div id="root">';
+  const at = html.indexOf(marker);
+  if (at === -1) return html;
+  return html.slice(0, at) + BOOT_LOADER_HTML + html.slice(at);
+}
+
 function writeRoute(route, html) {
   const dir = route === '/' ? DIST_PATH : path.join(DIST_PATH, route);
   fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(path.join(dir, 'index.html'), html, 'utf-8');
+  fs.writeFileSync(path.join(dir, 'index.html'), withBootLoader(html), 'utf-8');
 }
 
 // ---------------------------------------------------------------------------
@@ -362,7 +451,7 @@ const servicesData = [
   { slug: 'digital-marketing', image: '/digitalmarkiting.png' },
 ];
 
-const staticPages = ['about', 'contact', 'portfolio', 'case-studies', 'blog', 'pricing', 'privacy', 'terms'];
+const staticPages = ['about', 'contact', 'portfolio', 'case-studies', 'blog', 'pricing', 'privacy', 'terms', 'europe'];
 
 // Country landing pages come from the shared registry in src/utils/Constant/countries.js,
 // which also derives the hreflang cluster the pages render. Reading both from one array
@@ -393,6 +482,14 @@ async function run() {
   }
 
   const template = fs.readFileSync(INDEX_HTML_PATH, 'utf-8');
+
+  // Snapshot the boot loader block once, for re-insertion into every captured page.
+  // See extractBootLoader() for why a live capture never contains it.
+  BOOT_LOADER_HTML = extractBootLoader(template);
+  if (!BOOT_LOADER_HTML) {
+    console.warn('⚠️  Boot loader block not found in dist/index.html — prerendered pages will ship without it.');
+  }
+
   const routes = buildRouteList();
 
   console.log(`\n🚀 Prerendering ${routes.length} routes with headless Chrome\n`);
@@ -473,7 +570,7 @@ async function run() {
   // falling back to Vercel's default error page.
   try {
     const { html } = await renderRoute(browser, '/this-route-does-not-exist');
-    fs.writeFileSync(path.join(DIST_PATH, '404.html'), html, 'utf-8');
+    fs.writeFileSync(path.join(DIST_PATH, '404.html'), withBootLoader(html), 'utf-8');
     console.log('✅ 404.html                                  rendered from NotFound route');
   } catch (err) {
     console.warn(`⚠️  Could not render 404.html: ${err.message}`);
@@ -482,8 +579,8 @@ async function run() {
   await browser.close();
   server.close();
 
-  const blogs = await prerenderBlogMeta(template);
-  writeSitemap(results.map((r) => r.route), blogs);
+  const { blogs, reachable: blogApiUp } = await prerenderBlogMeta(template);
+  const sitemapOk = writeSitemap(results.map((r) => r.route), blogs, blogApiUp);
 
   // Report anything that rendered but looks wrong, so a silent regression cannot pass.
   const thin = results.filter((r) => r.words < 250);
@@ -531,18 +628,31 @@ async function run() {
 
   console.log('🎉 Pre-rendering complete.\n');
 
-  if (failures || emptyHubs.length || zeroed.length || misrouted.length) process.exitCode = 1;
+  // `!sitemapOk` means the blog API did not answer, so sitemap.xml was deliberately not
+  // rewritten. The dist is then internally inconsistent — prerendered pages but a stale or
+  // absent sitemap — and must not be deployed, so it fails the build like any other defect.
+  if (failures || emptyHubs.length || zeroed.length || misrouted.length || !sitemapOk) {
+    process.exitCode = 1;
+  }
 }
 
 // Blog articles keep meta-only files — middleware.js server-renders their bodies.
+//
+// Returns `{ blogs, reachable }`. The flag matters: an empty array from a failed fetch and
+// an empty array from a genuinely empty CMS are indistinguishable to the caller, and they
+// call for opposite behaviour. Production currently serves 62 blog URLs, so "no blogs"
+// almost certainly means the API did not answer — and writing a sitemap from that would
+// silently retract every one of them. See writeSitemap() for what the flag gates.
 async function prerenderBlogMeta(template) {
   console.log('📡 Fetching blogs for meta-only prerender…');
   let blogs = [];
+  let reachable = false;
   try {
     const res = await fetch(`${API_BASE_URL}/api/blogs/admin/all`);
     if (res.ok) {
       const data = await res.json();
       blogs = Array.isArray(data) ? data : (data?.blogs || data?.data || []);
+      reachable = true;
     } else {
       console.warn(`⚠️  Failed to fetch blogs: ${res.statusText}`);
     }
@@ -569,7 +679,7 @@ async function prerenderBlogMeta(template) {
     count++;
   }
   console.log(`✅ ${count} blog meta files written (bodies served by middleware.js)`);
-  return blogs;
+  return { blogs, reachable };
 }
 
 // Generate sitemap.xml from what was actually built, rather than maintaining it by hand.
@@ -579,7 +689,34 @@ async function prerenderBlogMeta(template) {
 // hreflang is emitted per page by Seo.jsx (x-default on /, en-NZ on /nz) rather than in
 // the sitemap. Both mechanisms are valid to Google; doing it in one place keeps the
 // annotation next to the page that owns it instead of splitting it across two files.
-function writeSitemap(routes, blogs = []) {
+function writeSitemap(routes, blogs = [], blogApiUp = true) {
+  /*
+   * Refuse to write a sitemap that silently retracts the blog.
+   *
+   * The blog is the largest section of the site — production serves 62 post URLs against
+   * 21 static ones — and it is the only part of the sitemap that depends on a network
+   * fetch at build time. When api.futurisesolutions.com does not answer, prerenderBlogMeta
+   * returns an empty list, and every one of those URLs simply vanishes from the output.
+   *
+   * That failure is quiet in the worst way. The XML is still well-formed, the build still
+   * emits "sitemap.xml generated", and the file on disk looks correct — it is just missing
+   * three quarters of the site. Shipping it tells Google those posts are gone, which is a
+   * far more expensive mistake than failing the build.
+   *
+   * So an unreachable API is treated as a hard stop rather than an empty result, and the
+   * existing sitemap.xml is left untouched. An API that answers with a genuinely empty
+   * list is a different thing and is allowed through: that is real data.
+   */
+  if (!blogApiUp) {
+    console.error(
+      '❌ Blog API unreachable — refusing to write sitemap.xml.\n' +
+      `   Production currently lists blog URLs that this build cannot see, and writing\n` +
+      `   a sitemap without them would retract them from Google.\n` +
+      `   Existing dist/sitemap.xml left unchanged. Re-run the build once ${API_BASE_URL} responds.`
+    );
+    return false;
+  }
+
   const today = new Date().toISOString().slice(0, 10);
 
   // Crawl priority follows commercial value: services convert, legal pages do not.
@@ -594,6 +731,10 @@ function writeSitemap(routes, blogs = []) {
     // Country landing pages sit just under the homepage: they are the entry point for a
     // whole market and target the highest-intent commercial queries we compete for.
     if (countryPages.includes(loc.slice(1))) return { priority: '0.9', changefreq: 'monthly' };
+    // The Europe region page is a market entry point like the country pages, and carries
+    // the same commercial intent, so it is crawled at the same priority even though it is
+    // deliberately not part of the COUNTRIES registry or the hreflang cluster.
+    if (loc === '/europe') return { priority: '0.9', changefreq: 'monthly' };
     if (loc.startsWith('/blog/')) return { priority: '0.7', changefreq: 'monthly' };
     if (loc === '/privacy' || loc === '/terms') return { priority: '0.3', changefreq: 'yearly' };
     return { priority: '0.7', changefreq: 'monthly' };
@@ -631,7 +772,8 @@ ${urls}
 `;
 
   fs.writeFileSync(path.join(DIST_PATH, 'sitemap.xml'), xml, 'utf-8');
-  console.log(`✅ sitemap.xml generated with ${seen.size} URLs`);
+  console.log(`✅ sitemap.xml generated with ${seen.size} URLs (${blogs.filter((b) => b.slug).length} blog)`);
+  return true;
 }
 
 /*
@@ -681,8 +823,8 @@ async function metaOnlyFallback(template) {
   // 404.html still has to exist, or unmatched paths fall back to Vercel's error page.
   fs.writeFileSync(path.join(DIST_PATH, '404.html'), template, 'utf-8');
 
-  const blogs = await prerenderBlogMeta(template);
-  writeSitemap(buildRouteList(), blogs);
+  const { blogs, reachable: blogApiUp } = await prerenderBlogMeta(template);
+  writeSitemap(buildRouteList(), blogs, blogApiUp);
   console.log(
     `⚠️  Meta-only fallback complete — ${buildRouteList().length} routes have files, ` +
     'but bodies are NOT prerendered. Crawlers will see an empty <div id="root">.'

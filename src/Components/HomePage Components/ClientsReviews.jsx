@@ -5,6 +5,7 @@ import { FiMapPin, FiCheck } from "react-icons/fi";
 import Marquee from "react-fast-marquee";
 import { testimonials, clientProof, engagementCommitments } from "../../utils/Constant";
 import { Section, SectionHeading, GlassCard, Reveal } from "../common";
+import AuroraField from "../common/AuroraField";
 
 /**
  * Social proof, carried by the delivery record rather than by quote volume.
@@ -80,7 +81,15 @@ const ClientsReviews = () => {
   const featured = testimonials[0];
 
   return (
-    <Section>
+    // `isolation` keeps the aurora's blur from compositing against the sections above
+    // and below, which would bleed light past the vignette.
+    <Section isolation="isolate" containerProps={{ position: "relative", zIndex: 2 }}>
+      {/* This section carried the most social proof on the page and had the least
+          visual support for it: a featured quote, a marquee and a four-card grid, all
+          on flat canvas. The drifting light gives the proof somewhere to sit without
+          adding another asset to download or another card to read. */}
+      <AuroraField intensity="base" />
+
       <SectionHeading
         eyebrow="Client work"
         title="Products we've shipped"

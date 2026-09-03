@@ -1,15 +1,16 @@
 import React from "react";
 import {
-  Box, Container, Heading, Text, VStack, HStack, SimpleGrid, Icon, Flex, Button, List, ListItem,
+  Box, Container, Heading, Text, VStack, HStack, SimpleGrid, Icon, Flex, Button, List, ListItem, Image, Link as ChakraLink
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiCheck, FiArrowUpRight } from "react-icons/fi";
-import { Reveal, Eyebrow, GlassCard, Seo, CTASection } from "../Components/common";
+import { Reveal, Eyebrow, GlassCard, Seo, CTASection, MarketHero, VisualBand } from "../Components/common";
 import Faqs from "../Components/HomePage Components/Faqs";
 import { useBooking } from "../context/BookingContext";
 import { NavbarservicesOptions } from "../utils/Constant";
 import { COUNTRY_ALTERNATES } from "../utils/Constant/countries";
 import { buildCountrySchema } from "../utils/countrySchema";
+import { marketAe, marketReach } from "../assests";
 import {
   aeMeta, aeEvidence, aeJurisdictions, aeInvoicing, aeArabic, aeLicence,
   aeSectors, aeFit, aePricingNotes, aeResources, aeFaqs,
@@ -68,10 +69,9 @@ const UAEPage = () => {
         alternates={COUNTRY_ALTERNATES}
       />
 
-      {/* Hero — sets up evidence rather than compliance, because evidence leads this page. */}
-      <Box position="relative" overflow="hidden" pt={{ base: 12, md: 20 }} pb={{ base: 8, md: 12 }}>
-        <Box position="absolute" top="-15%" left="-5%" w="500px" h="500px" bg="rgba(123,108,255,0.18)" filter="blur(120px)" rounded="full" pointerEvents="none" />
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} position="relative">
+      {/* Hero — sets up evidence rather than compliance, because evidence leads this page.
+          Market-specific atmosphere plate sits behind the shared texture. */}
+      <MarketHero image={marketAe} tone="hue-rotate(-10deg) saturate(0.88)">
           <Reveal><Eyebrow>United Arab Emirates</Eyebrow></Reveal>
           <Reveal delay={0.05}>
             <Heading as="h1" mt={5} fontSize={{ base: "38px", md: "56px" }} lineHeight={1.08} letterSpacing="-0.025em" maxW="940px">
@@ -97,11 +97,10 @@ const UAEPage = () => {
               </Button>
             </HStack>
           </Reveal>
-        </Container>
-      </Box>
+      </MarketHero>
 
       {/* 1 — Evidence. First section by design. */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
         <Reveal><Eyebrow>Delivered work</Eyebrow></Reveal>
         <Reveal delay={0.05}>
           <Heading as="h2" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="900px">
@@ -142,7 +141,7 @@ const UAEPage = () => {
 
       {/* 2 — Jurisdiction */}
       <Box bg="rgba(255,255,255,0.015)" borderY="1px solid" borderColor="border.subtle">
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
           <Reveal><Eyebrow>Legal geography</Eyebrow></Reveal>
           <Reveal delay={0.05}>
             <Heading as="h2" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="860px">
@@ -174,7 +173,7 @@ const UAEPage = () => {
       </Box>
 
       {/* 3 — E-invoicing */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
         <Reveal><Eyebrow>Coming into force</Eyebrow></Reveal>
         <Reveal delay={0.05}>
           <Heading as="h2" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="860px">
@@ -206,7 +205,7 @@ const UAEPage = () => {
 
       {/* 4 — Arabic and right-to-left */}
       <Box bg="rgba(255,255,255,0.015)" borderY="1px solid" borderColor="border.subtle">
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
           <Reveal><Eyebrow>Localisation</Eyebrow></Reveal>
           <Reveal delay={0.05}>
             <Heading as="h2" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="900px">
@@ -238,7 +237,7 @@ const UAEPage = () => {
       </Box>
 
       {/* 5 — Licence-first products */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
         <Reveal><Eyebrow>Regulated products</Eyebrow></Reveal>
         <Reveal delay={0.05}>
           <Heading as="h2" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="860px">
@@ -269,8 +268,20 @@ const UAEPage = () => {
       </Container>
 
       {/* 6 — Sectors */}
+      {/* Mid-page visual break. These pages run eight or more text-and-card
+          sections back to back, which reads as documentation; this is the pause.
+          The line restates the page's own argument rather than adding a claim. */}
+      <VisualBand
+        src={marketReach}
+        title="Free zone or mainland,"
+        highlight="the build differs"
+        subtitle="Legal geography decided before architecture, not discovered during it."
+        height={{ base: "260px", md: "340px", lg: "380px" }}
+        overlay={0.5}
+      />
+
       <Box bg="rgba(255,255,255,0.015)" borderY="1px solid" borderColor="border.subtle">
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
           {/* Heading must not match /ca's "Where these obligations concentrate" or /au's
               "Where these obligations land hardest" — the zero-shared-H2 gate is absolute. */}
           <Reveal><Eyebrow>Where it applies</Eyebrow></Reveal>
@@ -309,7 +320,7 @@ const UAEPage = () => {
 
       {/* 7 — Fit, with the two pricing considerations folded in from the removed cost
           section. The /pricing link and the mid-page CTA relocated here with them. */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
         <Reveal><Eyebrow>Fit</Eyebrow></Reveal>
         <Reveal delay={0.05}>
           <Heading as="h2" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="860px">
@@ -374,7 +385,7 @@ const UAEPage = () => {
 
       {/* 8 — Services + guides */}
       <Box bg="rgba(255,255,255,0.015)" borderY="1px solid" borderColor="border.subtle">
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
           <Reveal><Eyebrow>Services &amp; cost guides</Eyebrow></Reveal>
           <Reveal delay={0.05}>
             <Heading as="h2" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="860px">
@@ -398,9 +409,61 @@ const UAEPage = () => {
           <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={3} mb={12}>
             {NavbarservicesOptions.map((s, i) => (
               <Reveal key={s.option} delay={0.02 * i}>
-                <Button as={Link} to={s.path} variant="outlineGlow" size="md" w="full" justifyContent="space-between" rightIcon={<FiArrowUpRight />} fontSize={{ base: "13px", md: "14px" }}>
-                  {s.option}
-                </Button>
+                <ChakraLink
+                  as={Link}
+                  to={s.path}
+                  role="group"
+                  display="flex"
+                  alignItems="center"
+                  gap={3}
+                  h="full"
+                  px={4}
+                  py={3.5}
+                  borderRadius="14px"
+                  bgGradient="linear(160deg, rgba(255,255,255,0.055) 0%, rgba(255,255,255,0.018) 100%)"
+                  border="1px solid"
+                  borderColor="border.subtle"
+                  boxShadow="inset 0 1px 0 rgba(255,255,255,0.07)"
+                  transition="transform .28s cubic-bezier(0.22,1,0.36,1), border-color .28s ease, box-shadow .28s ease"
+                  _hover={{
+                    textDecoration: "none",
+                    transform: "translateY(-3px)",
+                    borderColor: "rgba(180,160,255,0.34)",
+                    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.12), 0 18px 36px -22px rgba(123,108,255,0.6)",
+                  }}
+                >
+                  <Flex
+                    w="38px"
+                    h="38px"
+                    flexShrink={0}
+                    borderRadius="11px"
+                    align="center"
+                    justify="center"
+                    bg="rgba(180,160,255,0.1)"
+                    border="1px solid"
+                    borderColor="rgba(180,160,255,0.22)"
+                    transition="background .28s ease"
+                    _groupHover={{ bg: "rgba(180,160,255,0.18)" }}
+                  >
+                    <Image src={s.icon} alt="" aria-hidden="true" w="19px" h="19px" />
+                  </Flex>
+                  <Box flex="1" minW={0}>
+                    <Text fontSize={{ base: "13.5px", md: "14px" }} fontWeight={600} color="text.primary" lineHeight={1.3} noOfLines={1}>
+                      {s.option}
+                    </Text>
+                    <Text fontSize="11.5px" color="text.faint" lineHeight={1.35} noOfLines={1}>
+                      {s.desc}
+                    </Text>
+                  </Box>
+                  <Icon
+                    as={FiArrowUpRight}
+                    boxSize={4}
+                    color="text.faint"
+                    flexShrink={0}
+                    transition="color .28s ease, transform .28s ease"
+                    _groupHover={{ color: "accent.solid", transform: "translate(2px,-2px)" }}
+                  />
+                </ChakraLink>
               </Reveal>
             ))}
           </SimpleGrid>

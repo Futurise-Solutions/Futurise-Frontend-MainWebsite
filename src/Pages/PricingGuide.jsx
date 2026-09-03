@@ -5,7 +5,8 @@ import {
 } from "@chakra-ui/react";
 import { FiArrowRight, FiCheck, FiTrendingUp } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { Reveal, Eyebrow, GlassCard, Seo, CTASection } from "../Components/common";
+import { Reveal, Eyebrow, GlassCard, Seo, CTASection, VisualBand } from "../Components/common";
+import { orderedTerrain } from "../assests";
 import { services } from "../utils/Constant";
 import { useBooking } from "../context/BookingContext";
 import {
@@ -58,7 +59,7 @@ const PricingGuide = () => {
       {/* Hero */}
       <Box position="relative" overflow="hidden" pt={{ base: 12, md: 20 }} pb={{ base: 8, md: 12 }}>
         <Box position="absolute" top="-15%" left="-5%" w="500px" h="500px" bg="rgba(123,108,255,0.18)" filter="blur(120px)" rounded="full" pointerEvents="none" />
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} position="relative">
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} position="relative">
           <Reveal><Eyebrow>Pricing &amp; engagement</Eyebrow></Reveal>
           <Reveal delay={0.05}>
             <Heading as="h1" mt={5} fontSize={{ base: "38px", md: "56px" }} lineHeight={1.08} letterSpacing="-0.025em" maxW="900px">
@@ -88,7 +89,7 @@ const PricingGuide = () => {
       </Box>
 
       {/* Cost factors */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
         <Reveal><Eyebrow>What moves the number</Eyebrow></Reveal>
         <Reveal delay={0.05}>
           <Heading as="h2" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="760px">
@@ -124,9 +125,21 @@ const PricingGuide = () => {
         </SimpleGrid>
       </Container>
 
+      {/* A pricing page is the densest reading on the site and this one carried no
+          image anywhere in its ~1900px. The band sits between the cost drivers and the
+          complexity tiers — the point where a reader most needs a beat before the next
+          block of figures. No copy, deliberately: nothing here should compete with the
+          numbers for attention. */}
+      <VisualBand
+        src={orderedTerrain}
+        height={{ base: "170px", md: "230px", lg: "260px" }}
+        focal="center 62%"
+        overlay={0.46}
+      />
+
       {/* Complexity tiers */}
       <Box bg="rgba(255,255,255,0.015)" borderY="1px solid" borderColor="border.subtle">
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
           <Reveal><Eyebrow>Project complexity</Eyebrow></Reveal>
           <Reveal delay={0.05}>
             <Heading as="h2" mt={4} mb={10} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="760px">
@@ -169,7 +182,7 @@ const PricingGuide = () => {
       </Box>
 
       {/* Engagement models */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
         <Reveal><Eyebrow>Engagement models</Eyebrow></Reveal>
         <Reveal delay={0.05}>
           <Heading as="h2" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="760px">
@@ -207,7 +220,7 @@ const PricingGuide = () => {
 
       {/* Timeline */}
       <Box bg="rgba(255,255,255,0.015)" borderY="1px solid" borderColor="border.subtle">
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
           <Reveal><Eyebrow>Timelines</Eyebrow></Reveal>
           <Reveal delay={0.05}>
             <Heading as="h2" mt={4} mb={10} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="760px">
@@ -236,7 +249,7 @@ const PricingGuide = () => {
       </Box>
 
       {/* ROI */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 14, md: 20 }}>
         <Reveal><Eyebrow>Business value</Eyebrow></Reveal>
         <Reveal delay={0.05}>
           <Heading as="h2" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="760px">
@@ -276,7 +289,7 @@ const PricingGuide = () => {
       {/* What is being priced. /pricing had five inbound links and exactly one outbound one
           (/contact), so a page whose whole job is to explain what work costs never sent a
           reader to the work itself. */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} pb={{ base: 12, md: 16 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} pb={{ base: 12, md: 16 }}>
         <Reveal>
           <Eyebrow>What is being priced</Eyebrow>
           <Heading as="h2" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="760px">

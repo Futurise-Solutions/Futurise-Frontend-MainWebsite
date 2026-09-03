@@ -280,7 +280,7 @@ const CaseStudyDetailPage = ({ slug: propSlug }) => {
           <Box position="absolute" bottom="-20%" right="-5%" w="450px" h="450px" bg={`${colors.to}14`} filter="blur(120px)" rounded="full" />
         </MotionBox>
 
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} position="relative">
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} position="relative">
           {/* Breadcrumb */}
           <Reveal>
             <HStack spacing={2} fontSize="sm" color="text.faint" mb={8} flexWrap="wrap">
@@ -367,7 +367,7 @@ const CaseStudyDetailPage = ({ slug: propSlug }) => {
       </Box>
 
       {/* ── Overview ── */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 10, md: 14 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 10, md: 14 }}>
         <Reveal>
           <Box p={{ base: 6, md: 10 }} borderRadius="24px"
             bgGradient={`linear(135deg, ${c}0d, ${colors.to}08)`}
@@ -383,7 +383,7 @@ const CaseStudyDetailPage = ({ slug: propSlug }) => {
 
       {/* ── Key Insight ── */}
       {study.keyInsight && (
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} pb={{ base: 10, md: 14 }}>
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} pb={{ base: 10, md: 14 }}>
           <Reveal>
             <Box
               p={{ base: 6, md: 8 }}
@@ -428,7 +428,7 @@ const CaseStudyDetailPage = ({ slug: propSlug }) => {
       )}
 
       {/* ── Challenge ── */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} pb={{ base: 10, md: 14 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} pb={{ base: 10, md: 14 }}>
         <Flex direction={{ base: "column", lg: "row" }} gap={{ base: 8, lg: 16 }} align="flex-start">
           <VStack flex="1" align="start" spacing={5}>
             <Reveal>
@@ -472,7 +472,7 @@ const CaseStudyDetailPage = ({ slug: propSlug }) => {
 
       {/* ── Solution ── */}
       <Box bg="rgba(255,255,255,0.015)" borderTop="1px solid" borderBottom="1px solid" borderColor="border.subtle" py={{ base: 12, md: 18 }}>
-        <Container maxW="1200px" px={{ base: 5, md: 8 }}>
+        <Container maxW="container.site" px={{ base: 5, md: 8 }}>
           <VStack align="start" spacing={10}>
             <VStack align="start" spacing={4} maxW="720px">
               <Reveal><Eyebrow>Our Solution</Eyebrow></Reveal>
@@ -498,7 +498,7 @@ const CaseStudyDetailPage = ({ slug: propSlug }) => {
 
       {/* ── Execution Timeline ── */}
       {study.timeline && (
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
           <VStack align="start" spacing={8} w="full">
             <VStack align="start" spacing={3}>
               <Reveal><Eyebrow>Execution Timeline</Eyebrow></Reveal>
@@ -554,7 +554,7 @@ const CaseStudyDetailPage = ({ slug: propSlug }) => {
       )}
 
       {/* ── Tech Stack ── */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 10, md: 14 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 10, md: 14 }}>
         <Reveal>
           <Box>
             <Eyebrow mb={4}>Tech Stack</Eyebrow>
@@ -583,7 +583,7 @@ const CaseStudyDetailPage = ({ slug: propSlug }) => {
 
       {/* ── Results ── */}
       <Box bg={`${c}08`} borderTop="1px solid" borderBottom="1px solid" borderColor={`${c}22`} py={{ base: 12, md: 18 }}>
-        <Container maxW="1200px" px={{ base: 5, md: 8 }}>
+        <Container maxW="container.site" px={{ base: 5, md: 8 }}>
           <VStack align="start" spacing={8}>
             <VStack align="start" spacing={3}>
               <Reveal><Eyebrow>Results</Eyebrow></Reveal>
@@ -604,7 +604,7 @@ const CaseStudyDetailPage = ({ slug: propSlug }) => {
 
       {/* ── Lessons Learned & Refinements ── */}
       {study.lessonsLearned && (
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
           <VStack align="start" spacing={8} w="full">
             <VStack align="start" spacing={3}>
               <Reveal><Eyebrow>Retrospective</Eyebrow></Reveal>
@@ -643,7 +643,7 @@ const CaseStudyDetailPage = ({ slug: propSlug }) => {
 
       {/* ── Testimonial ── */}
       {study.testimonial && (
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
           <Reveal>
             <Box
               p={{ base: 8, md: 12 }}
@@ -708,7 +708,7 @@ const CaseStudyDetailPage = ({ slug: propSlug }) => {
           title, which is correct here: this is the one link on the site where pointing the
           head term AT the service page is exactly what we want. */}
       {serviceForCaseStudy[study.slug] && services[serviceForCaseStudy[study.slug]] && (
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} pt={{ base: 4, md: 6 }} pb={{ base: 2, md: 4 }}>
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} pt={{ base: 4, md: 6 }} pb={{ base: 2, md: 4 }}>
           <Reveal>
             <Box
               as={Link}
@@ -745,7 +745,7 @@ const CaseStudyDetailPage = ({ slug: propSlug }) => {
       )}
 
       {/* ── Prev / Next ── */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} pb={{ base: 8, md: 12 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} pb={{ base: 8, md: 12 }}>
         <Divider borderColor="border.subtle" mb={8} />
         <Flex justify="space-between" gap={4} flexWrap="wrap">
           {prevSlug ? (

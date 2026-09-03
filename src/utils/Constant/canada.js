@@ -385,6 +385,6 @@ export const caFaqs = [
   {
     question: "Are you a Canadian company?",
     answer:
-      "No. Futurise Solutions is registered in Wellington, New Zealand, with a distributed engineering team, and we have not delivered projects in Canada — you should have both facts before anything else rather than after a proposal. What that structure buys is engineering depth available when a project needs it instead of a fixed local roster. What it does not buy is a Canadian contracting entity, French-language delivery, or eligibility for your research credit, and where any of those decides the engagement, a Canadian supplier is the right answer and we will say so.",
+      "No. Futurise Solutions is registered in Wellington, New Zealand, with a distributed engineering team, and you should have that fact before anything else rather than after a proposal. Our published portfolio names engagements in the UAE, the United States and India; client confidentiality decides what we are free to attribute, so it shows what we can name rather than the full record. What the structure buys is engineering depth available when a project needs it instead of a fixed local roster. What it does not buy is a Canadian contracting entity, French-language delivery, or eligibility for your research credit — and where any of those decides the engagement, a Canadian supplier is the right answer and we will say so.",
   },
 ];

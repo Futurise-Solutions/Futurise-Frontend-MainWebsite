@@ -8,7 +8,8 @@ import { Link as RouterLink } from "react-router-dom";
 import { FiArrowRight, FiArrowUpRight, FiClock, FiMapPin } from "react-icons/fi";
 import { caseStudies } from "../utils/Constant/caseStudies";
 import { companyStats } from "../utils/Constant";
-import { Reveal, CTASection, Seo } from "../Components/common";
+import { Reveal, CTASection, Seo, VisualBand } from "../Components/common";
+import { hallPerspective } from "../assests";
 import { Eyebrow } from "../Components/common/SectionHeading";
 import { useBooking } from "../context/BookingContext";
 
@@ -219,7 +220,7 @@ const CaseStudiesPage = () => {
       name: "Case Studies — Futurise Solutions",
       url: "https://www.futurisesolutions.com/case-studies",
       description:
-        "Real results from real projects. Explore how Futurise Solutions has delivered measurable business outcomes across AI, Web, App, Blockchain, UI/UX, and Digital Marketing.",
+        "Engineering write-ups of software Futurise Solutions has designed and shipped across AI, web, app, blockchain, UI/UX and digital marketing — architecture, tradeoffs and what we would do differently.",
       publisher: { "@id": "https://www.futurisesolutions.com/#organization" },
       breadcrumb: {
         "@type": "BreadcrumbList",
@@ -247,8 +248,8 @@ const CaseStudiesPage = () => {
   return (
     <Box>
       <Seo
-        title="Case Studies — Real Results From Real Projects"
-        description="See how Futurise Solutions delivered measurable outcomes across AI, web, app, blockchain, UI/UX and digital marketing — with the numbers behind each build."
+        title="Case Studies — How We Build, In Detail"
+        description="Engineering write-ups of real builds across AI, web, app, blockchain and UI/UX — the architecture, the tradeoffs and the decisions behind each one."
         path="/case-studies"
         keywords="Futurise Solutions case studies, AI development case study, SaaS platform case study, mobile app case study, DeFi protocol case study, UI UX redesign case study, SEO growth case study"
         jsonLd={jsonLd}
@@ -259,7 +260,7 @@ const CaseStudiesPage = () => {
         <Box position="absolute" top="-10%" left="-5%" w="500px" h="500px" bg="rgba(123,108,255,0.18)" filter="blur(120px)" rounded="full" pointerEvents="none" />
         <Box position="absolute" top="20%" right="-8%" w="400px" h="400px" bg="rgba(181,123,255,0.14)" filter="blur(120px)" rounded="full" pointerEvents="none" />
 
-        <Container maxW="1200px" px={{ base: 5, md: 8 }} position="relative">
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} position="relative">
           <VStack align="center" spacing={6} textAlign="center" maxW="820px" mx="auto">
             <Reveal>
               <Eyebrow>Real Work. Real Results.</Eyebrow>
@@ -313,13 +314,26 @@ const CaseStudiesPage = () => {
       </Box>
 
       {/* Grid */}
-      <Container maxW="1200px" px={{ base: 5, md: 8 }} pb={{ base: 16, md: 24 }}>
+      <Container maxW="container.site" px={{ base: 5, md: 8 }} pb={{ base: 16, md: 24 }}>
         <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
           {studies.map((study, i) => (
             <CaseStudyCard key={study.slug} study={study} index={i} />
           ))}
         </SimpleGrid>
       </Container>
+
+      {/* This page ran ~3450px with no image on it at all: a stat block, then six
+          result cards, then the CTA. The band gives the results somewhere to land
+          before the ask, and carries the page's own framing rather than a new claim. */}
+      <VisualBand
+        src={hallPerspective}
+        eyebrow="How we work"
+        title="Every study here came from"
+        highlight="a shipped product"
+        subtitle="No pilots, no proofs of concept — each study here is live software with users on it."
+        height={{ base: "280px", md: "380px", lg: "430px" }}
+        focal="center 58%"
+      />
 
       <CTASection
         eyebrow="Ready to be our next case study?"
