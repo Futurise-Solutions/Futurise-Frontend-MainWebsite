@@ -1,0 +1,199 @@
+/**
+ * Article body styling — the CSS-Module replacement for BlogMarkdown.jsx's Chakra
+ * component map.
+ *
+ * WHY CSS MODULES HERE AND NOWHERE ELSE: ArticleBody is a SERVER component, so it cannot
+ * use Chakra (which needs the Emotion client runtime). Every value below is transcribed
+ * from the Chakra props in src/Components/blog/BlogMarkdown.jsx, resolved through the
+ * theme — this is a mechanical translation, not a restyle.
+ *
+ * Token resolutions used (from theme/index.ts):
+ *   text.primary  #f4f2ff      text.muted  #b0a8c8      accent.solid  #b4a0ff
+ *   brand.500     #7b6cff      border.subtle rgba(255,255,255,0.08)
+ *   navy.700      #13131f
+ * Chakra font sizes: lg = 1.125rem, xl = 1.25rem, 2xl = 1.5rem, 3xl = 1.875rem,
+ * sm = 0.875rem. Chakra spacing: 1 unit = 0.25rem.
+ */
+
+.body {
+  color: #b0a8c8;
+}
+
+/* ⚠️ HEADING LEVELS ARE SHIFTED DOWN ONE. READ ArticleBody.jsx BEFORE EDITING.
+ *
+ * The renderer maps markdown `#` → <h2>, `##` → <h3>, `###` → <h4>, so the post title
+ * stays the only <h1> on the page. The rules below are UNCHANGED IN VALUE and simply
+ * moved down one selector each, so the rendered result is pixel-identical to what
+ * shipped before the shift:
+ *
+ *     markdown   was      now      sizing (unchanged)
+ *     #          <h1>  →  <h2>     1.875rem / mt 2.5rem / mb 1rem
+ *     ##         <h2>  →  <h3>     1.5rem   / mt 2rem   / mb 0.75rem
+ *     ###        <h3>  →  <h4>     1.25rem  / mt 1.5rem / mb 0.5rem
+ *
+ * This file and the component's `components` map are a MATCHED PAIR. Changing either
+ * alone makes every article's heading sizes visibly jump one step.
+ *
+ * `.body h1` is retained below as a defensive rule: no markdown can produce an <h1> in
+ * here any more, but if the mapping is ever reverted the styling would otherwise be lost
+ * silently. It costs one ruleset.
+ *
+ * scroll-margin-top matches the sticky header so TOC anchors land clear. */
+.body h1,
+.body h2,
+.body h3,
+.body h4,
+.body h5,
+.body h6 {
+  color: #f4f2ff;
+  scroll-margin-top: 100px;
+  font-family: var(--font-zangezi), sans-serif;
+}
+
+/* markdown `#` — formerly .body h1, values identical */
+.body h1,
+.body h2 {
+  font-size: 1.875rem; /* 3xl */
+  margin-top: 2.5rem;  /* mt={10} */
+  margin-bottom: 1rem; /* mb={4} */
+}
+
+/* markdown `##` — formerly .body h2, values identical */
+.body h3 {
+  font-size: 1.5rem;     /* 2xl */
+  margin-top: 2rem;      /* mt={8} */
+  margin-bottom: 0.75rem;/* mb={3} */
+}
+
+/* markdown `###` — formerly .body h3, values identical */
+.body h4 {
+  font-size: 1.25rem;    /* xl */
+  margin-top: 1.5rem;    /* mt={6} */
+  margin-bottom: 0.5rem; /* mb={2} */
+}
+
+/* `####`/`#####` had no rule before the shift either, so they inherited the body size.
+   Pinning them just above body text keeps a deeper nest from rendering smaller than the
+   paragraphs beneath it. No published post currently uses either. */
+.body h5,
+.body h6 {
+  font-size: 1.125rem;   /* lg — matches .body p */
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.body p {
+  font-size: 1.125rem;   /* lg */
+  line-height: 1.9;
+  color: #b0a8c8;
+  margin-bottom: 1.25rem; /* mb={5} */
+}
+
+.body a {
+  color: #b4a0ff;
+  text-decoration: none;
+}
+
+.body a:hover {
+  color: #f4f2ff;
+}
+
+.body ul,
+.body ol {
+  padding-left: 1.5rem;   /* pl={6} */
+  margin-bottom: 1.25rem; /* mb={5} */
+  color: #b0a8c8;
+  font-size: 1.125rem;
+}
+
+.body ul { list-style-type: disc; }
+.body ol { list-style-type: decimal; }
+
+.body li {
+  margin-bottom: 0.5rem; /* mb={2} */
+  line-height: 1.8;
+}
+
+.body blockquote {
+  border-left: 3px solid #7b6cff;
+  padding-left: 1.25rem;  /* pl={5} */
+  padding-top: 0.5rem;    /* py={2} */
+  padding-bottom: 0.5rem;
+  margin: 1.5rem 0;       /* my={6} */
+  background: rgba(123, 108, 255, 0.08);
+  border-radius: 0 12px 12px 0;
+  color: #b0a8c8;
+  font-style: italic;
+}
+
+.body pre {
+  padding: 1.25rem;       /* p={5} */
+  border-radius: 14px;
+  background: #13131f;    /* navy.700 */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow-x: auto;
+  margin-bottom: 1.5rem;  /* mb={6} */
+  font-size: 0.875rem;    /* sm */
+  white-space: pre;
+}
+
+/* A <code> inside <pre> is a block; on its own it is inline. The old component branched
+   in JS on `language-*` or an embedded newline; CSS expresses the same split directly. */
+.body pre code {
+  display: block;
+  font-family: var(--font-geist-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  color: #f4f2ff;
+  background: none;
+  padding: 0;
+}
+
+.body code {
+  padding: 0.125rem 0.5rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.07);
+  color: #b4a0ff;
+  font-size: 0.9em;
+  font-family: var(--font-geist-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+}
+
+/* In-article images are always below the fold — the title and intro come first. */
+.body img {
+  border-radius: 14px;
+  margin: 1.5rem 0;  /* my={6} */
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.body hr {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin: 2rem 0; /* my={8} */
+}
+
+.tableWrap {
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+
+.body table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.body th,
+.body td {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.5rem 0.75rem; /* py={2} px={3} */
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.body th {
+  color: #f4f2ff;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.body td {
+  color: #b0a8c8;
+}

@@ -1,0 +1,219 @@
+/* ============================================================
+   GLOBAL CSS — ported from src/index.css (Phase 2)
+
+   Source of truth: MIGRATION-INVENTORY.md §D.3, §D.4, §D.5.
+   Every rule below is copied character-for-character from the Vite app.
+
+   ── WHAT IS HERE ────────────────────────────────────────────
+     1. heroDrift + heroVeil            (the ONLY 2 keyframes that live in a stylesheet)
+     2. the prefers-reduced-motion guard for those two
+     3. .gradient-text
+     4. the five #app rules (font stack, content protection, image protection)
+     5. the html.scroll-jump override
+     6. the 5 .swiper-* override rules (restored — see the note at the end of this file)
+
+   ── WHAT IS DELIBERATELY NOT HERE ───────────────────────────
+     • The other 29 keyframes. They are inline in component `sx` props and stay there,
+       scoped by Emotion — moving them to a global sheet would change specificity and
+       defeat the scoping those components rely on. (31 carry over in total: these 2 here
+       + 29 in components.)
+     • The 5 fs-* boot-loader keyframes and the #fs-boot skeleton — DELETED, as required
+       by Phase 6. They were never ported: they existed only in the old index.html, which
+       has no equivalent here. Nothing in futurise-next references `fs-` at all. Do not
+       reintroduce them — the loader's whole purpose was to cover the gap before a
+       client-side React bundle mounted, and server rendering removes that gap.
+     • The 11 @font-face blocks — next/font generates them (theme/fonts.ts). Keeping both
+       would declare every family twice and double-download each face.
+     • The 5 .form rules — dead. Zero elements with className="form"; ContactForm.jsx
+       builds its own Chakra form with different values. (Backlog D4.)
+
+   Chakra's CSS reset + `styles.global` in theme/index.ts supply the #08080d canvas,
+   the body background gradients, ::selection and the custom scrollbar.
+   ============================================================ */
+
+/* ============================================================
+   HERO MOTION
+   Ambient drift for the home hero plate and its light veil.
+   Both are transform-only so they run on the compositor and can
+   never gate LCP — see the contract note in HeroParallax.jsx.
+   Long, offset durations (34s / 19s) mean the two layers never
+   fall into sync, so the movement stays organic rather than
+   reading as a loop.
+   ============================================================ */
+@keyframes heroDrift {
+  0%   { transform: scale(1.045) translate3d(0, 0, 0); }
+  50%  { transform: scale(1.075) translate3d(-1.1%, -0.7%, 0); }
+  100% { transform: scale(1.05) translate3d(0.9%, 0.5%, 0); }
+}
+
+@keyframes heroVeil {
+  0%   { transform: translate3d(0, 0, 0); opacity: 0.85; }
+  50%  { transform: translate3d(3.5%, -2.5%, 0); opacity: 1; }
+  100% { transform: translate3d(-2.5%, 2%, 0); opacity: 0.8; }
+}
+
+/* Belt-and-braces: the component already skips these under
+   prefers-reduced-motion, but a media query here means the
+   animation cannot run even if the class is applied some other way. */
+@media (prefers-reduced-motion: reduce) {
+  [style*="heroDrift"],
+  [style*="heroVeil"] {
+    animation: none !important;
+  }
+}
+
+/* ============================================================
+   #app — the legacy hydration-root wrapper.
+
+   In the Vite app this was <Box id='app'> inside <div id="root">. In Next it is a plain
+   <div id="app"> in app/layout.tsx, kept precisely so these rules keep matching.
+   Removing that wrapper silently un-applies everything below. Guide trap #1.
+   ============================================================ */
+/* ⚠️ THE ONE LINE IN THIS FILE THAT IS NOT A VERBATIM COPY. Read before editing.
+
+   Original (src/index.css):
+     font-family: 'Aeonik Trial', 'Inter', sans-serif;
+
+   Ported verbatim, this BREAKS ALL BODY TEXT, and silently.
+
+   `#app` is an ancestor of everything, so this declaration is inherited by every element
+   whose own font-family is not set — which is most body copy. In the Vite app that was
+   harmless: 'Aeonik Trial' was a real @font-face family, so the text rendered in Aeonik.
+   next/font renames families to a hashed identifier, so the literal string matches
+   NOTHING in the new app and the cascade falls through 'Inter' (never loaded either) to
+   plain sans-serif.
+
+   Measured via CDP CSS.getPlatformFontsForNode, which reports the face actually used:
+     production  <p>  →  "Aeonik TRIAL"  (postScript AeonikTRIAL-Regular, isCustomFont)
+     verbatim port <p> →  "Arial"        (postScript ArialMT,             NOT custom)
+
+   Computed styles matched perfectly in both — fontFamily read back as
+   '"Aeonik Trial", Inter, sans-serif' on production AND on the port — so a
+   getComputedStyle comparison, which is what STOP GATE 2 specifies, passes while the
+   page renders in the wrong typeface. Only asking the renderer which face it chose
+   surfaces it.
+
+   FIX: point the first entry at the same CSS variable Chakra's `fonts.body` uses, so it
+   resolves to the real Aeonik faces. Everything else — the dead 'Inter' fallback, the
+   final sans-serif, the smoothing, the text-rendering — is left exactly as it was.
+   This preserves the rule's effect (body text is Aeonik) while making it work under
+   next/font. Logged as backlog D5. */
+#app {
+  /* PHASE 8 (A8): the PRELOADED Aeonik Regular leads, with the full family behind it.
+     `--font-aeonik-body` covers the 400–500 weight this rule actually renders; anything
+     else falls through to `--font-aeonik` unchanged. 'Inter' and sans-serif stay exactly
+     where they were — see the U+00B7 note in theme/fonts.ts for why that tail matters. */
+  font-family: var(--font-aeonik-body), var(--font-aeonik), 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── Footer "selected work" thumbnail hover ──────────────────────────────────
+   The original was a Chakra <Image> with `_groupHover={{ transform: 'scale(1.07)' }}`
+   and `transition="transform .5s ease"`. Under next/image the element is a plain <img>
+   rendered by the library, so Chakra's `_groupHover` pseudo-prop has nothing to attach
+   to. This reproduces the identical effect with the same duration, easing and scale,
+   keyed off Chakra's `role="group"` on the parent link.
+   Values copied verbatim from src/Layout/Footer.jsx. */
+.chakra-linkbox:hover .footer-work-thumb,
+[role="group"]:hover .footer-work-thumb {
+  transform: scale(1.07);
+}
+
+/* Reusable utility classes */
+.gradient-text {
+  background: linear-gradient(135deg, #b4a0ff 0%, #d4a5ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ============================================================
+   Content & image protection (item 9 & 10)
+   - Disables casual text selection / image dragging for a premium,
+     app-like feel. Does NOT affect SEO or screen readers: the DOM,
+     headings, and alt text are untouched and fully crawlable/announced.
+   - Usability is preserved where it matters: form fields and copyable
+     contact links (mailto/tel) remain selectable.
+   ============================================================ */
+#app {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#app input,
+#app textarea,
+#app [contenteditable="true"],
+#app a[href^="mailto:"],
+#app a[href^="tel:"],
+#app [data-selectable="true"] {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+#app img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-select: none;
+}
+
+/* ============================================================
+   ROUTE-CHANGE SCROLL JUMP
+   The theme sets `scroll-behavior: smooth` on html, body, #root
+   and #app, which is right for in-page anchor links and wrong for
+   a route change — it animates the page back to the top over
+   ~500ms, which reads as a jump and can be interrupted mid-flight.
+   ScrollToTop.jsx adds this class for exactly one frame while it
+   repositions. `!important` because the theme rule is emitted by
+   Emotion at the same specificity.
+   ============================================================ */
+/* `#root` no longer exists in Next; it is kept in the selector list because a
+   non-matching selector is inert and removing it would be an unrequested change.
+   Whether the .scroll-jump mechanism is still needed at all under Next's own scroll
+   restoration is an open question for Phase 3 — see MIGRATION-STATUS.md. */
+html.scroll-jump,
+html.scroll-jump body,
+html.scroll-jump #root,
+html.scroll-jump #app {
+  scroll-behavior: auto !important;
+}
+
+/* ============================================================
+   SWIPER NAVIGATION THEMING — RESTORED.
+
+   ⚠️ These five rules were deleted as dead code under D18, on the basis of D8 ("Swiper
+   is unused"). D8 WAS WRONG: it was decided from the homepage DOM, but /portfolio
+   renders <Swiper>/<SwiperSlide> for the project gallery. D8 and backlog D2 are
+   reverted; the package is installed and Portfolio.jsx is ported.
+
+   Restored VERBATIM from src/index.css — these override Swiper's own stylesheet
+   (which Portfolio imports as "swiper/css" and "swiper/css/pagination"), so they must
+   stay in a global sheet. Scoping them to a component would lose the cascade they
+   depend on, and the !important flags are load-bearing against Swiper's defaults.
+   ============================================================ */
+/* Swiper navigation theming */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #b4a0ff !important;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(6px);
+  border-radius: 50%;
+  width: 42px !important;
+  height: 42px !important;
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 16px !important;
+  font-weight: 700;
+}
+.swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.4);
+}
+.swiper-pagination-bullet-active {
+  background: #b4a0ff;
+}
