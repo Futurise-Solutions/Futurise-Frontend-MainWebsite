@@ -1,7 +1,17 @@
 'use client'
 
 import { useState, useEffect, lazy, Suspense } from "react";
-import { Box, Flex, IconButton, Spinner, Text, keyframes, Icon } from "@chakra-ui/react";
+import { Box, Flex, IconButton, Spinner, Text, Icon } from "@chakra-ui/react";
+/* ⚠️ `keyframes` comes from @emotion/react, NOT @chakra-ui/react.
+   The source imported it from "@chakra-ui/react", which worked on the old app's
+   Chakra ^2.8.2 because that version re-exported Emotion's helper. The port resolved
+   to 2.10.10, which DROPPED the re-export, so the original import throws at build:
+   "Export keyframes doesn't exist in target module".
+
+   This is the same function — Chakra only ever re-exported Emotion's — so the animation
+   is unchanged. The error stayed hidden until now because ChatBubble was never mounted;
+   it surfaced the moment it was added to app/layout.tsx. */
+import { keyframes } from "@emotion/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiX } from "react-icons/fi";
 import { trackEvent, EVENTS } from "../../utils/analytics";
@@ -40,7 +50,7 @@ const RobotIcon = (props) => (
 // keeps it out of the initial page load entirely (perf/SEO rule).
 const ChatWidget = lazy(() => import("./ChatWidget"));
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 /** Shown for the brief moment while the ChatWidget chunk is being fetched. */
 const LoadingPanel = () => (

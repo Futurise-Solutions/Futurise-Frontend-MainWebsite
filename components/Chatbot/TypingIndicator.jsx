@@ -3,7 +3,7 @@
 import { HStack, Box } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 const Dot = ({ delay }) => (
   <MotionBox

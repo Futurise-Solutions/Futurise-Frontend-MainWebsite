@@ -17,7 +17,12 @@ const fallbackKB = [
   // ── Contact ─────────────────────────────────────────────────────────
   {
     keywords: ["contact", "email", "reach", "talk", "speak", "call", "message", "get in touch", "whatsapp", "phone", "number", "mail"],
-    answer: "Email us at business@futurisesolutions.com or call +91 76650 13356. We reply within a few hours.",
+    /* ⚠️ NO PHONE NUMBER. This answer used to offer one, which contradicted /about —
+       that page states in writing that no telephone number is published anywhere on the
+       site, and the Organization schema deliberately omits `telephone`. Owner decision:
+       there is no published number. Email and the booking flow are the two real channels.
+       Do not reintroduce one here without also updating /about, the schema and llms.txt. */
+    answer: "Email us at business@futurisesolutions.com or book a free call — we reply within a few hours.",
   },
 
   // ── Location ────────────────────────────────────────────────────────
@@ -31,7 +36,10 @@ const fallbackKB = [
     keywords: ["portfolio", "project", "past work", "example", "case study", "built", "clients", "showcase", "sample", "previous", "done before"],
     // Keep the figure in step with `companyStats` in utils/Constant/index.js — a chatbot
     // quoting a different number than the home page is the fastest way to look careless.
-    answer: "We've delivered 25+ projects including HOMIES, Marty-QR, GDT Exchange, and more. Check our portfolio page!",
+    /* ⚠️ NO PROJECT COUNT, AND NO UNNAMED CLIENT — see the note in predefinedQA.js.
+       /portfolio publishes NINE engagements, /about commits to publishing no counts, and
+       the trading terminal is published under its product rather than a client name. */
+    answer: "We've built property SaaS, AI review platforms, luxury e-commerce and trading terminals — including HOMIES and Marty-QR. Check our portfolio page!",
   },
 
   // ── Timeline / Delivery ──────────────────────────────────────────────
@@ -88,7 +96,12 @@ const fallbackKB = [
     // The "97% client retention rate" that used to sit here was dropped: it implies a
     // tracked metric nobody can produce on request, and it is the first claim an informed
     // buyer discounts. Concrete scope persuades better than an invented percentage.
-    answer: "We're a senior team of developers, designers, and strategists — 25+ projects delivered for 15+ clients across 4+ countries, spanning AI, web, mobile, UI/UX, blockchain and marketing.",
+    /* ⚠️ THREE INVENTED COUNTS REMOVED: "25+ projects", "15+ clients", "4+ countries".
+       None is supported anywhere — /portfolio publishes nine engagements, and /about
+       commits in writing to publishing no project, client or headcount figures, on the
+       grounds that a count is not something a reader can verify. The disciplines and the
+       markets are both checkable, so those stay. Do not reintroduce a number here. */
+    answer: "We're a senior team of developers, designers and strategists — registered in New Zealand with our engineering team in India, spanning AI, web, mobile, UI/UX, blockchain and marketing.",
   },
 
   // ── Tech Stack ────────────────────────────────────────────────────────

@@ -4,7 +4,7 @@ import { Box, Container, Heading, Text } from "@chakra-ui/react";
 import { motion, useReducedMotion } from "framer-motion";
 import NextImage from "next/image";
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 /**
  * Full-bleed atmospheric interstitial.

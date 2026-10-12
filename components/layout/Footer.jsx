@@ -295,7 +295,19 @@ const Footer = () => {
           >
             Markets
           </Text>
-          <Wrap spacing={0} shouldWrapChildren>
+          {/* 🔴 NO `shouldWrapChildren` — IT CAUSED A HYDRATION FAILURE. Do not re-add it.
+              That prop makes Chakra wrap every child in its OWN <WrapItem>, i.e. an <li>.
+              The children below are already <WrapItem>, so the output was:
+                  <ul><li><li>…   ← an <li> nested directly inside an <li>
+              Invalid HTML, so the browser repairs the DOM, the repaired tree no longer
+              matches the server HTML, and React threw
+                  "Hydration failed because the server rendered HTML didn't match"
+              regenerating the whole Footer on the client on every page load.
+              Ported from master with both mechanisms present; `next build` does not catch
+              it, only the dev console does.
+              The manual <WrapItem> is the one kept because it carries alignItems="center",
+              which keeps each label and its `·` separator on a shared baseline. */}
+          <Wrap spacing={0}>
             {[...COUNTRIES.map((c) => ({ to: c.path, label: c.label })),
               // Listed by hand rather than from COUNTRIES: /europe is a region page, not a
               // country page, and is deliberately outside that registry and the hreflang

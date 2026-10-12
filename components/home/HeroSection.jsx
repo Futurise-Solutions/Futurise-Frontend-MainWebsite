@@ -15,7 +15,7 @@ import {
 import HeroParallax from "../common/HeroParallax";
 import HeroLattice from "../common/HeroLattice";
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 // Real client wordmarks — the same assets used by the "Trusted by" strip. These
 // replace the stock-photo avatars that previously stood in for customers.

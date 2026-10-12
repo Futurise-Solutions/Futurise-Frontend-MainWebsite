@@ -23,7 +23,7 @@ import { mediaUrl, formatDate, readTime } from "@/lib/blog";
  *      images on one response.
  * Category filtering stays client-side, exactly as before.
  */
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 /** Cards per page. The first six load eagerly; everything after is lazy. */
 const PAGE_SIZE = 12;

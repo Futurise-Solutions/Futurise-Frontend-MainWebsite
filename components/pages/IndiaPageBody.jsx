@@ -10,8 +10,13 @@
  *
  * Section order is deliberate and inverts the other market pages. They open with a
  * regulatory argument because they have nothing shipped locally to open with. This one
- * opens with presence — the team is here, two published clients are here — because that is
- * the strongest true thing on the page and the only claim no competitor can copy honestly.
+ * opens with presence — the team is in the country — because that is the strongest true
+ * thing on the page and the only claim no competitor can copy honestly.
+ *
+ * ⚠️ THE SUBJECT IS INDIA, NOT UDAIPUR. The city is named ONCE, in the section-1 answer,
+ * as the place the team sits. Everything else is national. An earlier draft framed the
+ * hero, the eyebrow and three headings around the city, which narrowed a national page to
+ * one local market. If an edit makes this read as "a Udaipur agency", it is wrong.
  *
  * ⚠️ Every H2 that is followed by a standalone answer paragraph carries
  * `className="speakable-question"`, and that paragraph carries `speakable-answer`. Those
@@ -53,9 +58,9 @@ export default function IndiaPageBody() {
         </Reveal>
         <Reveal delay={0.1}>
           <Text mt={6} color="text.muted" fontSize={{ base: "md", md: "xl" }} lineHeight={1.7} maxW="760px">
-            Custom software, AI and SaaS built by an engineering team in Udaipur, Rajasthan —
-            quoted in rupees on fixed scope, inside your working day, with delivered work for
-            Udaipur businesses you can go and look at.
+            Custom software, AI and SaaS for businesses across India — built by our own
+            engineering team in the country, quoted in rupees on fixed scope, and delivered
+            inside your working day rather than across a twelve-hour gap.
           </Text>
         </Reveal>
         <Reveal delay={0.15}>
@@ -81,10 +86,10 @@ export default function IndiaPageBody() {
         </Reveal>
         <Reveal delay={0.1}>
           <Text className="speakable-answer" color="text.muted" fontSize={{ base: "md", md: "lg" }} lineHeight={1.7} maxW="720px" mb={10}>
-            The engineers who build your software work from Udaipur, Rajasthan, and two of the
-            clients on our portfolio are Udaipur businesses. The contracting entity is a New
-            Zealand company. All three of those facts matter, so all three are stated here
-            rather than in a footer.
+            The engineers who build your software are in India, working from Udaipur,
+            Rajasthan. We have delivered for Indian clients, two of them published with
+            screenshots. The contracting entity is a New Zealand company. All three of those
+            facts matter, so all three are stated here rather than in a footer.
           </Text>
         </Reveal>
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={5}>
@@ -139,18 +144,18 @@ export default function IndiaPageBody() {
 
       {/* SECTION 3 — the delivered work. The evidence the rest of the page rests on. */}
       <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
-        <Reveal><Eyebrow>Delivered in Udaipur</Eyebrow></Reveal>
+        <Reveal><Eyebrow>Delivered in India</Eyebrow></Reveal>
         <Reveal delay={0.05}>
           <Heading as="h2" className="speakable-question" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="780px">
-            Two Indian businesses,{" "}
-            <Box as="span" className="gradient-text">both named</Box>
+            What we have built{" "}
+            <Box as="span" className="gradient-text">for Indian businesses</Box>
           </Heading>
         </Reveal>
         <Reveal delay={0.1}>
           <Text className="speakable-answer" color="text.muted" fontSize={{ base: "md", md: "lg" }} lineHeight={1.7} maxW="720px" mb={10}>
-            Every client we publish is one we delivered for, and both of our Indian
-            engagements are local to the team. Here is what each needed and what was actually
-            built. We publish no project count and no performance figures, because neither is
+            Every client we publish is one we delivered for. Two Indian engagements are
+            published in full below; others were delivered for clients we are not able to
+            name. We publish no project count and no performance figures, because neither is
             something you could check.
           </Text>
         </Reveal>
@@ -230,7 +235,7 @@ export default function IndiaPageBody() {
         <Reveal delay={0.1}>
           <Text className="speakable-answer" color="text.muted" fontSize={{ base: "md", md: "lg" }} lineHeight={1.7} maxW="720px" mb={10}>
             The same stack as the rest of our work — we do not keep a cheaper toolchain for
-            one market. Both Udaipur sites are Next.js, one statically exported.
+            one market. Both published Indian sites are Next.js, one statically exported.
           </Text>
         </Reveal>
         <Flex direction={{ base: "column", lg: "row" }} gap={{ base: 10, lg: 14 }} align="start">

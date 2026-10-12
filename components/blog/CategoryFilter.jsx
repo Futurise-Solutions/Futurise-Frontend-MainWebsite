@@ -5,7 +5,7 @@ import { motion, LayoutGroup } from "framer-motion";
 import { Box, IconButton } from "@chakra-ui/react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 const FADE = 28; // width of the edge fade, px
 const EDGE_PAD = 24; // breathing room kept around the active pill when auto-scrolling

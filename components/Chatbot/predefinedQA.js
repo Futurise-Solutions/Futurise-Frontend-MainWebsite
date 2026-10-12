@@ -21,10 +21,17 @@ export const predefinedAnswers = {
     "We work on custom quotes based on your project scope. Book a free call and we'll give you a clear estimate.",
 
   "Show me your portfolio":
-    "We've delivered 25+ projects including HOMIES, Marty-QR, GDT Exchange, and more. Check our portfolio page!",
+    /* ⚠️ NO PROJECT COUNT, AND NO UNNAMED CLIENT. This answer previously claimed "25+
+       projects" and named "GDT Exchange". Both contradicted the site: /portfolio publishes
+       NINE engagements, /about commits in writing to publishing no project or client
+       counts, and the perpetuals trading terminal is deliberately published under its
+       product rather than a client name. Name only clients /portfolio names. */
+    "We've built property SaaS, AI review platforms, luxury e-commerce and trading terminals — including HOMIES and Marty-QR. Check our portfolio page!",
 
+  // ⚠️ NO PHONE NUMBER — see the note in keywordMatcher.js. Owner decision: none is
+  // published anywhere, matching /about and the Organization schema.
   "How can I contact you?":
-    "Email us at business@futurisesolutions.com, call +91 76650 13356, or use our contact page. We reply within hours.",
+    "Email us at business@futurisesolutions.com, book a free call, or use our contact page. We reply within hours.",
 
   "How long does a project take?":
     "It depends on scope. Most projects range from 4 to 16 weeks. We'll give you a clear timeline after the discovery call.",

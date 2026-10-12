@@ -317,7 +317,7 @@ typography measurement is meaningless.
 | D9 | **Drop the `/view` endpoint from the plan** | It does not exist. |
 | D10 | **Easing is `[0.22, 1, 0.36, 1]`** | In all 19 transitions. The guide's `[0.16,1,0.3,1]` was never real. |
 | D11 | **36 keyframes, not 23** | 31 carry over; 5 `fs-*` deleted in Phase 6. |
-| D12 | **Route count is 28 + 83** | 27 public + `/futurise-admin/blog`. |
+| D12 | **Route count is 28 + 83** | 27 public + `/futurise-admin/blog`. ⚠️ The `*` catch-all was NOT in that count and was missed — see the parity audit below. Now closed by `app/not-found.tsx`. |
 | D13 | **Theme: add `violet.*` and `container.site`** | Verbatim. `container.site = clamp(1200px, 85vw, 1560px)` sets every section width. Now in AGENTS.md constants. |
 | D14 | **`BlogPost` uses the real API shape** | `shortDescription` / `featuredImage` / `createdAt`. Content is Markdown. |
 | D22 | **Backend auth lands WITH Phase 5.5, not before** | Confirmed 18 Sep 2026: CMS routes have **no auth middleware at all** (B3), and `/api/chat` is an open unmetered LLM proxy (B4). Frontend-first sequencing is deliberate — 5.5 rewrites the admin frontend anyway, so auth is introduced once, not twice. 🔴 **Do not fix, probe, or touch the backend — not now, not in 5.5.** D5 stands: the admin frontend ports line-for-line *including* sending no auth header. **Phase 5.5 is BLOCKED** until the human specifies the mechanism. |
@@ -1665,3 +1665,62 @@ Tooling built and working — use it, do not rebuild it:
 Per page after generating: convert `to=` → `href=` (both `to="..."` and `to={...}`),
 add the useRouter/navigate shim if the body calls navigate(), and convert Chakra
 <Image> → next/image (except the HeroSection plate, which is a documented D27 exception).
+
+---
+
+# MASTER → NEXT PARITY AUDIT (27 Sep 2026)
+
+Run because three components were found missing by accident, which meant the migration had
+been *reported* complete while it was not. Method: enumerate all 115 source files in
+`master` (excluding tests), all 24 registered routes and all `public/` assets, then locate
+each in the Next app. Typecheck clean throughout.
+
+## Result
+
+| Area | master | Next | Status |
+|---|---:|---:|---|
+| Components (`src/Components`, `src/Layout`) | 58 | 58 | ✅ complete |
+| Public page bodies (`src/Pages`) | 19 | 19 | ✅ complete |
+| `src/utils` (live files) | 19 | 19 | ✅ complete |
+| Public routes | 23 | 23 | ✅ complete |
+| `public/` assets | all | all | ✅ (`llms.txt`, `robots.txt` are now generated routes) |
+
+**Intentional replacements, each verified reachable:** `Seo.jsx`→`lib/seo.ts`,
+`BlogMarkdown.jsx`→`ArticleBody.jsx`, `AllRoutes.jsx`→`app/`,
+`useBlogs.js`+`api/blogs.js`→`lib/blog.ts`, `utils/blog.js`→`lib/blog.ts`,
+`utils/clarity.js`→`Analytics.jsx`, `config.js`→`lib/blog.ts`.
+
+**Dropped, correctly:** `utils/Buttons/index.jsx` and `utils/Texts/index.jsx` — verified
+unreferenced in master as well, so dead before the port. Test files (no test port yet).
+
+## What the audit found missing
+
+**1. `*` catch-all / custom 404 — 🔴 was a real regression, NOW FIXED.**
+`src/Pages/NotFound.jsx` was never ported and `app/not-found.tsx` did not exist, so every
+unmatched URL served Next's built-in page: unstyled, no navbar, no footer, no route back.
+Confirmed in the built HTML ("This page could not be found"). It also affected every
+`notFound()` call — the three dynamic routes rely on it for unknown slugs.
+
+Closed by `app/not-found.tsx` + `components/pages/NotFoundBody.jsx`. Body ported
+byte-for-byte; the only changes are router-forced (`<Seo>`→Metadata API,
+`navigate("/")`→`<Link>`, `navigate(-1)`→`router.back()`). Metadata matches the source's
+`<Seo>` props exactly, including `noindex`. No canonical is emitted — a 404 answers for
+every unmatched path and has none of its own.
+
+**2. `/futurise-admin/blog` + 5 serverless auth endpoints — 🔴 BLOCKED, NOT FORGOTTEN.**
+Absent: `api/admin-login.js`, `api/admin-logout.js`, `api/admin-session.js`,
+`api/_lib/adminSession.js`, `api/_lib/apiBase.js`, `api/blog-fallback.js`, and the
+`AdminBlogPage.jsx` route. This is Phase 5.5, **blocked by D22** pending the human's
+specification of the backend auth mechanism. Do not port it before that decision.
+
+## Standing conclusion
+
+**The public-facing migration is complete.** `/futurise-admin` is the only outstanding
+item, and it is blocked on a human decision rather than on work.
+
+⚠️ **Scope of this audit:** it verified file PRESENCE, route coverage and asset coverage. It
+did **not** diff the contents of all 115 files line by line, so a partially-ported component
+would not have been caught by it. The four defects found in this session
+(BookingModal never ported, ChatBubble unmounted + broken `keyframes` import,
+PageTransition and ScrollToTop deleted) were all *absence* or *wiring* faults, which this
+method does catch — and all four are now fixed.

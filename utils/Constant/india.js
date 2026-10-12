@@ -1,26 +1,34 @@
 /**
  * /in — India market page copy.
  *
+ * ⚠️ THE SUBJECT OF THIS PAGE IS INDIA, NOT UDAIPUR. Read this before editing any copy
+ * below. An earlier draft framed the page around the city, which narrowed its targeting to
+ * one local market when the business it describes is national. Udaipur appears as a
+ * SUPPORTING FACT — it is where the team sits and where the two published clients are —
+ * never as the page's scope. `areaServed` is the country. If an edit makes a section read
+ * as "we are a Udaipur agency", it is wrong.
+ *
  * ── WHY THIS PAGE IS DIFFERENT FROM EVERY OTHER MARKET PAGE ─────────────────
  * The other five country pages argue a compliance or distance case for work delivered
- * REMOTELY into a market where nothing has been shipped yet. This one is the inverse:
- * India is where the engineering team actually sits, and it is the only market on the
- * site with named, delivered clients who are local businesses in the same city as the
- * team — Dhanlaxmi Property and Palm Vision Technology, both in Udaipur, Rajasthan, both
- * published on /portfolio with screenshots.
- *
- * So this page does NOT argue "we can serve you from a distance". It argues the opposite,
- * and it is the only page on the site entitled to.
+ * REMOTELY into a market. This one is the inverse: India is where the engineering team
+ * actually sits, so it argues presence rather than reach, and it is the only page on the
+ * site entitled to.
  *
  * ── THE DOORWAY-PAGE LINE ───────────────────────────────────────────────────
- * ⚠️ ONE PAGE FOR INDIA. Mumbai, Delhi, Bangalore, Pune and Jaipur are explicitly OUT and
- * must stay out. There is no office, no staff and no delivered client in any of them, and
- * a page per city with no presence behind it is a doorway page under Google's spam policy.
+ * ⚠️ ONE PAGE FOR INDIA. No per-city pages. Mumbai, Delhi, Bangalore, Pune and Jaipur are
+ * OUT and must stay out — there is no office and no address in any of them, and a page per
+ * city with no presence behind it is a doorway page under Google's spam policy.
  *
- * Udaipur is named throughout because it is where the team is and where both local clients
- * are. That is a fact about this company, not a landing-page keyword. The test for adding
- * any other Indian location to this site is the same one Udaipur passes: a named, delivered,
- * published client there, or staff there. Nowhere else currently passes it.
+ * The line is PHYSICAL PRESENCE, not published clients. Claiming delivered work in a market
+ * is fine whether or not the client can be named; claiming an office, an address or a local
+ * team that does not exist is not. That distinction is why this page can say "clients across
+ * India, some we cannot name" while saying plainly that there is no Mumbai office.
+ *
+ * ── UNNAMED WORK ────────────────────────────────────────────────────────────
+ * Where copy references work we cannot attribute, it says so plainly — "delivered for
+ * clients we are not able to name" — and grounds it in the published NDA commitment
+ * (engagementCommitments in Constant/index.js: "We sign your NDA before we see anything
+ * confidential"). It must never become vague filler implying more volume than is real.
  *
  * ── EVERY CLAIM AND ITS SOURCE ──────────────────────────────────────────────
  *   Udaipur engineering team        utils/Constant/europe.js ("our delivery team is in
@@ -47,12 +55,15 @@ export const inMeta = {
   // 40 characters — well inside Google's ~60-character render width, so the brand suffix
   // is appended by resolveTitle() rather than dropped.
   title: "Software Development Company India",
-  // 154 characters. Leads with the team location because that is the differentiator on
-  // this page and the thing no competitor page can copy honestly.
+  // 152 characters. The SUBJECT is India — Indian businesses and how engagements run —
+  // not one city. The Udaipur team is a supporting fact inside the page, not its framing.
   description:
-    "Custom software, AI and SaaS built by an engineering team in Udaipur, Rajasthan — with delivered work for Indian businesses and fixed-scope quotes in INR.",
+    "Custom software, AI and SaaS for Indian businesses — built by an in-house engineering team in India, quoted in rupees on fixed scope, inside your working day.",
+  // India-level terms lead. The two Udaipur terms are kept at the tail because the team
+  // and two delivered clients are genuinely there, but they must not out-weight the
+  // national terms this page exists to win.
   keywords:
-    "software development company India, custom software development India, web development company Udaipur, website development Udaipur, AI development company India, SaaS development India, Next.js development company India, software company Rajasthan",
+    "software development company India, custom software development India, AI development company India, SaaS development company India, web development company India, mobile app development company India, Next.js development company India, web development company Udaipur",
 };
 
 // SECTION 1 — WHERE THE TEAM IS. First section by design.
@@ -63,14 +74,14 @@ export const inMeta = {
 // for are in the same city.
 export const inPresence = [
   {
-    title: "The engineering team is in Udaipur",
+    title: "The engineering team is in India",
     detail:
-      "Not a sales office, not a partner network, not a contracted vendor we resell. The engineers who write your code work from Udaipur, Rajasthan. For an Indian client that removes the layer most offshore arrangements add — you are not briefing an account manager in one country who relays it to a team in another.",
+      "Not a sales office, not a partner network, not a contracted vendor we resell. The engineers who write your code are in India, working from Udaipur, Rajasthan. For an Indian client that removes the layer most offshore arrangements add — you are not briefing an account manager in one country who relays it to a team in another.",
   },
   {
-    title: "Two of our published clients are Udaipur businesses",
+    title: "Indian clients, named and unnamed",
     detail:
-      "Dhanlaxmi Property, a land development and property advisory firm operating here since 1998, and Palm Vision Technology, a CCTV and office technology business in Fatehpura trading since 2006. Both are on our portfolio with screenshots of what shipped. Local work you can go and look at is a different claim from a list of cities in a footer.",
+      "Two of our Indian engagements are published with screenshots: Dhanlaxmi Property, a land development and property advisory firm trading since 1998, and Palm Vision Technology, a CCTV and office technology business trading since 2006. Others were delivered for clients we are not able to name, because we sign NDAs before seeing anything confidential and we do not break them for marketing. We name no client who has not agreed.",
   },
   {
     title: "The contracting entity is in New Zealand",
@@ -87,9 +98,9 @@ export const inDelivery = [
       "No overnight handover, no waiting a cycle for an answer to a question that takes a minute. Scoping calls, reviews and the awkward mid-build conversations all happen inside one shared working day. It is the least glamorous advantage on this page and the one that most changes how a project actually feels.",
   },
   {
-    title: "Site visits are possible, not theoretical",
+    title: "Being in-country is not just a time zone",
     detail:
-      "For the two Udaipur engagements, understanding the business meant seeing it — plotted colony layouts and drone footage in one case, ten separate service lines and the brands stocked in the other. Neither brief could have been taken accurately over email alone.",
+      "Some briefs cannot be taken accurately over email. For our two published Indian engagements it meant seeing the business — plotted colony layouts and drone footage in one case, ten separate service lines and the brands stocked in the other. Being in India rather than describing India is what makes that possible.",
   },
   {
     title: "Quoted and invoiced in rupees",
@@ -99,7 +110,7 @@ export const inDelivery = [
   {
     title: "Built to be handed over",
     detail:
-      "Both Udaipur sites were built so the client is not dependent on us to keep them running — typed content rather than hand-built pages, static output where the site does not need a server. A supplier who makes themselves impossible to replace has optimised for the wrong thing.",
+      "Both published Indian sites were built so the client is not dependent on us to keep them running — typed content rather than hand-built pages, static output where the site does not need a server. A supplier who makes themselves impossible to replace has optimised for the wrong thing.",
   },
 ];
 
@@ -163,17 +174,17 @@ export const inFaqs = [
   {
     question: "Is Futurise Solutions an Indian company?",
     answer:
-      "No. Futurise Solutions is a company registered in Wellington, New Zealand, founded in 2024, and we hold no Indian entity. Our engineering team works from Udaipur, Rajasthan. We put that first rather than in a footer because it decides how contracting and invoicing work, and because some buyers specifically need an India-registered supplier — if that is your constraint, we are not the right answer and we will tell you so on the first call.",
+      "No. Futurise Solutions is a company registered in Wellington, New Zealand, founded in 2024, and we hold no Indian entity. Our engineering team is in India, working from Udaipur, Rajasthan. We put that first rather than in a footer because it decides how contracting and invoicing work, and because some buyers specifically need an India-registered supplier — if that is your constraint, we are not the right answer and we will tell you so on the first call.",
   },
   {
     question: "Do you actually have clients in India?",
     answer:
-      "Yes, and they are named. Dhanlaxmi Property, a land development and property advisory firm in Udaipur trading since 1998, and Palm Vision Technology, a CCTV and office technology business in Fatehpura, Udaipur, trading since 2006. Both appear on our portfolio with the problem, the approach and screenshots of what shipped. We name no client we have not delivered for, and we publish no client count.",
+      "Yes. Two are published with screenshots, the problem and the approach: Dhanlaxmi Property, a land development and property advisory firm trading since 1998, and Palm Vision Technology, a CCTV and office technology business trading since 2006 — both in Udaipur, Rajasthan, where our team is. Other Indian work was delivered for clients we are not able to name, because we sign NDAs before seeing anything confidential. We name no client who has not agreed, and we publish no client count.",
   },
   {
     question: "Do you work outside Udaipur?",
     answer:
-      "Yes. The team is in Udaipur, and the work is remote-capable across India and internationally — our published record also covers clients in Dubai and the United States. What we do not do is claim a presence in cities where we have none. There is no Mumbai, Delhi, Bangalore or Pune office, and you will not find a page on this site suggesting otherwise.",
+      "Yes — we work with businesses across India, and being in the country means one working day and one time zone wherever you are. Our published record also covers clients in Dubai and the United States. What we do not do is claim an OFFICE where we have none: there is no Mumbai, Delhi, Bangalore or Pune address, and you will not find a page on this site suggesting otherwise. The team works from Udaipur, Rajasthan.",
   },
   {
     question: "What does custom software cost in India?",
@@ -183,11 +194,11 @@ export const inFaqs = [
   {
     question: "Can we meet in person?",
     answer:
-      "In Udaipur, yes. Both local engagements involved seeing the business rather than taking the brief over email — in one case the plotted colony layouts and site footage, in the other the full range of service lines and stocked brands. Elsewhere in India, calls and video are how we work, and we would rather say that than imply a travel commitment we have not made.",
+      "In Udaipur, where the team is, yes — both published Indian engagements involved seeing the business rather than taking the brief over email. Elsewhere in India it depends on the project and is a conversation rather than a standing offer; calls and video are how most work runs. We would rather say that than imply a travel commitment we have not made.",
   },
   {
     question: "Who owns the code when the project ends?",
     answer:
-      "You do. Both Udaipur sites were deliberately built to be maintainable without us — content typed rather than hand-built into pages, static output where a server was not needed. We sign NDAs on request, work in two-week sprints with reviewable software at each one, and offer post-launch support as a choice rather than a dependency.",
+      "You do. Both published Indian sites were deliberately built to be maintainable without us — content typed rather than hand-built into pages, static output where a server was not needed. We sign NDAs on request, work in two-week sprints with reviewable software at each one, and offer post-launch support as a choice rather than a dependency.",
   },
 ];

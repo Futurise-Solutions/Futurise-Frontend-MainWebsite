@@ -14,17 +14,34 @@ sequence and body copy — none is invented.
 > 10+ to 4–5; changing a title on a ranking page can cost months. Nothing in this file was
 > written to a page.
 
-### The hard limit, restated
+### The location rule (corrected 2026-09-20)
 
-No city or location page is recommended for anywhere without a demonstrable presence.
-Eligible locations only:
+**The test is TRUTH, not publication.** An earlier version of this document restricted
+location claims to markets with a *published, nameable* client. That was the wrong test:
+this company delivers work under NDA — `/about` commits to signing one "before we see
+anything confidential" — so a market can be real and have no nameable client in it.
+
+- ✅ **ALLOWED — delivered work, named or not.** "Clients in the United States",
+  "delivered under NDA", "work across six markets" are all fine where true. Phrase unnamed
+  work plainly — *"delivered for clients we are not able to name"* — never as vague filler
+  implying more volume than exists. Name no client who has not agreed.
+- ❌ **NOT ALLOWED — a physical presence that does not exist.** No office, no local
+  address, no local phone, no "our Chicago team". This is the line that breaks local
+  directories and Google Business Profile, and it is the only one left.
+- ❌ **STILL NOT ALLOWED — a page for a city where no work has been done at all.**
+
+Locations and the evidence behind each:
 
 | Location | Published evidence |
 |---|---|
 | Wellington, NZ | Registered entity, Huddart Parker Building — stated on `/about` and in Organization schema |
 | Udaipur, India | Delivery team (`/europe` copy) **and two named clients** — Dhanlaxmi Property, Palm Vision Technology, both `location: "Udaipur, India"` on `/portfolio` |
-| Dubai / UAE | Infinity Bay Trading, Platinum Peak — named on `/portfolio` |
-| United States | HOMIES, Marty-QR, David Tishbi, Estate, GDT — named on `/portfolio` |
+| Dubai / UAE | Delivered client work — Infinity Bay Trading, Platinum Peak named on `/portfolio` |
+| United States | Delivered client work — HOMIES, Marty-QR, David Tishbi, Estate named on `/portfolio` |
+
+⚠️ **Only Wellington is premises.** The other rows are delivered-work and team-location
+claims. A location *page* is justified by delivered work; a local *directory listing* needs
+a real address, which only Wellington has.
 
 **One correction to the brief:** it listed Udaipur as "engineering team, stated on /about".
 The `/about` page does **not** mention Udaipur — the claim lives in `/europe` and in the
@@ -378,9 +395,10 @@ which has more traffic; I have no Search Console access. **Not actioned.**
 
 ### D.2 "software development company india", "next.js development company india" — ABSORB
 
-India is a **delivery** location, not a client market the site sells into. The published
-Indian client work (Dhanlaxmi, Palm Vision) is local Udaipur business, not the enterprise
-software buyer these queries represent.
+**Superseded — `/in` was built, and these are now OWNED.** The original reasoning rested on
+the published-client test (only two nameable Indian clients, both local Udaipur firms). Under
+the corrected rule that is not the question: India is a market with delivered work and an
+in-country engineering team, which justifies one national page.
 
 **Recommendation:** absorb into the existing post
 `/blog/web-development-services-in-india-2026-what-to-expect-what-to-pay-and-who-to-trust`,
@@ -388,7 +406,7 @@ which already ranks for the adjacent cost query. Strengthen its internal linking
 building `/in`. A market page for India would compete with `/nz`, `/us` and `/europe` for the
 same offshore-delivery narrative while having no buyer-side story of its own.
 
-### D.3 "web development company udaipur", "website development udaipur" — **BUILD (the one exception)**
+### D.3 "software development company india", "web development company udaipur" — **BUILT ✅**
 
 This is the only new page I recommend, and it clears the hard limit on evidence the brief
 itself did not have:
@@ -401,13 +419,13 @@ itself did not have:
 That is a real presence with named, verifiable local clients — the exact opposite of a
 doorway page for a city where nothing has been delivered.
 
-**Proposed:** `/in/udaipur` or `/udaipur`, built on the two case studies, the local-SEO angle
-both projects used, and the delivery-team fact. **It must not** recycle the market-page
-compliance template — it is a local services page with two local references.
+**Shipped as `/in` — one NATIONAL page, not a city page.** Title, H1, description and all
+seven H2s are India-level, and `areaServed` is `Country: India` with no sub-regions. Udaipur
+appears once in visible copy, as the place the team sits.
 
-**Before building, confirm:** is local Udaipur web work a business line you want more of, or
-were those two projects incidental? If incidental, absorb into `/portfolio` instead. **This
-is a business question, not an SEO one — I have not built anything.**
+It states plainly that there is **no Indian entity** (the contracting company is the NZ one)
+and that there is no Mumbai, Delhi, Bangalore or Pune office — those cities appear on the
+page only inside that denial.
 
 ### D.4 "wordpress to astro migration" — ABSORB into `/ae` and `/service/web-development`
 

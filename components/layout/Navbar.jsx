@@ -36,7 +36,7 @@ import { trackEvent, EVENTS } from "../../utils/analytics";
  * character-for-character identical to the source.
  */
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 // ---- Desktop nav links with a shared moving highlight ----
 // Desktop nav is defined here rather than from `navbarOptions` because two entries are

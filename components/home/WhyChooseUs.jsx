@@ -48,7 +48,22 @@ const WhyChooseUs = () => {
                     attributes; next/image takes width/height as the intrinsic size and
                     reserves the box, which is the same 26x26 result. `loading="lazy"`
                     and `decoding="async"` are next/image defaults. */}
-                <Image src={el.icon} alt={`${el.title} icon`} width={26} height={26} />
+                {/* ⚠️ `style={{ height: "auto" }}` IS REQUIRED — do not remove it.
+                    Three of these five SVGs are NOT square: clientIconHover is 87x68,
+                    postIconHover 61x80, timeIconHover 62x80 (qualityIconHover and
+                    expertiseiconHover are square, which is why only three warned). Passing
+                    26x26 to next/image sets both dimensions, so the non-square ones were
+                    squashed to a square box AND logged
+                      "Image has either width or height modified, but not the other".
+                    Constraining width and letting height follow preserves each icon's own
+                    ratio inside the same 26px-wide slot. */}
+                <Image
+                  src={el.icon}
+                  alt={`${el.title} icon`}
+                  width={26}
+                  height={26}
+                  style={{ width: 26, height: "auto" }}
+                />
               </Flex>
               <Heading as="h3" fontSize="lg" fontWeight={600} mb={2}>
                 {el.title}

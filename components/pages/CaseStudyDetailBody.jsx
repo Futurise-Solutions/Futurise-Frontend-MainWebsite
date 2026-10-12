@@ -30,7 +30,7 @@ import { Reveal, CTASection } from "@/components/common";
 import { Eyebrow } from "@/components/common/SectionHeading";
 import { useBooking } from "@/context/BookingContext";
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 // ── Service colour map (mirrors CaseStudiesPage) ─────────────────────────────
 const serviceColor = {

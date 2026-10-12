@@ -15,7 +15,7 @@ import BlogCard from "./BlogCard";
  * `if (loading || latest.length === 0) return null` guard moves to the server half —
  * where it runs before anything paints.
  */
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 const container = { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } };
 const cardVariant = {

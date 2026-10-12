@@ -9,7 +9,7 @@ import { FiArrowRight } from "react-icons/fi";
 import { Reveal, Eyebrow } from "../common";
 import { aboutLayers } from "../../assests";
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 /**
  * `backdrop` is optional and off by default, because this hero is shared with the

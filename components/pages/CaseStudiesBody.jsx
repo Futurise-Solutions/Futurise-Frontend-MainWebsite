@@ -25,7 +25,7 @@ import { hallPerspective } from "@/assests";
 import { Eyebrow } from "@/components/common/SectionHeading";
 import { useBooking } from "@/context/BookingContext";
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 // ── Service colour map ──────────────────────────────────────────────────────
 const serviceColor = {

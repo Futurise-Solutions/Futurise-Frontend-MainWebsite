@@ -10,6 +10,12 @@ Where a number is quoted, the command that produced it is stated.
 6 `/case-studies/*`) plus **86 blog posts** = 113 indexable pages, plus `/_not-found` and
 `/_global-error` which are correctly unlinked.
 
+⚠️ **`/_not-found` now renders a real branded 404** (`app/not-found.tsx`, added 27 Sep
+2026). It previously served Next's built-in page — unstyled, no navbar, no footer, no route
+back into the site — because `src/Pages/NotFound.jsx` was never ported. It carries
+`noindex, follow` and deliberately no canonical, so it stays out of the index while its
+links remain crawlable. It is correctly still counted as non-indexable above.
+
 > **Nothing in this document was applied to a title, H1 or meta description.** Those are in
 > `KEYWORD-MAP.md` as side-by-side recommendations awaiting approval, per the standing
 > instruction. What *was* fixed is listed in §7, and every item there is mechanical:
@@ -390,6 +396,86 @@ Technology, since 2006).
 ⚠️ **States plainly that there is no Indian entity** — the contracting company is the NZ
 one. That is in the first FAQ answer rather than a footer, because it is the fact most
 likely to rule the company out for a procurement-constrained buyer.
+
+---
+
+### 7.8 Four components restored to the layout shell
+
+Not SEO findings, but found while working on the pages and fixed here because each was a
+live defect with no error attached.
+
+**All four were lost the same way:** `app/layout.tsx` carried a comment describing the old
+App.jsx shell which named them as "NOT YET PRESENT, deliberately". Nothing tracked them
+afterwards, and a later reference search found their only mention *inside that comment* and
+read it as dead code. The comment has been rewritten to state what the shell actually
+contains, with a note not to leave components named in prose again.
+
+| Component | What was wrong | Consequence |
+|---|---|---|
+| `BookingModal` | **Never ported at all** | 🔴 Every "Book a call" button on the site flipped context state and rendered nothing. The primary conversion path was dead. |
+| `ChatBubble` | Ported but never mounted, **and** broken | Chat was absent site-wide. It also imports `keyframes` from `@chakra-ui/react`, which 2.10 no longer re-exports (the old app ran ^2.8.2, which did) — so mounting it initially threw a 500. Now imported from `@emotion/react`, the same function Chakra re-exported. |
+| `PageTransition` | Deleted in the restructure | Navigation snapped instead of fading. Restored with its original values unchanged: `opacity 0→1`, `y 14→0`, duration `0.5`, ease `[0.22, 1, 0.36, 1]`, re-keyed on pathname. |
+| `ScrollToTop` | Deleted in the restructure | See below — Next's own handling is **not** sufficient here. |
+
+**On `ScrollToTop` specifically** — the obvious conclusion is that Next 16 plus
+`data-scroll-behavior="smooth"` makes it redundant. It does not. Next's
+`disableSmoothScrollDuringRouteTransition()` sets `scrollBehavior = 'auto'` on
+`document.documentElement` **and nothing else**, while this theme sets
+`scrollBehavior: smooth` on `html, body, #root, #app` — confirmed in the compiled CSS:
+`body,#root,#app{…;scroll-behavior:smooth;}`. So `body` keeps animating during a route
+change, which is exactly the failure the original file documented (a partial fix landed at
+919px instead of 0). The `.scroll-jump` class covers all four selectors with `!important`,
+which is why it is still required.
+
+It is wrapped in `<Suspense>` because it calls `useSearchParams()`, which without a
+boundary opts every page into dynamic rendering. `useNavigationType()` has no App Router
+equivalent, so the original's POP exemption is left to Next's own history restoration —
+documented in the file, with a warning not to add a popstate listener that would fight it.
+
+**On lazy-load pop-in:** investigated and **no change made**. The four `next/dynamic`
+sections in `HomePageBody` have no `ssr: false`, so they are present in the prerendered
+HTML at full height and never pop in. The only client-only dynamic component is
+`AuroraField`, which is `position: absolute; inset: 0` — entirely out of flow, reserving
+nothing. There is no fixed-height lazy component to reserve space for, so adding one would
+invent a placeholder for a shift that does not occur.
+
+### 7.9 Chatbot consistency
+
+The chatbot predates the site's honesty rules and contradicted them in four places. All are
+in `components/Chatbot/keywordMatcher.js` and `predefinedQA.js`; no other answer was touched.
+
+- **Phone number** `+91 76650 13356` in two answers → replaced with email + the booking
+  flow. Owner decision: no phone number is published anywhere. Every surface now agrees —
+  pages, Organization schema, `llms.txt`, chatbot.
+- **"25+ projects"** in two answers → removed. `/portfolio` publishes nine and `/about`
+  commits in writing to publishing no counts.
+- **"15+ clients across 4+ countries"** → removed. Neither figure is supported anywhere.
+- **"GDT Exchange"** named as a client → removed. `/portfolio` publishes that engagement
+  under its product rather than a client name, deliberately.
+
+*(A "97% client retention rate" had already been removed in an earlier pass; only the
+explanatory comment remains.)*
+
+---
+
+### 7.10 Custom 404 restored
+
+`src/Pages/NotFound.jsx` had never been ported and no `app/not-found.tsx` existed, so every
+unmatched URL — and every `notFound()` call from the three dynamic routes — served Next's
+default page. Found by a systematic master→Next parity audit
+(`MIGRATION-STATUS.md`, "MASTER → NEXT PARITY AUDIT").
+
+**Why it mattered for SEO, not just appearance:** the three dynamic routes call `notFound()`
+for an unknown slug specifically to return a real 404 instead of the old app's soft 404. That
+status was correct, but the page it rendered had no navigation, so a crawler reaching a dead
+blog URL found a genuine 404 with zero internal links out — a dead end rather than a route
+back into the site.
+
+Ported byte-for-byte, split into `app/not-found.tsx` (metadata) and
+`components/pages/NotFoundBody.jsx` (client, for `router.back()`). Metadata matches the
+source's `<Seo>` props exactly: title `Page Not Found (404)`, the same description, and
+`noindex`. **No canonical** — a 404 answers for every unmatched path and has none of its own;
+do not add one to satisfy a canonical-coverage report.
 
 ---
 

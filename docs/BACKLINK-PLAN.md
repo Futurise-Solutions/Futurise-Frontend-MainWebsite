@@ -10,27 +10,24 @@ than guessed.
 
 > ### Three things to settle before you start
 >
-> 1. **The phone number is now an open decision — see §2.8.** It has been **removed from
->    `llms.txt`** so the site is internally consistent: `/about` states no phone number is
->    published anywhere, and the Organization schema deliberately omits one. But **26 of
->    the 100 targets below require a phone number to complete their form**, and a further
->    19 request one optionally. §2.8 lists exactly which. Decide before submitting,
->    because inconsistent NAP (name/address/phone) across directories actively hurts local
->    SEO, and a live listing is far harder to correct than to get right once.
-> 2. **⚠️ The chatbot still publishes `+91 76650 13356`** — in
->    `components/Chatbot/keywordMatcher.js` (the "contact" answer) and
->    `components/Chatbot/predefinedQA.js` ("How can I contact you?"). Those are
->    user-visible answers that contradict `/about` in the same way `llms.txt` did. They
->    were left alone because the instruction covered `llms.txt` only. **Whatever you decide
->    about the number, these two files must end up agreeing with `/about`.**
+> ### Two things to settle before you start
 >
->    *(While you are in that file: `predefinedQA.js` also answers "Show me your portfolio"
->    with **"We've delivered 25+ projects"**. `/portfolio` publishes nine, and `/about`
->    commits in writing to publishing no project counts. That is a separate inconsistency
->    on the same two files, and a directory profile is exactly where it would get copied.)*
-> 3. **Confirm the registered entity name.** Listings ask for a legal name. The site says
+> 1. **✅ PHONE: DECIDED — there is no published phone number.** Owner decision. It has been
+>    removed from `llms.txt` and from both chatbot files, so every surface now agrees with
+>    `/about` ("no telephone number is published anywhere on this site") and with the
+>    Organization schema, which omits `telephone`.
+>
+>    **Consequence: 26 of the 100 targets below are marked 🚫 SKIP** — their forms cannot be
+>    completed without a number, and three verify by OTP. §2.8 lists them. **Do not start
+>    those 26.** The remaining 74 are unaffected, including every item in the first sitting.
+>
+> 2. **Confirm the registered entity name.** Listings ask for a legal name. The site says
 >    "registered in Wellington" but never prints the registered company name or NZBN. Look
 >    it up on the NZ Companies Register before filling in anything legal.
+>
+> *(Resolved, for the record: `predefinedQA.js` previously answered "Show me your portfolio"
+> with "We've delivered 25+ projects" where `/portfolio` publishes nine — see §6. Do not
+> repeat any project count in a listing.)*
 
 ---
 
@@ -171,6 +168,11 @@ blockchain development, smart contract development, digital marketing agency, Ne
 
 Only these. Every one is named on `/portfolio` with screenshots.
 
+⚠️ **Naming and referencing are different permissions.** You may state that work has been
+delivered in a market WITHOUT naming the client — *"delivered for clients we are not able to
+name"* is accurate and backed by the published NDA commitment. You may **not** name, or show
+a logo for, any client absent from this table.
+
 | Client | Sector | Location |
 |---|---|---|
 | Infinity Bay Trading | B2B FMCG / HORECA / industrial supply | Dubai, UAE |
@@ -210,17 +212,20 @@ deliberately spread — roughly 40 to `/`, and the rest across `/nz`, `/us`, `/a
 > ### 🔴 THE NEW ZEALAND RULE — read before filling in any form in this section
 >
 > **`/about` states that no published engagement on this site belongs to a New Zealand
-> business.** New Zealand is where the company is *registered*, not where its customers
-> are. That is a deliberate published honesty commitment, and it is the reason the rest of
-> the site can be trusted on anything else.
->
-> So every NZ listing must be won on **registration and delivery model only**:
+> business.** New Zealand is where the company is *registered*. Wellington is also the one
+> place with a **real address**, which is what makes these listings legitimate at all.
 >
 > - ✅ **Say:** registered in Wellington · a New Zealand company founded in 2024 · NZD
->   fixed-scope quotes · NZ business-hours delivery · serving New Zealand businesses
-> - ❌ **Never say or imply:** New Zealand clients · Kiwi businesses we've worked with ·
->   "trusted by NZ companies" · local case studies · any client logo or name in an NZ
->   context
+>   fixed-scope quotes · NZ business-hours delivery · serving New Zealand businesses ·
+>   delivered client work in the UAE, the US and India
+> - ❌ **Never say or imply:** a named New Zealand client · "trusted by NZ companies" · an
+>   NZ case study · any client logo in an NZ context
+>
+> ⚠️ **This is narrower than the general location rule, deliberately.** Elsewhere,
+> referencing delivered work you cannot name is fine. Here it is not, because `/about`
+> makes a specific published claim about New Zealand — no delivered engagement belongs to
+> an NZ business — and a directory profile hinting otherwise contradicts the site directly.
+> Sell the registration and the delivery model, not a customer base.
 >
 > **The 50/100/160/300-word descriptions in Part 1 are already safe** — they say "Delivered
 > client work in the UAE, the United States and India", which is accurate and states the
@@ -229,10 +234,9 @@ deliberately spread — roughly 40 to `/`, and the rest across `/nz`, `/us`, `/a
 > temptation to localise a description for an NZ form. Do not localise it.
 >
 > Two specific traps in this section:
-> - **#12 NoCowboys** is a *customer review* platform. With no NZ clients there are no NZ
->   reviews to collect, and soliciting reviews from non-NZ clients on an NZ consumer
->   platform would misrepresent the record. Create the profile if you like, but do not
->   chase reviews there.
+> - **#12 NoCowboys** is a *customer review* platform aimed at NZ consumers. There are no
+>   NZ clients to ask, and routing overseas clients there to review an NZ-consumer listing
+>   would misrepresent the record. Create the profile if you like; do not chase reviews.
 > - **#15 Google Business Profile** will prompt for service areas and may surface a
 >   "customers in your area" framing. Set it to the Wellington registered address and the
 >   services offered — never to a customer base.
@@ -405,36 +409,40 @@ worse than listing none.
 Directories do not all agree. Below is what each of the 100 actually demands, so the
 decision can be made on facts rather than guessed at halfway through a submission run.
 
-**REQUIRED — cannot complete the listing without one (26)**
+**🚫 SKIP — these 26 require a phone number, and there is none to give (owner decision)**
 
-| # | Target | Note |
-|---:|---|---|
-| 3 | Yellow NZ | Core directory field |
-| 4 | Finda | Core directory field |
-| 5 | Localist | Core directory field |
-| 6 | NZ Business Directory | Core directory field |
-| 7 | Wellington Chamber of Commerce | Membership application |
-| 8 | BusinessNZ | Membership application |
-| 9 | NZTech | Membership application |
-| 11 | Neighbourly Business | Core directory field |
-| 12 | NoCowboys | Review platform, contact required |
-| 15 | **Google Business Profile (NZ)** | Phone **or** address; the Wellington address satisfies it — see note below |
-| 16 | JustDial | Phone is the primary key; OTP-verified |
-| 17 | IndiaMART | Seller account, OTP-verified |
-| 18 | Sulekha | Lead routing is by phone |
-| 19 | TradeIndia | Seller account, OTP-verified |
-| 20 | Google Business Profile (India) | Also needs a verifiable Udaipur address |
-| 30 | MouthShut | Business profile |
-| 31 | Yalwa India | Core directory field |
-| 33 | Tuugo India | Core directory field |
-| 34 | Hotfrog India | Core directory field |
-| 35 | ExportersIndia | Seller account |
-| 36 | Fundoodata | B2B data listing |
-| 40 | Udaipur Chamber of Commerce | Membership application |
-| 59 | BBB | Already skipped (needs US address) |
-| 64 | Yellow Pages UAE | Also may need a UAE licence |
-| 65 | Connect.ae | Core directory field |
-| 71 | Gulf Business | Paid media listing |
+Do not start these. The form cannot be completed truthfully without a number, and several
+(#16, #17, #19) verify by OTP, so one cannot be borrowed or faked. Revisit only if the
+no-phone decision is ever reversed — and then read the note at the end of this section first.
+
+| # | Target | Status | Reason |
+|---:|---|---|---|
+| 3 | Yellow NZ | 🚫 SKIP | Core directory field — phone mandatory |
+| 4 | Finda | 🚫 SKIP | Core directory field — phone mandatory |
+| 5 | Localist | 🚫 SKIP | Core directory field — phone mandatory |
+| 6 | NZ Business Directory | 🚫 SKIP | Core directory field — phone mandatory |
+| 7 | Wellington Chamber of Commerce | 🚫 SKIP | Membership application — phone mandatory |
+| 8 | BusinessNZ | 🚫 SKIP | Membership application — phone mandatory |
+| 9 | NZTech | 🚫 SKIP | Membership application — phone mandatory |
+| 11 | Neighbourly Business | 🚫 SKIP | Core directory field — phone mandatory |
+| 12 | NoCowboys | 🚫 SKIP | Review platform, contact required — phone mandatory |
+| 15 | **Google Business Profile (NZ)** | ✅ **DO IT** | Accepts **address instead of phone** — the Wellington address satisfies it. Highest-value listing available. |
+| 16 | JustDial | 🚫 SKIP | Phone is the primary key, OTP-verified — cannot be worked around |
+| 17 | IndiaMART | 🚫 SKIP | Seller account, OTP-verified |
+| 18 | Sulekha | 🚫 SKIP | Lead routing is by phone — a listing without one receives nothing |
+| 19 | TradeIndia | 🚫 SKIP | Seller account, OTP-verified |
+| 20 | Google Business Profile (India) | 🚫 SKIP | Needs a verifiable Udaipur **address** as well as a phone |
+| 30 | MouthShut | 🚫 SKIP | Business profile — phone mandatory |
+| 31 | Yalwa India | 🚫 SKIP | Core directory field — phone mandatory |
+| 33 | Tuugo India | 🚫 SKIP | Core directory field — phone mandatory |
+| 34 | Hotfrog India | 🚫 SKIP | Core directory field — phone mandatory |
+| 35 | ExportersIndia | 🚫 SKIP | Seller account — phone mandatory |
+| 36 | Fundoodata | 🚫 SKIP | B2B data listing — phone mandatory |
+| 40 | Udaipur Chamber of Commerce | 🚫 SKIP | Membership application — phone mandatory |
+| 59 | BBB | 🚫 SKIP | Already skipped in §2.3 — needs a US address too |
+| 64 | Yellow Pages UAE | 🚫 SKIP | Phone required, and may need a UAE trade licence |
+| 65 | Connect.ae | 🚫 SKIP | Core directory field — phone mandatory |
+| 71 | Gulf Business | 🚫 SKIP | Paid media listing — phone mandatory |
 
 **OPTIONAL — form has the field, submission completes without it (19)**
 
@@ -745,37 +753,60 @@ Ranked by effort-to-value. **⚡ = under five minutes.**
 are prerequisites other listings verify against. Items 11–13 are the three profiles that each
 syndicate across multiple market pages — one submission, many listings.
 
-## Second sitting (~2 hours)
+## Second sitting (~90 minutes)
 
-14. Google Business Profile at the Wellington address (#15) — resolve the phone question first
+14. ⚡ **Google Business Profile** at the Wellington address (#15) — the single
+    highest-value listing available, and it accepts the **address instead of a phone**.
+    Set service areas and services offered, never a customer base (see the NZ rule in §2.1).
 15. NZBN + Companies Register check (#1, #2)
-16. Yellow NZ, Finda, Localist (#3–5)
-17. The Manifest, UpCity (#47, #48)
-18. Sortlist, TechBehemoths (#56, #70)
-19. JustDial, IndiaMART, Sulekha, TradeIndia (#16–19)
+16. The Manifest, UpCity (#47, #48)
+17. Sortlist, TechBehemoths (#56, #70)
+18. Capterra, G2 vendor profiles (#50, #49)
+19. TopDevelopers, Techreviewer, SelectedFirms, ITFirms (#24, #28, #29, #27)
+
+> ⚠️ **Yellow NZ, Finda, Localist (#3–5) and JustDial, IndiaMART, Sulekha, TradeIndia
+> (#16–19) were in this sitting and have been REMOVED — all seven are phone-mandatory and
+> now marked 🚫 SKIP.** That is why this sitting is shorter than it was.
 
 ## Third sitting (~2 hours)
 
 20. Behance + Dribbble — needs UI/UX assets prepared (#78, #79)
 21. Astro showcase submission for Infinity Bay (#72)
 22. Product Hunt (#51)
-23. Remaining Indian directories (#31–36)
-24. Remaining UAE directories (#64–66, #71)
+23. Glassdoor + AmbitionBox employer profiles (#43, #44)
+24. Cybo (#32), UAE-Business-Directory (#66), EU-Startups (#76), Startup.info (#77)
+25. Awwwards / CSS Design Awards — paid per entry, so only if the budget exists (#80, #81)
+
+> ⚠️ "Remaining Indian directories (#31–36)" and "Remaining UAE directories (#64–66, #71)"
+> previously sat here. Most of those are phone-mandatory; only #32 and #66 survive, and they
+> are listed individually above.
 
 ## Ongoing, highest value per hour
 
-25. **Client outreach (Part 4)** — start with Infinity Bay. Eight emails, and a single yes
+26. **Client outreach (Part 4)** — start with Infinity Bay. Eight emails, and a single yes
     beats fifty directory listings.
-26. **Guest posts (Part 3)** — one pitch a week. Start with dev.to and Hashnode (self-publish,
+27. **Guest posts (Part 3)** — one pitch a week. Start with dev.to and Hashnode (self-publish,
     no gatekeeper) to build a body of work, then pitch Smashing and LogRocket.
-27. **Stack Overflow / Reddit** — genuine participation only, over months.
+28. **Stack Overflow / Reddit** — genuine participation only, over months.
 
-## Skipped and why
+## Skipped and why — 36 of the 100
 
-Ten of the hundred are marked **skip**: #58, #59, #60, #67, #68, #82, #90 and the
-address-gated parts of #20, #37, #39, #45, #86, #89. All require a local address or a local
-entity that does not exist. Submitting anyway means either an inaccurate listing or a
-rejection, and inaccurate NAP data across directories is actively harmful.
+**26 phone-mandatory** (§2.8): #3, #4, #5, #6, #7, #8, #9, #11, #12, #16, #17, #18, #19, #20,
+#30, #31, #33, #34, #35, #36, #40, #59, #64, #65, #71 and the phone-gated part of #45.
+There is no published phone number — owner decision — and three of these verify by OTP, so
+one cannot be borrowed. Their forms cannot be completed truthfully.
+
+**10 presence-gated**: #58, #59, #60, #67, #68, #82, #90 and the address-gated parts of #37,
+#39, #86, #89. Each needs a local address or a local entity that does not exist. This is the
+line that survives the corrected location rule: claiming delivered work in a market is fine
+whether or not the client can be named, but claiming premises is not.
+
+(#59 and #64 appear in both lists — they fail on phone *and* address.)
+
+Submitting anyway means either an inaccurate listing or a rejection, and inaccurate NAP data
+across directories is actively harmful and hard to correct once live.
+
+**That leaves ~64 actionable targets**, including every item in the first sitting.
 
 ---
 

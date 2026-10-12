@@ -9,7 +9,7 @@ import {
   FiBell, FiUser, FiSearch, FiMapPin, FiCpu,
 } from "react-icons/fi";
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 /**
  * Per-service hero compositions.

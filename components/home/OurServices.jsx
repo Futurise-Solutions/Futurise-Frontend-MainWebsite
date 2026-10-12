@@ -9,7 +9,7 @@ import { FiArrowUpRight } from "react-icons/fi";
 import { OurServiceData } from "../../utils/Constant";
 import { Section, SectionHeading, GlassCard, Reveal } from "../common";
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 const ServiceCard = ({ el, index }) => (
   <GlassCard

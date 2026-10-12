@@ -5,7 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import NextImage from "next/image";
 import AmbientCanvas from "./AmbientCanvas";
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 /**
  * Market-page hero shell.

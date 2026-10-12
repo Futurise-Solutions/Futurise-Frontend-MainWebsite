@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import './globals.css'
 import { Providers } from './providers'
 import { fontVariables } from '@/theme/fonts'
@@ -6,6 +7,10 @@ import { BookingProvider } from '@/context/BookingContext'
 import AnnouncementBar from '@/components/layout/AnnouncementBar'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
+import BookingModal from '@/components/common/BookingModal'
+import PageTransition from '@/components/common/PageTransition'
+import ScrollToTop from '@/components/common/ScrollToTop'
+import { ChatBubble } from '@/components/Chatbot'
 import Analytics from '@/components/common/Analytics'
 import { Analytics as VercelAnalytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
@@ -85,29 +90,57 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body className="chakra-ui-dark">
         {/* keeps every legacy `#app ...` CSS selector matching — see note above */}
-        {/* Reproduces the old App.jsx shell exactly:
-              <Box id='app' minH="100vh" display="flex" flexDirection="column">
-                <ScrollToTop /> <AnnouncementBar /> <Navbar />
-                <Box as="main" flex="1"> <PageTransition><AllRoutes/></PageTransition> </Box>
-                <Footer /> <BookingModal /> <ChatBubble />
-              </Box>
-            The flex column + `flex: 1` on main is what makes the Footer's `mt="auto"`
-            pin it to the bottom on short pages. Dropping it would let the footer float
-            up mid-viewport on /privacy and the 404.
+        {/* Reproduces the old App.jsx shell. The flex column + `flex: 1` on main is what
+            makes the Footer's `mt="auto"` pin it to the bottom on short pages; dropping it
+            would let the footer float up mid-viewport on /privacy and the 404.
 
-            NOT YET PRESENT, deliberately:
-              ScrollToTop   — Phase 3 open question (may be redundant under Next)
-              PageTransition— same
-              BookingModal  — Phase 4 (needs the modal + its framer-motion props)
-              ChatBubble    — Phase 4 per D24. Its absence bottom-right is the one
-                              EXPECTED delta in this phase's visual diff. */}
+            🔴 THIS COMMENT ONCE LISTED FOUR COMPONENTS AS "NOT YET PRESENT, deliberately"
+            — ScrollToTop, PageTransition, BookingModal, ChatBubble — and nothing tracked
+            them afterwards. Three consequences followed, none of which produced an error:
+
+              • BookingModal was never mounted, so every "Book a call" button on the site
+                flipped context state and rendered nothing. The primary conversion path was
+                dead. (It had also never been ported at all.)
+              • ChatBubble was never mounted either, and was additionally broken — it
+                imports `keyframes`, which Chakra 2.10 no longer re-exports.
+              • PageTransition and ScrollToTop were DELETED during the repo restructure,
+                because a reference search found their only mention here, inside this
+                comment, and read it as dead code.
+
+            The shell below is now the whole shell. If you remove something from it, delete
+            the component too — do not leave it named in a comment, which is precisely how
+            all four went missing. */}
         <div id="app" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
           <Providers>
             <BookingProvider>
+              {/* Restores the old app's route-change scroll reset. Next's own handling
+                  neutralises smooth scrolling on <html> only, and this theme also sets it
+                  on body/#root/#app — see the measurement note in ScrollToTop.jsx.
+                  Suspense is REQUIRED: it calls useSearchParams(), which without a
+                  boundary opts every page into dynamic rendering and fails the build. */}
+              <Suspense fallback={null}>
+                <ScrollToTop />
+              </Suspense>
               <AnnouncementBar />
               <Navbar />
-              <main style={{ flex: 1 }}>{children}</main>
+              {/* PageTransition wraps only `children`, exactly as the old shell wrapped
+                  <AllRoutes/> — NOT the navbar, bar or footer, which must stay put across
+                  navigations rather than fading with the page. */}
+              <main style={{ flex: 1 }}>
+                <PageTransition>{children}</PageTransition>
+              </main>
               <Footer />
+              {/* 🔴 MUST STAY INSIDE <BookingProvider>. Every "Book a call" button calls
+                  openBooking() from that context; this is the only component subscribed to
+                  the resulting isOpen state. It was missing entirely until now — the
+                  buttons flipped state and nothing rendered, silently. Moving it outside
+                  the provider gives it a null context and recreates the same dead click. */}
+              <BookingModal />
+              {/* Also never mounted, and lost the same way — the only reference to it was
+                  the comment above describing the old App.jsx shell. It is inside the
+                  provider because ContactFallback.jsx calls useBooking() to offer the
+                  booking flow when the bot cannot answer. */}
+              <ChatBubble />
             </BookingProvider>
           </Providers>
         </div>
