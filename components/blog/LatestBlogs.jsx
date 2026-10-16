@@ -1,4 +1,4 @@
-import { getBlogs } from '@/lib/blog'
+import { getCachedBlogSummaries } from '@/lib/blogSummaries'
 import LatestBlogsView from './LatestBlogsView'
 
 /**
@@ -16,7 +16,7 @@ import LatestBlogsView from './LatestBlogsView'
  * shift. The "hide the section when there are no published posts" rule is kept.
  */
 export default async function LatestBlogs() {
-  const blogs = await getBlogs()
+  const blogs = await getCachedBlogSummaries()
   const latest = blogs.slice(0, 4)
 
   // Hide the section entirely if there are no published blogs (or the API is unreachable).

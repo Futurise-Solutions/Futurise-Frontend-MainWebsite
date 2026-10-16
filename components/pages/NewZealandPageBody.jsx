@@ -1,4 +1,6 @@
 'use client'
+import regional from '../common/RegionalPages.module.css';
+import RegionalHero from '../common/RegionalHero';
 
 /**
  * /nz page body — ported VERBATIM from NewZealandPage.jsx.
@@ -17,15 +19,18 @@ import {
 import NextImage from "next/image";
 import Link from "next/link";
 import { FiArrowRight, FiCheck, FiArrowUpRight } from "react-icons/fi";
-import { Reveal, Eyebrow, GlassCard, CTASection, MarketHero, VisualBand } from "@/components/common";
+import Reveal from "@/components/common/Reveal";
+import { Eyebrow } from "@/components/common/SectionHeading";
+import GlassCard from "@/components/common/GlassCard";
+import CTASection from "@/components/common/CTASection";
+import VisualBand from "@/components/common/VisualBand";
+import CountrySolutions from "@/components/common/CountrySolutions";
 import Faqs from "@/components/home/Faqs";
 import { useBooking } from "@/context/BookingContext";
 import { NavbarservicesOptions } from "@/utils/Constant";
-import { COUNTRY_ALTERNATES } from "@/utils/Constant/countries";
-import { buildCountrySchema } from "@/utils/countrySchema";
-import { marketNz, marketReach } from "@/assests";
+import { marketReach } from "@/assests";
 import {
-  nzMeta, marketRealities, offshoreTradeoffs, nzSectors, nzIntegrations,
+  marketRealities, offshoreTradeoffs, nzSectors, nzIntegrations,
   nzCompliance, costModel, workingModel, nzResources, nzFaqs,
 } from "@/utils/Constant/newZealand";
 
@@ -36,9 +41,9 @@ export default function NewZealandPageBody() {
   // Zealand belongs here. The country registry supplies the path, label and language tag,
   // so the schema cannot disagree with the hreflang cluster or the footer link.
   return (
-    <Box>
+    <Box className={regional.page}>
       {/* Hero — market-specific atmosphere plate behind the shared texture. */}
-      <MarketHero image={marketNz}>
+      <RegionalHero>
           <Reveal><Eyebrow>New Zealand</Eyebrow></Reveal>
           <Reveal delay={0.05}>
             <Heading as="h1" mt={5} fontSize={{ base: "38px", md: "56px" }} lineHeight={1.08} letterSpacing="-0.025em" maxW="920px">
@@ -48,7 +53,7 @@ export default function NewZealandPageBody() {
           </Reveal>
           <Reveal delay={0.1}>
             <Text mt={6} color="text.muted" fontSize={{ base: "md", md: "xl" }} lineHeight={1.7} maxW="760px">
-              Custom software, AI and SaaS built for companies operating from Aotearoa —
+              Custom software, AI and SaaS built for companies operating from Aotearoa,
               quoted in New Zealand dollars, scoped against Privacy Act 2020 obligations, and
               delivered so that reviews land in your morning rather than three days later.
             </Text>
@@ -63,7 +68,7 @@ export default function NewZealandPageBody() {
               </Button>
             </HStack>
           </Reveal>
-      </MarketHero>
+      </RegionalHero>
 
       {/* Market realities */}
       <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
@@ -413,12 +418,14 @@ export default function NewZealandPageBody() {
         </Container>
       </Box>
 
+      <CountrySolutions market="nz" />
+
       <Faqs
         items={nzFaqs}
         eyebrow="New Zealand FAQ"
         title="Questions from"
         highlight="New Zealand buyers."
-        intro="The things NZ enquirers ask before the first call. If yours is not here, send it over — we answer within one business day."
+        intro="The things NZ enquirers ask before the first call. If yours is not here, send it over. We answer within one business day."
       />
 
       <CTASection

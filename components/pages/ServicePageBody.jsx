@@ -12,39 +12,28 @@
  * Every style prop, every element and every string is byte-for-byte unchanged.
  */
 import { lazy, Suspense } from "react";
-import { Box, Container, Flex, Heading, Text, Button, Stack, VStack, HStack, Icon, SimpleGrid, Wrap, WrapItem } from "@chakra-ui/react";
-import { useRouter } from "next/navigation";
+import { Box, Container, Heading, Text, HStack, Icon, SimpleGrid, Wrap, WrapItem } from "@chakra-ui/react";
+
 import RouterLink from "next/link";
 import { Link as ChakraLink } from "@chakra-ui/react";
-import { FiArrowRight, FiCheckCircle, FiArrowUpRight } from "react-icons/fi";
+import { FiCheckCircle, FiArrowUpRight } from "react-icons/fi";
 import ProcessSection from "@/components/service/ProcessSection";
 const ServiceStack = lazy(() => import("@/components/service/ServiceStack"));
-import ServiceHeroVisual from "@/components/service/ServiceHeroVisual";
+import ServiceIntro from "@/components/service/ServiceIntro";
+import agency from "@/components/common/AgencyPages.module.css";
 import Faqs from "@/components/home/Faqs";
-import { services, AREAS_SERVED } from "@/utils/Constant";
+import { services } from "@/utils/Constant";
 import { caseStudies, caseStudyForService } from "@/utils/Constant/caseStudies";
 import { serviceResources } from "@/utils/Constant/serviceResources";
-import { Reveal, Eyebrow, CTASection, AmbientCanvas, VisualBand } from "@/components/common";
+import { solutionLinks as solutionList } from "@/utils/Constant/solutionLinks";
+import Reveal from "@/components/common/Reveal";
+import { Eyebrow } from "@/components/common/SectionHeading";
+import CTASection from "@/components/common/CTASection";
+import VisualBand from "@/components/common/VisualBand";
 import { precisionLayers } from "@/assests";
 import { useBooking } from "@/context/BookingContext";
 
-const serviceImages = {
-  "web-development":       "/webdevelopment.png",
-  "app-development":       "/appdevlopment.png",
-  "ui-ux-design":          "/uiuxdevelopment.png",
-  "blockchain-development":"/blockchaindevelopment.png",
-  "ai-ml-solutions":       "/aimlsol.png",
-  "digital-marketing":     "/digitalmarkiting.png",
-};
 
-const serviceKeywords = {
-  "web-development":        "web development company, React developer, Next.js, Node.js, full stack development, website development New Zealand, India, USA",
-  "app-development":        "mobile app development, React Native, Expo, iOS Android app, cross-platform app, app developer New Zealand",
-  "ui-ux-design":           "UI UX design, Figma design, product design, user experience design, mobile UI design, web design New Zealand",
-  "blockchain-development": "blockchain development, DeFi development, Web3, dApp development, MEV bot, Solana, Ethereum, smart contract",
-  "ai-ml-solutions":        "AI development, ML solutions, AI agents, LLM integration, ChatGPT integration, AI SaaS, machine learning New Zealand",
-  "digital-marketing":      "digital marketing agency, SEO services, Google Ads, social media marketing, performance marketing New Zealand",
-};
 
 export default function ServicePageBody({ serviceName }) {
   /* `serviceName` now arrives as a PROP from the server component, which resolved it
@@ -53,8 +42,7 @@ export default function ServicePageBody({ serviceName }) {
      The `if (!service) return <NotFound/>` guard is gone: the route calls notFound()
      BEFORE rendering this, so an unknown slug returns a real 404 status rather than a
      200 carrying 404-looking content. */
-  const router = useRouter();
-  const navigate = (to) => router.push(to);
+
   const { onOpen: openBooking } = useBooking();
   const service = services[serviceName];
 
@@ -63,77 +51,17 @@ export default function ServicePageBody({ serviceName }) {
   const siblingServices = Object.entries(services)
     .filter(([slug]) => slug !== serviceName)
     .map(([slug, s]) => ({ slug, title: s.title }));
+  const specialistSolutions = solutionList.filter((s) => s.service === serviceName);
   return (
     <Box>
-      {/* Hero */}
-      <Box position="relative" overflow="hidden" pt={{ base: 12, md: 20 }} pb={{ base: 10, md: 14 }}>
-        {/* Shared atmosphere layer — same grid/aurora/grain system as the home hero,
-            so every service page reads as part of one visual system. */}
-        <AmbientCanvas variant="hero" />
-
-        <Container maxW="container.site" px={{ base: 5, md: 8 }} position="relative" zIndex={1}>
-          <Flex direction={{ base: "column", lg: "row" }} align="center" gap={{ base: 16, lg: 16 }}>
-            <VStack flex="1" align="start" spacing={5}>
-              <Reveal><Eyebrow>{service.whatWeDo}</Eyebrow></Reveal>
-              <Reveal delay={0.05}>
-                <Heading as="h1" fontSize={{ base: "38px", md: "52px" }} lineHeight={1.1} letterSpacing="-0.02em">
-                  <Box as="span" className="gradient-text">{service.title}</Box>
-                </Heading>
-              </Reveal>
-              <Reveal delay={0.1}>
-                {/* The page's primary direct answer: one sentence defining the service,
-                    written to stand alone. Marked speakable — see the note in
-                    app/service/[slug]/page.tsx. */}
-                <Text className="speakable-answer" fontSize={{ base: "lg", md: "xl" }} color="text.primary" fontWeight={500}>
-                  {service.description}
-                </Text>
-              </Reveal>
-              <Reveal delay={0.15}>
-                <Text color="text.muted" fontSize={{ base: "md", md: "lg" }} lineHeight={1.75}>
-                  {service.details}
-                </Text>
-              </Reveal>
-              <Reveal delay={0.2}>
-                <Stack direction={{ base: "column", sm: "row" }} spacing={4} pt={2}>
-                  <Button variant="gradient" size="lg" rightIcon={<FiArrowRight />} onClick={() => navigate("/contact")}>
-                    Get a free quote
-                  </Button>
-                  <Button variant="outlineGlow" size="lg" onClick={() => navigate("/portfolio")}>
-                    View our work
-                  </Button>
-                </Stack>
-              </Reveal>
-            </VStack>
-
-            {/* Service-specific hero visual */}
-            <Reveal from="left" flex="1" w="full">
-              <ServiceHeroVisual service={serviceName} />
-            </Reveal>
-          </Flex>
-
-          {/* What's included — compact strip below the hero */}
-          <Reveal delay={0.1}>
-            <Box mt={{ base: 14, md: 16 }} pt={{ base: 8, md: 10 }} borderTop="1px solid" borderColor="border.subtle">
-              <Text fontSize="sm" fontWeight={600} letterSpacing="0.08em" textTransform="uppercase" color="text.faint" mb={5}>
-                What’s included
-              </Text>
-              <SimpleGrid columns={{ base: 1, sm: 2 }} spacingX={10} spacingY={4}>
-                {service.features?.map((f) => (
-                  <HStack key={f} spacing={3} align="start">
-                    <Icon as={FiCheckCircle} color="accent.solid" boxSize={5} mt={0.5} flexShrink={0} />
-                    <Text color="text.muted">{f}</Text>
-                  </HStack>
-                ))}
-              </SimpleGrid>
-            </Box>
-          </Reveal>
-        </Container>
-      </Box>
+      <ServiceIntro service={service} slug={serviceName} />
 
       {/* Reserve height so the lazy chunk landing cannot shift the sections below it. */}
+      <div className={agency.light}>
       <Suspense fallback={<Box minH={{ base: "600px", md: "800px" }} />}>
         <ServiceStack service={serviceName} />
       </Suspense>
+      </div>
       <ProcessSection />
 
       {/* All six service pages run ~7600px of copy, chips, cards and accordions with no
@@ -162,7 +90,7 @@ export default function ServicePageBody({ serviceName }) {
           </Reveal>
           <Reveal delay={0.1}>
             <Text className="speakable-answer" mt={4} color="text.muted" fontSize={{ base: "md", md: "lg" }} lineHeight={1.7} maxW="640px">
-              We’ve shipped {service.title.toLowerCase()} work for founders and product teams across these sectors —
+              We’ve shipped {service.title.toLowerCase()} work for founders and product teams across these sectors,
               and adapt fast to yours.
             </Text>
           </Reveal>
@@ -224,7 +152,7 @@ export default function ServicePageBody({ serviceName }) {
                 <HStack justify="space-between" align="start" spacing={4}>
                   <Box>
                     <Text fontSize="sm" color="accent.solid" fontWeight={600} mb={1}>
-                      {relatedCaseStudy.industry} · {relatedCaseStudy.location}
+                      {relatedCaseStudy.industry}
                     </Text>
                     <Heading as="h3" fontSize={{ base: "20px", md: "24px" }} lineHeight={1.25}>
                       {relatedCaseStudy.hero?.title} {relatedCaseStudy.hero?.highlight}
@@ -269,6 +197,37 @@ export default function ServicePageBody({ serviceName }) {
           </Wrap>
         </Reveal>
 
+        {specialistSolutions.length > 0 && (
+          <Reveal delay={0.18}>
+            <Text mt={10} mb={4} fontSize="sm" fontWeight={600} letterSpacing="0.08em" textTransform="uppercase" color="text.faint">
+              Specialist solutions
+            </Text>
+            <Wrap spacing={3}>
+              {specialistSolutions.map((s) => (
+                <WrapItem key={s.slug}>
+                  <ChakraLink
+                    as={RouterLink}
+                    href={`/solutions/${s.slug}`}
+                    px={4}
+                    py={2.5}
+                    borderRadius="full"
+                    bg="bg.surface"
+                    border="1px solid"
+                    borderColor="border.subtle"
+                    fontSize={{ base: "sm", md: "md" }}
+                    color="text.primary"
+                    fontWeight={500}
+                    _hover={{ borderColor: "rgba(180,160,255,0.35)", textDecoration: "none" }}
+                    transition="border-color .2s"
+                  >
+                    {s.name}
+                  </ChakraLink>
+                </WrapItem>
+              ))}
+            </Wrap>
+          </Reveal>
+        )}
+
         {/* Markets.
             The service pages linked to the market pages only through the footer, so the
             Service -> Market half of the internal-link graph existed sitewide but not
@@ -285,12 +244,12 @@ export default function ServicePageBody({ serviceName }) {
           </Text>
           <Wrap spacing={3}>
             {[
-              { to: "/nz", label: "New Zealand — NZD quotes, Privacy Act 2020" },
-              { to: "/us", label: "United States — contracting and IP terms" },
-              { to: "/ca", label: "Canada — provincial privacy law" },
-              { to: "/au", label: "Australia — Consumer Data Right" },
-              { to: "/ae", label: "UAE — free zone, mainland and PDPL" },
-              { to: "/europe", label: "Europe — GDPR transfers and the EU AI Act" },
+              { to: "/us", label: "United States: contracting and IP terms" },
+              { to: "/ca", label: "Canada: provincial privacy law" },
+              { to: "/ae", label: "UAE: free zone, mainland and PDPL" },
+              { to: "/nz", label: "New Zealand: NZD quotes, Privacy Act 2020" },
+              { to: "/au", label: "Australia: Consumer Data Right" },
+              { to: "/europe", label: "Europe: GDPR transfers and the EU AI Act" },
             ].map((m) => (
               <WrapItem key={m.to}>
                 <ChakraLink

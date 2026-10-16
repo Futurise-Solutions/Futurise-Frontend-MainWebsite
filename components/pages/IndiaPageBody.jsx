@@ -1,4 +1,6 @@
 'use client'
+import regional from '../common/RegionalPages.module.css';
+import RegionalHero from '../common/RegionalHero';
 
 /**
  * /in page body.
@@ -33,22 +35,25 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { FiArrowRight, FiCheck, FiArrowUpRight } from "react-icons/fi";
-import { Reveal, Eyebrow, GlassCard, CTASection, MarketHero } from "@/components/common";
+import Reveal from "@/components/common/Reveal";
+import { Eyebrow } from "@/components/common/SectionHeading";
+import GlassCard from "@/components/common/GlassCard";
+import CTASection from "@/components/common/CTASection";
+import CountrySolutions from "@/components/common/CountrySolutions";
 import Faqs from "@/components/home/Faqs";
 import { useBooking } from "@/context/BookingContext";
 import { NavbarservicesOptions } from "@/utils/Constant";
-import { marketReach } from "@/assests";
 import {
-  inMeta, inPresence, inDelivery, inWork, inSectors, inStack, inFaqs,
+  inPresence, inDelivery, inWork, inSectors, inStack, inFaqs,
 } from "@/utils/Constant/india";
 
 export default function IndiaPageBody() {
   const { onOpen: openBooking } = useBooking();
 
   return (
-    <Box>
+    <Box className={regional.page}>
       {/* Hero */}
-      <MarketHero image={marketReach}>
+      <RegionalHero>
         <Reveal><Eyebrow>India</Eyebrow></Reveal>
         <Reveal delay={0.05}>
           <Heading as="h1" mt={5} fontSize={{ base: "38px", md: "56px" }} lineHeight={1.08} letterSpacing="-0.025em" maxW="920px">
@@ -58,7 +63,7 @@ export default function IndiaPageBody() {
         </Reveal>
         <Reveal delay={0.1}>
           <Text mt={6} color="text.muted" fontSize={{ base: "md", md: "xl" }} lineHeight={1.7} maxW="760px">
-            Custom software, AI and SaaS for businesses across India — built by our own
+            Custom software, AI and SaaS for businesses across India, built by our own
             engineering team in the country, quoted in rupees on fixed scope, and delivered
             inside your working day rather than across a twelve-hour gap.
           </Text>
@@ -73,14 +78,14 @@ export default function IndiaPageBody() {
             </Button>
           </HStack>
         </Reveal>
-      </MarketHero>
+      </RegionalHero>
 
       {/* SECTION 1 — presence. First, by design. */}
       <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
         <Reveal><Eyebrow>Where the team is</Eyebrow></Reveal>
         <Reveal delay={0.05}>
           <Heading as="h2" className="speakable-question" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="780px">
-            Not an offshore arrangement —{" "}
+            Not an offshore arrangement:{" "}
             <Box as="span" className="gradient-text">this is where we are</Box>
           </Heading>
         </Reveal>
@@ -201,7 +206,7 @@ export default function IndiaPageBody() {
           <Reveal delay={0.1}>
             <Text className="speakable-answer" color="text.muted" fontSize={{ base: "md", md: "lg" }} lineHeight={1.7} maxW="720px" mb={10}>
               Four shapes of work we are a good fit for. If your requirement is an
-              India-registered supplier for procurement reasons, we are not one — that is in
+              India-registered supplier for procurement reasons, we are not one. That is in
               the FAQ below rather than buried, because it is the first thing that would rule
               us out.
             </Text>
@@ -234,7 +239,7 @@ export default function IndiaPageBody() {
         </Reveal>
         <Reveal delay={0.1}>
           <Text className="speakable-answer" color="text.muted" fontSize={{ base: "md", md: "lg" }} lineHeight={1.7} maxW="720px" mb={10}>
-            The same stack as the rest of our work — we do not keep a cheaper toolchain for
+            The same stack as the rest of our work. We do not keep a cheaper toolchain for
             one market. Both published Indian sites are Next.js, one statically exported.
           </Text>
         </Reveal>
@@ -297,12 +302,14 @@ export default function IndiaPageBody() {
         </Flex>
       </Container>
 
+      <CountrySolutions market="in" />
+
       <Faqs
         items={inFaqs}
         eyebrow="India FAQ"
         title="Questions from"
         highlight="Indian buyers."
-        intro="The things Indian enquirers ask before the first call — including the ones that rule us out. If yours is not here, send it over."
+        intro="The things Indian enquirers ask before the first call, including the ones that rule us out. If yours is not here, send it over."
       />
 
       <CTASection

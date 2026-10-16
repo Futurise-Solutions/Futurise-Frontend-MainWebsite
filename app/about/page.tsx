@@ -10,7 +10,7 @@ const META_DESCRIPTION =
   'A Wellington-registered digital product studio founded in 2024, with an engineering team in Udaipur, India. Fixed-scope quotes and senior engineers.'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'About Futurise Solutions — NZ-Registered Dev Studio',
+  title: 'About Futurise Solutions: NZ-Registered Dev Studio',
   description: META_DESCRIPTION,
   path: '/about',
   image: '/about.png',

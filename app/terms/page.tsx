@@ -15,7 +15,7 @@ export const metadata: Metadata = buildMetadata({
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Terms & Conditions — Futurise Solutions',
+  name: 'Terms & Conditions: Futurise Solutions',
   url: 'https://www.futurisesolutions.com/terms',
   description:
     'Terms and Conditions governing use of Futurise Solutions website and engagement of services.',

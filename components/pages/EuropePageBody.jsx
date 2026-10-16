@@ -1,4 +1,6 @@
 'use client'
+import regional from '../common/RegionalPages.module.css';
+import RegionalHero from '../common/RegionalHero';
 
 /**
  * /europe page body — ported VERBATIM from EuropePage.jsx.
@@ -16,16 +18,19 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { FiArrowRight, FiCheck, FiAlertCircle, FiArrowUpRight } from "react-icons/fi";
-import { Reveal, Eyebrow, GlassCard, CTASection, MarketHero, VisualBand } from "@/components/common";
+import Reveal from "@/components/common/Reveal";
+import { Eyebrow } from "@/components/common/SectionHeading";
+import GlassCard from "@/components/common/GlassCard";
+import CTASection from "@/components/common/CTASection";
+import VisualBand from "@/components/common/VisualBand";
+import CountrySolutions from "@/components/common/CountrySolutions";
 import Faqs from "@/components/home/Faqs";
 import { useBooking } from "@/context/BookingContext";
-import { CONTACT, NavbarservicesOptions } from "@/utils/Constant";
-import { marketReach, precisionLayers } from "@/assests";
+import { NavbarservicesOptions } from "@/utils/Constant";
+import { precisionLayers } from "@/assests";
 import {
-  euMeta, euRegulatory, euPositioning, euWorkingModel, euSectors, euFaqs,
+  euRegulatory, euPositioning, euWorkingModel, euSectors, euFaqs,
 } from "@/utils/Constant/europe";
-
-const SITE_URL = "https://www.futurisesolutions.com";
 
 /**
  * /europe — the Europe market page.
@@ -58,8 +63,8 @@ const SITE_URL = "https://www.futurisesolutions.com";
 export default function EuropePageBody() {
   const { onOpen: openBooking } = useBooking();
   return (
-    <Box>
-      <MarketHero image={marketReach}>
+    <Box className={regional.page}>
+      <RegionalHero>
         <Reveal><Eyebrow>Europe</Eyebrow></Reveal>
         <Reveal delay={0.05}>
           <Heading as="h1" mt={5} fontSize={{ base: "38px", md: "56px" }} lineHeight={1.08} letterSpacing="-0.025em" maxW="940px">
@@ -71,7 +76,7 @@ export default function EuropePageBody() {
           <Text mt={6} color="text.muted" fontSize={{ base: "md", md: "xl" }} lineHeight={1.7} maxW="780px">
             Engaging a supplier outside the EEA is a data-protection decision before it is a
             procurement one. We publish the transfer mechanism we rely on, where your data
-            will physically live, and which EU AI Act obligations reach what you are building —
+            will physically live, and which EU AI Act obligations reach what you are building,
             before you ask for any of it.
           </Text>
         </Reveal>
@@ -85,7 +90,7 @@ export default function EuropePageBody() {
             </Button>
           </HStack>
         </Reveal>
-      </MarketHero>
+      </RegionalHero>
 
       {/* Regulatory spine — first, because for a non-EEA supplier this is the gate that
           decides whether the conversation can happen at all. */}
@@ -171,7 +176,7 @@ export default function EuropePageBody() {
         eyebrow="How we work"
         title="Decided in week one,"
         highlight="not retrofitted"
-        subtitle="Where data lives, what is logged, and which risk tier an AI feature falls into — settled before the architecture is set."
+        subtitle="Where data lives, what is logged, and which risk tier an AI feature falls into. All settled before the architecture is set."
         height={{ base: "260px", md: "340px", lg: "390px" }}
         focal="center"
       />
@@ -320,12 +325,14 @@ export default function EuropePageBody() {
       {/* Faqs renders the accordion only — it emits no structured data of its own, so the
           FAQPage node in this page's jsonLd above is the single source and there is no
           duplicate-schema risk. */}
+      <CountrySolutions market="eu" />
+
       <Faqs
         items={euFaqs}
         eyebrow="Europe FAQ"
         title="Questions from"
         highlight="European buyers."
-        intro="What European enquirers ask before a first call — including the one whose honest answer sends them to a different supplier."
+        intro="What European enquirers ask before a first call, including the one whose honest answer sends them to a different supplier."
       />
 
       <CTASection

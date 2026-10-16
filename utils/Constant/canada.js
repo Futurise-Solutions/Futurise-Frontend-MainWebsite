@@ -54,7 +54,7 @@ export const caMeta = {
   // Under 160 characters so Google renders it whole. Free of invoicing and response-time
   // claims, neither of which is confirmed.
   description:
-    "Custom software, AI and SaaS development for Canadian businesses — built for Quebec's Law 25 and Bill 96, AODA accessibility, CASL and the 2026 banking rules.",
+    "Custom software, AI and SaaS development for Canadian businesses, built for Quebec's Law 25 and Bill 96, AODA accessibility, CASL and the 2026 banking rules.",
   keywords:
     "software development company Canada, custom software development Canada, AI development company Canada, SaaS development company Canada, web development company Canada, mobile app development company Canada, AODA compliant software development, Quebec Law 25 software",
 };
@@ -81,12 +81,12 @@ export const caInterface = [
   {
     title: "An automated decision needs a route to a human",
     detail:
-      "Section 12.1 of Quebec's Law 25 has applied since 22 September 2023. Where a decision is based exclusively on automated processing of personal information, the person has to be told at the time of the decision, given the principal factors and parameters behind it, and offered the opportunity to submit observations to someone who is in a position to review it. That last part is a screen, a queue and a role — not a paragraph in a privacy policy. It is also self-limiting in a useful way: where the human review is genuine, the decision stops being exclusively automated.",
+      "Section 12.1 of Quebec's Law 25 has applied since 22 September 2023. Where a decision is based exclusively on automated processing of personal information, the person has to be told at the time of the decision, given the principal factors and parameters behind it, and offered the opportunity to submit observations to someone who is in a position to review it. That last part is a screen, a queue and a role, not a paragraph in a privacy policy. It is also self-limiting in a useful way: where the human review is genuine, the decision stops being exclusively automated.",
   },
   {
     title: "Messaging carries its own consent regime",
     detail:
-      "Canada's Anti-Spam Legislation governs commercial electronic messages on a consent basis rather than an opt-out one, and its mechanics are specific enough to be build requirements. An unsubscribe request has to be honoured within ten business days, and the unsubscribe mechanism has to stay valid for at least sixty days after the message was sent. Systems that record a marketing preference but not the evidence behind it — what was consented to, when, and by which route — cannot answer the only question that matters if the consent is ever challenged.",
+      "Canada's Anti-Spam Legislation governs commercial electronic messages on a consent basis rather than an opt-out one, and its mechanics are specific enough to be build requirements. An unsubscribe request has to be honoured within ten business days, and the unsubscribe mechanism has to stay valid for at least sixty days after the message was sent. Systems that record a marketing preference but not the evidence behind it (what was consented to, when, and by which route) cannot answer the only question that matters if the consent is ever challenged.",
   },
 ];
 
@@ -105,7 +105,7 @@ export const caQuebec = [
   {
     title: "Where our part ends, and where it does not",
     detail:
-      "We build the mechanism: the internationalisation layer, the locale routing, the parity checks that stop one language quietly falling behind the other, and the tests that catch it when it does. We do not write French copy and we do not provide translation — that is a separate specialism, it needs to be Quebec French rather than French generally, and you should source it from someone who does it properly. Saying so costs us nothing and saves a conversation later, because a supplier who implies otherwise is telling you something about how they scope.",
+      "We build the mechanism: the internationalisation layer, the locale routing, the parity checks that stop one language quietly falling behind the other, and the tests that catch it when it does. We do not write French copy and we do not provide translation. That is a separate specialism: it needs to be Quebec French rather than French generally, and you should source it from someone who does it properly. Saying so costs us nothing and saves a conversation later, because a supplier who implies otherwise is telling you something about how they scope.",
   },
   {
     title: "Portability has a format requirement attached",
@@ -123,7 +123,7 @@ export const caChanges2026 = [
   {
     title: "Screen scraping is on its way out",
     detail:
-      "Bill C-15, the Budget 2025 Implementation Act, No. 1, received royal assent on 26 March 2026 and replaced the earlier Consumer-Driven Banking Act with a fuller framework. Two parts of it reach software directly. Financial data sharing moves onto accredited interfaces, and screen scraping — collecting a customer's data by logging in with their credentials — becomes an offence rather than a tolerated workaround. Any product still acquiring bank data that way has a migration ahead of it, and the sequencing of that migration is a product decision as much as a technical one.",
+      "Bill C-15, the Budget 2025 Implementation Act, No. 1, received royal assent on 26 March 2026 and replaced the earlier Consumer-Driven Banking Act with a fuller framework. Two parts of it reach software directly. Financial data sharing moves onto accredited interfaces, and screen scraping (collecting a customer's data by logging in with their credentials) becomes an offence rather than a tolerated workaround. Any product still acquiring bank data that way has a migration ahead of it, and the sequencing of that migration is a product decision as much as a technical one.",
   },
   {
     title: "The regulator changed, which changes who you answer to",
@@ -156,7 +156,7 @@ export const caSupervision = [
   {
     title: "Technology risk has a named guideline behind it",
     detail:
-      "Guideline B-13 on technology and cyber risk management took effect on 1 January 2024 and sets expectations for how federally regulated institutions govern technology, manage change, and run operations. A supplier does not comply with B-13 — the institution does. But the expectations flow down through the arrangement, which is why questions about environment separation, change control, access review and incident handling arrive on projects that seemed, at the proposal stage, to be a straightforward build.",
+      "Guideline B-13 on technology and cyber risk management took effect on 1 January 2024 and sets expectations for how federally regulated institutions govern technology, manage change, and run operations. A supplier does not comply with B-13. The institution does. But the expectations flow down through the arrangement, which is why questions about environment separation, change control, access review and incident handling arrive on projects that seemed, at the proposal stage, to be a straightforward build.",
   },
   {
     title: "Handling payments is now a registration, not a feature",
@@ -166,7 +166,7 @@ export const caSupervision = [
   {
     title: "Safeguarding and reporting are build requirements",
     detail:
-      "Registered providers have to document a framework for managing operational risk and responding to incidents, and where they hold end-user funds those funds have to be safeguarded — held in a segregated trust account, or covered by insurance or a guarantee from an unaffiliated financial institution, in an amount that keeps pace with what is actually held. There is an annual report attached; the first fell due on 31 March 2026. Systems that commingle balances, or that cannot show the coverage position on a given date, make that reporting considerably harder than it needs to be.",
+      "Registered providers have to document a framework for managing operational risk and responding to incidents, and where they hold end-user funds those funds have to be safeguarded: held in a segregated trust account, or covered by insurance or a guarantee from an unaffiliated financial institution, in an amount that keeps pace with what is actually held. There is an annual report attached; the first fell due on 31 March 2026. Systems that commingle balances, or that cannot show the coverage position on a given date, make that reporting considerably harder than it needs to be.",
   },
 ];
 
@@ -190,7 +190,7 @@ export const caSred = [
   {
     title: "Where it still does not decide anything",
     detail:
-      "The credit only reaches work that qualifies as SR&ED in the first place — systematic investigation directed at resolving a technological uncertainty. A great deal of valuable software is not that. Building a well-understood integration, a reporting layer, a customer portal or a second version of something that already works is ordinary engineering, and no supplier's location changes its treatment. Establishing early which parts of a roadmap could plausibly qualify is worth more than assuming the whole project does, because the assumption is usually generous.",
+      "The credit only reaches work that qualifies as SR&ED in the first place: systematic investigation directed at resolving a technological uncertainty. A great deal of valuable software is not that. Building a well-understood integration, a reporting layer, a customer portal or a second version of something that already works is ordinary engineering, and no supplier's location changes its treatment. Establishing early which parts of a roadmap could plausibly qualify is worth more than assuming the whole project does, because the assumption is usually generous.",
   },
 ];
 
@@ -205,7 +205,7 @@ export const caSectors = [
   {
     sector: "Products with Quebec users",
     detail:
-      "Defined by jurisdiction rather than by industry, because the obligations follow the user. A product with a meaningful Quebec user base inherits language parity, the automated-decision route to a human, and a portability right with a format requirement — regardless of whether it is a marketplace, a scheduling tool or an internal platform. The engineering consequence is that the locale layer, the consent record and the export path stop being separate features and start being one design problem.",
+      "Defined by jurisdiction rather than by industry, because the obligations follow the user. A product with a meaningful Quebec user base inherits language parity, the automated-decision route to a human, and a portability right with a format requirement, regardless of whether it is a marketplace, a scheduling tool or an internal platform. The engineering consequence is that the locale layer, the consent record and the export path stop being separate features and start being one design problem.",
   },
   {
     sector: "Payments and money movement",
@@ -215,12 +215,12 @@ export const caSectors = [
   {
     sector: "Suppliers to regulated institutions",
     detail:
-      "Software companies whose customers are banks, insurers or their service providers, where the buyer's own supervision reaches through the contract. These builds are judged on what can be evidenced rather than on what works — environment separation, change control, access review, incident handling — and the questions usually arrive after the deal, from a risk team who were not in the sales conversation. Building the evidence trail from the first sprint is the difference between answering a questionnaire and reconstructing a year of decisions.",
+      "Software companies whose customers are banks, insurers or their service providers, where the buyer's own supervision reaches through the contract. These builds are judged on what can be evidenced rather than on what works: environment separation, change control, access review, incident handling. The questions usually arrive after the deal, from a risk team who were not in the sales conversation. Building the evidence trail from the first sprint is the difference between answering a questionnaire and reconstructing a year of decisions.",
   },
   {
     sector: "Public-facing services under accessibility duties",
     detail:
-      "Organisations whose web content is covered by AODA or the Accessible Canada Act, which is a far wider group than the public sector alone. The engineering reality is that conformance is decided by component behaviour rather than by a remediation pass — focus management, keyboard paths, name and role on custom controls, and error handling that a screen reader can actually follow. Retrofitting those into a finished interface routinely costs more than building them, and the compliance report has a date on it either way.",
+      "Organisations whose web content is covered by AODA or the Accessible Canada Act, which is a far wider group than the public sector alone. The engineering reality is that conformance is decided by component behaviour rather than by a remediation pass: focus management, keyboard paths, name and role on custom controls, and error handling that a screen reader can actually follow. Retrofitting those into a finished interface routinely costs more than building them, and the compliance report has a date on it either way.",
   },
 ];
 
@@ -304,11 +304,11 @@ export const caCostModel = [
 export const caResources = [
   {
     title: "Building a Custom AI Agent: ROI and Tech Stack Guide",
-    blurb: "Written for North American teams — how to size the return case before committing budget, and which architecture choices decide it.",
+    blurb: "Written for North American teams: how to size the return case before committing budget, and which architecture choices decide it.",
     to: "/blog/how-to-build-a-custom-ai-agent-for-your-business-the-complete-2026-roi-and-tech-stack-guide-for-us-and-canadian-startups",
   },
   {
-    title: "AI Agent Development Cost 2026 — Global Price Comparison",
+    title: "AI Agent Development Cost 2026: Global Price Comparison",
     blurb: "What the same agent build costs market by market, which is the comparison worth having before you shortlist anyone.",
     to: "/blog/ai-agent-development-cost-2026-a-global-price-comparison-for-custom-ai-solutions",
   },
@@ -340,12 +340,12 @@ export const caFaqs = [
   {
     question: "Does our product need a French version?",
     answer:
-      "If you are selling to consumers or business clients in Quebec, assume yes. The Charter of the French Language treats commercial websites and software as material Quebec customers are entitled to receive in French, and the standard is parity rather than presence — the French version has to match in content, presentation and functionality. Since 1 June 2025 the prominence rules also mean no other language may be given greater visual weight. The practical question is not whether to translate but whether the product is built so that it can be.",
+      "If you are selling to consumers or business clients in Quebec, assume yes. The Charter of the French Language treats commercial websites and software as material Quebec customers are entitled to receive in French, and the standard is parity rather than presence: the French version has to match in content, presentation and functionality. Since 1 June 2025 the prominence rules also mean no other language may be given greater visual weight. The practical question is not whether to translate but whether the product is built so that it can be.",
   },
   {
     question: "Do you provide the French translation?",
     answer:
-      "No. We build the mechanism — the internationalisation layer, locale routing, formatting, and the parity checks that stop one language falling behind the other — and we leave the language itself to people who do it properly. It needs to be Quebec French rather than French generally, and that is a separate specialism. We would rather tell you that now than imply a capability we do not have and hand you a problem at launch.",
+      "No. We build the mechanism: the internationalisation layer, locale routing, formatting, and the parity checks that stop one language falling behind the other. We leave the language itself to people who do it properly. It needs to be Quebec French rather than French generally, and that is a separate specialism. We would rather tell you that now than imply a capability we do not have and hand you a problem at launch.",
   },
   {
     question: "What accessibility standard do we have to meet?",
@@ -360,7 +360,7 @@ export const caFaqs = [
   {
     question: "What actually changed in Canadian privacy law in 2026?",
     answer:
-      "Bill C-15 received royal assent on 26 March 2026 and amended PIPEDA to add the first federal data-mobility right, requiring disclosure of an individual's personal information to another designated organisation on request. It is not in force. It commences on a day fixed by order of the Governor in Council and operates only once regulations establish a data-mobility framework for the sector. Separately, Bill C-27 — which would have replaced PIPEDA entirely and introduced an AI statute — died on the Order Paper in January 2025, so PIPEDA remains the operative federal law.",
+      "Bill C-15 received royal assent on 26 March 2026 and amended PIPEDA to add the first federal data-mobility right, requiring disclosure of an individual's personal information to another designated organisation on request. It is not in force. It commences on a day fixed by order of the Governor in Council and operates only once regulations establish a data-mobility framework for the sector. Separately, Bill C-27, which would have replaced PIPEDA entirely and introduced an AI statute, died on the Order Paper in January 2025, so PIPEDA remains the operative federal law.",
   },
   {
     question: "Does the open banking framework affect what we build?",
@@ -375,7 +375,7 @@ export const caFaqs = [
   {
     question: "Why did our bank client send us a security questionnaire?",
     answer:
-      "Almost certainly because of OSFI's Guideline B-10 on third-party risk management, effective 1 May 2024, under which a federally regulated financial institution remains accountable for risk arising from its third-party arrangements. Guideline B-13 on technology and cyber risk, effective 1 January 2024, shapes what it asks about. You do not comply with either — the institution does — but the expectations reach you through the contract. Systems built to produce evidence answer these in days; systems that were not take weeks and a lot of reconstruction.",
+      "Almost certainly because of OSFI's Guideline B-10 on third-party risk management, effective 1 May 2024, under which a federally regulated financial institution remains accountable for risk arising from its third-party arrangements. Guideline B-13 on technology and cyber risk, effective 1 January 2024, shapes what it asks about. You do not comply with either. The institution does, but the expectations reach you through the contract. Systems built to produce evidence answer these in days; systems that were not take weeks and a lot of reconstruction.",
   },
   {
     question: "Can we claim SR&ED on the work you do?",
@@ -385,6 +385,6 @@ export const caFaqs = [
   {
     question: "Are you a Canadian company?",
     answer:
-      "No. Futurise Solutions is registered in Wellington, New Zealand, with a distributed engineering team, and you should have that fact before anything else rather than after a proposal. Our published portfolio names engagements in the UAE, the United States and India; client confidentiality decides what we are free to attribute, so it shows what we can name rather than the full record. What the structure buys is engineering depth available when a project needs it instead of a fixed local roster. What it does not buy is a Canadian contracting entity, French-language delivery, or eligibility for your research credit — and where any of those decides the engagement, a Canadian supplier is the right answer and we will say so.",
+      "No. Futurise Solutions is registered in Wellington, New Zealand, with a distributed engineering team, and you should have that fact before anything else rather than after a proposal. Our published portfolio names engagements in the UAE, the United States and India; client confidentiality decides what we are free to attribute, so it shows what we can name rather than the full record. What the structure buys is engineering depth available when a project needs it instead of a fixed local roster. What it does not buy is a Canadian contracting entity, French-language delivery, or eligibility for your research credit. Where any of those decides the engagement, a Canadian supplier is the right answer and we will say so.",
   },
 ];

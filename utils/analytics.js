@@ -98,10 +98,3 @@ export function trackEvent(name, props = {}) {
     /* same */
   }
 }
-
-/**
- * Convenience wrapper for elements that are already real anchors (`<a href>`). The link
- * navigates on its own; this only records that it happened, so the handler must stay
- * side-effect free and must not preventDefault.
- */
-export const trackClick = (name, props) => () => trackEvent(name, props);

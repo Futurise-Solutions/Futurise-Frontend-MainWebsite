@@ -16,23 +16,30 @@ const CHAT_ENDPOINT = "/api/chat";
  *   { source: "quota_exceeded" }   → caller runs the keyword fallback
  *   { source: "error", message }   → caller runs the keyword fallback
  *
- * Network failure (server down, CORS, etc.) throws — the caller treats a thrown
+ * Network failure (server down, CORS, abort, etc.) throws — the caller treats a thrown
  * error the same as "quota_exceeded": fall back to keyword matching.
  *
  * @param {string} question
  * @param {Array<{role: "user"|"assistant", content: string}>} history
+ * @param {{ signal?: AbortSignal }} [options] abort to cancel the request (timeout / unmount)
  */
-export async function sendChatMessage(question, history = []) {
+export async function sendChatMessage(question, history = [], { signal } = {}) {
   const res = await fetch(CHAT_ENDPOINT, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ question, history }),
+    signal,
   });
 
   // The backend returns a `source` field even on handled errors, so we parse the
   // body regardless of status instead of throwing on non-2xx.
   const text = await res.text();
-  const data = text ? JSON.parse(text) : {};
+  let data;
+  try {
+    data = text ? JSON.parse(text) : {};
+  } catch {
+    return { source: "error", message: `Unreadable response (${res.status})` };
+  }
 
   if (!data.source) {
     // Unexpected shape → behave like an error so the caller falls back.

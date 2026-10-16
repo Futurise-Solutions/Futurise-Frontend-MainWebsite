@@ -13,9 +13,9 @@ import { Projects } from '@/utils/Constant'
  * buildMetadata reproduces that rule. Do not add the brand by hand.
  */
 export const metadata: Metadata = buildMetadata({
-  title: 'Portfolio — AI, SaaS & Web Projects',
+  title: 'Portfolio: AI, SaaS & Web Projects',
   description:
-    'Real client work: Infinity Bay Trading, Dhanlaxmi Property, Palm Vision Technology and more — SaaS dashboards, AI platforms and real-estate builds we shipped.',
+    'Real client work: Infinity Bay Trading, Dhanlaxmi Property, Palm Vision Technology and more: SaaS dashboards, AI platforms and real-estate builds we shipped.',
   path: '/portfolio',
   image: '/portfolio.png',
   keywords:
@@ -44,32 +44,32 @@ const jsonLd = {
   hasPart: [
     {
       '@type': 'CreativeWork',
-      name: 'HOMIES — Property Management SaaS',
+      name: 'HOMIES: Property Management SaaS',
       description: 'Unified SaaS dashboard for real-estate portfolio analytics.',
     },
     {
       '@type': 'CreativeWork',
-      name: 'Marty-QR — AI Review Platform',
+      name: 'Marty-QR: AI Review Platform',
       description: 'AI-powered review management platform for local businesses.',
     },
     {
       '@type': 'CreativeWork',
-      name: 'David Tishbi — Luxury E-commerce',
+      name: 'David Tishbi: Luxury E-commerce',
       description: 'Bespoke luxury jewelry storefront with appointment booking.',
     },
     {
       '@type': 'CreativeWork',
-      name: 'Estate — Property Listings Platform',
+      name: 'Estate: Property Listings Platform',
       description: 'SEO-optimized real-estate search and listings platform.',
     },
     {
       '@type': 'CreativeWork',
-      name: 'GDT — Crypto Trading Terminal',
+      name: 'GDT: Crypto Trading Terminal',
       description: 'Professional perpetuals trading terminal with live charts.',
     },
     {
       '@type': 'CreativeWork',
-      name: 'Platinum Peak — Hotel Booking',
+      name: 'Platinum Peak: Hotel Booking',
       description: 'Immersive direct hotel booking experience.',
     },
   ],
@@ -90,7 +90,7 @@ const jsonLd = {
 const itemList = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'Futurise Solutions — published client work',
+  name: 'Futurise Solutions: published client work',
   numberOfItems: Projects.length,
   itemListElement: Projects.map(
     (p: { Heading: string; aboutProject?: string; location?: string }, i: number) => ({

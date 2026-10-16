@@ -23,6 +23,9 @@ import Script from 'next/script'
 const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-5FKB0BL3MQ'
 const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID || 'ycomehde8x'
 
+/* Vercel previews, `next start` and Lighthouse runs are production builds too; only this host reports. */
+const PRODUCTION_HOST = 'www.futurisesolutions.com'
+
 export default function Analytics() {
   /* ⚠️ PRODUCTION ONLY — this gate is ported from src/utils/clarity.js and its reasoning
      applies to both tags now:
@@ -36,21 +39,23 @@ export default function Analytics() {
   return (
     <>
       {GA_ID && (
-        <>
-          <Script
-            src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-            strategy="afterInteractive"
-          />
-          {/* Ported verbatim from index.html's inline block. */}
-          <Script id="ga4-init" strategy="afterInteractive">
-            {`
+        /* One inline script instead of a <Script src>: the hostname check has to run before
+           gtag.js is requested, so the loader element is injected from inside the check.
+           The init block is ported from index.html's inline block. */
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            if (window.location.hostname === '${PRODUCTION_HOST}') {
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
               gtag('config', '${GA_ID}');
-            `}
-          </Script>
-        </>
+              var s = document.createElement('script');
+              s.async = true;
+              s.src = 'https://www.googletagmanager.com/gtag/js?id=${GA_ID}';
+              document.head.appendChild(s);
+            }
+          `}
+        </Script>
       )}
 
       {CLARITY_ID && (
@@ -66,11 +71,13 @@ export default function Analytics() {
            own handler, not from here. */
         <Script id="ms-clarity" strategy="lazyOnload">
           {`
-            (function(c,l,a,r,i,t,y){
-              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-            })(window, document, "clarity", "script", "${CLARITY_ID}");
+            if (window.location.hostname === '${PRODUCTION_HOST}') {
+              (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              })(window, document, "clarity", "script", "${CLARITY_ID}");
+            }
           `}
         </Script>
       )}

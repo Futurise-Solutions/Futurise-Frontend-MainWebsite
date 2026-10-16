@@ -16,9 +16,9 @@
  */
 
 export const pricingMeta = {
-  title: "How We Price Projects — Costs, Scope & Engagement",
+  title: "How We Price Projects: Costs, Scope & Engagement",
   description:
-    "What actually drives software project cost: scope, complexity, integrations and timeline — and how our engagement models, estimates and sprints work.",
+    "What actually drives software project cost: scope, complexity, integrations and timeline. How our engagement models, estimates and sprints work is covered too.",
   keywords:
     "software development pricing, project cost factors, fixed scope vs time and materials, software engagement models, development project timeline, software project ROI",
 };
@@ -48,7 +48,7 @@ export const costFactors = [
   {
     factor: "Design maturity",
     detail:
-      "An existing design system with defined components is the cheapest starting point. A rough idea needs research, wireframes and iteration first. Neither is wrong — but they are different projects, and treating them as the same is how quotes get revised.",
+      "An existing design system with defined components is the cheapest starting point. A rough idea needs research, wireframes and iteration first. Neither is wrong, but they are different projects, and treating them as the same is how quotes get revised.",
   },
   {
     factor: "Expected scale and reliability",
@@ -58,7 +58,7 @@ export const costFactors = [
   {
     factor: "Timeline pressure",
     detail:
-      "Compressing a schedule means more people working in parallel, which costs more per unit of output, not less. A hard external deadline is a legitimate reason to do it — we will tell you plainly when it is not worth the premium.",
+      "Compressing a schedule means more people working in parallel, which costs more per unit of output, not less. A hard external deadline is a legitimate reason to do it. We will tell you plainly when it is not worth the premium.",
   },
   {
     factor: "What happens after launch",
@@ -78,7 +78,7 @@ export const complexityTiers = [
       "You need to validate demand, test feasibility, or show something concrete to a stakeholder or investor.",
   },
   {
-    tier: "MVP — first production release",
+    tier: "MVP: first production release",
     goal: "Put a real product in front of real users and learn from it.",
     looksLike:
       "The smallest coherent product a customer would genuinely pay for: core workflows, authentication, payments if needed, production infrastructure and monitoring. Deliberately narrow, deliberately real.",
@@ -109,7 +109,7 @@ export const engagementModels = [
     model: "Fixed-scope project",
     how: "We define the scope precisely, then quote a fixed price and timeline against it. Changes go through a written change request so the number never moves quietly.",
     goodFor:
-      "Well-understood projects with a clear finish line — a website, a defined MVP, a specific integration.",
+      "Well-understood projects with a clear finish line: a website, a defined MVP, a specific integration.",
     tradeoff:
       "Requires real discovery before we can quote, and rewards clear thinking up front. It is the wrong model when the requirements are genuinely still unknown, because pricing uncertainty means pricing risk into the number.",
   },
@@ -127,7 +127,7 @@ export const engagementModels = [
     goodFor:
       "Large or ambiguous projects where an accurate estimate is impossible without real investigation.",
     tradeoff:
-      "An extra step before build starts — but far cheaper than discovering the same unknowns halfway through a fixed-price build.",
+      "An extra step before build starts, but far cheaper than discovering the same unknowns halfway through a fixed-price build.",
   },
   {
     model: "Support and maintenance",
@@ -192,7 +192,7 @@ export const roiFramework = [
   {
     question: "How quickly do you need payback?",
     guidance:
-      "A twelve-month payback expectation argues for a narrow, focused MVP. A three-year horizon justifies building for scale from the start. Both are valid — but they produce genuinely different projects, so it is worth deciding deliberately.",
+      "A twelve-month payback expectation argues for a narrow, focused MVP. A three-year horizon justifies building for scale from the start. Both are valid, but they produce genuinely different projects, so it is worth deciding deliberately.",
   },
 ];
 
@@ -207,7 +207,7 @@ export const pricingFaqs = [
   {
     question: "Why don't you publish fixed prices?",
     answer:
-      "Because a published figure would be wrong for almost everyone who read it. The same feature can differ severalfold in cost depending on the systems it must integrate with, the state of your data and the compliance obligations you carry. Quoting a number before understanding those factors produces estimates that get revised — which is exactly what clients dislike most.",
+      "Because a published figure would be wrong for almost everyone who read it. The same feature can differ severalfold in cost depending on the systems it must integrate with, the state of your data and the compliance obligations you carry. Quoting a number before understanding those factors produces estimates that get revised, which is exactly what clients dislike most.",
   },
   {
     question: "Do you charge fixed-price or hourly?",

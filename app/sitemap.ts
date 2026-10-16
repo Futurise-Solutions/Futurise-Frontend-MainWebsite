@@ -1,7 +1,10 @@
 import type { MetadataRoute } from 'next'
-import { getBlogs } from '@/lib/blog'
+import { getCachedBlogSummaries } from '@/lib/blogSummaries'
+import { RETIRED_BLOG_REDIRECTS } from '@/content/blogRedirects'
 import { caseStudies } from '@/utils/Constant/caseStudies'
 import { services } from '@/utils/Constant'
+import { solutions } from '@/utils/Constant/solutions'
+import { variantList } from '@/utils/Constant/solutionMarkets'
 
 /**
  * Dynamic sitemap: the 27 static routes plus every published blog slug.
@@ -23,6 +26,7 @@ const STATIC_ROUTES: Array<{ path: string; priority: number; changeFrequency: Me
   { path: '/portfolio', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/pricing', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/case-studies', priority: 0.8, changeFrequency: 'monthly' },
+  { path: '/solutions', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/blog', priority: 0.9, changeFrequency: 'daily' },
   // Market pages.
   { path: '/nz', priority: 0.9, changeFrequency: 'monthly' },
@@ -61,14 +65,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }))
 
-  // Published only — getBlogs() already filters status === 'published'.
-  const blogs = await getBlogs(revalidate)
-  const blogEntries: MetadataRoute.Sitemap = blogs.map((b) => ({
-    url: `${SITE}/blog/${b.slug}`,
-    lastModified: new Date(b.updatedAt || b.createdAt),
+  const solutionEntries: MetadataRoute.Sitemap = Object.keys(solutions).map((slug) => ({
+    url: `${SITE}/solutions/${slug}`,
+    lastModified: now,
     changeFrequency: 'monthly',
-    priority: 0.7,
+    priority: 0.8,
   }))
 
-  return [...staticEntries, ...serviceEntries, ...caseStudyEntries, ...blogEntries]
+  const variantEntries: MetadataRoute.Sitemap = variantList.map(({ slug, market }) => ({
+    url: `${SITE}/solutions/${slug}/${market}`,
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.8,
+  }))
+
+  // Published only — getBlogs() already filters status === 'published'. Retired slugs are
+  // skipped too, so they stay out of the sitemap until the CMS marks them as drafts.
+  const blogs = await getCachedBlogSummaries(revalidate)
+  const blogEntries: MetadataRoute.Sitemap = blogs
+    .filter((b) => !(b.slug in RETIRED_BLOG_REDIRECTS))
+    .map((b) => ({
+      url: `${SITE}/blog/${b.slug}`,
+      lastModified: new Date(b.updatedAt || b.createdAt),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    }))
+
+  return [...staticEntries, ...serviceEntries, ...caseStudyEntries, ...solutionEntries, ...variantEntries, ...blogEntries]
 }

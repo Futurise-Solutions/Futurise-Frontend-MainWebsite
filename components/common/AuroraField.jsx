@@ -2,6 +2,7 @@
 
 import { Box } from "@chakra-ui/react";
 import { useReducedMotion } from "framer-motion";
+import useMotionVisibility from './useMotionVisibility';
 
 /**
  * Slow-moving atmospheric backdrop for a full section.
@@ -32,6 +33,7 @@ const LEVELS = {
 
 const AuroraField = ({ intensity = "base", ...rest }) => {
   const reduce = useReducedMotion();
+  const motionRef = useMotionVisibility();
   const k = LEVELS[intensity] ?? LEVELS.base;
 
   const wash = (color, alpha) =>
@@ -39,6 +41,7 @@ const AuroraField = ({ intensity = "base", ...rest }) => {
 
   return (
     <Box
+      ref={motionRef}
       aria-hidden="true"
       position="absolute"
       inset={0}
@@ -46,6 +49,7 @@ const AuroraField = ({ intensity = "base", ...rest }) => {
       pointerEvents="none"
       zIndex={0}
       sx={{
+        '& > div': { animationPlayState: 'var(--motion-state, paused)' },
         "@keyframes afDriftA": {
           "0%,100%": { transform: "translate3d(0,0,0) scale(1)" },
           "50%": { transform: "translate3d(6%, 4%, 0) scale(1.14)" },

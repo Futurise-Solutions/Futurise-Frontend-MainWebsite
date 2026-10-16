@@ -82,5 +82,3 @@ export const COUNTRY_ALTERNATES = [
   ...COUNTRIES.map(({ hrefLang, path }) => ({ hrefLang, path })),
 ];
 
-/** Route slugs, consumed by prerender.js to build and prioritise the static routes. */
-export const COUNTRY_SLUGS = COUNTRIES.map((c) => c.code);

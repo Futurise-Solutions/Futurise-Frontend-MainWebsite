@@ -5,7 +5,7 @@
  *
  * ── THE EVIDENCE FORK: DO NOT "FIX" IT ───────────────────────────────────────
  *
- * Do NOT import `clientProof` or `testimonials` from Constant/index.js into this file.
+ * Do NOT import `clientProof` or `testimonials` from utils/clientsReviewsData.js into this file.
  *
  * The evidence section below is a deliberate prose fork of the Infinity Bay record, not a
  * re-render of it. Importing and rendering those constants would reproduce homepage text
@@ -60,7 +60,7 @@ export const aeMeta = {
   // Under 160 characters so Google renders it whole. Free of invoicing and response-time
   // claims, neither of which is confirmed.
   description:
-    "Custom software, AI and SaaS development for UAE businesses — built for DIFC and ADGM data rules, Arabic RTL interfaces and the 2026 e-invoicing mandate.",
+    "Custom software, AI and SaaS development for UAE businesses, built for DIFC and ADGM data rules, Arabic RTL interfaces and the 2026 e-invoicing mandate.",
   keywords:
     "software development company UAE, custom software development UAE, AI development company UAE, SaaS development UAE, web development UAE, mobile app development UAE, software development company Dubai, Arabic RTL application development",
 };
@@ -106,7 +106,7 @@ export const aeJurisdictions = [
   {
     title: "The federal law, stated carefully",
     detail:
-      "Federal Decree-Law No. 45 of 2021 has been in force since 2 January 2022 and governs personal data processing outside those free-zone regimes. We are deliberately not telling you what its implementing regulations require, because published sources disagree about whether they have been issued at all — a reputable practice guide says they have not, while several vendors cite a 2024 cabinet decision. Take that detail from counsel rather than from a development agency, including this one.",
+      "Federal Decree-Law No. 45 of 2021 has been in force since 2 January 2022 and governs personal data processing outside those free-zone regimes. We are deliberately not telling you what its implementing regulations require, because published sources disagree about whether they have been issued at all. A reputable practice guide says they have not, while several vendors cite a 2024 cabinet decision. Take that detail from counsel rather than from a development agency, including this one.",
   },
   {
     title: "DIFC reaches AI systems directly",
@@ -131,12 +131,12 @@ export const aeInvoicing = [
   {
     title: "A format and a network, not a PDF",
     detail:
-      "Invoices have to be issued as structured XML against the PINT AE schema and passed through an Accredited Service Provider — a Peppol-certified operator approved by the Ministry of Finance. That is materially different from rendering a document and emailing it. The data has to be complete and correctly typed at the moment of issue, because a schema either validates or it does not, and fields that were optional or free text in your system stop being either.",
+      "Invoices have to be issued as structured XML against the PINT AE schema and passed through an Accredited Service Provider: a Peppol-certified operator approved by the Ministry of Finance. That is materially different from rendering a document and emailing it. The data has to be complete and correctly typed at the moment of issue, because a schema either validates or it does not, and fields that were optional or free text in your system stop being either.",
   },
   {
     title: "Retrofitting is the expensive path",
     detail:
-      "Most billing systems can eventually produce a compliant document. The costly discovery is that the underlying records cannot populate one — an identifier never captured, a tax treatment inferred at render time rather than stored, or line items that exist only inside a template. Working out what the schema needs while the data model is still open is a short conversation. Doing it against a live ledger is a migration with an external deadline attached.",
+      "Most billing systems can eventually produce a compliant document. The costly discovery is that the underlying records cannot populate one: an identifier never captured, a tax treatment inferred at render time rather than stored, or line items that exist only inside a template. Working out what the schema needs while the data model is still open is a short conversation. Doing it against a live ledger is a migration with an external deadline attached.",
   },
 ];
 
@@ -148,7 +148,7 @@ export const aeArabic = [
   {
     title: "The legal test is sufficiency",
     detail:
-      "Consumer rules require that customers here receive sufficient information in Arabic — contract terms, pricing, product descriptions and advertising — with other languages permitted alongside it. That is a lighter test than some markets apply, and worth knowing precisely, because over-scoping Arabic costs as much as under-scoping it. A dedicated Arabic language law has been drafted with a rollout described for 2026 and 2027, but it is a draft and should be planned for rather than complied with.",
+      "Consumer rules require that customers here receive sufficient information in Arabic (contract terms, pricing, product descriptions and advertising), with other languages permitted alongside it. That is a lighter test than some markets apply, and worth knowing precisely, because over-scoping Arabic costs as much as under-scoping it. A dedicated Arabic language law has been drafted with a rollout described for 2026 and 2027, but it is a draft and should be planned for rather than complied with.",
   },
   {
     title: "Right-to-left is an interface rewrite",
@@ -158,7 +158,7 @@ export const aeArabic = [
   {
     title: "What we do here, and what we do not",
     detail:
-      "We build the mechanism — the localisation layer, directional styling, formatting for dates, numerals and currency, and tests that catch a layout breaking under mirroring. We do not write Arabic copy and we do not translate. That needs a native standard suited to this market and belongs with people who do it properly. A supplier implying they cover both is usually planning to machine-translate your customer-facing text, which is the version readers notice immediately.",
+      "We build the mechanism: the localisation layer, directional styling, formatting for dates, numerals and currency, and tests that catch a layout breaking under mirroring. We do not write Arabic copy and we do not translate. That needs a native standard suited to this market and belongs with people who do it properly. A supplier implying they cover both is usually planning to machine-translate your customer-facing text, which is the version readers notice immediately.",
   },
 ];
 
@@ -171,7 +171,7 @@ export const aeLicence = [
   {
     title: "Virtual assets are licensed in Dubai",
     detail:
-      "Dubai regulates virtual asset activity through an authority established under Dubai Law No. 4 of 2022, running a full market regime since February 2023 with twelve rulebooks and seven categories of regulated activity. If a product issues, custodies, exchanges or brokers virtual assets from Dubai, the licence is not a later formality — it governs what the product may do, for whom, and with what disclosures. Practitioners describe 2026 as the year those rulebooks are enforced.",
+      "Dubai regulates virtual asset activity through an authority established under Dubai Law No. 4 of 2022, running a full market regime since February 2023 with twelve rulebooks and seven categories of regulated activity. If a product issues, custodies, exchanges or brokers virtual assets from Dubai, the licence is not a later formality. It governs what the product may do, for whom, and with what disclosures. Practitioners describe 2026 as the year those rulebooks are enforced.",
   },
   {
     title: "The build follows the permission",
@@ -202,7 +202,7 @@ export const aeSectors = [
   {
     sector: "Virtual assets and tokenisation",
     detail:
-      "Products touching virtual assets from Dubai, where the regulatory category is settled before the roadmap is. The engineering problems are the familiar hard ones — correctness under partial failure, custody boundaries, and interfaces dense enough for expert users without becoming unusable — sitting on top of a permission that governs what may be offered at all. The compliance surface is unusually wide relative to the size of the first release.",
+      "Products touching virtual assets from Dubai, where the regulatory category is settled before the roadmap is. The engineering problems are the familiar hard ones: correctness under partial failure, custody boundaries, and interfaces dense enough for expert users without becoming unusable, sitting on top of a permission that governs what may be offered at all. The compliance surface is unusually wide relative to the size of the first release.",
   },
   {
     sector: "Free zone companies selling into the mainland",
@@ -278,13 +278,8 @@ export const aeResources = [
     to: "/blog/custom-software-development-cost-guide-2026-pricing-timeline-and-key-factors",
   },
   {
-    title: "How Much Does a Custom AI Agent Cost in 2026?",
-    blurb: "Priced by capability, from a scoped pilot through to something running in production.",
-    to: "/blog/how-much-does-it-cost-to-build-a-custom-ai-agent-in-2026",
-  },
-  {
-    title: "AI Agent Development Cost 2026 — Global Price Comparison",
-    blurb: "The same agent build priced market by market — the comparison worth having before shortlisting.",
+    title: "AI Agent Development Cost 2026: Global Price Comparison",
+    blurb: "The same agent build priced market by market. It is the comparison worth having before shortlisting.",
     to: "/blog/ai-agent-development-cost-2026-a-global-price-comparison-for-custom-ai-solutions",
   },
   {
@@ -309,7 +304,7 @@ export const aeResources = [
 // commercial commitments and neither is confirmed.
 export const aeFaqs = [
   {
-    question: "Free zone, mainland, DIFC or ADGM — does it change our software?",
+    question: "Free zone, mainland, DIFC or ADGM: does it change our software?",
     answer:
       "Yes, more than most teams expect. DIFC and ADGM run their own data protection statutes rather than the federal one, so an identical product can owe different duties depending on where the company is registered, and DIFC additionally reaches systems that process personal data autonomously. Because the incorporation decision is usually taken before a developer is appointed, tell us which one you are in at the start. It changes architecture, not just paperwork.",
   },
@@ -326,7 +321,7 @@ export const aeFaqs = [
   {
     question: "Does our app need to be in Arabic?",
     answer:
-      "If you sell to customers here, plan for it. Consumer rules require sufficient information in Arabic — contract terms, pricing, descriptions and advertising — with other languages allowed alongside. A dedicated Arabic language law has been drafted with a rollout described for 2026 and 2027, but it remains a draft. The larger cost is rarely the words: it is that the interface has to mirror, which is a design system decision rather than a content one.",
+      "If you sell to customers here, plan for it. Consumer rules require sufficient information in Arabic (contract terms, pricing, descriptions and advertising), with other languages allowed alongside. A dedicated Arabic language law has been drafted with a rollout described for 2026 and 2027, but it remains a draft. The larger cost is rarely the words: it is that the interface has to mirror, which is a design system decision rather than a content one.",
   },
   {
     question: "Are there UAE rules for AI features?",
@@ -341,12 +336,12 @@ export const aeFaqs = [
   {
     question: "What does the Open Finance framework mean for a fintech build?",
     answer:
-      "The Central Bank has established a framework with its own licence category for providers sharing data or initiating services on a customer's behalf. What makes it unusual internationally is that it is centralised — a single API hub and a common trust framework, rather than each institution exposing its own interface. That removes some integration work and concentrates the rest into meeting one specification and holding the right permission.",
+      "The Central Bank has established a framework with its own licence category for providers sharing data or initiating services on a customer's behalf. What makes it unusual internationally is that it is centralised: a single API hub and a common trust framework, rather than each institution exposing its own interface. That removes some integration work and concentrates the rest into meeting one specification and holding the right permission.",
   },
   {
     question: "Have you actually delivered anything in the UAE?",
     answer:
-      "Yes, and precisely one thing. We rebuilt the website of Infinity Bay Trading, a Dubai wholesale supplier, moving it off WordPress onto Astro and restructuring it for search. Their founder is quoted on this site by name and their own site carries our credit. That engagement was web and search work — not AI, not SaaS, not a custom platform. Our work in those categories was delivered for clients in other markets and is on the portfolio.",
+      "Yes, and precisely one thing. We rebuilt the website of Infinity Bay Trading, a Dubai wholesale supplier, moving it off WordPress onto Astro and restructuring it for search. Their founder is quoted on this site by name and their own site carries our credit. That engagement was web and search work, not AI, SaaS or a custom platform. Our work in those categories was delivered for clients in other markets and is on the portfolio.",
   },
   {
     question: "Do you have a UAE office or trade licence?",
@@ -356,6 +351,6 @@ export const aeFaqs = [
   {
     question: "Can you work in Arabic?",
     answer:
-      "No. We build the localisation layer, the directional styling and the tests that keep a mirrored interface from breaking, but the Arabic itself needs a native standard suited to this market and we would have you source it separately. We say so because the alternative — implying coverage and quietly machine-translating customer-facing text — is something readers notice immediately.",
+      "No. We build the localisation layer, the directional styling and the tests that keep a mirrored interface from breaking, but the Arabic itself needs a native standard suited to this market and we would have you source it separately. We say so because the alternative (implying coverage and quietly machine-translating customer-facing text) is something readers notice immediately.",
   },
 ];

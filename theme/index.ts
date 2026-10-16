@@ -19,10 +19,6 @@ import { extendTheme } from "@chakra-ui/react";
  *   - `sizes.container.site` — the width of every section on the site
  */
 
-export const GRADIENT = "linear-gradient(135deg, #7B6CFF 0%, #B57BFF 100%)";
-export const GRADIENT_SOFT =
-  "linear-gradient(135deg, rgba(123,108,255,0.18) 0%, rgba(181,123,255,0.18) 100%)";
-
 const colors = {
   // Periwinkle → indigo brand ramp (primary accent)
   brand: {
@@ -205,7 +201,7 @@ const components = {
  */
 const sizes = {
   container: {
-    site: "clamp(1200px, 85vw, 1560px)",
+    site: "min(92vw, 1800px)",
   },
 };
 

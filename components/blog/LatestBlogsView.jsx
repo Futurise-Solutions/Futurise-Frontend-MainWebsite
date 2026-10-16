@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { Box, SimpleGrid, Flex, Button } from "@chakra-ui/react";
 import Link from "next/link";
 import { FiArrowUpRight } from "react-icons/fi";
-import { Section, SectionHeading } from "@/components/common";
+import Section from "@/components/common/Section";
+import SectionHeading from "@/components/common/SectionHeading";
 import BlogCard from "./BlogCard";
 
 /**

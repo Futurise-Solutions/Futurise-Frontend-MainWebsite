@@ -15,7 +15,8 @@ import {
   Box, Container, Heading, Text, VStack, HStack, Icon, Link as CLink,
 } from "@chakra-ui/react";
 import { FiMail, FiMapPin, FiFileText } from "react-icons/fi";
-import { Reveal, Eyebrow } from "@/components/common";
+import Reveal from "@/components/common/Reveal";
+import { Eyebrow } from "@/components/common/SectionHeading";
 import { LAST_UPDATED, COMPANY, EMAIL, ADDRESS, sections } from "@/content/terms";
 
 const TermsSection = ({ section, delay }) => (
@@ -174,9 +175,9 @@ export default function TermsConditionsBody() {
                 borderColor="rgba(180,160,255,0.25)"
               >
                 <Text color="text.muted" fontSize={{ base: "14px", md: "15px" }} lineHeight={1.8}>
-                  These Terms and Conditions ("Terms") govern your use of the website{" "}
+                  These Terms and Conditions (&quot;Terms&quot;) govern your use of the website{" "}
                   <Box as="span" color="accent.solid" fontWeight={600}>futurisesolutions.com</Box> and any services
-                  provided by <Box as="span" color="text.primary" fontWeight={600}>{COMPANY}</Box> ("we", "us", or "our"),
+                  provided by <Box as="span" color="text.primary" fontWeight={600}>{COMPANY}</Box> (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;),
                   a digital product studio registered in New Zealand. These Terms were last updated on {LAST_UPDATED}.
                 </Text>
               </Box>

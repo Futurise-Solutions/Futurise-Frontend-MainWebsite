@@ -1,4 +1,6 @@
 'use client'
+import regional from '../common/RegionalPages.module.css';
+import RegionalHero from '../common/RegionalHero';
 
 /**
  * /ca page body — ported VERBATIM from CanadaPage.jsx.
@@ -17,15 +19,18 @@ import {
 import NextImage from "next/image";
 import Link from "next/link";
 import { FiArrowRight, FiCheck, FiArrowUpRight } from "react-icons/fi";
-import { Reveal, Eyebrow, GlassCard, CTASection, MarketHero, VisualBand } from "@/components/common";
+import Reveal from "@/components/common/Reveal";
+import { Eyebrow } from "@/components/common/SectionHeading";
+import GlassCard from "@/components/common/GlassCard";
+import CTASection from "@/components/common/CTASection";
+import VisualBand from "@/components/common/VisualBand";
+import CountrySolutions from "@/components/common/CountrySolutions";
 import Faqs from "@/components/home/Faqs";
 import { useBooking } from "@/context/BookingContext";
 import { NavbarservicesOptions } from "@/utils/Constant";
-import { COUNTRY_ALTERNATES } from "@/utils/Constant/countries";
-import { buildCountrySchema } from "@/utils/countrySchema";
-import { marketCa, marketReach } from "@/assests";
+import { marketReach } from "@/assests";
 import {
-  caMeta, caInterface, caQuebec, caChanges2026, caSupervision, caSred,
+  caInterface, caQuebec, caChanges2026, caSupervision, caSred,
   caSectors, partnerFit, caCostModel, caResources, caFaqs,
 } from "@/utils/Constant/canada";
 
@@ -41,9 +46,9 @@ export default function CanadaPageBody() {
   // be an unverifiable capability claim published as structured data. It stays at the
   // builder's default.
   return (
-    <Box>
+    <Box className={regional.page}>
       {/* Hero — market-specific atmosphere plate behind the shared texture. */}
-      <MarketHero image={marketCa}>
+      <RegionalHero>
           <Reveal><Eyebrow>Canada</Eyebrow></Reveal>
           <Reveal delay={0.05}>
             <Heading as="h1" mt={5} fontSize={{ base: "38px", md: "56px" }} lineHeight={1.08} letterSpacing="-0.025em" maxW="940px">
@@ -54,7 +59,7 @@ export default function CanadaPageBody() {
           <Reveal delay={0.1}>
             <Text mt={6} color="text.muted" fontSize={{ base: "md", md: "xl" }} lineHeight={1.7} maxW="800px">
               Custom software, AI and SaaS for companies building under Canadian obligations.
-              Here the rules reach the surface your users actually touch — the language it
+              Here the rules reach the surface your users actually touch: the language it
               renders in, whether it can be operated without a mouse, whether a person can
               contest an automated decision. Those are product decisions, and they are cheapest
               in week one.
@@ -70,7 +75,7 @@ export default function CanadaPageBody() {
               </Button>
             </HStack>
           </Reveal>
-      </MarketHero>
+      </RegionalHero>
 
       {/* The interface obligations — the thesis */}
       <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
@@ -150,7 +155,7 @@ export default function CanadaPageBody() {
           <Text className="speakable-answer" color="text.muted" fontSize={{ base: "md", md: "lg" }} lineHeight={1.7} maxW="780px" mb={10}>
             Two significant statutes received assent in 2026, and most published guidance
             predates both. Just as useful as knowing what they require is knowing what is not
-            yet in force — which, in two cases here, is the substance of it.
+            yet in force, which, in two cases here, is the substance of it.
           </Text>
         </Reveal>
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5}>
@@ -486,6 +491,8 @@ export default function CanadaPageBody() {
           </HStack>
         </Reveal>
       </Container>
+
+      <CountrySolutions market="ca" />
 
       <Faqs
         items={caFaqs}

@@ -1,256 +1,65 @@
-'use client'
+'use client';
 
-/**
- * Ported VERBATIM from src/Components/common/BookingModal.jsx.
- *
- * Only three things differ from the source: the 'use client' directive (it uses hooks,
- * framer-motion and window), and the two import paths below.
- *
- * 🔴 THIS FILE WAS MISSING UNTIL NOW, AND ITS ABSENCE BROKE THE SITE'S PRIMARY
- * CONVERSION PATH. BookingProvider, useBooking and every "Book a call" button were
- * ported in Phase 4, but the modal they open was not — app/layout.tsx referenced
- * <BookingModal /> only inside a comment describing the old App.jsx shell. So every
- * button called openBooking(), state flipped to isOpen: true, and nothing rendered,
- * because no component was subscribed to that state. No error, no warning — the click
- * simply did nothing.
- *
- * It is mounted in app/layout.tsx INSIDE <BookingProvider>. Mounting it outside gives it
- * a null context and the same silent failure in a new form.
- */
-import {
-  Box,
-  Flex,
-  Text,
-  Icon,
-  HStack,
-  VStack,
-  Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalCloseButton,
-} from "@chakra-ui/react";
-import {
-  FiCalendar,
-  FiClock,
-  FiArrowRight,
-  FiCheckCircle,
-} from "react-icons/fi";
-import { motion } from "framer-motion";
-import { useBooking } from "@/context/BookingContext";
-import { trackEvent, EVENTS } from "@/utils/analytics";
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton } from '@chakra-ui/react';
+import { useReducedMotion } from 'framer-motion';
+import { useBooking } from '@/context/BookingContext';
+import { trackEvent, EVENTS } from '@/utils/analytics';
+import styles from './BookingModal.module.css';
 
-const MotionBox = motion.create(Box);
-
-/**
- * BookingModal — Premium CTA design (iframe-free)
- * -----------------------------------------------
- * The original design embedded calendar.app.google in an <iframe>.
- * Google sends X-Frame-Options: DENY on that URL, which causes
- * "refused to connect" on every browser (not just Mac/Safari).
- *
- * Fix: open the booking link in a new tab, which works universally.
- * The modal now serves as a high-converting "pre-click" frame that
- * describes the call and gives the user confidence before they book.
- */
-
-const BOOKING_URL = "https://calendar.app.google/oZ5ENgnwaCWAchAv6";
-
+const BOOKING_URL = 'https://calendar.app.google/oZ5ENgnwaCWAchAv6';
 const BENEFITS = [
-  "Discuss your project goals & tech requirements",
-  "Get a recommended tech stack for your idea",
-  "Receive a clear build roadmap & timeline estimate",
-  "No sales pitch — just honest, expert advice",
+  'Discuss your project goals & tech requirements',
+  'Get a recommended tech stack for your idea',
+  'Receive a clear build roadmap & timeline estimate',
+  'No sales pitch, just honest, expert advice',
 ];
 
-const BookingModal = () => {
+export default function BookingModal() {
   const { isOpen, onClose, source } = useBooking();
-
+  const reduced = useReducedMotion();
   const handleBook = () => {
-    // The real conversion: the visitor has left for the booking calendar. Fired before
-    // window.open so a popup blocker cannot swallow the measurement too.
     trackEvent(EVENTS.BOOKING_CALENDAR_OPEN, { location: source });
-    window.open(BOOKING_URL, "_blank", "noopener,noreferrer");
     onClose();
   };
-
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      size="lg"
-      isCentered
-      motionPreset="slideInBottom"
-      trapFocus={false}
-    >
-      <ModalOverlay backdropFilter="blur(10px)" bg="rgba(0,0,0,0.65)" />
-      <ModalContent
-        bg="#0d0d16"
-        border="1px solid"
-        borderColor="rgba(180,160,255,0.2)"
-        borderRadius="24px"
-        overflow="hidden"
-        mx={4}
-        position="relative"
-      >
-        {/* Background glow orbs */}
-        <Box
-          position="absolute"
-          top="-60px"
-          right="-40px"
-          w="200px"
-          h="200px"
-          bg="rgba(123,108,255,0.12)"
-          filter="blur(60px)"
-          borderRadius="full"
-          pointerEvents="none"
-        />
-        <Box
-          position="absolute"
-          bottom="-40px"
-          left="-30px"
-          w="160px"
-          h="160px"
-          bg="rgba(181,123,255,0.1)"
-          filter="blur(50px)"
-          borderRadius="full"
-          pointerEvents="none"
-        />
-
-        {/* Header */}
-        <ModalHeader
-          borderBottom="1px solid"
-          borderColor="rgba(255,255,255,0.07)"
-          pb={4}
-          pr={{ base: "48px", md: "6" }}
-          position="relative"
-        >
-          <HStack spacing={3}>
-            <Flex
-              w="40px"
-              h="40px"
-              borderRadius="12px"
-              align="center"
-              justify="center"
-              bgGradient="linear(135deg, rgba(123,108,255,0.35), rgba(181,123,255,0.35))"
-              border="1px solid"
-              borderColor="rgba(180,160,255,0.35)"
-            >
-              <Icon as={FiCalendar} color="accent.solid" boxSize={5} />
-            </Flex>
-            <Box>
-              <Text fontSize="md" fontWeight={700} color="text.primary">
-                Book a Free Strategy Call
-              </Text>
-              <HStack spacing={1.5}>
-                <Icon as={FiClock} boxSize={3} color="text.faint" />
-                <Text fontSize="xs" color="text.faint" fontWeight={400}>
-                  45 minutes · Futurise Solutions
-                </Text>
-              </HStack>
-            </Box>
-          </HStack>
+    <Modal isOpen={isOpen} onClose={onClose} size="4xl" isCentered scrollBehavior="inside" motionPreset={reduced ? 'none' : 'slideInBottom'}>
+      <ModalOverlay bg="rgba(8,8,13,.78)" backdropFilter="blur(8px)" />
+      <ModalContent bg="#F4F2FF" color="#08080D" borderRadius="8px" overflow="hidden" mx={4} my={3} maxH="calc(100dvh - 24px)" boxShadow="0 30px 100px #0006">
+        <ModalHeader px={{ base: 5, md: 7 }} py={3} minH="48px" borderBottom="1px solid #08080d20" pr={14} fontWeight={500} fontSize="12px" letterSpacing=".06em">
+          Book a Free Strategy Call
         </ModalHeader>
-        <ModalCloseButton top={4} right={4} color="text.muted" />
-
-        {/* Body */}
-        <ModalBody py={6} px={6} position="relative">
-          <VStack spacing={6} align="stretch">
-            {/* Description */}
-            <Text fontSize="sm" color="text.muted" lineHeight={1.8}>
-              Talk to our experts about your project. We'll give you a clear
-              tech stack recommendation and build roadmap —{" "}
-              <Box as="span" color="accent.solid" fontWeight={600}>
-                completely free, no sales pitch.
-              </Box>
-            </Text>
-
-            {/* What to expect */}
-            <Box
-              p={4}
-              borderRadius="16px"
-              bg="rgba(123,108,255,0.07)"
-              border="1px solid"
-              borderColor="rgba(180,160,255,0.15)"
-            >
-              <Text
-                fontSize="11px"
-                fontWeight={700}
-                letterSpacing="0.1em"
-                textTransform="uppercase"
-                color="accent.solid"
-                mb={3}
-              >
-                What You'll Get
-              </Text>
-              <VStack spacing={2.5} align="stretch">
-                {BENEFITS.map((b) => (
-                  <HStack key={b} spacing={2.5} align="flex-start">
-                    <Icon
-                      as={FiCheckCircle}
-                      color="accent.solid"
-                      boxSize={4}
-                      mt="1px"
-                      flexShrink={0}
-                    />
-                    <Text fontSize="13px" color="text.muted" lineHeight={1.6}>
-                      {b}
-                    </Text>
-                  </HStack>
-                ))}
-              </VStack>
-            </Box>
-
-            {/* CTA */}
-            <MotionBox
-              position="relative"
-              whileHover={{ scale: 1.01 }}
-              whileTap={{ scale: 0.99 }}
-            >
-              {/* Glow behind button */}
-              <Box
-                position="absolute"
-                inset="-4px"
-                borderRadius="full"
-                bgGradient="linear(135deg, brand.500, violet.500)"
-                filter="blur(14px)"
-                opacity={0.4}
-                pointerEvents="none"
-              />
-              <Button
-                w="full"
-                size="lg"
-                variant="gradient"
-                rightIcon={<FiArrowRight />}
-                onClick={handleBook}
-                position="relative"
-                fontSize="15px"
-                py={6}
-                sx={{
-                  "& svg": { transition: "transform .25s" },
-                  _hover: { "& svg": { transform: "translateX(5px)" } },
-                }}
-              >
-                Open Booking Calendar
-              </Button>
-            </MotionBox>
-
-            {/* Trust signal */}
-            <Text
-              textAlign="center"
-              fontSize="12px"
-              color="text.faint"
-              lineHeight={1.6}
-            >
-              Opens Google Calendar · Secure · Free · No commitment
-            </Text>
-          </VStack>
+        <ModalCloseButton top={1} right={2} width="44px" height="44px" color="#514b60" borderRadius="full" _hover={{ bg: '#7b6cff20' }} />
+        <ModalBody p={0}>
+          <div className={styles.layout}>
+            <div className={styles.invitation}>
+              <p className={styles.eyebrow}>YOUR NEXT CHAPTER STARTS HERE</p>
+              <h2>Big idea?<br />{' '}Let’s give it<br />{' '}<em>direction.</em></h2>
+              <div className={styles.session}>
+                <svg viewBox="0 0 180 180" aria-hidden="true">
+                  <circle cx="90" cy="90" r="74" fill="none" stroke="#08080d20" strokeWidth="1" />
+                  <circle className={styles.arc} cx="90" cy="90" r="74" fill="none" stroke="#7055bf" strokeWidth="3" pathLength="100" strokeDasharray="75 25" transform="rotate(-90 90 90)" />
+                  {Array.from({ length: 12 }, (_, i) => <path key={i} d="M90 26V31" stroke="#7055bf" transform={`rotate(${i * 30} 90 90)`} />)}
+                  <text x="90" y="98" textAnchor="middle" fill="#08080d" fontSize="48">45</text>
+                  <text x="90" y="119" textAnchor="middle" fill="#514b60" fontSize="9" letterSpacing="2">MINUTES</text>
+                </svg>
+                <div><strong>A focused conversation.</strong><span>Free · No commitment</span></div>
+              </div>
+              <p className={styles.signature}>FUTURISE SOLUTIONS <span>↗</span></p>
+            </div>
+            <div className={styles.details}>
+              <p className={styles.eyebrow}>LESS GUESSWORK. MORE CLARITY.</p>
+              <h3>Leave with a<br />{' '}clearer next step.</h3>
+              <p className={styles.description}>Talk to our experts about your project. We’ll give you a clear tech stack recommendation and build roadmap. It’s completely free, with no sales pitch.</p>
+              <h4 className={styles.listTitle}>WHAT YOU’LL GET</h4>
+              <ol className={styles.benefits}>
+                {BENEFITS.map((benefit, i) => <li key={benefit}><span>0{i + 1}</span>{benefit}</li>)}
+              </ol>
+              <a className={styles.book} href={BOOKING_URL} target="_blank" rel="noopener noreferrer" onClick={handleBook}>Choose your time <span aria-hidden="true">↗</span></a>
+              <p className={styles.note}>Opens Google Calendar in a new tab.<br />{' '}Pick a time that works for you.</p>
+            </div>
+          </div>
         </ModalBody>
       </ModalContent>
     </Modal>
   );
-};
-
-export default BookingModal;
+}

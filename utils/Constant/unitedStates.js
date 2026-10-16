@@ -29,7 +29,7 @@ export const usMeta = {
   // Under 160 characters so Google renders it whole. Deliberately free of invoicing and
   // response-time claims, neither of which is confirmed.
   description:
-    "Custom software, AI and SaaS development for US businesses — built for HIPAA, CCPA and the 20-state privacy landscape, on fixed scope not hourly billing.",
+    "Custom software, AI and SaaS development for US businesses, built for HIPAA, CCPA and the 20-state privacy landscape, on fixed scope not hourly billing.",
   keywords:
     "software development company USA, custom software development United States, AI development company USA, SaaS development company USA, web development company USA, mobile app development company USA, HIPAA compliant software development, CCPA compliant software",
 };
@@ -38,7 +38,7 @@ export const usMeta = {
 //
 // ⚠️ THE EVIDENCE FORK — DO NOT "FIX" IT ⚠️
 //
-// Do NOT import `clientProof` or `testimonials` from Constant/index.js into this file. The
+// Do NOT import `clientProof` or `testimonials` from utils/clientsReviewsData.js into this file. The
 // cards below are a prose fork written from the same underlying facts, not a re-render of
 // those constants. Rendering them here would put homepage sentences verbatim on a second
 // URL, which is the duplicate-content failure this page is gated against. /ae carries the
@@ -65,7 +65,7 @@ export const usEvidence = [
   {
     title: "Where the record stops",
     detail:
-      "None of it is a HIPAA engagement, and none of it is a PCI DSS programme. This page argues both at length further down, and our published record evidences neither — so if regulated health data or card-data scope is central to what you are building, ask us for specifics rather than reading them into the list above. Several of these clients also operate across the United States and India rather than being US companies outright, which is the accurate description of the market involved.",
+      "None of it is a HIPAA engagement, and none of it is a PCI DSS programme. This page argues both at length further down, and our published record evidences neither. If regulated health data or card-data scope is central to what you are building, ask us for specifics rather than reading them into the list above. Several of these clients also operate across the United States and India rather than being US companies outright, which is the accurate description of the market involved.",
   },
   {
     title: "No one project covering for the rest",
@@ -87,7 +87,7 @@ export const usMarket = [
   {
     title: "Privacy here is twenty laws, not one",
     detail:
-      "Twenty states have comprehensive consumer privacy laws in effect during 2026, and twenty-four have now enacted one. The gap between those two numbers matters: a law that is enacted but not yet in force still sets a date you are building toward, and the schedule is continuous rather than occasional — Indiana, Kentucky and Rhode Island all came into effect on 1 January 2026. No single federal statute overrides them. For software the consequence is that compliance is not a yes-or-no property of your product. It is a question of which user triggers which obligation, and whether your system can tell the difference at the moment it matters rather than during an audit six months later.",
+      "Twenty states have comprehensive consumer privacy laws in effect during 2026, and twenty-four have now enacted one. The gap between those two numbers matters: a law that is enacted but not yet in force still sets a date you are building toward, and the schedule is continuous rather than occasional. Indiana, Kentucky and Rhode Island all came into effect on 1 January 2026. No single federal statute overrides them. For software the consequence is that compliance is not a yes-or-no property of your product. It is a question of which user triggers which obligation, and whether your system can tell the difference at the moment it matters rather than during an audit six months later.",
   },
   {
     title: "Compliance decisions land in the architecture, not the policy page",
@@ -97,7 +97,7 @@ export const usMarket = [
   {
     title: "Health and payment data raise the floor",
     detail:
-      "HIPAA applies wherever protected health information is handled, and its technical safeguards — access control, audit trails, integrity verification, transmission security — are engineering requirements rather than documentation exercises. Where a vendor processes that data on your behalf, a Business Associate Agreement governs the relationship. Payment data brings PCI DSS, whose practical effect is usually the opposite of what people expect: the goal is to shrink scope, because the fewer systems that touch card data, the smaller and cheaper the compliance surface becomes. Both are ultimately decisions about where system boundaries sit, and both are far easier to make before the first schema exists than after.",
+      "HIPAA applies wherever protected health information is handled, and its technical safeguards (access control, audit trails, integrity verification, transmission security) are engineering requirements rather than documentation exercises. Where a vendor processes that data on your behalf, a Business Associate Agreement governs the relationship. Payment data brings PCI DSS, whose practical effect is usually the opposite of what people expect: the goal is to shrink scope, because the fewer systems that touch card data, the smaller and cheaper the compliance surface becomes. Both are ultimately decisions about where system boundaries sit, and both are far easier to make before the first schema exists than after.",
   },
   {
     title: "AI systems now carry rules of their own",
@@ -125,7 +125,7 @@ export const deliveryTradeoffs = [
   {
     heading: "Where distributed delivery genuinely wins",
     points: [
-      "Specialist capability no single agency keeps idle on the bench — production LLM and retrieval engineering, audited smart contracts, computer vision pipelines.",
+      "Specialist capability no single agency keeps idle on the bench: production LLM and retrieval engineering, audited smart contracts, computer vision pipelines.",
       "Sustained throughput against a scope that is already defined, where the limit is engineering hours available rather than meeting slots in a calendar.",
       "Budgets that need to buy engineering rather than overhead, so a larger share of the money reaches the build instead of the account layer above it.",
       "Work that continues while your team sleeps, so a review left on Friday afternoon has an answer waiting rather than a two-day gap in the middle of it.",
@@ -197,26 +197,26 @@ export const ownership = [
     // and the treatment of reusable components. Until confirmed this stays generic.
     title: "Settle ownership before work starts, not after",
     detail:
-      "Who owns the resulting code, at what point ownership transfers, and whether that transfer is an assignment or a licence are questions with genuinely different answers at different suppliers — and all three are cheap to agree before a repository exists, expensive to argue about once a product is live and funded. Ask any supplier to state their position in the engagement documents rather than describing it on a call, and ask specifically whether they retain rights over reusable components or internal libraries that end up in your codebase. A supplier who cannot answer that clearly has not thought about it, which is itself useful information about how the engagement will run.",
+      "Who owns the resulting code, at what point ownership transfers, and whether that transfer is an assignment or a licence are questions with genuinely different answers at different suppliers. All three are cheap to agree before a repository exists and expensive to argue about once a product is live and funded. Ask any supplier to state their position in the engagement documents rather than describing it on a call, and ask specifically whether they retain rights over reusable components or internal libraries that end up in your codebase. A supplier who cannot answer that clearly has not thought about it, which is itself useful information about how the engagement will run.",
   },
   {
     title: "Confidentiality before anything is shared",
     detail:
-      "We sign your NDA before reviewing anything confidential. That covers the discovery stage, where you are describing systems, roadmaps and commercial context long before any contract exists — which is precisely the window most often left uncovered, because both sides are still deciding whether to proceed. If a supplier wants access to your data room or your codebase before any confidentiality agreement is in place, treat that as information about how they operate rather than an administrative detail to sort out later.",
+      "We sign your NDA before reviewing anything confidential. That covers the discovery stage, where you are describing systems, roadmaps and commercial context long before any contract exists. That is precisely the window most often left uncovered, because both sides are still deciding whether to proceed. If a supplier wants access to your data room or your codebase before any confidentiality agreement is in place, treat that as information about how they operate rather than an administrative detail to sort out later.",
   },
   {
     // TODO (Futurise): insert the confirmed notice period, what the client receives for
     // work completed to date, and the repository/infrastructure access-transfer process.
     title: "Write down what happens if it ends early",
     detail:
-      "Engagements end for reasons that have nothing to do with the quality of the work: funding moves, priorities change, a founder leaves, a board decides differently. Three terms are worth agreeing at the start — what notice each side gives, what you receive for work completed to that point, and how repository, environment and infrastructure access transfers back to you. Agreed up front these are administrative paperwork that takes an afternoon. Agreed during an actual disagreement they are neither quick nor cheap, and the party without them written down is usually the one that concedes.",
+      "Engagements end for reasons that have nothing to do with the quality of the work: funding moves, priorities change, a founder leaves, a board decides differently. Three terms are worth agreeing at the start: what notice each side gives, what you receive for work completed to that point, and how repository, environment and infrastructure access transfers back to you. Agreed up front these are administrative paperwork that takes an afternoon. Agreed during an actual disagreement they are neither quick nor cheap, and the party without them written down is usually the one that concedes.",
   },
   {
     // TODO (Futurise): insert the confirmed documentation and knowledge-transfer scope —
     // specifically whether handover is included by default or quoted as a separate item.
     title: "Plan the handover while you still need it",
     detail:
-      "The real measure of a finished engagement is whether your team can keep moving without the people who built the thing. In practice that means documentation that survives someone leaving, environment setup another developer can follow without a call, and architectural decisions recorded with the reasoning behind them rather than only the outcome — because the reasoning is what tells a future engineer whether a decision still applies to a situation nobody anticipated. Establish during scoping whether that work sits inside the engagement or arrives as a separate line item, since the two produce very different final invoices and only one of them is a surprise.",
+      "The real measure of a finished engagement is whether your team can keep moving without the people who built the thing. In practice that means documentation that survives someone leaving, environment setup another developer can follow without a call, and architectural decisions recorded with the reasoning behind them rather than only the outcome, because the reasoning is what tells a future engineer whether a decision still applies to a situation nobody anticipated. Establish during scoping whether that work sits inside the engagement or arrives as a separate line item, since the two produce very different final invoices and only one of them is a surprise.",
   },
 ];
 
@@ -243,7 +243,7 @@ export const costModel = [
   {
     title: "No published rate card, and the reason",
     detail:
-      "We publish how a price is built instead of a headline figure, because a number quoted before anyone understands the scope is wrong for almost everyone who reads it — too high for the simple case, too low for the complex one, and useless for comparing suppliers. What drives an estimate is written out in full on our pricing page, and the cost guides below work through real ranges for specific project types so you can calibrate against something concrete rather than a marketing number.",
+      "We publish how a price is built instead of a headline figure, because a number quoted before anyone understands the scope is wrong for almost everyone who reads it: too high for the simple case, too low for the complex one, and useless for comparing suppliers. What drives an estimate is written out in full on our pricing page, and the cost guides below work through real ranges for specific project types so you can calibrate against something concrete rather than a marketing number.",
   },
   {
     // TODO (Futurise): confirm and state the quoting and invoicing currency terms for US
@@ -265,7 +265,7 @@ export const usSectors = [
   {
     sector: "Fintech and financial services",
     detail:
-      "Ledgers, reconciliation engines, reporting layers, and the payment flows running underneath all of it. These builds are decided by correctness under partial failure rather than by feature count — what the system does when a payment provider commits and then times out, or when a webhook arrives twice, or when two updates race for the same balance. A reporting dashboard that disagrees with the ledger by a single cent is a dashboard nobody opens again, and rebuilding that trust costs more than building it correctly did.",
+      "Ledgers, reconciliation engines, reporting layers, and the payment flows running underneath all of it. These builds are decided by correctness under partial failure rather than by feature count: what the system does when a payment provider commits and then times out, or when a webhook arrives twice, or when two updates race for the same balance. A reporting dashboard that disagrees with the ledger by a single cent is a dashboard nobody opens again, and rebuilding that trust costs more than building it correctly did.",
   },
   {
     sector: "B2B SaaS",
@@ -286,7 +286,7 @@ export const usIntegrations = [
   {
     name: "Stripe",
     detail:
-      "Subscription billing, usage-based pricing, and checkout flows across currencies — including the webhook handling and idempotency work that keeps billing correct when the network is not.",
+      "Subscription billing, usage-based pricing, and checkout flows across currencies, including the webhook handling and idempotency work that keeps billing correct when the network is not.",
   },
   {
     name: "Salesforce",
@@ -311,7 +311,7 @@ export const usIntegrations = [
   {
     name: "Twilio",
     detail:
-      "Messaging and voice, together with the consent capture and opt-out handling those channels require — the part that is a compliance obligation rather than a feature.",
+      "Messaging and voice, together with the consent capture and opt-out handling those channels require. That part is a compliance obligation rather than a feature.",
   },
 ];
 
@@ -330,18 +330,13 @@ export const usResources = [
     to: "/blog/saas-development-cost-guide-2026-pricing-timeline-and-budget-breakdown",
   },
   {
-    title: "How Much Does a Custom AI Agent Cost in 2026?",
-    blurb: "A breakdown by capability, from a scoped pilot through to a production deployment.",
-    to: "/blog/how-much-does-it-cost-to-build-a-custom-ai-agent-in-2026",
-  },
-  {
-    title: "AI Agent Development Cost 2026 — Global Price Comparison",
+    title: "AI Agent Development Cost 2026: Global Price Comparison",
     blurb: "What the same AI build costs across markets, and why the spread is that wide.",
     to: "/blog/ai-agent-development-cost-2026-a-global-price-comparison-for-custom-ai-solutions",
   },
   {
     title: "Building a Custom AI Agent: ROI and Tech Stack Guide",
-    blurb: "Written for US and Canadian startups — architecture choices, model selection, and how to build the return case before committing budget.",
+    blurb: "Written for US and Canadian startups: architecture choices, model selection, and how to build the return case before committing budget.",
     to: "/blog/how-to-build-a-custom-ai-agent-for-your-business-the-complete-2026-roi-and-tech-stack-guide-for-us-and-canadian-startups",
   },
 ];
@@ -356,12 +351,12 @@ export const usFaqs = [
   {
     question: "Do you have a US office?",
     answer:
-      "No. Futurise Solutions is registered in Wellington, New Zealand, and our engineering team is distributed. That belongs at the top of the answer rather than buried in a footer, because it changes how you should evaluate us. The structure buys specialist depth — production AI, blockchain and mobile engineering — instead of only the skills a single local office happens to have hired. It does not buy someone who can be in your building on Thursday afternoon, and where a project genuinely needs that, we will say so.",
+      "No. Futurise Solutions is registered in Wellington, New Zealand, and our engineering team is distributed. That belongs at the top of the answer rather than buried in a footer, because it changes how you should evaluate us. The structure buys specialist depth (production AI, blockchain and mobile engineering) instead of only the skills a single local office happens to have hired. It does not buy someone who can be in your building on Thursday afternoon, and where a project genuinely needs that, we will say so.",
   },
   {
     question: "Are you SOC 2 certified?",
     answer:
-      "No, and it is worth knowing that strictly speaking nobody is. SOC 2 is an attestation report issued by a CPA firm against the AICPA's Trust Services Criteria — there is no certificate, no pass mark, and no certifying body, so any supplier describing themselves as SOC 2 certified is describing something that does not exist. If your procurement process requires a SOC 2 Type II report, ask for the report itself rather than the claim, and check the period it covers and which criteria were in scope.",
+      "No, and it is worth knowing that strictly speaking nobody is. SOC 2 is an attestation report issued by a CPA firm against the AICPA's Trust Services Criteria. There is no certificate, no pass mark, and no certifying body, so any supplier describing themselves as SOC 2 certified is describing something that does not exist. If your procurement process requires a SOC 2 Type II report, ask for the report itself rather than the claim, and check the period it covers and which criteria were in scope.",
   },
   {
     question: "How do you handle CCPA and other US state privacy laws?",
@@ -371,7 +366,7 @@ export const usFaqs = [
   {
     question: "Can you build HIPAA-compliant software?",
     answer:
-      "Yes. Where protected health information is in scope we build to HIPAA's technical safeguards — access control, audit trails, integrity verification and transmission security — and a Business Associate Agreement governs the arrangement where one is required. The most valuable decision is usually made early and cheaply: keeping the number of systems that touch PHI as small as possible, because every service inside that boundary inherits the obligation and the testing burden that comes with it.",
+      "Yes. Where protected health information is in scope we build to HIPAA's technical safeguards (access control, audit trails, integrity verification and transmission security), and a Business Associate Agreement governs the arrangement where one is required. The most valuable decision is usually made early and cheaply: keeping the number of systems that touch PHI as small as possible, because every service inside that boundary inherits the obligation and the testing burden that comes with it.",
   },
   {
     question: "Who owns the code and the intellectual property?",
@@ -381,7 +376,7 @@ export const usFaqs = [
   {
     question: "What happens if we end the contract early?",
     answer:
-      "Engagements end for reasons unrelated to quality — funding moves, priorities shift, people leave — so the terms are worth agreeing at the start rather than during a disagreement. Establish what notice each side gives, what you receive for work completed to that point, and how repository, environment and infrastructure access transfers back to you. We set these out in the engagement documents specifically so there is nothing to interpret if the circumstances ever arise.",
+      "Engagements end for reasons unrelated to quality: funding moves, priorities shift, people leave. So the terms are worth agreeing at the start rather than during a disagreement. Establish what notice each side gives, what you receive for work completed to that point, and how repository, environment and infrastructure access transfers back to you. We set these out in the engagement documents specifically so there is nothing to interpret if the circumstances ever arise.",
   },
   {
     question: "How much does custom software development cost in the US?",
@@ -391,12 +386,12 @@ export const usFaqs = [
   {
     question: "How do you compare with a US-based agency?",
     answer:
-      "There are engagements where a domestic agency wins outright, and we would rather name them than compete for work we are not suited to: live systems needing same-hours incident response, and contracts restricting data access by location. Our advantage sits elsewhere — specialist depth a single agency is unlikely to keep idle, covering production LLM and retrieval engineering, audited smart contracts and computer vision, plus sustained throughput against a scope already defined in writing.",
+      "There are engagements where a domestic agency wins outright, and we would rather name them than compete for work we are not suited to: live systems needing same-hours incident response, and contracts restricting data access by location. Our advantage sits elsewhere: specialist depth a single agency is unlikely to keep idle, covering production LLM and retrieval engineering, audited smart contracts and computer vision, plus sustained throughput against a scope already defined in writing.",
   },
   {
     question: "How do you handle working across time zones?",
     answer:
-      "By designing the workflow around the gap rather than treating it as a scheduling problem to solve case by case. Overlap with your working day is agreed during scoping and written into the engagement, and you have a named engineer instead of questions relayed through an account manager. Left unmanaged, a time difference turns a one-day question into a three-day round trip — but that is a process failure rather than a geography one, and it is avoidable.",
+      "By designing the workflow around the gap rather than treating it as a scheduling problem to solve case by case. Overlap with your working day is agreed during scoping and written into the engagement, and you have a named engineer instead of questions relayed through an account manager. Left unmanaged, a time difference turns a one-day question into a three-day round trip, but that is a process failure rather than a geography one, and it is avoidable.",
   },
   {
     question: "What happens on the first call?",

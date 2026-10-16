@@ -6,13 +6,15 @@ import ArticleBody from '@/components/blog/ArticleBody'
 import { buildMetadata } from '@/lib/seo'
 import {
   getBlogs,
-  getBlogSummaries,
   getBlogBySlug,
   mediaUrl,
   parseKeywords,
   parseTags,
   parseHeadings,
+  parseFaqs,
 } from '@/lib/blog'
+import { RETIRED_BLOG_REDIRECTS } from '@/content/blogRedirects'
+import { getCachedBlogSummaries } from '@/lib/blogSummaries'
 import { articleAuthor, articleAuthorName } from '@/utils/Constant/team'
 
 /** ISR — posts refresh hourly. */
@@ -25,7 +27,8 @@ type Params = { slug: string }
 
 export async function generateStaticParams(): Promise<Params[]> {
   const blogs = await getBlogs()
-  return blogs.map((b) => ({ slug: b.slug }))
+  // Retired slugs 308 in next.config.ts; never prerender them even if still published.
+  return blogs.filter((b) => !(b.slug in RETIRED_BLOG_REDIRECTS)).map((b) => ({ slug: b.slug }))
 }
 
 /**
@@ -69,7 +72,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
   /* PHASE 8: summaries, not full records — the related-posts strip needs title,
      description, image and date, never the Markdown body. */
-  const all = await getBlogSummaries(revalidate)
+  const all = await getCachedBlogSummaries(revalidate)
   const headings = parseHeadings(blog.content)
   const parsedTags = parseTags(blog)
   const isLatest = all[0]?.slug === blog.slug
@@ -105,7 +108,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
    * Dates pass straight through: datePublished ← createdAt, dateModified ← updatedAt.
    * Both are already ISO 8601; do not reformat them.
    */
-  const jsonLd = [
+  const jsonLd: Array<Record<string, unknown>> = [
     {
       '@context': 'https://schema.org',
       '@type': 'BlogPosting',
@@ -141,6 +144,21 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       ],
     },
   ]
+
+  /* FAQPage only when the post has a real "Frequently asked questions" section with at
+     least two Q&As; a single-question FAQPage adds nothing. */
+  const faqs = parseFaqs(blog.content || '')
+  if (faqs.length >= 2) {
+    jsonLd.push({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    })
+  }
 
   return (
     <>

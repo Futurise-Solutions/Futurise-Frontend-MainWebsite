@@ -1,21 +1,11 @@
-'use client'
-
-import React from "react";
-import { Section, SectionHeading, ProcessTimeline } from "../common";
-
-const Process = () => {
-  return (
-    <Section>
-      <SectionHeading
-        eyebrow="How we work"
-        title="A proven process,"
-        highlight="from idea to impact"
-        subtitle="A clear, collaborative workflow that keeps your project on track and you in the loop every step of the way."
-        mb={{ base: 10, md: 14 }}
-      />
-      <ProcessTimeline />
-    </Section>
-  );
-};
-
-export default Process;
+'use client';
+import ProcessExplorer from "../common/ProcessExplorer";
+import styles from "./SculptedHome.module.css";
+export default function Process() {
+  return <section className={styles.lightSection}><div className={styles.container}>
+    <p className={styles.eyebrow}>How we work <span /></p>
+    <h2 className={styles.display}>A proven process, from idea to impact</h2>
+    <p className={styles.sectionIntro}>A clear, collaborative workflow that keeps your project on track and you in the loop every step of the way.</p>
+    <ProcessExplorer />
+  </div></section>;
+}

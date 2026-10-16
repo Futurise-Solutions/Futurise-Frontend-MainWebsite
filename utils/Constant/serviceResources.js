@@ -37,7 +37,7 @@ export const serviceResources = {
     {
       title: "What sub-2-second load times actually cost to build",
       blurb:
-        "The architecture decisions behind a fast site — React, Next.js and Node.js choices that decide load time before a line of design work starts.",
+        "The architecture decisions behind a fast site: React, Next.js and Node.js choices that decide load time before a line of design work starts.",
       to: "/blog/web-development-services-fast-scalable-and-seo-ready-websites-and-web-apps-built-to-convert",
       retarget: true,
     },
@@ -65,7 +65,7 @@ export const serviceResources = {
     {
       title: "Choosing one codebase for iOS and Android",
       blurb:
-        "What React Native and Expo give you across both platforms — Firebase backends, payments, push and maps — and where a single codebase stops paying off.",
+        "What React Native and Expo give you across both platforms (Firebase backends, payments, push and maps), and where a single codebase stops paying off.",
       to: "/blog/app-development-services-build-cross-platform-ios-and-android-apps-that-users-actually-love",
       retarget: true,
     },
@@ -87,7 +87,7 @@ export const serviceResources = {
     {
       title: "How design decisions move conversion and churn",
       blurb:
-        "UX research, wireframing, high-fidelity UI, prototypes and design systems — traced through to the numbers they change.",
+        "UX research, wireframing, high-fidelity UI, prototypes and design systems, traced through to the numbers they change.",
       to: "/blog/uiux-design-services-how-great-design-turns-visitors-into-loyal-customers",
       retarget: true,
     },
@@ -121,36 +121,24 @@ export const serviceResources = {
         "How tokenisation digitises physical assets, and what a business needs in place before attempting it.",
       to: "/blog/real-world-asset-tokenization-rwa-2026-the-trillion-dollar-opportunity-for-businesses",
     },
-    {
-      title: "How digital assets are reshaping finance",
-      blurb:
-        "The tokenised economy explained through the business models it changes rather than the technology behind it.",
-      to: "/blog/the-tokenized-economy-2026-how-digital-assets-are-reshaping-global-finance-and-business-models",
-    },
-    {
-      title: "Self-sovereign identity and what it replaces",
-      blurb:
-        "Why decentralised identity matters for security and privacy, and which systems it takes over from.",
-      to: "/blog/the-decentralized-identity-revolution-why-your-business-needs-self-sovereign-identity-ssi-in-2026",
-    },
   ],
 
   "ai-ml-solutions": [
     {
-      title: "How agents, LLMs, NLP and vision change a workflow",
+      title: "Custom AI development: what to build, buy and expect",
       blurb:
-        "A practical walk through where each technique earns its place — automating operations, cutting cost, or opening new revenue.",
-      to: "/blog/ai-and-ml-solutions-how-custom-ai-agents-llms-nlp-and-computer-vision-are-transforming-modern-businesses",
+        "The four main types of custom AI work, when each makes sense, build versus buy, and the factors that drive cost.",
+      to: "/blog/ai-and-ml-solutions-custom-ai-agents-llm-integrations-nlp-and-computer-vision-built-for-your-business",
       retarget: true,
     },
     {
       title: "What a custom AI agent costs to build",
       blurb:
-        "2026 pricing factors, timelines and ROI, costed for businesses in the USA, Canada, New Zealand and the UAE.",
-      to: "/blog/how-much-does-it-cost-to-build-a-custom-ai-agent-in-2026",
+        "2026 vendor estimate ranges, running costs and regional rate differences, plus how to scope a quote.",
+      to: "/blog/ai-agent-development-cost-2026-a-global-price-comparison-for-custom-ai-solutions",
     },
     {
-      title: "AI agent or chatbot — which one you need",
+      title: "AI agent or chatbot: which one you need",
       blurb:
         "The differences that matter commercially, the cost gap between them, and the use cases that decide it.",
       to: "/blog/ai-agent-vs-traditional-chatbot-which-one-does-your-business-really-need-in-2026",
@@ -162,10 +150,10 @@ export const serviceResources = {
       to: "/blog/the-ai-hallucination-trap-how-to-build-trustworthy-ai-agents-in-2026-rag-and-verification-strategies",
     },
     {
-      title: "When the blocker is skills, not technology",
+      title: "Why AI investment is not paying off, and how to fix it",
       blurb:
-        "Why implementation stalls inside capable teams, and how the gap gets closed.",
-      to: "/blog/the-ai-skill-gap-crisis-why-your-team-cant-implement-ai-and-how-to-bridge-it-in-2026",
+        "Why AI pilots stall, from use case choice and the skills gap to change management and measuring ROI.",
+      to: "/blog/the-ai-paradox-why-your-business-is-investing-in-ai-but-not-seeing-roi-and-how-to-fix-it-in-2026",
     },
   ],
 
@@ -188,18 +176,6 @@ export const serviceResources = {
       blurb:
         "Zero-click search strategy for the queries Google now answers on the results page itself.",
       to: "/blog/the-zero-click-seo-strategy-for-2026-how-to-win-when-google-answers-everything",
-    },
-    {
-      title: "Personalisation without third-party data",
-      blurb:
-        "How targeting survives the end of the third-party cookie, and what replaces it.",
-      to: "/blog/the-cookie-less-future-2026-how-to-personalize-marketing-without-third-party-data",
-    },
-    {
-      title: "Where a 2026 budget is being wasted",
-      blurb:
-        "Which line items to reallocate toward AI and hyper-personalisation, and what that shift returns.",
-      to: "/blog/your-2026-digital-marketing-budget-is-wasted-heres-how-to-reallocate-for-ai-and-hyper-personalization-roi",
     },
   ],
 };

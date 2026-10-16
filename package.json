@@ -7,26 +7,27 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "postbuild": "node scripts/postbuild-guards.mjs"
+    "postbuild": "node scripts/postbuild-guards.mjs",
+    "indexnow": "node scripts/indexnow-submit.mjs",
+    "test:budgets": "node scripts/check-performance.mjs"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.10.10",
     "@emailjs/browser": "^4.4.1",
+    "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@uiw/react-md-editor": "^4.1.2",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "framer-motion": "^11.18.2",
+    "libphonenumber-js": "^1.13.15",
     "next": "16.3.5",
     "react": "19.2.8",
-    "react-countup": "^6.5.3",
     "react-dom": "19.2.8",
-    "react-fast-marquee": "^1.6.5",
     "react-icons": "5.2.1",
     "react-markdown": "^10.1.0",
-    "remark-gfm": "^4.0.1",
-    "swiper": "11.1.4"
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",

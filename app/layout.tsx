@@ -4,13 +4,13 @@ import './globals.css'
 import { Providers } from './providers'
 import { fontVariables } from '@/theme/fonts'
 import { BookingProvider } from '@/context/BookingContext'
-import AnnouncementBar from '@/components/layout/AnnouncementBar'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
-import BookingModal from '@/components/common/BookingModal'
+import HomeIntro from '@/components/home/HomeIntro'
+import BookingModal from '@/components/common/BookingLoader'
 import PageTransition from '@/components/common/PageTransition'
 import ScrollToTop from '@/components/common/ScrollToTop'
-import { ChatBubble } from '@/components/Chatbot'
+import ChatBubble from '@/components/Chatbot/ChatBubble'
 import Analytics from '@/components/common/Analytics'
 import { Analytics as VercelAnalytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
@@ -44,11 +44,19 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
  */
 
 export const metadata: Metadata = {
+  icons: {
+    icon: [
+      { url: '/favicon-32.png?v=2', type: 'image/png', sizes: '32x32' },
+      { url: '/favicon-48.png?v=2', type: 'image/png', sizes: '48x48' },
+    ],
+    shortcut: '/favicon.ico?v=2',
+    apple: [{ url: '/logo-mark-180.png?v=2', sizes: '180x180', type: 'image/png' }],
+  },
   // Phase 1 placeholder. The real metadata — including metadataBase, the per-page
   // absolute titles (NO template, per D7), OG/Twitter and JSON-LD — lands in Phase 7.
   // See MIGRATION-INVENTORY.md §I for every route's exact values.
   title: 'Futurise Solutions',
-  description: 'Phase 1 scaffold — not the production metadata.',
+  description: 'Phase 1 scaffold, not the production metadata.',
 }
 
 /**
@@ -63,7 +71,7 @@ export const metadata: Metadata = {
  * them, and React then reports:
  *   "A tree hydrated but some attributes of the server rendered HTML didn't match"
  *
- * That was a real, reproduced error on this scaffold — not theoretical. Declaring the
+ * That was a real, reproduced error on this scaffold, not theoretical. Declaring the
  * same values in the server render makes both sides agree, so the script becomes a no-op
  * on first load and the mismatch disappears.
  *
@@ -88,7 +96,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       // browser showing zero hydration errors. Suppression would hide a future real
       // mismatch here, so it stays off.
     >
-      <body className="chakra-ui-dark">
+      {/* Extensions may inject attributes into body (e.g. ColorZilla). This only
+          tolerates attributes on this element; child hydration checks stay enabled. */}
+      <body className="chakra-ui-dark" suppressHydrationWarning>
+        <HomeIntro />
         {/* keeps every legacy `#app ...` CSS selector matching — see note above */}
         {/* Reproduces the old App.jsx shell. The flex column + `flex: 1` on main is what
             makes the Footer's `mt="auto"` pin it to the bottom on short pages; dropping it
@@ -121,7 +132,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Suspense fallback={null}>
                 <ScrollToTop />
               </Suspense>
-              <AnnouncementBar />
               <Navbar />
               {/* PageTransition wraps only `children`, exactly as the old shell wrapped
                   <AllRoutes/> — NOT the navbar, bar or footer, which must stay put across

@@ -65,7 +65,7 @@ export async function generateMetadata({
   if (!service) return {}
 
   return buildMetadata({
-    title: service.metaTitle || `${service.title} — New Zealand, India & USA`,
+    title: service.metaTitle || `${service.title}: New Zealand, India & USA`,
     description:
       service.metaDescription || `${service.description} ${service.details}`.slice(0, 160),
     path: `/service/${slug}`,
@@ -120,7 +120,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       '@context': 'https://schema.org',
       '@type': 'Service',
       '@id': `https://www.futurisesolutions.com/service/${slug}#service`,
-      name: `${service.title} — Futurise Solutions`,
+      name: `${service.title}: Futurise Solutions`,
       description: service.metaDescription || service.details,
       url: `https://www.futurisesolutions.com/service/${slug}`,
       serviceType: service.title,

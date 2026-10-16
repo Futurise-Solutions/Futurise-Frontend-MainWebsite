@@ -8,6 +8,7 @@ import BlogCard from "./BlogCard";
 import ArticleSidebar from "./ArticleSidebar";
 import BlogCTA from "./BlogCTA";
 import { mediaUrl, formatDate, readTime } from "@/lib/blog";
+import { CONTACT } from "@/utils/Constant/navigation";
 
 /**
  * Article page chrome — ported verbatim from BlogDetailPage.jsx.
@@ -68,6 +69,11 @@ export default function ArticleShell({
         </Heading>
         <HStack spacing={5} color="text.faint" fontSize="sm" flexWrap="wrap" mb={3}>
           <HStack spacing={2}><Icon as={FiCalendar} /><Text>{formatDate(blog.createdAt)}</Text></HStack>
+          {/* Shown only for a real revision (more than a day after publishing), so readers
+              can see the content was reviewed recently, not just re-saved. */}
+          {blog.updatedAt && new Date(blog.updatedAt) - new Date(blog.createdAt) > 864e5 && (
+            <Text>Updated {formatDate(blog.updatedAt)}</Text>
+          )}
           <HStack spacing={2}><Icon as={FiClock} /><Text>{readTime(blog.content)} min read</Text></HStack>
           {/* Byline links to /about so the claim of expertise is one click from the
               evidence for it — and so the article passes a link to that page. */}
@@ -91,6 +97,18 @@ export default function ArticleShell({
           <Box flex="1" maxW="800px" minW={0}>
             {/* Server-rendered article body. */}
             {children}
+            {/* "Who and how" disclosure, per Google's people-first content guidance: who wrote
+                it, how AI was used, and how to report an error. Keep it true: if the editorial
+                process changes, change this text. */}
+            <Box mt={12} pt={6} borderTop="1px solid" borderColor="border.subtle" color="text.faint" fontSize="sm" lineHeight={1.7}>
+              <Text fontWeight={600} color="text.muted" mb={1}>About this article</Text>
+              <Text>
+                Written by the Futurise Solutions team. We use AI tools to help with research and drafting;
+                our team edits each article and checks figures and regulatory details against the
+                sources linked in it. Spotted something wrong?{" "}
+                <Text as="a" href={`mailto:${CONTACT.email}`} color="accent.solid">Email us</Text>.
+              </Text>
+            </Box>
           </Box>
 
           <ArticleSidebar headings={headings} title={blog.title} slug={blog.slug} />

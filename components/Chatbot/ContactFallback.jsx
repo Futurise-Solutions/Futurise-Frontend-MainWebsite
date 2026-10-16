@@ -1,51 +1,9 @@
-'use client'
-
-import { Box, Text, VStack, Button } from "@chakra-ui/react";
-import RouterLink from "next/link";
-import { FiCalendar, FiArrowRight } from "react-icons/fi";
-import { useBooking } from "../../context/BookingContext";
-
-/**
- * Last-resort answer: shown when both the AI and the keyword matcher fail to
- * find a specific answer. Gives the visitor two direct ways to reach us.
- */
-const ContactFallback = () => {
-  const booking = useBooking();
-  const openBooking = booking?.onOpen;
-
-  return (
-    <Box
-      p={4}
-      borderRadius="14px"
-      border="1px solid"
-      borderColor="border.subtle"
-      bg="bg.surface"
-    >
-      <Text fontSize="14px" color="text.muted" mb={3}>
-        I couldn&apos;t find a specific answer. Here&apos;s how to reach us directly:
-      </Text>
-      <VStack spacing={2} align="stretch">
-        <Button
-          size="sm"
-          variant="gradient"
-          leftIcon={<FiCalendar />}
-          onClick={() => openBooking?.("chatbot-fallback")}
-          isDisabled={!openBooking}
-        >
-          Book a Free Call
-        </Button>
-        <Button
-          as={RouterLink}
-          href="/contact"
-          size="sm"
-          variant="ghostLink"
-          rightIcon={<FiArrowRight />}
-        >
-          Send us a message
-        </Button>
-      </VStack>
-    </Box>
-  );
-};
-
-export default ContactFallback;
+'use client';
+import Link from 'next/link';
+import { useBooking } from '../../context/BookingContext';
+import styles from './Chat.module.css';
+export default function ContactFallback({ failed = false, onRetry, retryDisabled = false }) {
+  const booking=useBooking();
+  const openBooking=booking?.onOpen;
+  return <div className={styles.fallback}><p>{failed?'Sorry, I’m having trouble answering right now. You can try again, or reach the team directly:':'I couldn’t find a specific answer. Here’s how to reach us directly:'}</p>{failed&&onRetry&&<button type="button" onClick={onRetry} disabled={retryDisabled}>Try again <span aria-hidden="true">↻</span></button>}<button type="button" onClick={()=>openBooking?.('chatbot-fallback')} disabled={!openBooking}>Book a Free Call <span aria-hidden="true">↗</span></button><Link href="/contact">Send us a message <span aria-hidden="true">↗</span></Link></div>;
+}

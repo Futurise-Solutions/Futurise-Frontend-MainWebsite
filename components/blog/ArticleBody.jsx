@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import styles from './ArticleBody.module.css'
@@ -52,6 +53,8 @@ const slug = (children) =>
     .replace(/[^\w]+/g, '-')
     .replace(/^-+|-+$/g, '')
 
+const SITE_ORIGIN = 'https://www.futurisesolutions.com'
+
 const components = {
   /* Shifted one level down — see the note above. The `id` still comes from the heading's
      own text, so existing TOC anchors and any inbound #fragment links keep working. */
@@ -63,12 +66,20 @@ const components = {
   /* `######` has nowhere left to shift to — HTML stops at h6. It renders as <h6> with
      the same id, which is the closest correct answer. No published post uses it. */
   h6: ({ children }) => <h6 id={slug(children)}>{children}</h6>,
-  // The old component set isExternal on every link, which is rel+target on all of them.
-  a: ({ href, children }) => (
-    <a href={href} target="_blank" rel="noopener noreferrer">
-      {children}
-    </a>
-  ),
+  /* Internal links (site paths, in-page anchors, our own domain) open in the same tab.
+     Only genuinely external links keep rel+target. */
+  a: ({ href = '', children }) => {
+    if (href.startsWith('#')) return <a href={href}>{children}</a>
+    if (href.startsWith('/') && !href.startsWith('//')) return <Link href={href}>{children}</Link>
+    if (href.startsWith(SITE_ORIGIN)) {
+      return <Link href={href.slice(SITE_ORIGIN.length) || '/'}>{children}</Link>
+    }
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer">
+        {children}
+      </a>
+    )
+  },
   table: ({ children }) => (
     <div className={styles.tableWrap}>
       <table>{children}</table>

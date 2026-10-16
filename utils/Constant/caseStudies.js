@@ -4,45 +4,6 @@
  * Slugs match the route: /case-studies/:slug
  */
 
-export const caseStudiesNav = [
-  {
-    option: "AI Support Agent",
-    slug: "ai-support-agent",
-    desc: "RAG retrieval + human handoff",
-    service: "AI & ML",
-  },
-  {
-    option: "SaaS Platform Scale",
-    slug: "saas-platform-scale",
-    desc: "Multi-tenant rebuild",
-    service: "Web Dev",
-  },
-  {
-    option: "Real Estate App",
-    slug: "real-estate-app",
-    desc: "One React Native codebase",
-    service: "App Dev",
-  },
-  {
-    option: "FinTech UX Redesign",
-    slug: "fintech-ux-redesign",
-    desc: "Progressive-disclosure redesign",
-    service: "UI/UX",
-  },
-  {
-    option: "DeFi Protocol Launch",
-    slug: "defi-protocol-launch",
-    desc: "Non-upgradeable staking contracts",
-    service: "Blockchain",
-  },
-  {
-    option: "SaaS SEO Growth",
-    slug: "saas-seo-growth",
-    desc: "Technical SEO architecture",
-    service: "Marketing",
-  },
-];
-
 // Each service page's matching case study. Case studies were previously reachable only
 // from the navbar dropdown — nothing in any page body linked to them, so they had almost
 // no internal links pointing at them and read as orphaned to a crawler.
@@ -81,7 +42,6 @@ export const caseStudies = {
         "How we built a production RAG support agent for a B2B SaaS company: MongoDB Atlas vector retrieval, Gemini 2.5 Flash generation, confidence-based handoff.",
       keywords:
         "AI customer support agent case study, RAG chatbot production, LLM support automation, reduce support tickets AI, Futurise Solutions AI case study, custom AI agent development, AI workflow automation SaaS",
-      ogImage: "/case-study-ai.png",
     },
 
     hero: {
@@ -89,11 +49,11 @@ export const caseStudies = {
       title: "A Support Agent That Retrieves",
       highlight: "Before It Answers.",
       subtitle:
-        "How we built a production RAG support agent for a US B2B SaaS company — grounded in their own documentation, with a hard escalation path to a human when confidence drops.",
+        "How we built a production RAG support agent for a US B2B SaaS company. It is grounded in their own documentation, with a hard escalation path to a human when confidence drops.",
     },
 
     overview:
-      "A B2B SaaS company in the USA was losing most of its support capacity to repetitive first-line queries — password resets, billing questions, feature explanations — while genuinely technical issues waited behind them. They approached Futurise Solutions to build an AI layer that could answer the routine questions without degrading the experience for customers who needed a person.",
+      "A B2B SaaS company in the USA was losing most of its support capacity to repetitive first-line queries (password resets, billing questions, feature explanations) while genuinely technical issues waited behind them. They approached Futurise Solutions to build an AI layer that could answer the routine questions without degrading the experience for customers who needed a person.",
 
     challenge: {
       heading: "The Problem",
@@ -109,7 +69,7 @@ export const caseStudies = {
 
     solution: {
       heading: "Our Approach",
-      body: "We designed and built a full RAG (Retrieval-Augmented Generation) pipeline backed by a purpose-built knowledge base. Rather than connecting an off-the-shelf chatbot, we engineered the system to understand the client's specific product context — integrating live ticket data, documentation, and CRM metadata into a unified vector store queried in real-time.",
+      body: "We designed and built a full RAG (Retrieval-Augmented Generation) pipeline backed by a purpose-built knowledge base. Rather than connecting an off-the-shelf chatbot, we engineered the system to understand the client's specific product context. It integrates live ticket data, documentation, and CRM metadata into a unified vector store queried in real-time.",
       steps: [
         {
           title: "Knowledge Architecture",
@@ -141,7 +101,7 @@ export const caseStudies = {
 
     keyInsight: {
       title: "Chunking Beat Model Size",
-      body: "The largest gains in answer quality came from how the documentation was split and how context was assembled in the prompt — not from reaching for a bigger, more expensive model. Character-count chunking split code blocks and numbered procedures mid-instruction, so retrieval returned fragments that read as complete but were not. Switching to syntax-aware chunking that respects code fences and step boundaries, plus a metadata taxonomy that keeps release notes distinct from SOPs, did more for grounding than any model upgrade we tested. Cheap, well-structured context outperforms expensive, poorly-structured context."
+      body: "The largest gains in answer quality came from how the documentation was split and how context was assembled in the prompt, not from reaching for a bigger, more expensive model. Character-count chunking split code blocks and numbered procedures mid-instruction, so retrieval returned fragments that read as complete but were not. Switching to syntax-aware chunking that respects code fences and step boundaries, plus a metadata taxonomy that keeps release notes distinct from SOPs, did more for grounding than any model upgrade we tested. Cheap, well-structured context outperforms expensive, poorly-structured context."
     },
 
     timeline: [
@@ -161,7 +121,7 @@ export const caseStudies = {
     faqs: [
       {
         q: "What AI model powers the support agent?",
-        a: "We used Google Gemini 2.5 Flash for generation and text-embedding-004 for semantic retrieval. The model choice was driven by latency requirements — responses under 2 seconds — and strong performance on technical documentation.",
+        a: "We used Google Gemini 2.5 Flash for generation and text-embedding-004 for semantic retrieval. The model choice was driven by latency requirements (responses under 2 seconds) and strong performance on technical documentation.",
       },
       {
         q: "How did you prevent the AI from giving wrong answers?",
@@ -169,7 +129,7 @@ export const caseStudies = {
       },
       {
         q: "Can the AI handle billing and account queries?",
-        a: "Yes. We integrated the Stripe API so the agent can look up billing status, invoice history, and subscription tier in real-time — securely and only after verifying the user's session token.",
+        a: "Yes. We integrated the Stripe API so the agent can look up billing status, invoice history, and subscription tier in real-time, securely and only after verifying the user's session token.",
       },
       {
         q: "How long did the deployment take?",
@@ -192,10 +152,9 @@ export const caseStudies = {
     meta: {
       title: "Rebuilding a B2B SaaS Platform | Futurise Solutions",
       description:
-        "How we rebuilt a B2B property management SaaS on a multi-tenant architecture — React, Node.js, MongoDB namespacing, Redis caching, and CI/CD on AWS.",
+        "How we rebuilt a B2B property management SaaS on a multi-tenant architecture: React, Node.js, MongoDB namespacing, Redis caching and CI/CD on AWS.",
       keywords:
         "SaaS platform development case study, React Node.js SaaS build, MVP to scale web app, B2B SaaS development company, property management SaaS, web application development case study, Futurise Solutions web dev",
-      ogImage: "/case-study-saas.png",
     },
 
     hero: {
@@ -215,9 +174,9 @@ export const caseStudies = {
       points: [
         "Previous build had N+1 database queries causing 8-second load times at just 50 concurrent users",
         "No multi-tenancy: each customer's data was not properly isolated",
-        "No CI/CD pipeline — deployments took 4 hours and frequently broke production",
+        "No CI/CD pipeline: deployments took 4 hours and frequently broke production",
         "Zero automated testing: every release was a manual QA nightmare",
-        "No analytics — the founding team couldn't see which features users actually used",
+        "No analytics: the founding team couldn't see which features users actually used",
       ],
     },
 
@@ -227,7 +186,7 @@ export const caseStudies = {
       steps: [
         {
           title: "Multi-Tenant Architecture",
-          desc: "Built a database-per-tenant model using MongoDB namespacing, with shared infrastructure and isolated data boundaries — enabling both data security and operational simplicity.",
+          desc: "Built a database-per-tenant model using MongoDB namespacing, with shared infrastructure and isolated data boundaries. This gives both data security and operational simplicity.",
         },
         {
           title: "Performance-First Frontend",
@@ -235,11 +194,11 @@ export const caseStudies = {
         },
         {
           title: "Scalable Backend & API",
-          desc: "Designed a RESTful Node.js/Express API with Redis caching for hot data paths, rate limiting, and database indexing strategy — handling concurrent traffic without degradation.",
+          desc: "Designed a RESTful Node.js/Express API with Redis caching for hot data paths, rate limiting, and database indexing strategy. It handles concurrent traffic without degradation.",
         },
         {
           title: "CI/CD & Observability",
-          desc: "Implemented GitHub Actions for automated testing and zero-downtime deployments to AWS. Added Datadog for APM, error tracking, and usage analytics — giving the team full production visibility.",
+          desc: "Implemented GitHub Actions for automated testing and zero-downtime deployments to AWS. Added Datadog for APM, error tracking, and usage analytics, giving the team full production visibility.",
         },
       ],
     },
@@ -248,14 +207,14 @@ export const caseStudies = {
 
     results: [
       { value: "8 mo", label: "Discovery to production", desc: "One-week technical discovery sprint, then staged rebuild in two-week cycles" },
-      { value: "DB-per-tenant", label: "Multi-tenancy model", desc: "MongoDB namespacing on shared infrastructure — isolated data boundaries without separate clusters" },
+      { value: "DB-per-tenant", label: "Multi-tenancy model", desc: "MongoDB namespacing on shared infrastructure, with isolated data boundaries and no separate clusters" },
       { value: "Redis", label: "Caching layer", desc: "Hot data paths cached ahead of the database, with rate limiting at the API edge" },
       { value: "Aggregation", label: "Data access pattern", desc: "Dashboard reads restructured into aggregation pipelines instead of per-record queries" },
     ],
 
     keyInsight: {
       title: "Fix the Query Layer Before the Infrastructure",
-      body: "The inherited build was slow because of how it talked to the database, not because it lacked servers. Dashboard pages issued a separate query per record rather than fetching sets — the classic N+1 pattern — so cost grew with every row on screen. We profiled the access layer first, restructured those reads into aggregation pipelines, added indexes matched to the actual query shapes, and only then put Redis in front of the hot paths. Scaling the infrastructure would have made the same inefficiency more expensive without making it faster. Read the queries before you provision anything."
+      body: "The inherited build was slow because of how it talked to the database, not because it lacked servers. Dashboard pages issued a separate query per record rather than fetching sets (the classic N+1 pattern), so cost grew with every row on screen. We profiled the access layer first, restructured those reads into aggregation pipelines, added indexes matched to the actual query shapes, and only then put Redis in front of the hot paths. Scaling the infrastructure would have made the same inefficiency more expensive without making it faster. Read the queries before you provision anything."
     },
 
     timeline: [
@@ -283,7 +242,7 @@ export const caseStudies = {
       },
       {
         q: "How long was the MVP phase before scaling?",
-        a: "We delivered a production-ready MVP in 6 weeks — covering core dashboard, authentication, and unit management. The remaining 6 months were structured 2-week sprints adding analytics, billing, integrations, and scaling work.",
+        a: "We delivered a production-ready MVP in 6 weeks, covering core dashboard, authentication and unit management. The remaining 6 months were structured 2-week sprints adding analytics, billing, integrations, and scaling work.",
       },
     ],
   },
@@ -302,10 +261,9 @@ export const caseStudies = {
     meta: {
       title: "React Native Property App for India & US Markets",
       description:
-        "How we built a cross-platform React Native property app for India and the USA — list virtualization, viewport-bounded maps and offline browsing.",
+        "How we built a cross-platform React Native property app for India and the USA: list virtualization, viewport-bounded maps and offline browsing.",
       keywords:
         "real estate mobile app development case study, React Native property app, cross-platform app development India USA, mobile app 10k downloads, property search app case study, Futurise Solutions app dev",
-      ogImage: "/case-study-app.png",
     },
 
     hero: {
@@ -317,11 +275,11 @@ export const caseStudies = {
     },
 
     overview:
-      "A real estate platform operating in India and the USA needed a mobile-first experience for both property seekers and agents. Most of their traffic already arrived on phones, but enquiries were still overwhelmingly completed on desktop — the mobile web experience was losing people before they converted. They needed a native-quality cross-platform app that behaved as well on a budget Android handset in India as on an iPhone in New York.",
+      "A real estate platform operating in India and the USA needed a mobile-first experience for both property seekers and agents. Most of their traffic already arrived on phones, but enquiries were still overwhelmingly completed on desktop. The mobile web experience was losing people before they converted. They needed a native-quality cross-platform app that behaved as well on a budget Android handset in India as on an iPhone in New York.",
 
     challenge: {
       heading: "The Problem",
-      body: "The core challenge was not just building a mobile app — it was building one that could serve two very different markets simultaneously. Indian users were on low-memory Android devices on 4G networks; US users expected a premium native iOS experience. The app needed to feel fast, native, and reliable for both — with the same codebase.",
+      body: "The core challenge was not just building a mobile app. It was building one that could serve two very different markets at once. Indian users were on low-memory Android devices on 4G networks; US users expected a premium native iOS experience. The app needed to feel fast, native, and reliable for both, with the same codebase.",
       points: [
         "Most traffic arrived on mobile, but enquiries were completed almost entirely on desktop",
         "Property listing data was served via a slow REST API with no pagination strategy",
@@ -337,15 +295,15 @@ export const caseStudies = {
       steps: [
         {
           title: "Performance Architecture",
-          desc: "Implemented FlashList for virtualized property listings (10x faster than FlatList), lazy image loading with placeholders, and API response pagination — keeping scroll performance smooth even on 3-year-old Android hardware.",
+          desc: "Implemented FlashList for virtualized property listings (10x faster than FlatList), lazy image loading with placeholders, and API response pagination. Scroll performance stays smooth even on 3-year-old Android hardware.",
         },
         {
           title: "Advanced Maps Integration",
-          desc: "Integrated Google Maps with custom overlays for neighborhood boundaries, cluster markers for dense urban areas, and a radius-based search that queries only the visible map viewport — reducing API calls by 85%.",
+          desc: "Integrated Google Maps with custom overlays for neighborhood boundaries, cluster markers for dense urban areas, and a radius-based search that queries only the visible map viewport. This reduced API calls by 85%.",
         },
         {
           title: "In-App Messaging",
-          desc: "Built an encrypted real-time messaging layer using Firebase Realtime Database with encryption for agent-buyer communication — integrated with push notifications so agents never miss a lead.",
+          desc: "Built an encrypted real-time messaging layer using Firebase Realtime Database with encryption for agent-buyer communication, integrated with push notifications so agents never miss a lead.",
         },
         {
           title: "Offline-First Design",
@@ -365,7 +323,7 @@ export const caseStudies = {
 
     keyInsight: {
       title: "Performance Is the Feature, Not the Polish",
-      body: "The device floor sets the design budget. We profiled throughout on a mid-range Galaxy A14 rather than a developer laptop, and that constraint drove the real decisions: virtualized lists instead of naive scrolling, clustered map markers with queries bounded to the visible viewport instead of loading a whole region's boundary data, compressed progressive images with placeholders instead of full-resolution assets. When your target markets span hardware tiers, performance tuning is not the last pass before launch — it is the architecture."
+      body: "The device floor sets the design budget. We profiled throughout on a mid-range Galaxy A14 rather than a developer laptop, and that constraint drove the real decisions: virtualized lists instead of naive scrolling, clustered map markers with queries bounded to the visible viewport instead of loading a whole region's boundary data, compressed progressive images with placeholders instead of full-resolution assets. When your target markets span hardware tiers, performance tuning is not the last pass before launch. It is the architecture."
     },
 
     timeline: [
@@ -385,7 +343,7 @@ export const caseStudies = {
     faqs: [
       {
         q: "Why React Native over separate native apps?",
-        a: "With two markets (India and USA) and two platforms (iOS and Android), separate native builds would have multiplied both the engineering cost and the long-term maintenance surface. React Native with Expo let almost all of the code be shared while keeping native performance where it mattered — the right trade-off for this project.",
+        a: "With two markets (India and USA) and two platforms (iOS and Android), separate native builds would have multiplied both the engineering cost and the long-term maintenance surface. React Native with Expo let almost all of the code be shared while keeping native performance where it mattered. It was the right trade-off for this project.",
       },
       {
         q: "How did you handle performance on low-end Android devices?",
@@ -415,7 +373,6 @@ export const caseStudies = {
         "How we rebuilt a wealth management dashboard: user research, progressive-disclosure information architecture, a tokenised Figma design system, WCAG 2.1 AA.",
       keywords:
         "FinTech dashboard redesign case study, UI UX design fintech, user retention improvement design, SaaS dashboard UX, Figma design system case study, product design agency, Futurise Solutions UI UX",
-      ogImage: "/case-study-uiux.png",
     },
 
     hero: {
@@ -423,11 +380,11 @@ export const caseStudies = {
       title: "Rebuilding a Wealth Dashboard",
       highlight: "Around Progressive Disclosure.",
       subtitle:
-        "A research-led redesign of a FinTech wealth management platform — interviews and session review, then a new information architecture, then a tokenised design system engineering could extend without us.",
+        "A research-led redesign of a FinTech wealth management platform: interviews and session review, then a new information architecture, then a tokenised design system engineering could extend without us.",
     },
 
     overview:
-      "A UK-based wealth management FinTech had a retention problem rather than an acquisition one: trials converted well, but a large share of new customers left within their first few months. Exit surveys kept returning the same three complaints — the dashboard was overwhelming, the data was hard to interpret, and users could not find the features they were paying for.",
+      "A UK-based wealth management FinTech had a retention problem rather than an acquisition one: trials converted well, but a large share of new customers left within their first few months. Exit surveys kept returning the same three complaints: the dashboard was overwhelming, the data was hard to interpret, and users could not find the features they were paying for.",
 
     challenge: {
       heading: "The Problem",
@@ -435,7 +392,7 @@ export const caseStudies = {
       points: [
         "Trial conversion was healthy, but early-life retention was not",
         "Dashboard surfaced every available metric with no information hierarchy",
-        "Checking portfolio performance — the most common task — took far longer than it should",
+        "Checking portfolio performance, the most common task, took far longer than it should",
         "The most valuable feature sat three clicks deep and went undiscovered by many paying users",
         "No responsive layout, despite a substantial share of users arriving on phones",
       ],
@@ -451,11 +408,11 @@ export const caseStudies = {
         },
         {
           title: "Information Architecture",
-          desc: "Reduced the primary dashboard from 47 to 9 visible data points — surfacing only what drives immediate action. Introduced a progressive disclosure model: summary first, detail on demand. Rebuilt navigation with a clear 3-tier hierarchy.",
+          desc: "Reduced the primary dashboard from 47 to 9 visible data points, surfacing only what drives immediate action. Introduced a progressive disclosure model: summary first, detail on demand. Rebuilt navigation with a clear 3-tier hierarchy.",
         },
         {
           title: "Design System & Component Library",
-          desc: "Built a 200-component Figma design system (data visualisation components, form patterns, status states, empty states) with full dark mode support — enabling the engineering team to build consistently without per-feature design decisions.",
+          desc: "Built a 200-component Figma design system (data visualisation components, form patterns, status states, empty states) with full dark mode support, so the engineering team could to build consistently without per-feature design decisions.",
         },
         {
           title: "Usability Testing",
@@ -499,11 +456,11 @@ export const caseStudies = {
       },
       {
         q: "How long did the design system take to build?",
-        a: "The core design system with components took 4 weeks. We built it in parallel with the UX research phase so that when the information architecture was finalised, we had a component library ready to compose the high-fidelity screens — dramatically compressing the overall timeline.",
+        a: "The core design system with components took 4 weeks. We built it in parallel with the UX research phase so that when the information architecture was finalised, we had a component library ready to compose the high-fidelity screens. This compressed the overall timeline a lot.",
       },
       {
         q: "Did you measure the business impact post-launch?",
-        a: "Yes. Ninety-day retention was agreed as the primary success metric before the work started, alongside feature discovery rate — whether users reached the key feature in their first session — and task-completion time across a set of benchmark tasks. Those measurements belong to the client and we do not publish their figures.",
+        a: "Yes. Ninety-day retention was agreed as the primary success metric before the work started, alongside feature discovery rate (whether users reached the key feature in their first session) and task-completion time across a set of benchmark tasks. Those measurements belong to the client and we do not publish their figures.",
       },
     ],
   },
@@ -520,12 +477,11 @@ export const caseStudies = {
     year: "2026",
 
     meta: {
-      title: "DeFi Staking Protocol Build — Blockchain Case Study",
+      title: "DeFi Staking Protocol Build: Blockchain Case Study",
       description:
-        "How we architected and shipped a dual-pool DeFi staking and liquidity protocol — non-upgradeable contracts, MEV-resistant launch, Web3 frontend.",
+        "How we architected and shipped a dual-pool DeFi staking and liquidity protocol: non-upgradeable contracts, MEV-resistant launch, Web3 frontend.",
       keywords:
         "DeFi protocol development case study, smart contract development, staking protocol launch, smart contract audit preparation, blockchain development case study, Web3 startup, Ethereum DeFi, Futurise Solutions blockchain",
-      ogImage: "/case-study-blockchain.png",
     },
 
     hero: {
@@ -541,9 +497,9 @@ export const caseStudies = {
 
     challenge: {
       heading: "The Problem",
-      body: "DeFi protocol launches have the highest engineering stakes of any category we work in. A single smart contract vulnerability can result in complete fund loss — and in a space with sophisticated adversarial actors (MEV bots, flash loan attackers), the margin for error is zero. The client also needed to launch with community trust in a market that had seen numerous rug pulls and exploits.",
+      body: "DeFi protocol launches have the highest engineering stakes of any category we work in. A single smart contract vulnerability can result in complete fund loss. In a space with sophisticated adversarial actors (MEV bots, flash loan attackers), the margin for error is zero. The client also needed to launch with community trust in a market that had seen numerous rug pulls and exploits.",
       points: [
-        "Smart contract exploits had drained billions from DeFi in 2023 — trust was at a low",
+        "Smart contract exploits had drained billions from DeFi in 2023, and trust was at a low",
         "Existing smart contract drafts had 3 critical vulnerabilities in a preliminary review",
         "Frontend needed to abstract wallet complexity for non-crypto-native users",
         "Token launch mechanics required precise timing and on-chain coordination",
@@ -579,13 +535,13 @@ export const caseStudies = {
     results: [
       { value: "4", label: "Contracts in the suite", desc: "Roughly 1,800 lines of Solidity, rewritten from the client's original drafts" },
       { value: "16 wks", label: "Design to mainnet", desc: "Contract design, fuzz testing, audit preparation and wallet integration" },
-      { value: "Non-upgradeable", label: "Core staking contracts", desc: "No proxy, no admin upgrade path — removes admin-key compromise as an attack surface" },
+      { value: "Non-upgradeable", label: "Core staking contracts", desc: "No proxy, no admin upgrade path. This removes admin-key compromise as an attack surface" },
       { value: "48 hrs", label: "Governance time-lock", desc: "Reward-rate and lock-period changes are visible on-chain before they take effect" },
     ],
 
     keyInsight: {
       title: "Security Decisions Are Public Decisions",
-      body: "In a trustless environment, the security architecture is not a private engineering concern — it is the thing users read before they commit funds. Open-source contracts, an audit-ready codebase and a deliberately non-upgradeable core were design choices made to be inspected, not just to be safe. The tradeoff is real and worth stating: immutability means no patch path, so every decision has to be settled before deployment rather than after."
+      body: "In a trustless environment, the security architecture is not a private engineering concern. It is the thing users read before they commit funds. Open-source contracts, an audit-ready codebase and a deliberately non-upgradeable core were design choices made to be inspected, not just to be safe. The tradeoff is real and worth stating: immutability means no patch path, so every decision has to be settled before deployment rather than after."
     },
 
     timeline: [
@@ -605,15 +561,15 @@ export const caseStudies = {
     faqs: [
       {
         q: "What was the cost of the security audit?",
-        a: "Audit cost scales with the size and complexity of the contract suite — in this case four contracts of roughly 1,800 lines of Solidity. We quote it as a separate line item rather than absorbing it into the build, because it is paid to an independent firm and the client should see what they are buying. We treat an external audit as a non-negotiable cost for any protocol that holds user funds.",
+        a: "Audit cost scales with the size and complexity of the contract suite. In this case four contracts of roughly 1,800 lines of Solidity. We quote it as a separate line item rather than absorbing it into the build, because it is paid to an independent firm and the client should see what they are buying. We treat an external audit as a non-negotiable cost for any protocol that holds user funds.",
       },
       {
         q: "How did you protect against MEV bots during the token launch?",
-        a: "We used a commit-reveal scheme for the initial token distribution — users committed a hash of their intent before the reveal window opened. This prevents front-running bots from seeing the transaction and getting in ahead. The AMM also had a 3-block delay on large swaps during the first 48 hours.",
+        a: "We used a commit-reveal scheme for the initial token distribution. Users committed a hash of their intent before the reveal window opened. This prevents front-running bots from seeing the transaction and getting in ahead. The AMM also had a 3-block delay on large swaps during the first 48 hours.",
       },
       {
         q: "Is the protocol upgradeable?",
-        a: "The core staking contracts are non-upgradeable by design — this removes a major attack surface (admin key compromise). Governance parameters (reward rates, lock periods) are adjustable via a 48-hour time-locked multi-sig, so the community can see changes before they take effect.",
+        a: "The core staking contracts are non-upgradeable by design. This removes a major attack surface (admin key compromise). Governance parameters (reward rates, lock periods) are adjustable via a 48-hour time-locked multi-sig, so the community can see changes before they take effect.",
       },
     ],
   },
@@ -635,7 +591,6 @@ export const caseStudies = {
         "How we built an organic search system for a B2B SaaS platform: technical foundation, intent-mapped topic clusters, internal linking and schema.",
       keywords:
         "SaaS SEO case study, organic traffic growth, B2B SaaS SEO strategy, content clustering SEO, traffic growth, SEO agency case study, digital marketing results, Futurise Solutions marketing",
-      ogImage: "/case-study-marketing.png",
     },
 
     hero: {
@@ -643,7 +598,7 @@ export const caseStudies = {
       title: "Building an SEO System",
       highlight: "Foundation First.",
       subtitle:
-        "How we rebuilt a B2B SaaS platform's organic search architecture — fixing the technical layer before publishing a single article, then structuring content as intent-mapped clusters.",
+        "How we rebuilt a B2B SaaS platform's organic search architecture. We fixed the technical layer before publishing a single article, then structured content as intent-mapped clusters.",
     },
 
     overview:
@@ -657,8 +612,8 @@ export const caseStudies = {
         "Minimal earned domain authority",
         "Core product pages were thin and carried no semantic depth",
         "A blog existed but had gone unused for over a year",
-        "No internal linking architecture — page authority was not distributed",
-        "Core Web Vitals: LCP 5.8s, CLS 0.42 — failing across all metrics",
+        "No internal linking architecture: page authority was not distributed",
+        "Core Web Vitals: LCP 5.8s, CLS 0.42, failing across all metrics",
       ],
     },
 
@@ -668,7 +623,7 @@ export const caseStudies = {
       steps: [
         {
           title: "Technical SEO Foundation",
-          desc: "Fixed all crawl errors, implemented canonical tags, rebuilt XML sitemap, restructured URL architecture, and optimised Core Web Vitals — LCP from 5.8s to 1.6s, CLS from 0.42 to 0.03.",
+          desc: "Fixed all crawl errors, implemented canonical tags, rebuilt XML sitemap, restructured URL architecture, and optimised Core Web Vitals: LCP from 5.8s to 1.6s, CLS from 0.42 to 0.03.",
         },
         {
           title: "Keyword & Intent Architecture",
@@ -676,7 +631,7 @@ export const caseStudies = {
         },
         {
           title: "Content Production at Scale",
-          desc: "Produced 2 pillar pages and 6 cluster articles per month — all structured for featured snippet targeting, People Also Ask, and AI Overview citation. Every piece used E-E-A-T signals.",
+          desc: "Produced 2 pillar pages and 6 cluster articles per month, all structured for featured snippet targeting, People Also Ask, and AI Overview citation. Every piece used E-E-A-T signals.",
         },
         {
           title: "Link Acquisition",
@@ -696,7 +651,7 @@ export const caseStudies = {
 
     keyInsight: {
       title: "Structure Beats Volume",
-      body: "Structured topic clusters built around a narrow subject area are a stronger foundation for search authority than a larger number of scattered, unrelated articles. The internal link architecture is what makes the difference: when every cluster article links up to a pillar page and the pillar links back down, crawlers find new content through existing indexed pages rather than waiting to discover orphans. The corollary is that the technical layer has to come first — publishing into a site with crawl errors, missing canonicals and a stale sitemap means the architecture you designed is not the architecture a crawler actually sees."
+      body: "Structured topic clusters built around a narrow subject area are a stronger foundation for search authority than a larger number of scattered, unrelated articles. The internal link architecture is what makes the difference: when every cluster article links up to a pillar page and the pillar links back down, crawlers find new content through existing indexed pages rather than waiting to discover orphans. The corollary is that the technical layer has to come first. Publishing into a site with crawl errors, missing canonicals and a stale sitemap means the architecture you designed is not the architecture a crawler actually sees."
     },
 
     timeline: [
@@ -720,11 +675,122 @@ export const caseStudies = {
       },
       {
         q: "How did you generate original data for E-E-A-T?",
-        a: "We surveyed compliance professionals (via the client's existing customer base and LinkedIn) to generate a proprietary compliance report. This became the most linked asset in the campaign — earning backlinks in its first month.",
+        a: "We surveyed compliance professionals (via the client's existing customer base and LinkedIn) to generate a proprietary compliance report. This became the most linked asset in the campaign, earning backlinks in its first month.",
       },
       {
         q: "When did traffic start to move?",
         a: "Month 2 after we fixed Core Web Vitals and submitted the restructured sitemap. We saw Google begin re-crawling and re-indexing at a higher frequency. The first major ranking movements came in Month 3, with the full compounding effect visible by Month 5.",
+      },
+    ],
+  },
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     7. E-commerce & CRO — Shopify store for a D2C brand
+     The brand is under NDA: never add its name, logo, URL or screenshots here.
+     Every figure below was confirmed by the team (Oct 2026). Do not round them up.
+  ───────────────────────────────────────────────────────────────────────── */
+  "shopify-cro-d2c-brand": {
+    slug: "shopify-cro-d2c-brand",
+    service: "E-commerce & CRO",
+    industry: "D2C Health & Wellness",
+    location: "India",
+    duration: "Ongoing retainer",
+    year: "2026",
+
+    meta: {
+      title: "Shopify CRO Case Study: ~20× Monthly Revenue for a D2C Brand",
+      description:
+        "We reworked a D2C brand's Shopify product page, cart drawer, upsells and checkout. Revenue went from about ₹5,000 a month to ₹3,00,000 in the latest quarter.",
+      keywords:
+        "Shopify CRO case study, Shopify conversion rate optimisation India, Shopify cart drawer upsell, Shopify product page optimisation, D2C Shopify agency India, Shopify store development India, Futurise Solutions Shopify",
+    },
+
+    hero: {
+      eyebrow: "Case Study · E-commerce & CRO",
+      title: "From ₹5K a Month to",
+      highlight: "₹3 Lakh a Quarter.",
+      subtitle:
+        "How we reworked an Indian D2C health & wellness brand's Shopify store so the product page, cart, upsells, checkout and reviews work as one buying path. Then we kept improving it, month after month.",
+    },
+
+    overview:
+      "An Indian D2C health & wellness brand sold through its own Shopify store, but the store was making about ₹5,000 a month. The products and the brand's marketing were reaching people; the store itself was not turning enough of those visits into orders. Futurise Solutions took on the store's conversion work and stayed on as its ongoing development partner. In the most recent quarter the store closed ₹3,00,000 in revenue. That is an average of about ₹1,00,000 a month, roughly twenty times where it started.",
+
+    challenge: {
+      heading: "The Problem",
+      body: "The store ran on a largely standard theme setup. Product page, cart and checkout had each been set up on their own rather than designed as one path from interest to payment, so every step was a place a shopper could drift away. For a small brand, every lost order mattered.",
+      points: [
+        "Revenue of roughly ₹5,000 a month from the brand's own store",
+        "Product page, cart and checkout not designed as a single buying path",
+        "No in-cart upsell, so each order carried a single item more often than it needed to",
+        "Little on-page social proof at the moment of decision",
+        "A theme that needed custom work rather than more off-the-shelf apps",
+      ],
+    },
+
+    solution: {
+      heading: "Our Approach",
+      body: "We treated the store as one funnel and worked on the steps in the order a shopper meets them. Changes were built into the theme itself (custom Liquid sections and snippets) so the store stayed fast and maintainable instead of accumulating apps.",
+      steps: [
+        {
+          title: "Product Page Rework",
+          desc: "Reworked the product page layout and buy box in custom Liquid sections, so the information a shopper needs to decide sits next to the button that lets them act on it.",
+        },
+        {
+          title: "Custom Cart Drawer with Upsells",
+          desc: "Replaced the cart page with a slide-out cart drawer that keeps the shopper on the page, with relevant upsell suggestions inside the cart where adding one more item is a single tap.",
+        },
+        {
+          title: "One-Click Checkout",
+          desc: "Shortened the path from cart to payment with one-click checkout, removing steps between the decision to buy and the completed order.",
+        },
+        {
+          title: "Reviews as Social Proof",
+          desc: "Integrated Judge.me reviews into the product pages so real customer feedback is visible at the point of decision.",
+        },
+        {
+          title: "Ongoing Updates & Maintenance",
+          desc: "Stayed on as the store's development partner, shipping updates, fixes and improvements as the brand's range and campaigns change.",
+        },
+      ],
+    },
+
+    stack: ["Shopify", "Liquid (custom sections & snippets)", "Judge.me", "Shopify app configuration", "One-click checkout"],
+
+    results: [
+      { value: "~20×", label: "Monthly revenue", desc: "From about ₹5,000 a month to an average of about ₹1,00,000 a month across the latest quarter" },
+      { value: "₹3,00,000", label: "Revenue, latest quarter", desc: "Closed by the store in the most recent quarter" },
+      { value: "One path", label: "Funnel scope", desc: "Product page, cart drawer, upsells, checkout and reviews designed as a single buying journey" },
+      { value: "Ongoing", label: "Engagement", desc: "Continuous updates and maintenance as the brand's needs change" },
+    ],
+
+    keyInsight: {
+      title: "Fix the Path, Not the Pieces",
+      body: "Conversion problems on small Shopify stores are rarely one broken thing. They are a series of small exits: a product page that leaves a question unanswered, a cart page that takes the shopper away from the product, a checkout with one step too many. Working on the product page, cart and checkout as one path, and building the changes into the theme rather than stacking apps, is what let a small store compound its improvements instead of trading one problem for another.",
+    },
+
+    testimonial: null,
+
+    faqs: [
+      {
+        q: "Was all of the growth from conversion work?",
+        a: "No single change explains it, and we don't claim it does. The brand's own marketing brings shoppers to the store; our work was making the store better at turning those visits into orders and larger baskets, and keeping it that way with ongoing updates. Revenue went from about ₹5,000 a month to ₹3,00,000 in the latest quarter over that period.",
+      },
+      {
+        q: "Can we see the store?",
+        a: "The brand is under NDA, so we don't name it publicly. We're happy to walk you through the work (product page, cart drawer, upsells and checkout) on a live call.",
+      },
+      {
+        q: "Do you work on existing Shopify stores, or only new builds?",
+        a: "Both. This was an existing store: we worked inside its theme with custom Liquid sections and snippets rather than rebuilding from scratch, which kept the brand trading throughout.",
+      },
+      {
+        q: "Why build into the theme instead of installing more apps?",
+        a: "Every app adds scripts to every page and its own settings to maintain. Building the cart drawer, upsells and product page sections into the theme keeps the store faster and easier to change later, and leaves apps for the things that genuinely need them, like Judge.me for reviews.",
+      },
+      {
+        q: "What does an engagement like this look like after launch?",
+        a: "A retainer. We ship updates, fixes and improvements as the brand's needs change (new products, campaigns, seasonal changes), rather than handing over the store and walking away.",
       },
     ],
   },

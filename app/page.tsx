@@ -36,7 +36,7 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    name: 'Futurise Solutions — AI, SaaS & Web App Development Studio',
+    name: 'Futurise Solutions: AI, SaaS & Web App Development Studio',
     url: 'https://www.futurisesolutions.com/',
     description:
       'Futurise Solutions builds AI agents, SaaS platforms, web apps, mobile apps & Web3 products end-to-end.',
@@ -64,8 +64,8 @@ export default function Page() {
   return (
     <>
       <JsonLd data={jsonLd} />
-      {/* LatestBlogs is an async server component, so it is created HERE and passed
-          into the client body as a child. */}
+      {/* The homepage composition and blog fetch remain server-rendered; only
+          interactive sections hydrate on the client. */}
       <HomePageBody latestBlogs={<LatestBlogs />} />
     </>
   )

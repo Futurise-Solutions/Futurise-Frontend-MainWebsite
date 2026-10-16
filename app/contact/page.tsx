@@ -5,9 +5,9 @@ import { buildMetadata } from '@/lib/seo'
 import { AREAS_SERVED, AREAS_SERVED_ISO } from '@/utils/Constant'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Contact Us — Get a Free Quote | Futurise Solutions',
+  title: 'Contact Us: Get a Free Quote | Futurise Solutions',
   description:
-    'Start your AI, SaaS, web or mobile app project with Futurise Solutions. Book a strategy call or send us a message — we reply within one business day.',
+    'Start your AI, SaaS, web or mobile app project with Futurise Solutions. Book a strategy call or send us a message. We reply within one business day.',
   path: '/contact',
   image: '/contactus.png',
   keywords:

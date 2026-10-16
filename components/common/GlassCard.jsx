@@ -16,6 +16,7 @@ import { Box } from "@chakra-ui/react";
  */
 const GlassCard = ({ children, hover = true, tone = "default", ...rest }) => (
   <Box
+    data-glass-card=""
     position="relative"
     isolation="isolate"
     border="1px solid"

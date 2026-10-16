@@ -26,7 +26,7 @@ export const metadata: Metadata = buildMetadata({
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Privacy Policy — Futurise Solutions',
+  name: 'Privacy Policy: Futurise Solutions',
   url: 'https://www.futurisesolutions.com/privacy',
   description: 'Privacy policy detailing how Futurise Solutions handles personal data.',
   breadcrumb: {

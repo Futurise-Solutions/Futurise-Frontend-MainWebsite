@@ -58,7 +58,7 @@ export const inMeta = {
   // 152 characters. The SUBJECT is India — Indian businesses and how engagements run —
   // not one city. The Udaipur team is a supporting fact inside the page, not its framing.
   description:
-    "Custom software, AI and SaaS for Indian businesses — built by an in-house engineering team in India, quoted in rupees on fixed scope, inside your working day.",
+    "Custom software, AI and SaaS for Indian businesses, built by an in-house engineering team in India, quoted in rupees on fixed scope, inside your working day.",
   // India-level terms lead. The two Udaipur terms are kept at the tail because the team
   // and two delivered clients are genuinely there, but they must not out-weight the
   // national terms this page exists to win.
@@ -76,7 +76,7 @@ export const inPresence = [
   {
     title: "The engineering team is in India",
     detail:
-      "Not a sales office, not a partner network, not a contracted vendor we resell. The engineers who write your code are in India, working from Udaipur, Rajasthan. For an Indian client that removes the layer most offshore arrangements add — you are not briefing an account manager in one country who relays it to a team in another.",
+      "Not a sales office, not a partner network, not a contracted vendor we resell. The engineers who write your code are in India, working from Udaipur, Rajasthan. For an Indian client that removes the layer most offshore arrangements add: you are not briefing an account manager in one country who relays it to a team in another.",
   },
   {
     title: "Indian clients, named and unnamed",
@@ -86,7 +86,7 @@ export const inPresence = [
   {
     title: "The contracting entity is in New Zealand",
     detail:
-      "Futurise Solutions is a company registered in Wellington, New Zealand, founded in 2024. We hold no Indian entity. You should have that before the first call rather than after it, because it decides how the contract and the invoice work — and for some buyers, particularly those needing an Indian supplier for procurement reasons, it rules us out. Where that is your constraint we will say so.",
+      "Futurise Solutions is a company registered in Wellington, New Zealand, founded in 2024. We hold no Indian entity. You should have that before the first call rather than after it, because it decides how the contract and the invoice work. For some buyers, particularly those needing an Indian supplier for procurement reasons, it rules us out. Where that is your constraint we will say so.",
   },
 ];
 
@@ -100,7 +100,7 @@ export const inDelivery = [
   {
     title: "Being in-country is not just a time zone",
     detail:
-      "Some briefs cannot be taken accurately over email. For our two published Indian engagements it meant seeing the business — plotted colony layouts and drone footage in one case, ten separate service lines and the brands stocked in the other. Being in India rather than describing India is what makes that possible.",
+      "Some briefs cannot be taken accurately over email. For our two published Indian engagements it meant seeing the business: plotted colony layouts and drone footage in one case, ten separate service lines and the brands stocked in the other. Being in India rather than describing India is what makes that possible.",
   },
   {
     title: "Quoted and invoiced in rupees",
@@ -110,7 +110,7 @@ export const inDelivery = [
   {
     title: "Built to be handed over",
     detail:
-      "Both published Indian sites were built so the client is not dependent on us to keep them running — typed content rather than hand-built pages, static output where the site does not need a server. A supplier who makes themselves impossible to replace has optimised for the wrong thing.",
+      "Both published Indian sites were built so the client is not dependent on us to keep them running: typed content rather than hand-built pages, static output where the site does not need a server. A supplier who makes themselves impossible to replace has optimised for the wrong thing.",
   },
 ];
 
@@ -121,14 +121,14 @@ export const inWork = [
   {
     title: "Lead generation for a property advisory firm",
     detail:
-      "Dhanlaxmi Property sells plotted land near Udaipur to families, investors and NRIs buying from abroad. The problem was that judging a plotted colony required visiting it — plot counts, approved sizes and current site conditions lived on paper layout plans and the client's own drone footage, so every basic question became a phone call before anyone could be qualified. We built the site around the six colonies rather than a search box: each carries its layout plan, plot count, plotted area, plot sizes and aerial footage, with phone, WhatsApp and form enquiry on every page. Figures come off the client's own plans, and anything a plan does not state renders as 'On request' rather than being estimated.",
+      "Dhanlaxmi Property sells plotted land near Udaipur to families, investors and NRIs buying from abroad. The problem was that judging a plotted colony required visiting it. Plot counts, approved sizes and current site conditions lived on paper layout plans and the client's own drone footage, so every basic question became a phone call before anyone could be qualified. We built the site around the six colonies rather than a search box: each carries its layout plan, plot count, plotted area, plot sizes and aerial footage, with phone, WhatsApp and form enquiry on every page. Figures come off the client's own plans, and anything a plan does not state renders as 'On request' rather than being estimated.",
     to: "/portfolio",
     cta: "See it on the portfolio",
   },
   {
     title: "Ten service lines made findable for a local retailer",
     detail:
-      "Palm Vision Technology sells CCTV, biometric attendance, computers, printers, video door phones, projectors, intruder alarms and EPABX — ten distinct lines, each with its own buyers and its own search demand. With no page per service there was nothing for any of those searches to land on, and a customer looking for one line had no way to discover the other nine. We gave every line its own page generated from typed content, plus a stocked-brands index and buyer guides answering the questions that precede a quote. The whole site is statically exported to a custom domain.",
+      "Palm Vision Technology sells CCTV, biometric attendance, computers, printers, video door phones, projectors, intruder alarms and EPABX. That is ten distinct lines, each with its own buyers and its own search demand. With no page per service there was nothing for any of those searches to land on, and a customer looking for one line had no way to discover the other nine. We gave every line its own page generated from typed content, plus a stocked-brands index and buyer guides answering the questions that precede a quote. The whole site is statically exported to a custom domain.",
     to: "/portfolio",
     cta: "See it on the portfolio",
   },
@@ -174,17 +174,17 @@ export const inFaqs = [
   {
     question: "Is Futurise Solutions an Indian company?",
     answer:
-      "No. Futurise Solutions is a company registered in Wellington, New Zealand, founded in 2024, and we hold no Indian entity. Our engineering team is in India, working from Udaipur, Rajasthan. We put that first rather than in a footer because it decides how contracting and invoicing work, and because some buyers specifically need an India-registered supplier — if that is your constraint, we are not the right answer and we will tell you so on the first call.",
+      "No. Futurise Solutions is a company registered in Wellington, New Zealand, founded in 2024, and we hold no Indian entity. Our engineering team is in India, working from Udaipur, Rajasthan. We put that first rather than in a footer because it decides how contracting and invoicing work, and because some buyers specifically need an India-registered supplier. If that is your constraint, we are not the right answer and we will tell you so on the first call.",
   },
   {
     question: "Do you actually have clients in India?",
     answer:
-      "Yes. Two are published with screenshots, the problem and the approach: Dhanlaxmi Property, a land development and property advisory firm trading since 1998, and Palm Vision Technology, a CCTV and office technology business trading since 2006 — both in Udaipur, Rajasthan, where our team is. Other Indian work was delivered for clients we are not able to name, because we sign NDAs before seeing anything confidential. We name no client who has not agreed, and we publish no client count.",
+      "Yes. Two are published with screenshots, the problem and the approach: Dhanlaxmi Property, a land development and property advisory firm trading since 1998, and Palm Vision Technology, a CCTV and office technology business trading since 2006. Both are in Udaipur, Rajasthan, where our team is. Other Indian work was delivered for clients we are not able to name, because we sign NDAs before seeing anything confidential. We name no client who has not agreed, and we publish no client count.",
   },
   {
     question: "Do you work outside Udaipur?",
     answer:
-      "Yes — we work with businesses across India, and being in the country means one working day and one time zone wherever you are. Our published record also covers clients in Dubai and the United States. What we do not do is claim an OFFICE where we have none: there is no Mumbai, Delhi, Bangalore or Pune address, and you will not find a page on this site suggesting otherwise. The team works from Udaipur, Rajasthan.",
+      "Yes. We work with businesses across India, and being in the country means one working day and one time zone wherever you are. Our published record also covers clients in Dubai and the United States. What we do not do is claim an OFFICE where we have none: there is no Mumbai, Delhi, Bangalore or Pune address, and you will not find a page on this site suggesting otherwise. The team works from Udaipur, Rajasthan.",
   },
   {
     question: "What does custom software cost in India?",
@@ -194,11 +194,11 @@ export const inFaqs = [
   {
     question: "Can we meet in person?",
     answer:
-      "In Udaipur, where the team is, yes — both published Indian engagements involved seeing the business rather than taking the brief over email. Elsewhere in India it depends on the project and is a conversation rather than a standing offer; calls and video are how most work runs. We would rather say that than imply a travel commitment we have not made.",
+      "In Udaipur, where the team is, yes. Both published Indian engagements involved seeing the business rather than taking the brief over email. Elsewhere in India it depends on the project and is a conversation rather than a standing offer; calls and video are how most work runs. We would rather say that than imply a travel commitment we have not made.",
   },
   {
     question: "Who owns the code when the project ends?",
     answer:
-      "You do. Both published Indian sites were deliberately built to be maintainable without us — content typed rather than hand-built into pages, static output where a server was not needed. We sign NDAs on request, work in two-week sprints with reviewable software at each one, and offer post-launch support as a choice rather than a dependency.",
+      "You do. Both published Indian sites were deliberately built to be maintainable without us: content typed rather than hand-built into pages, static output where a server was not needed. We sign NDAs on request, work in two-week sprints with reviewable software at each one, and offer post-launch support as a choice rather than a dependency.",
   },
 ];

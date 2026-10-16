@@ -1,82 +1,21 @@
-'use client'
-
-import { Box, Button, Heading, Text, Stack, HStack, Link as CLink, Icon } from "@chakra-ui/react";
-import { useRouter } from "next/navigation";
-import { FiArrowRight, FiMail } from "react-icons/fi";
-import Section from "./Section";
-import Reveal from "./Reveal";
-import { CONTACT } from "../../utils/Constant";
-import { trackEvent, EVENTS } from "../../utils/analytics";
-
-/**
- * Reusable conversion CTA band. Used at the foot of most pages.
- */
+'use client';
+import Link from 'next/link';
+import {CONTACT} from '../../utils/Constant/navigation';
+import {trackEvent,EVENTS} from '../../utils/analytics';
+import useMotionVisibility from './useMotionVisibility';
+import styles from './StudioCTA.module.css';
 const CTASection = ({
   eyebrow = "Start building today",
   title = "Got an idea? We'll build your",
   highlight = "AI-powered product.",
-  subtitle = "Tell us your idea — we'll design, engineer, and launch your AI agent, SaaS platform, or app. Fixed scope. No fluff.",
+  subtitle = "Tell us your idea and we'll design, build, and launch your AI agent, SaaS platform, or app. Fixed scope. No fluff.",
   primaryLabel = "Start your project",
   secondaryLabel = "View our work",
   primaryTo = "/contact",
   secondaryTo = "/portfolio",
   onPrimary,
 }) => {
-  // react-router-dom → next/navigation, kept as navigate(to) so call sites are verbatim.
-  const router = useRouter();
-  const navigate = (to) => router.push(to);
-  return (
-    <Section py={{ base: "56px", md: "80px" }}>
-      <Reveal>
-        <Box
-          position="relative"
-          overflow="hidden"
-          borderRadius="28px"
-          px={{ base: 6, md: 14 }}
-          py={{ base: 12, md: 16 }}
-          textAlign="center"
-          border="1px solid"
-          borderColor="rgba(180,160,255,0.3)"
-          bgGradient="linear(135deg, rgba(123,108,255,0.16), rgba(181,123,255,0.16))"
-        >
-          {/* glow orbs */}
-          <Box position="absolute" top="-40%" left="-10%" w="320px" h="320px" bg="rgba(123,108,255,0.35)" filter="blur(90px)" rounded="full" />
-          <Box position="absolute" bottom="-50%" right="-5%" w="320px" h="320px" bg="rgba(181,123,255,0.3)" filter="blur(90px)" rounded="full" />
-
-          <Box position="relative">
-            <Text fontSize="sm" fontWeight={600} letterSpacing="0.16em" textTransform="uppercase" color="accent.solid" mb={3}>
-              {eyebrow}
-            </Text>
-            <Heading fontSize={{ base: "28px", md: "42px" }} lineHeight={1.15} maxW="760px" mx="auto">
-              {title} <Box as="span" className="gradient-text">{highlight}</Box>
-            </Heading>
-            <Text mt={4} color="text.muted" fontSize={{ base: "md", md: "lg" }} maxW="620px" mx="auto">
-              {subtitle}
-            </Text>
-            <Stack direction={{ base: "column", sm: "row" }} spacing={4} justify="center" mt={8}>
-              <Button variant="gradient" size="lg" rightIcon={<FiArrowRight />} onClick={onPrimary ?? (() => navigate(primaryTo))}>
-                {primaryLabel}
-              </Button>
-              <Button variant="outlineGlow" size="lg" onClick={() => navigate(secondaryTo)}>
-                {secondaryLabel}
-              </Button>
-            </Stack>
-
-            {/* direct contact — high-intent shortcut */}
-            <Stack direction={{ base: "column", sm: "row" }} spacing={{ base: 3, sm: 8 }} justify="center" align="center" mt={8} fontSize="sm">
-              <CLink
-                href={`mailto:${CONTACT.email}`}
-                onClick={() => trackEvent(EVENTS.EMAIL_CLICK, { location: "cta-section" })}
-                color="text.muted" _hover={{ color: "text.primary" }} transition="color .2s"
-              >
-                <HStack spacing={2}><Icon as={FiMail} color="accent.solid" /><Text>{CONTACT.email}</Text></HStack>
-              </CLink>
-            </Stack>
-          </Box>
-        </Box>
-      </Reveal>
-    </Section>
-  );
+ const ref=useMotionVisibility();
+ return <section ref={ref} className={styles.section}><div className={styles.panel}><div className={styles.copy}><p className={styles.eyebrow}>{eyebrow}</p><h2>{title} <em>{highlight}</em></h2><p className={styles.description}>{subtitle}</p><div className={styles.actions}>{onPrimary?<button type="button" onClick={onPrimary}>{primaryLabel}<span aria-hidden="true">↗</span></button>:<Link href={primaryTo}>{primaryLabel}<span aria-hidden="true">↗</span></Link>}<Link href={secondaryTo}>{secondaryLabel}<span aria-hidden="true">↗</span></Link></div><a className={styles.email} href={'mailto:'+CONTACT.email} onClick={()=>trackEvent(EVENTS.EMAIL_CLICK,{location:'cta-section'})}>{CONTACT.email}</a></div><svg className={styles.graphic} viewBox="0 0 400 400" fill="none" aria-hidden="true">{[0,1,2,3,4].map(i=><rect key={i} x={45+i*20} y={45+i*20} width={310-i*40} height={310-i*40} rx={80-i*12} stroke="currentColor" strokeOpacity={.15+i*.13} transform={'rotate('+(-15+i*7)+' 200 200)'}/>)}<path className={styles.signal} d="M0 200H130Q200 200 200 130V0M200 400V270Q200 200 270 200H400" stroke="#b57bff" strokeWidth="2"/><path d="M170 230L230 170M170 170H230V230" stroke="#f4f2ff" strokeWidth="3"/></svg></div></section>;
 };
-
 export default CTASection;

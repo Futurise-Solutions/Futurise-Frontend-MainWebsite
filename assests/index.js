@@ -10,13 +10,8 @@ export { default as AiMlHover } from "./HomeAssest/AiMlHover.svg";
 export { default as UIUXHover } from "./HomeAssest/UIUXHover.svg";
 export { default as BlockchainHover } from "./HomeAssest/BlockChainHover.svg";
 
-// Navbar service icons
-export { default as WebDevNavbarIcon } from "./HomeAssest/WebDevNavbarIcon.svg";
-export { default as AppDevNavbarIcon } from "./HomeAssest/AppDevNavbarIcon.svg";
-export { default as BlockchainDevNavbarIcon } from "./HomeAssest/BlockchainDevNavbarIcon.svg";
-export { default as DigiMarketingNavbarIcon } from "./HomeAssest/DigiMarketingNavbarIcon.svg";
-export { default as AiMlNavbarIcon } from "./HomeAssest/AiMlNavbarIcon.svg";
-export { default as UIUXNavbarIcon } from "./HomeAssest/UIUXNavbarIcon.svg";
+// Navbar service icons are imported directly by utils/Constant/navigation.js, so the
+// layout bundle does not pull in this whole module.
 
 // Why-choose-us icons (hover variants)
 export { default as clientIconHover } from "./HomeAssest/clientIconHover.svg";
@@ -53,16 +48,8 @@ export { default as logoInfinityBay }  from "./PartnerLogos/logo-infinity-bay.we
 export { default as logoDhanlaxmi }    from "./PartnerLogos/logo-dhanlaxmi.webp";
 export { default as logoPalmvision }   from "./PartnerLogos/logo-palmvision.webp";
 
-// Brand logo (Futurise Solutions wordmark — transparent bg).
-//
-// Points at the 354x120 build rather than the 1604x544 original. The logo renders at a
-// maximum of 40px tall (see Components/common/Logo.jsx) and appears in the navbar and
-// footer of every page, so the source file was shipping ~308 KB to render ~40 px — the
-// largest render-blocking asset on the site. 354x120 is 3x the largest render size, so
-// it stays sharp on high-DPI screens, at 24 KB.
-//
-// New-logo.png is kept as the source of truth for future exports. It is not imported
-// anywhere, so Vite does not include it in the bundle.
+// Original transparent wordmark, 354x120 PNG. Navbar renders at up to 48px tall.
+// Served losslessly by Logo so the small Solutions lettering stays crisp.
 export { default as logo } from "./New-logo-3x.png";
 
 // Portfolio project screenshots (real client work — optimized WebP, lazy-loaded where rendered)
@@ -107,28 +94,11 @@ export { default as palmvision3 }       from "./Project Images/palmvision3.webp"
 // Deliberately abstract: they carry mood and depth between text-heavy sections without
 // pretending to be product screenshots. Real client work still carries every proof
 // section — these never stand in for evidence.
-// The home hero plate is NOT exported here: it lives at public/hero-atmosphere.webp so
-// index.html can preload it by a stable URL (a hashed bundle asset cannot be named in
-// static HTML). It is the LCP element, and that preload is worth ~1s of LCP.
-export { default as homeArchitecture }  from "./Visuals/home-architecture.webp";
-export { default as homeCraft }         from "./Visuals/home-craft.webp";
-export { default as marketNz }          from "./Visuals/market-nz.webp";
-export { default as marketUs }          from "./Visuals/market-us.webp";
-export { default as marketAu }          from "./Visuals/market-au.webp";
-export { default as marketCa }          from "./Visuals/market-ca.webp";
-export { default as marketAe }          from "./Visuals/market-ae.webp";
 export { default as marketReach }       from "./Visuals/market-reach.webp";
-// About page. `aboutAtrium` is art-directed with its left third held near-black so the
-// hero headline sits on it without a scrim heavy enough to kill the image; `aboutLayers`
-// is the interstitial between the values grid and the expertise grid.
-export { default as aboutAtrium }       from "./Visuals/about-atrium.webp";
-export { default as aboutLayers }       from "./Visuals/about-layers.webp";
-// Second pass. These four punctuate the pages that ran longest without a visual:
+// Second pass. These two punctuate the pages that ran longest without a visual:
 // /case-studies and /pricing-guide carried no image at all, and the six service pages
 // ran ~7600px of text and cards each. Deliberately shared across routes rather than
 // generated per page — one plate already in a visitor's cache is worth more than a
 // unique one they have to download.
-export { default as hallPerspective }   from "./Visuals/hall-perspective.webp";
 export { default as precisionLayers }   from "./Visuals/precision-layers.webp";
 export { default as signalBraid }       from "./Visuals/signal-braid.webp";
-export { default as orderedTerrain }    from "./Visuals/ordered-terrain.webp";

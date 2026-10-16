@@ -11,10 +11,10 @@
 export const testimonials = [
   {
     name: "Abbas Kagzi",
-    title: "Founder, Infinity Bay Trading — Dubai, UAE",
+    title: "Founder, Infinity Bay Trading, Dubai, UAE",
     avatar: "",
     review:
-      "We came to Futurise with a slow WordPress site that barely showed up on Google. They rebuilt it on Astro — it loads instantly now, feels far smoother, and with the new SEO content and blog we're finally getting found by buyers across the UAE. Professional team, clear communication, handled everything from design to Google Search Console.",
+      "We came to Futurise with a slow WordPress site that barely showed up on Google. They rebuilt it on Astro. It loads instantly now, feels far smoother, and with the new SEO content and blog we're finally getting found by buyers across the UAE. Professional team, clear communication, handled everything from design to Google Search Console.",
   },
 ];
 

@@ -15,7 +15,8 @@ import {
   Box, Container, Heading, Text, VStack, HStack, Icon, Link as CLink,
 } from "@chakra-ui/react";
 import { FiMail, FiMapPin, FiShield } from "react-icons/fi";
-import { Reveal, Eyebrow } from "@/components/common";
+import Reveal from "@/components/common/Reveal";
+import { Eyebrow } from "@/components/common/SectionHeading";
 import { LAST_UPDATED, COMPANY, EMAIL, ADDRESS, sections } from "@/content/privacy";
 
 const PolicySection = ({ section, delay }) => (
@@ -175,7 +176,7 @@ export default function PrivacyPolicyBody() {
               >
                 <Text color="text.muted" fontSize={{ base: "14px", md: "15px" }} lineHeight={1.8}>
                   This Privacy Policy applies to the website <Box as="span" color="accent.solid" fontWeight={600}>futurisesolutions.com</Box> and all services
-                  offered by <Box as="span" color="text.primary" fontWeight={600}>{COMPANY}</Box> ("we", "us", or "our").
+                  offered by <Box as="span" color="text.primary" fontWeight={600}>{COMPANY}</Box> (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;).
                   By using our website you agree to the collection and use of information as described in this policy.
                   If you do not agree, please discontinue use of our website.
                 </Text>

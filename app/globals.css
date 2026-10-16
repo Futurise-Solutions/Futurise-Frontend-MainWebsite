@@ -10,7 +10,6 @@
      3. .gradient-text
      4. the five #app rules (font stack, content protection, image protection)
      5. the html.scroll-jump override
-     6. the 5 .swiper-* override rules (restored — see the note at the end of this file)
 
    ── WHAT IS DELIBERATELY NOT HERE ───────────────────────────
      • The other 29 keyframes. They are inline in component `sx` props and stay there,
@@ -103,22 +102,11 @@
      `--font-aeonik-body` covers the 400–500 weight this rule actually renders; anything
      else falls through to `--font-aeonik` unchanged. 'Inter' and sans-serif stay exactly
      where they were — see the U+00B7 note in theme/fonts.ts for why that tail matters. */
-  font-family: var(--font-aeonik-body), var(--font-aeonik), 'Inter', sans-serif;
+  font-family: var(--font-aeonik-body), var(--font-aeonik), sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-/* ── Footer "selected work" thumbnail hover ──────────────────────────────────
-   The original was a Chakra <Image> with `_groupHover={{ transform: 'scale(1.07)' }}`
-   and `transition="transform .5s ease"`. Under next/image the element is a plain <img>
-   rendered by the library, so Chakra's `_groupHover` pseudo-prop has nothing to attach
-   to. This reproduces the identical effect with the same duration, easing and scale,
-   keyed off Chakra's `role="group"` on the parent link.
-   Values copied verbatim from src/Layout/Footer.jsx. */
-.chakra-linkbox:hover .footer-work-thumb,
-[role="group"]:hover .footer-work-thumb {
-  transform: scale(1.07);
-}
 
 /* Reusable utility classes */
 .gradient-text {
@@ -182,38 +170,26 @@ html.scroll-jump #app {
   scroll-behavior: auto !important;
 }
 
-/* ============================================================
-   SWIPER NAVIGATION THEMING — RESTORED.
+/* Sculpted Type: homepage-only navigation treatment; shared routes keep their theme. */
+[data-home-nav]{background:#08080df5!important;box-shadow:none!important}
+[data-home-nav]>div:first-child{max-width:1440px;width:88%;padding-inline:0;height:86px}
+[data-home-nav]>div:first-child>div:nth-child(2){background:none;border:0;padding:0;border-radius:0}
+[data-home-nav]>div:first-child>div:nth-child(2)>a,[data-home-nav]>div:first-child>div:nth-child(2)>div{padding-inline:10px}
+[data-home-nav]>div:first-child>div:nth-child(2)>a>div,[data-home-nav]>div:first-child>div:nth-child(2)>div>div:first-child:not([role]){border-radius:0}
+[data-home-nav] button{box-shadow:none;border-radius:0}
+[data-home-nav] [data-nav-highlight]{background:none;border:0;border-bottom:1px solid #B57BFF;border-radius:0}
+[data-home-nav] a:focus-visible,[data-home-nav] button:focus-visible{outline:2px solid #B57BFF;outline-offset:3px}
+[data-home-nav]>div:first-child>div:last-child>div>div:first-child{display:none}
+[data-home-nav]>div:first-child>div:last-child button{background:none;border:1px solid #B57BFF;color:#F4F2FF}
+/* Every header variant collapses to the Menu button below 1200px; the full pill needs ~1060px. */
+@media(max-width:1200px){[data-site-nav]>div:first-child>div:nth-child(2){display:none}[data-site-nav]>div:first-child>div:last-child>div{display:none}[data-site-nav]>div:first-child>div:last-child>button{display:inline-flex}}
+@media(max-width:700px){[data-home-nav]>div:first-child{width:calc(100% - 40px);height:70px}}
 
-   ⚠️ These five rules were deleted as dead code under D18, on the basis of D8 ("Swiper
-   is unused"). D8 WAS WRONG: it was decided from the homepage DOM, but /portfolio
-   renders <Swiper>/<SwiperSlide> for the project gallery. D8 and backlog D2 are
-   reverted; the package is installed and Portfolio.jsx is ported.
+/* Shared desktop scale and directional button feedback. */
+[data-home-nav]>div:first-child{max-width:1800px}
+#app .chakra-button{border-radius:999px;background-image:linear-gradient(90deg,rgba(181,123,255,.5) 50%,transparent 50%);background-size:205% 100%;background-position:right;transition:background-position .4s,color .25s,border-color .25s}
+#app .chakra-button:hover{background-position:left}
+#app .chakra-button[data-nav-appointment]{border-radius:6px;min-height:40px;padding-inline:20px}
+@media(prefers-reduced-motion:reduce){#app .chakra-button{transition:none}}
 
-   Restored VERBATIM from src/index.css — these override Swiper's own stylesheet
-   (which Portfolio imports as "swiper/css" and "swiper/css/pagination"), so they must
-   stay in a global sheet. Scoping them to a component would lose the cascade they
-   depend on, and the !important flags are load-bearing against Swiper's defaults.
-   ============================================================ */
-/* Swiper navigation theming */
-.swiper-button-next,
-.swiper-button-prev {
-  color: #b4a0ff !important;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(6px);
-  border-radius: 50%;
-  width: 42px !important;
-  height: 42px !important;
-}
-.swiper-button-next::after,
-.swiper-button-prev::after {
-  font-size: 16px !important;
-  font-weight: 700;
-}
-.swiper-pagination-bullet {
-  background: rgba(255, 255, 255, 0.4);
-}
-.swiper-pagination-bullet-active {
-  background: #b4a0ff;
-}
+

@@ -1,4 +1,6 @@
 'use client'
+import regional from '../common/RegionalPages.module.css';
+import RegionalHero from '../common/RegionalHero';
 
 /**
  * /us page body — ported VERBATIM from UnitedStatesPage.jsx.
@@ -17,15 +19,18 @@ import {
 import NextImage from "next/image";
 import Link from "next/link";
 import { FiArrowRight, FiCheck, FiArrowUpRight } from "react-icons/fi";
-import { Reveal, Eyebrow, GlassCard, CTASection, MarketHero, VisualBand } from "@/components/common";
+import Reveal from "@/components/common/Reveal";
+import { Eyebrow } from "@/components/common/SectionHeading";
+import GlassCard from "@/components/common/GlassCard";
+import CTASection from "@/components/common/CTASection";
+import VisualBand from "@/components/common/VisualBand";
+import CountrySolutions from "@/components/common/CountrySolutions";
 import Faqs from "@/components/home/Faqs";
 import { useBooking } from "@/context/BookingContext";
 import { NavbarservicesOptions } from "@/utils/Constant";
-import { COUNTRY_ALTERNATES } from "@/utils/Constant/countries";
-import { buildCountrySchema } from "@/utils/countrySchema";
-import { marketUs, marketReach } from "@/assests";
+import { marketReach } from "@/assests";
 import {
-  usMeta, usEvidence, usMarket, deliveryTradeoffs, workingModel, ownership,
+  usEvidence, usMarket, deliveryTradeoffs, workingModel, ownership,
   costModel, usSectors, usIntegrations, usResources, usFaqs,
 } from "@/utils/Constant/unitedStates";
 
@@ -36,9 +41,9 @@ export default function UnitedStatesPageBody() {
   // States belongs here. The country registry supplies the path, label and language tag,
   // so the schema cannot disagree with the hreflang cluster or the footer link.
   return (
-    <Box>
+    <Box className={regional.page}>
       {/* Hero — market-specific atmosphere plate behind the shared texture. */}
-      <MarketHero image={marketUs}>
+      <RegionalHero>
           <Reveal><Eyebrow>United States</Eyebrow></Reveal>
           <Reveal delay={0.05}>
             <Heading as="h1" mt={5} fontSize={{ base: "38px", md: "56px" }} lineHeight={1.08} letterSpacing="-0.025em" maxW="920px">
@@ -48,11 +53,11 @@ export default function UnitedStatesPageBody() {
           </Reveal>
           <Reveal delay={0.1}>
             <Text mt={6} color="text.muted" fontSize={{ base: "md", md: "xl" }} lineHeight={1.7} maxW="780px">
-              Custom software, AI and SaaS built for companies serving US customers — scoped
+              Custom software, AI and SaaS built for companies serving US customers, scoped
               against the twenty state privacy regimes now in force, quoted on fixed scope
               rather than an hourly meter, and delivered by a named engineer you can reach
               directly. We publish our cost ranges, and we answer the two questions most
-              suppliers avoid — where we are actually based, and what SOC 2 compliance
+              suppliers avoid: where we are actually based, and what SOC 2 compliance
               really means.
             </Text>
           </Reveal>
@@ -66,7 +71,7 @@ export default function UnitedStatesPageBody() {
               </Button>
             </HStack>
           </Reveal>
-      </MarketHero>
+      </RegionalHero>
 
       {/* 1 — Evidence. First section by design, following the pattern proven on /ae: the
           delivery record goes ahead of the compliance argument, and the limit of that record
@@ -85,7 +90,7 @@ export default function UnitedStatesPageBody() {
         <Reveal delay={0.1}>
           <Text className="speakable-answer" color="text.muted" fontSize={{ base: "md", md: "lg" }} lineHeight={1.7} maxW="780px" mb={10}>
             The compliance arguments below are worth what the delivery record behind them is
-            worth, so the record comes first — including the part of it that is missing.
+            worth, so the record comes first, including the part of it that is missing.
           </Text>
         </Reveal>
         <SimpleGrid columns={{ base: 1, lg: 3 }} spacing={5}>
@@ -390,7 +395,7 @@ export default function UnitedStatesPageBody() {
           <Text className="speakable-answer" color="text.muted" fontSize={{ base: "md", md: "lg" }} lineHeight={1.7} maxW="740px" mb={10}>
             Every service below is available to US clients, and every cost guide below is
             already published rather than gated behind a form. Read the guide that matches
-            your project before booking anything — if the ranges do not fit your budget, that
+            your project before booking anything. If the ranges do not fit your budget, that
             is a useful answer to reach on your own terms rather than on a sales call.
           </Text>
         </Reveal>
@@ -496,6 +501,8 @@ export default function UnitedStatesPageBody() {
           </HStack>
         </Reveal>
       </Container>
+
+      <CountrySolutions market="us" />
 
       <Faqs
         items={usFaqs}

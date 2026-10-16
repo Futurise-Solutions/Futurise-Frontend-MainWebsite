@@ -4,7 +4,9 @@ import React from "react";
 import { Box, SimpleGrid, Heading, Text, HStack, VStack, Tag, Icon, Link as CLink, Flex } from "@chakra-ui/react";
 import Image from "next/image";
 import { FaLinkedinIn } from "react-icons/fa6";
-import { Section, SectionHeading, Reveal } from "../common";
+import Section from "../common/Section";
+import SectionHeading from "../common/SectionHeading";
+import Reveal from "../common/Reveal";
 import { team, publishedTeam, isTeamPublished, initialsOf } from "../../utils/Constant/team";
 
 /**
@@ -123,9 +125,9 @@ const TeamCard = ({ member }) => (
 
 const TeamSection = () => {
   const live = isTeamPublished();
-  // import.meta.env.DEV is statically replaced at build time, so the placeholder branch
+  // NODE_ENV is statically replaced by Next.js, so the placeholder branch
   // is tree-shaken out of the production bundle entirely.
-  const previewing = !live && import.meta.env.DEV;
+  const previewing = !live && process.env.NODE_ENV === 'development';
   if (!live && !previewing) return null;
 
   const members = live ? publishedTeam : team;
@@ -153,7 +155,7 @@ const TeamSection = () => {
         eyebrow="The team"
         title="The people who"
         highlight="build your product"
-        subtitle="You work directly with the people writing the code and designing the screens — no account managers relaying messages between you and the build."
+        subtitle="You work directly with the people writing the code and designing the screens. No account managers relaying messages between you and the build."
       />
 
       <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6} mt={{ base: 10, md: 14 }}>

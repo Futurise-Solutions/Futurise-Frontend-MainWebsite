@@ -43,7 +43,7 @@ export const sections = [
       },
       {
         subtitle: "Newsletter & Marketing",
-        body: `To send you our newsletter and relevant updates about our services, industry insights, or product launches — only when you have opted in. You may unsubscribe at any time by clicking the unsubscribe link in any email or contacting us directly.`,
+        body: `To send you our newsletter and relevant updates about our services, industry insights, or product launches, only when you have opted in. You may unsubscribe at any time by clicking the unsubscribe link in any email or contacting us directly.`,
       },
       {
         subtitle: "Website Improvement",

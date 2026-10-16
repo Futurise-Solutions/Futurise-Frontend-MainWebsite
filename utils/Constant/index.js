@@ -1,7 +1,13 @@
+import { recentProjects } from './recentProjects';
+import { SOCIAL_PROFILES } from './navigation';
+export { CONTACT, NavbarservicesOptions } from "./navigation";
+import logoStartusCloud from '../../assests/PartnerLogos/logo-startus-cloud-ondark.webp';
+import logoRamanScientific from '../../assests/PartnerLogos/logo-raman-scientific-ondark.webp';
+import logoJainCeramicMart from '../../assests/PartnerLogos/logo-jain-ceramic-mart-ondark.webp';
 import {
-  AppDevHover, AppDevNavbarIcon, BlockchainDevNavbarIcon, BlockchainHover,
-  DigiMarketingNavbarIcon, DigitalMarketingHover, AiMlHover, AiMlNavbarIcon,
-  UIUXHover, UIUXNavbarIcon, WebDevNavbarIcon, clientIconHover, expertiseiconHover,
+  AppDevHover, BlockchainHover,
+  DigitalMarketingHover, AiMlHover,
+  UIUXHover, clientIconHover, expertiseiconHover,
   postIconHover, qualityIconHover, timeIconHover, webDevHover,
   propertyDashboard1, propertyDashboard2, realState1, realState2, realState3,
   marty1, marty2, marty3, crypto1, crypto2, jewel1, jewel2, jewel3, hotel1, hotel2, hotel3,
@@ -57,7 +63,7 @@ export const OurServiceData = [
   {
     serviceName: "Blockchain Development",
     serviceDesc:
-      "Web3 frontends, DeFi platforms, MEV bots, launchpads, and multi-chain dApps — built for real production.",
+      "Web3 frontends, DeFi platforms, MEV bots, launchpads, and multi-chain dApps. Built for real production.",
     icon: BlockchainHover,
     route: "blockchain-development",
   },
@@ -68,45 +74,6 @@ export const OurServiceData = [
     icon: DigitalMarketingHover,
     route: "digital-marketing",
   },
-];
-
-// **************** CONTACT CHANNELS ****************
-// One definition for every way to reach the company.
-//
-// There is deliberately no phone number and no WhatsApp link here. Enquiries run through
-// three channels only: the strategy-call booking flow, the contact form, and email. A
-// published number was working against that — the only one we had was +91, sitting beside
-// a Wellington address, which reads as an offshore contact rather than a local one and
-// undercuts the New Zealand entity the rest of the site establishes. Removing it entirely
-// is a positioning decision, not an oversight: do not reintroduce a `phoneHref`,
-// `whatsappHref`, or `tel:`/`wa.me` link without revisiting that decision.
-export const CONTACT = {
-  email: "business@futurisesolutions.com",
-  address: {
-    line1: "Huddart Parker Building",
-    line2: "Wellington Central",
-    line3: "Wellington 6011, New Zealand",
-    mapsUrl:
-      "https://maps.google.com/?q=Huddart+Parker+Building,+Wellington+Central,+Wellington+6011,+New+Zealand",
-  },
-};
-
-// **************** SOCIAL PROFILES ****************
-// Drives both the footer icons and schema.org `sameAs`. These had drifted: the footer
-// linked four profiles while `sameAs` declared three, so the X profile was invisible to
-// search engines as a corroborating signal.
-//
-// `sameAs` is a primary entity-disambiguation input, and this brand needs it — "Futurise
-// Solutions" is one character from Futurice, an established Finnish consultancy with a
-// Wikipedia entry. Every additional verified profile makes the two easier to tell apart.
-//
-// Keep index.html's Organization schema in sync by hand: it is static HTML, outside the
-// bundle, and therefore cannot import this.
-export const SOCIAL_PROFILES = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/company/futurisesolutions/" },
-  { label: "Instagram", href: "https://www.instagram.com/futurisesolutions" },
-  { label: "Facebook", href: "https://www.facebook.com/share/1E6xe2C5DW/" },
-  { label: "X (Twitter)", href: "https://x.com/futurisesol" },
 ];
 
 /** Bare URL list, the shape schema.org `sameAs` expects. */
@@ -169,158 +136,78 @@ export const companyStats = [
   { value: 6, suffix: "", label: "Core service areas" },
 ];
 
-// **************** CLIENT TESTIMONIALS ****************
-// Attributed, first-party quotes only. Every entry names a real client whose project
-// appears in `Projects` below, so any claim here can be checked against the portfolio.
-// Add new entries only with the client's permission; anonymise as "First-name L.,
-// Role — sector, city" if they prefer, but never invent a person or a company.
-export const testimonials = [
-  {
-    name: "Abbas Kagzi",
-    title: "Founder, Infinity Bay Trading — Dubai, UAE",
-    avatar: "",
-    review:
-      "We came to Futurise with a slow WordPress site that barely showed up on Google. They rebuilt it on Astro — it loads instantly now, feels far smoother, and with the new SEO content and blog we're finally getting found by buyers across the UAE. Professional team, clear communication, handled everything from design to Google Search Console.",
-  },
-];
-
-// **************** DELIVERY RECORD ****************
-// Shown alongside testimonials as verifiable proof of work. Testimonials depend on a
-// client agreeing to be quoted; shipped projects do not — so this carries the trust
-// load while the testimonial list is still short, without inventing anything.
-//
-// Each entry is deliberately written as a self-contained factual statement
-// (client → market → what was built → what changed). That phrasing is what answer
-// engines quote: they retrieve and cite passages, not pages, so a sentence that names
-// the entity, the place and the outcome is far more likely to be surfaced than a
-// generic claim like "we build great software".
-export const clientProof = [
-  {
-    client: "Infinity Bay Trading",
-    location: "Dubai, UAE",
-    discipline: "Web Development & SEO",
-    work: "Rebuilt a slow WordPress site as an SEO-first Astro site",
-    outcome: "Faster page loads, a structured brand blog, and full Google Search Console indexing for UAE B2B buyers",
-  },
-  {
-    client: "HOMIES PropTech",
-    location: "USA & India",
-    discipline: "SaaS & Analytics",
-    work: "Built a unified property-management dashboard",
-    outcome: "Real-time income, expense and unit analytics across thousands of listings from any device",
-  },
-  {
-    client: "Marty-QR",
-    location: "USA & India",
-    discipline: "AI & SaaS",
-    work: "Built an AI-powered review-management platform",
-    outcome: "QR-driven review capture and online reputation management for multi-location businesses",
-  },
-  {
-    client: "David Tishbi Jewelry",
-    location: "USA",
-    discipline: "E-commerce & CRO",
-    work: "Designed and built a luxury jewellery storefront",
-    outcome: "A conversion-focused catalogue spanning fine jewellery, watches and bullion",
-  },
-  {
-    client: "Estate Realty",
-    location: "India & USA",
-    discipline: "Web Platform & SEO",
-    work: "Built a property search and listings platform",
-    outcome: "Search-led property discovery with an SEO structure built for inbound lead generation",
-  },
-  {
-    client: "GDT Exchange",
-    location: "USA & India",
-    discipline: "Blockchain & FinTech",
-    work: "Built a perpetuals crypto trading terminal",
-    outcome: "A dense trading interface built for experienced traders without sacrificing usability",
-  },
-  {
-    client: "Platinum Peak Hotels",
-    location: "India & USA",
-    discipline: "UI/UX & CRO",
-    work: "Designed a direct hotel booking experience",
-    outcome: "A booking flow built to win reservations directly rather than through third-party platforms",
-  },
-];
-
 // **************** PORTFOLIO PROJECTS ****************
 // Real client work. `featured: true` marks the projects highlighted on the home page.
-// Each image carries descriptive alt text (with market keywords) for SEO + accessibility.
+// Each image carries descriptive alt text for SEO + accessibility.
 export const Projects = [
   {
     featured: true,
     img: [
-      { src: infinityBayHome, alt: "Infinity Bay Trading homepage hero reading 'One hub for every space. Infinite supply.' — a Dubai, UAE one-stop FMCG, HORECA and industrial supply partner, rebuilt on Astro for fast loading" },
-      { src: infinityBayTruck, alt: "Infinity Bay Trading branded delivery truck in the scroll-driven hero, with category, brand and one-stop supply figures across the UAE" },
-      { src: infinityBayReveal, alt: "Infinity Bay Trading product reveal — FMCG beverages and confectionery, HORECA tableware and industrial bearings emerging from the delivery truck" },
-      { src: infinityBay3, alt: "Infinity Bay Trading product categories — coffee, beverages, confectionery, baby nutrition, spices, personal care and electronics for UAE businesses" },
+      { src: infinityBayHome, alt: "Infinity Bay Trading homepage hero reading 'One hub for every space. Infinite supply.' (a one-stop FMCG, HORECA and industrial supply partner, rebuilt on Astro for fast loading)" },
+      { src: infinityBayTruck, alt: "Infinity Bay Trading branded delivery truck in the scroll-driven hero, with category, brand and one-stop supply figures" },
+      { src: infinityBayReveal, alt: "Infinity Bay Trading product reveal: FMCG beverages and confectionery, HORECA tableware and industrial bearings emerging from the delivery truck" },
+      { src: infinityBay3, alt: "Infinity Bay Trading product categories: coffee, beverages, confectionery, baby nutrition, spices, personal care and electronics for businesses" },
     ],
-    location: "Dubai, UAE",
     projectType: "Wholesale Trading · Web Rebuild & SEO",
-    Heading: "Infinity Bay Trading — B2B Supply Website, Rebuilt for Speed & SEO",
+    Heading: "Infinity Bay Trading: B2B Supply Website, Rebuilt for Speed & SEO",
     aboutProject:
-      "A trusted Dubai-based supply partner covering FMCG, HORECA and industrial goods. We rebuilt their slow WordPress site as a fast, SEO-first website on Astro — with AEO/GEO-optimized content, a brand blog, and full Google Search Console indexing so buyers across the UAE can find them.",
+      "A trusted supply partner covering FMCG, HORECA and industrial goods. We rebuilt their slow WordPress site as a fast, SEO-first website on Astro. It has AEO/GEO-optimized content, a brand blog and full Google Search Console indexing so buyers can find them.",
     problem:
-      "Their previous WordPress site loaded slowly, ranked poorly on Google, and had weak on-page SEO — costing Infinity Bay visibility and qualified B2B enquiries in a competitive Dubai and UAE market.",
+      "Their previous WordPress site loaded slowly, ranked poorly on Google, and had weak on-page SEO. That cost Infinity Bay visibility and qualified B2B enquiries in a competitive market.",
     solution:
       "We rebuilt the site from the ground up on Astro for near-instant loads and smooth performance, restructured it around SEO/AEO/GEO-optimized, product-led content, launched an on-brand blog, and set up Google Search Console to get every page indexed and discoverable.",
-    tags: ["Web Development", "SEO", "Astro", "WordPress Migration", "AEO", "GEO", "Dubai", "UAE", "B2B Trading"],
+    tags: ["Web Development", "SEO", "Astro", "WordPress Migration", "AEO", "GEO", "B2B Trading"],
     clentName: "Infinity Bay Trading",
   },
+  ...recentProjects,
   {
     featured: true,
     img: [
-      { src: dhanlaxmi1, alt: "Dhanlaxmi Property homepage — a land development and property advisory firm in Udaipur, Rajasthan, with a lake-city hero and enquiry-led calls to action" },
-      { src: dhanlaxmi2, alt: "Dhanlaxmi Property track-record section showing land transactions closed, families housed, customer rating and years in Udaipur" },
-      { src: dhanlaxmi3, alt: "Dhanlaxmi Property plotted-colony listings with aerial site photography, plot counts, plotted area and plot sizes for each project near Udaipur" },
+      { src: dhanlaxmi1, alt: "Dhanlaxmi Property homepage: a land development and property advisory firm, with a lake-city hero and enquiry-led calls to action" },
+      { src: dhanlaxmi2, alt: "Dhanlaxmi Property track-record section showing land transactions closed, families housed, customer rating and years of experience" },
+      { src: dhanlaxmi3, alt: "Dhanlaxmi Property plotted-colony listings with aerial site photography, plot counts, plotted area and plot sizes for each project" },
     ],
-    location: "Udaipur, India",
     projectType: "Real Estate · Lead-Generation Site & SEO",
-    Heading: "Dhanlaxmi Property — Land Advisory Site Built for Qualified Enquiries",
+    Heading: "Dhanlaxmi Property: Land Advisory Site Built for Qualified Enquiries",
     aboutProject:
-      "A land development, project planning and property advisory firm operating in Udaipur since 1998. We built a lead-generation site on Next.js — not a listings marketplace — where the six plotted colonies each carry their own layout plan, plot sizes and aerial site footage, and every enquiry route is one tap away.",
+      "A land development, project planning and property advisory firm operating since 1998. We built a lead-generation site on Next.js, not a listings marketplace. The six plotted colonies each carry their own layout plan, plot sizes and aerial site footage, and every enquiry route is one tap away.",
     problem:
-      "Buyers judging land in Udaipur — families, investors and NRIs buying from abroad — had no way to check a plotted colony without visiting it. Plot counts, approved sizes and what a site actually looks like today lived on paper layout plans and in the client's own drone footage, so every basic question became a phone call before anyone could be qualified.",
+      "Buyers judging land (families, investors and NRIs buying from abroad) had no way to check a plotted colony without visiting it. Plot counts, approved sizes and what a site actually looks like today lived on paper layout plans and in the client's own drone footage, so every basic question became a phone call before anyone could be qualified.",
     solution:
       "We built the site around the six colonies rather than around a search box. Each project page carries the layout plan, the plot count, the plotted area, the plot sizes and aerial footage of the site as it stands, with phone, WhatsApp and form enquiry on every page. Figures are read off the client's own plans, and anything a plan does not state renders as 'On request' rather than being estimated.",
-    tags: ["Web Development", "Next.js", "SEO", "Local SEO", "Lead Generation", "Real Estate", "Udaipur", "India"],
+    tags: ["Web Development", "Next.js", "SEO", "Local SEO", "Lead Generation", "Real Estate"],
     clentName: "Dhanlaxmi Property",
   },
   {
     featured: true,
     img: [
-      { src: palmvision1, alt: "Palm Vision Technology homepage — CCTV, security systems and office technology supplied, installed and serviced in Fatehpura, Udaipur" },
+      { src: palmvision1, alt: "Palm Vision Technology homepage: CCTV, security systems and office technology supplied, installed and serviced" },
       { src: palmvision2, alt: "Palm Vision Technology service cards for CCTV and surveillance, biometric attendance, computers and laptops, printers and scanners, video door phone and projectors" },
-      { src: palmvision3, alt: "Palm Vision Technology site section showing supply, installation and service coverage for homes, shops, offices and factories in Udaipur" },
+      { src: palmvision3, alt: "Palm Vision Technology site section showing supply, installation and service coverage for homes, shops, offices and factories" },
     ],
-    location: "Udaipur, India",
     projectType: "Security & IT Retail · Static Site & Local SEO",
-    Heading: "Palm Vision Technology — Ten Service Lines, One Findable Shop",
+    Heading: "Palm Vision Technology: Ten Service Lines, One Findable Shop",
     aboutProject:
-      "A CCTV, security systems and office technology business in Fatehpura, Udaipur, trading since 2006. We built a statically exported Next.js site covering all ten service lines and the brands they stock, published to a custom domain with nothing but React shipping to the browser.",
+      "A CCTV, security systems and office technology business, trading since 2006. We built a statically exported Next.js site covering all ten service lines and the brands they stock, published to a custom domain with nothing but React shipping to the browser.",
     problem:
-      "The business sells ten distinct service lines — CCTV, biometric attendance, computers, printers, video door phones, projectors, intruder alarms, EPABX and more — each with its own buyers and its own search demand. With no page per service there was nothing for any of those searches to land on, and a customer looking for one line had no way to discover the other nine.",
+      "The business sells ten distinct service lines: CCTV, biometric attendance, computers, printers, video door phones, projectors, intruder alarms, EPABX and more. Each has its own buyers and its own search demand. With no page per service there was nothing for any of those searches to land on, and a customer looking for one line had no way to discover the other nine.",
     solution:
       "We gave every service line its own page, generated from typed content rather than hand-built, alongside a stocked-brands index and a set of buyer guides answering the questions that precede a quote. The whole site is statically exported and served from a custom domain, so pages load as flat files and the only runtime dependencies are React itself.",
-    tags: ["Web Development", "Next.js", "Static Export", "Local SEO", "Security Systems", "Udaipur", "India"],
+    tags: ["Web Development", "Next.js", "Static Export", "Local SEO", "Security Systems"],
     clentName: "Palm Vision Technology",
   },
   {
     featured: true,
     img: [
-      { src: propertyDashboard1, alt: "HOMIES property management dashboard showing income, expenses, and unit analytics for a real-estate portfolio in the USA and India" },
+      { src: propertyDashboard1, alt: "HOMIES property management dashboard showing income, expenses, and unit analytics for a real-estate portfolio" },
       { src: propertyDashboard2, alt: "HOMIES dashboard detail view with property performance charts and recent transactions" },
     ],
-    location: "USA & India",
     projectType: "PropTech · SaaS Dashboard",
-    Heading: "HOMIES — Property Management & Analytics Dashboard",
+    Heading: "HOMIES: Property Management & Analytics Dashboard",
     aboutProject:
-      "A unified SaaS dashboard giving real-estate teams a single view of income, expenses, occupancy, and unit performance — engineered in React, Vite, and Chakra UI with interactive charts built for speed on any device.",
+      "A unified SaaS dashboard giving real-estate teams a single view of income, expenses, occupancy, and unit performance. It's engineered in React, Vite and Chakra UI, with interactive charts built for speed on any device.",
     problem:
-      "Property managers were juggling multiple spreadsheets and outdated tools to track income, expenses, and occupancy across their portfolio — causing costly errors and slow decision-making.",
+      "Property managers were juggling multiple spreadsheets and outdated tools to track income, expenses, and occupancy across their portfolio. This caused costly errors and slow decision-making.",
     solution:
       "We built a unified SaaS dashboard with real-time analytics and interactive charts that gives property teams instant, accurate visibility across thousands of listings from any device.",
     stats: [
@@ -337,15 +224,14 @@ export const Projects = [
       { src: marty2, alt: "Marty-QR features overview for collecting customer reviews via QR codes" },
       { src: marty3, alt: "Marty-QR client portal for managing online reputation and feedback" },
     ],
-    location: "USA & India",
     projectType: "SaaS · AI Review Platform",
-    Heading: "Marty-QR — AI-Powered Review Management",
+    Heading: "Marty-QR: AI-Powered Review Management",
     aboutProject:
-      "An AI-powered review and feedback platform that helps local businesses collect, manage, and grow their online reputation through QR touchpoints and seamless Google integration.",
+      "An AI-powered review and feedback platform that helps local businesses collect, manage, and grow their online reputation through QR touchpoints and direct Google integration.",
     problem:
       "Local businesses were losing customers to competitors with stronger online reviews, but had no simple, consistent system to capture feedback from satisfied customers at the right moment.",
     solution:
-      "We delivered an AI-powered platform with QR touchpoints that capture in-moment reviews, automate responses, and sync directly with Google — turning every visit into a potential five-star rating.",
+      "We delivered an AI-powered platform with QR touchpoints that capture in-moment reviews, automate responses, and sync directly with Google. Every visit becomes a potential five-star rating.",
     stats: [
       { value: "3.2x", label: "Review Collection Rate" },
       { value: "+89%", label: "Google Rating Lift" },
@@ -358,17 +244,16 @@ export const Projects = [
     img: [
       { src: jewel1, alt: "David Tishbi luxury jewelry storefront hero featuring fine gems and rings" },
       { src: jewel2, alt: "David Tishbi jewelry collection page with product listings" },
-      { src: jewel3, alt: "David Tishbi watches and bullion category for premium shoppers in the USA and India" },
+      { src: jewel3, alt: "David Tishbi watches and bullion category for premium shoppers" },
     ],
-    location: "USA",
     projectType: "Luxury E-commerce",
-    Heading: "David Tishbi — Luxury Jewelry E-commerce",
+    Heading: "David Tishbi: Luxury Jewelry E-commerce",
     aboutProject:
-      "A bespoke luxury e-commerce storefront for a boutique jewelry brand — editorial storytelling, appointment booking, and a conversion-optimized checkout crafted for high-intent premium shoppers.",
+      "A bespoke luxury e-commerce storefront for a boutique jewelry brand, with editorial storytelling, appointment booking and a conversion-optimized checkout for high-intent premium shoppers.",
     problem:
-      "The brand's existing site failed to convey the premium quality of their pieces — slow load times, poor mobile experience, and a generic layout were driving high bounce rates and lost sales.",
+      "The brand's existing site failed to convey the premium quality of their pieces. Slow load times, a poor mobile experience and a generic layout were driving high bounce rates and lost sales.",
     solution:
-      "We crafted a bespoke luxury storefront with editorial design, refined typography, appointment booking, and a streamlined checkout — turning first-time visitors into loyal collectors.",
+      "We crafted a bespoke luxury storefront with editorial design, refined typography, appointment booking, and a streamlined checkout, turning first-time visitors into loyal collectors.",
     stats: [
       { value: "+73%", label: "Session Duration" },
       { value: "+48%", label: "Direct Bookings" },
@@ -379,15 +264,14 @@ export const Projects = [
   },
   {
     img: [
-      { src: realState1, alt: "Estate real-estate platform homepage with a property search hero for buyers in India and the USA" },
+      { src: realState1, alt: "Estate real-estate platform homepage with a property search hero for buyers" },
       { src: realState2, alt: "Estate property listings page showing homes for sale and rent" },
       { src: realState3, alt: "Estate agent profiles and featured property details" },
     ],
-    location: "India & USA",
     projectType: "Real Estate · Web Platform",
-    Heading: "Estate — Property Search & Listings Platform",
+    Heading: "Estate: Property Search & Listings Platform",
     aboutProject:
-      "A conversion-focused real-estate platform with rich property search, agent profiles, and featured listings — fast, SEO-friendly, and built to move visitors from browsing to booking.",
+      "A conversion-focused real-estate platform with rich property search, agent profiles, and featured listings. It's fast, SEO-friendly and built to move visitors from browsing to booking.",
     problem:
       "Growing agencies were stuck on generic listing platforms with poor SEO, no brand differentiation, and a clunky search experience that caused high lead drop-off before enquiry.",
     solution:
@@ -405,15 +289,14 @@ export const Projects = [
       { src: crypto1, alt: "Crypto trading terminal with a live candlestick chart, order book, and buy/sell order form" },
       { src: crypto2, alt: "Crypto exchange market view with depth chart and perpetuals trading tools" },
     ],
-    location: "USA & India",
     projectType: "FinTech · Web3",
-    Heading: "Crypto Exchange — Perpetuals Trading Terminal",
+    Heading: "Crypto Exchange: Perpetuals Trading Terminal",
     aboutProject:
-      "A professional trading terminal for spot and perpetuals with real-time charts, live order books, and audited smart-contract integrations — optimized for split-second decisions without sacrificing clarity.",
+      "A professional trading terminal for spot and perpetuals with real-time charts, live order books, and audited smart-contract integrations. It's optimized for split-second decisions without sacrificing clarity.",
     problem:
-      "Experienced traders were forced to use bloated, confusing interfaces that sacrificed usability for data density — leading to costly mistakes and high platform abandonment.",
+      "Experienced traders were forced to use bloated, confusing interfaces that sacrificed usability for data density. This led to costly mistakes and high platform abandonment.",
     solution:
-      "We engineered a precision trading terminal with real-time candlestick charts, live order books, and a clean buy/sell interface — optimized for speed, clarity, and non-custodial security.",
+      "We engineered a precision trading terminal with real-time candlestick charts, live order books, and a clean buy/sell interface, optimized for speed, clarity and non-custodial security.",
     stats: [
       { value: "+67%", label: "Trade Execution Speed" },
       { value: "+52%", label: "User Retention" },
@@ -428,15 +311,14 @@ export const Projects = [
       { src: hotel2, alt: "Platinum Peak suite gallery highlighting amenities and interiors" },
       { src: hotel3, alt: "Platinum Peak direct reservation booking section" },
     ],
-    location: "India & USA",
     projectType: "Hospitality · Booking",
-    Heading: "Platinum Peak — Luxury Hotel Booking Experience",
+    Heading: "Platinum Peak: Luxury Hotel Booking Experience",
     aboutProject:
-      "An immersive hotel booking website with stunning room galleries and a frictionless direct-reservation flow — designed to convert guests and reduce dependency on costly OTA platforms.",
+      "An immersive hotel booking website with stunning room galleries and a simple direct-booking flow. It's designed to convert guests and reduce dependency on costly OTA platforms.",
     problem:
       "The hotel was losing a majority of bookings to OTA platforms (Booking.com, Expedia), paying steep commissions and losing direct relationships with guests.",
     solution:
-      "We built an immersive direct-booking site with editorial room galleries, seamless reservation flow, and persuasive CTAs — making it effortless for guests to book without third parties.",
+      "We built an immersive direct-booking site with editorial room galleries, smooth reservation flow and persuasive CTAs, making it easy for guests to book without third parties.",
     stats: [
       { value: "+84%", label: "Direct Bookings" },
       { value: "+61%", label: "Conversion Rate" },
@@ -453,7 +335,7 @@ export const cards = [
     icon: expertiseiconHover,
     title: "Expertise & Innovation",
     description:
-      "A senior team that stays ahead of the curve, applying the right modern tech to every problem — not just the trendy one.",
+      "A senior team that stays ahead of the curve, applying the right modern tech to every problem, not just the trendy one.",
   },
   {
     icon: clientIconHover,
@@ -477,7 +359,7 @@ export const cards = [
     icon: expertiseiconHover,
     title: "Scalable Architecture",
     description:
-      "We build for tomorrow — systems that handle growth in users, data, and features without a costly rebuild.",
+      "We build for tomorrow: systems that handle growth in users, data, and features without a costly rebuild.",
   },
   {
     icon: postIconHover,
@@ -492,7 +374,7 @@ export const faqs = [
   {
     question: "What services does Futurise offer?",
     answer:
-      "We're a full-cycle product studio: AI agents & ML solutions, web and mobile app development, UI/UX design, blockchain & Web3 development, and data-driven digital marketing — everything you need to take an idea from concept to launch.",
+      "We're a full-cycle product studio: AI agents & ML solutions, web and mobile app development, UI/UX design, blockchain & Web3 development, and data-driven digital marketing. That's everything you need to take an idea from concept to launch.",
   },
   {
     question: "How much does a project cost?",
@@ -502,12 +384,12 @@ export const faqs = [
   {
     question: "How long does it take to build a product?",
     answer:
-      "A focused MVP typically takes 6–12 weeks, while larger platforms run 3–6 months. We work in two-week agile sprints with regular demos so you see real progress the whole way through.",
+      "A focused MVP typically takes 6 to 12 weeks, while larger platforms run 3 to 6 months. We work in two-week agile sprints with regular demos so you see real progress the whole way through.",
   },
   {
     question: "Do you offer custom solutions?",
     answer:
-      "Always. We don't use one-size-fits-all templates — every solution is tailored to your goals, brand, and users, with architecture chosen specifically for your needs.",
+      "Always. We don't use one-size-fits-all templates. Every solution is tailored to your goals, brand, and users, with architecture chosen specifically for your needs.",
   },
   {
     question: "What happens after the project launches?",
@@ -565,7 +447,7 @@ const CASE_STUDY_FOR_SERVICE = {
 };
 
 /** Case-study slug demonstrating a given service. Undefined if the service has none. */
-export const caseStudyForService = (serviceSlug = "") =>
+const caseStudyForService = (serviceSlug = "") =>
   CASE_STUDY_FOR_SERVICE[serviceSlug];
 
 /** Case-study slug for a blog category, routed through the same service mapping. */
@@ -600,6 +482,9 @@ export const engagementCommitments = [
 // **************** PARTNERS / TRUSTED BY ****************
 export const partners = [
   { img: logoInfinityBay,  name: "Infinity Bay Trading" },
+  { img: logoStartusCloud, name: "Startus Cloud" },
+  { img: logoRamanScientific, name: "Raman Scientific" },
+  { img: logoJainCeramicMart, name: "Jain Ceramic Mart" },
   { img: logoHomies,       name: "HOMIES PropTech" },
   { img: logoDhanlaxmi,    name: "Dhanlaxmi Property" },
   { img: logoMarty,        name: "Marty-QR" },
@@ -608,28 +493,6 @@ export const partners = [
   { img: logoEstate,       name: "Estate Realty" },
   { img: logoGdt,          name: "GDT Exchange" },
   { img: logoPlatinumPeak, name: "Platinum Peak Hotels" },
-];
-
-// **************** NAVIGATION ****************
-export const navbarOptions = [
-  { option: "Home", path: "/" },
-  { option: "About", path: "/about" },
-  { option: "Services", path: "/" },
-  { option: "Portfolio", path: "/portfolio" },
-  // "How much does this cost" is the question buyers arrive with and the intent the
-  // blog already ranks for, so it earns a top-level slot rather than a footer link.
-  { option: "Pricing", path: "/pricing" },
-  { option: "Blog", path: "/blog" },
-  { option: "Contact", path: "/contact" },
-];
-
-export const NavbarservicesOptions = [
-  { option: "Web Development", icon: WebDevNavbarIcon, path: "/service/web-development", desc: "Sites & web apps" },
-  { option: "App Development", icon: AppDevNavbarIcon, path: "/service/app-development", desc: "iOS & Android" },
-  { option: "UI/UX Design", icon: UIUXNavbarIcon, path: "/service/ui-ux-design", desc: "Product design" },
-  { option: "Blockchain Development", icon: BlockchainDevNavbarIcon, path: "/service/blockchain-development", desc: "Web3 & dApps" },
-  { option: "AI & ML Solutions", icon: AiMlNavbarIcon, path: "/service/ai-ml-solutions", desc: "Agents & automation" },
-  { option: "Digital Marketing", icon: DigiMarketingNavbarIcon, path: "/service/digital-marketing", desc: "SEO & growth" },
 ];
 
 // **************** WORLDWIDE LOCATIONS ****************
@@ -647,7 +510,7 @@ export const locations = [
 export const coreValues = [
   {
     title: "Transparency",
-    description: "Clear pricing, honest timelines, and open communication at every stage — no jargon, no surprises.",
+    description: "Clear pricing, honest timelines, and open communication at every stage. No jargon, no surprises.",
   },
   {
     title: "Craftsmanship",
@@ -677,7 +540,7 @@ export const strengths = [
   {
     name: "Web Development",
     description: [
-      "Responsive designs that adapt seamlessly across every screen and device.",
+      "Responsive designs that work well on every screen and device.",
       "Dynamic, high-performance websites with interactive, modern features.",
       "SEO best practices baked in to maximize visibility and search rankings.",
     ],
@@ -686,7 +549,7 @@ export const strengths = [
   {
     name: "App Development",
     description: [
-      "High-quality mobile apps with robust functionality and seamless performance.",
+      "High-quality mobile apps with solid features and smooth performance.",
       "Cross-platform compatibility for iOS and Android to reach a wider audience.",
       "Intuitive, user-friendly interfaces designed for engagement and retention.",
     ],
@@ -725,13 +588,13 @@ export const strengths = [
 export const services = {
   "app-development": {
     title: "App Development",
-    metaTitle: "App Development Company — iOS & Android (React Native)",
+    metaTitle: "React Native App Development Company: iOS, Android & Expo",
     metaDescription:
       "Cross-platform iOS & Android apps from one React Native codebase. Fixed-scope quotes instead of open-ended hourly billing. Book a free 45-minute consultation.",
     whatWeDo: "What we do",
     description: "Cross-platform iOS & Android apps built with React Native & Expo.",
     details:
-      "From idea to App Store, we design and engineer cross-platform mobile apps with React Native and Expo that are fast, secure, and a joy to use. We handle architecture, UI, maps, push notifications, backend integration, and full store deployment — so you get a polished product on both platforms without the headaches.",
+      "From idea to App Store, we design and engineer cross-platform mobile apps with React Native and Expo that are fast, secure, and a joy to use. We handle architecture, UI, maps, push notifications, backend integration, and full store deployment. You get a polished product on both platforms without the headaches.",
     features: [
       "Cross-platform apps with React Native & Expo",
       "Google Maps API, push notifications & deep linking",
@@ -750,17 +613,17 @@ export const services = {
       {
         question: "How long does it take to build an app?",
         answer:
-          "A focused MVP usually takes 8–14 weeks; a full product with custom backend and payments runs 16–24 weeks. We scope it precisely after a free discovery call so there are no surprises.",
+          "A focused MVP usually takes 8 to 14 weeks; a full product with custom backend and payments runs 16 to 24 weeks. We scope it precisely after a free discovery call so there are no surprises.",
       },
       {
         question: "Why cross-platform instead of separate native apps?",
         answer:
-          "React Native and Expo give you true native performance from a single codebase — both platforms ship together, typically at 40–60% less cost than building two separate native apps.",
+          "React Native and Expo give you true native performance from a single codebase. Both platforms ship together, typically at 40 to 60% less cost than building two separate native apps.",
       },
       {
         question: "Do you handle App Store and Play Store submission?",
         answer:
-          "Yes. We manage the full submission process — developer accounts, metadata, screenshots, privacy requirements, and responding to reviewer feedback.",
+          "Yes. We manage the full submission process: developer accounts, metadata, screenshots, privacy requirements, and responding to reviewer feedback.",
       },
       {
         question: "Can you add features to an existing app?",
@@ -770,19 +633,19 @@ export const services = {
       {
         question: "Which devices will the app support?",
         answer:
-          "We target iOS 14+ and Android 8+ as a baseline — over 95% of active devices — and test on real hardware across multiple OS versions, not just simulators.",
+          "We target iOS 14+ and Android 8+ as a baseline (over 95% of active devices) and test on real hardware across multiple OS versions, not just simulators.",
       },
     ],
   },
   "web-development": {
     title: "Web Development",
-    metaTitle: "Web Development Company — React, Next.js & Node.js",
+    metaTitle: "Web Development Company: React, Next.js & Node.js",
     metaDescription:
       "Custom websites, SaaS platforms and web apps in React, Next.js and Node.js. Fixed-scope quotes, not hourly billing. Book a free 45-minute consultation.",
     whatWeDo: "What we do",
     description: "Responsive, robust web applications that perform.",
     details:
-      "We build high-performing websites and web apps with modern frameworks, clean architecture, and rock-solid performance. From pixel-perfect frontends to scalable Node.js backends, structured databases, CI/CD pipelines, and full test coverage — SEO-ready, accessible, and built to last.",
+      "We build high-performing websites and web apps with modern frameworks, clean architecture, and fast, reliable performance. From pixel-perfect frontends to scalable Node.js backends, structured databases, CI/CD pipelines, and full test coverage. It's SEO-ready, accessible and built to last.",
     features: [
       "Modern frontends with React, Next.js, Astro & TypeScript",
       "Node.js backends with REST & GraphQL APIs",
@@ -811,7 +674,7 @@ export const services = {
       {
         question: "Will my website be fast and SEO-ready?",
         answer:
-          "Performance and SEO are built into the architecture — server-side rendering, semantic HTML, structured data, and Core Web Vitals tuned for sub-2-second loads.",
+          "Performance and SEO are built into the architecture: server-side rendering, semantic HTML, structured data, and Core Web Vitals tuned for sub-2-second loads.",
       },
       {
         question: "Do you provide hosting and maintenance after launch?",
@@ -821,13 +684,13 @@ export const services = {
       {
         question: "How long does a web project take?",
         answer:
-          "A marketing site typically takes 3–6 weeks; a full web app or SaaS platform runs 8–16 weeks. You get a clear timeline after a free discovery call.",
+          "A marketing site typically takes 3 to 6 weeks; a full web app or SaaS platform runs 8 to 16 weeks. You get a clear timeline after a free discovery call.",
       },
     ],
   },
   "ui-ux-design": {
     title: "UI/UX Design",
-    metaTitle: "UI/UX Design Agency — Product Design & Figma",
+    metaTitle: "UI/UX Design Agency & Consultants: Product Design",
     metaDescription:
       "UX research, Figma UI and design systems that cut churn and lift conversions. Fixed-scope quotes, not hourly billing. Book a free 45-minute consultation.",
     whatWeDo: "What we do",
@@ -852,12 +715,12 @@ export const services = {
       {
         question: "Do I need UX research if I already know my users?",
         answer:
-          "Almost every team discovers something surprising in the first week of research. What users say and what they actually do rarely match — research removes expensive assumptions before you build.",
+          "Almost every team discovers something surprising in the first week of research. What users say and what they actually do rarely match. Research removes expensive assumptions before you build.",
       },
       {
         question: "How long does a UI/UX project take?",
         answer:
-          "A focused landing page or feature redesign takes 2–3 weeks; a full product design with a design system runs 6–12 weeks depending on scope and feedback cycles.",
+          "A focused landing page or feature redesign takes 2 to 3 weeks; a full product design with a design system runs 6 to 12 weeks depending on scope and feedback cycles.",
       },
       {
         question: "Can you redesign an existing product without breaking it?",
@@ -873,15 +736,15 @@ export const services = {
   },
   "blockchain-development": {
     title: "Blockchain Development",
-    metaTitle: "Blockchain Development — Smart Contracts, DeFi & Web3",
+    metaTitle: "Blockchain Development: Smart Contracts, DeFi & Web3",
     metaDescription:
       "Audited smart contracts, DeFi platforms and multi-chain dApps on Ethereum, Solana and Base. Fixed-scope quotes. Book a free 45-minute consultation.",
     whatWeDo: "What we do",
-    description: "Real Web3 products — DeFi, bots, launchpads & multi-chain.",
+    description: "Real Web3 products: DeFi, bots, launchpads & multi-chain.",
     details:
       "We build production-grade Web3 products backed by real delivered projects: DeFi frontends with staking, swaps, and liquidity pools; MEV and transaction-bundling bots; Telegram-native trading platforms; launchpads and airdrop dashboards; and multi-chain EVM deployments across Ethereum, BSC, Base, Arbitrum, and Solana.",
     features: [
-      "DeFi frontends — staking, AMM swaps, liquidity, launchpads",
+      "DeFi frontends: staking, AMM swaps, liquidity, launchpads",
       "MEV bots, Solana/ETH bundle scripts & arbitrage automation",
       "Telegram trading & analytics bots with real-time data",
       "Multi-chain EVM deployments (Ethereum, BSC, Base, Arbitrum, Polygon)",
@@ -919,13 +782,13 @@ export const services = {
   },
   "ai-ml-solutions": {
     title: "AI & ML Solutions",
-    metaTitle: "AI & ML Development — AI Agents, LLMs & Computer Vision",
+    metaTitle: "AI & ML Development: AI Agents, LLMs & Computer Vision",
     metaDescription:
       "Custom AI agents and LLM & RAG integrations that automate real workflows and cut costs. Fixed-scope quotes. Book a free 45-minute consultation.",
     whatWeDo: "What we do",
     description: "Intelligent systems that learn, adapt, and automate.",
     details:
-      "We design and build production-ready AI agents, ML-powered features, and fully integrated AI SaaS platforms — from data pipelines to deployed models — so your product gets smarter over time and your team operates at a higher level.",
+      "We design and build production-ready AI agents, ML-powered features, and fully integrated AI SaaS platforms, from data pipelines to deployed models. Your product gets smarter over time and your team works at a higher level.",
     features: [
       "Custom AI agents & LLM-powered workflow automation",
       "ML model development, training & production deployment",
@@ -944,7 +807,7 @@ export const services = {
       {
         question: "What's the difference between an AI agent and an LLM integration?",
         answer:
-          "An LLM integration adds language features — search, Q&A, generation — to your product. An AI agent goes further: it reasons, calls tools and APIs, and completes multi-step tasks autonomously.",
+          "An LLM integration adds language features (search, Q&A, generation) to your product. An AI agent goes further: it reasons, calls tools and APIs, and completes multi-step tasks autonomously.",
       },
       {
         question: "Can the AI use our own data?",
@@ -954,24 +817,24 @@ export const services = {
       {
         question: "Which AI models do you use?",
         answer:
-          "We're model-agnostic — OpenAI, Anthropic Claude, Google Gemini, Meta Llama and open-source models — and recommend what best fits your budget, latency and accuracy needs.",
+          "We're model-agnostic: OpenAI, Anthropic Claude, Google Gemini, Meta Llama and open-source models. We recommend what best fits your budget, latency and accuracy needs.",
       },
       {
         question: "Will it work reliably in production?",
         answer:
-          "We build for production, not demos — with evaluation, guardrails, monitoring, fallback handling and cost controls in from day one.",
+          "We build for production, not demos. Evaluation, guardrails, monitoring, fallback handling and cost controls are in from day one.",
       },
     ],
   },
   "digital-marketing": {
     title: "Digital Marketing",
-    metaTitle: "Digital Marketing Agency — SEO, Paid Ads & CRO",
+    metaTitle: "Digital Marketing Agency: SEO, Paid Ads & CRO",
     metaDescription:
       "SEO, Google & Meta ads and CRO tied to revenue, not vanity metrics. Fixed-scope quotes and monthly reporting. Book a free 45-minute consultation.",
     whatWeDo: "What we do",
     description: "Comprehensive, data-driven growth marketing.",
     details:
-      "We build digital marketing systems that remove guesswork. From technical SEO and content strategy to performance ads across Google, Meta and LinkedIn, conversion rate optimisation, and full analytics and attribution — every channel we run is tied to a measurable business outcome: traffic, leads, pipeline, or revenue.",
+      "We build digital marketing systems that remove guesswork. From technical SEO and content strategy to performance ads across Google, Meta and LinkedIn, conversion rate optimisation, and full analytics and attribution. Every channel we run is tied to a measurable business outcome: traffic, leads, pipeline, or revenue.",
     features: [
       "SEO & content strategy",
       "Performance & paid social campaigns",
@@ -990,12 +853,12 @@ export const services = {
       {
         question: "How long before we see results from SEO?",
         answer:
-          "Meaningful organic growth typically takes 3–6 months for competitive terms and 1–3 months for lower-competition niches. Paid channels deliver results from week one, so we often run both in parallel.",
+          "Meaningful organic growth typically takes 3 to 6 months for competitive terms and 1 to 3 months for lower-competition niches. Paid channels deliver results from week one, so we often run both in parallel.",
       },
       {
         question: "What ad budget do we need?",
         answer:
-          "It depends on your market, the competitiveness of the terms and how many channels you want running. Rather than quote a band that would be wrong for most readers, we look at your cost per acquisition target and what your competitors are paying for the same clicks, then tell you honestly whether the budget you have in mind can achieve what you want — including when the answer is that it cannot.",
+          "It depends on your market, the competitiveness of the terms and how many channels you want running. Rather than quote a band that would be wrong for most readers, we look at your cost per acquisition target and what your competitors are paying for the same clicks, then tell you honestly whether the budget you have in mind can achieve what you want, including when the answer is that it cannot.",
       },
       {
         question: "Do you create the content, or do we?",
@@ -1095,7 +958,7 @@ export const techStacks = {
   "ai-ml-solutions": {
     title: "AI & ML Solutions",
     stacks: [
-      { title: "AI Agents & LLMs", subtitle: "Automate with intelligence", description: "Custom agents powered by state-of-the-art language models integrated directly into your product.", techStack: "OpenAI, Claude, LangChain, LlamaIndex" },
+      { title: "AI Agents & LLMs", subtitle: "Automate with intelligence", description: "Custom agents built on leading language models and integrated directly into your product.", techStack: "OpenAI, Claude, LangChain, LlamaIndex" },
       { title: "ML Development", subtitle: "Models that improve over time", description: "End-to-end ML pipelines from data preprocessing and training to production deployment.", techStack: "Python, PyTorch, TensorFlow, scikit-learn" },
       { title: "AI-Powered SaaS", subtitle: "Build smarter products", description: "Web apps and SaaS platforms with AI-driven features on scalable cloud infrastructure.", techStack: "FastAPI, Node.js, AWS, Vercel" },
     ],

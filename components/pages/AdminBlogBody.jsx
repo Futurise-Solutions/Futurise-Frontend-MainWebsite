@@ -192,6 +192,7 @@ const BlogFormDrawer = ({ isOpen, onClose, editing, onSaved }) => {
 
   useEffect(() => {
     if (isOpen) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- reset the form from the selected post each time the drawer opens
       setForm(editing ? { ...EMPTY_FORM, ...editing, meta: { ...EMPTY_FORM.meta, ...(editing.meta || {}) } } : EMPTY_FORM);
     }
   }, [isOpen, editing]);
@@ -389,7 +390,7 @@ const Dashboard = ({ onLogout }) => {
       .catch(() => toast({ title: "Couldn’t load blogs", description: "Check the API connection.", status: "error", duration: 4000, position: "top" }))
       .finally(() => setLoading(false));
   };
-  useEffect(load, []); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(load, []); // eslint-disable-line react-hooks/exhaustive-deps, react-hooks/set-state-in-effect -- initial load on mount
 
   const filtered = useMemo(() => {
     return blogs.filter((b) => {

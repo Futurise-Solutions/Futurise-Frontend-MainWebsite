@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import JsonLd from '@/components/common/JsonLd'
 import BlogsPageView from '@/components/blog/BlogsPageView'
 import { buildMetadata } from '@/lib/seo'
-import { getBlogs } from '@/lib/blog'
+import { getCachedBlogSummaries } from '@/lib/blogSummaries'
 
 /** ISR — the index refreshes every 10 minutes. */
 export const revalidate = 600
@@ -17,7 +17,7 @@ export const metadata: Metadata = buildMetadata({
 })
 
 export default async function Page() {
-  const blogs = await getBlogs(revalidate)
+  const blogs = await getCachedBlogSummaries(revalidate)
 
   /** JSON-LD ported verbatim. The ItemList is only emitted when there are posts. */
   const jsonLd: Array<Record<string, unknown>> = [

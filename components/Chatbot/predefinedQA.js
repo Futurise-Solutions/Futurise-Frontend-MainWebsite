@@ -26,7 +26,7 @@ export const predefinedAnswers = {
        NINE engagements, /about commits in writing to publishing no project or client
        counts, and the perpetuals trading terminal is deliberately published under its
        product rather than a client name. Name only clients /portfolio names. */
-    "We've built property SaaS, AI review platforms, luxury e-commerce and trading terminals — including HOMIES and Marty-QR. Check our portfolio page!",
+    "We've built property SaaS, AI review platforms, luxury e-commerce and trading terminals, including HOMIES and Marty-QR. Check our portfolio page!",
 
   // ⚠️ NO PHONE NUMBER — see the note in keywordMatcher.js. Owner decision: none is
   // published anywhere, matching /about and the Organization schema.

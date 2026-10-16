@@ -2,7 +2,6 @@
 
 import React, { useMemo } from "react";
 import { Box } from "@chakra-ui/react";
-import { useReducedMotion } from "framer-motion";
 // Same landmass grid the /contact plate uses, projected onto a sphere here instead of
 // a rectangle — see the module header for how it is built.
 import { COLS, ROWS, LAND } from "../../utils/Constant/worldLand";
@@ -45,6 +44,9 @@ const LON0 = 120;
 const LAT0 = -8;
 
 const rad = (d) => (d * Math.PI) / 180;
+// SVG does not need machine-precision coordinates. Stable rounding avoids
+// server/browser trig differences becoming hydration attribute mismatches.
+const svgNumber = (value) => Number(value.toFixed(4));
 
 /**
  * Orthographic projection. Returns null when the point is on the far side of the
@@ -57,16 +59,15 @@ const project = (lon, lat) => {
   const cosc = Math.sin(p0) * Math.sin(p) + Math.cos(p0) * Math.cos(p) * Math.cos(l);
   if (cosc < 0) return null; // back face
   return {
-    x: CX + R * Math.cos(p) * Math.sin(l),
-    y: CY - R * (Math.cos(p0) * Math.sin(p) - Math.sin(p0) * Math.cos(p) * Math.cos(l)),
+    x: svgNumber(CX + R * Math.cos(p) * Math.sin(l)),
+    y: svgNumber(CY - R * (Math.cos(p0) * Math.sin(p) - Math.sin(p0) * Math.cos(p) * Math.cos(l))),
     // Points near the limb are foreshortened; fading them keeps the sphere reading as
     // a sphere rather than as a flat disc with dots scattered on it.
-    z: cosc,
+    z: svgNumber(cosc),
   };
 };
 
 const MarketGlobe = ({ size = { base: "220px", md: "280px" } }) => {
-  const reduce = useReducedMotion();
 
   // Graticule: meridians and parallels, sampled and clipped to the visible hemisphere.
   const graticule = useMemo(() => {
@@ -172,8 +173,8 @@ const MarketGlobe = ({ size = { base: "220px", md: "280px" } }) => {
               key={i}
               cx={p.x}
               cy={p.y}
-              r={0.5 + 1.15 * p.z}
-              opacity={0.12 + 0.5 * p.z}
+              r={svgNumber(0.5 + 1.15 * p.z)}
+              opacity={svgNumber(0.12 + 0.5 * p.z)}
             />
           ))}
         </g>
@@ -190,7 +191,7 @@ const MarketGlobe = ({ size = { base: "220px", md: "280px" } }) => {
 
         {/* markets */}
         {pts.map((p, i) => (
-          <g key={p.name} opacity={0.45 + 0.55 * p.z}>
+          <g key={p.name} opacity={svgNumber(0.45 + 0.55 * p.z)}>
             {/* Radar pulse as a CSS keyframe animation rather than a Framer one.
                 /about is prerendered at build time, and Framer resolving a keyframe
                 array on the SVG `r` attribute emits r="undefined" on that first
@@ -198,7 +199,7 @@ const MarketGlobe = ({ size = { base: "220px", md: "280px" } }) => {
                 Expected length' once per node. A scale transform about the node's
                 own origin produces the identical effect, is composited rather than
                 re-laid-out, and has a valid `r` in the markup from the start. */}
-            {!reduce && (
+            {(
               <circle
                 cx={p.x}
                 cy={p.y}
@@ -208,7 +209,7 @@ const MarketGlobe = ({ size = { base: "220px", md: "280px" } }) => {
                 strokeWidth={1}
                 style={{
                   transformOrigin: `${p.x}px ${p.y}px`,
-                  animation: `mg-pulse 3s ${(i * 0.45).toFixed(2)}s ease-out infinite`,
+                  animation: `mg-pulse 3s ${(i * 0.45).toFixed(2)}s ease-out 1`,
                 }}
               />
             )}

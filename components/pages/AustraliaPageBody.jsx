@@ -1,4 +1,6 @@
 'use client'
+import regional from '../common/RegionalPages.module.css';
+import RegionalHero from '../common/RegionalHero';
 
 /**
  * /au page body — ported VERBATIM from AustraliaPage.jsx.
@@ -17,15 +19,18 @@ import {
 import NextImage from "next/image";
 import Link from "next/link";
 import { FiArrowRight, FiCheck, FiArrowUpRight } from "react-icons/fi";
-import { Reveal, Eyebrow, GlassCard, CTASection, MarketHero, VisualBand } from "@/components/common";
+import Reveal from "@/components/common/Reveal";
+import { Eyebrow } from "@/components/common/SectionHeading";
+import GlassCard from "@/components/common/GlassCard";
+import CTASection from "@/components/common/CTASection";
+import VisualBand from "@/components/common/VisualBand";
+import CountrySolutions from "@/components/common/CountrySolutions";
 import Faqs from "@/components/home/Faqs";
 import { useBooking } from "@/context/BookingContext";
 import { NavbarservicesOptions } from "@/utils/Constant";
-import { COUNTRY_ALTERNATES } from "@/utils/Constant/countries";
-import { buildCountrySchema } from "@/utils/countrySchema";
-import { marketAu, marketReach } from "@/assests";
+import { marketReach } from "@/assests";
 import {
-  auMeta, auDeadlines, auDataEconomy, auSectors, auRails,
+  auDeadlines, auDataEconomy, auSectors, auRails,
   partnerChoice, auCostModel, auResources, auFaqs,
 } from "@/utils/Constant/australia";
 
@@ -36,9 +41,9 @@ export default function AustraliaPageBody() {
   // Australian belongs here. The country registry supplies the path, label and language
   // tag, so the schema cannot disagree with the hreflang cluster or the footer link.
   return (
-    <Box>
+    <Box className={regional.page}>
       {/* Hero — market-specific atmosphere plate behind the shared texture. */}
-      <MarketHero image={marketAu} tone="hue-rotate(-18deg) saturate(0.82)">
+      <RegionalHero>
           <Reveal><Eyebrow>Australia</Eyebrow></Reveal>
           <Reveal delay={0.05}>
             <Heading as="h1" mt={5} fontSize={{ base: "38px", md: "56px" }} lineHeight={1.08} letterSpacing="-0.025em" maxW="940px">
@@ -49,7 +54,7 @@ export default function AustraliaPageBody() {
           <Reveal delay={0.1}>
             <Text mt={6} color="text.muted" fontSize={{ base: "md", md: "xl" }} lineHeight={1.7} maxW="800px">
               Custom software, AI and SaaS built for companies operating under Australian
-              obligations — the Privacy Act, the Consumer Data Right, the critical
+              obligations: the Privacy Act, the Consumer Data Right, the critical
               infrastructure regime and the Essential Eight. Here, compliance is a set of
               dated requirements with an engineering consequence, not a page in a policy
               document.
@@ -65,7 +70,7 @@ export default function AustraliaPageBody() {
               </Button>
             </HStack>
           </Reveal>
-      </MarketHero>
+      </RegionalHero>
 
       {/* Deadlines */}
       <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
@@ -411,6 +416,8 @@ export default function AustraliaPageBody() {
           </HStack>
         </Reveal>
       </Container>
+
+      <CountrySolutions market="au" />
 
       <Faqs
         items={auFaqs}

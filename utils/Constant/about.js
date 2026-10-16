@@ -43,12 +43,12 @@ export const aboutEntity = [
   {
     title: "Delivered work sits in three markets",
     detail:
-      "The published record covers clients in Dubai, in the United States and in India. New Zealand is where the company is registered, not where its clients are — no delivered engagement on this site belongs to a New Zealand business, and we would rather say so than let a registered address imply a customer base.",
+      "The published record covers clients in Dubai, in the United States and in India. New Zealand is where the company is registered, not where its clients are. No delivered engagement on this site belongs to a New Zealand business, and we would rather say so than let a registered address imply a customer base.",
   },
   {
     title: "One published way to reach a human",
     detail:
-      "Enquiries arrive by email at business@futurisesolutions.com, through the contact form, or through the booking flow. No telephone number is published anywhere on this site, and none appears in its structured data either — listing a channel that nobody answers is worse than listing none, and search engines read that field literally.",
+      "Enquiries arrive by email at business@futurisesolutions.com, through the contact form, or through the booking flow. No telephone number is published anywhere on this site, and none appears in its structured data either. Listing a channel that nobody answers is worse than listing none, and search engines read that field literally.",
   },
 ];
 
@@ -58,7 +58,7 @@ export const aboutNotClaimed = [
   {
     title: "No colleagues you cannot look up",
     detail:
-      "This site names no member of staff. A team section is built and sitting behind a switch, and it stays off until real names, roles and profile links go into it. Publishing invented colleagues, or emitting structured data describing people who do not exist, is a fabricated-authority signal search engines specifically penalise — and it is a worse answer than the gap it would fill.",
+      "This site names no member of staff. A team section is built and sitting behind a switch, and it stays off until real names, roles and profile links go into it. Publishing invented colleagues, or emitting structured data describing people who do not exist, is a fabricated-authority signal search engines specifically penalise. It is a worse answer than the gap it would fill.",
   },
   {
     title: "No logo wall",

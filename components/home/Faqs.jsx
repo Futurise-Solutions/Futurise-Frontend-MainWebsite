@@ -1,13 +1,15 @@
 'use client'
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Flex, Box, Heading, Text, Button, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon,
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { FiArrowRight } from "react-icons/fi";
 import { faqs } from "../../utils/Constant";
-import { Section, Reveal, Eyebrow } from "../common";
+import Section from "../common/Section";
+import Reveal from "../common/Reveal";
+import { Eyebrow } from "../common/SectionHeading";
 
 import dynamic from "next/dynamic";
 
@@ -30,18 +32,16 @@ const Faqs = ({
   const navigate = (to) => router.push(to);
   const [openIndex, setOpenIndex] = useState(0);
 
-  // Reset to first item on every mount (covers back/forward navigation)
-  useEffect(() => { setOpenIndex(0); }, []);
-
   return (
     // The FAQ is the last long read before the CTA — a two-column block of accordion
     // rows on flat canvas. The drifting light gives the end of the page somewhere to
     // rest without adding a fourth interstitial band to a page that already has three.
     <Section isolation="isolate" containerProps={{ position: "relative", zIndex: 2 }}>
       <AuroraField intensity="soft" />
-      <Flex direction={{ base: "column", lg: "row" }} gap={{ base: 10, lg: 16 }} align="start">
+      {/* Keep all FAQ content above the absolute decorative background. */}
+      <Flex position="relative" zIndex={1} direction={{ base: "column", lg: "row" }} gap={{ base: 10, lg: 16 }} align="start">
         {/* Left */}
-        <Box flex={{ lg: "0 0 38%" }}>
+        <Box flex={{ lg: "0 0 38%" }} position={{ base: "static", lg: "sticky" }} top="125px" alignSelf="flex-start">
           <Reveal><Eyebrow>{eyebrow}</Eyebrow></Reveal>
           <Reveal delay={0.05}>
             <Heading mt={4} fontSize={{ base: "30px", md: "40px" }} lineHeight={1.15}>
@@ -74,7 +74,7 @@ const Faqs = ({
                   key={index}
                   border="1px solid"
                   borderColor="border.subtle"
-                  borderRadius="16px"
+                  borderRadius="4px"
                   mb={3}
                   bg="bg.surface"
                   overflow="hidden"
@@ -87,7 +87,8 @@ const Faqs = ({
                       to that. The heading wraps the button rather than sitting inside
                       it, since <button> only accepts phrasing content. */}
                   <Box as="h3" m={0}>
-                    <AccordionButton py={5} px={6} _hover={{ bg: "transparent" }} _expanded={{ color: "accent.solid" }}>
+                    <AccordionButton py={6} px={{ base: 4, md: 6 }} gap={4} color="text.primary" _hover={{ bg: "rgba(123,108,255,.05)" }} _expanded={{ color: "#B57BFF", bg: "rgba(123,108,255,.07)" }}>
+                      <Box as="span" aria-hidden="true" fontSize="10px" color="#B57BFF" fontWeight={400}>{String(index + 1).padStart(2, '0')}</Box>
                       <Box flex="1" textAlign="left" fontWeight={600} fontSize={{ base: "15px", md: "16px" }}>
                         {faq.question}
                       </Box>

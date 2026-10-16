@@ -40,7 +40,7 @@ export const euMeta = {
   // 152 characters. Leads with the transfer question because that is the query behind
   // "can we even use a non-EU developer", which is the real objection on this page.
   description:
-    "Custom software, AI and SaaS built for European businesses — GDPR transfer mechanisms, EU AI Act obligations and EU data residency handled from day one.",
+    "Custom software, AI and SaaS built for European businesses: GDPR transfer mechanisms, EU AI Act obligations and EU data residency handled from day one.",
   keywords:
     "software development company Europe, GDPR compliant software development, EU AI Act compliance software, offshore development GDPR, EU data residency development, custom software development Europe, standard contractual clauses software supplier",
 };
@@ -62,17 +62,17 @@ export const euRegulatory = [
   {
     title: "Transfers out of the EEA run on Standard Contractual Clauses",
     detail:
-      "India has no European Commission adequacy decision, so a transfer to an Indian delivery team relies on Article 46 safeguards — in practice the 2021 Standard Contractual Clauses, together with the transfer impact assessment the CJEU required in Schrems II (Case C-311/18, 16 July 2020). This is the specific mechanism, named, before you ask for it. A supplier who cannot tell you which Article 46 route they rely on has not thought about it.",
+      "India has no European Commission adequacy decision, so a transfer to an Indian delivery team relies on Article 46 safeguards. In practice that means the 2021 Standard Contractual Clauses, together with the transfer impact assessment the CJEU required in Schrems II (Case C-311/18, 16 July 2020). This is the specific mechanism, named, before you ask for it. A supplier who cannot tell you which Article 46 route they rely on has not thought about it.",
   },
   {
     title: "Data residency is an architectural decision, not a hosting preference",
     detail:
-      "Keeping personal data physically inside the EEA is usually the cleanest answer, and it is decided in week one or retrofitted expensively later. In practice it means selecting EU regions at the infrastructure layer, checking that every managed service in the stack — database, queue, object store, logging, error tracking, analytics — offers an EU region, and knowing which of your third-party processors quietly do not.",
+      "Keeping personal data physically inside the EEA is usually the cleanest answer, and it is decided in week one or retrofitted expensively later. In practice it means selecting EU regions at the infrastructure layer, checking that every managed service in the stack (database, queue, object store, logging, error tracking, analytics) offers an EU region, and knowing which of your third-party processors quietly do not.",
   },
   {
     title: "The EU AI Act now has dates attached",
     detail:
-      "Regulation (EU) 2024/1689 entered into force on 1 August 2024. Its prohibitions on unacceptable-risk practices have applied since 2 February 2025, and obligations for general-purpose AI models since 2 August 2025, with the bulk of high-risk obligations following on 2 August 2026. For anyone commissioning an AI feature aimed at European users, the practical question is no longer whether the Act applies but which risk tier the system falls into — and that determination changes the build.",
+      "Regulation (EU) 2024/1689 entered into force on 1 August 2024. Its prohibitions on unacceptable-risk practices have applied since 2 February 2025, and obligations for general-purpose AI models since 2 August 2025, with the bulk of high-risk obligations following on 2 August 2026. For anyone commissioning an AI feature aimed at European users, the practical question is no longer whether the Act applies but which risk tier the system falls into. That determination changes the build.",
   },
   {
     title: "A processor's obligations are written into the contract, not assumed",
@@ -92,7 +92,7 @@ export const euPositioning = [
     heading: "What we do not claim",
     points: [
       "We hold no European entity, no European office and no European staff. Futurise Solutions is registered in Wellington, New Zealand, and our delivery team is in Udaipur, India. That is a corporate fact you can check, and it is stated before you ask.",
-      "The engagements named on our portfolio are in the UAE, the United States and India. Not every engagement is public — client confidentiality decides what we may attribute, and we do not publish work we have not been cleared to name. So read the portfolio as what we can show you, not as the whole record.",
+      "The engagements named on our portfolio are in the UAE, the United States and India. Not every engagement is public. Client confidentiality decides what we may attribute, and we do not publish work we have not been cleared to name. So read the portfolio as what we can show you, not as the whole record.",
       "We are not the right supplier for a contract that requires an EU-established legal entity, or for public-sector procurement with an EEA-establishment condition. Where that is the requirement we will say so on the first call rather than after it.",
     ],
   },
@@ -100,7 +100,7 @@ export const euPositioning = [
     heading: "What is genuinely true",
     points: [
       "The transfer mechanism, the sub-processor list and the data-residency design are settled in writing before the build starts, not requested from us during your vendor review.",
-      "We already build to a comparable regime. New Zealand's Privacy Act 2020 and the UAE's PDPL both impose cross-border transfer duties, and the engineering habits they demand — deciding where data lives, what is logged and for how long, whether a person's record can be exported or erased without a one-off script — are the same habits GDPR needs.",
+      "We already build to a comparable regime. New Zealand's Privacy Act 2020 and the UAE's PDPL both impose cross-border transfer duties, and the engineering habits they demand (deciding where data lives, what is logged and for how long, whether a person's record can be exported or erased without a one-off script) are the same habits GDPR needs.",
       "You contract with a New Zealand company. New Zealand holds a European Commission adequacy decision, in force since 2013 and retained following the Commission's 2024 review, which makes the contracting entity itself a jurisdiction the Commission has already assessed.",
     ],
   },
@@ -122,7 +122,7 @@ export const euWorkingModel = [
   {
     step: "A working overlap that is real, not nominal",
     detail:
-      "Indian Standard Time runs 4.5 hours ahead of Central European Time in winter and 3.5 ahead during CEST. A 09:00 start in Udaipur is 04:30 in Berlin, and 17:30 in Udaipur is 13:00 in Berlin — so the European morning and the Indian afternoon overlap by roughly half a working day, every day, without anyone keeping unusual hours. For the UK the overlap is an hour wider.",
+      "Indian Standard Time runs 4.5 hours ahead of Central European Time in winter and 3.5 ahead during CEST. A 09:00 start in Udaipur is 04:30 in Berlin, and 17:30 in Udaipur is 13:00 in Berlin. So the European morning and the Indian afternoon overlap by roughly half a working day, every day, without anyone keeping unusual hours. For the UK the overlap is an hour wider.",
   },
   {
     step: "Scoping calls in your working day",
@@ -150,7 +150,7 @@ export const euSectors = [
   {
     title: "AI features aimed at European users",
     detail:
-      "The design question is which EU AI Act risk tier a system falls into, and it changes the build. Transparency duties for systems people interact with, logging and human-oversight requirements where a use case is high-risk, and — for anything touching biometric categorisation or social scoring — a prohibition rather than a control. Deciding this before the architecture is set is far cheaper than discovering it during a compliance review.",
+      "The design question is which EU AI Act risk tier a system falls into, and it changes the build. Transparency duties for systems people interact with, logging and human-oversight requirements where a use case is high-risk, and, for anything touching biometric categorisation or social scoring, a prohibition rather than a control. Deciding this before the architecture is set is far cheaper than discovering it during a compliance review.",
   },
   {
     title: "SaaS platforms processing personal data",
@@ -165,7 +165,7 @@ export const euSectors = [
   {
     title: "Internal tooling and integrations",
     detail:
-      "The common European build is not greenfield — it is software that has to sit alongside an existing ERP, ledger or CRM rather than replace it, and the integration is usually where the project is won or lost. Sub-processor disclosure matters here too: every SaaS the integration touches becomes part of your processing record.",
+      "The common European build is not greenfield. It is software that has to sit alongside an existing ERP, ledger or CRM rather than replace it, and the integration is usually where the project is won or lost. Sub-processor disclosure matters here too: every SaaS the integration touches becomes part of your processing record.",
   },
 ];
 
@@ -184,7 +184,7 @@ export const euFaqs = [
   {
     question: "Where will our data physically live?",
     answer:
-      "Wherever the design requires, and it is decided before the first line of production code. For most European engagements that means EU regions across the whole stack — not only the primary database but every managed service around it, including queues, object storage, logging, error tracking and analytics, since each one is a processor in its own right. Where a component has no EU region we tell you before it is chosen, not after.",
+      "Wherever the design requires, and it is decided before the first line of production code. For most European engagements that means EU regions across the whole stack, not only the primary database but every managed service around it, including queues, object storage, logging, error tracking and analytics, since each one is a processor in its own right. Where a component has no EU region we tell you before it is chosen, not after.",
   },
   {
     question: "Do you sign a Data Processing Agreement?",
@@ -199,7 +199,7 @@ export const euFaqs = [
   {
     question: "Which European countries do you work with?",
     answer:
-      "We work with businesses across the EEA and the United Kingdom, and we make no claim of local presence in any of them: no European entity, no European office, no European staff. On client work, the honest answer is that our portfolio shows the engagements we are free to name — confidentiality decides the rest, and we will not publish a client we have not been cleared to name. If your contract requires an EU-established supplier, that is a requirement we cannot meet, and we will tell you on the first call rather than after a proposal.",
+      "We work with businesses across the EEA and the United Kingdom, and we make no claim of local presence in any of them: no European entity, no European office, no European staff. On client work, the honest answer is that our portfolio shows the engagements we are free to name. Confidentiality decides the rest, and we will not publish a client we have not been cleared to name. If your contract requires an EU-established supplier, that is a requirement we cannot meet, and we will tell you on the first call rather than after a proposal.",
   },
   {
     question: "How do timezones work between Europe and your delivery team?",

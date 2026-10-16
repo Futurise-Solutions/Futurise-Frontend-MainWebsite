@@ -1,4 +1,5 @@
 import type { NextConfig } from 'next'
+import { RETIRED_BLOG_REDIRECTS } from './content/blogRedirects'
 
 /**
  * ⚠️ NO CUSTOM WEBPACK CONFIG. Turbopack is the default bundler in Next 16 for both
@@ -8,6 +9,12 @@ import type { NextConfig } from 'next'
  */
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  // Production checks freshly generated build types, not a running dev server's cache.
+  typescript: {
+    tsconfigPath: process.env.NODE_ENV === 'production' ? 'tsconfig.build.json' : 'tsconfig.json',
+  },
+  // Opt-in for constrained local verification; normal production builds keep defaults.
+  ...(process.env.FUTURISE_LOW_MEMORY_BUILD === '1' ? { experimental: { cpus: 1 } } : {}),
 
   /**
    * PHASE 8 — React Compiler.
@@ -133,6 +140,16 @@ const nextConfig: NextConfig = {
        * Acceptance: the FULL table in REDIRECT-BEHAVIOUR-BASELINE.md, including the 404
        * rows. Asserting only that `/About` redirects again is a FAILURE.
        */
+      /**
+       * Retired blog posts (Oct 2026 consolidation) → the page that absorbed the topic.
+       * The slugs are long and lowercase, so the case-insensitive source matching above
+       * cannot collide with a real route or a kept post.
+       */
+      ...Object.entries(RETIRED_BLOG_REDIRECTS).map(([slug, destination]) => ({
+        source: `/blog/${slug}`,
+        destination,
+        permanent: true,
+      })),
     ]
   },
 }

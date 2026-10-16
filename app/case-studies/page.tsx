@@ -5,9 +5,9 @@ import { buildMetadata } from '@/lib/seo'
 import { caseStudies } from '@/utils/Constant/caseStudies'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Case Studies — How We Build, In Detail',
+  title: 'Case Studies: How We Build, In Detail',
   description:
-    'Engineering write-ups of real builds across AI, web, app, blockchain and UI/UX — the architecture, the tradeoffs and the decisions behind each one.',
+    'Engineering write-ups of real builds across AI, web, app, blockchain and UI/UX: the architecture, the tradeoffs and the decisions behind each one.',
   path: '/case-studies',
   keywords:
     'Futurise Solutions case studies, AI development case study, SaaS platform case study, mobile app case study, DeFi protocol case study, UI UX redesign case study, SEO growth case study',
@@ -26,10 +26,10 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: 'Case Studies — Futurise Solutions',
+    name: 'Futurise Solutions Case Studies',
     url: 'https://www.futurisesolutions.com/case-studies',
     description:
-      'Engineering write-ups of software Futurise Solutions has designed and shipped across AI, web, app, blockchain, UI/UX and digital marketing — architecture, tradeoffs and what we would do differently.',
+      'Engineering write-ups of software Futurise Solutions has designed and shipped across AI, web, app, blockchain, UI/UX and digital marketing: architecture, tradeoffs and what we would do differently.',
     publisher: { '@id': 'https://www.futurisesolutions.com/#organization' },
     breadcrumb: {
       '@type': 'BreadcrumbList',
@@ -54,7 +54,7 @@ const jsonLd = [
       '@type': 'ListItem',
       position: i + 1,
       url: `https://www.futurisesolutions.com/case-studies/${s.slug}`,
-      name: `${s.hero.title} ${s.hero.highlight} — ${s.service} Case Study`,
+      name: `${s.hero.title} ${s.hero.highlight}: ${s.service} Case Study`,
     })),
   },
 ]

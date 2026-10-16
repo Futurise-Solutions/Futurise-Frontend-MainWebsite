@@ -41,7 +41,7 @@ export const auMeta = {
   // Under 160 characters so Google renders it whole. Free of invoicing and response-time
   // claims, neither of which is confirmed.
   description:
-    "Custom software, AI and SaaS development for Australian businesses — built for the Privacy Act, Consumer Data Right, SOCI Act and the Essential Eight.",
+    "Custom software, AI and SaaS development for Australian businesses, built for the Privacy Act, Consumer Data Right, SOCI Act and the Essential Eight.",
   keywords:
     "software development company Australia, custom software development Australia, AI development company Australia, SaaS development company Australia, web development company Australia, mobile app development company Australia, Consumer Data Right software, Australian Privacy Principles software development",
 };
@@ -81,7 +81,7 @@ export const auDataEconomy = [
   {
     title: "The Consumer Data Right is an interface obligation",
     detail:
-      "Established under Part IVD of the Competition and Consumer Act 2010, the Consumer Data Right lets consumers and small businesses authorise sharing of their data with accredited recipients. It has rolled out sector by sector — banking from 2020, energy from 2022 — and it is still expanding: product data obligations for non-bank lenders commenced on 13 July 2026, consumer data sharing begins on 9 November 2026, and large providers follow on 10 May 2027. No timeline has been announced for superannuation, insurance or telecommunications. If you are a data holder this is not a feature request, it is a published interface with conformance expectations attached, and it belongs in the architecture rather than in a later phase.",
+      "Established under Part IVD of the Competition and Consumer Act 2010, the Consumer Data Right lets consumers and small businesses authorise sharing of their data with accredited recipients. It has rolled out sector by sector, with banking from 2020 and energy from 2022. It is still expanding: product data obligations for non-bank lenders commenced on 13 July 2026, consumer data sharing begins on 9 November 2026, and large providers follow on 10 May 2027. No timeline has been announced for superannuation, insurance or telecommunications. If you are a data holder this is not a feature request, it is a published interface with conformance expectations attached, and it belongs in the architecture rather than in a later phase.",
   },
   {
     title: "Critical infrastructure carries a twelve-hour clock",
@@ -91,12 +91,12 @@ export const auDataEconomy = [
   {
     title: "The Essential Eight is becoming the default baseline",
     detail:
-      "Since August 2024, entities subject to a critical infrastructure risk management program have had to align their cyber risk approach with one of five recognised frameworks — the Essential Eight, the NIST Cybersecurity Framework, C2M2, ISO/IEC 27001, or the Australian Energy Sector Cyber Security Framework. The Essential Eight is the one that shows up most often in Australian procurement, and several of its mitigations are decisions made during development rather than afterwards: how applications are patched, how administrative privileges are separated, and whether multi-factor authentication is genuinely enforced at the boundary rather than merely offered.",
+      "Since August 2024, entities subject to a critical infrastructure risk management program have had to align their cyber risk approach with one of five recognised frameworks: the Essential Eight, the NIST Cybersecurity Framework, C2M2, ISO/IEC 27001, or the Australian Energy Sector Cyber Security Framework. The Essential Eight is the one that shows up most often in Australian procurement, and several of its mitigations are decisions made during development rather than afterwards: how applications are patched, how administrative privileges are separated, and whether multi-factor authentication is genuinely enforced at the boundary rather than merely offered.",
   },
   {
     title: "Where the data physically sits is a design input",
     detail:
-      "Australian buyers ask early where information will be stored, and in regulated sectors the answer determines whether a proposal proceeds at all. The major cloud providers operate Australian regions, so the constraint is usually satisfiable — but only if it is known before the architecture is drawn. Choosing a managed service that has no Australian region, or a third-party tool that quietly relays data offshore, is inexpensive to avoid at design time and expensive to unwind once production data exists.",
+      "Australian buyers ask early where information will be stored, and in regulated sectors the answer determines whether a proposal proceeds at all. The major cloud providers operate Australian regions, so the constraint is usually satisfiable, but only if it is known before the architecture is drawn. Choosing a managed service that has no Australian region, or a third-party tool that quietly relays data offshore, is inexpensive to avoid at design time and expensive to unwind once production data exists.",
   },
 ];
 
@@ -148,7 +148,7 @@ export const auRails = [
   {
     name: "Payments and settlement",
     detail:
-      "Australian payment flows have to handle real-time settlement, recurring authority and the reconciliation gap between an authorisation and a cleared transaction — the interval where most billing defects actually live. Designing for the failure cases first, rather than the happy path, is what separates a system that reconciles from one that needs a person checking it every morning.",
+      "Australian payment flows have to handle real-time settlement, recurring authority and the reconciliation gap between an authorisation and a cleared transaction. That interval is where most billing defects actually live. Designing for the failure cases first, rather than the happy path, is what separates a system that reconciles from one that needs a person checking it every morning.",
   },
   {
     name: "Identity and verification",
@@ -168,7 +168,7 @@ export const auRails = [
   {
     name: "Australian-region infrastructure",
     detail:
-      "Where residency is a requirement, every dependency has to satisfy it — including the logging, analytics, error reporting and support tooling that rarely appear on an architecture diagram. A single managed service defaulting to an overseas region is enough to make an otherwise compliant system non-compliant.",
+      "Where residency is a requirement, every dependency has to satisfy it, including the logging, analytics, error reporting and support tooling that rarely appear on an architecture diagram. A single managed service defaulting to an overseas region is enough to make an otherwise compliant system non-compliant.",
   },
 ];
 
@@ -188,7 +188,7 @@ export const partnerChoice = [
   {
     heading: "When a distributed team is the right answer",
     points: [
-      "Capability that is genuinely scarce and rarely sits idle — production language-model and retrieval engineering, audited smart contracts, computer vision.",
+      "Capability that is genuinely scarce and rarely sits idle: production language-model and retrieval engineering, audited smart contracts, computer vision.",
       "Throughput against a scope that is already written down, where the limit is engineering capacity rather than availability in a calendar.",
       "Budgets that need to buy engineering rather than the account layer sitting above it.",
       "Build phases that are well specified, where the expensive discovery work has already happened and what remains is disciplined delivery.",
@@ -220,7 +220,7 @@ export const auCostModel = [
   {
     title: "Evidence costs less when it is designed in",
     detail:
-      "Being able to show who accessed what, how a decision was produced, and which records an incident touched is inexpensive when the system is built to record it and expensive when it has to be reconstructed. Most of the cost overruns we are asked to rescue on Australian projects are not feature creep — they are a compliance requirement arriving after the architecture stopped being able to accommodate it cheaply.",
+      "Being able to show who accessed what, how a decision was produced, and which records an incident touched is inexpensive when the system is built to record it and expensive when it has to be reconstructed. Most of the cost overruns we are asked to rescue on Australian projects are not feature creep. They are a compliance requirement arriving after the architecture stopped being able to accommodate it cheaply.",
   },
   {
     title: "A written scope before a number",
@@ -248,12 +248,7 @@ export const auResources = [
     to: "/blog/saas-development-cost-guide-2026-pricing-timeline-and-budget-breakdown",
   },
   {
-    title: "How Much Does a Custom AI Agent Cost in 2026?",
-    blurb: "A breakdown by capability, from a scoped pilot through to a production deployment.",
-    to: "/blog/how-much-does-it-cost-to-build-a-custom-ai-agent-in-2026",
-  },
-  {
-    title: "AI Agent Development Cost 2026 — Global Price Comparison",
+    title: "AI Agent Development Cost 2026: Global Price Comparison",
     blurb: "What the same AI build costs across markets, and why the spread is that wide.",
     to: "/blog/ai-agent-development-cost-2026-a-global-price-comparison-for-custom-ai-solutions",
   },
@@ -285,7 +280,7 @@ export const auFaqs = [
   {
     question: "Do you build to the Essential Eight?",
     answer:
-      "We build so the mitigations that are genuinely development decisions are handled — patching, separation of administrative privileges, and multi-factor authentication enforced at the boundary rather than merely offered. Measuring you against the maturity levels is an assessor's job, not ours. Worth knowing too: there is no Essential Eight certificate to hold, so a supplier advertising one is telling you something useful about their rigour.",
+      "We build so the mitigations that are genuinely development decisions are handled: patching, separation of administrative privileges, and multi-factor authentication enforced at the boundary rather than merely offered. Measuring you against the maturity levels is an assessor's job, not ours. Worth knowing too: there is no Essential Eight certificate to hold, so a supplier advertising one is telling you something useful about their rigour.",
   },
   {
     question: "Is our business covered by the SOCI Act?",
@@ -300,17 +295,17 @@ export const auFaqs = [
   {
     question: "Can our data stay in Australia?",
     answer:
-      "Usually yes, provided it is decided before the architecture is drawn rather than after. The major cloud providers operate Australian regions, so the constraint is generally satisfiable. What catches teams out is the dependencies nobody lists on the diagram — logging, analytics, error reporting and support tooling — where a default configuration can move data offshore without anyone choosing to.",
+      "Usually yes, provided it is decided before the architecture is drawn rather than after. The major cloud providers operate Australian regions, so the constraint is generally satisfiable. What catches teams out is the dependencies nobody lists on the diagram: logging, analytics, error reporting and support tooling, where a default configuration can move data offshore without anyone choosing to.",
   },
   {
     question: "Are you an Australian company?",
     answer:
-      "No — we are registered in Wellington, New Zealand, with a distributed engineering team. You should have that fact before anything else, because it decides which engagements we are the right choice for and which we are not. Where a contract requires an Australian entity, personnel clearances, or participation in a formal assessment, a local supplier is the correct answer and we will say so rather than compete for the work.",
+      "No. We are registered in Wellington, New Zealand, with a distributed engineering team. You should have that fact before anything else, because it decides which engagements we are the right choice for and which we are not. Where a contract requires an Australian entity, personnel clearances, or participation in a formal assessment, a local supplier is the correct answer and we will say so rather than compete for the work.",
   },
   {
     question: "How do you compare with a Sydney or Melbourne agency?",
     answer:
-      "On assurance a local firm can offer things we cannot, including an Australian contracting entity and participation in assessments that cannot be inherited. Our advantage is capability that rarely sits idle at a single agency — production language-model and retrieval engineering, audited smart contracts, computer vision — together with sustained delivery against a scope that has already been written down.",
+      "On assurance a local firm can offer things we cannot, including an Australian contracting entity and participation in assessments that cannot be inherited. Our advantage is capability that rarely sits idle at a single agency (production language-model and retrieval engineering, audited smart contracts, computer vision), together with sustained delivery against a scope that has already been written down.",
   },
   {
     question: "What does custom software cost in Australia?",

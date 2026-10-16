@@ -10,6 +10,8 @@
  * declare. Do not invent an author field and do not declare a second Organization.
  */
 
+import { RETIRED_BLOG_REDIRECTS } from '../content/blogRedirects'
+
 const API_ORIGIN =
   process.env.BLOG_API_ORIGIN || 'https://futurise-backend-main-website.vercel.app'
 
@@ -54,6 +56,12 @@ export function mediaUrl(path?: string): string {
 export const isPublished = (b: Blog) => b.status === 'published'
 
 /**
+ * Retired posts are 308-redirected in next.config.ts but the CMS may still list them as
+ * published until they are deleted. They must never be listed, linked or served.
+ */
+const isRetiredSlug = (slug: string) => Object.prototype.hasOwnProperty.call(RETIRED_BLOG_REDIRECTS, slug)
+
+/**
  * Fetch all published blogs, newest first.
  * `revalidate` is passed by the caller so the index (600s) and posts (3600s) can differ.
  */
@@ -68,30 +76,42 @@ export const isPublished = (b: Blog) => b.status === 'published'
  *
  * Memoising the in-flight promise collapses that to ONE request per process. It does not
  * replace ISR: `revalidate` still governs the cached page lifetime in production, and a
- * fresh server process (or a revalidation) starts with an empty memo.
+ * this memo expires according to the caller's revalidation interval. Compact summary
+ * results also use the persistent framework cache in blogSummaries.ts.
  */
 let _blogsPromise: Promise<Blog[]> | null = null
+let _blogsFetchedAt = 0
+let _blogsPending = false
 
 export async function getBlogs(revalidate = 600): Promise<Blog[]> {
-  if (_blogsPromise) return _blogsPromise
+  if (_blogsPromise && (_blogsPending || Date.now() - _blogsFetchedAt < revalidate * 1000)) return _blogsPromise
+  _blogsPending = true
 
   _blogsPromise = (async () => {
-    const res = await fetch(`${API_ORIGIN}/api/blogs`, { next: { revalidate } })
-    if (!res.ok) return []
+    // The raw list exceeds the framework data-cache limit. Cache compact summaries
+    // separately; use this expiring process memo to deduplicate full-list requests.
+    const res = await fetch(`${API_ORIGIN}/api/blogs`, { cache: 'no-store' })
+    if (!res.ok) throw new Error(`Blog list request failed: ${res.status}`)
     const data = await res.json()
     // Bare array — confirmed against the live endpoint.
-    const list: Blog[] = Array.isArray(data) ? data : []
+    if (!Array.isArray(data)) throw new Error('Unexpected blog list response')
+    const list: Blog[] = data
     return list
       .filter(isPublished)
+      .filter((b) => !isRetiredSlug(b.slug))
       .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
   })()
 
   try {
-    return await _blogsPromise
+    const list = await _blogsPromise
+    _blogsFetchedAt = Date.now()
+    return list
   } catch (err) {
     // Never memoise a failure — the next caller must be able to retry.
     _blogsPromise = null
     throw err
+  } finally {
+    _blogsPending = false
   }
 }
 
@@ -110,6 +130,7 @@ export async function getBlogBySlug(slug: string, revalidate = 3600): Promise<Bl
      `phase` distinguishes them: NEXT_PHASE is 'phase-production-build' only during
      `next build`. Everything else — dev, ISR revalidation, on-demand rendering of a slug
      published after the build — takes the single-post path. */
+  if (isRetiredSlug(slug)) return null
   const isBuild = process.env.NEXT_PHASE === 'phase-production-build'
   if (isBuild && _blogsPromise) {
     const list = await _blogsPromise
@@ -128,7 +149,7 @@ export async function getBlogBySlug(slug: string, revalidate = 3600): Promise<Bl
 }
 
 /** A blog record without its Markdown body — enough for cards, related lists and sorting. */
-export type BlogSummary = Omit<Blog, 'content'> & { content?: string }
+export type BlogSummary = Omit<Blog, 'content'> & { content?: string; readingMinutes?: number }
 
 /**
  * The published list WITHOUT `content`.
@@ -144,7 +165,7 @@ export type BlogSummary = Omit<Blog, 'content'> & { content?: string }
  */
 export async function getBlogSummaries(revalidate = 600): Promise<BlogSummary[]> {
   const list = await getBlogs(revalidate)
-  return list.map(({ content, ...rest }) => rest)
+  return list.map(({ content, ...rest }) => ({ ...rest, readingMinutes: readTime(content || rest.shortDescription) }))
 }
 
 /**
@@ -218,6 +239,51 @@ export const parseHeadings = (markdown = '') => {
         out.push({ level: m[1].length, text, id })
       }
     })
+  return out
+}
+
+/** Markdown → plain text: links keep their label, emphasis/code markers drop, whitespace collapses. */
+const toPlainText = (md: string) =>
+  md
+    .replace(/!?\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/[*`]+/g, '')
+    .replace(/(^|\s)_+|_+(?=\s|$|[.,;:!?)])/g, '$1')
+    .replace(/\s+/g, ' ')
+    .trim()
+
+/**
+ * FAQ extractor for the `## Frequently asked questions` section that rewritten posts end
+ * with. Each `### Question?` heading owns the text up to the next `###` or `##`; the
+ * section itself ends at the next `## ` heading or the end of the post. Returns [] when
+ * the section is missing.
+ */
+export function parseFaqs(markdown: string): Array<{ q: string; a: string }> {
+  const lines = String(markdown || '').split('\n')
+  const start = lines.findIndex((l) => /^##\s+frequently asked questions\s*$/i.test(l.trim()))
+  if (start === -1) return []
+
+  const out: Array<{ q: string; a: string }> = []
+  let q: string | null = null
+  let answer: string[] = []
+  const flush = () => {
+    if (q) {
+      const a = toPlainText(answer.join(' '))
+      if (a) out.push({ q, a })
+    }
+  }
+
+  for (const line of lines.slice(start + 1)) {
+    const t = line.trim()
+    if (/^##\s/.test(t)) break
+    if (/^###\s/.test(t)) {
+      flush()
+      q = toPlainText(t.replace(/^###\s+/, ''))
+      answer = []
+    } else if (q) {
+      answer.push(t)
+    }
+  }
+  flush()
   return out
 }
 

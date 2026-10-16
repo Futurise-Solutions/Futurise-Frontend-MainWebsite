@@ -1,60 +1,17 @@
-'use client'
-
-import { useState } from "react";
-import { HStack, Input, IconButton } from "@chakra-ui/react";
-import { FiSend } from "react-icons/fi";
-
-/** Text input + send button. Enter submits. Disabled while the AI is replying. */
-const MessageInput = ({ onSend, disabled }) => {
-  const [value, setValue] = useState("");
-
-  const submit = (e) => {
-    e.preventDefault();
+'use client';
+import { useState } from 'react';
+import styles from './Chat.module.css';
+export default function MessageInput({ onSend, disabled }) {
+  const [value, setValue] = useState('');
+  const submit = event => {
+    event.preventDefault();
     const text = value.trim();
     if (!text || disabled) return;
     onSend(text);
-    setValue("");
+    setValue('');
   };
-
-  return (
-    <HStack
-      as="form"
-      onSubmit={submit}
-      spacing={2}
-      p={3}
-      borderTop="1px solid"
-      borderColor="border.subtle"
-    >
-      <Input
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        placeholder="Ask me anything…"
-        variant="unstyled"
-        px={4}
-        py={2}
-        h="42px"
-        bg="bg.surface"
-        borderRadius="full"
-        border="1px solid"
-        borderColor="border.subtle"
-        fontSize="14px"
-        color="text.primary"
-        _placeholder={{ color: "text.faint" }}
-        _focus={{ borderColor: "brand.400", bg: "bg.surfaceHover" }}
-        autoComplete="off"
-      />
-      <IconButton
-        type="submit"
-        aria-label="Send message"
-        icon={<FiSend />}
-        variant="gradient"
-        boxSize="42px"
-        minW="42px"
-        borderRadius="full"
-        isDisabled={disabled || !value.trim()}
-      />
-    </HStack>
-  );
-};
-
-export default MessageInput;
+  return <form className={styles.composer} onSubmit={submit}>
+    <input aria-label="Your message to Futurise Assistant" value={value} onChange={event=>setValue(event.target.value)} placeholder="Tell us what’s on your mind…" autoComplete="off" onKeyDown={event=>{if(event.key==='Enter'&&event.nativeEvent.isComposing)event.preventDefault();}} />
+    <button type="submit" aria-label="Send message" disabled={disabled||!value.trim()}><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5M6 11L12 5L18 11" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/></svg></button>
+  </form>;
+}

@@ -1,83 +1,25 @@
-'use client'
+import { cards } from '../../utils/Constant';
+import styles from './HomeRefinements.module.css';
 
-import React from "react";
-import { SimpleGrid, Text, Heading, Flex, Box } from "@chakra-ui/react";
-import Image from "next/image";
-import { cards } from "../../utils/Constant";
-import { Section, SectionHeading, GlassCard, Reveal } from "../common";
-import CircuitRail from "../common/CircuitRail";
+function PrincipleArt({ index }) {
+  const illustrations = [
+    <g key="expertise"><path d="M20 42L70 17L120 42L70 67Z M20 62L70 87L120 62 M20 82L70 107L120 82" /><path d="M70 32V52M60 42H80" strokeWidth="3" /></g>,
+    <g key="collaboration"><circle cx="40" cy="60" r="25"/><circle cx="100" cy="60" r="25"/><path d="M52 60H88M70 42V78"/><circle cx="70" cy="60" r="5" fill="currentColor"/></g>,
+    <g key="quality"><path d="M70 14L108 30V61Q108 87 70 108Q32 87 32 61V30Z"/><path d="M50 59L65 74L92 45" strokeWidth="3"/></g>,
+    <g key="delivery"><circle cx="70" cy="60" r="43"/><path d="M70 25V60L94 74M64 7H76"/><circle cx="70" cy="60" r="4" fill="currentColor"/></g>,
+    <g key="scale"><rect x="29" y="50" width="45" height="45" rx="2"/><path d="M57 50V22H112V77H74M88 47L112 22M94 22H112V40"/></g>,
+    <g key="support"><path d="M32 41A42 42 0 0170 18A42 42 0 01109 43M109 27V44H92M109 78A42 42 0 0170 102A42 42 0 0131 77M31 93V76H48"/><path d="M52 60H88M70 42V78"/></g>,
+  ];
+  return <svg viewBox="0 0 140 120" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{illustrations[index % illustrations.length]}</svg>;
+}
 
-const WhyChooseUs = () => {
-  return (
-    <Section>
-      <SectionHeading
-        eyebrow="Why Futurise"
-        title="Built on trust,"
-        highlight="delivered with care"
-        subtitle="We obsess over the details that make a product successful — and the relationship that makes the project enjoyable."
-        mb={{ base: 10, md: 14 }}
-      />
-
-      {/* Connector rail behind the grid. The six cards are one argument, but laid out
-          as six separate boxes they read as a list — the rail draws the relationship
-          without adding anything to read. Desktop only: at one and two columns the
-          cards stack, so a horizontal spine would connect nothing.
-          See CircuitRail.jsx. */}
-      <Box position="relative">
-        <Box display={{ base: "none", lg: "block" }} position="relative" h="30px" mb={2}>
-          <CircuitRail stops={3} height={30} top="0" />
-        </Box>
-
-        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6} position="relative" zIndex={1}>
-        {cards.map((el, index) => (
-          <Reveal key={el.title + index} delay={(index % 3) * 0.08}>
-            <GlassCard h="full" p={{ base: 6, md: 7 }}>
-              <Flex
-                w="52px"
-                h="52px"
-                borderRadius="14px"
-                align="center"
-                justify="center"
-                bgGradient="linear(135deg, rgba(123,108,255,0.2), rgba(181,123,255,0.2))"
-                border="1px solid"
-                borderColor="rgba(180,160,255,0.25)"
-                mb={5}
-              >
-                {/* D27: next/image with the static import passed directly. The old
-                    Chakra <Image> took w/h as styles and htmlWidth/htmlHeight as
-                    attributes; next/image takes width/height as the intrinsic size and
-                    reserves the box, which is the same 26x26 result. `loading="lazy"`
-                    and `decoding="async"` are next/image defaults. */}
-                {/* ⚠️ `style={{ height: "auto" }}` IS REQUIRED — do not remove it.
-                    Three of these five SVGs are NOT square: clientIconHover is 87x68,
-                    postIconHover 61x80, timeIconHover 62x80 (qualityIconHover and
-                    expertiseiconHover are square, which is why only three warned). Passing
-                    26x26 to next/image sets both dimensions, so the non-square ones were
-                    squashed to a square box AND logged
-                      "Image has either width or height modified, but not the other".
-                    Constraining width and letting height follow preserves each icon's own
-                    ratio inside the same 26px-wide slot. */}
-                <Image
-                  src={el.icon}
-                  alt={`${el.title} icon`}
-                  width={26}
-                  height={26}
-                  style={{ width: 26, height: "auto" }}
-                />
-              </Flex>
-              <Heading as="h3" fontSize="lg" fontWeight={600} mb={2}>
-                {el.title}
-              </Heading>
-              <Text color="text.muted" fontSize="15px" lineHeight={1.7}>
-                {el.description}
-              </Text>
-            </GlassCard>
-          </Reveal>
-        ))}
-        </SimpleGrid>
-      </Box>
-    </Section>
-  );
-};
-
-export default WhyChooseUs;
+export default function WhyChooseUs() {
+  return <section className={styles.why} aria-labelledby="why-heading">
+    <p className={styles.eyebrow}>WHY FUTURISE / THE DIFFERENCE IS IN THE DETAILS</p>
+    <div className={styles.whyIntro}><h2 id="why-heading">Built on trust,<br />delivered with care</h2><p>We obsess over the details that make a product successful, and the relationship that makes the project enjoyable.</p></div>
+    <div className={styles.reasons}>{cards.map((card, i) => <article key={card.title} className={styles.reason}>
+      <div className={styles.reasonHead}><span>0{i + 1}</span><PrincipleArt index={i}/></div>
+      <h3>{card.title}</h3><p>{card.description}</p>
+    </article>)}</div>
+  </section>;
+}

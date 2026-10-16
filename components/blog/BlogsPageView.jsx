@@ -67,7 +67,7 @@ const HeroBlog = ({ blog }) => (
         <HStack spacing={3} mt={5} color="text.faint" fontSize="sm">
           <Text>{formatDate(blog.createdAt)}</Text>
           <Box w="4px" h="4px" rounded="full" bg="text.faint" />
-          <Text>{readTime(blog.content || blog.shortDescription)} min read</Text>
+          <Text>{blog.readingMinutes ?? readTime(blog.content || blog.shortDescription)} min read</Text>
         </HStack>
         <Button as={Link} href={`/blog/${blog.slug}`} mt={7} variant="gradient" size="lg" rightIcon={<FiArrowRight />}>
           Read Article
@@ -121,7 +121,7 @@ export default function BlogsPageView({ blogs }) {
       ) : (
         <Box minH="200px" display="flex" alignItems="center">
           <Container maxW="1200px" px={{ base: 5, md: 8 }}>
-            <Text color="text.muted">No articles published yet — check back soon.</Text>
+            <Text color="text.muted">No articles published yet. Check back soon.</Text>
           </Container>
         </Box>
       )}
@@ -224,7 +224,7 @@ export default function BlogsPageView({ blogs }) {
               Complete archive
             </Heading>
             <Text color="text.muted" fontSize="sm" mb={6}>
-              Every post, oldest to newest — {blogs.length} in total.
+              Every post, oldest to newest: {blogs.length} in total.
             </Text>
             <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacingX={8} spacingY={3}>
               {blogs.map((b) => (

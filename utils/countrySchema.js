@@ -77,7 +77,7 @@ export const buildCountrySchema = ({
       "@context": "https://schema.org",
       "@type": "WebPage",
       "@id": url,
-      name: `${title} — ${SITE_NAME}`,
+      name: `${title} | ${SITE_NAME}`,
       url,
       description,
       inLanguage: hrefLang,
@@ -117,7 +117,7 @@ export const buildCountrySchema = ({
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
       "@id": `${url}#service`,
-      name: `${SITE_NAME} — ${label}`,
+      name: `${SITE_NAME} | ${label}`,
       url,
       description,
       // Links this regional node to the site-wide Organization rather than declaring a

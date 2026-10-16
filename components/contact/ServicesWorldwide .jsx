@@ -1,10 +1,13 @@
 'use client'
 
 import React from "react";
+import ReachAtlas from "./ReachAtlas";
 import { Wrap, WrapItem, Tag, TagLeftIcon, TagLabel } from "@chakra-ui/react";
 import { FiMapPin } from "react-icons/fi";
 import { locations } from "../../utils/Constant";
-import { Section, SectionHeading, Reveal, WorldReachMap } from "../common";
+import Section from "../common/Section";
+import SectionHeading from "../common/SectionHeading";
+import Reveal from "../common/Reveal";
 
 /**
  * The map here used to be a react-leaflet OpenStreetMap embed. See
@@ -23,7 +26,7 @@ const ServicesWorldwide = () => {
         eyebrow="Global reach"
         title="We serve clients"
         highlight="worldwide"
-        subtitle="From startups to enterprises, we partner with teams across the globe — wherever you are, we’re ready to build."
+        subtitle="From startups to enterprises, we partner with teams across the globe. Wherever you are, we’re ready to build."
         mb={{ base: 8, md: 12 }}
       />
 
@@ -41,7 +44,7 @@ const ServicesWorldwide = () => {
       </Reveal>
 
       <Reveal delay={0.1}>
-        <WorldReachMap height={{ base: "230px", md: "400px", lg: "470px" }} />
+        <ReachAtlas />
       </Reveal>
     </Section>
   );

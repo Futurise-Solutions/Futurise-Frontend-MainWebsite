@@ -6,8 +6,8 @@ import NextImage from "next/image";
 import { logo } from "../../assests";
 
 /** Actual Futurise wordmark, used in navbar + footer + loader. */
-const Logo = ({ size = "md", to = "/", ...rest }) => {
-  const h = size === "lg" ? { base: "34px", md: "40px" } : { base: "30px", md: "34px" };
+const Logo = ({ size = "md", to = "/", priority = false, ...rest }) => {
+  const h = size === "nav" ? { base: "42px", md: "48px" } : size === "lg" ? { base: "34px", md: "40px" } : { base: "30px", md: "34px" };
   return (
     <Box
       // Router migration: react-router's <Link to> → next/link's <Link href>.
@@ -16,6 +16,7 @@ const Logo = ({ size = "md", to = "/", ...rest }) => {
       as={to ? NextLink : "div"}
       href={to || undefined}
       display="inline-flex"
+      flexShrink={0}
       alignItems="center"
       transition="transform .25s ease, filter .25s ease"
       _hover={{ transform: "scale(1.04)", filter: "drop-shadow(0 4px 14px rgba(180,160,255,0.45))" }}
@@ -41,8 +42,9 @@ const Logo = ({ size = "md", to = "/", ...rest }) => {
       <Box h={h} display="inline-flex" alignItems="center">
         <NextImage
           src={logo}
+          unoptimized
           alt="Futurise Solutions"
-          priority
+          priority={priority}
           draggable={false}
           style={{ height: "100%", width: "auto", maxWidth: "none", objectFit: "contain" }}
         />

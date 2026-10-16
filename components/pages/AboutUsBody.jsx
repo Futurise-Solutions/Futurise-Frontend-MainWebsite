@@ -13,48 +13,33 @@
  */
 import { Box, Container, Flex, Heading, Text, Wrap, WrapItem, SimpleGrid, Link as ChakraLink } from "@chakra-ui/react";
 import RouterLink from "next/link";
-import AboutUsHero from "@/components/about/AboutUsHero";
+import AboutUsHero from "@/components/about/AgencyAboutHero";
+import { useBooking } from "@/context/BookingContext";
+import agency from "@/components/common/AgencyPages.module.css";
 import MissionVision from "@/components/about/MissionVision";
 import CompanyStats from "@/components/home/CompanyStats";
-import CoreValues from "@/components/about/CoreValues";
+import CoreValues from "@/components/about/StudioValues";
 import TeamSection from "@/components/about/TeamSection";
-import TechnologyExcellence from "@/components/contact/TechnologyExcellence";
-import { CTASection, Reveal, Eyebrow, GlassCard, VisualBand, MarketGlobe } from "@/components/common";
-import { aboutAtrium, signalBraid } from "@/assests";
-import { AREAS_SERVED, SAME_AS } from "@/utils/Constant";
+import TechnologyExcellence from "@/components/about/StudioExpertise";
+import CTASection from "@/components/common/CTASection";
+import Reveal from "@/components/common/Reveal";
+import { Eyebrow } from "@/components/common/SectionHeading";
+import GlassCard from "@/components/common/GlassCard";
+import VisualBand from "@/components/common/VisualBand";
+import MarketGlobe from "@/components/common/MarketGlobe";
+import { signalBraid } from "@/assests";
 import { COUNTRIES } from "@/utils/Constant/countries";
 import { aboutEntity, aboutNotClaimed, aboutVerify } from "@/utils/Constant/about";
-import { teamPersonSchema, isTeamPublished } from "@/utils/Constant/team";
 
 export default function AboutUsBody() {
+  const { onOpen: openBooking } = useBooking();
   return (
-    <Box>
+    <Box className={agency.page}>
       <AboutUsHero />
       <CompanyStats />
       <MissionVision />
-      <CoreValues />
+      <div className={agency.light}><CoreValues /></div>
       <TeamSection />
-
-      {/* Interstitial. Between the values grid and the expertise grid was the longest
-          unbroken run of card grids on the site — mission/vision, then values, then
-          six expertise cards, then three more EEAT grids after that. This is the one
-          pause in the middle of it. The copy restates the process the page already
-          describes rather than making a new claim, and it sets up "Technology
-          excellence" immediately below. */}
-      {/* focal sits at 88% because this plate is composed with its structure entirely
-          in the right third and near-black everywhere else — cropped any further left
-          the lit edge lands mid-band and reads as a pasted-in rectangle rather than as
-          a photograph. Cropping into the structure lets the scrim carry the left side. */}
-      <VisualBand
-        src={aboutAtrium}
-        eyebrow="How we work"
-        title="Structure first,"
-        highlight="surface second"
-        subtitle="The decisions that are expensive to change later are the ones we make before anything is built."
-        height={{ base: "280px", md: "380px", lg: "420px" }}
-        focal="88% center"
-        overlay={0.5}
-      />
 
       <TechnologyExcellence />
 
@@ -224,7 +209,7 @@ export default function AboutUsBody() {
             and what we have actually delivered.
           </Text>
           <Wrap spacing={3}>
-            {COUNTRIES.map((c) => (
+            {[...COUNTRIES].sort((a, b) => ["us", "ca", "ae", "nz", "au", "in"].indexOf(a.code) - ["us", "ca", "ae", "nz", "au", "in"].indexOf(b.code)).map((c) => (
               <WrapItem key={c.code}>
                 <ChakraLink
                   as={RouterLink}

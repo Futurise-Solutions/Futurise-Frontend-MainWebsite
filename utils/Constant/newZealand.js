@@ -23,7 +23,7 @@ export const nzMeta = {
   title: "Software Development Company New Zealand",
   // Kept under ~160 characters so Google renders it whole rather than truncating.
   description:
-    "Custom software, AI and SaaS development for New Zealand businesses — fixed-scope quotes in NZD, Privacy Act 2020 handled, NZ business-hours delivery.",
+    "Custom software, AI and SaaS development for New Zealand businesses: fixed-scope quotes in NZD, Privacy Act 2020 handled, NZ business-hours delivery.",
   keywords:
     "software development company New Zealand, custom software development NZ, AI development company New Zealand, SaaS development New Zealand, app development New Zealand, software developers Auckland, software developers Wellington",
 };
@@ -41,7 +41,7 @@ export const marketRealities = [
   {
     title: "Cloud accounting is the centre of the stack",
     detail:
-      "Xero was founded in Wellington, and cloud-first accounting became normal here earlier than in most markets. The practical result is that a New Zealand business system is rarely a greenfield build — it is an integration problem. Your software has to sit alongside the ledger, not replace it, and the integration is usually where the project is won or lost.",
+      "Xero was founded in Wellington, and cloud-first accounting became normal here earlier than in most markets. The practical result is that a New Zealand business system is rarely a greenfield build. It is an integration problem. Your software has to sit alongside the ledger, not replace it, and the integration is usually where the project is won or lost.",
   },
   {
     title: "Small teams, senior expectations",
@@ -70,7 +70,7 @@ export const offshoreTradeoffs = [
   {
     heading: "Where distributed delivery genuinely wins",
     points: [
-      "Specialist capability that no single local team keeps on the bench — production LLM and RAG engineering, audited smart contracts, computer vision.",
+      "Specialist capability that no single local team keeps on the bench: production LLM and RAG engineering, audited smart contracts, computer vision.",
       "Sustained throughput on a defined scope, where the constraint is engineering hours rather than meetings.",
       "Work that continues while your team sleeps, so a review request left on Friday evening has an answer waiting Monday morning.",
     ],
@@ -80,7 +80,7 @@ export const offshoreTradeoffs = [
     points: [
       "Scope handed over without a written specification, then rebuilt twice at your cost.",
       "Hourly billing with no fixed ceiling, which rewards the supplier for the project taking longer.",
-      "No named engineer — questions routed through an account manager who cannot answer them.",
+      "No named engineer, with questions routed through an account manager who cannot answer them.",
     ],
   },
 ];
@@ -97,7 +97,7 @@ export const nzSectors = [
   {
     sector: "Professional services and finance",
     detail:
-      "Practice platforms, client portals and reporting layers that sit on top of an existing ledger. These projects live or die on integration fidelity — a portal that disagrees with the accounting system by one cent is a portal nobody trusts twice.",
+      "Practice platforms, client portals and reporting layers that sit on top of an existing ledger. These projects live or die on integration fidelity: a portal that disagrees with the accounting system by one cent is a portal nobody trusts twice.",
   },
   {
     sector: "Tourism and hospitality",
@@ -132,7 +132,7 @@ export const nzCompliance = [
   {
     title: "GST at 15%",
     detail:
-      "New Zealand GST has been 15% since 1 October 2010. Any system that quotes, invoices or reports revenue has to handle it correctly at the boundary — including the case that trips up most imported software, where a New Zealand seller invoices an overseas customer and the treatment changes.",
+      "New Zealand GST has been 15% since 1 October 2010. Any system that quotes, invoices or reports revenue has to handle it correctly at the boundary, including the case that trips up most imported software, where a New Zealand seller invoices an overseas customer and the treatment changes.",
   },
   {
     title: "NZBN and entity data",
@@ -236,7 +236,7 @@ export const nzFaqs = [
   {
     question: "How do you compare with hiring an Auckland or Wellington agency?",
     answer:
-      "For work that needs a whiteboard and the whole room present, or a New Zealand supplier entity on the contract, a local agency is the better answer and we will say so. Where we are stronger is specialist capability that a single local team is unlikely to keep on the bench — production LLM and RAG engineering, audited smart contracts, computer vision — and sustained throughput on a defined scope.",
+      "For work that needs a whiteboard and the whole room present, or a New Zealand supplier entity on the contract, a local agency is the better answer and we will say so. Where we are stronger is specialist capability that a single local team is unlikely to keep on the bench (production LLM and RAG engineering, audited smart contracts, computer vision), and sustained throughput on a defined scope.",
   },
   {
     question: "Can you integrate with Xero, MYOB or Windcave?",
@@ -251,7 +251,7 @@ export const nzFaqs = [
   {
     question: "Do you invoice in NZD with GST?",
     answer:
-      "Quotes and invoices are in New Zealand dollars. New Zealand GST has been 15% since 1 October 2010, and any system we build that quotes, invoices or reports revenue handles it correctly at the boundary — including the case where a New Zealand seller invoices an overseas customer and the treatment changes.",
+      "Quotes and invoices are in New Zealand dollars. New Zealand GST has been 15% since 1 October 2010, and any system we build that quotes, invoices or reports revenue handles it correctly at the boundary, including the case where a New Zealand seller invoices an overseas customer and the treatment changes.",
   },
   {
     question: "What happens on the first call?",

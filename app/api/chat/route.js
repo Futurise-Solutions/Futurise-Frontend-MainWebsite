@@ -33,6 +33,10 @@
  * answer (the O4/D23 requirement).
  */
 
+/* Vercel would otherwise cut this function off at the plan default. The upstream fetch
+   below gives up at 30s, so 60s leaves room to answer with a clean error. */
+export const maxDuration = 60
+
 /** The backend that actually answers. Same origin production calls (see .env). */
 const BACKEND_ORIGIN =
   process.env.CHAT_BACKEND_ORIGIN || 'https://futurise-backend-main-website.vercel.app'
@@ -152,10 +156,20 @@ export async function POST(req) {
   }
 
   try {
+    /* Optional shared secret. The backend sees this proxy's IP for every visitor, so when
+       CHAT_PROXY_KEY is set we pass the real visitor IP, proven by the key, and the
+       backend rate-limits per visitor. Unset = no extra headers, behaviour unchanged. */
+    const headers = { 'Content-Type': 'application/json' }
+    if (process.env.CHAT_PROXY_KEY) {
+      headers['X-Chat-Proxy-Key'] = process.env.CHAT_PROXY_KEY
+      headers['X-Visitor-IP'] = clientIp(req)
+    }
+
     const upstream = await fetch(`${BACKEND_ORIGIN}/api/chat`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: rawBody,
+      signal: AbortSignal.timeout(30_000),
     })
 
     /* Return the backend's response UNCHANGED. It already returns a `source` field even
@@ -167,7 +181,11 @@ export async function POST(req) {
       status: upstream.status,
       headers: { 'Content-Type': 'application/json' },
     })
-  } catch {
+  } catch (err) {
+    // Backend too slow. Same `error` shape, so the client retries or falls back.
+    if (err?.name === 'TimeoutError') {
+      return json({ source: 'error', message: 'Upstream timeout' })
+    }
     // Backend unreachable. The client treats a thrown error and an `error` source the
     // same way — keyword fallback — so this stays consistent with a network failure.
     return json({ source: 'error', message: 'Upstream request failed' })

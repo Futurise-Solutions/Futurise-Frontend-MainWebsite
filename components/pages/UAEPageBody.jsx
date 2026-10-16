@@ -1,4 +1,6 @@
 'use client'
+import regional from '../common/RegionalPages.module.css';
+import RegionalHero from '../common/RegionalHero';
 
 /**
  * /ae page body — ported VERBATIM from UAEPage.jsx.
@@ -17,15 +19,18 @@ import {
 import NextImage from "next/image";
 import Link from "next/link";
 import { FiArrowRight, FiCheck, FiArrowUpRight } from "react-icons/fi";
-import { Reveal, Eyebrow, GlassCard, CTASection, MarketHero, VisualBand } from "@/components/common";
+import Reveal from "@/components/common/Reveal";
+import { Eyebrow } from "@/components/common/SectionHeading";
+import GlassCard from "@/components/common/GlassCard";
+import CTASection from "@/components/common/CTASection";
+import VisualBand from "@/components/common/VisualBand";
+import CountrySolutions from "@/components/common/CountrySolutions";
 import Faqs from "@/components/home/Faqs";
 import { useBooking } from "@/context/BookingContext";
 import { NavbarservicesOptions } from "@/utils/Constant";
-import { COUNTRY_ALTERNATES } from "@/utils/Constant/countries";
-import { buildCountrySchema } from "@/utils/countrySchema";
-import { marketAe, marketReach } from "@/assests";
+import { marketReach } from "@/assests";
 import {
-  aeMeta, aeEvidence, aeJurisdictions, aeInvoicing, aeArabic, aeLicence,
+  aeEvidence, aeJurisdictions, aeInvoicing, aeArabic, aeLicence,
   aeSectors, aeFit, aePricingNotes, aeResources, aeFaqs,
 } from "@/utils/Constant/uae";
 
@@ -43,10 +48,10 @@ export default function UAEPageBody() {
   // No Review or AggregateRating node either. A real testimonial exists, but it belongs to
   // the homepage, not to this page, and the builder does not emit one.
   return (
-    <Box>
+    <Box className={regional.page}>
       {/* Hero — sets up evidence rather than compliance, because evidence leads this page.
           Market-specific atmosphere plate sits behind the shared texture. */}
-      <MarketHero image={marketAe} tone="hue-rotate(-10deg) saturate(0.88)">
+      <RegionalHero>
           <Reveal><Eyebrow>United Arab Emirates</Eyebrow></Reveal>
           <Reveal delay={0.05}>
             <Heading as="h1" mt={5} fontSize={{ base: "38px", md: "56px" }} lineHeight={1.08} letterSpacing="-0.025em" maxW="940px">
@@ -58,7 +63,7 @@ export default function UAEPageBody() {
             <Text mt={6} color="text.muted" fontSize={{ base: "md", md: "xl" }} lineHeight={1.7} maxW="800px">
               Custom software, AI and SaaS for companies building here. We have delivered one
               project in Dubai and say exactly what it was before anything else. The rest of
-              this page covers the decisions — jurisdiction, Arabic, licensing, invoicing —
+              this page covers the decisions (jurisdiction, Arabic, licensing, invoicing)
               that are cheap early and expensive later.
             </Text>
           </Reveal>
@@ -72,14 +77,14 @@ export default function UAEPageBody() {
               </Button>
             </HStack>
           </Reveal>
-      </MarketHero>
+      </RegionalHero>
 
       {/* 1 — Evidence. First section by design. */}
       <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
         <Reveal><Eyebrow>Delivered work</Eyebrow></Reveal>
         <Reveal delay={0.05}>
           <Heading as="h2" className="speakable-question" mt={4} mb={3} fontSize={{ base: "28px", md: "38px" }} lineHeight={1.15} maxW="900px">
-            What we&apos;ve shipped in the UAE —{" "}
+            What we&apos;ve shipped in the UAE,{" "}
             <Box as="span" className="gradient-text">and what we haven&apos;t</Box>
           </Heading>
         </Reveal>
@@ -222,7 +227,7 @@ export default function UAEPageBody() {
         </Reveal>
         <Reveal delay={0.1}>
           <Text className="speakable-answer" color="text.muted" fontSize={{ base: "md", md: "lg" }} lineHeight={1.7} maxW="780px" mb={10}>
-            For one category of product here, the permission decides the specification —
+            For one category of product here, the permission decides the specification,
             reversing the order most teams work in.
           </Text>
         </Reveal>
@@ -477,6 +482,8 @@ export default function UAEPageBody() {
           </Reveal>
         </Container>
       </Box>
+
+      <CountrySolutions market="ae" />
 
       <Faqs
         items={aeFaqs}

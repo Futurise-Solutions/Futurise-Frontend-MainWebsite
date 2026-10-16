@@ -87,7 +87,7 @@ const BlogCTA = ({ category }) => {
 
             <Text mt={4} color="text.muted" fontSize={{ base: "md", md: "lg" }} lineHeight={1.7} maxW="560px">
               {service.description} Book a free 45-minute call and we&rsquo;ll scope your
-              project, flag the risks, and give you a fixed-scope estimate — whether or
+              project, flag the risks, and give you a fixed-scope estimate, whether or
               not you work with us.
             </Text>
 

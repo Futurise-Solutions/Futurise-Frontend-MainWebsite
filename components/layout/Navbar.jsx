@@ -1,19 +1,20 @@
 'use client'
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   Box, Flex, Button, HStack, Text, Icon, useDisclosure,
-  IconButton, Drawer, DrawerBody, DrawerContent, DrawerOverlay, DrawerCloseButton,
-  Popover, PopoverTrigger, PopoverContent, VStack, Collapse, SimpleGrid,
+  Drawer, DrawerBody, DrawerContent, DrawerOverlay, DrawerHeader,
+  Popover, PopoverTrigger, PopoverContent, VStack, SimpleGrid,
 } from "@chakra-ui/react";
-import { motion, AnimatePresence } from "framer-motion";
-import { FiMenu, FiChevronDown, FiArrowRight, FiArrowUpRight } from "react-icons/fi";
+import { motion, useReducedMotion } from "framer-motion";
+import { FiChevronDown, FiArrowRight, FiArrowUpRight } from "react-icons/fi";
 import NextLink from "next/link";
 import NextImage from "next/image";
 import { useRouter, usePathname } from "next/navigation";
-import { navbarOptions, NavbarservicesOptions, CONTACT } from "../../utils/Constant";
-import { caseStudiesNav } from "../../utils/Constant/caseStudies";
+import { navbarOptions, NavbarservicesOptions, CONTACT, caseStudiesNav } from "../../utils/Constant/navigation";
+import { solutionLinks as solutionList } from "../../utils/Constant/solutionLinks";
 import Logo from "../common/Logo";
+import mobile from "./MobileNavigation.module.css";
 import { useBooking } from "../../context/BookingContext";
 import { trackEvent, EVENTS } from "../../utils/analytics";
 
@@ -56,7 +57,8 @@ const NAV_ITEMS = [
 
 const Highlight = () => (
   <MotionBox
-    layoutId="navHighlight"
+    aria-hidden="true"
+    data-nav-highlight=""
     position="absolute"
     inset={0}
     borderRadius="full"
@@ -69,10 +71,17 @@ const Highlight = () => (
 
 const ServicesMenu = ({ onBook, active, hovered, setHovered, index }) => {
   const showHighlight = hovered === index || (hovered === null && active);
+  const menu = useDisclosure();
+  const route = usePathname();
+  const closeMenu = menu.onClose;
+  useEffect(() => { const frame = requestAnimationFrame(closeMenu); return () => cancelAnimationFrame(frame); }, [route, closeMenu]);
   return (
-    <Popover trigger="hover" placement="bottom" gutter={18} openDelay={0} closeDelay={120}>
+    <Popover trigger="hover" openDelay={80} closeDelay={220} placement="bottom" gutter={10} isLazy isOpen={menu.isOpen} onOpen={menu.onOpen} onClose={menu.onClose} returnFocusOnClose={false}>
       <PopoverTrigger>
         <Box
+          as="button"
+          type="button"
+          aria-label="Services"
           position="relative"
           px={4}
           py={2}
@@ -91,6 +100,7 @@ const ServicesMenu = ({ onBook, active, hovered, setHovered, index }) => {
         </Box>
       </PopoverTrigger>
       <PopoverContent
+        onClickCapture={e => { if (e.target.closest("a,button")) menu.onClose(); }}
         w="640px"
         bg="#0f0f1a"
         border="1px solid"
@@ -149,10 +159,17 @@ const ServicesMenu = ({ onBook, active, hovered, setHovered, index }) => {
 // ── Case Studies dropdown (mirrors ServicesMenu) ──────────────────────────────
 const CaseStudiesMenu = ({ navigate, active, hovered, setHovered, index }) => {
   const showHighlight = hovered === index || (hovered === null && active);
+  const menu = useDisclosure();
+  const route = usePathname();
+  const closeMenu = menu.onClose;
+  useEffect(() => { const frame = requestAnimationFrame(closeMenu); return () => cancelAnimationFrame(frame); }, [route, closeMenu]);
   return (
-    <Popover trigger="hover" placement="bottom" gutter={18} openDelay={0} closeDelay={120}>
+    <Popover trigger="hover" openDelay={80} closeDelay={220} placement="bottom" gutter={10} isLazy isOpen={menu.isOpen} onOpen={menu.onOpen} onClose={menu.onClose} returnFocusOnClose={false}>
       <PopoverTrigger>
         <Box
+          as="button"
+          type="button"
+          aria-label="Case Studies"
           position="relative" px={4} py={2}
           borderRadius="full" cursor="pointer"
           onMouseEnter={() => setHovered(index)}
@@ -168,7 +185,8 @@ const CaseStudiesMenu = ({ navigate, active, hovered, setHovered, index }) => {
         </Box>
       </PopoverTrigger>
       <PopoverContent
-        w="520px"
+        onClickCapture={e => { if (e.target.closest("a,button")) menu.onClose(); }}
+        w="min(860px, calc(100vw - 32px))"
         bg="#0f0f1a"
         border="1px solid" borderColor="border.subtle"
         borderRadius="20px"
@@ -176,34 +194,64 @@ const CaseStudiesMenu = ({ navigate, active, hovered, setHovered, index }) => {
         p={3} overflow="hidden"
         _focus={{ outline: "none", boxShadow: "0 40px 80px -28px rgba(0,0,0,0.85)" }}
       >
-        <SimpleGrid columns={2} spacing={2}>
-          {caseStudiesNav.map((s) => (
-            <VStack
-              key={s.slug}
-              as={NextLink}
-              href={`/case-studies/${s.slug}`}
-              align="start" spacing={2} p={4}
-              borderRadius="14px" cursor="pointer"
-              transition="all .2s" role="group"
-              border="1px solid transparent"
-              _hover={{ bg: "rgba(180,160,255,0.08)", borderColor: "rgba(180,160,255,0.25)", transform: "translateY(-2px)", textDecoration: "none" }}
-            >
-              <Box>
-                <HStack spacing={1}>
-                  <Text fontSize="13px" fontWeight={600} color="text.primary">{s.option}</Text>
-                  <Icon as={FiArrowUpRight} fontSize="12px" color="text.faint" opacity={0} transition="all .2s" _groupHover={{ opacity: 1, color: "accent.solid", transform: "translate(2px,-2px)" }} />
+        <Flex align="stretch" gap={3}>
+          <Box flex="1 1 0" minW={0}>
+            <Text px={4} pt={1} pb={2} fontSize="11px" letterSpacing="0.12em" textTransform="uppercase" color="text.faint">Case studies</Text>
+            <SimpleGrid columns={2} spacing={2}>
+              {caseStudiesNav.map((s) => (
+                <VStack
+                  key={s.slug}
+                  as={NextLink}
+                  href={`/case-studies/${s.slug}`}
+                  align="start" spacing={2} p={4}
+                  borderRadius="14px" cursor="pointer"
+                  transition="all .2s" role="group"
+                  border="1px solid transparent"
+                  _hover={{ bg: "rgba(180,160,255,0.08)", borderColor: "rgba(180,160,255,0.25)", transform: "translateY(-2px)", textDecoration: "none" }}
+                >
+                  <Box>
+                    <HStack spacing={1}>
+                      <Text fontSize="13px" fontWeight={600} color="text.primary">{s.option}</Text>
+                      <Icon as={FiArrowUpRight} fontSize="12px" color="text.faint" opacity={0} transition="all .2s" _groupHover={{ opacity: 1, color: "accent.solid", transform: "translate(2px,-2px)" }} />
+                    </HStack>
+                    <Text fontSize="11px" color="text.faint">{s.service} · {s.desc}</Text>
+                  </Box>
+                </VStack>
+              ))}
+            </SimpleGrid>
+          </Box>
+          <Box flex="0 0 290px" minW={0} pl={3} borderLeft="1px solid" borderColor="border.subtle">
+            <Text px={3} pt={1} pb={2} fontSize="11px" letterSpacing="0.12em" textTransform="uppercase" color="text.faint">Solutions we build</Text>
+            <VStack align="stretch" spacing={0.5}>
+              {solutionList.map((sol) => (
+                <HStack
+                  key={sol.slug}
+                  as={NextLink}
+                  href={`/solutions/${sol.slug}`}
+                  justify="space-between" spacing={3} px={3} py="7px"
+                  borderRadius="10px" cursor="pointer"
+                  transition="all .2s" role="group"
+                  border="1px solid transparent"
+                  _hover={{ bg: "rgba(180,160,255,0.08)", borderColor: "rgba(180,160,255,0.25)", textDecoration: "none" }}
+                >
+                  <HStack spacing={1} minW={0}>
+                    <Text fontSize="13px" fontWeight={600} color="text.primary" noOfLines={1}>{sol.name}</Text>
+                    <Icon as={FiArrowUpRight} flexShrink={0} fontSize="12px" color="text.faint" opacity={0} transition="all .2s" _groupHover={{ opacity: 1, color: "accent.solid", transform: "translate(2px,-2px)" }} />
+                  </HStack>
                 </HStack>
-                <Text fontSize="11px" color="text.faint">{s.service} · {s.desc}</Text>
-              </Box>
+              ))}
             </VStack>
-          ))}
-        </SimpleGrid>
-        <Flex mt={2} px={4} py={3} borderRadius="14px" align="center" justify="space-between"
+          </Box>
+        </Flex>
+        <Flex mt={2} px={4} py={3} borderRadius="14px" align="center" justify="space-between" gap={3}
           bgGradient="linear(135deg, rgba(123,108,255,0.14), rgba(181,123,255,0.14))"
           border="1px solid" borderColor="rgba(180,160,255,0.2)"
         >
           <Text fontSize="14px" color="text.muted">See all results &amp; outcomes</Text>
-          <Button size="sm" variant="gradient" rightIcon={<FiArrowRight />} onClick={() => navigate("/case-studies")}>All studies</Button>
+          <HStack spacing={2} flexShrink={0}>
+            <Button size="sm" variant="outlineGlow" rightIcon={<FiArrowRight />} onClick={() => navigate("/solutions")}>All solutions</Button>
+            <Button size="sm" variant="gradient" rightIcon={<FiArrowRight />} onClick={() => navigate("/case-studies")}>All studies</Button>
+          </HStack>
         </Flex>
       </PopoverContent>
     </Popover>
@@ -218,6 +266,7 @@ const NavLinkItem = ({ item, index, hovered, setHovered }) => {
     <Box
       as={NextLink}
       href={item.path}
+      aria-current={active ? "page" : undefined}
       position="relative"
       px={4}
       py={2}
@@ -235,6 +284,8 @@ const NavLinkItem = ({ item, index, hovered, setHovered }) => {
 };
 
 const Navbar = () => {
+  const menuTrigger = useRef(null);
+  const reduceMotion = useReducedMotion();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { onOpen: openBooking } = useBooking();
   const [servicesOpen, setServicesOpen] = useState(false);
@@ -246,6 +297,7 @@ const Navbar = () => {
   const navigate = (to) => router.push(to);
   const servicesActive = pathname.startsWith("/service");
   const caseStudiesActive = pathname.startsWith("/case-studies");
+  const solutionsActive = pathname.startsWith("/solutions");
 
   useEffect(() => {
     const onScroll = () => {
@@ -262,9 +314,13 @@ const Navbar = () => {
   // Robustly close the mobile drawer on every route change — covers link taps,
   // the in-drawer logo, service sub-items, and browser back/forward navigation.
   useEffect(() => {
-    onClose();
-    setServicesOpen(false);
-  }, [pathname]); // eslint-disable-line react-hooks/exhaustive-deps
+    const frame = requestAnimationFrame(() => {
+      onClose();
+      setServicesOpen(false);
+      setHovered(null);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [pathname, onClose]);
 
   // Lock body scroll while the drawer is open so the page behind doesn't move.
   useEffect(() => {
@@ -277,6 +333,8 @@ const Navbar = () => {
   return (
     <Box
       as="header"
+      data-site-nav=""
+      data-home-nav={["/", "/about", "/contact", "/portfolio", "/pricing", "/us", "/ca", "/ae", "/nz", "/au", "/in", "/europe"].includes(pathname) || pathname.startsWith("/service/") || pathname.startsWith("/case-studies") ? "" : undefined}
       position="sticky"
       top={0}
       zIndex={1000}
@@ -286,8 +344,8 @@ const Navbar = () => {
       borderBottom="1px solid"
       borderColor={scrolled ? "border.subtle" : "transparent"}
     >
-      <Flex h={scrolled ? "62px" : "74px"} maxW="1240px" mx="auto" px={{ base: 5, md: 8 }} align="center" justify="space-between" transition="height .3s ease">
-        <Logo />
+      <Flex h={scrolled ? "62px" : "74px"} maxW="1800px" mx="auto" px={{ base: 5, md: 8 }} align="center" justify="space-between" transition="height .3s ease">
+        <Logo size="nav" priority />
 
         {/* Center nav pill */}
         <HStack
@@ -326,6 +384,7 @@ const Navbar = () => {
               pointerEvents="none"
             />
             <Button
+              data-nav-appointment
               position="relative"
               variant="gradient"
               size="sm"
@@ -337,14 +396,9 @@ const Navbar = () => {
               Book appointment
             </Button>
           </Box>
-          <IconButton
-            display={{ base: "inline-flex", lg: "none" }}
-            aria-label="Open menu"
-            icon={<FiMenu />}
-            variant="outlineGlow"
-            size="md"
-            onClick={onOpen}
-          />
+          <button ref={menuTrigger} type="button" className={mobile.trigger} aria-label="Open menu" aria-expanded={isOpen} aria-controls={isOpen ? 'mobile-navigation' : undefined} onClick={onOpen}>
+            <span>Menu</span><span className={mobile.bars} aria-hidden="true"><i /><i /></span>
+          </button>
         </HStack>
       </Flex>
 
@@ -354,103 +408,35 @@ const Navbar = () => {
       </Box>
 
       {/* Mobile drawer */}
-      <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="xs">
-        <DrawerOverlay backdropFilter="blur(6px)" bg="rgba(0,0,0,0.5)" />
-        <DrawerContent bg="navy.800" borderLeft="1px solid" borderColor="border.subtle">
-          <Box position="absolute" top="-10%" right="-20%" w="260px" h="260px" bg="rgba(181,123,255,0.18)" filter="blur(80px)" rounded="full" pointerEvents="none" />
-          <DrawerCloseButton mt={3} color="text.muted" zIndex={10} />
-          <Box px={6} py={5} position="relative">
-            <Logo />
-          </Box>
-          <DrawerBody px={6} position="relative">
-            <AnimatePresence>
-              <VStack align="stretch" spacing={1}>
-                {navbarOptions
-                  .filter((l) => l.option !== "Services")
-                  .map((l, i) => (
-                    <MotionBox
-                      key={l.option}
-                      initial={{ opacity: 0, x: 24 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.05 + i * 0.06 }}
-                    >
-                      <Text
-                        as={NextLink}
-                        href={l.path}
-                        onClick={onClose}
-                        display="block"
-                        py={3}
-                        fontSize="lg"
-                        fontWeight={500}
-                        borderBottom="1px solid"
-                        borderColor="border.subtle"
-                        _hover={{ color: "accent.solid", pl: 2, textDecoration: "none" }}
-                        transition="all .2s"
-                      >
-                        {l.option}
-                      </Text>
-                    </MotionBox>
-                  ))}
-
-                <MotionBox initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.17 }}>
-                  <Box borderBottom="1px solid" borderColor="border.subtle">
-                    <HStack justify="space-between" py={3} cursor="pointer" onClick={() => setServicesOpen((v) => !v)}>
-                      <Text fontSize="lg" fontWeight={500}>Services</Text>
-                      <Icon as={FiChevronDown} transform={servicesOpen ? "rotate(180deg)" : "none"} transition="transform .2s" />
-                    </HStack>
-                    <Collapse in={servicesOpen} animateOpacity>
-                      <VStack align="stretch" spacing={0} pb={2}>
-                        {NavbarservicesOptions.map((s) => (
-                          <HStack
-                            key={s.option}
-                            spacing={3}
-                            py={2.5}
-                            pl={2}
-                            cursor="pointer"
-                            onClick={() => { navigate(s.path); onClose(); }}
-                            _hover={{ color: "accent.solid", pl: 3 }}
-                            transition="all .2s"
-                          >
-                            <Flex w="32px" h="32px" align="center" justify="center" borderRadius="9px" bg="rgba(180,160,255,0.12)">
-                              <NextImage src={s.icon} alt={`${s.option} service icon`} width={18} height={18} style={{ width: "18px", height: "18px" }} />
-                            </Flex>
-                            <Text fontSize="15px" color="text.muted">{s.option}</Text>
-                          </HStack>
-                        ))}
-                      </VStack>
-                    </Collapse>
-                  </Box>
-                </MotionBox>
-
-                {/* Mobile Case Studies accordion */}
-                <MotionBox initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.21 }}>
-                  <Box borderBottom="1px solid" borderColor="border.subtle">
-                    <HStack justify="space-between" py={3} cursor="pointer"
-                      onClick={() => navigate("/case-studies") & onClose()}
-                    >
-                      <Text fontSize="lg" fontWeight={500}>Case Studies</Text>
-                      <Icon as={FiArrowUpRight} color="accent.solid" boxSize={4} />
-                    </HStack>
-                  </Box>
-                </MotionBox>
-
-                <MotionBox initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.28 }} pt={5}>
-                  <Button w="full" variant="gradient" size="lg" rightIcon={<FiArrowRight />} onClick={() => { openBooking("navbar-mobile"); onClose(); }}>
-                    Book appointment
-                  </Button>
-                  <VStack spacing={1} mt={4}>
-                    <Text
-                      as="a"
-                      href={`mailto:${CONTACT.email}`}
-                      onClick={() => trackEvent(EVENTS.EMAIL_CLICK, { location: "navbar-drawer" })}
-                      fontSize="sm" color="text.muted" _hover={{ color: "accent.solid" }} transition="color .2s"
-                    >
-                      {CONTACT.email}
-                    </Text>
-                  </VStack>
-                </MotionBox>
-              </VStack>
-            </AnimatePresence>
+      <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="full" finalFocusRef={menuTrigger}>
+        <DrawerOverlay bg="rgba(8,8,13,.6)" />
+        <DrawerContent bg="#F4F2FF" color="#08080D" maxW={{base:'100%',md:'520px'}} h="100dvh" motionProps={reduceMotion ? {transition:{duration:0}} : undefined}>
+          <DrawerHeader p={0}>
+            <div className={mobile.top}><span>FUTURISE SOLUTIONS<small>DESIGN / ENGINEERING / POSSIBILITY</small></span><button type="button" onClick={onClose} aria-label="Close menu"><span>Close</span><b aria-hidden="true">×</b></button></div>
+          </DrawerHeader>
+          <DrawerBody p={0} id="mobile-navigation" className={mobile.body}>
+            <p className={mobile.eyebrow}>EXPLORE FUTURISE</p>
+            <nav className={mobile.links} aria-label="Mobile navigation">
+              {navbarOptions.map((item,i) => item.option === 'Services' ? (
+                <div key={item.option} className={mobile.serviceGroup}>
+                  <button type="button" className={mobile.navRow} aria-expanded={servicesOpen} aria-controls="mobile-services" onClick={()=>setServicesOpen(v=>!v)} data-active={servicesActive}>
+                    <span className={mobile.number}>{String(i+1).padStart(2,'0')}</span><span>Services</span><b className={mobile.plus} data-open={servicesOpen} aria-hidden="true">+</b>
+                  </button>
+                  <div id="mobile-services" hidden={!servicesOpen} className={mobile.serviceList}>
+                    {NavbarservicesOptions.map(service=><NextLink key={service.path} href={service.path} onClick={onClose} aria-current={pathname===service.path?'page':undefined}><span><strong>{service.option}</strong><small>{service.desc}</small></span><span aria-hidden="true">↗</span></NextLink>)}
+                  </div>
+                </div>
+              ) : (
+                <NextLink key={item.path} href={item.path} onClick={onClose} className={mobile.navRow} aria-current={pathname===item.path?'page':undefined}><span className={mobile.number}>{String(i+1).padStart(2,'0')}</span><span>{item.option}</span><b aria-hidden="true">↗</b></NextLink>
+              ))}
+              <NextLink href="/case-studies" onClick={onClose} className={mobile.navRow} aria-current={caseStudiesActive?'page':undefined}><span className={mobile.number}>08</span><span>Case Studies</span><b aria-hidden="true">↗</b></NextLink>
+              <NextLink href="/solutions" onClick={onClose} className={mobile.navRow} aria-current={solutionsActive?'page':undefined}><span className={mobile.number}>09</span><span>Solutions</span><b aria-hidden="true">↗</b></NextLink>
+            </nav>
+            <div className={mobile.contact}>
+              <p>HAVE SOMETHING IN MIND?</p>
+              <button type="button" onClick={()=>{onClose();openBooking("navbar-mobile");}}>Book a strategy call <span aria-hidden="true">↗</span></button>
+              <a href={`mailto:${CONTACT.email}`} onClick={()=>trackEvent(EVENTS.EMAIL_CLICK,{location:"navbar-drawer"})}>{CONTACT.email}</a>
+            </div>
           </DrawerBody>
         </DrawerContent>
       </Drawer>
