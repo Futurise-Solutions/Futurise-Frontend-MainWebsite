@@ -4,3 +4,10 @@
 @media(max-width:700px){.section{padding:55px 0}.container{width:calc(100% - 40px)}.heading{display:block}.heading>p{margin-top:22px}.featured{grid-template-columns:1fr;padding:24px;gap:24px}.person{display:flex;align-items:center;gap:15px}.avatar{width:48px;height:48px;flex-shrink:0;font-size:19px;margin:0}.quotation{display:none}.person>div strong{font-size:16px}.featured blockquote{font-size:20px}.group{width:760px}.excerpt{padding:24px}.commitments{grid-template-columns:1fr 1fr;gap:25px}.delivery>div{grid-template-columns:1fr}.motionHeading{gap:10px}.motionHeading p{max-width:200px}}
 @media(prefers-reduced-motion:reduce){.track{animation:none}.rail{overflow-x:auto}.group[aria-hidden=true]{display:none}}
 .track{animation-play-state:var(--motion-state,paused)}
+
+/* Full client reviews in the rails: fixed-width cards so any count scrolls evenly. */
+.group:has(.review){width:max-content;min-width:100vw}
+.review{flex:0 0 420px}
+.review blockquote{font-size:16px;line-height:1.7;margin:16px 0 22px;color:#2b2533}
+.serviceTag{display:inline-block!important;margin-top:12px!important;padding:5px 10px;border:1px solid #7055bf55;border-radius:999px;font-size:10px!important;letter-spacing:.06em;text-transform:uppercase;color:#7055bf!important}
+@media(max-width:700px){.review{flex-basis:300px}.review blockquote{font-size:15px}}

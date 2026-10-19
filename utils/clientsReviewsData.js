@@ -13,8 +13,66 @@ export const testimonials = [
     name: "Abbas Kagzi",
     title: "Founder, Infinity Bay Trading, Dubai, UAE",
     avatar: "",
+    service: "Web Development & SEO",
     review:
       "We came to Futurise with a slow WordPress site that barely showed up on Google. They rebuilt it on Astro. It loads instantly now, feels far smoother, and with the new SEO content and blog we're finally getting found by buyers across the UAE. Professional team, clear communication, handled everything from design to Google Search Console.",
+  },
+  // Client reviews supplied and approved via the account manager (Oct 2026).
+  {
+    name: "Rahul Sharma",
+    title: "India",
+    avatar: "",
+    service: "Web Application Development",
+    review:
+      "We were facing challenges managing our business operations across different systems. Futurise Solutions helped us develop a custom web application that better fits our workflow. Their team understood our requirements and focused on making the solution practical and easy to use. The communication was professional throughout the process.",
+  },
+  {
+    name: "Priya Mehta",
+    title: "India",
+    avatar: "",
+    service: "Custom AI & ML Solutions",
+    review:
+      "We needed a smarter way to handle repetitive tasks and work with our business data. Futurise Solutions helped us explore and implement an AI-based approach tailored to our needs. They explained the technical aspects clearly and kept the focus on solving our actual business problems rather than adding unnecessary complexity.",
+  },
+  {
+    name: "Arjun Patel",
+    title: "India",
+    avatar: "",
+    service: "Shopify Development",
+    review:
+      "We wanted an online store that looked professional and was easier to manage as our business grew. Futurise Solutions helped us build a Shopify experience around our products and business requirements. The team was receptive to feedback and worked toward making the shopping journey smoother for our customers.",
+  },
+  {
+    name: "Oliver Bennett",
+    title: "New Zealand",
+    avatar: "",
+    service: "AI Agents & Automation",
+    review:
+      "Our team was spending too much time on repetitive processes that could be handled more efficiently. Futurise Solutions helped us explore custom AI agents and automation suited to our workflow. I appreciated their practical approach, willingness to understand our challenges, and focus on building a solution around the way our business operates.",
+  },
+  {
+    name: "Emily Carter",
+    title: "USA",
+    avatar: "",
+    service: "Mobile App Development",
+    review:
+      "We had a business idea but needed a development team that could help turn it into a usable mobile application. Futurise Solutions took time to understand the concept, discuss the required features, and consider the user experience. Their structured approach helped us think through the technical requirements and move toward a solution aligned with our goals.",
+  },
+  {
+    name: "Liam Thompson",
+    title: "Canada",
+    avatar: "",
+    service: "Blockchain Solutions",
+    review:
+      "We needed guidance on how blockchain technology could address specific requirements in our project. Futurise Solutions helped us explore the technical possibilities and discuss an approach suited to our use case. Their team was open to questions and focused on understanding the problem before considering the right implementation.",
+  },
+  {
+    name: "Jack Wilson",
+    title: "Australia",
+    avatar: "",
+    service: "Custom Software & AI Integration",
+    review:
+      "Managing different tools and disconnected workflows was creating unnecessary complexity for our business. Futurise Solutions helped us explore a custom software approach that could better connect our processes and support future growth. Their ability to discuss both software and AI possibilities made the project conversations useful and focused on our business needs.",
   },
 ];
 
