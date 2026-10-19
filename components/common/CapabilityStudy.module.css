@@ -1,0 +1,9 @@
+.study{margin:0;background:#f4f2ff;color:#08080d;overflow:hidden;position:relative;container-type:inline-size;border-radius:18px}
+.top{display:flex;justify-content:space-between;padding:18px 24px;border-bottom:1px solid #7b6cff25;font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.art{height:350px;position:relative;overflow:hidden}
+.study figcaption{padding:20px 24px 8px;border-top:1px solid #7b6cff25}.study figcaption strong{font-size:21px;font-weight:500;letter-spacing:-.025em}.study figcaption p{font-size:13px;line-height:1.6;margin-top:8px;max-width:600px;min-height:42px;color:#514b60}
+.controls{display:flex;align-items:center;padding:10px 24px 20px;gap:7px}.controls>span{flex:1;padding:10px 8px;border-bottom:2px solid #7b6cff25;font-size:11px;color:#514b60;transition:color .5s,border-color .5s;text-align:center}.controls>span[data-active=true]{color:#08080d;border-color:#7b6cff}
+.study[data-compact=true] .art{height:300px}.study[data-compact=true] figcaption{padding-block:14px 0}.study[data-compact=true] figcaption strong{font-size:18px}.study[data-compact=true] .controls{padding-bottom:15px}
+@container(max-width:400px){.top{padding:15px;font-size:9px}.art,.study[data-compact=true] .art{height:240px}.study figcaption{padding:16px 16px 0}.study figcaption strong{font-size:18px}.controls{padding:12px 16px}.controls>span{font-size:10px;padding-inline:4px}}
+@media(prefers-reduced-motion:reduce){.study *{animation:none!important;transition:none!important}}
+.art>svg{width:100%;height:100%}
