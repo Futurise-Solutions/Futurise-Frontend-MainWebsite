@@ -1,176 +1,197 @@
 // Pure function — no React, no imports, no API calls.
-// Covers 25+ intent categories — runs only when the backend AI is unavailable
-// (quota hit, error, or network down) so the assistant still answers instantly.
+// Runs only when the backend AI is unavailable (quota hit, error, or network down) so
+// the assistant still answers instantly. Facts here must match the live site: no phone
+// number, no project/client counts, MVPs 6 to 12 weeks, replies within one business day.
+//
+// Matching is whole-word and scored. The old first-substring match answered "Do you
+// build Shopify stores?" with the UI/UX entry because "ui" sits inside "build".
+// Keywords ending in "*" match as a prefix ("speciali*" → specialise, specialist).
+// Specific solutions come first and weigh more, so they win over the general entries.
+const SITE = "https://www.futurisesolutions.com";
+
 const fallbackKB = [
-  // ── Services (general) ──────────────────────────────────────────────
+  // ── Dedicated solutions (specific, weighted) ─────────────────────────
   {
-    keywords: ["service", "offer", "provide", "what do you do", "speciali", "capabilities", "can you", "help with", "expertise"],
-    answer: "We offer 6 core services: AI & ML, Web Development, App Development, UI/UX Design, Blockchain/Web3, and Digital Marketing. Which one interests you?",
+    weight: 3,
+    keywords: ["shopify", "woocommerce", "ecommerce", "e-commerce", "online store", "d2c", "cro", "conversion rate", "cart", "checkout", "liquid"],
+    answer: `Yes, we build and optimise Shopify stores for D2C brands: store builds, conversion rate optimisation, cart drawers with upsells, checkout and product page work. See ${SITE}/solutions/shopify-development-cro and the case study at ${SITE}/case-studies/shopify-cro-d2c-brand`,
+  },
+  {
+    weight: 3,
+    keywords: ["whatsapp crm", "whatsapp business", "whatsapp api", "whatsapp automation", "whatsapp marketing", "whatsapp campaign", "bulk message*", "broadcast"],
+    answer: `Yes, we build WhatsApp CRM systems: bulk campaigns, template management, product catalogues and a live-chat inbox tied into your CRM workflows. See ${SITE}/solutions/whatsapp-crm`,
+  },
+  {
+    weight: 3,
+    keywords: ["chrome extension", "browser extension", "chrome", "extension", "add-on", "plugin"],
+    answer: `Yes, we develop Chrome extensions, from AI copilots to virtual try-on tools, built for Manifest V3 and the Chrome Web Store. See ${SITE}/solutions/chrome-extension-development`,
+  },
+  {
+    weight: 3,
+    keywords: ["telegram", "telegram bot"],
+    answer: `Yes, we build Telegram bots, including AI assistants that handle text and voice and group bots with moderation. See ${SITE}/solutions/telegram-bot-development`,
+  },
+  {
+    weight: 3,
+    keywords: ["hospital", "clinic", "hms", "healthcare", "patient", "ipd", "opd", "pharmacy"],
+    answer: `Yes, we build hospital management systems for hospitals and clinics: appointments, billing, IPD, pharmacy, lab and patient apps. See ${SITE}/solutions/hospital-management-system`,
+  },
+  {
+    weight: 3,
+    keywords: ["recruitment", "recruiting", "hiring platform", "ats", "applicant", "resume screening", "interview"],
+    answer: `We build AI recruitment platforms with recruiter and candidate flows, AI-conducted interviews, resume analysis and candidate shortlisting. See ${SITE}/solutions/ai-recruitment-platform`,
+  },
+  {
+    weight: 3,
+    keywords: ["server management", "devops", "hosting panel", "server monitoring", "control panel", "vps"],
+    answer: `We build server management platforms for hosting companies: one control panel for the full server lifecycle, from provisioning to OS reinstalls and suspension. See ${SITE}/solutions/server-management-platform`,
+  },
+  {
+    weight: 2,
+    keywords: ["dapp", "web3", "blockchain", "smart contract*", "solidity", "defi", "nft", "decentrali*", "crypto", "ethereum", "solana", "token*", "wallet", "dao"],
+    answer: `We build Web3 dApps, smart contracts, token launches, staking and NFT products across major chains. See ${SITE}/solutions/web3-dapp-development`,
+  },
+  {
+    weight: 2,
+    keywords: ["ai saas", "saas"],
+    answer: `We design and build AI SaaS products end to end, from MVP to scale. See ${SITE}/solutions/ai-saas-development`,
   },
 
-  // ── Pricing ─────────────────────────────────────────────────────────
+  // ── Commercial questions ─────────────────────────────────────────────
   {
-    keywords: ["price", "cost", "how much", "rate", "charge", "budget", "pricing", "quote", "estimate", "affordable", "expensive", "cheap", "fees", "invoice"],
-    answer: "We work on custom quotes based on your project scope. Book a free call and we'll give you a clear estimate, with no commitment needed.",
+    weight: 2,
+    keywords: ["price", "pricing", "cost*", "how much", "rate", "rates", "charge", "budget", "quote", "estimate", "affordable", "expensive", "cheap", "fee", "fees"],
+    answer: `Every project is quoted to its scope, so there is no fixed price list. Book a free call and we'll send a fixed-scope estimate. See ${SITE}/pricing`,
+  },
+  {
+    weight: 2,
+    keywords: ["timeline", "how long", "duration", "deadline", "week*", "month*", "delivery", "turnaround", "urgent", "rush"],
+    answer: "A focused MVP typically takes 6 to 12 weeks, and larger platforms 3 to 6 months. You get a clear timeline after the discovery call.",
+  },
+  {
+    weight: 2,
+    keywords: ["nda", "confidential*", "non-disclosure", "secret"],
+    answer: "Yes, we sign NDAs and keep all client information strictly confidential. Your idea is safe with us.",
+  },
+  {
+    weight: 2,
+    keywords: ["case study", "case studies", "portfolio", "past work", "previous work", "examples", "clients", "showcase"],
+    /* ⚠️ NO PROJECT OR CLIENT COUNT: /about commits in writing to publishing none. */
+    answer: `You can see our published work on ${SITE}/portfolio and detailed write-ups on ${SITE}/case-studies`,
   },
 
-  // ── Contact ─────────────────────────────────────────────────────────
+  // ── Contact & booking ────────────────────────────────────────────────
   {
-    keywords: ["contact", "email", "reach", "talk", "speak", "call", "message", "get in touch", "whatsapp", "phone", "number", "mail"],
-    /* ⚠️ NO PHONE NUMBER. This answer used to offer one, which contradicted /about —
-       that page states in writing that no telephone number is published anywhere on the
-       site, and the Organization schema deliberately omits `telephone`. Owner decision:
-       there is no published number. Email and the booking flow are the two real channels.
-       Do not reintroduce one here without also updating /about, the schema and llms.txt. */
-    answer: "Email us at business@futurisesolutions.com or book a free call. We reply within a few hours.",
+    weight: 2,
+    keywords: ["book", "schedule", "appointment", "meeting", "consultation", "free call", "discovery call", "strategy call", "demo"],
+    answer: `Book a free strategy call from our website, or use the contact page: ${SITE}/contact`,
+  },
+  {
+    weight: 2,
+    keywords: ["contact", "email", "reach", "get in touch", "phone", "phone number", "mobile number", "call you", "talk to"],
+    /* ⚠️ NO PHONE NUMBER. /about states that no telephone number is published and the
+       Organization schema omits `telephone`. Email, the contact form and the booking
+       flow are the real channels. */
+    answer: `Email us at business@futurisesolutions.com, use the contact form or book a free call. We reply within one business day. ${SITE}/contact`,
+  },
+  {
+    weight: 2,
+    keywords: ["location", "located", "based", "where are you", "office", "address", "wellington", "new zealand", "headquarter*"],
+    answer: "We're based in Wellington, New Zealand, with team members in India, and work with clients in the USA, UAE, India, Australia, Canada, NZ and Europe.",
+  },
+  {
+    weight: 2,
+    keywords: ["working hours", "hours", "open", "timezone", "time zone"],
+    answer: "Our working hours are Monday to Friday, 9:00 AM to 6:00 PM (NZST), and we reply within one business day.",
   },
 
-  // ── Location ────────────────────────────────────────────────────────
+  // ── Core services ────────────────────────────────────────────────────
   {
-    keywords: ["location", "based", "where", "country", "new zealand", "india", "usa", "office", "address", "city", "wellington", "remote", "onsite"],
-    answer: "We're based in Wellington, New Zealand, with team members in India. We serve clients in the USA, NZ, India and worldwide.",
+    keywords: ["ai", "artificial intelligence", "machine learning", "ml", "llm", "gpt", "chatgpt", "agent", "agents", "automation", "automate", "nlp", "computer vision", "rag", "chatbot"],
+    answer: `We build custom AI agents, LLM integrations, RAG assistants, NLP and computer vision features, and automation. See ${SITE}/service/ai-ml-solutions`,
   },
-
-  // ── Portfolio / Past Work ────────────────────────────────────────────
   {
-    keywords: ["portfolio", "project", "past work", "example", "case study", "built", "clients", "showcase", "sample", "previous", "done before"],
-    // Keep the figure in step with `companyStats` in utils/Constant/index.js — a chatbot
-    // quoting a different number than the home page is the fastest way to look careless.
-    /* ⚠️ NO PROJECT COUNT, AND NO UNNAMED CLIENT — see the note in predefinedQA.js.
-       /portfolio publishes NINE engagements, /about commits to publishing no counts, and
-       the trading terminal is published under its product rather than a client name. */
-    answer: "We've built property SaaS, AI review platforms, luxury e-commerce and trading terminals, including HOMIES and Marty-QR. Check our portfolio page!",
+    keywords: ["website", "web", "web app", "web application", "react", "next.js", "nextjs", "node", "frontend", "backend", "full stack", "fullstack", "api", "dashboard", "portal"],
+    answer: `We build fast, scalable websites and web apps with React, Next.js and Node.js. See ${SITE}/service/web-development`,
   },
-
-  // ── Timeline / Delivery ──────────────────────────────────────────────
   {
-    keywords: ["timeline", "how long", "duration", "deadline", "weeks", "months", "delivery", "time", "fast", "quick", "urgent", "rush"],
-    answer: "Most projects take 4 to 16 weeks depending on scope. We'll give a clear timeline after the discovery call.",
+    keywords: ["app", "apps", "mobile", "ios", "android", "react native", "flutter", "expo", "cross-platform", "app store", "play store"],
+    answer: `We build cross-platform iOS and Android apps with React Native and Expo. See ${SITE}/service/app-development`,
   },
-
-  // ── Getting Started / Hiring ─────────────────────────────────────────
   {
-    keywords: ["start", "hire", "begin", "get started", "work together", "collaborate", "onboard", "kick off", "process", "next step", "how to", "ready"],
-    answer: "Book a free strategy call! We'll discuss your idea, scope it out, and put together a plan, with no commitment needed.",
+    keywords: ["design", "ui", "ux", "ui/ux", "user experience", "user interface", "figma", "wireframe*", "prototype*", "mockup*", "redesign", "landing page"],
+    answer: `We offer full UI/UX design: research, wireframes, Figma prototypes, design systems and developer handoff. See ${SITE}/service/ui-ux-design`,
   },
-
-  // ── AI & ML ──────────────────────────────────────────────────────────
   {
-    keywords: ["ai", "artificial intelligence", "machine learning", "ml", "llm", "large language model", "gpt", "chatgpt", "openai", "gemini", "agent", "automation", "nlp", "computer vision", "data science", "model", "prediction", "recommendation"],
-    answer: "We build custom AI agents, LLM integrations, NLP systems, computer vision pipelines, and ML-powered features for your product.",
+    keywords: ["marketing", "seo", "search engine", "social media", "ads", "google ads", "content", "traffic", "leads", "growth", "campaign*", "ranking"],
+    answer: `We offer SEO, AI search visibility, content, paid ads and conversion work to grow traffic and leads. See ${SITE}/service/digital-marketing`,
   },
-
-  // ── Web Development ──────────────────────────────────────────────────
   {
-    keywords: ["web", "website", "web app", "saas", "react", "next.js", "nextjs", "node", "nodejs", "frontend", "backend", "fullstack", "full stack", "graphql", "api", "rest", "dashboard", "portal", "platform"],
-    answer: "We build scalable web applications with React, Next.js, Node.js, and GraphQL, from SaaS platforms to dashboards and portals.",
+    keywords: ["blog", "article*", "guide*", "insight*", "resources"],
+    answer: `Our guides on AI, SaaS, Shopify, apps and more are on ${SITE}/blog`,
   },
-
-  // ── Mobile App Development ────────────────────────────────────────────
   {
-    keywords: ["app", "mobile", "ios", "android", "react native", "expo", "cross-platform", "flutter", "native", "app store", "play store", "smartphone", "tablet"],
-    answer: "We build cross-platform mobile apps with React Native & Expo that run natively on both iOS and Android.",
+    keywords: ["technology", "tech stack", "stack", "framework*", "typescript", "javascript", "python", "aws", "cloud", "docker", "database", "mongodb", "postgres*"],
+    answer: "We choose the stack per project. Common choices are React, Next.js, Node.js, Python, MongoDB, PostgreSQL and AWS.",
   },
-
-  // ── UI/UX Design ──────────────────────────────────────────────────────
   {
-    keywords: ["design", "ui", "ux", "user experience", "user interface", "figma", "wireframe", "prototype", "mockup", "branding", "visual", "landing page", "redesign", "pixel", "creative", "logo"],
-    answer: "We offer full UI/UX design: user research, wireframes, Figma prototypes, design systems, and pixel-perfect handoffs.",
+    keywords: ["support", "maintenance", "maintain", "bug*", "after launch", "post launch", "ongoing"],
+    answer: "We offer post-launch support and maintenance, and revision rounds are defined up front in every project.",
   },
-
-  // ── Blockchain / Web3 ─────────────────────────────────────────────────
   {
-    keywords: ["blockchain", "web3", "smart contract", "solidity", "defi", "nft", "dapp", "decentralized", "crypto", "ethereum", "solana", "token", "wallet", "mev", "dao"],
-    answer: "We build dApps, smart contracts, DeFi protocols, MEV bots, and Web3 solutions across major chains.",
+    keywords: ["team", "who are you", "about you", "about futurise", "company", "agency", "studio", "founded"],
+    /* ⚠️ No invented counts (projects, clients, countries, retention). */
+    answer: `We're a senior product engineering team covering AI, web, mobile, UI/UX, blockchain and marketing, registered in New Zealand. See ${SITE}/about`,
   },
-
-  // ── Digital Marketing ─────────────────────────────────────────────────
   {
-    keywords: ["marketing", "seo", "search engine", "social media", "ads", "google ads", "facebook ads", "instagram", "linkedin", "content", "blog", "traffic", "leads", "conversion", "analytics", "growth", "campaign", "rank", "keywords"],
-    answer: "We offer SEO, performance marketing, content strategy, paid ads, and social media growth to drive real traffic and leads.",
+    keywords: ["partner", "partnership", "collab*", "reseller", "white label", "referral"],
+    answer: "We're open to agency partnerships. Email business@futurisesolutions.com to discuss.",
   },
-
-  // ── Team / Company Info ───────────────────────────────────────────────
   {
-    keywords: ["team", "who are you", "about", "people", "member", "developer", "staff", "company", "agency", "studio", "futurise", "founded", "experience", "years"],
-    // The "97% client retention rate" that used to sit here was dropped: it implies a
-    // tracked metric nobody can produce on request, and it is the first claim an informed
-    // buyer discounts. Concrete scope persuades better than an invented percentage.
-    /* ⚠️ THREE INVENTED COUNTS REMOVED: "25+ projects", "15+ clients", "4+ countries".
-       None is supported anywhere — /portfolio publishes nine engagements, and /about
-       commits in writing to publishing no project, client or headcount figures, on the
-       grounds that a count is not something a reader can verify. The disciplines and the
-       markets are both checkable, so those stay. Do not reintroduce a number here. */
-    answer: "We're a senior team of developers, designers and strategists, registered in New Zealand with our engineering team in India, spanning AI, web, mobile, UI/UX, blockchain and marketing.",
+    keywords: ["job", "jobs", "career*", "intern", "internship", "vacancy", "join your team"],
+    answer: "Interested in joining us? Email your portfolio and CV to business@futurisesolutions.com.",
   },
-
-  // ── Tech Stack ────────────────────────────────────────────────────────
   {
-    keywords: ["technology", "tech stack", "tools", "framework", "language", "typescript", "javascript", "python", "aws", "cloud", "docker", "database", "mongodb", "postgres", "mysql"],
-    answer: "Our stack includes React, Next.js, Node.js, Python, MongoDB, PostgreSQL, AWS, and more, chosen based on what's best for your project.",
+    weight: 0.5,
+    keywords: ["service*", "offer", "provide", "what do you do", "speciali*", "capabilit*", "expertise"],
+    answer: `We offer AI & ML, web, app, UI/UX, blockchain and digital marketing services, plus dedicated solutions such as Shopify, WhatsApp CRM and Chrome extensions. See ${SITE}/solutions`,
   },
-
-  // ── Revisions / Support ───────────────────────────────────────────────
   {
-    keywords: ["revision", "change", "update", "support", "maintenance", "bug", "fix", "after delivery", "post launch", "ongoing"],
-    answer: "Every project includes revision rounds defined upfront. We also offer post-launch support and maintenance packages.",
+    weight: 0.5,
+    keywords: ["thank*", "appreciate", "great", "awesome", "helpful"],
+    answer: "You're welcome! Ask anything else, or book a free call when you're ready.",
   },
-
-  // ── NDA / Confidentiality ─────────────────────────────────────────────
   {
-    keywords: ["nda", "confidential", "secret", "agreement", "legal", "contract", "sign", "privacy", "secure"],
-    answer: "Absolutely. We sign NDAs and keep all client information strictly confidential. Your idea is safe with us.",
-  },
-
-  // ── Refund / Guarantee ────────────────────────────────────────────────
-  {
-    keywords: ["refund", "guarantee", "money back", "quality", "satisfaction", "warranty", "assurance"],
-    answer: "We stand behind our work. Quality is defined upfront in the project scope, and revisions ensure you're satisfied with every deliverable.",
-  },
-
-  // ── Blog / Resources ──────────────────────────────────────────────────
-  {
-    keywords: ["blog", "article", "read", "resource", "guide", "learn", "insight", "news", "update"],
-    answer: "Check out our blog for insights on AI, web development, mobile apps, blockchain, and digital marketing!",
-  },
-
-  // ── Book a Call ───────────────────────────────────────────────────────
-  {
-    keywords: ["book", "schedule", "appointment", "meeting", "call", "consultation", "free call", "discovery", "demo"],
-    answer: "Book a free strategy call directly from our website. Just click 'Book a free call' or visit our contact page.",
-  },
-
-  // ── Greetings ─────────────────────────────────────────────────────────
-  {
-    keywords: ["hello", "hi", "hey", "good morning", "good afternoon", "good evening", "howdy", "greetings", "sup", "what's up"],
-    answer: "Hey there! 👋 I'm Futurise Assistant. Ask me anything about our services, pricing, or how to get started!",
-  },
-
-  // ── Thank you ─────────────────────────────────────────────────────────
-  {
-    keywords: ["thank", "thanks", "thank you", "appreciate", "great", "awesome", "helpful"],
-    answer: "You're welcome! 😊 Feel free to ask anything else, or book a free call when you're ready to get started.",
-  },
-
-  // ── Partnership / Collaboration ───────────────────────────────────────
-  {
-    keywords: ["partner", "partnership", "collab", "collaboration", "reseller", "white label", "agency partner", "referral"],
-    answer: "We're open to agency partnerships and collaborations. Email us at business@futurisesolutions.com to discuss.",
-  },
-
-  // ── Internship / Jobs ─────────────────────────────────────────────────
-  {
-    keywords: ["job", "career", "intern", "internship", "hiring", "vacancy", "apply", "join", "work for", "opportunity"],
-    answer: "Interested in joining us? Email your portfolio and CV to business@futurisesolutions.com. We'd love to hear from you.",
+    weight: 0.5,
+    keywords: ["hello", "hi", "hey", "good morning", "good afternoon", "good evening", "greetings"],
+    answer: "Hi! I'm Futurise Assistant. Ask me about our services, pricing or how to get started.",
   },
 ];
 
+const escape = (s) => s.replace(/[.*+?^${}()|[\]\\/]/g, "\\$&");
+const compiled = fallbackKB.map((entry) => ({
+  ...entry,
+  patterns: entry.keywords.map((kw) => {
+    const prefix = kw.endsWith("*");
+    const word = escape(prefix ? kw.slice(0, -1) : kw);
+    return {
+      re: new RegExp(`(^|[^a-z0-9])${word}${prefix ? "" : "(?=$|[^a-z0-9])"}`),
+      score: kw.includes(" ") ? 2 : 1,
+    };
+  }),
+}));
+
 export function matchKeyword(question) {
-  const q = (question || "").toLowerCase().trim();
-  for (const entry of fallbackKB) {
-    if (entry.keywords.some((kw) => q.includes(kw))) {
-      return entry.answer;
+  const q = (question || "").toLowerCase();
+  let best = null;
+  let bestScore = 0;
+  for (const entry of compiled) {
+    const hits = entry.patterns.reduce((sum, p) => sum + (p.re.test(q) ? p.score : 0), 0);
+    const score = hits * (entry.weight ?? 1);
+    if (score > bestScore) {
+      best = entry;
+      bestScore = score;
     }
   }
-  return null; // no match → show ContactFallback
+  return best ? best.answer : null; // no match → show ContactFallback
 }
