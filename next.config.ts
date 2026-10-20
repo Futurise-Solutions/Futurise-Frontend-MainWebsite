@@ -1,5 +1,5 @@
 import type { NextConfig } from 'next'
-import { RETIRED_BLOG_REDIRECTS } from './content/blogRedirects'
+import { RETIRED_BLOG_REDIRECTS, RENAMED_BLOG_REDIRECTS } from './content/blogRedirects'
 
 /**
  * ⚠️ NO CUSTOM WEBPACK CONFIG. Turbopack is the default bundler in Next 16 for both
@@ -145,7 +145,7 @@ const nextConfig: NextConfig = {
        * The slugs are long and lowercase, so the case-insensitive source matching above
        * cannot collide with a real route or a kept post.
        */
-      ...Object.entries(RETIRED_BLOG_REDIRECTS).map(([slug, destination]) => ({
+      ...Object.entries({ ...RETIRED_BLOG_REDIRECTS, ...RENAMED_BLOG_REDIRECTS }).map(([slug, destination]) => ({
         source: `/blog/${slug}`,
         destination,
         permanent: true,
