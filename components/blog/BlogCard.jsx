@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Box, Text, HStack, Badge } from "@chakra-ui/react";
-import NextImage from "next/image";
+import BlogImage from "./BlogImage";
 import Link from "next/link";
 import { FiArrowUpRight } from "react-icons/fi";
 import { mediaUrl, formatDate } from "@/lib/blog";
@@ -54,7 +54,7 @@ const BlogCard = ({ blog, eager = false }) => (
           correct form. The hover scale moves to the wrapper's `sx` so it still targets
           the rendered img. `loading="lazy"` and `decoding="async"` are defaults. */}
       {blog.featuredImage && (
-        <NextImage
+        <BlogImage
           src={mediaUrl(blog.featuredImage)}
           alt={blog.title}
           fill

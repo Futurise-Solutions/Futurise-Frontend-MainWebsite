@@ -67,20 +67,14 @@ export default function ArticleSidebar({ headings = [], title, slug }) {
     return () => observer.disconnect();
   }, [headings]);
 
-  const shareUrl =
-    typeof window !== "undefined"
-      ? window.location.href
-      : `https://www.futurisesolutions.com/blog/${slug}`;
+  // Stable across SSR and hydration; share the canonical article, not a preview host.
+  const shareUrl = `https://www.futurisesolutions.com/blog/${slug}`;
 
   const copyLink = () => {
     navigator.clipboard?.writeText(shareUrl).then(
       () => toast({ title: "Link copied!", status: "success", duration: 2000, position: "top" }),
       () => toast({ title: "Couldn’t copy link", status: "error", duration: 2000, position: "top" })
     );
-  };
-
-  const scrollTo = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -94,14 +88,15 @@ export default function ArticleSidebar({ headings = [], title, slug }) {
             {headings.map((h) => (
               <Text
                 key={h.id}
-                as="button"
+                as="a"
+                href={`#${h.id}`}
+                aria-current={activeId === h.id ? "location" : undefined}
                 textAlign="left"
                 fontSize="sm"
                 color={activeId === h.id ? "accent.solid" : "text.muted"}
                 pl={h.level === 3 ? 4 : 0}
                 _hover={{ color: "accent.solid" }}
                 transition="color .2s"
-                onClick={() => scrollTo(h.id)}
               >
                 {h.text}
               </Text>

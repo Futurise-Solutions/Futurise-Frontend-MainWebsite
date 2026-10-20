@@ -16,7 +16,7 @@
  */
 
 .body {
-  color: #b0a8c8;
+  color: var(--journal-muted, #b0a8c8);
 }
 
 /* ⚠️ HEADING LEVELS ARE SHIFTED DOWN ONE. READ ArticleBody.jsx BEFORE EDITING.
@@ -45,9 +45,9 @@
 .body h4,
 .body h5,
 .body h6 {
-  color: #f4f2ff;
+  color: var(--journal-ink, #f4f2ff);
   scroll-margin-top: 100px;
-  font-family: var(--font-zangezi), sans-serif;
+  font-family: var(--font-aeonik), sans-serif;
 }
 
 /* markdown `#` — formerly .body h1, values identical */
@@ -85,24 +85,24 @@
 .body p {
   font-size: 1.125rem;   /* lg */
   line-height: 1.9;
-  color: #b0a8c8;
+  color: var(--journal-muted, #b0a8c8);
   margin-bottom: 1.25rem; /* mb={5} */
 }
 
 .body a {
-  color: #b4a0ff;
+  color: var(--journal-link, #b4a0ff);
   text-decoration: none;
 }
 
 .body a:hover {
-  color: #f4f2ff;
+  color: var(--journal-ink, #f4f2ff);
 }
 
 .body ul,
 .body ol {
   padding-left: 1.5rem;   /* pl={6} */
   margin-bottom: 1.25rem; /* mb={5} */
-  color: #b0a8c8;
+  color: var(--journal-muted, #b0a8c8);
   font-size: 1.125rem;
 }
 
@@ -122,7 +122,7 @@
   margin: 1.5rem 0;       /* my={6} */
   background: rgba(123, 108, 255, 0.08);
   border-radius: 0 12px 12px 0;
-  color: #b0a8c8;
+  color: var(--journal-muted, #b0a8c8);
   font-style: italic;
 }
 
@@ -130,7 +130,7 @@
   padding: 1.25rem;       /* p={5} */
   border-radius: 14px;
   background: #13131f;    /* navy.700 */
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--journal-line, rgba(255, 255, 255, 0.08));
   overflow-x: auto;
   margin-bottom: 1.5rem;  /* mb={6} */
   font-size: 0.875rem;    /* sm */
@@ -150,8 +150,8 @@
 .body code {
   padding: 0.125rem 0.5rem;
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0.07);
-  color: #b4a0ff;
+  background: rgba(123, 108, 255, 0.09);
+  color: var(--journal-link, #b4a0ff);
   font-size: 0.9em;
   font-family: var(--font-geist-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
 }
@@ -167,7 +167,7 @@
 
 .body hr {
   border: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--journal-line, rgba(255, 255, 255, 0.08));
   margin: 2rem 0; /* my={8} */
 }
 
@@ -183,17 +183,30 @@
 
 .body th,
 .body td {
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--journal-line, rgba(255, 255, 255, 0.08));
   padding: 0.5rem 0.75rem; /* py={2} px={3} */
   text-align: left;
   font-size: 0.875rem;
 }
 
 .body th {
-  color: #f4f2ff;
-  background: rgba(255, 255, 255, 0.03);
+  color: var(--journal-ink, #f4f2ff);
+  background: rgba(123, 108, 255, 0.07);
 }
 
 .body td {
-  color: #b0a8c8;
+  color: var(--journal-muted, #b0a8c8);
+}
+
+.body strong { color: var(--journal-ink, #f4f2ff); }
+.body a { text-decoration: underline; text-underline-offset: 3px; }
+.body :is(h2, h3, h4, h5, h6) { font-weight: 600; line-height: 1.3; letter-spacing: -.02em; }
+.body > :first-child { margin-top: 0; }
+.body blockquote p { margin-bottom: 0; }
+.body blockquote { padding: 20px 24px; }
+.body th, .body td { padding: 14px 16px; line-height: 1.6; }
+@media (max-width: 640px) {
+  .body p, .body ul, .body ol { font-size: 1rem; line-height: 1.8; }
+  .body h2 { font-size: 1.6rem; }
+  .body blockquote { padding: 16px; }
 }
