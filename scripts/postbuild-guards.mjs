@@ -20,20 +20,38 @@ import path from 'path'
 const APP_DIR = path.join(process.cwd(), '.next', 'server', 'app')
 const failures = []
 
-/** Every prerendered .html Next produced, keyed by the route it corresponds to. */
+/* Where prerendered HTML lives. A plain `next build` writes it under .next/server/app.
+   On Vercel, Next 16.3.6+ runs Vercel's build adapter ("Applying modifyConfig from
+   Vercel" … "onBuildComplete from Vercel"), which emits the pages into .vercel/output
+   instead, so .next/server/app is empty there. */
+const HTML_ROOTS = [
+  APP_DIR,
+  path.join(process.cwd(), '.vercel', 'output', 'static'),
+  path.join(process.cwd(), '.vercel', 'output', 'functions'),
+]
+
+/** Every prerendered .html under `dir`, keyed by the route it corresponds to. */
 function collectHtml(dir, base = '') {
   const out = new Map()
   if (!fs.existsSync(dir)) return out
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name)
     if (entry.isDirectory()) {
-      for (const [k, v] of collectHtml(full, `${base}/${entry.name}`)) out.set(k, v)
+      // Vercel function folders are "<route>.func"; the folder name is the route segment.
+      const segment = entry.name.replace(/\.(func|rsc)$/, '')
+      for (const [k, v] of collectHtml(full, `${base}/${segment}`)) if (!out.has(k)) out.set(k, v)
     } else if (entry.name.endsWith('.html')) {
-      const name = entry.name.replace(/\.html$/, '')
+      const name = entry.name.replace(/(\.prerender-fallback)?\.html$/, '')
       const route = name === 'index' ? base || '/' : `${base}/${name}`
-      out.set(route, fs.readFileSync(full, 'utf8'))
+      if (!out.has(route)) out.set(route, fs.readFileSync(full, 'utf8'))
     }
   }
+  return out
+}
+
+function collectAllHtml() {
+  const out = new Map()
+  for (const root of HTML_ROOTS) for (const [k, v] of collectHtml(root)) if (!out.has(k)) out.set(k, v)
   return out
 }
 
@@ -62,12 +80,22 @@ function hubLinkCount(html, prefix) {
   return hrefs.filter((h) => h.includes(`href="${prefix}`)).length
 }
 
-const pages = collectHtml(APP_DIR)
+const pages = collectAllHtml()
 
 if (pages.size === 0) {
-  failures.push(
-    'No prerendered HTML found under .next/server/app — did `next build` run, and did it succeed?'
-  )
+  if (process.env.VERCEL) {
+    /* Vercel's adapter can keep prerenders out of every folder this script can read. The
+       HTML guards (zeroed stats, hub links) then have nothing to inspect; they still run on
+       every local build. The sitemap guard below checks the data itself and still applies. */
+    console.warn(
+      '⚠️  No prerendered HTML on disk (Vercel build adapter). HTML guards skipped here; ' +
+        'they run on local builds. The sitemap data guard still applies.'
+    )
+  } else {
+    failures.push(
+      'No prerendered HTML found under .next/server/app — did `next build` run, and did it succeed?'
+    )
+  }
 }
 
 for (const [route, html] of pages) {
