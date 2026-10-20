@@ -121,3 +121,93 @@ export const RETIRED_BLOG_REDIRECTS: Record<string, string> = {
   'the-ai-data-poisoning-threat-2026-how-to-protect-your-models-from-malicious-inputs-and-maintain-trust':
     '/blog/the-ai-hallucination-trap-how-to-build-trustworthy-ai-agents-in-2026-rag-and-verification-strategies',
 }
+
+/**
+ * Slugs the CMS briefly generated on 20 Oct 2026, when re-saving posts in the admin panel
+ * regenerated each slug from its title (fixed in the backend the same day; the original
+ * slugs were restored). Any of these URLs crawled in that window 308s to the real post.
+ */
+export const RENAMED_BLOG_REDIRECTS: Record<string, string> = {
+  'shopify-vs-woocommerce-for-d2c-brands-cost-and-control':
+    '/blog/shopify-vs-woocommerce-for-d2c-brands',
+  'hotel-direct-booking-website-how-to-reduce-ota-commission':
+    '/blog/hotel-direct-booking-website-reduce-ota-commission',
+  'arabic-ai-chatbot-guide-for-uae-businesses-what-actually-works':
+    '/blog/arabic-ai-chatbot-guide-for-uae-businesses',
+  'shopify-cro-checklist-for-d2c-stores-fix-these-in-order':
+    '/blog/shopify-cro-checklist-for-d2c-stores',
+  'chrome-extension-development-cost-and-process-a-planning-guide':
+    '/blog/chrome-extension-development-cost-and-process',
+  'ai-vendor-security-questions-a-due-diligence-list-for-us-buyers':
+    '/blog/security-questions-to-ask-an-ai-vendor',
+  'hospital-management-system-in-india-build-vs-buy-guide':
+    '/blog/hospital-management-system-build-vs-buy-india',
+  'hotel-pms-booking-engine-and-channel-manager-explained':
+    '/blog/hotel-pms-booking-engine-channel-manager-explained',
+  'ai-governance-framework-a-lightweight-model-for-mid-size-companies':
+    '/blog/the-ai-governance-gap-2026-why-your-enterprise-ai-projects-are-stalling-and-how-to-build-a-future-proof-framework',
+  'private-llm-for-business-hosted-api-private-cloud-self-hosted-or-on-prem':
+    '/blog/the-ai-data-privacy-dilemma-how-to-build-compliant-and-secure-ai-systems-in-2026',
+  'ai-model-drift-monitoring-keep-production-ml-and-llm-features-accurate':
+    '/blog/the-ai-data-drift-dilemma-why-your-ai-models-are-failing-in-2026-and-how-to-implement-continuous-learning',
+  'ai-tool-sprawl-how-to-consolidate-your-ai-stack-in-2026':
+    '/blog/the-ai-integration-fatigue-crisis-why-your-business-is-drowning-in-ai-tools-and-how-to-build-a-unified-ai-operating-system-in-2026',
+  'zero-click-search-strategy-how-to-win-leads-when-google-answers':
+    '/blog/the-zero-click-seo-strategy-for-2026-how-to-win-when-google-answers-everything',
+  'content-strategy-for-ai-search-what-ai-cannot-commoditise':
+    '/blog/the-ai-proof-content-strategy-for-2026-how-to-thrive-beyond-googles-ai-overviews-and-llms',
+  'ai-agents-in-business-where-they-work-and-where-they-dont':
+    '/blog/the-ai-agent-economy-2026-how-autonomous-ai-is-reshaping-global-business-models',
+  'internal-knowledge-assistant-connecting-siloed-data-for-ai':
+    '/blog/the-data-silo-trap-why-your-ai-agents-cant-talk-to-each-other-and-how-to-build-a-unified-data-layer-in-2026',
+  'secure-rag-build-an-internal-knowledge-assistant-that-respects-permissions':
+    '/blog/the-ai-hallucination-trap-how-to-build-trustworthy-ai-agents-in-2026-rag-and-verification-strategies',
+  'the-ai-paradox-why-your-ai-investment-isnt-paying-off-and-how-to-fix-it':
+    '/blog/the-ai-paradox-why-your-business-is-investing-in-ai-but-not-seeing-roi-and-how-to-fix-it-in-2026',
+  'how-to-build-an-ai-marketing-agent-for-personalisation-in-2026':
+    '/blog/how-to-build-a-hyper-personalized-ai-marketing-agent-in-2026-no-code-and-low-code-guide',
+  'e-e-a-t-explained-why-your-traffic-dropped-and-what-to-fix':
+    '/blog/why-googles-e-e-a-t-algorithm-update-is-killing-your-website-traffic-in-2026',
+  'real-world-asset-tokenization-a-2026-guide-for-businesses':
+    '/blog/real-world-asset-tokenization-rwa-2026-the-trillion-dollar-opportunity-for-businesses',
+  'website-not-converting-leads-a-2026-diagnosis-and-fix-guide':
+    '/blog/why-your-ai-powered-website-isnt-converting-leads-and-how-to-fix-it-in-2026',
+  'how-to-build-an-ai-agent-for-data-analysis-and-reporting':
+    '/blog/how-to-build-a-custom-ai-agent-for-data-analysis-and-reporting-in-2026-no-code-and-low-code-guide',
+  'how-to-build-an-ai-agent-for-lead-generation-in-2026':
+    '/blog/how-to-build-a-custom-ai-agent-for-lead-generation-in-2026-no-code-and-low-code-guide',
+  'how-to-build-an-ai-agent-for-business-automation-in-2026':
+    '/blog/how-to-build-an-autonomous-ai-agent-for-business-automation-in-2026-step-by-step-guide',
+  'how-to-build-an-ai-customer-support-agent-no-code-and-low-code-guide':
+    '/blog/how-to-build-a-custom-ai-agent-for-customer-support-in-2026-no-code-and-low-code-guide',
+  'ai-agent-development-cost-in-2026-global-prices-compared':
+    '/blog/ai-agent-development-cost-2026-a-global-price-comparison-for-custom-ai-solutions',
+  'ai-agent-development-cost-in-new-zealand-a-2026-nzd-budget-guide':
+    '/blog/ai-agent-development-cost-in-new-zealand-2026-pricing-roi-and-implementation-guide',
+  'ai-agent-development-cost-in-the-uk-2026-pricing-guide-in-gbp':
+    '/blog/custom-ai-agent-development-cost-uk-2026-pricing-roi-and-what-uk-businesses-pay',
+  'seo-for-ai-overviews-what-googles-own-guidance-says-to-do':
+    '/blog/seo-for-ai-overviews-2026-how-to-rank-when-google-rewrites-your-content',
+  'react-native-vs-flutter-for-australian-startups-2026-cost-and-roi-guide':
+    '/blog/react-native-vs-flutter-for-australian-startups-complete-cost-and-roi-guide-2026',
+  'web-development-services-in-india-2026-costs-and-vendor-guide':
+    '/blog/web-development-services-in-india-2026-what-to-expect-what-to-pay-and-who-to-trust',
+  'uiux-design-cost-in-new-zealand-2026-pricing-and-process-guide':
+    '/blog/uiux-design-cost-in-new-zealand-2026-pricing-process-and-complete-guide',
+  'saas-development-cost-in-2026-mvp-version-1-and-scale-budgets':
+    '/blog/saas-development-cost-guide-2026-pricing-timeline-and-budget-breakdown',
+  'custom-software-development-cost-in-2026-how-to-budget-and-quote':
+    '/blog/custom-software-development-cost-guide-2026-pricing-timeline-and-key-factors',
+  'ai-automation-for-small-businesses-in-new-zealand-a-practical-2026-guide':
+    '/blog/ai-automation-for-small-businesses-in-new-zealand-the-complete-2026-growth-guide',
+  'ai-agent-vs-chatbot-which-does-your-business-need-in-2026':
+    '/blog/ai-agent-vs-traditional-chatbot-which-one-does-your-business-really-need-in-2026',
+  'how-to-build-a-custom-ai-agent-for-your-business-a-2026-guide':
+    '/blog/how-to-build-a-custom-ai-agent-for-your-business-the-complete-2026-roi-and-tech-stack-guide-for-us-and-canadian-startups',
+  'offshore-software-development-for-nz-startups-fix-what-fails':
+    '/blog/scaling-kiwi-startups-why-offshore-software-development-fails-and-how-custom-ai-and-saas-integrations-xero-hubspot-drive-nz-growth',
+  'ai-development-company-in-dubai-what-uae-businesses-should-know':
+    '/blog/unlocking-dubais-ai-future-how-uae-businesses-are-implementing-autonomous-ai-agents-and-web3-platforms-under-the-national-ai-strategy-2031',
+  'whatsapp-business-api-pricing-and-setup-guide-for-2026':
+    '/blog/whatsapp-business-api-pricing-and-setup-guide',
+}
