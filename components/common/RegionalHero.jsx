@@ -1,5 +1,5 @@
 'use client';
-import {usePathname} from 'next/navigation';
+import usePathname from '@/lib/useSitePathname';
 import Link from 'next/link';
 import RegionalGlobe,{regions} from './RegionalGlobe';
 import s from './RegionalPages.module.css';

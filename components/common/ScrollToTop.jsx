@@ -1,7 +1,8 @@
 'use client'
 
 import { useLayoutEffect } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import usePathname from "@/lib/useSitePathname";
 
 /**
  * Global route-change scroll restoration.
