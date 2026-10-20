@@ -198,9 +198,13 @@ export function parseKeywords(blog: Blog): string[] {
     .filter(Boolean)
 }
 
-/** Format an ISO date as e.g. "June 14, 2026". Ported from src/utils/blog.js. */
+/**
+ * Format an ISO date as e.g. "June 14, 2026". Ported from src/utils/blog.js.
+ * Pinned to IST: without a timeZone the server (UTC) and a visitor's browser can land on
+ * different calendar days, which breaks hydration (React #418) and shows the wrong date.
+ */
 export const formatDate = (d?: string) =>
-  d ? new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : ''
+  d ? new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Asia/Kolkata' }) : ''
 
 /** Estimate read time in minutes from markdown (~200 wpm). Ported from src/utils/blog.js. */
 export const readTime = (content = '') =>
