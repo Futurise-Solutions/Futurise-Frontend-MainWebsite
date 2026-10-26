@@ -47,10 +47,7 @@ console.log('PASS: blog deduplication, expiry, error recovery, retired-slug filt
 
 const budgets = [
   ['public/motion/studio-sculpture.mp4', 750 * 1024],
-  ['public/motion/studio-sculpture-poster.webp', 50 * 1024],
-  ['public/fonts/aeoniktrial-regular.woff2', 15 * 1024],
-  ['public/fonts/Zangezi08_Trial-Regular.woff2', 60 * 1024],
-];
+  ['public/motion/studio-sculpture-poster.webp', 50 * 1024],];
 for (const [path, budget] of budgets) {
   const { size } = await stat(path);
   assert(size <= budget, `${path} exceeds its asset budget`);

@@ -52,35 +52,11 @@ const colors = {
   // Default brand color scheme for Chakra components (e.g. colorScheme="brand")
 };
 
-/**
- * The one intentional deviation from the Vite theme.
- *
- * Old value:
- *   heading: `'Zangezi', 'Aeonik Trial', -apple-system, system-ui, sans-serif`
- *   body:    `'Aeonik Trial', -apple-system, system-ui, sans-serif`
- *
- * next/font hashes the family name at build time, so the literal strings above would
- * match nothing. The CSS variables resolve to the same faces with the same fallback
- * order. Declared in theme/fonts.ts and bound to <html> in app/layout.tsx.
- *
- * ⚠️ Re-measure h1 letter-spacing after Phase 2 (STOP GATE 2). next/font applies a
- * fallback-metrics adjustment that can shift computed tracking; home h1 must still
- * compute to -2.16px at 72px (72 × -0.03em). See MIGRATION-INVENTORY.md §C.4.
- */
-/* PHASE 8 (A8): the PRELOADED single-face families lead each stack, with the full
-   families immediately behind them.
-
-   The preloaded face covers the weight actually rendered above the fold — Zangezi
-   Regular ('500 800') for headings, Aeonik Regular ('400 500') for body — so first
-   paint resolves against a font the browser has already been told to fetch. Anything
-   outside those ranges (Light, SemiLight, Bold, every italic) falls through to the full
-   family on the next line, unchanged.
-
-   Order matters and the tail is untouched: `-apple-system, system-ui, sans-serif` stays
-   exactly where it was, so the U+00B7 regression recorded in fonts.ts cannot recur. */
+/* Cormorant Garamond for headings, Manrope for body and UI. Both variables are set on
+   <html> by theme/fonts.ts. */
 const fonts = {
-  heading: `var(--font-zangezi-display), var(--font-zangezi), var(--font-aeonik), -apple-system, system-ui, sans-serif`,
-  body: `var(--font-aeonik-body), var(--font-aeonik), -apple-system, system-ui, sans-serif`,
+  heading: `var(--font-heading), Georgia, 'Times New Roman', serif`,
+  body: `var(--font-body), -apple-system, system-ui, sans-serif`,
 };
 
 const semanticTokens = {

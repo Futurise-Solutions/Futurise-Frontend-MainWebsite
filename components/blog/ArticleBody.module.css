@@ -47,7 +47,7 @@
 .body h6 {
   color: var(--journal-ink, #f4f2ff);
   scroll-margin-top: 100px;
-  font-family: var(--font-aeonik), sans-serif;
+  font-family: var(--font-heading),Georgia,serif;
 }
 
 /* markdown `#` — formerly .body h1, values identical */

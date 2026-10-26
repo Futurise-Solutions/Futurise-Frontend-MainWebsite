@@ -68,43 +68,28 @@
    <div id="app"> in app/layout.tsx, kept precisely so these rules keep matching.
    Removing that wrapper silently un-applies everything below. Guide trap #1.
    ============================================================ */
-/* ⚠️ THE ONE LINE IN THIS FILE THAT IS NOT A VERBATIM COPY. Read before editing.
+/* Typography: Cormorant Garamond for headings, Manrope for body and UI (theme/fonts.ts).
+   The four legacy variable names are still referenced across the CSS modules, so they
+   are aliased here rather than renamed in every file: the serif display names map to
+   the heading font, the sans names to the body font. */
+html {
+  --font-zangezi-display: var(--font-heading);
+  --font-zangezi: var(--font-heading);
+  --font-aeonik-body: var(--font-body);
+  --font-aeonik: var(--font-body);
+}
 
-   Original (src/index.css):
-     font-family: 'Aeonik Trial', 'Inter', sans-serif;
-
-   Ported verbatim, this BREAKS ALL BODY TEXT, and silently.
-
-   `#app` is an ancestor of everything, so this declaration is inherited by every element
-   whose own font-family is not set — which is most body copy. In the Vite app that was
-   harmless: 'Aeonik Trial' was a real @font-face family, so the text rendered in Aeonik.
-   next/font renames families to a hashed identifier, so the literal string matches
-   NOTHING in the new app and the cascade falls through 'Inter' (never loaded either) to
-   plain sans-serif.
-
-   Measured via CDP CSS.getPlatformFontsForNode, which reports the face actually used:
-     production  <p>  →  "Aeonik TRIAL"  (postScript AeonikTRIAL-Regular, isCustomFont)
-     verbatim port <p> →  "Arial"        (postScript ArialMT,             NOT custom)
-
-   Computed styles matched perfectly in both — fontFamily read back as
-   '"Aeonik Trial", Inter, sans-serif' on production AND on the port — so a
-   getComputedStyle comparison, which is what STOP GATE 2 specifies, passes while the
-   page renders in the wrong typeface. Only asking the renderer which face it chose
-   surfaces it.
-
-   FIX: point the first entry at the same CSS variable Chakra's `fonts.body` uses, so it
-   resolves to the real Aeonik faces. Everything else — the dead 'Inter' fallback, the
-   final sans-serif, the smoothing, the text-rendering — is left exactly as it was.
-   This preserves the rule's effect (body text is Aeonik) while making it work under
-   next/font. Logged as backlog D5. */
 #app {
-  /* PHASE 8 (A8): the PRELOADED Aeonik Regular leads, with the full family behind it.
-     `--font-aeonik-body` covers the 400–500 weight this rule actually renders; anything
-     else falls through to `--font-aeonik` unchanged. 'Inter' and sans-serif stay exactly
-     where they were — see the U+00B7 note in theme/fonts.ts for why that tail matters. */
-  font-family: var(--font-aeonik-body), var(--font-aeonik), sans-serif;
+  font-family: var(--font-body), sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+/* Headings default to the heading font. :where() keeps specificity at zero, so any
+   module rule that styles a heading still wins; this only covers headings with no
+   font rule of their own, which would otherwise inherit the body font from #app. */
+:where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-heading), Georgia, serif;
 }
 
 

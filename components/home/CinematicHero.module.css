@@ -2,7 +2,7 @@
 .film{position:absolute;inset:0;z-index:-1}.film video{height:100%;width:100%;object-fit:cover;object-position:center}.film::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#08080d88,transparent 80%),linear-gradient(0deg,#08080d77,transparent 30%)}
 .inner{width:min(1440px,88%);margin:auto;padding:85px 0 30px}
 .eyebrow{font-size:10px;letter-spacing:.17em;text-transform:uppercase;color:#ccc4dc;margin-bottom:40px;line-height:1.8}
-.title{font:400 clamp(66px,7.4vw,118px)/.99 var(--font-aeonik-body),sans-serif;letter-spacing:-.065em;max-width:920px;margin:0}.title span{display:block}.title span:last-child{color:#b57bff;font:inherit}
+.title{font:400 clamp(66px,7.4vw,118px)/.99 var(--font-heading),Georgia,serif;letter-spacing:-.065em;max-width:920px;margin:0}.title span{display:block}.title span:last-child{color:#b57bff;font:inherit}
 .copy{font-size:17px;line-height:1.8;max-width:540px;color:#d5cfe0;margin:30px 0 0}
 .actions{display:flex;align-items:center;flex-wrap:wrap;gap:28px;margin-top:30px}.primary{background:#f4f2ff;color:#08080d;padding:18px 24px;display:inline-flex;align-items:center;gap:30px;font-size:14px;min-height:52px;transition:background .2s}.primary:hover{background:#b57bff}.secondary{font-size:14px;border-bottom:1px solid #c1adc8;padding:13px 0;min-height:48px;color:#f4f2ff;transition:color .2s}.secondary:hover{color:#c3a0ff}
 

@@ -52,7 +52,9 @@ const nextConfig: NextConfig = {
       /* Blog `featuredImage` values are Cloudinary URLs — confirmed against the live
          /api/blogs endpoint. The preconnect hint in the old index.html referred to an
          unused account (§G.1); this entry is for the URLs the API actually returns. */
-      { protocol: 'https', hostname: 'res.cloudinary.com' },
+      // Only our own Cloudinary account: any account on the host would let anyone route
+      // their files through this site's public /_next/image optimizer.
+      { protocol: 'https', hostname: 'res.cloudinary.com', pathname: '/dbiuh48bc/**' },
     ],
 
     // Next 16 changed three defaults. Restoring what the site actually needs:
