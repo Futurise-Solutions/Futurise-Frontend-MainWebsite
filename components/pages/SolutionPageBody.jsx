@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import {solutions} from '../../utils/Constant/solutions';
+import {solutionGuides} from '../../utils/Constant/solutionGuides';
 import {MARKETS,baseMarket,marketVariants} from '../../utils/Constant/solutionMarkets';
 import {services} from '../../utils/Constant';
 import BookDemoButton from '../common/BookDemoButton';
@@ -28,7 +29,7 @@ export default function SolutionPageBody({slug}){
     <ProcessSteps/>
     <section id="stack" className={styles.articleSection}><p className={styles.eyebrow}>Tech Stack</p><h2>Built with</h2><ul className={styles.techList}>{s.stack.map(t=><li key={t}>{t}</li>)}</ul></section>
     <section id="questions" className={styles.articleSection}><p className={styles.eyebrow}>Frequently Asked</p><h2>Questions</h2><div className={styles.ruledList}>{s.faqs.map(f=><details key={f.q}><summary>{f.q}</summary><p>{f.a}</p></details>)}</div></section>
-    <section id="related" className={styles.articleSection}><p className={styles.eyebrow}>Related</p><h2>Keep exploring</h2><div className={styles.linkList}>{s.related.filter(r=>solutions[r]).map(r=><Link key={r} href={`/solutions/${r}`}>{solutions[r].name} ↗</Link>)}{service&&<Link href={`/service/${s.service}`}>{service.title} ↗</Link>}{country&&<Link href={country[0]}>{country[1]} ↗</Link>}</div></section>
+    <section id="related" className={styles.articleSection}><p className={styles.eyebrow}>Related</p><h2>Keep exploring</h2><div className={styles.linkList}>{s.related.filter(r=>solutions[r]).map(r=><Link key={r} href={`/solutions/${r}`}>{solutions[r].name} ↗</Link>)}{(solutionGuides[slug]||[]).map(g=><Link key={g.href} href={g.href}>{g.label} ↗</Link>)}{service&&<Link href={`/service/${s.service}`}>{service.title} ↗</Link>}{country&&<Link href={country[0]}>{country[1]} ↗</Link>}</div></section>
    </div>
   </div>
   <section className={styles.end}><p className={styles.eyebrow}>Next step</p><h2>See it working before you decide.</h2><p>Our client work is under NDA, so we don&apos;t publish screenshots. We walk you through the working software live on a call instead.</p><div className={styles.actions}><BookDemoButton source={`solution-${slug}-cta`}>Book a free live demo ↗</BookDemoButton></div></section>

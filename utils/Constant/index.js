@@ -588,9 +588,11 @@ export const strengths = [
 export const services = {
   "app-development": {
     title: "App Development",
+    // Keyword-led H1 (SEO, Nov 2026); `title` stays short because it is reused in sentences.
+    h1: "React Native App Development Company",
     metaTitle: "React Native App Development Company: iOS, Android & Expo",
     metaDescription:
-      "Cross-platform iOS & Android apps from one React Native codebase. Fixed-scope quotes instead of open-ended hourly billing. Book a free 45-minute consultation.",
+      "React Native & Expo development company for iOS and Android apps from one codebase. Fixed-scope quotes from senior engineers. Book a free 45-minute call.",
     whatWeDo: "What we do",
     description: "Cross-platform iOS & Android apps built with React Native & Expo.",
     details:
@@ -639,6 +641,8 @@ export const services = {
   },
   "web-development": {
     title: "Web Development",
+    // Keyword-led H1 (SEO, Nov 2026); `title` stays short because it is reused in sentences.
+    h1: "Web Development Company",
     metaTitle: "Web Development Company: React, Next.js & Node.js",
     metaDescription:
       "Custom websites, SaaS platforms and web apps in React, Next.js and Node.js. Fixed-scope quotes, not hourly billing. Book a free 45-minute consultation.",
@@ -690,7 +694,9 @@ export const services = {
   },
   "ui-ux-design": {
     title: "UI/UX Design",
-    metaTitle: "UI/UX Design Agency & Consultants: Product Design",
+    // Keyword-led H1 (SEO, Nov 2026); `title` stays short because it is reused in sentences.
+    h1: "UI/UX Design Company",
+    metaTitle: "UI/UX Design Company: UX Research, UI & Design Systems",
     metaDescription:
       "UX research, Figma UI and design systems that cut churn and lift conversions. Fixed-scope quotes, not hourly billing. Book a free 45-minute consultation.",
     whatWeDo: "What we do",
@@ -736,6 +742,8 @@ export const services = {
   },
   "blockchain-development": {
     title: "Blockchain Development",
+    // Keyword-led H1 (SEO, Nov 2026); `title` stays short because it is reused in sentences.
+    h1: "Blockchain & Web3 Development",
     metaTitle: "Blockchain Development: Smart Contracts, DeFi & Web3",
     metaDescription:
       "Audited smart contracts, DeFi platforms and multi-chain dApps on Ethereum, Solana and Base. Fixed-scope quotes. Book a free 45-minute consultation.",
@@ -782,6 +790,8 @@ export const services = {
   },
   "ai-ml-solutions": {
     title: "AI & ML Solutions",
+    // Keyword-led H1 (SEO, Nov 2026); `title` stays short because it is reused in sentences.
+    h1: "AI Agent & ML Development",
     metaTitle: "AI & ML Development: AI Agents, LLMs & Computer Vision",
     metaDescription:
       "Custom AI agents and LLM & RAG integrations that automate real workflows and cut costs. Fixed-scope quotes. Book a free 45-minute consultation.",
@@ -828,6 +838,8 @@ export const services = {
   },
   "digital-marketing": {
     title: "Digital Marketing",
+    // Keyword-led H1 (SEO, Nov 2026); `title` stays short because it is reused in sentences.
+    h1: "Digital Marketing Agency",
     metaTitle: "Digital Marketing Agency: SEO, Paid Ads & CRO",
     metaDescription:
       "SEO, Google & Meta ads and CRO tied to revenue, not vanity metrics. Fixed-scope quotes and monthly reporting. Book a free 45-minute consultation.",

@@ -22,9 +22,12 @@ import { COUNTRY_ALTERNATES } from '@/utils/Constant/countries'
  * construction rather than by remembering to edit each page when a market is added.
  */
 export const metadata: Metadata = buildMetadata({
-  title: 'AI, SaaS & Web App Development Company',
+  /* SEO (Nov 2026): the homepage ranks 1–8 for generic "software development company /
+     agency / firm" searches (≈500 impressions in 3 months) with 0 clicks, so the title now
+     leads with that phrase. The brand suffix still fits under 60 characters. */
+  title: 'AI & Software Development Company',
   description:
-    'Futurise Solutions builds AI agents, SaaS platforms, web and mobile apps end-to-end. Fixed-scope quotes, not hourly billing. Book a free 45-minute consultation.',
+    'Futurise Solutions is a software development company building AI agents, SaaS platforms, web and mobile apps end to end. Fixed-scope quotes. Free 45-min call.',
   path: '/',
   image: '/home.png',
   alternates: COUNTRY_ALTERNATES,

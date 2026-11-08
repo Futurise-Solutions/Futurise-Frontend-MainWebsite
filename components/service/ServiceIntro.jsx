@@ -7,7 +7,7 @@ export default function ServiceIntro({service,slug}) {
   <section className={`${styles.hero} ${styles.serviceHero}`}>
    <div className={styles.heroContent}>
     <p className={styles.eyebrow}>{service.whatWeDo}</p>
-    <h1>{service.title}</h1>
+    <h1>{service.h1 || service.title}</h1>
     <p className="speakable-answer">{service.description}</p>
     <div className={styles.actions}><Link href="/contact">Get a free quote <span aria-hidden="true">↗</span></Link><Link href="/portfolio">View our work <span aria-hidden="true">↗</span></Link></div>
    </div>

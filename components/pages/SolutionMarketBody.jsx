@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import {solutions} from '../../utils/Constant/solutions';
+import {solutionGuides} from '../../utils/Constant/solutionGuides';
 import {MARKETS,baseMarket,marketVariants} from '../../utils/Constant/solutionMarkets';
 import BookDemoButton from '../common/BookDemoButton';
 import EditorialOpening from '../common/EditorialOpening';
@@ -27,7 +28,7 @@ export default function SolutionMarketBody({slug,market}){
     <ProcessSteps/>
     <section id="questions" className={styles.articleSection}><p className={styles.eyebrow}>Frequently Asked</p><h2>Questions</h2><div className={styles.ruledList}>{v.faqs.map(f=><details key={f.q}><summary>{f.q}</summary><p>{f.a}</p></details>)}</div></section>
     <MarketSwitcher items={switcher} current={market}/>
-    <section id="related" className={styles.articleSection}><p className={styles.eyebrow}>Related</p><h2>Keep exploring</h2><div className={styles.linkList}><Link href={m.countryPage}>Software development in {m.label} ↗</Link><Link href={`/solutions/${slug}`}>{base.name} ↗</Link>{related.map(r=><Link key={r} href={`/solutions/${r}`}>{solutions[r].name} ↗</Link>)}</div></section>
+    <section id="related" className={styles.articleSection}><p className={styles.eyebrow}>Related</p><h2>Keep exploring</h2><div className={styles.linkList}><Link href={m.countryPage}>Software development in {m.label} ↗</Link><Link href={`/solutions/${slug}`}>{base.name} ↗</Link>{related.map(r=><Link key={r} href={`/solutions/${r}`}>{solutions[r].name} ↗</Link>)}{(solutionGuides[slug]||[]).map(g=><Link key={g.href} href={g.href}>{g.label} ↗</Link>)}</div></section>
    </div>
   </div>
   <section className={styles.end}><p className={styles.eyebrow}>Next step</p><h2>See it working before you decide.</h2><p>Our client work is under NDA, so we don&apos;t publish screenshots. We walk you through the working software live on a call instead.</p><div className={styles.actions}><BookDemoButton source={`solution-${slug}-${market}-cta`}>Book a free live demo ↗</BookDemoButton></div></section>
