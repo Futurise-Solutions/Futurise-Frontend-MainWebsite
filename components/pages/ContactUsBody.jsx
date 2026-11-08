@@ -16,6 +16,7 @@ export default function ContactUsBody(){
     <p>Tell us what you have in mind. We’ll discuss your goals, the scope and how we can help.</p>
     <dl className={styles.contactInfo}>
      <div><dt>Email us</dt><dd><a href={`mailto:${CONTACT.email}`} onClick={()=>trackEvent(EVENTS.EMAIL_CLICK,{location:'contact-page-cards'})}>{CONTACT.email}</a></dd></div>
+     <div><dt>WhatsApp</dt><dd><a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer" onClick={()=>trackEvent(EVENTS.WHATSAPP_CLICK,{location:'contact-page-cards'})}>Message us on WhatsApp ↗</a></dd></div>
      <div><dt>Location</dt><dd>Wellington, NZ · Serving worldwide</dd></div>
      <div><dt>Working hours</dt><dd>Mon to Fri, 9:00 AM to 6:00 PM (NZST)</dd></div>
      <div><dt>Response time</dt><dd>Within one business day</dd></div>

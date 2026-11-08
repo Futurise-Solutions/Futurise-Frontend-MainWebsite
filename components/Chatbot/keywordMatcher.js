@@ -89,10 +89,9 @@ const fallbackKB = [
   {
     weight: 2,
     keywords: ["contact", "email", "reach", "get in touch", "phone", "phone number", "mobile number", "call you", "talk to"],
-    /* ⚠️ NO PHONE NUMBER. /about states that no telephone number is published and the
-       Organization schema omits `telephone`. Email, the contact form and the booking
-       flow are the real channels. */
-    answer: `Email us at business@futurisesolutions.com, use the contact form or book a free call. We reply within one business day. ${SITE}/contact`,
+    /* ⚠️ NO NUMBER IN TEXT. No phone number is ever written in text or schema; WhatsApp is
+       offered only as a click-to-chat link (never put the wa.me URL in this plain-text answer). */
+    answer: `Email us at business@futurisesolutions.com, message us on WhatsApp (link on our contact page), use the contact form or book a free call. We reply within one business day. ${SITE}/contact`,
   },
   {
     weight: 2,

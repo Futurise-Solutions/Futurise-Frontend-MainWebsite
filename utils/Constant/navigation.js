@@ -11,15 +11,12 @@ import UIUXNavbarIcon from "../../assests/HomeAssest/UIUXNavbarIcon.svg";
 // **************** CONTACT CHANNELS ****************
 // One definition for every way to reach the company.
 //
-// There is deliberately no phone number and no WhatsApp link here. Enquiries run through
-// three channels only: the strategy-call booking flow, the contact form, and email. A
-// published number was working against that — the only one we had was +91, sitting beside
-// a Wellington address, which reads as an offshore contact rather than a local one and
-// undercuts the New Zealand entity the rest of the site establishes. Removing it entirely
-// is a positioning decision, not an oversight: do not reintroduce a `phoneHref`,
-// `whatsappHref`, or `tel:`/`wa.me` link without revisiting that decision.
+// Enquiries run through the booking flow, the contact form, email, and a WhatsApp
+// click-to-chat link on the business number (owner decision, Nov 2026). The number is
+// never displayed as text or placed in schema, and there is no `tel:` link.
 export const CONTACT = {
   email: "business@futurisesolutions.com",
+  whatsapp: "https://wa.me/917665013356?text=" + encodeURIComponent("Hi Futurise Solutions, I found you on your website and I'd like to discuss a project."),
   address: {
     line1: "Huddart Parker Building",
     line2: "Wellington Central",

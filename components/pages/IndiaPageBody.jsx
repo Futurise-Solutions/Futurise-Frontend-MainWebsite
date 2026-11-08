@@ -91,9 +91,8 @@ export default function IndiaPageBody() {
         </Reveal>
         <Reveal delay={0.1}>
           <Text className="speakable-answer" color="text.muted" fontSize={{ base: "md", md: "lg" }} lineHeight={1.7} maxW="720px" mb={10}>
-            The engineers who build your software are in India, working from Udaipur,
-            Rajasthan. We have delivered for Indian clients, two of them published with
-            screenshots. The contracting entity is a New Zealand company. All three of those
+            The engineers who build your software are in India. We have delivered for Indian clients, two of them
+            published with screenshots. The contracting entity is a New Zealand company. All three of those
             facts matter, so all three are stated here rather than in a footer.
           </Text>
         </Reveal>

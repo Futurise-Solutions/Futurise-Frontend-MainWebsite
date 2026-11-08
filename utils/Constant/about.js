@@ -48,7 +48,7 @@ export const aboutEntity = [
   {
     title: "One published way to reach a human",
     detail:
-      "Enquiries arrive by email at business@futurisesolutions.com, through the contact form, or through the booking flow. No telephone number is published anywhere on this site, and none appears in its structured data either. Listing a channel that nobody answers is worse than listing none, and search engines read that field literally.",
+      "Enquiries arrive by email at business@futurisesolutions.com, through the contact form, through the booking flow, or by WhatsApp message. We do not run a published phone line, and no telephone number appears in this site's structured data. Listing a channel that nobody answers is worse than listing none, and search engines read that field literally.",
   },
 ];
 

@@ -91,7 +91,7 @@ export const euPositioning = [
   {
     heading: "What we do not claim",
     points: [
-      "We hold no European entity, no European office and no European staff. Futurise Solutions is registered in Wellington, New Zealand, and our delivery team is in Udaipur, India. That is a corporate fact you can check, and it is stated before you ask.",
+      "We hold no European entity, no European office and no European staff. Futurise Solutions is registered in Wellington, New Zealand, and our delivery team is in India. That is a corporate fact you can check, and it is stated before you ask.",
       "The engagements named on our portfolio are in the UAE, the United States and India. Not every engagement is public. Client confidentiality decides what we may attribute, and we do not publish work we have not been cleared to name. So read the portfolio as what we can show you, not as the whole record.",
       "We are not the right supplier for a contract that requires an EU-established legal entity, or for public-sector procurement with an EEA-establishment condition. Where that is the requirement we will say so on the first call rather than after it.",
     ],
@@ -122,7 +122,7 @@ export const euWorkingModel = [
   {
     step: "A working overlap that is real, not nominal",
     detail:
-      "Indian Standard Time runs 4.5 hours ahead of Central European Time in winter and 3.5 ahead during CEST. A 09:00 start in Udaipur is 04:30 in Berlin, and 17:30 in Udaipur is 13:00 in Berlin. So the European morning and the Indian afternoon overlap by roughly half a working day, every day, without anyone keeping unusual hours. For the UK the overlap is an hour wider.",
+      "Indian Standard Time runs 4.5 hours ahead of Central European Time in winter and 3.5 ahead during CEST. A 09:00 start in India is 04:30 in Berlin, and 17:30 in India is 13:00 in Berlin. So the European morning and the Indian afternoon overlap by roughly half a working day, every day, without anyone keeping unusual hours. For the UK the overlap is an hour wider.",
   },
   {
     step: "Scoping calls in your working day",
@@ -204,7 +204,7 @@ export const euFaqs = [
   {
     question: "How do timezones work between Europe and your delivery team?",
     answer:
-      "Indian Standard Time is 4.5 hours ahead of CET and 3.5 ahead of CEST, which puts roughly half of each working day in overlap with continental Europe and slightly more with the UK. A 17:30 finish in Udaipur is 13:00 in Berlin, so the European morning is shared working time rather than a handover window. Scoping calls are booked in your hours, and every enquiry is answered inside one business day.",
+      "Indian Standard Time is 4.5 hours ahead of CET and 3.5 ahead of CEST, which puts roughly half of each working day in overlap with continental Europe and slightly more with the UK. A 17:30 finish in India is 13:00 in Berlin, so the European morning is shared working time rather than a handover window. Scoping calls are booked in your hours, and every enquiry is answered inside one business day.",
   },
   {
     question: "What does a project cost, and in which currency?",

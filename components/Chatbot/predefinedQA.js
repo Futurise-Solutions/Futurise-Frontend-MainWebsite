@@ -28,10 +28,10 @@ export const predefinedAnswers = {
        product rather than a client name. Name only clients /portfolio names. */
     "We've built property SaaS, AI review platforms, luxury e-commerce and trading terminals, including HOMIES and Marty-QR. Check our portfolio page!",
 
-  // ⚠️ NO PHONE NUMBER — see the note in keywordMatcher.js. Owner decision: none is
-  // published anywhere, matching /about and the Organization schema.
+  // ⚠️ NO NUMBER IN TEXT — see the note in keywordMatcher.js. No number is ever written in
+  // text; WhatsApp is offered only as a click-to-chat link.
   "How can I contact you?":
-    "Email us at business@futurisesolutions.com, book a free call, or use our contact page. We reply within one business day: https://www.futurisesolutions.com/contact",
+    "Email us at business@futurisesolutions.com, message us on WhatsApp (link on our contact page), use the contact form or book a free call. We reply within one business day: https://www.futurisesolutions.com/contact",
 
   "How long does a project take?":
     "It depends on scope. A focused MVP typically takes 6 to 12 weeks, and larger platforms 3 to 6 months. We'll give you a clear timeline after the discovery call.",
