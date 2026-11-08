@@ -1,7 +1,21 @@
 # Backlink Plan — Futurise Solutions
 
-**Date:** 2026-09-20
+**Date:** 2026-09-20 · **Facts re-checked against the live site:** 2026-11-09
 **Audience:** whoever executes this by hand. Everything is paste-ready.
+
+> ### Nov 2026 update: what changed and where links should point
+>
+> - **Portfolio is now 12 projects, 12 clients named** (was 9 / 8): Startus Cloud, Raman
+>   Scientific and Jain Ceramic Mart were added, and the perpetuals terminal's client
+>   (GDT Exchange) now appears in the site's logo strip. §1.4 and §1.7 are updated.
+>   **Seven** case studies are published at `/case-studies` (was six).
+> - **Where authority is needed most (from Search Console, Nov 2026):** the Shopify pages
+>   rank 50–90 for "shopify agency/developers dubai" and NZ, and on-page work alone will
+>   not move them. Where a profile allows a portfolio item or service link, point the
+>   Shopify entry at `/solutions/shopify-development-cro` (or `/ae` and `/nz` variants
+>   for those markets), not only at `/`.
+> - **Do not state a location for Startus Cloud, Raman Scientific or Jain Ceramic Mart.**
+>   The site publishes none.
 
 Every fact in Part 1 is pulled from this repository — `/about`, `/portfolio`,
 `utils/Constant/index.js` (CONTACT, SOCIAL_PROFILES, AREAS_SERVED) and the Organization
@@ -26,7 +40,7 @@ than guessed.
 >    it up on the NZ Companies Register before filling in anything legal.
 >
 > *(Resolved, for the record: `predefinedQA.js` previously answered "Show me your portfolio"
-> with "We've delivered 25+ projects" where `/portfolio` publishes nine — see §6. Do not
+> with "We've delivered 25+ projects" where `/portfolio` publishes twelve — see §6. Do not
 > repeat any project count in a listing.)*
 
 ---
@@ -107,8 +121,8 @@ than guessed.
 > tied to revenue.
 >
 > How we work is deliberately checkable. Every engagement starts with a free discovery call
-> and a fixed-scope estimate. Delivery runs in two-week sprints. We publish nine client
-> projects with screenshots and six long-form engineering write-ups, and we name no client
+> and a fixed-scope estimate. Delivery runs in two-week sprints. We publish twelve client
+> projects with screenshots and seven long-form case studies, and we name no client
 > we have not delivered for.
 
 **300 words**
@@ -135,9 +149,9 @@ than guessed.
 > software, with NDAs signed on request and post-launch support available. MVPs typically run
 > 6–12 weeks; larger platforms 3–6 months.
 >
-> Our published record is deliberately checkable. Nine client engagements appear on the
-> portfolio with screenshots and the problem each solved, and six carry long-form engineering
-> write-ups covering architecture, tradeoffs and what we would do differently. We publish no
+> Our published record is deliberately checkable. Twelve client engagements appear on the
+> portfolio with screenshots and the problem each solved, and seven long-form case studies
+> are published alongside them. We publish no
 > client counts, no award badges and no ratings, and we name no client we have not delivered
 > for. Clients span Dubai, the United States and India.
 
@@ -183,11 +197,16 @@ a logo for, any client absent from this table.
 | David Tishbi | Luxury jewellery e-commerce | USA |
 | Estate | Real-estate listings platform | India & USA |
 | Platinum Peak | Hospitality / hotel booking | India & USA |
+| Startus Cloud | Shopify e-commerce & CRO (PC components) | *not published, leave blank* |
+| Raman Scientific | Laboratory supplies website (Next.js) | *not published, leave blank* |
+| Jain Ceramic Mart | Ceramics showroom website | *not published, leave blank* |
+| GDT Exchange | Crypto perpetuals trading terminal | *not published, leave blank* |
 
-**Nine projects are published; eight are named.** The ninth — a crypto perpetuals trading
-terminal — is published **under its product, not its client**. Do not attach a client name
-to it in any listing. *(Note: `llms.txt` refers to it as "GDT Exchange"; `/portfolio` does
-not. Treat the portfolio as authoritative and leave it unnamed.)*
+**Twelve projects are published.** Every client above appears by name in the site's logo
+strip. On `/portfolio` the perpetuals terminal is titled by product ("Crypto Exchange"), so
+in a portfolio-item field, use the product title and keep the client name for logo or
+client-list fields. Startus Cloud is the only published **Shopify** project, so it is the
+right portfolio item for any Shopify category.
 
 **Testimonials:** exactly one is on the record, from the Founder of Infinity Bay Trading
 (Dubai). Do not imply more.
