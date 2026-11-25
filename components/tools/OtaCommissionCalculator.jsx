@@ -311,7 +311,22 @@ export function createFormat(currencyCode) {
   };
 }
 
+/**
+ * The tidied text for a valid entry when its field loses focus (6000 → "6,000"), or null
+ * when tidying would change the figure used: `input` rounds to two decimals, so 12.345%
+ * would silently become 12.35%. The visitor's own number always wins over neat display.
+ */
+export function tidyEntry(value, field, format) {
+  const tidy = format.input(value, field.kind);
+  return parseField(tidy, field).value === value ? tidy : null;
+}
+
 /* ── Everything the UI shows, derived from the raw field text ──────────────── */
+
+/** "1 room night", "438 room nights": the noun agrees with the figure as displayed. */
+function counted(text, noun) {
+  return `${text} ${noun}${text === '1' ? '' : 's'}`;
+}
 
 function breakEvenParts(inputs, r, f) {
   if (!r) {
@@ -338,7 +353,7 @@ function breakEvenParts(inputs, r, f) {
         : `${f.share(r.breakEvenShare)} of your OTA room nights. You entered ${f.percent(inputs.moveShare)}.`;
   }
   return {
-    value: `${f.count(nights)} room ${nights === 1 ? 'night' : 'nights'}`,
+    value: counted(f.count(nights), 'room night'),
     formula: `${f.money(inputs.yearlyCost)} ÷ ${f.perNight(r.savingPerNight)} per night${roundedUp ? ', rounded up' : ''}`,
     note,
   };
@@ -348,17 +363,23 @@ function verdictText(r, f, missing) {
   if (!r) return `Results appear when every field holds a valid number. Missing or invalid: ${missing}.`;
   if (r.otaNights === 0) return 'With no room nights booked through OTAs, there is no commission to save.';
   if (r.savingPerNight <= 0) {
-    return `A direct booking costs at least as much per room night as the ${f.perNight(r.commissionPerNight)} commission it replaces, so moving bookings saves nothing at these inputs.`;
+    // A direct booking that costs MORE than the commission loses money on every night
+    // moved; "saves nothing" would understate that.
+    const extra = -r.savingPerNight;
+    return Math.round(extra * 100) > 0
+      ? `A direct booking costs ${f.perNight(extra)} a room night more than the ${f.perNight(r.commissionPerNight)} commission it replaces, so every room night moved loses money at these inputs.`
+      : `A direct booking costs as much per room night as the ${f.perNight(r.commissionPerNight)} commission it replaces, so moving bookings saves nothing at these inputs.`;
   }
   if (r.nightsMoved === 0) {
     return 'With no room nights moved to direct, there is no saving to set against the yearly cost.';
   }
+  const moving = counted(f.nights(r.nightsMoved), 'room night');
   const net = Math.round(r.netSaving);
   if (net > 0) {
-    return `Moving ${f.nights(r.nightsMoved)} room nights a year to direct would cover the yearly cost of the direct channel and leave ${f.money(r.netSaving)}.`;
+    return `Moving ${moving} a year to direct would cover the yearly cost of the direct channel and leave ${f.money(r.netSaving)}.`;
   }
   if (net === 0) {
-    return `Moving ${f.nights(r.nightsMoved)} room nights a year to direct would cover the yearly cost of the direct channel, with nothing left over.`;
+    return `Moving ${moving} a year to direct would cover the yearly cost of the direct channel, with nothing left over.`;
   }
   return `At these inputs the direct channel costs ${f.money(-r.netSaving)} a year more than it saves.`;
 }
@@ -377,7 +398,7 @@ function workingRows(inputs, r, f, breakEven) {
       key: 'nightsSold',
       label: 'Room nights sold per year',
       formula: ok
-        ? `${f.count(inputs.rooms)} rooms × 365 × ${f.percent(inputs.occupancy)} occupancy`
+        ? `${counted(f.count(inputs.rooms), 'room')} × 365 × ${f.percent(inputs.occupancy)} occupancy`
         : 'rooms × 365 × occupancy',
       value: ok ? f.nights(r.nightsSold) : DASH,
     },
@@ -493,7 +514,7 @@ export function deriveView(values, currencyCode) {
     exampleNote: exampleNoteText(exampleKeys.length),
     headline,
     headlineFormula: r
-      ? `${f.nights(r.nightsMoved)} nights × (${f.perNight(inputs.adr)} × ${f.percent(inputs.commission)} − ${f.perNight(inputs.directCost)}) − ${f.money(inputs.yearlyCost)}`
+      ? `${counted(f.nights(r.nightsMoved), 'night')} × (${f.perNight(inputs.adr)} × ${f.percent(inputs.commission)} − ${f.perNight(inputs.directCost)}) − ${f.money(inputs.yearlyCost)}`
       : 'room nights moved × (ADR × commission − direct cost per room night) − yearly cost',
     verdict: verdictText(r, f, missing),
     keyStats: [
@@ -502,7 +523,7 @@ export function deriveView(values, currencyCode) {
         label: 'Commission paid to OTAs per year',
         value: r ? f.money(r.commissionPaid) : DASH,
         formula: r
-          ? `${f.nights(r.otaNights)} OTA room nights × ${f.perNight(inputs.adr)} × ${f.percent(inputs.commission)}`
+          ? `${counted(f.nights(r.otaNights), 'OTA room night')} × ${f.perNight(inputs.adr)} × ${f.percent(inputs.commission)}`
           : 'OTA room nights × ADR × commission',
         note: '',
       },
@@ -528,7 +549,9 @@ function NumberField({ id, field, value, error, isExample, currency, onChange, o
       <label htmlFor={id} className={styles.label}>
         <span>
           {field.label}
+          {/* The visible symbol and % are aria-hidden affixes, so the unit is spoken here. */}
           {currency ? <span className={styles.srOnly}> ({currency.code})</span> : null}
+          {field.kind === 'percent' ? <span className={styles.srOnly}> (%)</span> : null}
         </span>
         <span className={styles.tag} data-hidden={isExample ? undefined : 'true'}>
           Example
@@ -645,7 +668,8 @@ export default function OtaCommissionCalculator() {
     setTouched((current) => (current[field.key] ? current : { ...current, [field.key]: true }));
     const entry = parsed[field.key];
     if (entry.error) return;
-    const tidy = format.input(entry.value, field.kind);
+    const tidy = tidyEntry(entry.value, field, format);
+    if (tidy === null) return;
     setValues((current) => (current[field.key] === tidy ? current : { ...current, [field.key]: tidy }));
   };
 

@@ -290,9 +290,15 @@ export default function Page() {
               together, and how we build hotel booking websites.
             </p>
             <div className={commercial.linkList}>
-              <Link href={OTA_GUIDE}>How to reduce OTA commission with a direct booking website ↗</Link>
-              <Link href={PMS_GUIDE}>How a PMS, booking engine and channel manager connect ↗</Link>
-              <Link href={HOTEL_SOLUTION}>Hotel booking website development ↗</Link>
+              <Link href={OTA_GUIDE}>
+                How to reduce OTA commission with a direct booking website <span aria-hidden="true">↗</span>
+              </Link>
+              <Link href={PMS_GUIDE}>
+                How a PMS, booking engine and channel manager connect <span aria-hidden="true">↗</span>
+              </Link>
+              <Link href={HOTEL_SOLUTION}>
+                Hotel booking website development <span aria-hidden="true">↗</span>
+              </Link>
             </div>
           </div>
         </section>

@@ -7,7 +7,7 @@ import { solutions } from '@/utils/Constant/solutions'
 import { variantList } from '@/utils/Constant/solutionMarkets'
 
 /**
- * Dynamic sitemap: the 27 static routes plus every published blog slug.
+ * Dynamic sitemap: the static routes below plus every published blog slug.
  *
  * The old build wrote this from prerender.js and could silently emit a truncated file.
  * Generating it from the same sources the routes use means it cannot drift: the service
@@ -27,6 +27,7 @@ const STATIC_ROUTES: Array<{ path: string; priority: number; changeFrequency: Me
   { path: '/pricing', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/case-studies', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/solutions', priority: 0.8, changeFrequency: 'monthly' },
+  { path: '/tools/ota-commission-calculator', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/blog', priority: 0.9, changeFrequency: 'daily' },
   // Market pages.
   { path: '/nz', priority: 0.9, changeFrequency: 'monthly' },

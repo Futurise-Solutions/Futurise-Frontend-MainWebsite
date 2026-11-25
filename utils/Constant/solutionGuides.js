@@ -39,6 +39,7 @@ export const solutionGuides = {
     { href: '/blog/ai-agent-development-cost-2026-a-global-price-comparison-for-custom-ai-solutions', label: 'AI agent development cost in 2026' },
   ],
   'hotel-booking-website-development': [
+    { href: '/tools/ota-commission-calculator', label: 'OTA commission calculator for hotels' },
     { href: '/blog/hotel-direct-booking-website-reduce-ota-commission', label: 'Hotel direct booking website: reduce OTA commission' },
     { href: '/blog/hotel-pms-booking-engine-channel-manager-explained', label: 'Hotel PMS, booking engine and channel manager explained' },
   ],
