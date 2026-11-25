@@ -397,6 +397,7 @@ const Navbar = () => {
               Book appointment
             </Button>
           </Box>
+          <button type="button" className={mobile.pill} onClick={() => openBooking("navbar-mobile-pill")}>Book a call</button>
           <button ref={menuTrigger} type="button" className={mobile.trigger} aria-label="Open menu" aria-expanded={isOpen} aria-controls={isOpen ? 'mobile-navigation' : undefined} onClick={onOpen}>
             <span>Menu</span><span className={mobile.bars} aria-hidden="true"><i /><i /></span>
           </button>

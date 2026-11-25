@@ -197,7 +197,7 @@ AGENTS.md rule 1.
 | N1 | `src/assests/` — misspelled ("assests", 3 `s`). Path appears in ~40 imports and all 11 `@font-face` `src` URLs. |
 | N2 | `src/Components/ContactCusCpmponents/` — misspelled ("Cpmponents"). |
 | N3 | `src/Components/ContactCusCpmponents/ServicesWorldwide .jsx` — **trailing space before `.jsx`**. Will need renaming on port regardless. |
-| N4 | `public/appdevlopment.png`, `public/digitalmarkiting.png` — both misspelled. Referenced by `serviceImages` in `ServicePage.jsx` and by `prerender.js`. Renaming changes OG image URLs — SEO-visible, do not do casually. |
+| N4 | `public/appdevlopment.png`, `public/digitalmarkiting.png` — both misspelled. Referenced by `serviceImages` in `ServicePage.jsx` and by `prerender.js`. Renaming changes OG image URLs — SEO-visible, do not do casually. (Update 25 Nov 2026: link previews now use `public/og/*-v2.png`, so these files are no longer the OG images.) |
 | N5 | `src/assests/Project Images/infiitybay3.webp` — missing an `n`. The export name is correct. |
 | N6 | `src/utils/Constant/index.js` — `clentName` (missing `i`) on all 9 `Projects` entries. |
 | N7 | `AboutUsHero.jsx` exports `PageHero`, not `AboutUsHero`, and is shared with `/portfolio`. Filename misleads. |

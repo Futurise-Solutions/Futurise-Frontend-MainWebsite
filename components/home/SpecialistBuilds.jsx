@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { solutionList } from '../../utils/Constant/solutions';
+import { solutions, solutionList, numberToWords } from '../../utils/Constant/solutions';
 import styles from './SpecialistBuilds.module.css';
 import proof from './HomeProof.module.css';
 
@@ -9,7 +9,7 @@ export default function SpecialistBuilds() {
       <div>
         <p className={proof.eyebrow}>SPECIALIST BUILDS</p>
         <h2 id="builds-title">Systems we’ve already shipped.</h2>
-        <p className={styles.intro}>Nine kinds of software we’ve built for clients under NDA. Each is shown live on a call.</p>
+        <p className={styles.intro}>{numberToWords(Object.keys(solutions).length)} kinds of software we’ve built for clients, most of them under NDA. Each is shown live on a call.</p>
       </div>
       <Link className={styles.all} href="/solutions">All solutions <span aria-hidden="true">↗</span></Link>
     </div>

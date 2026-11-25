@@ -17,7 +17,7 @@ export const metadata: Metadata = buildMetadata({
   description: pricingMeta.description,
   path: '/pricing',
   keywords: pricingMeta.keywords,
-  image: '/home.png',
+  image: '/og/home-v2.png',
 })
 
 /** JSON-LD ported verbatim — an ARRAY of two blocks, as in the source. */

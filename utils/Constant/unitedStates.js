@@ -47,20 +47,25 @@ export const usMeta = {
 // The cost of the fork is that new US work has to be added HERE by hand as well as to
 // `clientProof`. That cost is accepted deliberately.
 //
-// THE LIMIT THIS SECTION MUST STATE. Six of the seven portfolio projects were delivered for
-// businesses operating in the US market, which is a far stronger record than /ae's single
-// engagement. It is also a record with a specific hole in it: this page argues HIPAA and
-// PCI DSS at length in SECTION 2, and nothing published evidences an engagement in either.
-// Card 2 says so on the page where blurring it would help us most. Do not soften it, and do
-// not let breadth of delivery imply regulated-domain experience the record does not show.
+// THE LIMIT THIS SECTION MUST STATE. Six of the twelve portfolio projects (counted 25 Nov
+// 2026: HOMIES, Marty-QR, David Tishbi, Estate, GDT Exchange, Platinum Peak) were delivered
+// for businesses operating in the US market, which is a far broader record than /ae's single
+// named engagement. Platinum Peak's published scope is design ("Designed a direct hotel
+// booking experience"), so call these six projects, never six builds. It is also a record
+// with a specific hole in it: this page argues HIPAA and PCI DSS at length in SECTION 2, and
+// nothing published evidences an engagement in either. Card 2 says so on the page where
+// blurring it would help us most. Do not soften it, and do not let breadth of delivery
+// imply regulated-domain experience the record does not show.
 //
-// Nothing here may claim a testimonial. The site's only testimonial belongs to a Dubai
-// client and is the homepage's; `buildCountrySchema` emits no Review node for this reason.
+// Testimonials live on the homepage and /contact: eight in all, one signed with name and
+// company (Infinity Bay, Dubai) and seven with name and country, one of them from the USA.
+// Do not quote or restate them here (the fork rule above), and add no Review or
+// AggregateRating node; `buildCountrySchema` emits none.
 export const usEvidence = [
   {
-    title: "Six builds for businesses selling into the US",
+    title: "Six projects for businesses selling into the US",
     detail:
-      "Six of the seven projects on our portfolio were delivered for companies operating in the US market. They run from a property-management platform reporting income, expenses and occupancy across large listing portfolios, to an AI review-capture product aimed at chains with many locations, a luxury jewellery storefront covering fine pieces, watches and bullion, a real-estate search platform structured so individual listings can be found through organic search, a perpetuals trading terminal dense enough for full-time traders, and a hotel booking flow built to take reservations directly rather than surrender them to an intermediary.",
+      "Six of the projects on our portfolio were delivered for companies operating in the US market. They run from a property-management platform reporting income, expenses and occupancy across large listing portfolios, to an AI review-capture product aimed at chains with many locations, a luxury jewellery storefront covering fine pieces, watches and bullion, a real-estate search platform structured so individual listings can be found through organic search, a perpetuals trading terminal dense enough for full-time traders, and a hotel booking flow designed to take reservations directly rather than surrender them to an intermediary.",
   },
   {
     title: "Where the record stops",

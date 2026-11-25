@@ -12,3 +12,11 @@
 
 .details h3 br,.note br{display:none}
 @media(max-width:650px){.invitation h2 br{display:none}.invitation .eyebrow{font-size:8px;margin-bottom:8px}.session svg{width:72px}.details .eyebrow{margin-bottom:8px}.benefits li{padding:7px 0}.listTitle{margin-top:12px}.book{margin-top:12px}}
+
+button.book{width:100%;border:0;cursor:pointer;font-family:inherit;text-align:left}button.book:hover>span{transform:translateY(3px)}
+.embedPanel{padding:16px 20px;display:flex;flex-direction:column;min-width:0}
+.embedBar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}.embedBar .eyebrow{margin:0}.embedBar a{font-size:12px;color:#514b60;text-decoration:underline;text-underline-offset:3px;min-height:44px;display:inline-flex;align-items:center;gap:4px}.embedBar a:hover{color:#7055bf}
+.frameWrap{position:relative;height:min(75vh,720px);min-height:420px;background:#fff;border:1px solid #08080d20}
+.frame{position:relative;width:100%;height:100%;border:0;display:block}
+.loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:#62596f;margin:0}
+@media(max-width:650px){.invitationEmbed{display:none}.embedPanel{padding:12px}}

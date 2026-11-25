@@ -8,18 +8,19 @@ const startIntro = `(() => {
   if (window.location.pathname !== '/') return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   try {
+    const q = new URLSearchParams(window.location.search);
+    for (const k of q.keys()) if (/^utm_/i.test(k) || k === 'gclid' || k === 'msclkid') return;
+    const host = new URL(document.referrer).hostname + '/';
+    if (['google.', 'bing.', 'duckduckgo.', 'yahoo.', 'ecosia.', 'baidu.', 'yandex.', 'search.brave.'].some(e => host.includes(e))) return;
+  } catch {}
+  try {
     if (sessionStorage.getItem('futurise-intro')) return;
     sessionStorage.setItem('futurise-intro', '1');
   } catch {}
   const dialog = document.getElementById('home-intro');
   if (!dialog || typeof dialog.showModal !== 'function') return;
-  const preventCancel = event => event.preventDefault();
-  dialog.addEventListener('cancel', preventCancel);
   dialog.showModal();
-  window.setTimeout(() => {
-    dialog.close();
-    dialog.removeEventListener('cancel', preventCancel);
-  }, 2000);
+  window.setTimeout(() => { if (dialog.open) dialog.close(); }, 2000);
 })();`;
 
 export default function HomeIntro() {

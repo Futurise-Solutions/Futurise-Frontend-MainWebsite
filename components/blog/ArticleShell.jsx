@@ -49,7 +49,7 @@ export default function ArticleShell({ blog, headings, parsedTags, isLatest, rel
           <ArticleSidebar headings={headings} title={blog.title} slug={blog.slug} />
         </div>
       </div>
-      <div className={styles.ctaBand}><BlogCTA category={blog.category} /></div>
+      <div className={styles.ctaBand}><BlogCTA category={blog.category} slug={blog.slug} /></div>
       {related.length > 0 && (
         <section className={`${styles.container} ${styles.related}`} aria-labelledby="related-heading">
           <div className={styles.sectionHeading}><h2 id="related-heading">Keep exploring.</h2><Link href="/blog" className={styles.textLink}>All articles <FiArrowUpRight /></Link></div>

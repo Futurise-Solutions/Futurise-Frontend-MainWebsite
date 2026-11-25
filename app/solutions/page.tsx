@@ -7,7 +7,7 @@ import { solutionList } from '@/utils/Constant/solutions'
 export const metadata: Metadata = buildMetadata({
   title: "Solutions: Specialist Software We've Built",
   description:
-    'Nine niches we have built in: Shopify CRO, hospital systems, WhatsApp CRM, AI SaaS, Chrome extensions, Telegram bots, Web3, AI recruitment and server tools.',
+    'Specialist software we design and build: Shopify CRO, hotel booking websites, property management, AI SaaS, WhatsApp CRM, hospital systems, Web3 and more.',
   path: '/solutions',
   keywords:
     'Futurise Solutions solutions, Shopify CRO, hospital management system development, WhatsApp CRM, AI SaaS development, Chrome extension development, Telegram bot development, Web3 dApp development, AI recruitment software, server management platform',

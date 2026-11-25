@@ -12,6 +12,7 @@ import {
 } from "@/utils/Constant";
 import { caseStudies } from "@/utils/Constant/caseStudies";
 import { useBooking } from "@/context/BookingContext";
+import { BLOG_CTA_OVERRIDES } from "@/utils/Constant/blogCtaOverrides";
 
 /**
  * Conversion block for the end of a blog article.
@@ -25,7 +26,7 @@ import { useBooking } from "@/context/BookingContext";
  * than generic, and the commitments are repeated here because this is often the
  * first page of the site a visitor sees — they never passed the home page.
  */
-const BlogCTA = ({ category }) => {
+const BlogCTA = ({ category, slug: postSlug }) => {
   const { onOpen: openBooking } = useBooking();
   const slug = serviceForBlogCategory(category);
   const service = services[slug];
@@ -36,6 +37,9 @@ const BlogCTA = ({ category }) => {
      /service/<slug> for that service's head term. */
   const caseSlug = caseStudyForBlogCategory(category);
   const study = caseSlug ? caseStudies[caseSlug] : null;
+
+  /* Topic-matched copy for specific posts; every other post keeps the category band. */
+  const o = postSlug ? BLOG_CTA_OVERRIDES[postSlug] : null;
 
   if (!service) return null;
 
@@ -77,37 +81,53 @@ const BlogCTA = ({ category }) => {
               color="accent.solid"
               mb={3}
             >
-              Working on this?
+              {o ? o.eyebrow : "Working on this?"}
             </Text>
 
             <Heading as="h2" fontSize={{ base: "26px", md: "34px" }} lineHeight={1.15}>
-              Talk to the team that{" "}
-              <Box as="span" className="gradient-text">builds it</Box>
+              {o ? o.heading : (<>Talk to the team that{" "}<Box as="span" className="gradient-text">builds it</Box></>)}
             </Heading>
 
             <Text mt={4} color="text.muted" fontSize={{ base: "md", md: "lg" }} lineHeight={1.7} maxW="560px">
-              {service.description} Book a free 45-minute call and we&rsquo;ll scope your
+              {o ? o.body : (<>{service.description} Book a free 45-minute call and we&rsquo;ll scope your
               project, flag the risks, and give you a fixed-scope estimate, whether or
-              not you work with us.
+              not you work with us.</>)}
             </Text>
 
             <HStack spacing={3} mt={7} flexWrap="wrap" rowGap={3}>
-              <Button variant="gradient" rightIcon={<FiArrowRight />} onClick={() => openBooking("blog-cta")}>
-                Book a free consultation
+              <Button variant="gradient" rightIcon={<FiArrowRight />} onClick={() => openBooking(o ? "blog-cta:" + postSlug : "blog-cta")}>
+                {o ? o.buttonLabel : "Book a free consultation"}
               </Button>
               <Button
                 as={RouterLink}
-                href={`/service/${slug}`}
+                href={o ? o.secondaryLink.href : `/service/${slug}`}
                 variant="outlineGlow"
                 rightIcon={<FiArrowUpRight />}
               >
-                {service.title}
+                {o ? o.secondaryLink.label : service.title}
               </Button>
             </HStack>
 
             {/* Evidence link. Separate from the button row so it reads as a reference
                 rather than a third call to action competing with the two above. */}
-            {study && (
+            {/* Not "See it built": the hotel proof is a design project (Platinum Peak). */}
+            {o && (
+              <Text mt={5} fontSize="sm" color="text.muted">
+                Related work:{" "}
+                <Box as={RouterLink} href={o.proofLink.href} color="accent.solid" fontWeight={500} _hover={{ textDecoration: "underline" }}>
+                  {o.proofLink.label}
+                </Box>
+                {o.caseStudyLink && (
+                  <>
+                    {" · "}
+                    <Box as={RouterLink} href={o.caseStudyLink.href} color="accent.solid" fontWeight={500} _hover={{ textDecoration: "underline" }}>
+                      {o.caseStudyLink.label}
+                    </Box>
+                  </>
+                )}
+              </Text>
+            )}
+            {!o && study && (
               <Text mt={5} fontSize="sm" color="text.muted">
                 See it built:{" "}
                 <Box

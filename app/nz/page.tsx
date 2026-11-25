@@ -21,7 +21,7 @@ export const metadata: Metadata = buildMetadata({
   description: nzMeta.description,
   path: '/nz',
   keywords: nzMeta.keywords,
-  image: '/home.png',
+  image: '/og/home-v2.png',
   alternates: COUNTRY_ALTERNATES,
 })
 
@@ -35,7 +35,7 @@ const jsonLd = buildCountrySchema({
   regions: ['Auckland', 'Wellington', 'Christchurch'],
   currency: 'NZD',
   faqs: nzFaqs,
-  image: '/home.png',
+  image: '/og/home-v2.png',
 })
 
 export default function Page() {

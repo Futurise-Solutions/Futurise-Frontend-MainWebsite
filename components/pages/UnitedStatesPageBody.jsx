@@ -76,8 +76,8 @@ export default function UnitedStatesPageBody() {
       {/* 1 — Evidence. First section by design, following the pattern proven on /ae: the
           delivery record goes ahead of the compliance argument, and the limit of that record
           is stated beside it rather than in a caveat further down. The difference here is
-          the shape of the limit — /ae had one engagement and had to say what it did not
-          cover; /us has six and has to say that breadth is not regulated-domain experience.
+          the shape of the limit — /ae has one named engagement and has to say what it does
+          not cover; /us has six and has to say that breadth is not regulated-domain experience.
           See the evidence-fork rule in src/utils/Constant/unitedStates.js. */}
       <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 12, md: 16 }}>
         <Reveal><Eyebrow>The record</Eyebrow></Reveal>

@@ -263,7 +263,7 @@ export const caseStudies = {
       description:
         "How we built a cross-platform React Native property app for India and the USA: list virtualization, viewport-bounded maps and offline browsing.",
       keywords:
-        "real estate mobile app development case study, React Native property app, cross-platform app development India USA, mobile app 10k downloads, property search app case study, Futurise Solutions app dev",
+        "real estate mobile app development case study, React Native property app, cross-platform app development India USA, property search app case study, Futurise Solutions app dev",
     },
 
     hero: {

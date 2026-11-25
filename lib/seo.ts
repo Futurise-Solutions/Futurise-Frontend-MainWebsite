@@ -16,7 +16,7 @@ import type { Metadata } from 'next'
 
 export const SITE_NAME = 'Futurise Solutions'
 export const SITE_URL = 'https://www.futurisesolutions.com'
-export const DEFAULT_IMAGE = `${SITE_URL}/home.png`
+export const DEFAULT_IMAGE = `${SITE_URL}/og/home-v2.png`
 
 /**
  * Reproduces the old <Seo> title logic EXACTLY:

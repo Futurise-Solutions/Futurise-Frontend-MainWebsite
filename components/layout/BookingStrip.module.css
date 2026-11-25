@@ -1,0 +1,7 @@
+.strip{position:relative;display:flex;align-items:stretch;height:36px;flex-shrink:0;background:linear-gradient(90deg,#0d0b1a 0%,#120d28 20%,#1a0f35 50%,#120d28 80%,#0d0b1a 100%);border-bottom:1px solid rgba(180,160,255,.18);color:#e4dcff;font-family:var(--font-aeonik-body),-apple-system,system-ui,sans-serif}
+.cta{flex:1;min-width:0;display:flex;align-items:center;justify-content:center;gap:8px;padding:0 44px;color:inherit;font-size:13px;font-weight:500;letter-spacing:.015em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
+.cta:hover{color:#fff}
+.close{position:absolute;top:0;right:0;width:44px;height:36px;display:flex;align-items:center;justify-content:center;color:#b4a0ff;font-size:20px;line-height:1;cursor:pointer}
+.close:hover{color:#fff}
+.cta:focus-visible,.close:focus-visible{outline:2px solid #b4a0ff;outline-offset:-2px}
+@media(max-width:380px){.cta{font-size:12px;padding:0 40px 0 12px;gap:6px}}

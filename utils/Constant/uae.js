@@ -18,15 +18,20 @@
  * to `clientProof`. That cost is accepted deliberately. When UAE delivery grows beyond one
  * engagement, revisit this section rather than widening it.
  *
+ * Note (25 Nov 2026): caseStudies.js lists `defi-protocol-launch` with location
+ * "USA & UAE". That client is unnamed and the case-study page does not show the market, so
+ * this page speaks of ONE NAMED engagement and never says "only one". Confirm the market
+ * with the owner before citing that case study here.
+ *
  * The client NAME is exempt from all of this — "Infinity Bay Trading" is already sitewide
  * footer chrome and appears on every route including /privacy.
  *
  * ── THE OTHER RULES ──────────────────────────────────────────────────────────
  *
- * ONE. This is the only country page with delivered work, and the work is WEB AND SEO. It
- * is not AI, SaaS or custom platform work. Nothing here may let one website rebuild stand in
- * for capabilities it does not evidence. That limit is stated in the first section heading
- * rather than buried in a caveat, and FAQ 8 restates it.
+ * ONE. The named UAE engagement is WEB AND SEO. It is not AI, SaaS or custom platform
+ * work. Nothing here may let one website rebuild stand in for capabilities it does not
+ * evidence. That limit is stated in the first section heading rather than buried in a
+ * caveat, and FAQ 8 restates it.
  *
  * TWO. Nothing here may repeat the homepage, a service page, /nz, /us, /au or /ca. Five
  * collisions are prohibited outright. Do not argue privacy-law FRAGMENTATION (/us owns
@@ -67,27 +72,27 @@ export const aeMeta = {
 
 // SECTION 1 — EVIDENCE. First in-page section, by design.
 //
-// Every other country page leads with compliance because it had nothing shipped to lead
-// with. This one does, so proof goes first and the limit goes in the heading beside it.
+// Most country pages lead with compliance because they have no named local work to lead
+// with. This one has, so proof goes first and the limit goes in the heading beside it.
 //
 // ⚠️ Written from the Infinity Bay facts, NOT from clientProof's wording. See the fork rule
 // at the top of this file. Do not paste the testimonial quote or the clientProof `work` and
 // `outcome` strings in here in any form.
 export const aeEvidence = [
   {
-    title: "One delivered engagement, in Dubai",
+    title: "One named engagement, in Dubai",
     detail:
       "Infinity Bay Trading is a Dubai wholesale supplier working across food, hospitality and industrial goods. Their site ran on WordPress, loaded slowly and was largely invisible in search. We moved it onto Astro so pages ship as static HTML, reorganised the catalogue around the way buyers look for stock, and put indexing on a proper footing. We can name them because they agreed to be named, and their site carries our credit in its own footer.",
   },
   {
     title: "What that engagement was not",
     detail:
-      "It was web and search work. It was not an AI build, a SaaS platform or a custom internal system. We say so on the page where blurring it would help us most, because the alternative is letting one website rebuild stand in for capabilities it does not evidence. Our AI, SaaS and blockchain work was delivered for clients in other markets and sits on the portfolio under their names.",
+      "It was web and search work. It was not an AI build, a SaaS platform or a custom internal system. We say so on the page where blurring it would help us most, because the alternative is letting one website rebuild stand in for capabilities it does not evidence. Our AI, SaaS and blockchain work was delivered for other clients, and it is on the portfolio and in our case studies.",
   },
   {
     title: "How to check any of this",
     detail:
-      "Every project we reference is on the portfolio with the client named, the problem stated and screenshots attached, and the one testimonial on this site belongs to a person you can look up. Some suppliers here name large clients; others publish project counts with nothing checkable attached. Whoever you shortlist, ask for one reference you can verify without their help.",
+      "Every project we reference is on the portfolio with the client named, the problem stated and screenshots attached, and the Infinity Bay testimonial on our homepage is signed with the founder's name and his company, so you can look him up. Some suppliers here lead with large client names or headline numbers. Whoever you shortlist, us included, ask for one reference you can verify without their help.",
   },
 ];
 
@@ -187,12 +192,12 @@ export const aeLicence = [
 
 // SECTION 6 — sectors. Grouped by the UAE obligation or market condition that reaches them,
 // because the obvious industry slots are exhausted across /nz, /us, /au and /ca. Item 1 is
-// the only sector on any country page that we have actually delivered in.
+// the sector of the named UAE engagement.
 export const aeSectors = [
   {
     sector: "B2B trading, wholesale and distribution",
     detail:
-      "The sector we have actually delivered in here. Catalogues that are large, shallow and constantly changing, where the commercial problem is that buyers search for a product rather than a company, and the technical problem is that most catalogue sites render slowly enough to lose them first. What decides these builds is how the catalogue is structured and how fast a page reaches a buyer on a phone, rather than the length of the feature list.",
+      "The sector our named engagement here sits in. Catalogues that are large, shallow and constantly changing, where the commercial problem is that buyers search for a product rather than a company, and the technical problem is that most catalogue sites render slowly enough to lose them first. What decides these builds is how the catalogue is structured and how fast a page reaches a buyer on a phone, rather than the length of the feature list.",
   },
   {
     sector: "Real estate and proptech",
@@ -341,7 +346,7 @@ export const aeFaqs = [
   {
     question: "Have you actually delivered anything in the UAE?",
     answer:
-      "Yes, and precisely one thing. We rebuilt the website of Infinity Bay Trading, a Dubai wholesale supplier, moving it off WordPress onto Astro and restructuring it for search. Their founder is quoted on this site by name and their own site carries our credit. That engagement was web and search work, not AI, SaaS or a custom platform. Our work in those categories was delivered for clients in other markets and is on the portfolio.",
+      "Yes. The engagement we can name is the website of Infinity Bay Trading, a Dubai wholesale supplier, which we moved off WordPress onto Astro and restructured for search. Their founder is quoted on this site by name and their own site carries our credit. That engagement was web and search work, not AI, SaaS or a custom platform. Our work in those categories was delivered for other clients and is on the portfolio and in our case studies.",
   },
   {
     question: "Do you have a UAE office or trade licence?",

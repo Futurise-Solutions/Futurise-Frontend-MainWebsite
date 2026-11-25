@@ -206,7 +206,7 @@ export default function AboutUsBody() {
             Privacy law, invoicing rules, accessibility duties and procurement expectations
             differ by country, and they land in the architecture rather than in a policy
             document. We keep a page for each market we work in, covering what applies there
-            and what we have actually delivered.
+            and, where it is public, what we have delivered.
           </Text>
           <Wrap spacing={3}>
             {[...COUNTRIES].sort((a, b) => ["us", "ca", "ae", "nz", "au", "in"].indexOf(a.code) - ["us", "ca", "ae", "nz", "au", "in"].indexOf(b.code)).map((c) => (

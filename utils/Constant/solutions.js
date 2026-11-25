@@ -15,7 +15,15 @@
  *   - Token-sniping bots are deliberately absent from every page.
  *   - Timelines and pricing use the studio-wide facts (fixed-scope quote after a free
  *     discovery call; MVPs typically 6–12 weeks, larger platforms 3–6 months).
+ *
+ * Optional fields: `caseStudy` (a published case-study slug), `portfolio` ({ href, label }
+ * linking the named version of a build on /portfolio, so the client is still not named
+ * here), `endNote` (replaces the closing NDA line where that line is not true for the
+ * page) and `link` on an FAQ ({ href, label }, shown under the answer).
  */
+
+import { hotelBookingWebsiteSolution } from "./solutionHotel.js";
+import { ragDevelopmentSolution } from "./solutionRag.js";
 
 export const solutions = {
   /* ───────────────────────────── 1. Shopify ───────────────────────────── */
@@ -213,7 +221,12 @@ export const solutions = {
       { q: "Do you build on the official WhatsApp Business APIs?", a: "Yes. Campaigns and templates are built on Meta's WhatsApp template and campaign APIs." },
       { q: "Can you add WhatsApp to our existing CRM?", a: "Yes. The module we built lives inside an existing production CRM. We integrate with your CRM's APIs rather than replacing it." },
       { q: "Can it send bulk campaigns?", a: "Yes, to large contact lists, using approved message templates." },
+      { q: "Do we need Meta business verification?", a: "To use the API you need a Meta business portfolio and a WhatsApp Business Account to hold your number. Verification matters for volume: Meta caps how many people a business can message outside an open customer service window in any rolling 24 hours, and verifying the business is one of the ways to raise that cap. Plan the first bulk campaign around the cap your account is on, not the size of your contact list." },
+      { q: "Which phone number does it use?", a: "A business phone number registered to your WhatsApp Business Account. Keep that account in your own business portfolio rather than a provider's, so the number stays with you if you ever change suppliers. The CRM module connects to the account through Meta's APIs." },
+      { q: "How does template approval work?", a: "Meta reviews every template when it is created or edited. Its documentation says review can take up to 24 hours, and a rejected template can't be sent. Templates are created and managed inside the CRM module, and bulk campaigns go out on approved templates only. Meta also puts each template in a category (marketing, utility or authentication) that sets its price, and can recategorise a template later, so check the category before a large send." },
+      { q: "Do contacts need to opt in?", a: "Yes. Meta's policy says you may message people only if they have given you their number and opted in to hearing from your business, and you must honour requests to stop, whether they come on WhatsApp or elsewhere. Opt-in can be collected on your website, by SMS, through an IVR call or in person on paper. Campaigns go to the contact lists in your CRM, so keep those lists to people who have opted in, and ask separately for order updates and for offers." },
       { q: "How is it priced?", a: "As a fixed-scope quote after a free discovery call, based on the modules and the CRM you're integrating with." },
+      { q: "What does WhatsApp cost to run once it's built?", a: "Meta bills per delivered template message, at a rate set by the template's category and the recipient's country calling code. Replies inside the 24-hour customer service window are free, as is a utility template sent while that window is open, so the bill depends mostly on how many marketing and out-of-window messages you send. Those charges are billed by Meta, or by a Meta partner if you use one, separately from the cost of building the module. Take current rates from Meta's rate card for your country and currency.", link: { href: "/blog/whatsapp-business-api-pricing-and-setup-guide", label: "WhatsApp Business API pricing and setup guide" } },
       { q: "Can we see it working?", a: "The CRM is under NDA, so we demo the module on a live call instead of publishing screenshots." },
     ],
 
@@ -286,7 +299,7 @@ export const solutions = {
       { q: "Can we see what you've built?", a: "Our clients are under NDA, so we demo the products on a live call." },
     ],
 
-    related: ["chrome-extension-development", "ai-recruitment-platform", "telegram-bot-development"],
+    related: ["rag-development", "chrome-extension-development", "ai-recruitment-platform"],
   },
 
   /* ───────────────────────────── 5. Chrome extensions ───────────────────────────── */
@@ -616,7 +629,94 @@ export const solutions = {
 
     related: ["web3-dapp-development", "ai-saas-development", "telegram-bot-development"],
   },
+
+  /* ─────────────────────── 10. Property management software ─────────────────────── */
+  // The PropTech dashboard on /portfolio and the platform rebuild in the saas-platform-scale
+  // case study share sector and region (PropTech, USA & India) and may be one engagement, so
+  // they are described together as one build and never counted as two projects. Real-estate
+  // listing and lead-generation websites are not property management software: not listed here.
+  "property-management-software": {
+    slug: "property-management-software",
+    name: "Property Management Software",
+    market: "United States",
+    markets: ["United States", "India", "Global"],
+    service: "web-development",
+    country: "us",
+    caseStudy: "saas-platform-scale",
+    portfolio: { href: "/portfolio#homies-proptech", label: "See the dashboard in our portfolio" },
+    endNote: "The property dashboard we built is in our portfolio, and the platform work is a published case study. We walk you through the working software live on a call.",
+
+    meta: {
+      title: "Custom Property Management Software Development",
+      description:
+        "Custom property management software development: income, expense and occupancy dashboards, multi-tenant PropTech SaaS and a straight build vs buy answer.",
+      keywords:
+        "custom property management software development, property management software development company, building property management software, custom property management system, build to rent software, property management system API integration, PropTech software development, multi-tenant property management SaaS",
+    },
+
+    hero: {
+      eyebrow: "Solutions · PropTech",
+      title: "Custom property management software",
+      highlight: "built around your workflow.",
+      subtitle:
+        "Portfolio dashboards and multi-tenant platforms for property managers, landlords and PropTech founders, built when off-the-shelf tools no longer fit how you work.",
+    },
+
+    answer:
+      "Futurise Solutions builds custom property management software for property managers, landlords and PropTech companies. Our PropTech work in the USA and India covers a property management dashboard with income, expense, occupancy and unit analytics, and a multi-tenant SaaS platform rebuild: each customer's data isolated, a Redis-cached Node.js API, Stripe billing and CI/CD on AWS. If an existing product already fits your workflow, we'll tell you to buy it.",
+
+    capabilities: [
+      { title: "Portfolio dashboards", desc: "Income, expenses, occupancy and unit performance across a whole portfolio in one view, with interactive charts that work on any device." },
+      { title: "Unit management", desc: "Units and sign-in for property teams, shipped as the first release; analytics, billing and integrations followed in two-week sprints." },
+      { title: "Multi-tenant SaaS", desc: "One platform serving many property businesses, with each customer's data in its own database namespace on shared infrastructure." },
+      { title: "Query & caching layer", desc: "Dashboard reads restructured into aggregation pipelines, indexes matched to real query shapes, and Redis caching in front of the hot paths." },
+      { title: "Billing", desc: "Stripe billing built into the platform." },
+      { title: "Releases & monitoring", desc: "Automated tests and zero-downtime deploys to AWS through GitHub Actions, with Datadog for performance, errors and usage." },
+    ],
+
+    builds: [
+      {
+        title: "A property management SaaS: portfolio dashboard and multi-tenant platform",
+        client: "PropTech, USA & India",
+        problem: "Property managers needed one view of income, expenses, occupancy and unit performance across a portfolio. The platform work started from an inherited build that was slow, hard to extend and did not isolate each customer's data.",
+        built: ["Portfolio dashboard for income, expenses, occupancy and unit performance", "Unit management and authentication", "Database-per-tenant isolation with MongoDB namespacing", "Aggregation pipelines, query-matched indexes and Redis caching", "Stripe billing", "CI/CD to AWS with GitHub Actions, and Datadog monitoring"],
+        stack: ["React", "Vite", "Chakra UI", "React Query", "Recharts", "Node.js", "Express", "MongoDB", "Redis", "Stripe", "AWS", "GitHub Actions", "Datadog"],
+        outcome: "The platform rebuild ran eight months from discovery to production, with a production-ready first release (dashboard, sign-in and unit management) in six weeks. The case study covers it in full.",
+      },
+    ],
+
+    stack: ["React", "Vite", "Chakra UI", "React Query", "Recharts", "Node.js", "Express", "MongoDB", "Redis", "Stripe", "AWS", "GitHub Actions", "Datadog"],
+
+    faqs: [
+      { q: "Should we build or buy property management software?", a: "Buy first if your workflow looks like everyone else's: established products cover rent collection, accounting and maintenance well, and a tool you adopt this month usually beats a custom system that launches in six months. Build when the software is the business, when your workflow is distinctive, when you need one view across several systems, or when you want to own the tenant and owner experience. A hybrid, with a bought core and a custom dashboard or portal on top through its API, is often the sensible middle.", link: { href: "/blog/property-management-software-development-build-vs-buy", label: "Read our build vs buy guide" } },
+      { q: "What goes into building custom property management software?", a: "Usually the same modules a product has: properties and units, leases and tenants, rent collection, maintenance, accounting and owner reporting, tenant and owner portals, and analytics. Custom work pays off in the modules where your operation differs, such as unusual unit structures, your own approval or payout workflow, local payment rails or your reporting format. Our delivered PropTech work covers the dashboard, unit management, multi-tenant and billing layers; anything beyond that we scope with you." },
+      { q: "Can one platform serve many property businesses?", a: "Yes. That is a multi-tenant SaaS, and it is how the platform in our case study was rebuilt: a database-per-tenant model with MongoDB namespacing, so customers share infrastructure while each one's data stays inside its own boundary, without running separate database clusters at early scale." },
+      { q: "Can you build software for build-to-rent operators?", a: "Build-to-rent operators usually own whole buildings, so they report at building and portfolio level, and unit-level income, occupancy and expense views matter more than owner-by-owner statements. The dashboard we built gives that view. The BTR-specific parts, such as lease-up tracking, amenity booking and a resident app, are not in that build, so we would scope them with you, often as a custom layer on top of a bought system that keeps the ledger and rent collection." },
+      { q: "Can you build on the property management system we already use?", a: "If its API or developer kit allows it, yes. That is the hybrid route: the bought system stays the record for accounting and rent, and a dashboard, portal or automation layer sits on top through its API. Before quoting, we check what the API exposes, on which plan and with what limits, because that decides what can be built on top." },
+      { q: "How do you handle tenant data and privacy?", a: "Tenant records hold identity documents, income details and payment data, so we treat privacy as a design input from day one: collect only what is needed and set retention periods, separate roles so a tenant sees their lease, an owner their properties and staff what their job needs, keep an audit trail of ledger changes, and let a payment provider hold card and bank details. Which privacy and tenancy rules apply depends on the country, so check them with your legal adviser." },
+      { q: "How much does custom property management software cost, and how long does it take?", a: "It depends on scope, so we quote fixed scope after a free discovery call rather than publish one price. The main cost drivers are the number of roles and portals, whether money moves through the system, accounting depth, integrations, data migration and mobile apps. As a guide, a focused MVP usually takes 6 to 12 weeks and a larger platform 3 to 6 months." },
+      { q: "Can you build a mobile app for tenants or residents?", a: "The closest work we have delivered is a React Native property app for buyers and agents in India and the US, with map search, in-app messaging between agents and buyers and offline access to shortlisted listings, built to run as well on a budget Android phone as on an iPhone. A responsive web portal costs less than native apps, so for many operators it is the better first step.", link: { href: "/case-studies/real-estate-app", label: "Read the property app case study" } },
+      { q: "Can we see what you've built?", a: "Yes. Screenshots of the property dashboard we built are in our portfolio, and the platform work is written up as a case study. We walk you through the working software on a live call.", link: { href: "/portfolio#homies-proptech", label: "See the dashboard in our portfolio" } },
+    ],
+
+    related: ["ai-saas-development", "hospital-management-system", "whatsapp-crm"],
+  },
+
+  /* ───────────────────────────── 11. Hotel booking websites ───────────────────────────── */
+  "hotel-booking-website-development": hotelBookingWebsiteSolution,
+
+  /* ───────────────────────────── 12. RAG development ───────────────────────────── */
+  "rag-development": ragDevelopmentSolution,
 };
 
 /** Ordered list for hubs, nav and sitemap. */
 export const solutionList = Object.values(solutions);
+
+const ONES = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+const TENS = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+
+/** A count as a capitalised English word ("Ten"), so copy like "Ten kinds of software" follows Object.keys(solutions).length. Digits from 100. */
+export function numberToWords(n) {
+  const word = n < 20 ? ONES[n] : n < 100 ? TENS[Math.floor(n / 10)] + (n % 10 ? `-${ONES[n % 10]}` : "") : String(n);
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}

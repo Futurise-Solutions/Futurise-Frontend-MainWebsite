@@ -55,7 +55,7 @@ export const buildCountrySchema = ({
   // ISO 4217, e.g. "NZD". This is the field a buyer's currency-qualified query keys on.
   currency,
   faqs = [],
-  image = "/home.png",
+  image = "/og/home-v2.png",
   // A market with more than one working language (e.g. en + ar) passes both.
   languages = ["English"],
   services = NavbarservicesOptions,

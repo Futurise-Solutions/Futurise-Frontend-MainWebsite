@@ -255,7 +255,7 @@ sits here.
 
 **6.2 `llms.txt` publishes a phone number that no other surface does.**
 
-`content/llms.txt.ts` contains `Phone: +91 76650 13356`. This directly contradicts `/about`
+`content/llms.txt.ts` contained a printed phone line (the WhatsApp business number). This directly contradicts `/about`
 ("No telephone number is published anywhere on this site") and the deliberate omission of
 `telephone` from the Organization schema. One of the two is wrong.
 
@@ -374,8 +374,8 @@ No copy was changed. The CMS content still says `#`; only its mapping changed.
 
 ### 7.7 `/in` — India market page (new)
 
-A seventh market page, built because Udaipur clears the doorway test on evidence the
-original brief did not have: the engineering team is there **and** two named, published
+A seventh market page, built because India clears the doorway test on evidence the
+original brief did not have: the engineering team is in India **and** two named, published
 clients are Udaipur businesses (Dhanlaxmi Property, trading since 1998; Palm Vision
 Technology, since 2006).
 
@@ -385,7 +385,7 @@ Technology, since 2006).
   six existing market content modules. It inverts their argument: they argue remote
   delivery works, this one leads with people on the ground.
 - **Full schema**: WebPage (+ speakable), ProfessionalService, OfferCatalog, FAQPage,
-  BreadcrumbList. `areaServed` is **Udaipur and Rajasthan only**.
+  BreadcrumbList. `areaServed` was originally Udaipur and Rajasthan only; it is now `Country: India` (client fact, not a team location).
 - **Registered in `COUNTRIES`**, so hreflang reciprocity is structural. Verified: all
   seven pages (`/`, `/nz`, `/us`, `/au`, `/ca`, `/ae`, `/in`) now declare 7 alternates
   including `en-IN`, each self-canonical.
@@ -444,7 +444,7 @@ invent a placeholder for a shift that does not occur.
 The chatbot predates the site's honesty rules and contradicted them in four places. All are
 in `components/Chatbot/keywordMatcher.js` and `predefinedQA.js`; no other answer was touched.
 
-- **Phone number** `+91 76650 13356` in two answers → replaced with email + the booking
+- **Phone number** (the WhatsApp business number) in two answers → replaced with email + the booking
   flow. Owner decision: no phone number is published anywhere. Every surface now agrees —
   pages, Organization schema, `llms.txt`, chatbot.
 - **"25+ projects"** in two answers → removed. `/portfolio` publishes nine and `/about`

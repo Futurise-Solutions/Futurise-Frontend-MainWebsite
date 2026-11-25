@@ -35,6 +35,9 @@ import { useBooking } from "@/context/BookingContext";
 
 
 
+// Lower-case a service name for mid-sentence use, but keep acronyms (AI, ML) intact.
+const inlineName = (t) => t.split(" ").map((w) => (/[A-Z]{2}/.test(w) ? w : w.toLowerCase())).join(" ");
+
 export default function ServicePageBody({ serviceName }) {
   /* `serviceName` now arrives as a PROP from the server component, which resolved it
      from `await params` — the old page read it from react-router's useParams().
@@ -90,7 +93,7 @@ export default function ServicePageBody({ serviceName }) {
           </Reveal>
           <Reveal delay={0.1}>
             <Text className="speakable-answer" mt={4} color="text.muted" fontSize={{ base: "md", md: "lg" }} lineHeight={1.7} maxW="640px">
-              We’ve shipped {service.title.toLowerCase()} work for founders and product teams across these sectors,
+              We’ve shipped {inlineName(service.title)} work for founders and product teams across these sectors,
               and adapt fast to yours.
             </Text>
           </Reveal>
@@ -132,7 +135,7 @@ export default function ServicePageBody({ serviceName }) {
             <Reveal><Eyebrow>Related work</Eyebrow></Reveal>
             <Reveal delay={0.05}>
               <Heading mt={4} mb={6} fontSize={{ base: "26px", md: "36px" }} lineHeight={1.15} maxW="760px">
-                See {service.title.toLowerCase()}{" "}
+                See {service.title}{" "}
                 <Box as="span" className="gradient-text">in production</Box>
               </Heading>
             </Reveal>
@@ -332,7 +335,7 @@ export default function ServicePageBody({ serviceName }) {
           eyebrow="FAQ"
           title="Frequently asked"
           highlight="questions"
-          intro={`Common questions about our ${service.title.toLowerCase()} services. Can’t find what you’re looking for?`}
+          intro={`Common questions about our ${inlineName(service.title)} services. Can’t find what you’re looking for?`}
         />
       )}
 

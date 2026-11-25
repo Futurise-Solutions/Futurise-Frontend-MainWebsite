@@ -21,7 +21,7 @@ export const metadata: Metadata = buildMetadata({
   description: usMeta.description,
   path: '/us',
   keywords: usMeta.keywords,
-  image: '/home.png',
+  image: '/og/home-v2.png',
   alternates: COUNTRY_ALTERNATES,
 })
 
@@ -35,7 +35,7 @@ const jsonLd = buildCountrySchema({
   regions: ['California', 'Texas', 'New York', 'Florida', 'Washington'],
   currency: 'USD',
   faqs: usFaqs,
-  image: '/home.png',
+  image: '/og/home-v2.png',
 })
 
 export default function Page() {

@@ -19,7 +19,7 @@ export const metadata: Metadata = buildMetadata({
   description: euMeta.description,
   path: '/europe',
   keywords: euMeta.keywords,
-  image: '/home.png',
+  image: '/og/home-v2.png',
 })
 
 /** JSON-LD ported verbatim — four blocks. */
@@ -34,7 +34,7 @@ const jsonLd = [
     inLanguage: 'en',
     isPartOf: { '@id': `${SITE_URL}/#website` },
     about: { '@id': `${SITE_URL}/#organization` },
-    primaryImageOfPage: { '@type': 'ImageObject', url: `${SITE_URL}/home.png` },
+    primaryImageOfPage: { '@type': 'ImageObject', url: `${SITE_URL}/og/home-v2.png` },
   },
   {
     '@context': 'https://schema.org',

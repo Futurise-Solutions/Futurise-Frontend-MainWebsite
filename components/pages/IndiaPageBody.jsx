@@ -10,15 +10,17 @@ import RegionalHero from '../common/RegionalHero';
  * bespoke and shares no sentence with any other market page, because the argument is
  * genuinely different: see the header note in utils/Constant/india.js.
  *
- * Section order is deliberate and inverts the other market pages. They open with a
- * regulatory argument because they have nothing shipped locally to open with. This one
+ * Section order is deliberate and inverts most other market pages. They open with a
+ * regulatory argument because they have no named local work to open with. This one
  * opens with presence — the team is in the country — because that is the strongest true
  * thing on the page and the only claim no competitor can copy honestly.
  *
- * ⚠️ THE SUBJECT IS INDIA, NOT UDAIPUR. The city is named ONCE, in the section-1 answer,
- * as the place the team sits. Everything else is national. An earlier draft framed the
- * hero, the eyebrow and three headings around the city, which narrowed a national page to
- * one local market. If an edit makes this read as "a Udaipur agency", it is wrong.
+ * ⚠️ THE SUBJECT IS INDIA, NOT ONE CITY. The team's location is stated as India and
+ * nowhere more precisely (owner decision, Nov 2026). A city appears only in the work cards
+ * and the FAQ, as where the two published clients are. Everything else is national. An
+ * earlier draft framed the hero, the eyebrow and three headings around a city, which
+ * narrowed a national page to one local market. If an edit makes this read as a city
+ * agency, it is wrong.
  *
  * ⚠️ Every H2 that is followed by a standalone answer paragraph carries
  * `className="speakable-question"`, and that paragraph carries `speakable-answer`. Those
@@ -159,8 +161,7 @@ export default function IndiaPageBody() {
           <Text className="speakable-answer" color="text.muted" fontSize={{ base: "md", md: "lg" }} lineHeight={1.7} maxW="720px" mb={10}>
             Every client we publish is one we delivered for. Two Indian engagements are
             published in full below; others were delivered for clients we are not able to
-            name. We publish no project count and no performance figures, because neither is
-            something you could check.
+            name.
           </Text>
         </Reveal>
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>

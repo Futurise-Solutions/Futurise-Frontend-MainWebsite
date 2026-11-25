@@ -31,7 +31,7 @@ export const metadata: Metadata = buildMetadata({
   description: inMeta.description,
   path: '/in',
   keywords: inMeta.keywords,
-  image: '/home.png',
+  image: '/og/home-v2.png',
   alternates: COUNTRY_ALTERNATES,
 })
 
@@ -43,11 +43,11 @@ export const metadata: Metadata = buildMetadata({
    { '@type': 'Country', name: 'India' } from the registry, and `regions` only ADDS
    AdministrativeArea nodes beneath it.
 
-   `regions` is deliberately EMPTY. An earlier version passed ['Udaipur', 'Rajasthan'],
+   `regions` is deliberately EMPTY. An earlier version passed a single city and state,
    which narrowed the served-area claim to one city and state on a page whose subject is
-   the national market. The service is offered across India; Udaipur is where the team
-   sits, which is a fact the page states in its copy and does not need to assert as a
-   service boundary.
+   the national market. The service is offered across India; the team is based in India,
+   which is a fact the page states in its copy and does not need to assert as a service
+   boundary.
 
    Do NOT list the big metros here either. `areaServed` is read as a claim, and an office
    in Mumbai or Bangalore does not exist. */
@@ -58,7 +58,7 @@ const jsonLd = buildCountrySchema({
   regions: [],
   currency: 'INR',
   faqs: inFaqs,
-  image: '/home.png',
+  image: '/og/home-v2.png',
 })
 
 export default function Page() {

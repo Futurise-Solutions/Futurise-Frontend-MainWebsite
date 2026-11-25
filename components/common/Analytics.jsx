@@ -1,6 +1,8 @@
 'use client'
 
+import { useEffect } from 'react'
 import Script from 'next/script'
+import { captureLeadSource } from '../../utils/leadSource'
 
 /**
  * Third-party tags, deferred (Phase 8).
@@ -27,6 +29,11 @@ const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID || 'ycomehde8x'
 const PRODUCTION_HOST = 'www.futurisesolutions.com'
 
 export default function Analytics() {
+  /* Remember where this visit started (landing page, external referrer, UTM tags) so an
+     enquiry can say which page and campaign produced it. sessionStorage only; runs in
+     every environment because it sends nothing by itself. See utils/leadSource.js. */
+  useEffect(() => { captureLeadSource() }, [])
+
   /* ⚠️ PRODUCTION ONLY — this gate is ported from src/utils/clarity.js and its reasoning
      applies to both tags now:
        "local development and the prerender pass — which loads all 27 routes in headless

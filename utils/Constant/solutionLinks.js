@@ -17,6 +17,9 @@ export const solutionLinks = [
   { slug: "web3-dapp-development", name: "Web3 dApp Development", market: "United States", service: "blockchain-development", country: "us" },
   { slug: "ai-recruitment-platform", name: "AI Recruitment Platform", market: "India", service: "ai-ml-solutions", country: "in" },
   { slug: "server-management-platform", name: "Server Management Platform", market: "Global", service: "web-development", country: null },
+  { slug: "property-management-software", name: "Property Management Software", market: "United States", service: "web-development", country: "us" },
+  { slug: "hotel-booking-website-development", name: "Hotel Booking Websites", market: "Global", service: "web-development", country: null },
+  { slug: "rag-development", name: "RAG Development", market: "United States", service: "ai-ml-solutions", country: "us" },
 ];
 
 /** Which market variants exist per solution (mirrors marketVariants in solutionMarkets.js). */
@@ -49,11 +52,11 @@ export function solutionHref(slug, market) {
  * links to its market variant when one exists, otherwise to the base page.
  */
 export const countrySolutionOrder = {
-  us: ["shopify-development-cro", "ai-saas-development", "chrome-extension-development", "web3-dapp-development", "ai-recruitment-platform", "telegram-bot-development", "server-management-platform", "whatsapp-crm", "hospital-management-system"],
-  ca: ["shopify-development-cro", "ai-saas-development", "chrome-extension-development", "web3-dapp-development", "ai-recruitment-platform", "telegram-bot-development", "server-management-platform", "whatsapp-crm", "hospital-management-system"],
-  nz: ["shopify-development-cro", "ai-saas-development", "chrome-extension-development", "whatsapp-crm", "ai-recruitment-platform", "web3-dapp-development", "telegram-bot-development", "server-management-platform", "hospital-management-system"],
-  ae: ["web3-dapp-development", "shopify-development-cro", "whatsapp-crm", "ai-saas-development", "hospital-management-system", "telegram-bot-development", "chrome-extension-development", "ai-recruitment-platform", "server-management-platform"],
-  in: ["shopify-development-cro", "hospital-management-system", "whatsapp-crm", "ai-recruitment-platform", "ai-saas-development", "web3-dapp-development", "chrome-extension-development", "telegram-bot-development", "server-management-platform"],
-  au: ["shopify-development-cro", "ai-saas-development", "chrome-extension-development", "whatsapp-crm", "web3-dapp-development", "ai-recruitment-platform", "telegram-bot-development", "server-management-platform", "hospital-management-system"],
-  eu: ["ai-saas-development", "shopify-development-cro", "web3-dapp-development", "chrome-extension-development", "telegram-bot-development", "server-management-platform", "ai-recruitment-platform", "whatsapp-crm", "hospital-management-system"],
+  us: ["shopify-development-cro", "ai-saas-development", "rag-development", "property-management-software", "hotel-booking-website-development", "chrome-extension-development", "web3-dapp-development", "ai-recruitment-platform", "telegram-bot-development", "server-management-platform", "whatsapp-crm", "hospital-management-system"],
+  ca: ["shopify-development-cro", "ai-saas-development", "rag-development", "property-management-software", "hotel-booking-website-development", "chrome-extension-development", "web3-dapp-development", "ai-recruitment-platform", "telegram-bot-development", "server-management-platform", "whatsapp-crm", "hospital-management-system"],
+  nz: ["shopify-development-cro", "ai-saas-development", "rag-development", "property-management-software", "hotel-booking-website-development", "chrome-extension-development", "whatsapp-crm", "ai-recruitment-platform", "web3-dapp-development", "telegram-bot-development", "server-management-platform", "hospital-management-system"],
+  ae: ["web3-dapp-development", "shopify-development-cro", "whatsapp-crm", "ai-saas-development", "rag-development", "property-management-software", "hotel-booking-website-development", "hospital-management-system", "telegram-bot-development", "chrome-extension-development", "ai-recruitment-platform", "server-management-platform"],
+  in: ["shopify-development-cro", "hospital-management-system", "whatsapp-crm", "ai-recruitment-platform", "ai-saas-development", "rag-development", "property-management-software", "hotel-booking-website-development", "web3-dapp-development", "chrome-extension-development", "telegram-bot-development", "server-management-platform"],
+  au: ["shopify-development-cro", "ai-saas-development", "rag-development", "property-management-software", "hotel-booking-website-development", "chrome-extension-development", "whatsapp-crm", "web3-dapp-development", "ai-recruitment-platform", "telegram-bot-development", "server-management-platform", "hospital-management-system"],
+  eu: ["ai-saas-development", "rag-development", "property-management-software", "hotel-booking-website-development", "shopify-development-cro", "web3-dapp-development", "chrome-extension-development", "telegram-bot-development", "server-management-platform", "ai-recruitment-platform", "whatsapp-crm", "hospital-management-system"],
 };

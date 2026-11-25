@@ -181,6 +181,33 @@ if (blogUrls !== null && blogUrls < SITEMAP_MIN_BLOG_URLS) {
   console.log(`✅ sitemap blog section: ${blogUrls} published post(s)`)
 }
 
+/* ── GUARD: the contact form must read its fields before disabling them ─────
+   Shipped 20 Oct 2026 and undetected for 37 days: ContactForm set `busy` (which disables
+   its <fieldset>) and then called emailjs.sendForm(form). Browsers omit disabled controls
+   from form data, so every enquiry reached the inbox blank while the visitor saw
+   "Message sent". A static check is crude but cannot be skipped the way a manual test can. */
+{
+  const file = path.join(process.cwd(), 'components', 'common', 'ContactForm.jsx')
+  if (!fs.existsSync(file)) {
+    failures.push('components/common/ContactForm.jsx is missing; the contact-form guard cannot run.')
+  } else {
+    // Comments stripped first, so prose that mentions setBusy or sendForm cannot fool the check.
+    const src = fs
+      .readFileSync(file, 'utf8')
+      .replace(/\/\*[\s\S]*?\*\//g, '')
+      .replace(/(^|[^:])\/\/.*$/gm, '$1')
+    const read = src.indexOf('new FormData(')
+    const busy = src.indexOf('setBusy(true)')
+    if (/\bsendForm\s*\(/.test(src)) {
+      failures.push('ContactForm.jsx calls emailjs.sendForm(). Read the fields with new FormData() and use emailjs.send().')
+    } else if (read === -1 || busy === -1 || read > busy) {
+      failures.push('ContactForm.jsx must build its params with new FormData(form) BEFORE setBusy(true), or every enquiry is sent empty.')
+    } else {
+      console.log('✅ contact form reads its fields before disabling them')
+    }
+  }
+}
+
 /* ── report ─────────────────────────────────────────────────────────────── */
 console.log(`\npost-build guards — ${pages.size} prerendered page(s) checked`)
 if (failures.length) {

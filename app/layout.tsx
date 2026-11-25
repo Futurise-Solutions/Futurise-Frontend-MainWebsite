@@ -4,6 +4,7 @@ import './globals.css'
 import { Providers } from './providers'
 import { fontVariables } from '@/theme/fonts'
 import { BookingProvider } from '@/context/BookingContext'
+import BookingStrip from '@/components/layout/BookingStrip'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import HomeIntro from '@/components/home/HomeIntro'
@@ -132,6 +133,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Suspense fallback={null}>
                 <ScrollToTop />
               </Suspense>
+              <BookingStrip />
               <Navbar />
               {/* PageTransition wraps only `children`, exactly as the old shell wrapped
                   <AllRoutes/> — NOT the navbar, bar or footer, which must stay put across

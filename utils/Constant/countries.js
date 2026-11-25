@@ -60,7 +60,8 @@ export const COUNTRIES = [
   },
   {
     // India is the only entry here where the company has PEOPLE rather than only clients:
-    // the engineering team is in Udaipur, and two published clients are Udaipur businesses.
+    // the engineering team is in India (stated as the country only, never a city), and two
+    // published clients are Indian businesses.
     // ⚠️ ONE entry for the country. No per-city entries — see the note at the top of
     // utils/Constant/india.js for the test any additional Indian location must pass.
     code: "in",

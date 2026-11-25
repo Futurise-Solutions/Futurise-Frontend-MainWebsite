@@ -101,7 +101,7 @@ const fallbackKB = [
   {
     weight: 2,
     keywords: ["working hours", "hours", "open", "timezone", "time zone"],
-    answer: "Our working hours are Monday to Friday, 9:00 AM to 6:00 PM (NZST), and we reply within one business day.",
+    answer: "You can book a call Monday to Saturday, 9:00 AM to 10:30 PM India time (IST); the booking calendar shows each slot in your own time zone. Messages get a reply within one business day.",
   },
 
   // ── Core services ────────────────────────────────────────────────────

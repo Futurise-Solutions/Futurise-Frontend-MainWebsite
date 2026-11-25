@@ -1,12 +1,13 @@
 /**
  * /in — India market page copy.
  *
- * ⚠️ THE SUBJECT OF THIS PAGE IS INDIA, NOT UDAIPUR. Read this before editing any copy
- * below. An earlier draft framed the page around the city, which narrowed its targeting to
- * one local market when the business it describes is national. Udaipur appears as a
- * SUPPORTING FACT — it is where the team sits and where the two published clients are —
- * never as the page's scope. `areaServed` is the country. If an edit makes a section read
- * as "we are a Udaipur agency", it is wrong.
+ * ⚠️ THE SUBJECT OF THIS PAGE IS INDIA, NOT ONE CITY. Read this before editing any copy
+ * below. An earlier draft framed the page around a city, which narrowed its targeting to
+ * one local market when the business it describes is national. The team's location is
+ * stated as India and never more precisely (owner decision, Nov 2026). A city appears only
+ * as a SUPPORTING FACT about the two published clients (both are in Udaipur), never as the
+ * page's scope and never as where the team sits. `areaServed` is the country. If an edit
+ * makes a section read as a city agency, it is wrong.
  *
  * ── WHY THIS PAGE IS DIFFERENT FROM EVERY OTHER MARKET PAGE ─────────────────
  * The other five country pages argue a compliance or distance case for work delivered
@@ -31,20 +32,23 @@
  * confidential"). It must never become vague filler implying more volume than is real.
  *
  * ── EVERY CLAIM AND ITS SOURCE ──────────────────────────────────────────────
- *   Udaipur engineering team        utils/Constant/europe.js ("our delivery team is in
- *                                   Udaipur, India"), /about meta description
- *   Dhanlaxmi Property              Projects[] in Constant/index.js — location
- *                                   "Udaipur, India", trading since 1998, Next.js
- *                                   lead-generation site, six plotted colonies
- *   Palm Vision Technology          Projects[] — location "Udaipur, India", trading since
- *                                   2006, statically exported Next.js, ten service lines
+ *   Engineering team in India       utils/Constant/europe.js ("our delivery team is in
+ *                                   India"), /about meta description
+ *   Dhanlaxmi Property              Projects[] in Constant/index.js — trading since 1998,
+ *                                   Next.js lead-generation site, six plotted colonies.
+ *                                   Client location (Udaipur): owner-confirmed client fact
+ *   Palm Vision Technology          Projects[] — trading since 2006, statically exported
+ *                                   Next.js, ten service lines. Client location (Udaipur):
+ *                                   owner-confirmed client fact
  *   Wellington registration         CONTACT in Constant/index.js, Organization schema
  *   IST offsets                     utils/Constant/europe.js, stated there already
  *   Fixed scope / 2-week sprints    engagementCommitments in Constant/index.js
  *
  * NOTHING ELSE. No headcount, no project count, no revenue figure, no client count, no
- * "years of experience", no award, no rating. /about commits in writing to publishing none
- * of those, and this page may not be the one that breaks it.
+ * "years of experience", no award, no rating on this page. /about states in writing that
+ * the site shows no ratings or awards and names no staff, and this page may not be the one
+ * that breaks it. Do not claim the SITE publishes no counts or figures either: the
+ * companyStats band and the case studies carry some.
  *
  * ⚠️ There is NO India-registered entity. The company is a New Zealand company whose team
  * works from India. The FAQ says so in the first answer, before anyone asks, because that
@@ -56,10 +60,10 @@ export const inMeta = {
   // is appended by resolveTitle() rather than dropped.
   title: "Software Development Company India",
   // 152 characters. The SUBJECT is India — Indian businesses and how engagements run —
-  // not one city. The Udaipur team is a supporting fact inside the page, not its framing.
+  // not one city. The team's location is stated as India, nowhere more precisely.
   description:
     "Custom software, AI and SaaS for Indian businesses, built by an in-house engineering team in India, quoted in rupees on fixed scope, inside your working day.",
-  // India-level terms lead. The Udaipur terms were removed (Nov 2026, owner decision: team
+  // India-level terms lead. City-level terms were removed (Nov 2026, owner decision: team
   // location is stated as India).
   keywords:
     "software development company India, custom software development India, AI development company India, SaaS development company India, web development company India, mobile app development company India, Next.js development company India",
@@ -67,10 +71,10 @@ export const inMeta = {
 
 // SECTION 1 — WHERE THE TEAM IS. First section by design.
 //
-// Every other market page opens with a regulatory argument because it has nothing shipped
-// locally to open with. This one opens with the thing that is actually true and actually
-// rare: the people building the software are here, and two of the businesses they built
-// for are in the same city.
+// Most other market pages open with a regulatory argument because they have no named local
+// work to open with. This one opens with the thing that is actually true and actually
+// rare: the people building the software are here, and so are two of the businesses they
+// built for.
 export const inPresence = [
   {
     title: "The engineering team is in India",
@@ -178,12 +182,12 @@ export const inFaqs = [
   {
     question: "Do you actually have clients in India?",
     answer:
-      "Yes. Two are published with screenshots, the problem and the approach: Dhanlaxmi Property, a land development and property advisory firm trading since 1998, and Palm Vision Technology, a CCTV and office technology business trading since 2006. Both are based in Udaipur, Rajasthan. Other Indian work was delivered for clients we are not able to name, because we sign NDAs before seeing anything confidential. We name no client who has not agreed, and we publish no client count.",
+      "Yes. Two are published with screenshots, the problem and the approach: Dhanlaxmi Property, a land development and property advisory firm trading since 1998, and Palm Vision Technology, a CCTV and office technology business trading since 2006. Both are based in Udaipur, Rajasthan. Other Indian work was delivered for clients we are not able to name, because we sign NDAs before seeing anything confidential. We name no client who has not agreed.",
   },
   {
     question: "Do you work with businesses across India?",
     answer:
-      "Yes. We work with businesses across India, and being in the country means one working day and one time zone wherever you are. Our published record also covers clients in Dubai and the United States. What we do not do is claim an OFFICE where we have none: there is no Mumbai, Delhi, Bangalore or Pune address, and you will not find a page on this site suggesting otherwise.",
+      "Yes. We work with businesses across India, and being in the country means one working day and one time zone wherever you are. Our published record also covers clients in the UAE, the United States, the United Kingdom, Canada, Australia and New Zealand. What we do not do is claim an OFFICE where we have none: there is no Mumbai, Delhi, Bangalore or Pune address, and you will not find a page on this site suggesting otherwise.",
   },
   {
     question: "What does custom software cost in India?",

@@ -35,7 +35,7 @@ Locations and the evidence behind each:
 | Location | Published evidence |
 |---|---|
 | Wellington, NZ | Registered entity, Huddart Parker Building — stated on `/about` and in Organization schema |
-| Udaipur, India | Delivery team (`/europe` copy) **and two named clients** — Dhanlaxmi Property, Palm Vision Technology, both `location: "Udaipur, India"` on `/portfolio` |
+| India (Udaipur, clients) | Delivery team (India) **and two named clients** — Dhanlaxmi Property, Palm Vision Technology, both `location: "Udaipur, India"` on `/portfolio` |
 | Dubai / UAE | Delivered client work — Infinity Bay Trading, Platinum Peak named on `/portfolio` |
 | United States | Delivered client work — HOMIES, Marty-QR, David Tishbi, Estate named on `/portfolio` |
 
@@ -43,9 +43,9 @@ Locations and the evidence behind each:
 claims. A location *page* is justified by delivered work; a local *directory listing* needs
 a real address, which only Wellington has.
 
-**One correction to the brief:** it listed Udaipur as "engineering team, stated on /about".
-The `/about` page does **not** mention Udaipur — the claim lives in `/europe` and in the
-`/about` meta description. But Udaipur's evidence is *stronger* than the brief credited,
+**One correction to the brief:** it listed the engineering team location as stated on /about.
+The `/about` page does **not** name a city — the claim lives in `/europe` and in the
+`/about` meta description. Owner rule: the team is stated only as India. The Udaipur evidence is client-side,
 because two named clients are Udaipur businesses. This matters for §D.
 
 **One caution the brief did not flag:** `/about` states plainly that **no delivered
@@ -414,14 +414,14 @@ itself did not have:
 - **Two named clients are Udaipur businesses** — Dhanlaxmi Property (Udaipur, Rajasthan,
   trading since 1998) and Palm Vision Technology (Fatehpura, Udaipur, trading since 2006).
   Both are published on `/portfolio` with screenshots, problem, solution and tags.
-- **The delivery team is in Udaipur** — stated in `/europe` copy.
+- **The delivery team is in India** (owner rule: never a city) — stated in `/europe` copy.
 
 That is a real presence with named, verifiable local clients — the exact opposite of a
 doorway page for a city where nothing has been delivered.
 
 **Shipped as `/in` — one NATIONAL page, not a city page.** Title, H1, description and all
 seven H2s are India-level, and `areaServed` is `Country: India` with no sub-regions. Udaipur
-appears once in visible copy, as the place the team sits.
+appears in visible copy only as the location of the two named clients.
 
 It states plainly that there is **no Indian entity** (the contracting company is the NZ one)
 and that there is no Mumbai, Delhi, Bangalore or Pune office — those cities appear on the

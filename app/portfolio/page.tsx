@@ -17,7 +17,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     'Real client work: Infinity Bay Trading, Dhanlaxmi Property, Palm Vision Technology and more: SaaS dashboards, AI platforms and real-estate builds we shipped.',
   path: '/portfolio',
-  image: '/portfolio.png',
+  image: '/og/portfolio-v2.png',
   keywords:
     'web development portfolio, AI app portfolio, SaaS portfolio, React projects, blockchain projects, mobile app portfolio, New Zealand web agency portfolio, case studies',
 })

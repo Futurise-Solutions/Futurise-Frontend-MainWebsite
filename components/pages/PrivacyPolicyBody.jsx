@@ -177,8 +177,8 @@ export default function PrivacyPolicyBody() {
                 <Text color="text.muted" fontSize={{ base: "14px", md: "15px" }} lineHeight={1.8}>
                   This Privacy Policy applies to the website <Box as="span" color="accent.solid" fontWeight={600}>futurisesolutions.com</Box> and all services
                   offered by <Box as="span" color="text.primary" fontWeight={600}>{COMPANY}</Box> (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;).
-                  By using our website you agree to the collection and use of information as described in this policy.
-                  If you do not agree, please discontinue use of our website.
+                  It explains what we collect, why we use it and on what lawful basis, who we share it with,
+                  how long we keep it, and the rights you have.
                 </Text>
               </Box>
             </Reveal>

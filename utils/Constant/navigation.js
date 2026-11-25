@@ -14,9 +14,27 @@ import UIUXNavbarIcon from "../../assests/HomeAssest/UIUXNavbarIcon.svg";
 // Enquiries run through the booking flow, the contact form, email, and a WhatsApp
 // click-to-chat link on the business number (owner decision, Nov 2026). The number is
 // never displayed as text or placed in schema, and there is no `tel:` link.
+/**
+ * WhatsApp click-to-chat link whose pre-filled first message names the page the visitor
+ * was on, so the owner can tell which page produced the chat (analytics cannot see inside
+ * WhatsApp). The number lives ONLY inside this href (owner rule): never render it as text.
+ *
+ * @param {string} [pathname] Current route, e.g. from usePathname(). Omit for the generic message.
+ * @param {"page"|"chat"} [context] "chat" when the link is offered by the site assistant.
+ */
+export function whatsappHref(pathname = "", context = "page") {
+  const path = typeof pathname === "string" && pathname.startsWith("/") ? pathname.slice(0, 120) : "";
+  const text = !path
+    ? "Hi Futurise Solutions, I found you on your website and I'd like to discuss a project."
+    : context === "chat"
+      ? `Hi Futurise Solutions, I was chatting with your assistant on futurisesolutions.com${path} and I'd like to discuss a project.`
+      : `Hi Futurise Solutions, I was on futurisesolutions.com${path} and I'd like to discuss a project.`;
+  return "https://wa.me/917665013356?text=" + encodeURIComponent(text);
+}
+
 export const CONTACT = {
   email: "business@futurisesolutions.com",
-  whatsapp: "https://wa.me/917665013356?text=" + encodeURIComponent("Hi Futurise Solutions, I found you on your website and I'd like to discuss a project."),
+  whatsapp: whatsappHref(),
   address: {
     line1: "Huddart Parker Building",
     line2: "Wellington Central",

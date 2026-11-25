@@ -25,14 +25,14 @@ interface Service {
 
 const svc = services as Record<string, Service>
 
-/** Ported verbatim from src/Pages/ServicePage.jsx. */
+/** Brand cards (1200x630) rendered for each service; no stats or people. */
 const serviceImages: Record<string, string> = {
-  'web-development': '/webdevelopment.png',
-  'app-development': '/appdevlopment.png',
-  'ui-ux-design': '/uiuxdevelopment.png',
-  'blockchain-development': '/blockchaindevelopment.png',
-  'ai-ml-solutions': '/aimlsol.png',
-  'digital-marketing': '/digitalmarkiting.png',
+  'web-development': '/og/web-development-v2.png',
+  'app-development': '/og/app-development-v2.png',
+  'ui-ux-design': '/og/ui-ux-design-v2.png',
+  'blockchain-development': '/og/blockchain-development-v2.png',
+  'ai-ml-solutions': '/og/ai-ml-solutions-v2.png',
+  'digital-marketing': '/og/digital-marketing-v2.png',
 }
 
 const serviceKeywords: Record<string, string> = {
@@ -69,7 +69,7 @@ export async function generateMetadata({
     description:
       service.metaDescription || `${service.description} ${service.details}`.slice(0, 160),
     path: `/service/${slug}`,
-    image: serviceImages[slug] || '/home.png',
+    image: serviceImages[slug] || '/og/home-v2.png',
     keywords: serviceKeywords[slug] || '',
   })
 }

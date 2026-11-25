@@ -4,6 +4,7 @@ import useAutoScene from '../common/useAutoScene';
 import Image from 'next/image';
 import Link from 'next/link';
 import {Projects,services} from '../../utils/Constant';
+import {useBooking} from '../../context/BookingContext';
 import MasonryGrid from '../common/MasonryGrid';
 import {PortfolioOpening} from '../common/PageOpenings';
 import styles from '../common/CommercialPages.module.css';
@@ -27,16 +28,18 @@ function ProjectGallery({project,priority}){
   <div className={styles.galleryControls}><p>{project.clentName} · {String(active+1).padStart(2,'0')} / {String(project.img.length).padStart(2,'0')}</p><div><button type="button" aria-controls={id} aria-label={`Previous image of ${project.clentName}`} onClick={()=>setActive(v=>(v-1+project.img.length)%project.img.length)}>←</button><button type="button" aria-controls={id} aria-label={`Next image of ${project.clentName}`} onClick={()=>setActive(v=>(v+1)%project.img.length)}>→</button></div></div>
  </div>;
 }
+const projectId=name=>String(name).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
 export default function PortfolioBody(){
+ const {onOpen}=useBooking();
  return <div className={`${styles.page} ${presentation.page}`}>
   <PortfolioOpening eyebrow="Our portfolio" title="Crafting innovation with" accent="every project." description="A look at some of the products we've designed and engineered for ambitious teams around the world."><Link href="/contact">Start your project ↗</Link><Link href="/service/web-development">Our services ↗</Link></PortfolioOpening>
   <section id="project-index" className={styles.container} aria-label="Portfolio projects">
-   <MasonryGrid className={styles.projectGrid}>{Projects.map(project=><div key={project.Heading}><article className={styles.project} aria-label={project.Heading}>
+   <MasonryGrid className={styles.projectGrid}>{Projects.map(project=><div key={project.Heading}><article id={projectId(project.clentName)} className={`${styles.project} ${presentation.anchor}`} aria-label={project.Heading}>
     <ProjectGallery project={project} priority={Projects.indexOf(project)===0}/>
     <div className={styles.projectHead}><div><p className={styles.meta}>{project.projectType}</p><h2>{project.Heading}</h2></div><span>{String(Projects.indexOf(project)+1).padStart(2,'0')}</span></div>
     <details className={styles.projectNotes}><summary>Project notes <span aria-hidden="true">+</span></summary>
     <div className={styles.projectInfo}><p>{project.aboutProject}</p><details><summary>The problem &amp; our solution</summary><h3>The Problem</h3><p>{project.problem}</p><h3>Our Solution</h3><p>{project.solution}</p></details></div>
-    <div className={styles.projectFoot}>{project.stats&&<dl className={styles.metrics}>{project.stats.map(s=><div key={s.label}><dt>{s.label}</dt><dd>{s.value}</dd></div>)}</dl>}<p className={styles.meta}>Client: {project.clentName}</p><Link href="/contact">Start a similar project ↗</Link></div>
+    <div className={styles.projectFoot}>{project.stats&&<dl className={styles.metrics}>{project.stats.map(s=><div key={s.label}><dt>{s.label}</dt><dd>{s.value}</dd></div>)}</dl>}<p className={styles.meta}>Client: {project.clentName}</p><button type="button" className={presentation.similar} onClick={()=>onOpen('portfolio:'+projectId(project.clentName))}>Start a similar project ↗</button></div>
     </details>
    </article></div>)}</MasonryGrid>
   </section>

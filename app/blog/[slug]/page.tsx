@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation'
 import JsonLd from '@/components/common/JsonLd'
 import ArticleShell from '@/components/blog/ArticleShell'
 import ArticleBody from '@/components/blog/ArticleBody'
+import InlineBookingCTA from '@/components/blog/InlineBookingCTA'
+import { BLOG_CTA_OVERRIDES } from '@/utils/Constant/blogCtaOverrides'
 import { buildMetadata } from '@/lib/seo'
 import {
   getBlogs,
@@ -160,6 +162,21 @@ export default async function Page({ params }: { params: Promise<Params> }) {
     })
   }
 
+  /* Inline CTA: split before the SECOND '## ' line, i.e. after the first section. Posts with
+     fewer than three '## ' lines get no inline CTA. Fence-aware so code samples can't match. */
+  const content: string = blog.content || ''
+  const lines = content.split('\n')
+  let inFence = false
+  const h2At: number[] = []
+  lines.forEach((l, i) => {
+    if (/^\s*(```|~~~)/.test(l)) inFence = !inFence
+    else if (!inFence && l.startsWith('## ')) h2At.push(i)
+  })
+  const splitAt = h2At.length >= 3 ? h2At[1] : -1
+  const before = splitAt > 0 ? lines.slice(0, splitAt).join('\n') : content
+  const after = splitAt > 0 ? lines.slice(splitAt).join('\n') : ''
+  const inlineHeading = (BLOG_CTA_OVERRIDES as Record<string, { heading?: string }>)[blog.slug]?.heading
+
   return (
     <>
       <JsonLd data={jsonLd} />
@@ -172,7 +189,9 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         authorName={articleAuthorName()}
       >
         {/* SERVER-rendered article body — never crosses the client boundary. */}
-        <ArticleBody content={blog.content || ''} />
+        <ArticleBody content={before} />
+        {after && <InlineBookingCTA slug={blog.slug} heading={inlineHeading} />}
+        {after && <ArticleBody content={after} />}
       </ArticleShell>
     </>
   )

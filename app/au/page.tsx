@@ -21,7 +21,7 @@ export const metadata: Metadata = buildMetadata({
   description: auMeta.description,
   path: '/au',
   keywords: auMeta.keywords,
-  image: '/home.png',
+  image: '/og/home-v2.png',
   alternates: COUNTRY_ALTERNATES,
 })
 
@@ -35,7 +35,7 @@ const jsonLd = buildCountrySchema({
   regions: ['New South Wales', 'Victoria', 'Queensland', 'Western Australia', 'South Australia'],
   currency: 'AUD',
   faqs: auFaqs,
-  image: '/home.png',
+  image: '/og/home-v2.png',
 })
 
 export default function Page() {

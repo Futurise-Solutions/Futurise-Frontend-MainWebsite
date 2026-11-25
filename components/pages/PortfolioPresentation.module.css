@@ -17,3 +17,6 @@
 @media(hover:hover) and (prefers-reduced-motion:no-preference){.gallery:hover .laptop{transform:translateY(-3px)}.gallery:hover .phone{transform:rotate(0)}}
 @media(max-width:700px){.gallery{padding:18px}.stage[data-mobile=true]{padding-top:24px}.phone{width:25%}.lid{padding-top:10px}}
 @media(prefers-reduced-motion:reduce){.laptop,.phone{transition:none}}
+
+.anchor{scroll-margin-top:120px}
+.similar{background:none;border:0;border-bottom:1px solid #08080d70;padding:14px 0;min-height:48px;font-size:14px;color:inherit;font-family:inherit}

@@ -6,7 +6,7 @@ import { buildMetadata } from '@/lib/seo'
 import { solutionAlternates } from '@/lib/solutionAlternates'
 import { solutions } from '@/utils/Constant/solutions'
 
-/** /solutions/[slug] — one route file, nine prerendered pages from the content module. */
+/** /solutions/[slug] — one route file, one prerendered page per entry in the content module. */
 type Params = { slug: string }
 
 interface Solution {

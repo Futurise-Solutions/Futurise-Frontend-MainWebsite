@@ -9,7 +9,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     'Start your AI, SaaS, web or mobile app project with Futurise Solutions. Book a strategy call or send us a message. We reply within one business day.',
   path: '/contact',
-  image: '/contactus.png',
+  image: '/og/contact-v2.png',
   keywords:
     'contact Futurise Solutions, hire web developer New Zealand, get a quote AI app, start SaaS project, web development consultation, mobile app quote, free project consultation',
 })
@@ -59,12 +59,6 @@ const jsonLd = [
         url: 'https://www.futurisesolutions.com/contact',
         availableLanguage: ['English'],
         areaServed: AREAS_SERVED_ISO,
-        hoursAvailable: {
-          '@type': 'OpeningHoursSpecification',
-          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-          opens: '09:00',
-          closes: '18:00',
-        },
       },
     ],
   },

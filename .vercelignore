@@ -1,0 +1,21 @@
+# Files the Vercel CLI must never upload. Production deploys run with `vercel deploy --prod`
+# from a clean local checkout, so this file mirrors .gitignore: only tracked source goes up.
+# Secrets live in the Vercel project's environment variables, never in the upload.
+.env
+.env.*
+*.pem
+
+# Dependencies, build output and caches are rebuilt on Vercel.
+node_modules
+.next
+out
+build
+coverage
+*.tsbuildinfo
+next-env.d.ts
+
+# Local QA captures and throwaway review scripts.
+output
+
+# Logs.
+*.log

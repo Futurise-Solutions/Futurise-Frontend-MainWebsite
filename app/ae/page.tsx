@@ -21,7 +21,7 @@ export const metadata: Metadata = buildMetadata({
   description: aeMeta.description,
   path: '/ae',
   keywords: aeMeta.keywords,
-  image: '/home.png',
+  image: '/og/home-v2.png',
   alternates: COUNTRY_ALTERNATES,
 })
 
@@ -35,7 +35,7 @@ const jsonLd = buildCountrySchema({
   regions: ['Dubai', 'Abu Dhabi', 'Sharjah', 'Ras Al Khaimah'],
   currency: 'AED',
   faqs: aeFaqs,
-  image: '/home.png',
+  image: '/og/home-v2.png',
 })
 
 export default function Page() {

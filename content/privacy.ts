@@ -1,11 +1,17 @@
 /**
  * Content for /privacy.
  *
- * Extracted PROGRAMMATICALLY from src/Pages/PrivacyPolicy.jsx — bytes copied, never
- * retyped, so curly quotes, em dashes and any non-breaking spaces survive exactly.
+ * Originally extracted from src/Pages/PrivacyPolicy.jsx. Revised 25 Nov 2026 to describe
+ * what the site actually uses: EmailJS, Google Analytics 4, Microsoft Clarity, Vercel
+ * hosting with Web Analytics and Speed Insights, Google Calendar appointment scheduling,
+ * WhatsApp, the chat assistant, and the copy of each enquiry stored by /api/lead.
+ *
+ * ⚠️ PrivacyPolicyBody.jsx renders every section except the LAST, then draws its own
+ * "10. Contact Us" card. Keep Contact as the final section, and keep ten sections unless
+ * that hard-coded heading is updated too. Name no service the site does not use.
  */
 
-export const LAST_UPDATED = "15 June 2025";
+export const LAST_UPDATED = "25 November 2026";
 export const COMPANY = "Futurise Solutions";
 export const EMAIL = "business@futurisesolutions.com";
 export const ADDRESS = "Huddart Parker Building, Wellington Central, Wellington 6011, New Zealand";
@@ -17,15 +23,15 @@ export const sections = [
     content: [
       {
         subtitle: "1.1 Information You Provide Directly",
-        body: `When you contact us, request a quote, fill in our contact form, or subscribe to our newsletter, we collect information you voluntarily provide, including: your name and email address, phone number, company name, project details and requirements, and any other information you choose to share with us.`,
+        body: `When you contact us, we collect the information you choose to give us. The contact form asks for your name, email address, country and the service you are interested in, and lets you add your company name, a phone or WhatsApp number and a description of your project. The newsletter sign-up asks only for your email address. If you book a call, the booking form asks for details such as your name and email address. If you email us or message us on WhatsApp, we receive what you send, together with your email address or your WhatsApp name and number. If you type questions into the chat assistant, we receive those messages.`,
       },
       {
         subtitle: "1.2 Information Collected Automatically",
-        body: `When you visit our website at futurisesolutions.com, we automatically collect certain technical information, including: IP address and approximate geolocation, browser type and version, operating system, pages visited and time spent on each page, referring website or source, and device type (desktop, mobile, tablet).`,
+        body: `When you visit futurisesolutions.com, some technical information is collected automatically: IP address and approximate location, browser type and version, operating system, the pages you visit and how long you spend on them, the website that referred you, and device type (desktop, mobile, tablet). It is collected by our hosting provider and by the analytics tools described in section 3. Microsoft Clarity also records clicks, scrolling and mouse movement to produce session recordings and heatmaps, and it masks what you type into form fields. When you send the contact form, it also carries the page you sent it from, the page you first arrived on during that visit, the website that referred you and any campaign (UTM) tags in the link you followed, so that we know where enquiries come from.`,
       },
       {
         subtitle: "1.3 Cookies & Similar Technologies",
-        body: `We use cookies and similar tracking technologies to improve your experience on our website. These include essential cookies (required for the site to function), analytics cookies (to understand how visitors use our site), and preference cookies (to remember your settings). You may disable cookies via your browser settings, though some features of the site may be affected.`,
+        body: `Google Analytics and Microsoft Clarity use cookies so they can recognise a returning browser and measure how the site is used. The site itself keeps a few small values in your browser: a display setting and, for the length of a visit only, a few interface choices (such as whether the homepage introduction has already played) and the page, referring website and any campaign tags you arrived with, so that an enquiry can say where it came from. You can block or delete cookies and stored site data in your browser settings; the site still works without them.`,
       },
     ],
   },
@@ -35,23 +41,35 @@ export const sections = [
     content: [
       {
         subtitle: "",
-        body: `We use the information we collect for the following purposes:`,
+        body: `We use your information only for the purposes below. For each one we say what allows us to use it, known as the lawful basis.`,
       },
       {
-        subtitle: "Service Delivery",
-        body: `To respond to your enquiries, provide quotes, manage client projects, and communicate updates related to work we are performing for you.`,
+        subtitle: "Replying to Enquiries & Bookings",
+        body: `To reply to you, answer your questions, prepare a quote and arrange calls. Basis: you asked us to get in touch, so this is a step you requested before any contract, and we have a legitimate interest in answering the people who contact us.`,
       },
       {
-        subtitle: "Newsletter & Marketing",
-        body: `To send you our newsletter and relevant updates about our services, industry insights, or product launches, only when you have opted in. You may unsubscribe at any time by clicking the unsubscribe link in any email or contacting us directly.`,
+        subtitle: "Keeping a Copy of Each Enquiry",
+        body: `We keep a copy of each contact-form enquiry and newsletter sign-up in our own database, so that none is lost if an email fails to arrive and so that we can follow up. Basis: our legitimate interest in not losing enquiries and in following them up.`,
       },
       {
-        subtitle: "Website Improvement",
-        body: `To analyse website traffic, understand user behaviour, fix technical issues, and improve the quality and performance of our website and services.`,
+        subtitle: "Client Projects",
+        body: `To manage projects we are engaged on and to keep you updated on the work. Basis: performing our contract with you.`,
+      },
+      {
+        subtitle: "Newsletter",
+        body: `To send you our newsletter, only if you subscribe. Basis: your consent, which you can withdraw at any time by writing to business@futurisesolutions.com.`,
+      },
+      {
+        subtitle: "Website Analytics & Improvement",
+        body: `To understand how the site is used, find pages that are broken, slow or confusing, and improve them. Basis: our legitimate interest in running a website that works.`,
+      },
+      {
+        subtitle: "Chat Assistant",
+        body: `To answer the questions you type into the chat assistant. Basis: our legitimate interest in answering visitors' questions.`,
       },
       {
         subtitle: "Legal & Compliance",
-        body: `To comply with applicable laws and regulations, enforce our terms, prevent fraud, and protect the rights, safety, and property of Futurise Solutions and our clients.`,
+        body: `To comply with applicable laws and regulations, enforce our terms, prevent fraud and spam, and protect the rights, safety, and property of Futurise Solutions and our clients. Basis: our legal obligations, and our legitimate interest in protecting the site and our business.`,
       },
     ],
   },
@@ -61,11 +79,35 @@ export const sections = [
     content: [
       {
         subtitle: "",
-        body: `We do not sell, rent, or trade your personal information to third parties. We may share your information in the following limited circumstances:`,
+        body: `We do not sell, rent, or trade your personal information to third parties. We share it only with the services below, which run this website and our communications, and in the limited circumstances that follow them:`,
       },
       {
-        subtitle: "Service Providers",
-        body: `We work with trusted third-party service providers who assist us in operating our business. These include EmailJS (newsletter delivery), Google Analytics (website analytics), and project management or communication tools. These providers are contractually required to keep your data confidential and use it only for the services they perform for us.`,
+        subtitle: "Email Delivery (EmailJS)",
+        body: `EmailJS delivers contact-form enquiries and newsletter sign-ups from this website to our inbox.`,
+      },
+      {
+        subtitle: "Our Own Database",
+        body: `Contact-form enquiries and newsletter sign-ups are stored in our own database on our backend as well as emailed to us. A contact-form copy also records the page you sent it from, the page you first arrived on, the website that referred you and any campaign (UTM) tags.`,
+      },
+      {
+        subtitle: "Analytics (Google, Microsoft, Vercel)",
+        body: `Google Analytics 4 measures how visitors use the site. Microsoft Clarity produces session recordings and heatmaps of clicks, scrolling and mouse movement, and masks what you type into form fields. Vercel hosts the site, and Vercel Web Analytics and Speed Insights measure visits and how quickly pages load.`,
+      },
+      {
+        subtitle: "Booking (Google Calendar)",
+        body: `Calls are booked through Google Calendar appointment scheduling. When you book, the details you enter in the booking form go to Google and to us.`,
+      },
+      {
+        subtitle: "WhatsApp (Meta)",
+        body: `If you choose to message us on WhatsApp, the conversation takes place on WhatsApp, a service operated by Meta, and WhatsApp's own terms and privacy policy apply to it.`,
+      },
+      {
+        subtitle: "Chat Assistant",
+        body: `Questions you type into the chat assistant are sent to our backend and to the AI model provider that writes its replies.`,
+      },
+      {
+        subtitle: "Other Tools",
+        body: `We also use email and project-management tools to run our business and deliver client work. Each provider named in this section handles information under its own terms and privacy policy.`,
       },
       {
         subtitle: "Legal Requirements",
@@ -83,7 +125,7 @@ export const sections = [
     content: [
       {
         subtitle: "",
-        body: `We take reasonable and appropriate technical and organisational measures to protect your personal information against unauthorised access, alteration, disclosure, or destruction. Our website uses HTTPS encryption for all data in transit. However, no method of transmission over the Internet or electronic storage is 100% secure, and we cannot guarantee absolute security. We encourage you to use strong passwords and keep your contact details up to date.`,
+        body: `We take reasonable and appropriate technical and organisational measures to protect your personal information against unauthorised access, alteration, disclosure, or destruction. Our website uses HTTPS encryption for all data in transit. However, no method of transmission over the Internet or electronic storage is 100% secure, and we cannot guarantee absolute security.`,
       },
     ],
   },
@@ -93,7 +135,7 @@ export const sections = [
     content: [
       {
         subtitle: "",
-        body: `Depending on your location, you may have certain rights under applicable data protection laws (including the New Zealand Privacy Act 2020 and, where applicable, the GDPR):`,
+        body: `Under the New Zealand Privacy Act 2020, the UK and EU GDPR and India's Digital Personal Data Protection Act 2023, you can ask us for access to the personal information we hold about you, ask us to correct it, and ask us to delete it. Depending on the law that applies to you, you may also have the other rights listed here:`,
       },
       {
         subtitle: "Access",
@@ -121,7 +163,7 @@ export const sections = [
       },
       {
         subtitle: "",
-        body: `To exercise any of these rights, please contact us at business@futurisesolutions.com. We will respond within 30 days.`,
+        body: `To exercise any of these rights, please contact us at business@futurisesolutions.com. We will respond within 30 days. If you are unhappy with how we handle your information, you can also complain to the privacy regulator where you live, such as the Office of the Privacy Commissioner in New Zealand.`,
       },
     ],
   },
@@ -131,7 +173,7 @@ export const sections = [
     content: [
       {
         subtitle: "",
-        body: `We retain your personal information only for as long as is necessary to fulfil the purposes for which it was collected, including any legal, accounting, or reporting requirements. Contact form submissions are retained for up to 24 months. Newsletter subscriber data is retained until you unsubscribe. Client project data is retained for up to 7 years for financial and legal compliance purposes.`,
+        body: `We keep enquiries (contact-form submissions and the copy in our database, booking details, emails and WhatsApp messages) for as long as we need them to respond to you and follow up, and no longer than 24 months after our last contact with you, unless you ask us to delete them sooner. Newsletter sign-ups are kept until you unsubscribe. Client project data is retained for up to 7 years for financial and legal compliance purposes. Analytics data is kept by the analytics providers under the retention settings of those tools.`,
       },
     ],
   },
@@ -151,7 +193,7 @@ export const sections = [
     content: [
       {
         subtitle: "",
-        body: `Futurise Solutions operates across New Zealand, India, and the United States. Your personal information may be transferred to, stored in, or processed in countries other than your own. When we transfer personal data internationally, we take appropriate safeguards to ensure it is protected in accordance with applicable privacy laws. By using our website, you consent to the transfer of your information to these countries.`,
+        body: `Futurise Solutions is a New Zealand company, and our team works from India. The services described in section 3 may store or process your information in other countries, including the United States, so it may be transferred to, stored in, or processed in countries other than your own. When we transfer personal data internationally, we take appropriate safeguards to ensure it is protected in accordance with applicable privacy laws.`,
       },
     ],
   },
@@ -161,7 +203,7 @@ export const sections = [
     content: [
       {
         subtitle: "",
-        body: `We may update this Privacy Policy from time to time to reflect changes in our practices, technology, legal requirements, or other factors. When we make material changes, we will update the "Last Updated" date at the top of this page. We encourage you to review this policy periodically. Your continued use of our website after any changes constitutes your acceptance of the updated policy.`,
+        body: `We may update this Privacy Policy from time to time to reflect changes in our practices, technology, legal requirements, or other factors. When we do, we will update the "Last updated" date at the top of this page. We encourage you to review this policy periodically.`,
       },
     ],
   },

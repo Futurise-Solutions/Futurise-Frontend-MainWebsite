@@ -22,14 +22,16 @@
  * service it is listed under. Head terms belong to the service page; the posts get
  * the long-tail question their body actually answers.
  *
- * The seven re-targeted posts carry a lower-case `retarget: true` marker. Until the
+ * The re-targeted posts carry a lower-case `retarget: true` marker. Until the
  * matching CMS title change lands, their anchor text here describes the post's body
  * rather than its current <title>. That mismatch is intentional and harmless —
  * anchor text has never been required to repeat the destination's title — and it
- * resolves the moment the CMS edit is applied.
+ * resolves the moment the CMS edit is applied. (The AI one is no longer listed; see
+ * the note under "ai-ml-solutions".)
  *
- * Every `to` was verified against a prerendered directory in dist/blog. Every blurb
- * is drawn from the post's own meta description or body; none is invented.
+ * Every `to` was verified against a prerendered directory in dist/blog (entries added
+ * on 25 Nov 2026 against the live blog API). Every blurb is drawn from the post's own
+ * meta description or body; none is invented.
  */
 
 export const serviceResources = {
@@ -58,6 +60,18 @@ export const serviceResources = {
       blurb:
         "How a build is priced stage by stage, the factors that move the figure furthest, and how to budget against them.",
       to: "/blog/custom-software-development-cost-guide-2026-pricing-timeline-and-key-factors",
+    },
+    {
+      title: "Property software: build, buy or a hybrid",
+      blurb:
+        "How landlords, property managers and PropTech founders choose between off-the-shelf software, a custom build or a hybrid, with the modules, integrations and cost drivers to check.",
+      to: "/blog/property-management-software-development-build-vs-buy",
+    },
+    {
+      title: "How a hotel PMS, channel manager and booking engine connect",
+      blurb:
+        "Two-way sync, API versus middleware, where integrations fail, and the questions to ask a vendor before you buy.",
+      to: "/blog/hotel-pms-booking-engine-channel-manager-explained",
     },
   ],
 
@@ -105,6 +119,12 @@ export const serviceResources = {
         "Where the interface, not the technology, is the reason visitors leave without becoming leads.",
       to: "/blog/why-your-ai-powered-website-isnt-converting-leads-and-how-to-fix-it-in-2026",
     },
+    {
+      title: "What a hotel direct booking site needs to cut OTA commission",
+      blurb:
+        "A worked savings formula, what the site needs to win repeat guests, and how to measure direct share.",
+      to: "/blog/hotel-direct-booking-website-reduce-ota-commission",
+    },
   ],
 
   "blockchain-development": [
@@ -124,13 +144,10 @@ export const serviceResources = {
   ],
 
   "ai-ml-solutions": [
-    {
-      title: "Custom AI development: what to build, buy and expect",
-      blurb:
-        "The four main types of custom AI work, when each makes sense, build versus buy, and the factors that drive cost.",
-      to: "/blog/ai-and-ml-solutions-custom-ai-agents-llm-integrations-nlp-and-computer-vision-built-for-your-business",
-      retarget: true,
-    },
+    // The "custom AI development: what to build, buy and expect" post used to lead this
+    // list. Its build-vs-buy, delivery and cost guidance now lives on the service page
+    // itself (Nov 2026) and "Custom AI Development Services" is that page's H1, so a card
+    // pointing at the post would hand the head term back to it. Deliberately not linked.
     {
       title: "What a custom AI agent costs to build",
       blurb:
@@ -154,6 +171,18 @@ export const serviceResources = {
       blurb:
         "Why AI pilots stall, from use case choice and the skills gap to change management and measuring ROI.",
       to: "/blog/the-ai-paradox-why-your-business-is-investing-in-ai-but-not-seeing-roi-and-how-to-fix-it-in-2026",
+    },
+    {
+      title: "Security questions to ask an AI vendor",
+      blurb:
+        "Data retention and training, sub-processors, SOC 2 scope, prompt injection, incident response and HIPAA BAAs: a due-diligence list for US buyers.",
+      to: "/blog/security-questions-to-ask-an-ai-vendor",
+    },
+    {
+      title: "Making an Arabic chatbot work for UAE customers",
+      blurb:
+        "Gulf dialect and code-switching, right-to-left design, WhatsApp, human handoff, testing and data protection.",
+      to: "/blog/arabic-ai-chatbot-guide-for-uae-businesses",
     },
   ],
 

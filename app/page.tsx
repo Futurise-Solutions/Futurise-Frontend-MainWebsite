@@ -29,7 +29,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     'Futurise Solutions is a software development company building AI agents, SaaS platforms, web and mobile apps end to end. Fixed-scope quotes. Free 45-min call.',
   path: '/',
-  image: '/home.png',
+  image: '/og/home-v2.png',
   alternates: COUNTRY_ALTERNATES,
   keywords:
     'AI app development, SaaS development, web development company, mobile app development, React Native, blockchain development, Web3, AI agents, digital marketing, New Zealand, India, USA, Futurise Solutions',

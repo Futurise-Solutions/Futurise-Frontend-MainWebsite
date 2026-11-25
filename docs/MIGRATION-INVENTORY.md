@@ -1444,6 +1444,8 @@ Cloudinary is **not** needed. Whether to keep the dead preconnect: **NOT FOUND �
 
 ### G.2 `public/` — served at a stable URL (17 files)
 
+> **Update 25 Nov 2026:** the OG/link-preview filenames in this section are historical. Link previews now live in `public/og/*-v2.png` (no ratings, counts, stats, phone or people).
+
 | Path | Format | Used by | ATF? | `priority`? |
 |---|---|---|---|---|
 | `hero-atmosphere.avif` | AVIF | `HeroSection` `<source>`; **preloaded in `index.html`** | ✅ **LCP on `/`** | ✅ **the one `priority` on `/`** |
@@ -1940,7 +1942,7 @@ product?", "Do you offer custom solutions?", "What happens after the project lau
 |---|---|
 | `title` prop | `About Futurise Solutions — NZ-Registered Dev Studio` (50 chars) |
 | **Resolved `<title>`** | ⚠️ **`About Futurise Solutions — NZ-Registered Dev Studio`** — the title **contains** "Futurise Solutions", so `title.includes(SITE_NAME)` is true and **the brand is NOT appended**. |
-| `description` | `A Wellington-registered digital product studio founded in 2024, with an engineering team in Udaipur, India. Fixed-scope quotes and senior engineers.` |
+| `description` | `A Wellington-registered digital product studio founded in 2024, with an engineering team in India. Fixed-scope quotes and senior engineers.` |
 | canonical | `https://www.futurisesolutions.com/about` |
 | `og:image` | `/about.png` |
 | `keywords` | `about Futurise Solutions, AI development team, web development company, mobile app developers, blockchain team, New Zealand tech agency, digital product studio` |

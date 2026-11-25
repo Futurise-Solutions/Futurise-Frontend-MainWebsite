@@ -26,7 +26,11 @@ than guessed.
 >
 > ### Two things to settle before you start
 >
-> 1. **✅ PHONE: DECIDED — there is no published phone number.** Owner decision. It has been
+> 1. **✅ PHONE: UPDATED 9 Nov 2026 (owner decision).** Directory and backlink listings **may use
+>    the WhatsApp business number** in their phone fields. The website itself shows that number
+>    only inside the `wa.me` click-to-chat link, and no other page, schema or `llms.txt` prints a
+>    phone number. Never type the digits into a document; refer to "the WhatsApp business number".
+>    Earlier decision, now superseded for listings: it had been
 >    removed from `llms.txt` and from both chatbot files, so every surface now agrees with
 >    `/about` ("no telephone number is published anywhere on this site") and with the
 >    Organization schema, which omits `telephone`.
@@ -55,10 +59,10 @@ than guessed.
 | Website | https://www.futurisesolutions.com |
 | Email | business@futurisesolutions.com |
 | Registered address | Huddart Parker Building, Wellington Central, Wellington 6011, New Zealand |
-| Phone | **None published.** Removed from `llms.txt`; absent from every page and from the Organization schema. See §2.8 for the 26 targets that require one. |
+| Phone | **The WhatsApp business number** — allowed in directory/backlink phone fields (owner decision, 9 Nov 2026). On the website it appears only inside the `wa.me` link; it is not in `llms.txt` or the Organization schema. §2.8 lists the targets that require a phone. |
 | Founded | 2024 |
 | Entity type | Registered New Zealand company |
-| Delivery team | Udaipur, Rajasthan, India |
+| Delivery team | India |
 | Team size band | ⚠️ **Not published anywhere.** Use "2–10" only if you can stand behind it; the site deliberately publishes no headcount. Leave blank where optional. |
 | Languages | English |
 | Currencies | NZD, USD, AED, CAD, AUD, EUR, INR *(markets served; NZD and USD are the ones named in page copy)* |
@@ -89,14 +93,14 @@ than guessed.
 **50 words**
 
 > Futurise Solutions is a Wellington-registered digital product studio founded in 2024, with
-> an engineering team in Udaipur, India. We build AI agents, SaaS platforms, web and mobile
+> an engineering team in India. We build AI agents, SaaS platforms, web and mobile
 > apps end to end — on fixed-scope quotes rather than hourly billing. Delivered client work
 > in the UAE, the United States and India.
 
 **100 words**
 
 > Futurise Solutions is a full-cycle digital product studio registered in Wellington, New
-> Zealand and founded in 2024, with its engineering team in Udaipur, India. We design, build
+> Zealand and founded in 2024, with its engineering team in India. We design, build
 > and scale AI, web, mobile and Web3 products for startup founders, SaaS companies and
 > enterprises.
 >
@@ -109,7 +113,7 @@ than guessed.
 **160 words**
 
 > Futurise Solutions is a full-cycle digital product studio registered in Wellington, New
-> Zealand, founded in 2024, with its engineering team based in Udaipur, India. We take
+> Zealand, founded in 2024, with its engineering team in India. We take
 > products from concept to scaled production for startup founders, SaaS companies and
 > enterprises.
 >
@@ -129,7 +133,7 @@ than guessed.
 
 > Futurise Solutions is a full-cycle digital product studio registered in Wellington, New
 > Zealand at the Huddart Parker Building, founded in 2024, with its engineering team in
-> Udaipur, Rajasthan, India. We design, build and scale AI, web, mobile and Web3 products,
+> India. We design, build and scale AI, web, mobile and Web3 products,
 > taking an idea from concept through to production for startup founders, SaaS companies and
 > enterprises.
 >
@@ -208,8 +212,10 @@ in a portfolio-item field, use the product title and keep the client name for lo
 client-list fields. Startus Cloud is the only published **Shopify** project, so it is the
 right portfolio item for any Shopify category.
 
-**Testimonials:** exactly one is on the record, from the Founder of Infinity Bay Trading
-(Dubai). Do not imply more.
+**Testimonials:** there are eight, confirmed genuine by the owner on 25 Nov 2026. One is signed
+with name and company (Infinity Bay Trading, Dubai); seven are signed with name and country
+(India x3, New Zealand, USA, Canada, Australia). Do not claim more than eight, and do not
+invent ratings or review counts.
 
 ---
 
@@ -219,8 +225,9 @@ right portfolio item for any Shopify category.
 still accepts submissions · LOW = may be dead or may have closed submissions.
 
 **Honesty rule applied:** anywhere requiring a local street address in a city with no
-presence is marked **"needs local address — skip"**. Udaipur and Wellington listings *are*
-available, because there is a real address in Wellington and named local clients in Udaipur.
+presence is marked **"needs local address — skip"**. Wellington listings are available because
+there is a real address there. The team location is stated only as India, so no Indian city
+listing is claimed for the company.
 
 **Anchor mix across the 100:** ~50 branded, ~25 bare URL, ~25 descriptive. Target URLs are
 deliberately spread — roughly 40 to `/`, and the rest across `/nz`, `/us`, `/ae`, `/europe`,
@@ -280,23 +287,25 @@ deliberately spread — roughly 40 to `/`, and the rest across `/nz`, `/us`, `/a
 
 ## 2.2 India (30)
 
-Udaipur listings are legitimate — two named Udaipur clients and the delivery team are there.
+> 🚫 **DO NOT USE the city-specific rows below (marked "DO NOT USE").** The team location is
+> stated only as **India**; do not claim a city for the company. Country-level rows (Global/India)
+> remain usable.
 
 > **Target page:** `/in` now exists (built after this plan was first written) and is the
-> correct destination for Indian directory listings. It names both Udaipur clients, states
-> the team location, and states plainly that there is **no Indian entity** — which matters
+> correct destination for Indian directory listings. It names both Udaipur clients (a client
+> fact), states the team location as India, and states plainly that there is **no Indian entity** — which matters
 > here, because several listings below ask for one.
 >
 > ⚠️ **One page for India.** Do not create city-specific listings implying a Mumbai, Delhi,
-> Bangalore or Pune presence. Udaipur is the only Indian location this company can claim.
+> Bangalore, Pune or Udaipur presence for the company.
 
 | # | Site | URL | City | Type | Cost | Signup | Target | Anchor | Conf |
 |---:|---|---|---|---|---|---|---|---|---|
-| 16 | JustDial | justdial.com | Udaipur | Business directory | Freemium | Free listing | `/in` | Futurise Solutions | HIGH |
-| 17 | IndiaMART | indiamart.com | Udaipur | B2B directory | Freemium | Seller account | `/in` | Futurise Solutions | HIGH |
-| 18 | Sulekha | sulekha.com | Udaipur | Business directory | Freemium | Submit | `/service/web-development` | web development company | HIGH |
-| 19 | TradeIndia | tradeindia.com | Udaipur | B2B directory | Freemium | Submit | `/in` | futurisesolutions.com | HIGH |
-| 20 | Google Business Profile (India) | business.google.com | Udaipur | Local | Free | ⚠️ Needs a verifiable Udaipur address — use only if the team has a registered office there | `/` | Futurise Solutions | MEDIUM |
+| 16 | JustDial | justdial.com | 🚫 DO NOT USE (city) | Business directory | Freemium | Free listing | `/in` | Futurise Solutions | HIGH |
+| 17 | IndiaMART | indiamart.com | 🚫 DO NOT USE (city) | B2B directory | Freemium | Seller account | `/in` | Futurise Solutions | HIGH |
+| 18 | Sulekha | sulekha.com | 🚫 DO NOT USE (city) | Business directory | Freemium | Submit | `/service/web-development` | web development company | HIGH |
+| 19 | TradeIndia | tradeindia.com | 🚫 DO NOT USE (city) | B2B directory | Freemium | Submit | `/in` | futurisesolutions.com | HIGH |
+| 20 | Google Business Profile (India) | business.google.com | 🚫 DO NOT USE (city) | Local | Free | ⚠️ Needs a verifiable local address — the company has no Indian address | `/` | Futurise Solutions | MEDIUM |
 | 21 | Clutch | clutch.co | Global/India | Review platform | Freemium | Company profile | `/portfolio` | Futurise Solutions | HIGH |
 | 22 | GoodFirms | goodfirms.co | Global/India | Review platform | Freemium | Company profile | `/portfolio` | Futurise Solutions | HIGH |
 | 23 | DesignRush | designrush.com | Global | Agency listing | Freemium | Submit | `/service/ui-ux-design` | UI UX design agency | HIGH |
@@ -307,16 +316,16 @@ Udaipur listings are legitimate — two named Udaipur clients and the delivery t
 | 28 | Techreviewer | techreviewer.co | Global | Agency listing | Freemium | Submit | `/service/ai-ml-solutions` | AI development company | MEDIUM |
 | 29 | SelectedFirms | selectedfirms.co | Global | Agency listing | Free | Submit | `/` | futurisesolutions.com | MEDIUM |
 | 30 | MouthShut | mouthshut.com | India | Review platform | Free | Business profile | `/` | Futurise Solutions | MEDIUM |
-| 31 | Yalwa India | yalwa.in | Udaipur | Business directory | Free | Submit | `/in` | Futurise Solutions | MEDIUM |
-| 32 | Cybo | cybo.com | Udaipur | Business directory | Free | Submit | `/` | futurisesolutions.com | MEDIUM |
-| 33 | Tuugo India | tuugo.in | Udaipur | Business directory | Free | Submit | `/` | Futurise Solutions | MEDIUM |
-| 34 | Hotfrog India | hotfrog.in | Udaipur | Business directory | Free | Submit | `/in` | software development company Udaipur | MEDIUM |
-| 35 | ExportersIndia | exportersindia.com | Udaipur | B2B directory | Freemium | Submit | `/` | Futurise Solutions | MEDIUM |
+| 31 | Yalwa India | yalwa.in | 🚫 DO NOT USE (city) | Business directory | Free | Submit | `/in` | Futurise Solutions | MEDIUM |
+| 32 | Cybo | cybo.com | 🚫 DO NOT USE (city) | Business directory | Free | Submit | `/` | futurisesolutions.com | MEDIUM |
+| 33 | Tuugo India | tuugo.in | 🚫 DO NOT USE (city) | Business directory | Free | Submit | `/` | Futurise Solutions | MEDIUM |
+| 34 | Hotfrog India | hotfrog.in | 🚫 DO NOT USE (city) | Business directory | Free | Submit | `/in` | software development company India | MEDIUM |
+| 35 | ExportersIndia | exportersindia.com | 🚫 DO NOT USE (city) | B2B directory | Freemium | Submit | `/` | Futurise Solutions | MEDIUM |
 | 36 | Fundoodata | fundoodata.com | India | B2B directory | Freemium | Submit | `/` | Futurise Solutions | LOW |
 | 37 | StartupIndia | startupindia.gov.in | India | Government / startup | Free | ⚠️ Requires Indian entity registration — verify eligibility | `/` | Futurise Solutions | MEDIUM |
 | 38 | YourStory Directory | yourstory.com | India | Startup directory | Free | Submit | `/` | futurisesolutions.com | LOW |
-| 39 | Rajasthan Udyog / MSME portal | msme.gov.in | Udaipur | Government | Free | ⚠️ Requires Indian entity | `/` | Futurise Solutions | LOW |
-| 40 | Udaipur Chamber of Commerce | ucciudaipur.com | Udaipur | Chamber | Paid | Membership — legitimate, two local clients | `/in` | Futurise Solutions | MEDIUM |
+| 39 | India MSME portal | msme.gov.in | 🚫 DO NOT USE (city) | Government | Free | ⚠️ Requires Indian entity | `/` | Futurise Solutions | LOW |
+| 40 | City chamber of commerce (India) | — | 🚫 DO NOT USE (city) | Chamber | Paid | Membership — city-specific, DO NOT USE | `/in` | Futurise Solutions | MEDIUM |
 | 41 | Crunchbase | crunchbase.com | Global | Startup directory | Freemium | Company profile | `/` | Futurise Solutions | HIGH |
 | 42 | LinkedIn Company Page | linkedin.com | Global | Social profile | Free | Already exists — complete every field | `/` | Futurise Solutions | HIGH |
 | 43 | Glassdoor | glassdoor.com | Global | Employer profile | Free | Claim | `/about` | Futurise Solutions | MEDIUM |
@@ -420,6 +429,8 @@ the link rather than a form submission.
 
 ## 2.8 ⚠️ Which targets require a phone number
 
+> **Update 9 Nov 2026:** the owner now allows the WhatsApp business number in directory phone fields, so the SKIP verdicts below that rest only on a missing phone can be reconsidered. The website still shows that number only inside the `wa.me` link. The text below is the earlier analysis, kept for the reasons each target is gated.
+
 The site now publishes **no phone number anywhere** — `/about` says so explicitly, the
 Organization schema omits `telephone`, and it has been removed from `llms.txt`. That is a
 deliberate, defensible position: `/about` argues that listing a channel nobody answers is
@@ -450,14 +461,14 @@ no-phone decision is ever reversed — and then read the note at the end of this
 | 17 | IndiaMART | 🚫 SKIP | Seller account, OTP-verified |
 | 18 | Sulekha | 🚫 SKIP | Lead routing is by phone — a listing without one receives nothing |
 | 19 | TradeIndia | 🚫 SKIP | Seller account, OTP-verified |
-| 20 | Google Business Profile (India) | 🚫 SKIP | Needs a verifiable Udaipur **address** as well as a phone |
+| 20 | Google Business Profile (India) | 🚫 SKIP | City-specific listing — DO NOT USE (needs a local address) |
 | 30 | MouthShut | 🚫 SKIP | Business profile — phone mandatory |
 | 31 | Yalwa India | 🚫 SKIP | Core directory field — phone mandatory |
 | 33 | Tuugo India | 🚫 SKIP | Core directory field — phone mandatory |
 | 34 | Hotfrog India | 🚫 SKIP | Core directory field — phone mandatory |
 | 35 | ExportersIndia | 🚫 SKIP | Seller account — phone mandatory |
 | 36 | Fundoodata | 🚫 SKIP | B2B data listing — phone mandatory |
-| 40 | Udaipur Chamber of Commerce | 🚫 SKIP | Membership application — phone mandatory |
+| 40 | City chamber of commerce (India) | 🚫 SKIP | Membership application — phone mandatory |
 | 59 | BBB | 🚫 SKIP | Already skipped in §2.3 — needs a US address too |
 | 64 | Yellow Pages UAE | 🚫 SKIP | Phone required, and may need a UAE trade licence |
 | 65 | Connect.ae | 🚫 SKIP | Core directory field — phone mandatory |

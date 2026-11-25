@@ -1,13 +1,17 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import Link from "next/link";
+import { useBooking } from "../../context/BookingContext";
+import WhatsAppLink from "../common/WhatsAppLink";
+import { trackEvent, EVENTS } from "../../utils/analytics";
 import AssistantMark from "./AssistantMark";
 import styles from "./Chat.module.css";
 
 import MessageList from "./MessageList";
 import MessageInput from "./MessageInput";
 import PredefinedChips from "./PredefinedChips";
-import { predefinedAnswers } from "./predefinedQA";
+import { predefinedAnswers, answersWithBooking } from "./predefinedQA";
 import { matchKeyword } from "./keywordMatcher";
 import { sendChatMessage } from "../../api/chat";
 
@@ -45,6 +49,8 @@ const ChatWidget = ({ onClose }) => {
   const aliveRef = useRef(true);
   const abortRef = useRef(null);
   const timersRef = useRef([]);
+  const turnRef = useRef(0);
+  const booking = useBooking();
   useEffect(() => { closeRef.current?.focus({ preventScroll: true }); }, []);
 
   // The widget is mounted lazily and can be closed mid-request: cancel the request,
@@ -60,6 +66,7 @@ const ChatWidget = ({ onClose }) => {
   }, []);
 
   const hasUserMessage = messages.some((m) => m.role === "user");
+  const hasAnswer = messages.some((m) => m.role === "assistant" && m.id !== GREETING.id);
 
   // Auto-scroll to the newest message / typing indicator.
   useEffect(() => {
@@ -77,9 +84,10 @@ const ChatWidget = ({ onClose }) => {
   const runFallback = useCallback(
     (question, failed = false) => {
       const kw = matchKeyword(question);
-      if (kw) push({ role: "assistant", text: kw });
-      else if (failed) push({ role: "assistant", isFallback: true, failed: true, question });
+      if (kw) { push({ role: "assistant", text: kw }); return "keyword"; }
+      if (failed) push({ role: "assistant", isFallback: true, failed: true, question });
       else push({ role: "assistant", isFallback: true });
+      return "fallback";
     },
     [push]
   );
@@ -117,10 +125,12 @@ const ChatWidget = ({ onClose }) => {
       } else {
         // 1. Echo the user's message.
         push({ role: "user", text: question });
+        turnRef.current += 1;
 
         // 2. Predefined chip → instant answer, no network call.
         if (predefinedAnswers[question]) {
-          push({ role: "assistant", text: predefinedAnswers[question] });
+          push({ role: "assistant", text: predefinedAnswers[question], cta: answersWithBooking.has(question) });
+          trackEvent(EVENTS.CHATBOT_MESSAGE, { turn: turnRef.current, answer_source: "chip" });
           return;
         }
       }
@@ -154,13 +164,17 @@ const ChatWidget = ({ onClose }) => {
           if (!aliveRef.current) return;
         }
 
+        let answerSource;
         if (res.source === "ai" && res.answer) {
           push({ role: "assistant", text: res.answer });
+          answerSource = "ai";
         } else if (res.source === "quota_exceeded") {
-          runFallback(question);
+          answerSource = runFallback(question);
         } else {
-          runFallback(question, true);
+          answerSource = runFallback(question, true);
         }
+        // A retry re-answers a message that was already counted. Never send the text itself.
+        if (!retry) trackEvent(EVENTS.CHATBOT_MESSAGE, { turn: turnRef.current, answer_source: answerSource });
       } finally {
         timersRef.current.forEach(clearTimeout);
         timersRef.current = [];
@@ -184,6 +198,7 @@ const ChatWidget = ({ onClose }) => {
         <MessageList messages={messages} isTyping={isTyping} typingLabel={typingLabel} onRetry={handleRetry} />
       </div>
       <div className={styles.composerArea}>
+        {hasAnswer && <div className={styles.actions} role="group" aria-label="Next steps"><button type="button" onClick={() => booking?.onOpen?.("chatbot-actions")} disabled={!booking?.onOpen}>Book a free 45-min call</button><Link href="/contact">Send your brief</Link><WhatsAppLink context="chat" location="chatbot-actions">WhatsApp</WhatsAppLink></div>}
         {!hasUserMessage && <PredefinedChips onSelect={handleSend} />}
         <MessageInput onSend={handleSend} disabled={isTyping} />
         <p className={styles.disclosure}>Futurise AI assistant · For project guidance</p>

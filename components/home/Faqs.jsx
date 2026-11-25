@@ -4,9 +4,10 @@ import React, { useState } from "react";
 import {
   Flex, Box, Heading, Text, Button, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon,
 } from "@chakra-ui/react";
-import { useRouter } from "next/navigation";
 import { FiArrowRight } from "react-icons/fi";
 import { faqs } from "../../utils/Constant";
+import { useBooking } from "../../context/BookingContext";
+import usePathname from "@/lib/useSitePathname";
 import Section from "../common/Section";
 import Reveal from "../common/Reveal";
 import { Eyebrow } from "../common/SectionHeading";
@@ -27,9 +28,11 @@ const Faqs = ({
   highlight = "We’ve got answers.",
   intro = "Everything you need to know about working with us. Can’t find what you’re looking for?",
 }) => {
-  // react-router-dom → next/navigation, kept as `navigate(to)` so call sites are verbatim.
-  const router = useRouter();
-  const navigate = (to) => router.push(to);
+  const { onOpen } = useBooking();
+  // This block also renders on the market and service pages, so the booking label names
+  // the page: "home-faq" on /, "us-faq" on /us, "service-web-development-faq" and so on.
+  const pathname = usePathname();
+  const ctaLabel = `${pathname.replace(/^\/+|\/+$/g, "").replace(/\//g, "-") || "home"}-faq`;
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
@@ -55,7 +58,7 @@ const Faqs = ({
             </Text>
           </Reveal>
           <Reveal delay={0.15}>
-            <Button mt={6} variant="gradient" rightIcon={<FiArrowRight />} onClick={() => navigate("/contact")}>
+            <Button mt={6} variant="gradient" rightIcon={<FiArrowRight />} onClick={() => onOpen(ctaLabel)}>
               Talk to us
             </Button>
           </Reveal>

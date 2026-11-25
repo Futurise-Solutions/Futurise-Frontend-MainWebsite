@@ -45,8 +45,9 @@ export default function UAEPageBody() {
   // length, which makes passing ["English", "Arabic"] tempting — and it would be an
   // unverifiable capability claim published as structured data.
   //
-  // No Review or AggregateRating node either. A real testimonial exists, but it belongs to
-  // the homepage, not to this page, and the builder does not emit one.
+  // No Review or AggregateRating node either. The site's eight testimonials (one signed
+  // with name and company, Infinity Bay's; seven with name and country) render on the
+  // homepage and /contact, not on this page, and the builder emits no review markup.
   return (
     <Box className={regional.page}>
       {/* Hero — sets up evidence rather than compliance, because evidence leads this page.
@@ -61,7 +62,7 @@ export default function UAEPageBody() {
           </Reveal>
           <Reveal delay={0.1}>
             <Text mt={6} color="text.muted" fontSize={{ base: "md", md: "xl" }} lineHeight={1.7} maxW="800px">
-              Custom software, AI and SaaS for companies building here. We have delivered one
+              Custom software, AI and SaaS for companies building here. We name one delivered
               project in Dubai and say exactly what it was before anything else. The rest of
               this page covers the decisions (jurisdiction, Arabic, licensing, invoicing)
               that are cheap early and expensive later.

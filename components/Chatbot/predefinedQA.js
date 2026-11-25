@@ -10,6 +10,9 @@ export const predefinedChips = [
   "How long does a project take?",
 ];
 
+// Chip answers that mention a call get a booking button under them.
+export const answersWithBooking = new Set(["How do I start a project?", "What does it cost?"]);
+
 export const predefinedAnswers = {
   "What services do you offer?":
     "We offer AI & ML Solutions, Web Development, App Development, UI/UX Design, Blockchain/Web3 and Digital Marketing, plus dedicated solutions such as Shopify development, WhatsApp CRM, Chrome extensions and hospital management systems: https://www.futurisesolutions.com/solutions",

@@ -34,8 +34,12 @@ export const EVENTS = {
   NEWSLETTER_SUBSCRIBE: "newsletter_subscribe",
   BOOKING_MODAL_OPEN: "booking_modal_open",
   BOOKING_CALENDAR_OPEN: "booking_calendar_open",
+  // Inside the modal the calendar is embedded; this records the "Open in a new tab" fallback.
+  // Deliberately NOT a lead event: the inline open already counted booking_calendar_open.
+  BOOKING_CALENDAR_NEW_TAB: "booking_calendar_new_tab",
   EMAIL_CLICK: "email_click",
   CHATBOT_OPEN: "chatbot_open",
+  CHATBOT_MESSAGE: "chatbot_message",
 };
 
 /**

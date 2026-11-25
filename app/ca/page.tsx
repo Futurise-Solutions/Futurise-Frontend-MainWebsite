@@ -21,7 +21,7 @@ export const metadata: Metadata = buildMetadata({
   description: caMeta.description,
   path: '/ca',
   keywords: caMeta.keywords,
-  image: '/home.png',
+  image: '/og/home-v2.png',
   alternates: COUNTRY_ALTERNATES,
 })
 
@@ -35,7 +35,7 @@ const jsonLd = buildCountrySchema({
   regions: ['Ontario', 'Quebec', 'British Columbia', 'Alberta'],
   currency: 'CAD',
   faqs: caFaqs,
-  image: '/home.png',
+  image: '/og/home-v2.png',
 })
 
 export default function Page() {

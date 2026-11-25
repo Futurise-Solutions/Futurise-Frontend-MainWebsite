@@ -28,7 +28,7 @@ import {
 // placeholder social proof is not acceptable here: fabricated testimonials breach
 // Google's spam policies and are prohibited outright by the FTC's 2024 Rule on Consumer
 // Reviews and Testimonials, the NZ Fair Trading Act and UAE consumer protection law.
-// When adding a testimonial, add the matching project to `Projects` in the same commit.
+// A testimonial needs the client's approval for publication; add it to utils/clientsReviewsData.js and update the counts on /about, /ae and content/llms.txt.ts in the same commit.
 
 // **************** OUR SERVICES ****************
 export const OurServiceData = [
@@ -210,11 +210,6 @@ export const Projects = [
       "Property managers were juggling multiple spreadsheets and outdated tools to track income, expenses, and occupancy across their portfolio. This caused costly errors and slow decision-making.",
     solution:
       "We built a unified SaaS dashboard with real-time analytics and interactive charts that gives property teams instant, accurate visibility across thousands of listings from any device.",
-    stats: [
-      { value: "+62%", label: "Faster Reporting" },
-      { value: "+45%", label: "Admin Time Saved" },
-      { value: "98%", label: "Data Accuracy" },
-    ],
     tags: ["PropTech", "SaaS", "Analytics Dashboard", "React", "Real Estate"],
     clentName: "HOMIES PropTech",
   },
@@ -232,11 +227,6 @@ export const Projects = [
       "Local businesses were losing customers to competitors with stronger online reviews, but had no simple, consistent system to capture feedback from satisfied customers at the right moment.",
     solution:
       "We delivered an AI-powered platform with QR touchpoints that capture in-moment reviews, automate responses, and sync directly with Google. Every visit becomes a potential five-star rating.",
-    stats: [
-      { value: "3.2x", label: "Review Collection Rate" },
-      { value: "+89%", label: "Google Rating Lift" },
-      { value: "+55%", label: "New Customer Conversions" },
-    ],
     tags: ["SaaS", "AI", "Review Management", "QR Code", "Online Reputation"],
     clentName: "Marty-QR",
   },
@@ -254,11 +244,6 @@ export const Projects = [
       "The brand's existing site failed to convey the premium quality of their pieces. Slow load times, a poor mobile experience and a generic layout were driving high bounce rates and lost sales.",
     solution:
       "We crafted a bespoke luxury storefront with editorial design, refined typography, appointment booking, and a streamlined checkout, turning first-time visitors into loyal collectors.",
-    stats: [
-      { value: "+73%", label: "Session Duration" },
-      { value: "+48%", label: "Direct Bookings" },
-      { value: "-38%", label: "Bounce Rate" },
-    ],
     tags: ["E-commerce", "Luxury Retail", "Jewelry", "Conversion Optimization", "Web Design"],
     clentName: "David Tishbi Jewelry",
   },
@@ -276,11 +261,6 @@ export const Projects = [
       "Growing agencies were stuck on generic listing platforms with poor SEO, no brand differentiation, and a clunky search experience that caused high lead drop-off before enquiry.",
     solution:
       "We built a fast, SEO-optimized property platform with rich filtering, agent profiles, and compelling calls-to-action that guide visitors naturally from discovery to booking a viewing.",
-    stats: [
-      { value: "+58%", label: "Organic Traffic" },
-      { value: "+41%", label: "Lead Conversion" },
-      { value: "3x", label: "Page Speed Score" },
-    ],
     tags: ["Real Estate", "Web Platform", "Property Search", "SEO", "Lead Generation"],
     clentName: "Estate Realty",
   },
@@ -297,11 +277,6 @@ export const Projects = [
       "Experienced traders were forced to use bloated, confusing interfaces that sacrificed usability for data density. This led to costly mistakes and high platform abandonment.",
     solution:
       "We engineered a precision trading terminal with real-time candlestick charts, live order books, and a clean buy/sell interface, optimized for speed, clarity and non-custodial security.",
-    stats: [
-      { value: "+67%", label: "Trade Execution Speed" },
-      { value: "+52%", label: "User Retention" },
-      { value: "-28%", label: "Order Error Rate" },
-    ],
     tags: ["FinTech", "Web3", "Crypto Exchange", "Trading Terminal", "Smart Contracts"],
     clentName: "GDT Exchange",
   },
@@ -318,12 +293,7 @@ export const Projects = [
     problem:
       "The hotel was losing a majority of bookings to OTA platforms (Booking.com, Expedia), paying steep commissions and losing direct relationships with guests.",
     solution:
-      "We built an immersive direct-booking site with editorial room galleries, smooth reservation flow and persuasive CTAs, making it easy for guests to book without third parties.",
-    stats: [
-      { value: "+84%", label: "Direct Bookings" },
-      { value: "+61%", label: "Conversion Rate" },
-      { value: "-42%", label: "OTA Dependency" },
-    ],
+      "We designed an immersive direct-booking site with editorial room galleries, smooth reservation flow and persuasive CTAs, making it easy for guests to book without third parties.",
     tags: ["Hospitality", "Hotel Booking", "Direct Booking", "Web Design", "CRO"],
     clentName: "Platinum Peak Hotels",
   },
@@ -399,7 +369,7 @@ export const faqs = [
   {
     question: "How do we get started?",
     answer:
-      "Just reach out through our contact page. We'll schedule a free consultation within a couple of hours to understand your vision and recommend the best path forward.",
+      "Book a free call, or send your details through our contact page and we'll reply within one business day. On the call we'll understand your vision and recommend the best path forward.",
   },
 ];
 
@@ -432,7 +402,7 @@ export const serviceForBlogCategory = (category = "") => {
 // onward (the service page, via BlogCTA) and no route to evidence that the service has
 // actually been delivered.
 //
-// The six case studies map 1:1 onto the six services by their own `service` field, so
+// Six of the seven case studies map 1:1 onto the six services (shopify-cro-d2c-brand has no service page of its own) by their own `service` field, so
 // this table is a transcription of that field, not a judgement call. Keyed by service
 // slug because that is what serviceForBlogCategory already returns, which means a post
 // resolves to its case study through the same routing its service link uses and the two
@@ -791,19 +761,25 @@ export const services = {
   "ai-ml-solutions": {
     title: "AI & ML Solutions",
     // Keyword-led H1 (SEO, Nov 2026); `title` stays short because it is reused in sentences.
-    h1: "AI Agent & ML Development",
+    // 25 Nov 2026: H1 aligned to "custom AI development services" (94 of the cluster's 115
+    // queries contain "custom" or "services"). This page now carries the build-vs-buy,
+    // delivery and cost guidance that used to rank through a blog post, so it is the one
+    // page for that intent. metaTitle deliberately unchanged.
+    h1: "Custom AI Development Services",
     metaTitle: "AI & ML Development: AI Agents, LLMs & Computer Vision",
     metaDescription:
       "Custom AI agents and LLM & RAG integrations that automate real workflows and cut costs. Fixed-scope quotes. Book a free 45-minute consultation.",
     whatWeDo: "What we do",
-    description: "Intelligent systems that learn, adapt, and automate.",
+    description: "AI agents, RAG assistants and LLM features built around a real task and tested on your own data before launch.",
     details:
-      "We design and build production-ready AI agents, ML-powered features, and fully integrated AI SaaS platforms, from data pipelines to deployed models. Your product gets smarter over time and your team works at a higher level.",
+      "A common way for AI projects to go wrong is to start from a tool (“we need an agent”) instead of a task (“support staff spend two hours a day finding policy answers”). We start from the task. Custom AI work usually falls into four kinds: agents that carry out multi-step tasks across your systems, RAG assistants that answer from your own documents, language-model features inside a product you already run, and document or image automation. Which one fits depends on the task, your data and what a wrong answer costs you, and if an off-the-shelf tool already does the job, we'll say so.",
     features: [
-      "Custom AI agents & LLM-powered workflow automation",
+      "AI agents that carry out multi-step tasks across your CRM, calendar & database",
+      "RAG assistants that answer from your documents & hand off to a person when unsure",
+      "LLM features inside your product: summaries, drafted replies & field extraction",
+      "Document & image automation with NLP and computer vision",
+      "AI SaaS products with accounts, credits & subscriptions",
       "ML model development, training & production deployment",
-      "AI-integrated web apps & SaaS platforms",
-      "NLP, computer vision & predictive analytics pipelines",
     ],
     industries: [
       "SaaS & Startups",
@@ -815,24 +791,74 @@ export const services = {
     ],
     faqs: [
       {
+        question: "What does a custom AI development service cover?",
+        answer:
+          "Custom AI work usually falls into four kinds. AI agents carry out multi-step tasks and call tools such as your CRM, calendar or database: qualifying inbound leads, triaging support tickets, compiling reports from several systems. RAG assistants answer from your own documents, so replies come from your policies, product data or contracts rather than the model's general training. LLM features sit inside a product you already run, such as summarising a long record, drafting a reply or extracting fields from an upload. Document and image automation reads forms, invoices and photos and passes structured data to your systems; it lives or dies on test data, so measure accuracy on a few hundred real examples, including the messy ones, before you commit.",
+      },
+      {
+        question: "Should we build custom AI, buy a tool or configure a platform?",
+        answer:
+          "Buy an off-the-shelf tool when the task is generic, such as meeting notes or basic chat, and accept that it will fit your process and data only loosely. Configure a platform or no-code tool when you want to test an idea quickly; it hits limits on integrations, control and cost at volume. Build custom when the workflow, data or integrations are specific to you, or when AI is part of your product; it costs more up front and needs an owner after launch. A sensible path is to prove the value cheaply, then build custom only where the off-the-shelf version stops short. We'll tell you when buying is the right answer.",
+      },
+      {
         question: "What's the difference between an AI agent and an LLM integration?",
         answer:
           "An LLM integration adds language features (search, Q&A, generation) to your product. An AI agent goes further: it reasons, calls tools and APIs, and completes multi-step tasks autonomously.",
       },
       {
+        question: "When is an AI agent the wrong choice?",
+        answer:
+          "When the steps are fixed and predictable. A plain workflow with one or two model calls is then cheaper, faster and easier to test. Agents suit tasks with several steps and some judgement, where the path really varies from one case to the next. They are the easiest kind of AI work to over-build, so we check for this before recommending one.",
+      },
+      {
         question: "Can the AI use our own data?",
         answer:
-          "Yes. We build RAG (retrieval-augmented generation) and fine-tuning pipelines so the AI answers from your documents and data, not generic internet content.",
+          "Yes. We build RAG (retrieval-augmented generation) and fine-tuning pipelines so the AI answers from your documents and data, not generic internet content. Done properly, a RAG assistant can say “I don't know”, and access control is applied when documents are retrieved, not only in the prompt. The support agent in our case study answers when its confidence is high and hands the conversation to a person when it drops.",
+      },
+      {
+        question: "How does a custom AI project run?",
+        answer:
+          "In six steps. Discovery defines the task, who uses it, what good looks like and what a mistake costs. A data check looks at what data exists, where it lives, who can see it and any privacy limits. A prototype is the thinnest working version, built against real examples and measured. Evaluation scores outputs on a test set before and after every change, which is what separates a demo from a product. Build and integrate connects it to your systems, with logging, permissions and human review where needed. Launch and monitor tracks quality, cost and failure cases, then adjusts prompts, retrieval and models over time.",
+      },
+      {
+        question: "What drives the cost of custom AI development?",
+        answer:
+          "Five things matter more than the model itself: how many systems the AI must read from or write to; how messy or scattered your data is; how accurate the output must be, since needing 99% costs far more than a useful first draft; the approval screens and handoff flows that human review needs; and running costs after launch, meaning maintenance plus model, API and hosting usage. We give a fixed-scope quote after a free discovery call.",
+      },
+      {
+        question: "How long does a custom AI project take?",
+        answer:
+          "A focused MVP usually takes 6 to 12 weeks, and a larger platform 3 to 6 months. For reference, the RAG support agent in our case study took 14 weeks from kickoff to production: data preparation and knowledge architecture first, then the retrieval pipeline and guardrails, then a supervised rollout alongside human agents.",
       },
       {
         question: "Which AI models do you use?",
         answer:
-          "We're model-agnostic: OpenAI, Anthropic Claude, Google Gemini, Meta Llama and open-source models. We recommend what best fits your budget, latency and accuracy needs.",
+          "We're model-agnostic: OpenAI, Anthropic Claude, Google Gemini, Grok, Meta Llama and open-source models, with LangChain and vector databases where they help. Model choice is a cost, speed and quality question that changes quickly, so we test candidates against your data rather than picking by reputation.",
+      },
+      {
+        question: "Do we need to fine-tune a model?",
+        answer:
+          "Usually not at the start. Prompting, good retrieval and careful evaluation solve most business problems, and they are cheaper to change. Fine-tuning becomes worth considering when you have a large set of high-quality examples and a narrow, repeated task. We can help you judge whether you have reached that point.",
+      },
+      {
+        question: "Is our data safe if it goes to a model provider?",
+        answer:
+          "It depends on the provider's terms and your setup, so read them rather than assume. The options run from enterprise API terms for most work, to private-cloud deployments for more control, to self-hosting for the most sensitive data, which brings its own hardware and staffing cost. Decide what data must never leave your environment, then check the terms with your legal adviser.",
       },
       {
         question: "Will it work reliably in production?",
         answer:
           "We build for production, not demos. Evaluation, guardrails, monitoring, fallback handling and cost controls are in from day one.",
+      },
+      {
+        question: "Where should we start?",
+        answer:
+          "With a task that happens often, takes real time and has a clear right answer, where a wrong output is cheap to catch and the data is accessible and allowed to go to a model provider. Check that you can measure the result in hours saved, tickets deflected or conversion, and that someone will own the system after launch. Avoid a first project that touches regulated decisions or needs perfect accuracy.",
+      },
+      {
+        question: "What AI work have you delivered?",
+        answer:
+          "A RAG support agent for a US B2B SaaS company that answers from the client's documentation and hands off to a person when confidence drops, written up as a case study. Gemini-assisted features in a hospital management system. A real-time sales copilot Chrome extension with live transcription and suggested answers. An AI hiring platform that runs first-round interviews and analyses resumes. An AI music generation SaaS with credits and subscriptions. The clients are under NDA, so we show the work on a live call.",
       },
     ],
   },

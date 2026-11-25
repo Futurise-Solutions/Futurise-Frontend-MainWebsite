@@ -67,7 +67,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       headline: study.meta.title,
       description: study.meta.description,
       url: `https://www.futurisesolutions.com/case-studies/${slug}`,
-      image: `https://www.futurisesolutions.com${study.meta.ogImage || '/home.png'}`,
+      image: `https://www.futurisesolutions.com${study.meta.ogImage || '/og/home-v2.png'}`,
       author: { '@id': 'https://www.futurisesolutions.com/#organization' },
       publisher: { '@id': 'https://www.futurisesolutions.com/#organization' },
       datePublished: `${study.year}-01-01`,

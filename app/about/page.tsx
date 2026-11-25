@@ -7,13 +7,13 @@ import { teamPersonSchema, isTeamPublished } from '@/utils/Constant/team'
 
 /** Ported verbatim from src/Pages/AboutUs.jsx. */
 const META_DESCRIPTION =
-  'A Wellington-registered digital product studio founded in 2024, with an engineering team in India. Fixed-scope quotes and senior engineers.'
+  'A Wellington-registered digital product studio founded in 2024, with an engineering team in India. Fixed-scope quotes, two-week sprints and NDAs on request.'
 
 export const metadata: Metadata = buildMetadata({
   title: 'About Futurise Solutions: NZ-Registered Dev Studio',
   description: META_DESCRIPTION,
   path: '/about',
-  image: '/about.png',
+  image: '/og/about-v2.png',
   keywords:
     'about Futurise Solutions, AI development team, web development company, mobile app developers, blockchain team, New Zealand tech agency, digital product studio',
 })
@@ -34,7 +34,7 @@ const jsonLd = [
     name: 'About Futurise Solutions',
     url: 'https://www.futurisesolutions.com/about',
     description:
-      'Senior team building AI, SaaS, web and mobile products. Registered in Wellington, New Zealand, with delivered client work in the United Arab Emirates, the United States and India.',
+      'Digital product studio building AI, SaaS, web and mobile products. Registered in Wellington, New Zealand, with an engineering team in India and clients in the United Arab Emirates, the United States, India, the United Kingdom, Canada, Australia and New Zealand.',
     breadcrumb: {
       '@type': 'BreadcrumbList',
       itemListElement: [

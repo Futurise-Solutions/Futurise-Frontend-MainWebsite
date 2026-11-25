@@ -18,6 +18,8 @@
  * 3. Set `TEAM_PUBLISHED` to `true`.
  * 4. Delete any member entries you don't need — the grid adapts to the count.
  *
+ * Owner rule (Nov 2026): the team is not shown on this site. Leave TEAM_PUBLISHED false.
+ *
  * Until step 3, the section renders in local development only, so the layout can be
  * reviewed, and never appears in a production build. That gate is deliberate: publishing
  * invented colleagues would misrepresent the company to buyers, and emitting Person
@@ -25,7 +27,7 @@
  * signal Google's spam policies target. Both effects are worse than having no section.
  */
 
-/** Flip to `true` once every member below carries real details. */
+/** Flip to `true` once every member below carries real details. Owner rule (Nov 2026): the team is not shown on this site. Leave TEAM_PUBLISHED false. */
 export const TEAM_PUBLISHED = false;
 
 /** Images live in /public so paths stay stable and are usable in schema.org absolute URLs. */

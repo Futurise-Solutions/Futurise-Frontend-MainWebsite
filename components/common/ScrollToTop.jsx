@@ -62,6 +62,21 @@ const ScrollToTop = () => {
 
   useLayoutEffect(() => {
     const root = document.documentElement;
+
+    // A link to an anchor on the incoming page (e.g. /portfolio#platinum-peak-hotels from a
+    // blog post) must land on that anchor, not the top. Without this check the reset below
+    // ran after Next's own scrollIntoView and undid it, on client navigation and cold loads
+    // alike. A hash with no matching element (#book-a-call opens the booking modal) still
+    // scrolls to the top. scrollIntoView honours the target's scroll-margin-top.
+    let target = null;
+    try {
+      const id = decodeURIComponent(window.location.hash.slice(1));
+      target = id ? document.getElementById(id) : null;
+    } catch {
+      target = null;
+    }
+    const jump = () => (target ? target.scrollIntoView({ block: "start" }) : window.scrollTo(0, 0));
+
     root.classList.add("scroll-jump");
 
     // Two resets. The first covers the common case. The second runs after the incoming
@@ -69,9 +84,9 @@ const ScrollToTop = () => {
     // (Suspense resolving, an image reserving height) can extend the scrollable area
     // *after* the first call, and the browser then restores a non-zero offset against
     // the newly available height. Both run with the class on, so neither animates.
-    window.scrollTo(0, 0);
+    jump();
     const raf = requestAnimationFrame(() => {
-      window.scrollTo(0, 0);
+      jump();
       root.classList.remove("scroll-jump");
     });
 

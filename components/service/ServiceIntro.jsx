@@ -1,15 +1,17 @@
 'use client';
 import Link from 'next/link';
+import {useBooking} from '../../context/BookingContext';
 import CapabilityStudy from '../common/CapabilityStudy';
 import styles from '../common/AgencyPages.module.css';
 export default function ServiceIntro({service,slug}) {
+ const {onOpen}=useBooking();
  return <>
   <section className={`${styles.hero} ${styles.serviceHero}`}>
    <div className={styles.heroContent}>
     <p className={styles.eyebrow}>{service.whatWeDo}</p>
     <h1>{service.h1 || service.title}</h1>
     <p className="speakable-answer">{service.description}</p>
-    <div className={styles.actions}><Link href="/contact">Get a free quote <span aria-hidden="true">↗</span></Link><Link href="/portfolio">View our work <span aria-hidden="true">↗</span></Link></div>
+    <div className={styles.actions}><Link href="/contact" onClick={e=>{if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;e.preventDefault();onOpen('service-intro:'+slug);}}>Get a free quote <span aria-hidden="true">↗</span></Link><Link href="/portfolio">View our work <span aria-hidden="true">↗</span></Link></div>
    </div>
    <div className={styles.serviceVisual}><CapabilityStudy service={slug}/></div>
   </section>
