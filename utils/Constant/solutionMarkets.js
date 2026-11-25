@@ -166,7 +166,7 @@ export const marketVariants = {
       faqs: [
         { q: "Can you build an Arabic Shopify store?", a: "Yes. An Arabic right-to-left storefront alongside English, with mirrored layouts and forms, not just translated text." },
         { q: "Can our store accept cash on delivery and Tabby or Tamara?", a: "Yes. We set up COD and instalment options and place them on the product page and cart where they help shoppers decide." },
-        { q: "Have you worked with UAE clients?", a: "Yes. We rebuilt the website of Infinity Bay Trading, a Dubai B2B supplier, and our Shopify work spans India and the US." },
+        { q: "Have you worked with UAE clients?", a: "Yes. We rebuilt the website of a Dubai B2B supplier (it is on our portfolio), and our Shopify work spans India and the US." },
         { q: "Do you build headless Shopify stores in Dubai?", a: "Yes, where it pays off. We build React storefront pages on Shopify's GraphQL API and keep Shopify's checkout, admin and apps underneath. For most UAE brands a well-built theme launches faster, so we recommend headless only when the design or speed needs it." },
         { q: "How is a UAE Shopify project priced?", a: "Fixed scope, quoted after a free discovery call; ongoing optimisation runs as a retainer." },
         { q: "Can we see your Shopify work?", a: "Clients are under NDA, so we walk through the work on a live call." },
@@ -268,7 +268,7 @@ export const marketVariants = {
       proof: "AI products shipped for clients under NDA and shown on a live call; UAE web work delivered for a Dubai B2B supplier.",
       faqs: [
         { q: "Can you build an Arabic AI assistant?", a: "Yes. We plan Arabic and English from the start, including right-to-left UI, and test each model's Arabic before we build on it." },
-        { q: "Have you worked with UAE clients?", a: "Yes. We rebuilt the website of Infinity Bay Trading, a Dubai B2B supplier, and our AI products serve clients across markets." },
+        { q: "Have you worked with UAE clients?", a: "Yes. We rebuilt the website of a Dubai B2B supplier (it is on our portfolio), and our AI products serve clients across markets." },
         { q: "Do you handle UAE data protection rules?", a: "We build to the requirements your legal advisers set for mainland, DIFC or ADGM. We don't give legal advice ourselves." },
         { q: "How long does an AI MVP take?", a: "Usually 6 to 12 weeks, depending on scope. Larger platforms take 3 to 6 months." },
         { q: "Can we see your AI work?", a: "Clients are under NDA, so we demo the products on a live call." },

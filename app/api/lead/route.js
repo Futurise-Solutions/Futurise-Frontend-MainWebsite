@@ -30,6 +30,19 @@ const RATE_WINDOW_MS = 60_000
 const MAX_BODY_BYTES = 20 * 1024
 const hits = new Map() // ip -> number[] (timestamps)
 
+/* Global ceiling per instance per day, FAILS CLOSED, as in /api/chat: the per-IP limit caps one
+   sender, this caps a distributed burst of junk leads. Real volume is a few a week. */
+const DAILY_CEILING = 300
+let dayKey = ''
+let dayCount = 0
+function underDailyCeiling() {
+  const k = new Date().toISOString().slice(0, 10)
+  if (k !== dayKey) { dayKey = k; dayCount = 0 }
+  if (dayCount >= DAILY_CEILING) return false
+  dayCount++
+  return true
+}
+
 function underRateLimit(ip) {
   const now = Date.now()
   const arr = (hits.get(ip) || []).filter((t) => now - t < RATE_WINDOW_MS)
@@ -131,6 +144,7 @@ export async function POST(req) {
 
   const lead = normaliseLead(body)
   if (!lead) return json({ ok: false }, 400)
+  if (!underDailyCeiling()) return json({ ok: false }, 503)
 
   // LEAD_PROXY_KEY if set; otherwise ADMIN_KEY, which both projects already share for the
   // admin CMS (server-to-server only). The backend's requireLeadKey applies the same order.
