@@ -8,8 +8,8 @@ export default function SpecialistBuilds() {
     <div className={styles.heading}>
       <div>
         <p className={proof.eyebrow}>SPECIALIST BUILDS</p>
-        <h2 id="builds-title">Systems we’ve already shipped.</h2>
-        <p className={styles.intro}>{numberToWords(Object.keys(solutions).length)} kinds of software we’ve built for clients, most of them under NDA. Each is shown live on a call.</p>
+        <h2 id="builds-title">Systems we’ve designed and shipped.</h2>
+        <p className={styles.intro}>{numberToWords(Object.keys(solutions).length)} kinds of software we’ve designed or built for clients, most of them under NDA. Each is shown live on a call.</p>
       </div>
       <Link className={styles.all} href="/solutions">All solutions <span aria-hidden="true">↗</span></Link>
     </div>

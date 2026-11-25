@@ -15,7 +15,7 @@ const RAG = {
 
 const HOTEL = {
   eyebrow: "Planning a direct-booking website?",
-  heading: "More direct bookings, built around the PMS you already use",
+  heading: "A direct-booking website, built around the booking engine you already use",
   body: "We designed the direct booking experience for Platinum Peak Hotels as a UI/UX and conversion design project. We're not a booking engine or PMS vendor, so we build around the one you choose. In a free 45-minute strategy call we'll map your booking flow, engine options and measurement plan.",
   buttonLabel: CALL,
   proofLink: { href: "/portfolio#platinum-peak-hotels", label: "See the Platinum Peak Hotels project" },

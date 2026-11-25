@@ -27,7 +27,7 @@ export default function CountrySolutions({ market }) {
         {heading}
       </Heading>
       <Text color="text.muted" fontSize="15px" mb={5}>
-        Specialist systems we&apos;ve built and delivered. Each is shown live on a call.
+        Specialist systems we&apos;ve designed or built for clients. Each is shown live on a call.
       </Text>
       <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={3}>
         {order.map((slug) => (

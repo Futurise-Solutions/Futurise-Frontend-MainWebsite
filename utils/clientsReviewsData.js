@@ -17,7 +17,7 @@ export const testimonials = [
     review:
       "We came to Futurise with a slow WordPress site that barely showed up on Google. They rebuilt it on Astro. It loads instantly now, feels far smoother, and with the new SEO content and blog we're finally getting found by buyers across the UAE. Professional team, clear communication, handled everything from design to Google Search Console.",
   },
-  // Client reviews supplied and approved for publication by the clients (Oct 2026).
+  // Client reviews supplied by the clients and approved for publication (Oct 2026).
   {
     name: "Rahul Sharma",
     title: "India",

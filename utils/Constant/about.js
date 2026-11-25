@@ -95,7 +95,7 @@ export const aboutVerify = [
   {
     title: "Eight client testimonials",
     detail:
-      "Eight clients have given us a testimonial, and all eight appear on our homepage and contact page. One is signed with the client's name and company, Infinity Bay Trading in Dubai. The other seven carry the client's name and country: three in India, and one each in New Zealand, the United States, Canada and Australia. Each was approved for publication by the client who gave it.",
+      "Eight clients have given us a testimonial, and all eight appear on our homepage and contact page. One is signed with the client's name and company, Infinity Bay Trading in Dubai. The other seven carry the client's name and country: three in India, and one each in New Zealand, the United States, Canada and Australia. Each was approved for publication before it went up.",
     to: "/contact",
     cta: "Read them on the contact page",
   },

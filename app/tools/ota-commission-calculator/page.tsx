@@ -287,7 +287,7 @@ export default function Page() {
             <h2 id="reading-title">The guides behind the calculator</h2>
             <p className={commercial.intro}>
               The worked example and where the figures come from, how the systems behind a direct booking fit
-              together, and how we build hotel booking websites.
+              together, and how we approach hotel booking websites.
             </p>
             <div className={commercial.linkList}>
               <Link href={OTA_GUIDE}>

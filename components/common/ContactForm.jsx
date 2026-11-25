@@ -135,7 +135,7 @@ export default function ContactForm({location='contact-page'}) {
    <input type="hidden" name="phone"/><input type="hidden" name="message"/>
    <button className={styles.submit} type="submit" disabled={busy}>{busy?'Sending…':'Send message'}<span aria-hidden="true">↗</span></button>
   </fieldset>
-  <p className={styles.privacy}>Fields marked * are required. Your details are used solely to respond to your enquiry.</p>
+  <p className={styles.privacy}>Fields marked * are required. Your details are used to reply to your enquiry and to see which page or campaign it came from.</p>
   <p className={styles.status} role="status" aria-live="polite">{status}</p>
   {status.startsWith('Your message')&&<p className={styles.fallback}>
    <a className={styles.email} href={`mailto:${CONTACT.email}`}>Email us directly ↗</a>

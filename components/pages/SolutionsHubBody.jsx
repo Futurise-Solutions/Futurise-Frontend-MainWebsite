@@ -5,7 +5,7 @@ import EditorialOpening from '../common/EditorialOpening';
 import styles from '../common/CommercialPages.module.css';
 export default function SolutionsHubBody(){
  return <div className={styles.page}>
-  <EditorialOpening eyebrow="Solutions" title="Specialist builds," accent="proven in production." description={`${numberToWords(Object.keys(solutions).length)} kinds of software we have designed and shipped for clients, each with what we built, the stack behind it and the questions buyers ask.`}><BookDemoButton source="solutions-hub">Book a free live demo ↗</BookDemoButton></EditorialOpening>
+  <EditorialOpening eyebrow="Solutions" title="Specialist builds," accent="proven in production." description={`${numberToWords(Object.keys(solutions).length)} kinds of software we have designed or built for clients, each with the work behind it, the stack and the questions buyers ask.`}><BookDemoButton source="solutions-hub">Book a free live demo ↗</BookDemoButton></EditorialOpening>
   <div className={styles.container}>
    <section className={styles.studyGrid} aria-label="Solutions">{solutionList.map((s,i)=><Link key={s.slug} className={styles.studyCard} href={`/solutions/${s.slug}`}>
     <div className={styles.studyCover}><span>{s.market}</span><i aria-hidden="true">{String(i+1).padStart(2,'0')}</i><div className={styles.coverLines} aria-hidden="true">{Array.from({length:22},(_,j)=><i key={j}/>)}</div></div>
