@@ -3,15 +3,15 @@
  *
  * Originally extracted from src/Pages/PrivacyPolicy.jsx. Revised 25 Nov 2026 to describe
  * what the site actually uses: EmailJS, Google Analytics 4, Microsoft Clarity, Vercel
- * hosting with Web Analytics and Speed Insights, Google Calendar appointment scheduling,
- * WhatsApp, the chat assistant, and the copy of each enquiry stored by /api/lead.
+ * hosting with Web Analytics and Speed Insights, Google Calendar appointment scheduling
+ * (embedded in the booking modal), Cloudinary blog images, WhatsApp, the chat assistant, and the copy of each enquiry stored by /api/lead.
  *
  * ⚠️ PrivacyPolicyBody.jsx renders every section except the LAST, then draws its own
  * "10. Contact Us" card. Keep Contact as the final section, and keep ten sections unless
  * that hard-coded heading is updated too. Name no service the site does not use.
  */
 
-export const LAST_UPDATED = "25 November 2026";
+export const LAST_UPDATED = "26 November 2026";
 export const COMPANY = "Futurise Solutions";
 export const EMAIL = "business@futurisesolutions.com";
 export const ADDRESS = "Huddart Parker Building, Wellington Central, Wellington 6011, New Zealand";
@@ -95,7 +95,11 @@ export const sections = [
       },
       {
         subtitle: "Booking (Google Calendar)",
-        body: `Calls are booked through Google Calendar appointment scheduling. When you book, the details you enter in the booking form go to Google and to us.`,
+        body: `Calls are booked through Google Calendar appointment scheduling. The booking calendar opens inside this site but is a Google page: it loads from Google, which may set its own cookies, only when you open it. When you book, the details you enter in the booking form go to Google and to us.`,
+      },
+      {
+        subtitle: "Images (Cloudinary)",
+        body: `Blog images are stored on and served by Cloudinary. Your browser fetches them from Cloudinary, which, like any image host, receives your IP address and browser details to deliver them.`,
       },
       {
         subtitle: "WhatsApp (Meta)",

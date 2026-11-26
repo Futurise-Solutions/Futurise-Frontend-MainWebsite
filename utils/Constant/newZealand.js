@@ -170,9 +170,9 @@ export const costModel = [
 // The engagement mechanics that make a distributed team workable from New Zealand.
 export const workingModel = [
   {
-    step: "Scoping call in NZ business hours",
+    step: "Scoping call in the NZ late afternoon",
     detail:
-      "Booked in your working day, not ours. The output is a written understanding of scope, not a sales pitch.",
+      "Call slots open from late afternoon New Zealand time, and the calendar shows each one in your own time zone. The output is a written understanding of scope, not a sales pitch.",
   },
   {
     step: "Fixed-scope estimate before commitment",
@@ -226,7 +226,7 @@ export const nzFaqs = [
   {
     question: "Will I be working with someone in New Zealand business hours?",
     answer:
-      "Scoping calls are booked in your working day, and every enquiry gets an answer inside one New Zealand business day. During delivery you have a named engineer rather than an account manager relaying questions. Work progresses overnight in New Zealand time, so reviews are generally waiting for you in the morning.",
+      "Scoping calls can be booked from late afternoon New Zealand time, and every enquiry gets an answer inside one New Zealand business day. During delivery you have a named engineer rather than an account manager relaying questions. Work progresses overnight in New Zealand time, so reviews are generally waiting for you in the morning.",
   },
   {
     question: "What does custom software cost in New Zealand?",

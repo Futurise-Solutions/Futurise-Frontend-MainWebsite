@@ -468,12 +468,12 @@ export const partners = [
 // **************** WORLDWIDE LOCATIONS ****************
 export const locations = [
   { name: "USA", coordinates: [37.0902, -95.7129] },
-  { name: "Australia", coordinates: [-25.2744, 133.7751] },
-  { name: "Denmark", coordinates: [56.2639, 10.4515] },
-  { name: "South Africa", coordinates: [-30.5595, 22.9375] },
+  { name: "UK", coordinates: [55.378051, -3.435973] },
+  { name: "Canada", coordinates: [56.1304, -106.3468] },
   { name: "UAE", coordinates: [25.2048, 55.1713] },
   { name: "India", coordinates: [20.5937, 78.9629] },
-  { name: "UK", coordinates: [55.378051, -3.435973] },
+  { name: "Australia", coordinates: [-25.2744, 133.7751] },
+  { name: "New Zealand", coordinates: [-40.9006, 174.886] },
 ];
 
 // **************** ABOUT — CORE VALUES ****************

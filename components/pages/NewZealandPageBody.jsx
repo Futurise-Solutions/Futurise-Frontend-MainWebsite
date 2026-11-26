@@ -432,7 +432,7 @@ export default function NewZealandPageBody() {
         eyebrow="Start in New Zealand"
         title="Building something in"
         highlight="New Zealand?"
-        subtitle="Book a scoping call in your working day, or send us the scope and we'll come back with a fixed-scope estimate in New Zealand dollars."
+        subtitle="Book a scoping call for a New Zealand late afternoon, or send us the scope and we'll come back with a fixed-scope estimate in New Zealand dollars."
         primaryLabel="Book a strategy call"
         secondaryLabel="Send us your scope"
         secondaryTo="/contact"
