@@ -328,6 +328,80 @@ export default function ServicePageBody({ serviceName }) {
         </Container>
       )}
 
+      {/* Buying guide: long-form material folded in from the retired twin blog posts.
+          Plain server-rendered headings, lists and a real <table>, so it is crawlable and
+          readable without JS. Renders nothing when the service has no `guide`. */}
+      {service.guide && (
+        <Container maxW="container.site" px={{ base: 5, md: 8 }} py={{ base: 10, md: 14 }}>
+          <Reveal><Eyebrow>{service.guide.eyebrow}</Eyebrow></Reveal>
+          <Reveal delay={0.05}>
+            <Heading as="h2" mt={4} fontSize={{ base: "26px", md: "36px" }} lineHeight={1.15} maxW="760px">
+              {service.guide.title}
+            </Heading>
+          </Reveal>
+          {service.guide.intro && (
+            <Reveal delay={0.1}>
+              <Text mt={4} color="text.muted" fontSize={{ base: "md", md: "lg" }} lineHeight={1.7} maxW="760px">
+                {service.guide.intro}
+              </Text>
+            </Reveal>
+          )}
+          {service.guide.sections.map((sec) => (
+            <Box key={sec.heading} mt={{ base: 8, md: 10 }} maxW="860px">
+              <Heading as="h3" fontSize={{ base: "20px", md: "24px" }} lineHeight={1.25}>
+                {sec.heading}
+              </Heading>
+              {sec.paragraphs?.map((para, pi) => (
+                <Text key={pi} mt={3} color="text.muted" fontSize={{ base: "sm", md: "md" }} lineHeight={1.7}>
+                  {para}
+                </Text>
+              ))}
+              {sec.bullets?.length > 0 && (
+                <Box as="ul" mt={4} pl={5} display="grid" gap={2.5}>
+                  {sec.bullets.map((b, bi) => (
+                    <Box as="li" key={bi} color="text.muted" fontSize={{ base: "sm", md: "md" }} lineHeight={1.7}>
+                      {b}
+                    </Box>
+                  ))}
+                </Box>
+              )}
+              {sec.table && (
+                <Box mt={5} overflowX="auto" borderRadius="16px" border="1px solid" borderColor="border.subtle" bg="bg.surface">
+                  <Box as="table" aria-label={sec.heading} w="100%" minW="520px" fontSize={{ base: "sm", md: "md" }} lineHeight={1.6} sx={{ borderCollapse: "collapse" }}>
+                    <Box as="thead">
+                      <Box as="tr">
+                        {sec.table.columns.map((c, ci) => (
+                          <Box as="th" scope="col" key={ci} textAlign="left" px={4} py={3} color="text.primary" fontWeight={600} borderBottom="1px solid" borderColor="border.subtle">
+                            {c}
+                          </Box>
+                        ))}
+                      </Box>
+                    </Box>
+                    <Box as="tbody">
+                      {sec.table.rows.map((row, ri) => (
+                        <Box as="tr" key={ri}>
+                          {row.map((cell, i) =>
+                            i === 0 ? (
+                              <Box as="th" scope="row" key={i} textAlign="left" verticalAlign="top" px={4} py={3} color="text.primary" fontWeight={600} borderTop="1px solid" borderColor="border.subtle">
+                                {cell}
+                              </Box>
+                            ) : (
+                              <Box as="td" key={i} verticalAlign="top" px={4} py={3} color="text.muted" borderTop="1px solid" borderColor="border.subtle">
+                                {cell}
+                              </Box>
+                            )
+                          )}
+                        </Box>
+                      ))}
+                    </Box>
+                  </Box>
+                </Box>
+              )}
+            </Box>
+          ))}
+        </Container>
+      )}
+
       {/* Service-specific FAQ (also emits FAQPage schema above) */}
       {service.faqs?.length > 0 && (
         <Faqs

@@ -37,13 +37,6 @@
 export const serviceResources = {
   "web-development": [
     {
-      title: "What sub-2-second load times actually cost to build",
-      blurb:
-        "The architecture decisions behind a fast site: React, Next.js and Node.js choices that decide load time before a line of design work starts.",
-      to: "/blog/web-development-services-fast-scalable-and-seo-ready-websites-and-web-apps-built-to-convert",
-      retarget: true,
-    },
-    {
       title: "Hiring a web team in India: what to pay and who to trust",
       blurb:
         "Typical 2026 costs, what to expect from a delivery partner, and the checks worth running before you sign.",
@@ -77,13 +70,6 @@ export const serviceResources = {
 
   "app-development": [
     {
-      title: "Choosing one codebase for iOS and Android",
-      blurb:
-        "What React Native and Expo give you across both platforms (Firebase backends, payments, push and maps), and where a single codebase stops paying off.",
-      to: "/blog/app-development-services-build-cross-platform-ios-and-android-apps-that-users-actually-love",
-      retarget: true,
-    },
-    {
       title: "React Native vs Flutter: cost and ROI compared",
       blurb:
         "A framework decision costed out for Australian startups across Sydney, Melbourne and Brisbane.",
@@ -98,13 +84,6 @@ export const serviceResources = {
   ],
 
   "ui-ux-design": [
-    {
-      title: "How design decisions move conversion and churn",
-      blurb:
-        "UX research, wireframing, high-fidelity UI, prototypes and design systems, traced through to the numbers they change.",
-      to: "/blog/uiux-design-services-how-great-design-turns-visitors-into-loyal-customers",
-      retarget: true,
-    },
     {
       // "UI/UX design" is this service page's own head term, so it must not appear in
       // anchor text pointing away from it — the whole card is inside the <a>.
@@ -128,13 +107,6 @@ export const serviceResources = {
   ],
 
   "blockchain-development": [
-    {
-      title: "Getting a smart contract audited and shipped",
-      blurb:
-        "What production-grade means for audited contracts, DeFi platforms, multi-chain dApps and Web3 integrations.",
-      to: "/blog/blockchain-development-services-smart-contracts-defi-and-web3-solutions-for-modern-businesses",
-      retarget: true,
-    },
     {
       title: "Real-world asset tokenisation in 2026",
       blurb:
@@ -187,13 +159,6 @@ export const serviceResources = {
   ],
 
   "digital-marketing": [
-    {
-      title: "Tying SEO, ads and CRO to revenue rather than vanity metrics",
-      blurb:
-        "How performance ads, paid social, CRO and analytics get measured against money instead of impressions.",
-      to: "/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue",
-      retarget: true,
-    },
     {
       title: "Ranking when Google rewrites your content",
       blurb:

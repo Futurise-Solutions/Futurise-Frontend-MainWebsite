@@ -6,8 +6,21 @@
  * Keys are post slugs; values are destination paths.
  */
 export const RETIRED_BLOG_REDIRECTS: Record<string, string> = {
+  // Folded into the service page that absorbed the post's useful material (Nov 2026).
+  'web-development-services-fast-scalable-and-seo-ready-websites-and-web-apps-built-to-convert':
+    '/service/web-development',
+  'app-development-services-build-cross-platform-ios-and-android-apps-that-users-actually-love':
+    '/service/app-development',
+  'uiux-design-services-how-great-design-turns-visitors-into-loyal-customers':
+    '/service/ui-ux-design',
+  'blockchain-development-services-smart-contracts-defi-and-web3-solutions-for-modern-businesses':
+    '/service/blockchain-development',
+  'digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue':
+    '/service/digital-marketing',
+  'ai-and-ml-solutions-custom-ai-agents-llm-integrations-nlp-and-computer-vision-built-for-your-business':
+    '/service/ai-ml-solutions',
   'ai-and-ml-solutions-how-custom-ai-agents-llms-nlp-and-computer-vision-are-transforming-modern-businesses':
-    '/blog/ai-and-ml-solutions-custom-ai-agents-llm-integrations-nlp-and-computer-vision-built-for-your-business',
+    '/service/ai-ml-solutions',
   'the-ultimate-tech-guide-careers-and-hiring-strategies-for-ai-web-apps-blockchain-and-marketing':
     '/blog',
   'how-much-does-it-cost-to-build-a-custom-ai-agent-in-2026':
@@ -21,11 +34,11 @@ export const RETIRED_BLOG_REDIRECTS: Record<string, string> = {
   'beyond-google-the-2026-seo-strategy-for-dominating-tiktok-youtube-and-niche-ai-search':
     '/blog/the-ai-proof-content-strategy-for-2026-how-to-thrive-beyond-googles-ai-overviews-and-llms',
   'why-your-2026-digital-marketing-strategy-is-failing-and-how-to-fix-it-with-ai-and-hyper-personalization':
-    '/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue',
+    '/service/digital-marketing',
   'your-2026-digital-marketing-budget-is-wasted-heres-how-to-reallocate-for-ai-and-hyper-personalization-roi':
-    '/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue',
+    '/service/digital-marketing',
   'the-dark-social-seo-strategy-for-2026-how-to-track-and-optimize-unattributed-conversions':
-    '/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue',
+    '/service/digital-marketing',
   'your-2026-marketing-funnel-is-leaking-how-to-plug-the-gaps-with-predictive-ai-and-behavioral-economics':
     '/blog/why-your-ai-powered-website-isnt-converting-leads-and-how-to-fix-it-in-2026',
   'the-innovation-debt-crisis-why-your-business-cant-adapt-fast-enough-in-2026-and-how-to-fix-it':
@@ -33,7 +46,7 @@ export const RETIRED_BLOG_REDIRECTS: Record<string, string> = {
   'the-ai-adoption-gap-why-your-business-isnt-using-ai-effectively-and-how-to-bridge-it-in-2026':
     '/blog/the-ai-paradox-why-your-business-is-investing-in-ai-but-not-seeing-roi-and-how-to-fix-it-in-2026',
   'beyond-google-ads-the-2026-ai-powered-strategy-for-niche-platform-advertising-and-customer-acquisition':
-    '/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue',
+    '/service/digital-marketing',
   'the-ai-ethics-gap-why-your-business-risks-reputation-and-regulation-and-how-to-build-responsible-ai-in-2026':
     '/blog/the-ai-governance-gap-2026-why-your-enterprise-ai-projects-are-stalling-and-how-to-build-a-future-proof-framework',
   'the-ai-integration-nightmare-why-your-enterprise-ai-projects-fail-and-how-to-build-a-unified-ai-ecosystem-in-2026':
@@ -45,11 +58,11 @@ export const RETIRED_BLOG_REDIRECTS: Record<string, string> = {
   'state-of-ai-adoption-in-south-africa-2026-trends-challenges-and-growth-opportunities-for-businesses':
     '/blog/the-ai-agent-economy-2026-how-autonomous-ai-is-reshaping-global-business-models',
   'the-decentralized-identity-revolution-why-your-business-needs-self-sovereign-identity-ssi-in-2026':
-    '/blog/blockchain-development-services-smart-contracts-defi-and-web3-solutions-for-modern-businesses',
+    '/service/blockchain-development',
   'the-tokenized-economy-2026-how-digital-assets-are-reshaping-global-finance-and-business-models':
     '/blog/real-world-asset-tokenization-rwa-2026-the-trillion-dollar-opportunity-for-businesses',
   'the-cookie-less-future-2026-how-to-personalize-marketing-without-third-party-data':
-    '/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue',
+    '/service/digital-marketing',
   'the-ai-skill-gap-crisis-why-your-team-cant-implement-ai-and-how-to-bridge-it-in-2026':
     '/blog/the-ai-paradox-why-your-business-is-investing-in-ai-but-not-seeing-roi-and-how-to-fix-it-in-2026',
   'the-attention-economy-2026-how-to-capture-and-convert-micro-moments-with-ai-driven-content':
@@ -67,49 +80,49 @@ export const RETIRED_BLOG_REDIRECTS: Record<string, string> = {
   'the-ai-overload-paradox-why-more-ai-tools-arent-making-your-business-smarter-and-how-to-build-a-strategic-ai-os-in-2026':
     '/blog/the-ai-integration-fatigue-crisis-why-your-business-is-drowning-in-ai-tools-and-how-to-build-a-unified-ai-operating-system-in-2026',
   'the-ai-driven-customer-retention-playbook-for-2026-beyond-acquisition-to-lifetime-value':
-    '/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue',
+    '/service/digital-marketing',
   'the-ai-powered-micro-influencer-strategy-for-2026-beyond-celebrity-endorsements-to-hyper-niche-conversions':
-    '/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue',
+    '/service/digital-marketing',
   'the-ai-powered-brand-storytelling-playbook-for-2026-beyond-product-features-to-emotional-resonance':
-    '/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue',
+    '/service/digital-marketing',
   'the-ai-shadow-it-risk-how-unsanctioned-ai-tools-are-hurting-your-business-and-how-to-build-a-secure-ai-governance-framework-in-2026':
     '/blog/the-ai-governance-gap-2026-why-your-enterprise-ai-projects-are-stalling-and-how-to-build-a-future-proof-framework',
   'the-ai-powered-dark-funnel-strategy-for-2026-uncovering-and-converting-invisible-customer-journeys':
-    '/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue',
+    '/service/digital-marketing',
   'the-ai-powered-brand-safety-playbook-for-2026-protecting-your-reputation-in-the-age-of-generative-ai':
-    '/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue',
+    '/service/digital-marketing',
   'the-ai-powered-brand-activism-playbook-for-2026-how-to-authentically-engage-in-social-issues-and-build-trust':
-    '/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue',
+    '/service/digital-marketing',
   'the-ai-powered-brand-empathy-playbook-for-2026-building-deep-customer-connections-in-a-hyper-personalized-world':
-    '/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue',
+    '/service/digital-marketing',
   'the-ai-data-moat-strategy-for-2026-how-to-protect-your-unique-business-data-from-generative-ai-and-competitors':
     '/blog/the-ai-data-privacy-dilemma-how-to-build-compliant-and-secure-ai-systems-in-2026',
   'the-ai-powered-brand-authenticity-playbook-for-2026-building-real-trust-in-a-deepfake-world':
-    '/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue',
+    '/service/digital-marketing',
   'the-ai-powered-micro-moment-marketing-playbook-for-2026-capturing-intent-in-a-fragmented-world':
-    '/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue',
+    '/service/digital-marketing',
   'the-ai-powered-customer-journey-mapping-playbook-for-2026-beyond-linear-funnels-to-predictive-paths':
     '/blog/why-your-ai-powered-website-isnt-converting-leads-and-how-to-fix-it-in-2026',
   'the-ai-agent-trust-index-2026-why-businesses-are-hesitant-and-how-to-build-enterprise-ready-ai':
     '/blog/the-ai-governance-gap-2026-why-your-enterprise-ai-projects-are-stalling-and-how-to-build-a-future-proof-framework',
   'the-ai-powered-brand-advocacy-playbook-for-2026-turning-customers-into-autonomous-marketing-agents':
-    '/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue',
+    '/service/digital-marketing',
   'the-ai-powered-brand-resonance-playbook-for-2026-how-to-cut-through-the-noise-and-build-deep-customer-loyalty':
-    '/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue',
+    '/service/digital-marketing',
   'the-ai-alignment-crisis-2026-why-your-enterprise-ai-is-going-rogue-and-how-to-build-human-centric-control':
     '/blog/the-ai-governance-gap-2026-why-your-enterprise-ai-projects-are-stalling-and-how-to-build-a-future-proof-framework',
   'the-ai-powered-brand-community-playbook-for-2026-building-unstoppable-loyalty-beyond-social-media':
-    '/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue',
+    '/service/digital-marketing',
   'the-ai-powered-dark-social-playbook-for-2026-unlocking-hidden-conversions-and-brand-growth':
-    '/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue',
+    '/service/digital-marketing',
   'the-ai-powered-brand-purpose-playbook-for-2026-beyond-esg-to-authentic-impact-and-customer-loyalty':
-    '/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue',
+    '/service/digital-marketing',
   'the-ai-powered-brand-experience-playbook-for-2026-beyond-personalization-to-predictive-engagement':
-    '/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue',
+    '/service/digital-marketing',
   'the-ai-powered-customer-lifetime-value-playbook-for-2026-beyond-acquisition-to-hyper-retention':
-    '/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue',
+    '/service/digital-marketing',
   'the-ai-powered-brand-recall-playbook-for-2026-how-to-dominate-top-of-mind-awareness-in-a-noisy-world':
-    '/blog/digital-marketing-services-the-data-driven-strategy-that-grows-traffic-leads-and-revenue',
+    '/service/digital-marketing',
   'the-ai-shadow-workforce-problem-how-unseen-ai-agents-are-hurting-your-business-and-how-to-regain-control-in-2026':
     '/blog/the-ai-governance-gap-2026-why-your-enterprise-ai-projects-are-stalling-and-how-to-build-a-future-proof-framework',
   'the-ai-decision-paralysis-trap-why-too-many-ai-tools-are-killing-your-business-agility-and-how-to-build-a-strategic-ai-command-center-in-2026':

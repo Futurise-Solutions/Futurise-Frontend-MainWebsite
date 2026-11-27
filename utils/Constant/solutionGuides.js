@@ -22,7 +22,6 @@ export const solutionGuides = {
     { href: '/blog/security-questions-to-ask-an-ai-vendor', label: 'Security questions buyers ask an AI vendor' },
   ],
   'web3-dapp-development': [
-    { href: '/blog/blockchain-development-services-smart-contracts-defi-and-web3-solutions-for-modern-businesses', label: 'Blockchain development: what to build and check' },
     { href: '/blog/real-world-asset-tokenization-rwa-2026-the-trillion-dollar-opportunity-for-businesses', label: 'Real-world asset tokenization guide' },
   ],
   // The hotel PMS explainer is here for visitors who mean "property management system" in

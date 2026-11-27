@@ -1,5 +1,6 @@
 import { recentProjects } from './recentProjects';
 import { SOCIAL_PROFILES } from './navigation';
+import { serviceGuides } from './serviceGuides';
 export { CONTACT, NavbarservicesOptions } from "./navigation";
 import logoStartusCloud from '../../assests/PartnerLogos/logo-startus-cloud-ondark.webp';
 import logoRamanScientific from '../../assests/PartnerLogos/logo-raman-scientific-ondark.webp';
@@ -305,7 +306,7 @@ export const cards = [
     icon: expertiseiconHover,
     title: "Expertise & Innovation",
     description:
-      "A senior team that stays ahead of the curve, applying the right modern tech to every problem, not just the trendy one.",
+      "A team that stays ahead of the curve, applying the right modern tech to every problem, not just the trendy one.",
   },
   {
     icon: clientIconHover,
@@ -562,7 +563,7 @@ export const services = {
     h1: "React Native App Development Company",
     metaTitle: "React Native App Development Company: iOS, Android & Expo",
     metaDescription:
-      "React Native & Expo development company for iOS and Android apps from one codebase. Fixed-scope quotes from senior engineers. Book a free 45-minute call.",
+      "React Native & Expo development company for iOS and Android apps from one codebase. Fixed-scope quotes, not hourly billing. Book a free 45-minute call.",
     whatWeDo: "What we do",
     description: "Cross-platform iOS & Android apps built with React Native & Expo.",
     details:
@@ -581,16 +582,17 @@ export const services = {
       "Health & Fitness",
       "B2B & SaaS",
     ],
+    guide: serviceGuides["app-development"].guide,
     faqs: [
       {
         question: "How long does it take to build an app?",
         answer:
-          "A focused MVP usually takes 8 to 14 weeks; a full product with custom backend and payments runs 16 to 24 weeks. We scope it precisely after a free discovery call so there are no surprises.",
+          "A focused MVP usually takes 6 to 12 weeks; a larger product with a custom backend and payments runs 3 to 6 months. We scope it precisely after a free discovery call so there are no surprises.",
       },
       {
         question: "Why cross-platform instead of separate native apps?",
         answer:
-          "React Native and Expo give you true native performance from a single codebase. Both platforms ship together, typically at 40 to 60% less cost than building two separate native apps.",
+          "React Native and Expo give you true native performance from a single codebase. Both platforms ship together, so you build and maintain one codebase instead of two separate native apps.",
       },
       {
         question: "Do you handle App Store and Play Store submission?",
@@ -607,6 +609,7 @@ export const services = {
         answer:
           "We target iOS 14+ and Android 8+ as a baseline (over 95% of active devices) and test on real hardware across multiple OS versions, not just simulators.",
       },
+      ...serviceGuides["app-development"].extraFaqs,
     ],
   },
   "web-development": {
@@ -634,6 +637,7 @@ export const services = {
       "Healthcare",
       "FinTech",
     ],
+    guide: serviceGuides["web-development"].guide,
     faqs: [
       {
         question: "Do you work with existing codebases or only new projects?",
@@ -660,6 +664,7 @@ export const services = {
         answer:
           "A marketing site typically takes 3 to 6 weeks; a full web app or SaaS platform runs 8 to 16 weeks. You get a clear timeline after a free discovery call.",
       },
+      ...serviceGuides["web-development"].extraFaqs,
     ],
   },
   "ui-ux-design": {
@@ -687,6 +692,7 @@ export const services = {
       "Real Estate",
       "EdTech & Marketplaces",
     ],
+    guide: serviceGuides["ui-ux-design"].guide,
     faqs: [
       {
         question: "Do I need UX research if I already know my users?",
@@ -708,6 +714,7 @@ export const services = {
         answer:
           "Always. We design in Figma with developer handoff in mind and work directly with your engineers to answer implementation questions throughout the build.",
       },
+      ...serviceGuides["ui-ux-design"].extraFaqs,
     ],
   },
   "blockchain-development": {
@@ -735,6 +742,7 @@ export const services = {
       "Trading & MEV",
       "Web3 Startups",
     ],
+    guide: serviceGuides["blockchain-development"].guide,
     faqs: [
       {
         question: "Which chains do you build on?",
@@ -756,6 +764,7 @@ export const services = {
         answer:
           "We build MEV bots, arbitrage and liquidation automation, mempool monitoring, and Telegram-native trading tools with gas-optimised, competitive execution.",
       },
+      ...serviceGuides["blockchain-development"].extraFaqs,
     ],
   },
   "ai-ml-solutions": {
@@ -887,6 +896,7 @@ export const services = {
       "Healthcare",
       "Hospitality",
     ],
+    guide: serviceGuides["digital-marketing"].guide,
     faqs: [
       {
         question: "How long before we see results from SEO?",
@@ -908,6 +918,7 @@ export const services = {
         answer:
           "Yes. We start with a full audit of what's been done and what's working, then transition carefully so live campaigns aren't disrupted.",
       },
+      ...serviceGuides["digital-marketing"].extraFaqs,
     ],
   },
 };
