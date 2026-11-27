@@ -28,9 +28,9 @@ export const RETIRED_BLOG_REDIRECTS: Record<string, string> = {
   'saudi-vision-2030-how-ai-agents-and-web3-are-reshaping-ksas-tech-landscape-2026':
     '/blog/unlocking-dubais-ai-future-how-uae-businesses-are-implementing-autonomous-ai-agents-and-web3-platforms-under-the-national-ai-strategy-2031',
   'how-to-build-a-vibe-coding-ai-agent-for-rapid-prototyping-in-2026-no-code-and-low-code-guide':
-    '/blog/how-to-build-an-autonomous-ai-agent-for-business-automation-in-2026-step-by-step-guide',
+    '/blog/how-to-build-a-custom-ai-agent-for-your-business-the-complete-2026-roi-and-tech-stack-guide-for-us-and-canadian-startups',
   'beyond-ai-overviews-the-2026-seo-strategy-for-dominating-niche-serps-and-driving-conversions':
-    '/blog/seo-for-ai-overviews-2026-how-to-rank-when-google-rewrites-your-content',
+    '/blog/the-zero-click-seo-strategy-for-2026-how-to-win-when-google-answers-everything',
   'beyond-google-the-2026-seo-strategy-for-dominating-tiktok-youtube-and-niche-ai-search':
     '/blog/the-ai-proof-content-strategy-for-2026-how-to-thrive-beyond-googles-ai-overviews-and-llms',
   'why-your-2026-digital-marketing-strategy-is-failing-and-how-to-fix-it-with-ai-and-hyper-personalization':
@@ -50,11 +50,11 @@ export const RETIRED_BLOG_REDIRECTS: Record<string, string> = {
   'the-ai-ethics-gap-why-your-business-risks-reputation-and-regulation-and-how-to-build-responsible-ai-in-2026':
     '/blog/the-ai-governance-gap-2026-why-your-enterprise-ai-projects-are-stalling-and-how-to-build-a-future-proof-framework',
   'the-ai-integration-nightmare-why-your-enterprise-ai-projects-fail-and-how-to-build-a-unified-ai-ecosystem-in-2026':
-    '/blog/the-data-silo-trap-why-your-ai-agents-cant-talk-to-each-other-and-how-to-build-a-unified-data-layer-in-2026',
+    '/blog/the-ai-hallucination-trap-how-to-build-trustworthy-ai-agents-in-2026-rag-and-verification-strategies',
   'the-ai-trust-deficit-why-your-customers-dont-trust-your-ai-and-how-to-build-transparent-ai-in-2026':
     '/blog/the-ai-governance-gap-2026-why-your-enterprise-ai-projects-are-stalling-and-how-to-build-a-future-proof-framework',
   'the-ai-integration-paradox-why-your-best-ai-tools-arent-talking-to-each-other-and-how-to-build-a-unified-ai-stack-in-2026':
-    '/blog/the-data-silo-trap-why-your-ai-agents-cant-talk-to-each-other-and-how-to-build-a-unified-data-layer-in-2026',
+    '/blog/the-ai-hallucination-trap-how-to-build-trustworthy-ai-agents-in-2026-rag-and-verification-strategies',
   'state-of-ai-adoption-in-south-africa-2026-trends-challenges-and-growth-opportunities-for-businesses':
     '/blog/the-ai-agent-economy-2026-how-autonomous-ai-is-reshaping-global-business-models',
   'the-decentralized-identity-revolution-why-your-business-needs-self-sovereign-identity-ssi-in-2026':
@@ -133,6 +133,13 @@ export const RETIRED_BLOG_REDIRECTS: Record<string, string> = {
     '/blog/how-to-build-a-hyper-personalized-ai-marketing-agent-in-2026-no-code-and-low-code-guide',
   'the-ai-data-poisoning-threat-2026-how-to-protect-your-models-from-malicious-inputs-and-maintain-trust':
     '/blog/the-ai-hallucination-trap-how-to-build-trustworthy-ai-agents-in-2026-rag-and-verification-strategies',
+  // 26 Nov 2026: merged into stronger posts (CMS batch upgrades-2026-11-26).
+  'how-to-build-an-autonomous-ai-agent-for-business-automation-in-2026-step-by-step-guide':
+    '/blog/how-to-build-a-custom-ai-agent-for-your-business-the-complete-2026-roi-and-tech-stack-guide-for-us-and-canadian-startups',
+  'the-data-silo-trap-why-your-ai-agents-cant-talk-to-each-other-and-how-to-build-a-unified-data-layer-in-2026':
+    '/blog/the-ai-hallucination-trap-how-to-build-trustworthy-ai-agents-in-2026-rag-and-verification-strategies',
+  'seo-for-ai-overviews-2026-how-to-rank-when-google-rewrites-your-content':
+    '/blog/the-zero-click-seo-strategy-for-2026-how-to-win-when-google-answers-everything',
 }
 
 /**
@@ -172,7 +179,7 @@ export const RENAMED_BLOG_REDIRECTS: Record<string, string> = {
   'ai-agents-in-business-where-they-work-and-where-they-dont':
     '/blog/the-ai-agent-economy-2026-how-autonomous-ai-is-reshaping-global-business-models',
   'internal-knowledge-assistant-connecting-siloed-data-for-ai':
-    '/blog/the-data-silo-trap-why-your-ai-agents-cant-talk-to-each-other-and-how-to-build-a-unified-data-layer-in-2026',
+    '/blog/the-ai-hallucination-trap-how-to-build-trustworthy-ai-agents-in-2026-rag-and-verification-strategies',
   'secure-rag-build-an-internal-knowledge-assistant-that-respects-permissions':
     '/blog/the-ai-hallucination-trap-how-to-build-trustworthy-ai-agents-in-2026-rag-and-verification-strategies',
   'the-ai-paradox-why-your-ai-investment-isnt-paying-off-and-how-to-fix-it':
@@ -190,7 +197,7 @@ export const RENAMED_BLOG_REDIRECTS: Record<string, string> = {
   'how-to-build-an-ai-agent-for-lead-generation-in-2026':
     '/blog/how-to-build-a-custom-ai-agent-for-lead-generation-in-2026-no-code-and-low-code-guide',
   'how-to-build-an-ai-agent-for-business-automation-in-2026':
-    '/blog/how-to-build-an-autonomous-ai-agent-for-business-automation-in-2026-step-by-step-guide',
+    '/blog/how-to-build-a-custom-ai-agent-for-your-business-the-complete-2026-roi-and-tech-stack-guide-for-us-and-canadian-startups',
   'how-to-build-an-ai-customer-support-agent-no-code-and-low-code-guide':
     '/blog/how-to-build-a-custom-ai-agent-for-customer-support-in-2026-no-code-and-low-code-guide',
   'ai-agent-development-cost-in-2026-global-prices-compared':
@@ -200,7 +207,7 @@ export const RENAMED_BLOG_REDIRECTS: Record<string, string> = {
   'ai-agent-development-cost-in-the-uk-2026-pricing-guide-in-gbp':
     '/blog/custom-ai-agent-development-cost-uk-2026-pricing-roi-and-what-uk-businesses-pay',
   'seo-for-ai-overviews-what-googles-own-guidance-says-to-do':
-    '/blog/seo-for-ai-overviews-2026-how-to-rank-when-google-rewrites-your-content',
+    '/blog/the-zero-click-seo-strategy-for-2026-how-to-win-when-google-answers-everything',
   'react-native-vs-flutter-for-australian-startups-2026-cost-and-roi-guide':
     '/blog/react-native-vs-flutter-for-australian-startups-complete-cost-and-roi-guide-2026',
   'web-development-services-in-india-2026-costs-and-vendor-guide':

@@ -160,12 +160,6 @@ export const serviceResources = {
 
   "digital-marketing": [
     {
-      title: "Ranking when Google rewrites your content",
-      blurb:
-        "What AI Overviews change about SEO, and how to adapt a strategy built for ten blue links.",
-      to: "/blog/seo-for-ai-overviews-2026-how-to-rank-when-google-rewrites-your-content",
-    },
-    {
       title: "Winning the click that never happens",
       blurb:
         "Zero-click search strategy for the queries Google now answers on the results page itself.",
